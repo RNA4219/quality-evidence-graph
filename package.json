@@ -1,0 +1,45 @@
+{
+  "name": "@quality-harness/quality-evidence-graph",
+  "version": "0.1.0",
+  "description": "Local-first Quality Evidence Graph and Test Placement Engine contracts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "exports": {
+    ".": "./dist/index.js"
+  },
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "schemas/",
+    "docs/",
+    "fixtures/",
+    "README.md",
+    "BLUEPRINT.md",
+    "HUB.codex.md",
+    "RUNBOOK.md",
+    "EVALUATION.md",
+    "GUARDRAILS.md",
+    "TASK.codex.md",
+    "CHECKLISTS.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": [
+    "quality-gate",
+    "evidence-graph",
+    "test-placement",
+    "risk-based-testing",
+    "sarif"
+  ],
+  "author": "R_N_A",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}

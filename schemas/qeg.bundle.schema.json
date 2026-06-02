@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/qeg.bundle.schema.json",
+  "title": "Quality Evidence Graph Bundle",
+  "type": "object",
+  "required": ["metadata", "nodes", "edges", "completeness"],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": { "$ref": "shared-defs.schema.json#/$defs/metadata" },
+    "nodes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/node" }
+    },
+    "edges": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/edge" }
+    },
+    "completeness": {
+      "type": "object",
+      "required": ["score", "partial", "parserFailures", "unsupportedClaims"],
+      "additionalProperties": false,
+      "properties": {
+        "score": { "type": "number", "minimum": 0, "maximum": 1 },
+        "partial": { "type": "boolean" },
+        "parserFailures": { "type": "array", "items": { "type": "object" } },
+        "unsupportedClaims": { "type": "array", "items": { "type": "object" } }
+      }
+    }
+  },
+  "$defs": {
+    "node": {
+      "type": "object",
+      "required": ["id", "kind", "title", "traceability", "sourceArtifactIds"],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "kind": {
+          "enum": [
+            "requirement",
+            "acceptance_criteria",
+            "risk",
+            "failure_mode",
+            "changed_code",
+            "finding",
+            "test",
+            "test_placement",
+            "execution_evidence",
+            "gate_verdict",
+            "waiver",
+            "policy",
+            "acceptance_record"
+          ]
+        },
+        "title": { "type": "string", "minLength": 1 },
+        "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" },
+        "sourceArtifactIds": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+        }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": ["id", "kind", "from", "to", "traceability"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "kind": {
+          "enum": [
+            "derives_from",
+            "satisfies",
+            "risks",
+            "manifests_as",
+            "touches",
+            "supports",
+            "contradicts",
+            "requires_test",
+            "placed_at",
+            "evidenced_by",
+            "waived_by",
+            "governed_by",
+            "decides"
+          ]
+        },
+        "from": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "to": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" }
+      }
+    }
+  }
+}

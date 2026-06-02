@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/test-placement-plan.schema.json",
+  "title": "Test Placement Plan",
+  "type": "object",
+  "required": ["metadata", "obligations", "placements"],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": { "$ref": "shared-defs.schema.json#/$defs/metadata" },
+    "obligations": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/obligation" }
+    },
+    "placements": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/placement" }
+    }
+  },
+  "$defs": {
+    "obligation": {
+      "type": "object",
+      "required": [
+        "id",
+        "requirementIds",
+        "riskIds",
+        "failureModeIds",
+        "changedCodeIds",
+        "priority",
+        "riskPriorityIndex",
+        "gateRelevance",
+        "traceability"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "requirementIds": { "type": "array", "items": { "type": "string" } },
+        "riskIds": { "type": "array", "items": { "type": "string" } },
+        "failureModeIds": { "type": "array", "items": { "type": "string" } },
+        "changedCodeIds": { "type": "array", "items": { "type": "string" } },
+        "priority": { "$ref": "shared-defs.schema.json#/$defs/priority" },
+        "riskPriorityIndex": { "type": "number", "minimum": 0 },
+        "gateRelevance": { "enum": ["informational", "advisory", "blocking"] },
+        "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" }
+      }
+    },
+    "placement": {
+      "type": "object",
+      "required": [
+        "id",
+        "kind",
+        "title",
+        "traceability",
+        "sourceArtifactIds",
+        "obligationId",
+        "primaryLayer",
+        "disposition",
+        "gateRelevance",
+        "candidateScores",
+        "selectedTestIds"
+      ],
+      "additionalProperties": true,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "kind": { "const": "test_placement" },
+        "title": { "type": "string" },
+        "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" },
+        "sourceArtifactIds": { "type": "array", "items": { "type": "string" } },
+        "obligationId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "primaryLayer": { "$ref": "shared-defs.schema.json#/$defs/placementLayer" },
+        "disposition": { "enum": ["reuse", "adapt", "add", "manual-only", "blocked"] },
+        "gateRelevance": { "enum": ["informational", "advisory", "blocking"] },
+        "candidateScores": { "type": "array", "items": { "type": "object" } },
+        "selectedTestIds": { "type": "array", "items": { "type": "string" } }
+      }
+    }
+  }
+}

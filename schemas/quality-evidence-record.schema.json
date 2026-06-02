@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/quality-evidence-record.schema.json",
+  "title": "Quality Evidence Record",
+  "type": "object",
+  "required": ["metadata", "graph", "placementPlan", "gate", "exports"],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": { "$ref": "shared-defs.schema.json#/$defs/metadata" },
+    "graph": { "$ref": "qeg.bundle.schema.json" },
+    "placementPlan": { "$ref": "test-placement-plan.schema.json" },
+    "gate": { "$ref": "gate-verdict.schema.json" },
+    "exports": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["kind", "path"],
+        "additionalProperties": false,
+        "properties": {
+          "kind": { "enum": ["json", "markdown", "graphml", "sarif"] },
+          "path": { "type": "string", "minLength": 1 },
+          "contentHash": { "type": "string" }
+        }
+      }
+    }
+  }
+}

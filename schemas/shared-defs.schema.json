@@ -1,0 +1,128 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/shared-defs.schema.json",
+  "title": "Quality Evidence Graph Shared Definitions",
+  "type": "object",
+  "$defs": {
+    "stableId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "isoDateTime": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "confidence": {
+      "enum": ["low", "medium", "high"]
+    },
+    "severity": {
+      "enum": ["info", "low", "medium", "high", "critical"]
+    },
+    "priority": {
+      "enum": ["P0", "P1", "P2", "P3"]
+    },
+    "gateProfile": {
+      "enum": ["lean", "standard", "strict", "ipo_controlled"]
+    },
+    "gateVerdict": {
+      "enum": ["go", "conditional_go", "no_go", "disqualified"]
+    },
+    "placementLayer": {
+      "enum": [
+        "unit",
+        "integration",
+        "system",
+        "e2e",
+        "manual-scripted",
+        "manual-exploratory",
+        "spec-clarification"
+      ]
+    },
+    "sourceRef": {
+      "type": "object",
+      "required": ["id", "path"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "path": { "type": "string", "minLength": 1 },
+        "startLine": { "type": "integer", "minimum": 1 },
+        "endLine": { "type": "integer", "minimum": 1 },
+        "excerptHash": { "type": "string" },
+        "revision": { "type": "string" },
+        "label": { "type": "string" }
+      }
+    },
+    "traceability": {
+      "type": "object",
+      "required": ["sourceRefs", "assumptions", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sourceRef" }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "confidence": { "$ref": "#/$defs/confidence" }
+      }
+    },
+    "artifactRef": {
+      "type": "object",
+      "required": ["id", "adapter", "kind", "path"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "adapter": { "type": "string", "minLength": 1 },
+        "kind": { "type": "string", "minLength": 1 },
+        "path": { "type": "string", "minLength": 1 },
+        "schemaId": { "type": "string" },
+        "contentHash": { "type": "string" },
+        "revision": { "type": "string" }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["qegVersion", "runId", "createdAt", "profile", "inputArtifacts"],
+      "additionalProperties": false,
+      "properties": {
+        "qegVersion": { "const": "0.1" },
+        "runId": { "$ref": "#/$defs/stableId" },
+        "createdAt": { "$ref": "#/$defs/isoDateTime" },
+        "baseRef": { "type": "string" },
+        "headRef": { "type": "string" },
+        "repoRoot": { "type": "string" },
+        "profile": { "$ref": "#/$defs/gateProfile" },
+        "policyId": { "type": "string" },
+        "policyHash": { "type": "string" },
+        "inputArtifacts": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/artifactRef" }
+        },
+        "workflowRefs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "kind", "path"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "#/$defs/stableId" },
+              "kind": {
+                "enum": [
+                  "birdseye-index",
+                  "birdseye-capsule",
+                  "task-seed",
+                  "acceptance-template"
+                ]
+              },
+              "path": { "type": "string", "minLength": 1 },
+              "nodeId": { "type": "string" },
+              "contentHash": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

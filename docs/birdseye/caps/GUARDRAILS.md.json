@@ -1,0 +1,10 @@
+{
+  "id": "GUARDRAILS.md",
+  "role": "policy",
+  "public_api": [],
+  "summary": "contract safety、Birdseye intake、must not、IPO controlled の変更時注意を定義する。",
+  "deps_out": ["docs/birdseye/index.json", "docs/requirements.md"],
+  "deps_in": ["HUB.codex.md"],
+  "risks": ["Guardrails が古いと sourceRefs 空や conditional_go success を見逃す"],
+  "tests": ["node -e JSON parse docs/birdseye/index.json"]
+}

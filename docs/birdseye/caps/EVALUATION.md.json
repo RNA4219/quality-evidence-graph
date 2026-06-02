@@ -1,0 +1,10 @@
+{
+  "id": "EVALUATION.md",
+  "role": "quality",
+  "public_api": [],
+  "summary": "requirements、types、schema、Birdseye、package dry-run の acceptance criteria と checklist。",
+  "deps_out": ["RUNBOOK.md", "CHECKLISTS.md"],
+  "deps_in": ["HUB.codex.md"],
+  "risks": ["acceptance が古いと release readiness が甘くなる"],
+  "tests": ["npm run typecheck", "npm pack --dry-run --cache ./.npm-cache"]
+}

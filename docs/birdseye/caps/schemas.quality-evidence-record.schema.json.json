@@ -1,0 +1,10 @@
+{
+  "id": "schemas/quality-evidence-record.schema.json",
+  "role": "schema",
+  "public_api": ["QualityEvidenceRecord"],
+  "summary": "graph、placementPlan、gate、exports を束ねる final record schema。",
+  "deps_out": [],
+  "deps_in": ["schemas/qeg.bundle.schema.json", "schemas/test-placement-plan.schema.json", "schemas/gate-verdict.schema.json"],
+  "risks": ["final record が schema drift を束ねて失敗する"],
+  "tests": ["node -e JSON parse schemas"]
+}

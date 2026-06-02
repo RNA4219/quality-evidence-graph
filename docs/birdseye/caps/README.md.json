@@ -1,0 +1,10 @@
+{
+  "id": "README.md",
+  "role": "overview",
+  "public_api": [],
+  "summary": "QEG の概要、LLM bootstrap、開発入口、IPO controlled 方針を示す。",
+  "deps_out": ["HUB.codex.md", "BLUEPRINT.md", "docs/requirements.md"],
+  "deps_in": [],
+  "risks": ["bootstrap と Birdseye がずれると読込順が崩れる"],
+  "tests": ["npm run typecheck"]
+}

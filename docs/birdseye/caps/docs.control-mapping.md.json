@@ -1,0 +1,10 @@
+{
+  "id": "docs/control-mapping.md",
+  "role": "control-mapping",
+  "public_api": [],
+  "summary": "変更管理、品質判定、例外承認、証跡保全、職務分掌、リリース承認への QEG artifact 対応を定義する。",
+  "deps_out": ["docs/requirements.md", "docs/ipo-controlled-profile.md"],
+  "deps_in": ["HUB.codex.md", "TASK.codex.md"],
+  "risks": ["統制対応が文書化されないと ipo_controlled profile が実装時に曖昧になる"],
+  "tests": ["npm pack --dry-run --cache ./.npm-cache"]
+}

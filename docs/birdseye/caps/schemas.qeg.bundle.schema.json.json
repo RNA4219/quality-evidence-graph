@@ -1,0 +1,10 @@
+{
+  "id": "schemas/qeg.bundle.schema.json",
+  "role": "schema",
+  "public_api": ["QualityEvidenceGraph"],
+  "summary": "canonical graph bundle の schema。nodes、edges、completeness を定義する。",
+  "deps_out": ["schemas/quality-evidence-record.schema.json"],
+  "deps_in": ["schemas/shared-defs.schema.json"],
+  "risks": ["additionalProperties の緩さは IPO strict schema で hardening 対象"],
+  "tests": ["node -e JSON parse schemas"]
+}

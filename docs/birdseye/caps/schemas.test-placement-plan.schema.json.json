@@ -1,0 +1,10 @@
+{
+  "id": "schemas/test-placement-plan.schema.json",
+  "role": "schema",
+  "public_api": ["TestPlacementPlan"],
+  "summary": "test obligation と placement node の schema。",
+  "deps_out": ["schemas/quality-evidence-record.schema.json"],
+  "deps_in": ["schemas/shared-defs.schema.json", "docs/requirements.md"],
+  "risks": ["candidateScores が緩いため V1 strict schema の対象"],
+  "tests": ["node -e JSON parse schemas"]
+}

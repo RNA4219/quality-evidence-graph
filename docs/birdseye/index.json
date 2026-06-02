@@ -1,0 +1,133 @@
+{
+  "generated_at": "00001",
+  "nodes": {
+    "README.md": {
+      "role": "overview",
+      "caps": "docs/birdseye/caps/README.md.json",
+      "mtime": "00001"
+    },
+    "HUB.codex.md": {
+      "role": "navigation",
+      "caps": "docs/birdseye/caps/HUB.codex.md.json",
+      "mtime": "00001"
+    },
+    "BLUEPRINT.md": {
+      "role": "blueprint",
+      "caps": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "mtime": "00001"
+    },
+    "docs/requirements.md": {
+      "role": "requirements",
+      "caps": "docs/birdseye/caps/docs.requirements.md.json",
+      "mtime": "00001"
+    },
+    "RUNBOOK.md": {
+      "role": "operations",
+      "caps": "docs/birdseye/caps/RUNBOOK.md.json",
+      "mtime": "00001"
+    },
+    "EVALUATION.md": {
+      "role": "quality",
+      "caps": "docs/birdseye/caps/EVALUATION.md.json",
+      "mtime": "00001"
+    },
+    "GUARDRAILS.md": {
+      "role": "policy",
+      "caps": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "mtime": "00001"
+    },
+    "TASK.codex.md": {
+      "role": "task-template",
+      "caps": "docs/birdseye/caps/TASK.codex.md.json",
+      "mtime": "00001"
+    },
+    "CHECKLISTS.md": {
+      "role": "checklist",
+      "caps": "docs/birdseye/caps/CHECKLISTS.md.json",
+      "mtime": "00001"
+    },
+    "fixtures/README.md": {
+      "role": "fixture-contract",
+      "caps": "docs/birdseye/caps/fixtures.README.md.json",
+      "mtime": "00001"
+    },
+    "docs/control-mapping.md": {
+      "role": "control-mapping",
+      "caps": "docs/birdseye/caps/docs.control-mapping.md.json",
+      "mtime": "00001"
+    },
+    "docs/ipo-controlled-profile.md": {
+      "role": "ipo-profile",
+      "caps": "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+      "mtime": "00001"
+    },
+    "docs/implementation-prep-gate-2026-06-02.md": {
+      "role": "gate-record",
+      "caps": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
+      "mtime": "00001"
+    },
+    "src/types.ts": {
+      "role": "types",
+      "caps": "docs/birdseye/caps/src.types.ts.json",
+      "mtime": "00001"
+    },
+    "schemas/shared-defs.schema.json": {
+      "role": "schema",
+      "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
+      "mtime": "00001"
+    },
+    "schemas/gate-verdict.schema.json": {
+      "role": "schema",
+      "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
+      "mtime": "00001"
+    },
+    "schemas/qeg.bundle.schema.json": {
+      "role": "schema",
+      "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
+      "mtime": "00001"
+    },
+    "schemas/test-placement-plan.schema.json": {
+      "role": "schema",
+      "caps": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
+      "mtime": "00001"
+    },
+    "schemas/quality-evidence-record.schema.json": {
+      "role": "schema",
+      "caps": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
+      "mtime": "00001"
+    }
+  },
+  "edges": [
+    ["README.md", "HUB.codex.md"],
+    ["HUB.codex.md", "docs/birdseye/index.json"],
+    ["HUB.codex.md", "BLUEPRINT.md"],
+    ["HUB.codex.md", "docs/requirements.md"],
+    ["HUB.codex.md", "RUNBOOK.md"],
+    ["HUB.codex.md", "EVALUATION.md"],
+    ["HUB.codex.md", "GUARDRAILS.md"],
+    ["HUB.codex.md", "TASK.codex.md"],
+    ["HUB.codex.md", "fixtures/README.md"],
+    ["HUB.codex.md", "docs/control-mapping.md"],
+    ["HUB.codex.md", "docs/ipo-controlled-profile.md"],
+    ["HUB.codex.md", "docs/implementation-prep-gate-2026-06-02.md"],
+    ["docs/requirements.md", "src/types.ts"],
+    ["docs/requirements.md", "schemas/gate-verdict.schema.json"],
+    ["docs/requirements.md", "TASK.codex.md"],
+    ["docs/requirements.md", "fixtures/README.md"],
+    ["docs/requirements.md", "docs/control-mapping.md"],
+    ["docs/requirements.md", "docs/ipo-controlled-profile.md"],
+    ["TASK.codex.md", "fixtures/README.md"],
+    ["TASK.codex.md", "docs/control-mapping.md"],
+    ["TASK.codex.md", "docs/ipo-controlled-profile.md"],
+    ["docs/implementation-prep-gate-2026-06-02.md", "TASK.codex.md"],
+    ["src/types.ts", "schemas/shared-defs.schema.json"],
+    ["schemas/shared-defs.schema.json", "schemas/gate-verdict.schema.json"],
+    ["schemas/shared-defs.schema.json", "schemas/qeg.bundle.schema.json"],
+    ["schemas/shared-defs.schema.json", "schemas/test-placement-plan.schema.json"],
+    ["schemas/qeg.bundle.schema.json", "schemas/quality-evidence-record.schema.json"],
+    ["schemas/test-placement-plan.schema.json", "schemas/quality-evidence-record.schema.json"],
+    ["schemas/gate-verdict.schema.json", "schemas/quality-evidence-record.schema.json"],
+    ["RUNBOOK.md", "EVALUATION.md"],
+    ["GUARDRAILS.md", "docs/birdseye/index.json"]
+  ]
+}

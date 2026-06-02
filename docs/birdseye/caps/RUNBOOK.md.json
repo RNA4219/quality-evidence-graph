@@ -1,0 +1,10 @@
+{
+  "id": "RUNBOOK.md",
+  "role": "operations",
+  "public_api": [],
+  "summary": "typecheck、schema parse、release dry-run、rollback、observability の運用手順。",
+  "deps_out": ["EVALUATION.md", "docs/requirements.md", "package.json"],
+  "deps_in": ["HUB.codex.md"],
+  "risks": ["実行手順が requirements とずれると検収証跡が再現できない"],
+  "tests": ["npm run typecheck", "node -e JSON parse schemas"]
+}

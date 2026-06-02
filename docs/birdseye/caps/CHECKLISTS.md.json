@@ -1,0 +1,10 @@
+{
+  "id": "CHECKLISTS.md",
+  "role": "checklist",
+  "public_api": [],
+  "summary": "Hygiene と IPO controlled の release checklist。",
+  "deps_out": ["EVALUATION.md", "RUNBOOK.md"],
+  "deps_in": ["HUB.codex.md"],
+  "risks": ["checklist が acceptance とずれると出荷判定が割れる"],
+  "tests": ["npm pack --dry-run --cache ./.npm-cache"]
+}

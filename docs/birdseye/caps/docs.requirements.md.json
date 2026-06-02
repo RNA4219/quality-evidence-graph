@@ -1,0 +1,10 @@
+{
+  "id": "docs/requirements.md",
+  "role": "requirements",
+  "public_api": ["RequiredAdapterKind", "GateProfile", "GateVerdict", "DisqualificationCode"],
+  "summary": "必須 3 接続、canonical graph、placement、Gate、IPO governance、security、schema hardening の正本要件。",
+  "deps_out": ["src/types.ts", "schemas/gate-verdict.schema.json", "schemas/shared-defs.schema.json"],
+  "deps_in": ["HUB.codex.md", "BLUEPRINT.md"],
+  "risks": ["Git 管理外や package 対象外になると統制証跡が壊れる"],
+  "tests": ["npm run typecheck", "npm pack --dry-run --cache ./.npm-cache"]
+}
