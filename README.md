@@ -1,47 +1,76 @@
 # Quality Evidence Graph
 
+`Quality Evidence Graph` は、仕様、実装差分、リスク、テスト配置、実行証跡、Gate 判定を 1 つの証跡グラフとして扱う local-first な品質ゲート基盤です。
+
+人間向けの概要は次を読んでください。
+
+- 日本語: [README_JA.md](README_JA.md)
+- English: [README_EN.md](README_EN.md)
+
 <!-- LLM-BOOTSTRAP v1 -->
+## Agent Bootstrap
+
 読む順番:
-1. `HUB.codex.md` …… repo 内ドキュメントの入口とタスク分解ルール
-2. `docs/birdseye/index.json` …… ノード一覧・隣接関係
-3. `docs/birdseye/caps/*.json` …… 必要ノードだけ point read
-4. `BLUEPRINT.md` / `docs/requirements.md` / `RUNBOOK.md` / `EVALUATION.md`
+
+1. `HUB.codex.md` - repo 内ドキュメントの入口とタスク分解ルール
+2. `docs/birdseye/index.json` - ノード一覧・隣接関係
+3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
+4. `docs/spec/index.md` - IPO controlled 実装仕様書群の入口
+5. `docs/spec/implementation-gate-2026-06-03.md` - 現在の実装 Gate 証跡
+6. `RUNBOOK.md` / `EVALUATION.md` - 実行手順と受入条件
 
 フォーカス手順:
-- 直近変更ファイル±2hopのノードIDを `docs/birdseye/index.json` から取得
-- 対応する `docs/birdseye/caps/*.json` のみ読み込む
-- Birdseye の世代や capsule が不整合なら、暫定読みに留めて再生成を要求する
+
+- 直近変更ファイル±2hopの node ID を `docs/birdseye/index.json` から取得する。
+- 対応する `docs/birdseye/caps/*.json` だけを読む。
+- Birdseye の世代や capsule が不整合なら stale とみなし、暫定読みに留める。
+- 仕様・型・schema・fixture・Gate 記録の整合を崩す変更は、必ず検証証跡を残す。
 <!-- /LLM-BOOTSTRAP -->
 
-`Quality Evidence Graph` は、仕様、実装差分、リスク、テスト配置、実行証跡、Gate 判定を単一の証跡グラフとして扱う local-first な品質ゲート基盤です。
+## Agent Rules
 
-初期 MVP は `RanD`、`code-to-gate`、`manual-bb-test-harness` の artifact を必須入力として取り込み、次の 4 つの契約を出力します。
+- 要求正本は `docs/requirements.md`。
+- IPO controlled の実装仕様正本は `docs/spec/`。
+- public TypeScript contract は `src/types.ts` facade から辿る。
+- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`。
+- `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
+- `gate-input.json` 欠落・invalid は CLI failure として exit code `1`。
+- DQ は最優先で、waiver では DQ を消せない。
+- `output-record.json` は own-output validation の証跡として扱う。
 
-- `qeg.bundle.json`
-- `test-placement-plan.json`
-- `gate-verdict.json`
-- `quality-evidence-record.json`
+## Current Implementation
 
-## 開発入口
+- IPO controlled profile 実装済み。
+- DQ-01 から DQ-17 まで実装済み。
+- 21 fixture で negative / positive regression を保持。
+- `code-to-gate` findings は 0 を維持する方針。
+- Gate evaluator、CLI、types は facade + internal modules に分割済み。
+
+## Validation Commands
 
 ```sh
 npm run typecheck
 npm run build
+npm pack --dry-run --cache ./.npm-cache
 ```
 
-## 現在の実装範囲
+Fixture regression:
 
-- TypeScript の canonical 型定義
-- MVP artifact の JSON Schema 初期版
-- `go / conditional_go / no_go / disqualified` の Gate 契約
-- `unit / integration / system / e2e / manual-scripted / manual-exploratory / spec-clarification` の配置層契約
-- `workflow-cookbook` の Birdseye / Capsule / Task Seed 型を作業準備用参照として扱う契約
+```sh
+npm run validate -- fixtures/positive-release-go
+npm run gate -- fixtures/positive-release-go
+npm run record -- fixtures/positive-release-go
+```
 
-## 方針
+`code-to-gate`:
 
-- 根拠のない claim を Gate 判定に使わない
-- `sourceRefs`, `assumptions`, `confidence` を traceability の最小単位にする
-- 必須接続先は `RanD`、`code-to-gate`、`manual-bb-test-harness` の 3 つに限定する
-- `workflow-cookbook` は adapter ではなく、実装準備と文書構造化の補助契約として使う
-- schema validation を通らない出力は判定不能として扱う
-- IPO レベルの運用では `ipo_controlled` profile、版管理された Gate policy、waiver governance、監査用 evidence package を必須化する
+```sh
+node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze C:\Users\ryo-n\Codex_dev\quality-evidence-graph --emit all --out C:\tmp\qeg-ctg --cache disabled --parallel 4
+```
+
+## Human-Facing Pages
+
+この root README は agent / maintainer 向けの作業入口です。製品の意味、使いどころ、読みやすい導入説明は次を参照してください。
+
+- [README_JA.md](README_JA.md)
+- [README_EN.md](README_EN.md)

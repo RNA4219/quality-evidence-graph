@@ -2,9 +2,9 @@
   "id": "docs/spec/implementation-gate-2026-06-03.md",
   "role": "ipo-implementation-gate",
   "public_api": [],
-  "summary": "IPO controlled profile 実装 Gate 記録。型、schema、CLI、6 negative fixture、own-output validation は通過したが、DQ-02/04/05/06/08/09/10/11/12/13/14 未実装のため IPO controlled release Gate は no_go と判定する。",
+  "summary": "IPO controlled profile 実装 Gate 記録。型、schema、CLI、Gate evaluator、DQ-01〜DQ-17、21 fixture、own-output validation、code-to-gate refactor 検証が通過し、IPO controlled release Gate は go と判定する。",
   "deps_out": ["RUNBOOK.md", "EVALUATION.md", "docs/spec/gate-acceptance-2026-06-03.md"],
   "deps_in": ["HUB.codex.md", "docs/spec/gate-acceptance-2026-06-03.md"],
-  "risks": ["未実装 DQ code が残る状態で release Go と誤認すると、判定資格失格を見落とす"],
-  "tests": ["npm run typecheck", "npm run build", "schema JSON parse", "fixture validate/gate/record", "npm pack --dry-run --cache ./.npm-cache"]
+  "risks": ["release approval evidence と production deployment approval は本 Gate 外の運用証跡として継続管理する"],
+  "tests": ["npm run typecheck", "npm run build", "schema JSON parse", "fixture validate/gate/record", "npm pack --dry-run --cache ./.npm-cache", "code-to-gate analyze --emit all"]
 }

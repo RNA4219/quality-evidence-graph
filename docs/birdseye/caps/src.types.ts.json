@@ -2,7 +2,7 @@
   "id": "src/types.ts",
   "role": "types",
   "public_api": ["GateProfile", "GateVerdict", "AdapterKind", "ArtifactKind", "DisqualificationCode", "QualityEvidenceRecord"],
-  "summary": "QEG の TypeScript canonical contract。requirements と schema enum の同期対象。",
+  "summary": "QEG の TypeScript canonical contract facade。primitive / evidence / graph / gate / record 型は src/types/ 配下へ分割し、既存 public export 名は維持する。",
   "deps_out": ["schemas/shared-defs.schema.json", "schemas/gate-verdict.schema.json"],
   "deps_in": ["docs/requirements.md"],
   "risks": ["types と schema の enum drift"],

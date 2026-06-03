@@ -13,31 +13,35 @@ next_review_due: 2026-07-02
 ## 1. 読み順
 
 1. `README.md`
-2. `docs/birdseye/index.json`
-3. 必要な `docs/birdseye/caps/*.json`
-4. `BLUEPRINT.md`
-5. `docs/requirements.md`
-6. `RUNBOOK.md`
-7. `EVALUATION.md`
-8. `GUARDRAILS.md`
-9. `TASK.codex.md`
-10. `fixtures/README.md`
-11. `docs/control-mapping.md`
-12. `docs/ipo-controlled-profile.md`
-13. `docs/spec/index.md`
-14. `docs/spec/review-2026-06-03.md`
-15. `docs/spec/gate-acceptance-2026-06-03.md`
-16. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
-17. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
-18. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
-19. `docs/spec/kano-mode-2026-06-03/kano.json`
-20. `docs/spec/implementation-gate-2026-06-03.md`
+2. `README_JA.md` / `README_EN.md`
+3. `docs/birdseye/index.json`
+4. 必要な `docs/birdseye/caps/*.json`
+5. `BLUEPRINT.md`
+6. `docs/requirements.md`
+7. `RUNBOOK.md`
+8. `EVALUATION.md`
+9. `GUARDRAILS.md`
+10. `TASK.codex.md`
+11. `fixtures/README.md`
+12. `docs/control-mapping.md`
+13. `docs/ipo-controlled-profile.md`
+14. `docs/spec/index.md`
+15. `docs/spec/review-2026-06-03.md`
+16. `docs/spec/gate-acceptance-2026-06-03.md`
+17. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
+18. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
+19. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
+20. `docs/spec/kano-mode-2026-06-03/kano.json`
+21. `docs/spec/implementation-gate-2026-06-03.md`
+22. `docs/release-notes/2026-06-03-ipo-controlled.md`
 
 ## 2. 入力ファイル分類
 
 | File | Role | Priority |
 |---|---|---|
 | `README.md` | repo overview / bootstrap | high |
+| `README_JA.md` | human-facing Japanese overview | high |
+| `README_EN.md` | human-facing English overview | high |
 | `BLUEPRINT.md` | problem, scope, I/O contract | high |
 | `docs/requirements.md` | requirements source of truth | high |
 | `RUNBOOK.md` | execution / validation / release operation | high |
@@ -54,6 +58,7 @@ next_review_due: 2026-07-02
 | `docs/spec/code-to-gate-2026-06-03/*` | code-to-gate static gate evidence | high |
 | `docs/spec/kano-mode-2026-06-03/*` | RanD KanoMode requirements audit evidence | high |
 | `docs/spec/implementation-gate-2026-06-03.md` | IPO controlled implementation gate record | high |
+| `docs/release-notes/2026-06-03-ipo-controlled.md` | release notes | high |
 | `docs/implementation-prep-gate-2026-06-02.md` | implementation preparation gate record | high |
 | `schemas/*.schema.json` | JSON Schema contracts | high |
 | `src/types.ts` | TypeScript contract source | high |

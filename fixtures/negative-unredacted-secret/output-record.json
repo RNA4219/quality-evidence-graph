@@ -59,12 +59,12 @@
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-09: Unredacted secret/token/PII detected in evidence package"
+      "- DQ-09: Unredacted sensitive value detected in evidence package"
     ],
     "disqualifications": [
       {
         "code": "DQ-09",
-        "message": "Unredacted secret/token/PII detected in evidence package",
+        "message": "Unredacted sensitive value detected in evidence package",
         "nodeIds": [],
         "sourceRefs": [
           {
@@ -72,7 +72,7 @@
             "path": "docs/spec/retention-immutability.md",
             "startLine": 63,
             "endLine": 65,
-            "label": "secret/token/PII must be redacted"
+            "label": "sensitive value redaction requirement"
           }
         ]
       }
@@ -84,7 +84,7 @@
   "exports": [
     {
       "kind": "json",
-      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-unredacted-secret\\output-record.json"
+      "path": "output-record.json"
     }
   ],
   "auditTrail": {

@@ -6,6 +6,16 @@
       "caps": "docs/birdseye/caps/README.md.json",
       "mtime": "00001"
     },
+    "README_JA.md": {
+      "role": "human-overview-ja",
+      "caps": "docs/birdseye/caps/README_JA.md.json",
+      "mtime": "00001"
+    },
+    "README_EN.md": {
+      "role": "human-overview-en",
+      "caps": "docs/birdseye/caps/README_EN.md.json",
+      "mtime": "00001"
+    },
     "HUB.codex.md": {
       "role": "navigation",
       "caps": "docs/birdseye/caps/HUB.codex.md.json",
@@ -106,6 +116,11 @@
       "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
       "mtime": "00001"
     },
+    "docs/release-notes/2026-06-03-ipo-controlled.md": {
+      "role": "release-notes",
+      "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-ipo-controlled.md.json",
+      "mtime": "00001"
+    },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
       "role": "code-to-gate-analysis",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
@@ -163,8 +178,14 @@
     }
   },
   "edges": [
+    ["README.md", "README_JA.md"],
+    ["README.md", "README_EN.md"],
     ["README.md", "HUB.codex.md"],
+    ["README_JA.md", "HUB.codex.md"],
+    ["README_EN.md", "HUB.codex.md"],
     ["HUB.codex.md", "docs/birdseye/index.json"],
+    ["HUB.codex.md", "README_JA.md"],
+    ["HUB.codex.md", "README_EN.md"],
     ["HUB.codex.md", "BLUEPRINT.md"],
     ["HUB.codex.md", "docs/requirements.md"],
     ["HUB.codex.md", "RUNBOOK.md"],
@@ -211,6 +232,11 @@
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/kano.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/implementation-gate-2026-06-03.md"],
+    ["HUB.codex.md", "docs/release-notes/2026-06-03-ipo-controlled.md"],
+    ["docs/release-notes/2026-06-03-ipo-controlled.md", "README.md"],
+    ["docs/release-notes/2026-06-03-ipo-controlled.md", "README_JA.md"],
+    ["docs/release-notes/2026-06-03-ipo-controlled.md", "README_EN.md"],
+    ["docs/release-notes/2026-06-03-ipo-controlled.md", "docs/spec/implementation-gate-2026-06-03.md"],
     ["docs/spec/implementation-gate-2026-06-03.md", "RUNBOOK.md"],
     ["docs/spec/implementation-gate-2026-06-03.md", "EVALUATION.md"],
     ["docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],

@@ -84,7 +84,7 @@
   "exports": [
     {
       "kind": "json",
-      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-approval-missing\\output-record.json"
+      "path": "output-record.json"
     }
   ],
   "auditTrail": {

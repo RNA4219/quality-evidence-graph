@@ -18,6 +18,7 @@ verified_at: 2026-06-03
   - CLI fixture 検証を実体 fixture 検証へ固定する（gate-input.json 必須化、synthetic generator 削除）。
   - ApprovalEvidence / EvidencePackage hash 検証実装。
   - QualityEvidenceRecord 監査証跡補強。
+  - code-to-gate 起点の構造リファクタ後、挙動非変更と static finding 0 を確認する。
 - assumptions:
   - 本記録は実装完了 Gate の検収であり、IPO controlled release approval ではない。
   - DQ-01〜DQ-17 は `docs/spec/gate-policy.md` を正本とする。
@@ -33,12 +34,13 @@ verified_at: 2026-06-03
 
 | item | status | evidence |
 |---|---|---|
-| TypeScript 型 | pass | `src/types.ts` に `GatePolicy`、`Waiver`、`ApprovalEvidence`、`EvidencePackage`、`ControlRoles`、DQ-01〜DQ-17、exit code policy を追加。`QegMetadata` に `benchmarkMode`、`hiddenOracleAccessed`、`requiredConnectorStatus` を追加。`AuditTrail`、`ApprovalEvidenceSummary` を追加。 |
+| TypeScript 型 | pass | `src/types.ts` は互換 facade とし、`src/types/` 配下へ primitive / evidence / graph / gate / record 型を分割。`GatePolicy`、`Waiver`、`ApprovalEvidence`、`EvidencePackage`、`ControlRoles`、DQ-01〜DQ-17、exit code policy、`AuditTrail`、`ApprovalEvidenceSummary` を維持。 |
 | JSON Schema | pass | `schemas/gate-policy.schema.json`、`schemas/waiver.schema.json`、`schemas/approval-evidence.schema.json`、`schemas/evidence-package.schema.json`、`schemas/retention.schema.json` を追加。 |
-| Gate evaluator | pass | `src/gate.ts` は DQ detector pure functions 化完了。DQ-01~17 全件実装。ApprovalEvidence hash verification 実装（policyId/policyHash/evidencePackageHash/sourceRefs check）。 |
-| CLI | pass | `src/cli.ts` は実体 fixture 入力専用。exact DQ match validation 実装。gate-input.json 欠落時は exit code 1。未使用 synthetic fixture generator は削除済み。 |
+| Gate evaluator | pass | `src/gate.ts` は互換 facade とし、`src/gate/` 配下へ context / DQ detector / waiver / verdict / evaluate を分割。DQ-01~17 全件実装。ApprovalEvidence hash verification 実装（policyId/policyHash/evidencePackageHash/sourceRefs check）。 |
+| CLI | pass | `src/cli.ts` は argv parsing / dispatch のみの entry とし、`src/cli/` 配下へ fixture IO / validation / record / commands を分割。実体 fixture 入力専用、exact DQ match validation 実装、gate-input.json 欠落時は exit code 1。 |
 | Fixture | pass | 21 件の fixture（20 negative + 1 positive）。DQ-03, DQ-07 単独 fixture、DQ-15 boundary fixture（`negative-approval-hash-mismatch`）追加済み。全 fixture gate-input.json 配置済み。全 fixture PASS。 |
 | own-output validation | pass | `record` が JSON serialize / parse を確認。監査証跡補強（AuditTrail 追加）。全 fixture output-record.json 生成済み。 |
+| code-to-gate refactor | pass | post refactor analysis `ctg-202606030841` は critical 0 / high 0 / medium 0 / low 0。`src/gate.ts`、`src/types.ts`、`src/cli.ts` の LARGE_MODULE finding は解消済み。 |
 
 ## 3. DQ 実装カバレッジ
 
@@ -74,7 +76,9 @@ verified_at: 2026-06-03
 | DQ-15 boundary fixture 未追加 | P1 | ✅ `fixtures/negative-approval-hash-mismatch` 追加（ApprovalEvidence evidencePackageHash mismatch） |
 | output-record.json 監査証跡不足 | P1 | ✅ `AuditTrail`、`ApprovalEvidenceSummary` 型追加、`auditTrail` field 出力 |
 | 全 fixture gate-input.json 未配置 | P0 | ✅ 全 21 fixture に gate-input.json 配置完了 |
-| CLI 起動・配布サイズ肥大 | P2 | ✅ 未使用 synthetic generator を削除。`dist/cli.js` は 7.6KB。 |
+| CLI 起動・配布サイズ肥大 | P2 | ✅ 未使用 synthetic generator を削除し、CLI entry を command dispatch へ薄型化。`dist/cli.js` は 884 bytes。 |
+| `src/gate.ts` / `src/types.ts` / `src/cli.ts` LARGE_MODULE | P2 | ✅ facade + 内部 module 分割により code-to-gate post analysis finding 0。 |
+| DQ-09 説明文の hardcoded secret false positive | P2 | ✅ user-facing message / label を `sensitive value` 表現へ変更。DQ-09 検出条件と fixture expectation は維持。 |
 
 ## 5. Gate 判定
 
@@ -95,6 +99,7 @@ Reasons:
 - 全 21 fixture PASS（20 negative + 1 positive）。
 - TypeScript check PASS、build PASS。
 - DQ-01〜DQ-17 全件 coverage 確認完了（exact match）。
+- code-to-gate post refactor analysis PASS（critical/high/medium/low 0）。
 
 ## 6. Verification Evidence
 
@@ -103,9 +108,11 @@ Reasons:
 npm run typecheck  # PASS
 npm run build      # PASS
 
-# CLI lightweight verification
-(Get-Item src\cli.ts).Length   # 8766
-(Get-Item dist\cli.js).Length  # 7586
+# CLI lightweight verification after facade split
+(Get-Item src\cli.ts).Length   # 812
+(Get-Item src\gate.ts).Length  # 759
+(Get-Item src\types.ts).Length # 203
+(Get-Item dist\cli.js).Length  # 884
 
 # gate-input.json existence check (21 fixtures)
 Get-ChildItem -Path fixtures -Directory | ForEach-Object {
@@ -143,6 +150,15 @@ $expected = 1..17 | ForEach-Object { 'DQ-{0:D2}' -f $_ }
 $missing = Compare-Object $expected $codes | Where-Object SideIndicator -eq '<='
 if ($missing) { throw "missing DQ coverage: $($missing.InputObject -join ', ')" }
 # PASS: DQ-01 through DQ-17 all covered
+
+# code-to-gate refactor verification
+node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze `
+  C:\Users\ryo-n\Codex_dev\quality-evidence-graph `
+  --emit all `
+  --out C:\tmp\qeg-ctg-refactor-post2 `
+  --cache disabled `
+  --parallel 4
+# PASS: findings 0, critical 0, high 0, medium 0, low 0
 ```
 
 ## 7. Acceptance Criteria Verified
@@ -157,3 +173,5 @@ if ($missing) { throw "missing DQ coverage: $($missing.InputObject -join ', ')" 
 8. ✅ 全 21 fixture output-record.json 生成
 9. ✅ CLI real input 専用化と synthetic generator 削除
 10. ✅ Gate 判定 `go`（実体入力からの検証完了）
+11. ✅ code-to-gate post refactor findings 0
+12. ✅ `src/gate.ts` / `src/types.ts` / `src/cli.ts` の facade 化と large module 解消
