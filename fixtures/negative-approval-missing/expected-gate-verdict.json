@@ -1,0 +1,26 @@
+{
+  "fixture": "negative-approval-missing",
+  "description": "Evidence package in release_decision phase without approvalEvidence - DQ-15 for approval evidence missing",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-15",
+      "message": "Approval evidence missing in release_decision phase",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "SR-DQ-15-APPROVAL",
+          "path": "docs/spec/evidence-package.md",
+          "startLine": 1,
+          "endLine": 10,
+          "label": "approval evidence required for release_decision"
+        }
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/evidence-package.md: release_decision phase requires approval evidence"
+}

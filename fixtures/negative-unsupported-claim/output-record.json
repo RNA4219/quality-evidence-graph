@@ -1,0 +1,117 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-unsupported-claim",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-unsupported-claim/input.json"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-unsupported-claim",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "claim-node-001",
+        "kind": "acceptance_criteria",
+        "title": "Test coverage is sufficient",
+        "traceability": {
+          "sourceRefs": [],
+          "assumptions": [
+            "Coverage assumption not backed by evidence"
+          ],
+          "confidence": "low"
+        },
+        "sourceArtifactIds": [
+          "artifact-001"
+        ],
+        "requirementIds": [],
+        "oracleRefs": []
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 0.95,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": [
+        {
+          "id": "claim-node-001",
+          "claim": "Test coverage is sufficient",
+          "nodeIds": [
+            "claim-node-001"
+          ],
+          "gateRelevant": true
+        }
+      ]
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-unsupported-claim",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-unsupported-claim",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-unsupported-claim/input.json"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-03: Unsupported claim: Test coverage is sufficient"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-03",
+        "message": "Unsupported claim: Test coverage is sufficient",
+        "nodeIds": [
+          "claim-node-001"
+        ],
+        "sourceRefs": []
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-unsupported-claim\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

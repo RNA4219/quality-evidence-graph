@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-evidence-hash-mismatch",
+  "description": "Evidence hash mismatch for artifact - DQ-06",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-06",
+      "message": "Evidence hash mismatch for artifact \"artifact-mismatch\"",
+      "nodeIds": ["artifact-mismatch"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

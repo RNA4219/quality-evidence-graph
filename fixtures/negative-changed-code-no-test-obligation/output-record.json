@@ -1,0 +1,119 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-changed-code-no-test-obligation",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-changed-code-no-test-obligation/input.json"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-changed-code-no-test-obligation",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "changed-code-001",
+        "kind": "changed_code",
+        "title": "Changed code in src/auth.ts",
+        "path": "src/auth.ts",
+        "language": "typescript",
+        "symbols": [
+          "authenticate",
+          "validateToken"
+        ],
+        "hunks": [
+          {
+            "id": "hunk-001",
+            "path": "src/auth.ts",
+            "startLine": 10,
+            "endLine": 25
+          }
+        ],
+        "blastRadius": 3,
+        "traceability": {
+          "sourceRefs": [],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "artifact-001"
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 0.95,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-changed-code-no-test-obligation",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-changed-code-no-test-obligation",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-changed-code-no-test-obligation/input.json"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-05: Changed code \"src/auth.ts\" without test obligation or waiver"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-05",
+        "message": "Changed code \"src/auth.ts\" without test obligation or waiver",
+        "nodeIds": [
+          "changed-code-001"
+        ],
+        "sourceRefs": []
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-changed-code-no-test-obligation\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

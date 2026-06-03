@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/gate-policy.schema.json",
+  "title": "Gate Policy",
+  "type": "object",
+  "required": [
+    "policyId",
+    "policyHash",
+    "profile",
+    "effectiveDate",
+    "approver",
+    "sourceRefs",
+    "dqScope",
+    "exitCodePolicy"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "policyId": { "type": "string", "minLength": 1 },
+    "policyHash": { "type": "string", "minLength": 1 },
+    "profile": { "$ref": "shared-defs.schema.json#/$defs/gateProfile" },
+    "effectiveDate": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+    "approver": { "type": "string", "minLength": 1 },
+    "sourceRefs": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" }
+    },
+    "dqScope": {
+      "type": "array",
+      "items": { "$ref": "shared-defs.schema.json#/$defs/disqualificationCode" }
+    },
+    "exitCodePolicy": { "$ref": "shared-defs.schema.json#/$defs/exitCodePolicy" }
+  }
+}

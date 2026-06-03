@@ -1,0 +1,12 @@
+{
+  "fixture": "negative-approval-hash-mismatch",
+  "description": "ApprovalEvidence evidencePackageHash mismatch - DQ-15",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-15",
+      "reason": "ApprovalEvidence evidencePackageHash mismatch"
+    }
+  ],
+  "expectedExitCode": 2
+}

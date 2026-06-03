@@ -1,0 +1,96 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-approval-missing",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-approval-missing/input.json"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-approval-missing",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-approval-missing",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-approval-missing",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-approval-missing/input.json"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-15: Approval evidence missing in release_decision phase"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-15",
+        "message": "Approval evidence missing in release_decision phase",
+        "nodeIds": [],
+        "sourceRefs": [
+          {
+            "id": "SR-DQ-15-APPROVAL",
+            "path": "docs/spec/evidence-package.md",
+            "startLine": 1,
+            "endLine": 10,
+            "label": "approval evidence required for release_decision"
+          }
+        ]
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-approval-missing\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

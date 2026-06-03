@@ -1,0 +1,26 @@
+{
+  "fixture": "negative-waiver-dq-attempt",
+  "description": "DQ present with waiver attempting to remove DQ - waiver cannot remove DQ per docs/spec/waiver-approval.md §3",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-01",
+      "message": "Required artifact missing",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "SR-DQ-01",
+          "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
+          "label": "missing artifact"
+        }
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedWaiversValid": false,
+  "expectedWaiverImpact": "none - DQ cannot be waived",
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/waiver-approval.md §3: waiver cannot remove DQ, verdict stays disqualified"
+}

@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-required-connector-contract",
+  "description": "Required connector contract violation treated as success - DQ-11",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-11",
+      "message": "Required connector \"manual-bb-test-harness\" contract violation treated as success",
+      "nodeIds": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §65-66"
+}

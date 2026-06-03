@@ -1,0 +1,163 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-waiver-dq-attempt",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-waiver-dq-attempt/input.json"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-waiver-dq-attempt",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-waiver-dq-attempt/input.json"
+        }
+      ]
+    },
+    "nodes": [
+      {
+        "id": "risk-001",
+        "kind": "risk",
+        "title": "Missing artifact risk",
+        "priority": "P1",
+        "severity": "high",
+        "likelihood": 0.8,
+        "businessImpact": 0.9,
+        "complianceCriticality": 0.7,
+        "evidenceGap": 0.6,
+        "novelty": 0.3,
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "sr-risk-001",
+              "path": "docs/risk-analysis.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "medium"
+        },
+        "sourceArtifactIds": [
+          "artifact-001"
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 0.95,
+      "partial": false,
+      "parserFailures": [
+        {
+          "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
+          "reason": "Required artifact missing",
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-01",
+              "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
+              "label": "missing artifact"
+            }
+          ]
+        }
+      ],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-waiver-dq-attempt",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-waiver-dq-attempt",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-waiver-dq-attempt/input.json"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-01: Parser failure: Required artifact missing",
+      "No-go blockers: 1",
+      "- High/critical risk \"Missing artifact risk\" with evidence gap",
+      "Valid waivers: 1 (conditional_go required)",
+      "Residual risks: 1",
+      "Required human review: 2"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-01",
+        "message": "Parser failure: Required artifact missing",
+        "nodeIds": [],
+        "sourceRefs": [
+          {
+            "id": "SR-DQ-01",
+            "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
+            "label": "missing artifact"
+          }
+        ]
+      }
+    ],
+    "blockers": [
+      {
+        "id": "blocker-risk-001",
+        "message": "High/critical risk \"Missing artifact risk\" with evidence gap",
+        "riskIds": [
+          "risk-001"
+        ],
+        "sourceRefs": [
+          {
+            "id": "sr-risk-001",
+            "path": "docs/risk-analysis.md"
+          }
+        ]
+      }
+    ],
+    "residualRisks": [
+      "risk-001"
+    ],
+    "requiredHumanReview": [
+      "waiver-001",
+      "risk-001"
+    ]
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-waiver-dq-attempt\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

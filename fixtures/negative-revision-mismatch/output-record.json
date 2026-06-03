@@ -1,0 +1,94 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-revision-mismatch",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "headRef": "refs/heads/main",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-revision-mismatch/input.json",
+        "revision": "refs/heads/feature-branch"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-revision-mismatch",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-revision-mismatch",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-revision-mismatch",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "headRef": "refs/heads/main",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-revision-mismatch/input.json",
+          "revision": "refs/heads/feature-branch"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-12: Artifact revision \"refs/heads/feature-branch\" mismatch with headRef \"refs/heads/main\""
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-12",
+        "message": "Artifact revision \"refs/heads/feature-branch\" mismatch with headRef \"refs/heads/main\"",
+        "nodeIds": [
+          "artifact-001"
+        ],
+        "sourceRefs": []
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-revision-mismatch\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

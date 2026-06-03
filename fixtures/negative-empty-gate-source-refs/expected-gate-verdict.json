@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-empty-gate-source-refs",
+  "description": "Evidence package sourceRefs is empty - DQ-13",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-13",
+      "message": "Evidence package sourceRefs is empty",
+      "nodeIds": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

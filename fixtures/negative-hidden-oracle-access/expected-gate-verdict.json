@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-hidden-oracle-access",
+  "description": "Candidate accessed hidden oracle in benchmark mode - DQ-10",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-10",
+      "message": "Candidate accessed hidden oracle in benchmark mode",
+      "nodeIds": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

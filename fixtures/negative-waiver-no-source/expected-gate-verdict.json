@@ -1,0 +1,19 @@
+{
+  "fixture": "negative-waiver-no-source",
+  "description": "Waiver without sourceRefs - DQ-15 for source-backed violation per docs/spec/waiver-approval.md §2",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-15",
+      "message": "Waiver is not source-backed: sourceRefs is empty",
+      "nodeIds": ["waiver-001"],
+      "sourceRefs": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedWaiversValid": false,
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/waiver-approval.md §2: waiver must have sourceRefs minimum 1, §3: invalid waiver does not improve gate"
+}

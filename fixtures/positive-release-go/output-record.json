@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-positive-release-go",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/positive-release-go/input.json",
+        "revision": "refs/heads/main"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "claim-001",
+        "kind": "claim",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/positive-release-go/input.json",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "verdict": "go",
+    "reasons": [
+      "All gate conditions satisfied"
+    ],
+    "disqualifications": [],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\positive-release-go\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:release-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "approval-release-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

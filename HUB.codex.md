@@ -31,6 +31,7 @@ next_review_due: 2026-07-02
 17. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
 18. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
 19. `docs/spec/kano-mode-2026-06-03/kano.json`
+20. `docs/spec/implementation-gate-2026-06-03.md`
 
 ## 2. 入力ファイル分類
 
@@ -52,6 +53,7 @@ next_review_due: 2026-07-02
 | `docs/spec/gate-acceptance-2026-06-03.md` | IPO control spec gate acceptance record | high |
 | `docs/spec/code-to-gate-2026-06-03/*` | code-to-gate static gate evidence | high |
 | `docs/spec/kano-mode-2026-06-03/*` | RanD KanoMode requirements audit evidence | high |
+| `docs/spec/implementation-gate-2026-06-03.md` | IPO controlled implementation gate record | high |
 | `docs/implementation-prep-gate-2026-06-02.md` | implementation preparation gate record | high |
 | `schemas/*.schema.json` | JSON Schema contracts | high |
 | `src/types.ts` | TypeScript contract source | high |

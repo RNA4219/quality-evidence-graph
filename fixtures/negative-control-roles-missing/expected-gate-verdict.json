@@ -1,0 +1,26 @@
+{
+  "fixture": "negative-control-roles-missing",
+  "description": "ControlRoles not recorded - DQ-17 for job separation violation per docs/spec/waiver-approval.md §5",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-17",
+      "message": "Control roles (producer/reviewer/approver/waiverApprover/releaseOwner) not recorded",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "SR-DQ-17",
+          "path": "docs/spec/waiver-approval.md",
+          "startLine": 69,
+          "endLine": 79,
+          "label": "ControlRoles required for IPO controlled"
+        }
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/waiver-approval.md §5: IPO controlled release Go requires ControlRoles recorded, missing triggers DQ-17"
+}

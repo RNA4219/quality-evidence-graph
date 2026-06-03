@@ -27,6 +27,33 @@
     "gateVerdict": {
       "enum": ["go", "conditional_go", "no_go", "disqualified"]
     },
+    "disqualificationCode": {
+      "enum": [
+        "DQ-01",
+        "DQ-02",
+        "DQ-03",
+        "DQ-04",
+        "DQ-05",
+        "DQ-06",
+        "DQ-07",
+        "DQ-08",
+        "DQ-09",
+        "DQ-10",
+        "DQ-11",
+        "DQ-12",
+        "DQ-13",
+        "DQ-14",
+        "DQ-15",
+        "DQ-16",
+        "DQ-17"
+      ]
+    },
+    "packagePhase": {
+      "enum": ["implementation_preparation", "pre_release_review", "release_decision"]
+    },
+    "storageClassification": {
+      "enum": ["immutable", "append_only", "versioned", "mutable", "unknown"]
+    },
     "placementLayer": {
       "enum": [
         "unit",
@@ -122,6 +149,47 @@
             }
           }
         }
+      }
+    },
+    "exitCodePolicy": {
+      "type": "object",
+      "required": ["go", "conditional_go", "no_go", "disqualified"],
+      "additionalProperties": false,
+      "properties": {
+        "go": { "const": 0 },
+        "conditional_go": { "const": 2 },
+        "no_go": { "const": 2 },
+        "disqualified": { "const": 2 }
+      }
+    },
+    "controlRoles": {
+      "type": "object",
+      "required": ["producer", "reviewer", "approver", "waiverApprover", "releaseOwner"],
+      "additionalProperties": false,
+      "properties": {
+        "producer": { "type": "string", "minLength": 1 },
+        "reviewer": { "type": "string", "minLength": 1 },
+        "approver": { "type": "string", "minLength": 1 },
+        "waiverApprover": { "type": "string", "minLength": 1 },
+        "releaseOwner": { "type": "string", "minLength": 1 }
+      }
+    },
+    "evidenceRef": {
+      "type": "object",
+      "required": ["id", "path", "evidenceKind"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "path": { "type": "string", "minLength": 1 },
+        "startLine": { "type": "integer", "minimum": 1 },
+        "endLine": { "type": "integer", "minimum": 1 },
+        "excerptHash": { "type": "string" },
+        "revision": { "type": "string" },
+        "label": { "type": "string" },
+        "evidenceKind": {
+          "enum": ["code", "spec", "test_result", "coverage", "sarif", "human_review", "audit", "policy"]
+        },
+        "capturedAt": { "$ref": "#/$defs/isoDateTime" }
       }
     }
   }

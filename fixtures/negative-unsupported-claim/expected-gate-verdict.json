@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-unsupported-claim",
+  "description": "Unsupported claim on gate-relevant path - DQ-03",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-03",
+      "message": "Unsupported claim: Test coverage is sufficient",
+      "nodeIds": ["claim-node-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

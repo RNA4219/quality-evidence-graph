@@ -1,0 +1,11 @@
+{
+  "fixture": "positive-release-go",
+  "description": "Complete evidence package proving IPO controlled release Gate go verdict",
+  "expectedVerdict": "go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 0,
+  "contractRef": "docs/spec/gate-policy.md §5"
+}

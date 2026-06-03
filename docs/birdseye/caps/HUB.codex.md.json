@@ -2,8 +2,8 @@
   "id": "HUB.codex.md",
   "role": "navigation",
   "public_api": [],
-  "summary": "repo 内の読み順、ファイル分類、タスク分解、Birdseye 鮮度、出力契約、IPO 統制仕様書、レビュー記録、Gate 記録、code-to-gate 証跡、KanoMode 監査証跡への入口を定義する。",
-  "deps_out": ["docs/birdseye/index.json", "BLUEPRINT.md", "docs/requirements.md", "RUNBOOK.md", "EVALUATION.md", "GUARDRAILS.md", "docs/spec/index.md", "docs/spec/review-2026-06-03.md", "docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/analysis-report.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/kano-mode-2026-06-03/kano.json", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
+  "summary": "repo 内の読み順、ファイル分類、タスク分解、Birdseye 鮮度、出力契約、IPO 統制仕様書、レビュー記録、Gate 記録、code-to-gate 証跡、KanoMode 監査証跡、実装 Gate 記録への入口を定義する。",
+  "deps_out": ["docs/birdseye/index.json", "BLUEPRINT.md", "docs/requirements.md", "RUNBOOK.md", "EVALUATION.md", "GUARDRAILS.md", "docs/spec/index.md", "docs/spec/review-2026-06-03.md", "docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/analysis-report.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/kano-mode-2026-06-03/kano.json", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json", "docs/spec/implementation-gate-2026-06-03.md"],
   "deps_in": ["README.md"],
   "risks": ["HUB が古いと agent が正本を読み違える"],
   "tests": ["node -e JSON parse docs/birdseye/index.json"]

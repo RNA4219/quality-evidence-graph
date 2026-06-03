@@ -100,6 +100,22 @@ uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0,
 - go=5、conditional_go=0、no_go=0
 - KanoMode の `go` は Kano-inspired requirements audit の証跡であり、正式な狩野調査または IPO controlled release approval ではない
 
+### 8. IPO controlled 実装 Gate 証跡
+
+```sh
+npm run build
+node dist/cli.js validate fixtures/negative-approval-missing
+node dist/cli.js gate fixtures/negative-approval-missing
+node dist/cli.js record fixtures/negative-approval-missing
+```
+
+期待結果:
+
+- 6 negative fixture の `validate` が PASS
+- 6 negative fixture の `gate` が `disqualified` と exit code `2`
+- 6 negative fixture の `record` が own-output validation PASS
+- `docs/spec/implementation-gate-2026-06-03.md` が、未実装 DQ code と IPO controlled release Gate `no_go` 維持理由を記録している
+
 ## Confirm
 
 - `docs/requirements.md` が Git 管理対象である
@@ -115,6 +131,7 @@ uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0,
 - `docs/spec/gate-acceptance-2026-06-03.md` が仕様書 Gate、実装着手 Gate、IPO release Gate を分離している
 - `docs/spec/code-to-gate-2026-06-03/` が code-to-gate による静的 Gate 証跡を保持している
 - `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による要求価値監査証跡を保持している
+- `docs/spec/implementation-gate-2026-06-03.md` が実装 Gate と release Gate を分離している
 
 ## Rollback / Retry
 
@@ -127,6 +144,7 @@ uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0,
 - `conditional_go` / `ipo_controlled` / DQ enum の契約が requirements / types / schema で不一致
 - code-to-gate の `passed` を IPO controlled release approval と誤読する導線がある
 - KanoMode の `go` を正式な狩野調査または IPO controlled release approval と誤読する導線がある
+- 実装 Gate の `conditional_go` を IPO controlled release Go と誤読する導線がある
 
 ### 復旧手順
 
@@ -134,7 +152,7 @@ uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0,
 2. `docs/birdseye/index.json` から関連 capsule を読む。
 3. requirements / types / schema / README / BLUEPRINT のどれが正本と矛盾したかを特定する。
 4. 最小差分で修正する。
-5. Execute の 2〜7 を再実行する。
+5. Execute の 2〜8 を再実行する。
 
 ## Observability
 

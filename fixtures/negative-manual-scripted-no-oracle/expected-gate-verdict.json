@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-manual-scripted-no-oracle",
+  "description": "Manual-scripted placement without acceptable oracle - DQ-14",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-14",
+      "message": "Manual-scripted placement \"placement-001\" without acceptable oracle",
+      "nodeIds": ["placement-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

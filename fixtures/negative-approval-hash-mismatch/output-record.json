@@ -1,0 +1,108 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-approval-hash-mismatch",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-approval-hash-mismatch/input.json",
+        "revision": "refs/heads/main"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-approval-hash-mismatch",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-approval-hash-mismatch",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-approval-hash-mismatch",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-approval-hash-mismatch/input.json",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-15: ApprovalEvidence \"approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\""
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-15",
+        "message": "ApprovalEvidence \"approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\"",
+        "nodeIds": [
+          "approval-001"
+        ],
+        "sourceRefs": [
+          {
+            "id": "SR-DQ-15-APPROVAL-PKGHASH",
+            "path": "docs/spec/waiver-approval.md",
+            "startLine": 1,
+            "endLine": 10,
+            "label": "ApprovalEvidence evidencePackageHash must match EvidencePackage"
+          }
+        ]
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-approval-hash-mismatch\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:correct-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "approval-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:MISMATCHED-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

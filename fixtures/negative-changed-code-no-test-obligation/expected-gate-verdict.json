@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-changed-code-no-test-obligation",
+  "description": "Changed code without test obligation or waiver - DQ-05",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-05",
+      "message": "Changed code \"src/example.ts\" without test obligation or waiver",
+      "nodeIds": ["changed-code-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

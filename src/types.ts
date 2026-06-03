@@ -128,6 +128,119 @@ export type DisqualificationCode =
   | "DQ-16"
   | "DQ-17";
 
+export type PackagePhase =
+  | "implementation_preparation"
+  | "pre_release_review"
+  | "release_decision";
+
+export type StorageClassification =
+  | "immutable"
+  | "append_only"
+  | "versioned"
+  | "mutable"
+  | "unknown";
+
+export interface ExitCodePolicy {
+  readonly go: 0;
+  readonly conditional_go: 2;
+  readonly no_go: 2;
+  readonly disqualified: 2;
+}
+
+export interface GatePolicy {
+  readonly policyId: string;
+  readonly policyHash: string;
+  readonly profile: GateProfile;
+  readonly effectiveDate: IsoDateTime;
+  readonly approver: string;
+  readonly sourceRefs: readonly SourceRef[];
+  readonly dqScope: readonly DisqualificationCode[];
+  readonly exitCodePolicy: ExitCodePolicy;
+}
+
+export interface Waiver {
+  readonly id: StableId;
+  readonly linkedRiskIds: readonly StableId[];
+  readonly approver: string;
+  readonly approvalAuthority: string;
+  readonly reason: string;
+  readonly expiry: IsoDateTime;
+  readonly impactScope: string;
+  readonly rollbackOrContainment: string;
+  readonly followUpOwner: string;
+  readonly recheckCondition: string;
+  readonly sourceRefs: readonly SourceRef[];
+  readonly valid?: boolean;
+  readonly invalidReason?: string;
+}
+
+export interface ApprovalEvidence {
+  readonly id: StableId;
+  readonly approver: string;
+  readonly roleOrAuthority: string;
+  readonly approvedDecision: string;
+  readonly approvedAt: IsoDateTime;
+  readonly policyId: string;
+  readonly policyHash: string;
+  readonly sourceRefs: readonly SourceRef[];
+  readonly evidencePackageHash: string;
+}
+
+export interface ControlRoles {
+  readonly producer: string;
+  readonly reviewer: string;
+  readonly approver: string;
+  readonly waiverApprover: string;
+  readonly releaseOwner: string;
+}
+
+export interface Retention {
+  readonly retentionPeriod: string;
+  readonly retentionOwner: string;
+  readonly storageLocation: string;
+  readonly contentHash: string;
+  readonly capturedAt: IsoDateTime;
+  readonly tamperEvidence: string;
+  readonly reverificationMethod: string;
+  readonly sourceRefs: readonly SourceRef[];
+  readonly storageClassification: StorageClassification;
+}
+
+export interface ManualEvidenceItem {
+  readonly executedCaseId: StableId;
+  readonly result: "pass" | "fail" | "blocked" | "skipped";
+  readonly expectedResult: string;
+  readonly oracleRefs: readonly EvidenceRef[];
+  readonly traceTo: readonly StableId[];
+  readonly evidenceRefs: readonly EvidenceRef[];
+  readonly reviewerNote?: string;
+}
+
+export interface QegOutputRefs {
+  readonly qegBundle: ArtifactRef;
+  readonly testPlacementPlan: ArtifactRef;
+  readonly gateVerdict: ArtifactRef;
+  readonly qualityEvidenceRecord: ArtifactRef;
+  readonly markdownSummary?: ArtifactRef;
+}
+
+export interface EvidencePackage {
+  readonly id: StableId;
+  readonly createdAt: IsoDateTime;
+  readonly createdBy: string;
+  readonly inputArtifactHashes: readonly ArtifactRef[];
+  readonly qegOutputs: QegOutputRefs;
+  readonly gatePolicy: GatePolicy;
+  readonly waivers: readonly Waiver[];
+  readonly approvalEvidence: readonly ApprovalEvidence[];
+  readonly manualEvidence: readonly ManualEvidenceItem[];
+  readonly retention: Retention;
+  readonly sourceRefs: readonly SourceRef[];
+  readonly phase: PackagePhase;
+  readonly evidencePackageHash: string;
+  readonly controlRoles?: ControlRoles;
+}
+
 export interface SourceRef {
   readonly id: StableId;
   readonly path: string;
@@ -187,6 +300,13 @@ export interface QegMetadata {
   readonly policyHash?: string;
   readonly inputArtifacts: readonly ArtifactRef[];
   readonly workflowRefs?: readonly WorkflowCookbookRef[];
+  readonly benchmarkMode?: boolean;
+  readonly hiddenOracleAccessed?: boolean;
+  readonly requiredConnectorStatus?: {
+    readonly "manual-bb-test-harness": "success" | "contract_violation";
+    readonly "code-to-gate": "success" | "contract_violation";
+    readonly "RanD": "success" | "contract_violation";
+  };
 }
 
 export interface QegNodeBase {
@@ -396,7 +516,7 @@ export interface QualityEvidenceGraph {
 }
 
 export interface GraphCompleteness {
-  readonly score: number;
+  readonly score: number | undefined; // undefined triggers DQ-07 when partial=true
   readonly partial: boolean;
   readonly parserFailures: readonly ParserFailure[];
   readonly unsupportedClaims: readonly UnsupportedClaim[];
@@ -421,6 +541,27 @@ export interface QualityEvidenceRecord {
   readonly placementPlan: TestPlacementPlan;
   readonly gate: GateResult;
   readonly exports: readonly ExportRef[];
+  /**
+   * Audit trail enhancement for IPO controlled.
+   * Includes evidence package hash and approval evidence summary.
+   */
+  readonly auditTrail?: AuditTrail;
+}
+
+export interface AuditTrail {
+  readonly evidencePackageHash: string;
+  readonly approvalEvidenceSummary: readonly ApprovalEvidenceSummary[];
+  readonly gatePolicyHash: string;
+  readonly gatePolicyId: string;
+}
+
+export interface ApprovalEvidenceSummary {
+  readonly id: string;
+  readonly approver: string;
+  readonly approvedAt: string;
+  readonly policyId: string;
+  readonly policyHash: string;
+  readonly evidencePackageHash: string;
 }
 
 export interface ExportRef {

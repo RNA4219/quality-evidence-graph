@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-unredacted-secret",
+  "description": "Unredacted secret/token/PII detected in evidence package - DQ-09",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-09",
+      "message": "Unredacted secret/token/PII detected in evidence package",
+      "nodeIds": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/retention-immutability.md §63-65"
+}

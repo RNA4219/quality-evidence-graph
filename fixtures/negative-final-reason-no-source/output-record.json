@@ -1,0 +1,125 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-final-reason-no-source",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-final-reason-no-source/input.json"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-final-reason-no-source",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "risk-critical-001",
+        "kind": "risk",
+        "title": "Critical Security Risk",
+        "priority": "P0",
+        "severity": "critical",
+        "likelihood": 0.9,
+        "businessImpact": 1,
+        "complianceCriticality": 0.95,
+        "evidenceGap": 0.7,
+        "novelty": 0.5,
+        "traceability": {
+          "sourceRefs": [],
+          "assumptions": [],
+          "confidence": "low"
+        },
+        "sourceArtifactIds": [
+          "artifact-001"
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 0.95,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-final-reason-no-source",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-final-reason-no-source",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-final-reason-no-source/input.json"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-02: Blocker \"High/critical risk \"Critical Security Risk\" with evidence gap\" has no sourceRefs",
+      "No-go blockers: 1",
+      "- High/critical risk \"Critical Security Risk\" with evidence gap",
+      "Required human review: 1"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-02",
+        "message": "Blocker \"High/critical risk \"Critical Security Risk\" with evidence gap\" has no sourceRefs",
+        "nodeIds": [
+          "risk-critical-001"
+        ],
+        "sourceRefs": []
+      }
+    ],
+    "blockers": [
+      {
+        "id": "blocker-risk-critical-001",
+        "message": "High/critical risk \"Critical Security Risk\" with evidence gap",
+        "riskIds": [
+          "risk-critical-001"
+        ],
+        "sourceRefs": []
+      }
+    ],
+    "residualRisks": [],
+    "requiredHumanReview": [
+      "risk-critical-001"
+    ]
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-final-reason-no-source\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

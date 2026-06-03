@@ -1,0 +1,26 @@
+{
+  "fixture": "negative-silent-overwrite",
+  "description": "Evidence in mutable storage only - DQ-16 for silent overwrite risk per docs/spec/retention-immutability.md",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-16",
+      "message": "Evidence used for release judgment exists only in silent-overwrite capable storage",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "SR-DQ-16",
+          "path": "docs/spec/retention-immutability.md",
+          "startLine": 1,
+          "endLine": 10,
+          "label": "storage classification must be immutable/versioned"
+        }
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/retention-immutability.md: silent overwrite capable evidence alone triggers DQ-16"
+}

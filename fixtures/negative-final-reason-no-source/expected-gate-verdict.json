@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-final-reason-no-source",
+  "description": "Gate blocker without sourceRefs - DQ-02",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-02",
+      "message": "Blocker \"High/critical risk \"Critical Security Risk\" with evidence gap\" has no sourceRefs",
+      "nodeIds": ["risk-critical-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

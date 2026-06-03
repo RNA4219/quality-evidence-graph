@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-partial-graph-no-completeness",
+  "description": "Partial graph without explicit completeness score - DQ-07",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-07",
+      "message": "Partial graph without explicit completeness score",
+      "nodeIds": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

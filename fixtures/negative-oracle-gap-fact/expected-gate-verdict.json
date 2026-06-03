@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-oracle-gap-fact",
+  "description": "P0/P1 risk with oracle gap treated as fact - DQ-04",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-04",
+      "message": "P0/P1 risk \"P0 Security Risk\" with oracle gap treated as fact",
+      "nodeIds": ["risk-p0-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

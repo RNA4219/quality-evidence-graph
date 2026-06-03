@@ -101,6 +101,11 @@
       "caps": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
       "mtime": "00001"
     },
+    "docs/spec/implementation-gate-2026-06-03.md": {
+      "role": "ipo-implementation-gate",
+      "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
+      "mtime": "00001"
+    },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
       "role": "code-to-gate-analysis",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
@@ -205,6 +210,9 @@
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/kano.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
+    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/implementation-gate-2026-06-03.md"],
+    ["docs/spec/implementation-gate-2026-06-03.md", "RUNBOOK.md"],
+    ["docs/spec/implementation-gate-2026-06-03.md", "EVALUATION.md"],
     ["docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],
     ["docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json", "docs/spec/kano-mode-2026-06-03/kano.json"],
     ["docs/spec/acceptance.md", "RUNBOOK.md"],

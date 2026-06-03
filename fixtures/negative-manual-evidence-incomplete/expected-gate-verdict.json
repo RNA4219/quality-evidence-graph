@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-manual-evidence-incomplete",
+  "description": "Manual evidence incomplete - DQ-08",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-08",
+      "message": "Manual evidence \"manual-001\" incomplete",
+      "nodeIds": ["manual-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

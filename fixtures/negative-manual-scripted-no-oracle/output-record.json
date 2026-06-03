@@ -1,0 +1,106 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "run-negative-manual-scripted-no-oracle",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/negative-manual-scripted-no-oracle/input.json"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-manual-scripted-no-oracle",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "placement-001",
+        "kind": "test_placement",
+        "title": "Manual scripted placement without oracle",
+        "traceability": {
+          "sourceRefs": []
+        },
+        "sourceArtifactIds": [],
+        "obligationId": "obligation-001",
+        "primaryLayer": "manual-scripted",
+        "disposition": "manual-only",
+        "gateRelevance": "blocking",
+        "candidateScores": [],
+        "selectedTestIds": []
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-manual-scripted-no-oracle",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "run-negative-manual-scripted-no-oracle",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/negative-manual-scripted-no-oracle/input.json"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-14: Manual-scripted placement \"placement-001\" without acceptable oracle"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-14",
+        "message": "Manual-scripted placement \"placement-001\" without acceptable oracle",
+        "nodeIds": [
+          "placement-001"
+        ],
+        "sourceRefs": []
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "C:\\Users\\CodexSandboxOffline\\.codex\\.sandbox\\cwd\\9e232dd910563b2\\fixtures\\negative-manual-scripted-no-oracle\\output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:ep-hash-001",
+    "approvalEvidenceSummary": [],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "policy-ipo-controlled-001"
+  }
+}

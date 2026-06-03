@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-revision-mismatch",
+  "description": "Artifact revision mismatch with headRef - DQ-12",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-12",
+      "message": "Artifact revision \"main\" mismatch with headRef \"feature-branch\"",
+      "nodeIds": ["artifact-001"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}
