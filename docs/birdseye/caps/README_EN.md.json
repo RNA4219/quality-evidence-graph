@@ -3,8 +3,8 @@
   "role": "human-overview-en",
   "public_api": [],
   "summary": "Human-facing English README describing QEG's purpose, QA problems solved, core concepts, controlled governance profile, CLI usage, verdict semantics, and current implementation status.",
-  "deps_out": ["README.md", "HUB.codex.md", "docs/requirements.md", "docs/spec/index.md"],
-  "deps_in": ["README.md", "HUB.codex.md"],
+  "deps_out": ["README.md", "docs/agent/HUB.codex.md", "docs/requirements.md", "docs/spec/index.md"],
+  "deps_in": ["README.md", "docs/agent/HUB.codex.md"],
   "risks": ["English human-facing copy can drift from normative specs"],
   "tests": ["npm run typecheck"]
 }

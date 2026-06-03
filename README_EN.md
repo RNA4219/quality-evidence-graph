@@ -78,7 +78,7 @@ npm run record -- fixtures/positive-release-go
 
 ## For Developers And Agents
 
-Use the root [README.md](README.md) and [HUB.codex.md](HUB.codex.md) as the implementation entry point.
+Use the root [README.md](README.md) and [docs/agent/HUB.codex.md](docs/agent/HUB.codex.md) as the implementation entry point.
 
 Key sources of truth:
 

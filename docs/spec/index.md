@@ -19,7 +19,7 @@ next_review_due: 2026-07-03
 | `docs/control-mapping.md` | 統制対応表 | 2 |
 | `docs/ipo-controlled-profile.md` | IPO profile 要求 | 2 |
 | `docs/spec/*.md` | 実装仕様正本 | 3 |
-| `TASK.codex.md` | 実装順序と受入条件 | 4 |
+| `docs/project/tasks.codex.md` | 実装順序と受入条件 | 4 |
 | `fixtures/README.md` | fixture 契約 | 4 |
 
 矛盾した場合は、要求正本を更新するか、この仕様群を修正する。実装側だけで解釈を変えてはならない。

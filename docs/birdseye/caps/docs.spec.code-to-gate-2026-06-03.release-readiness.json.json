@@ -4,7 +4,7 @@
   "public_api": [],
   "summary": "code-to-gate v1.4.1 の readiness artifact。policy `ci-release-readiness` で status `passed`、findings 0、critical 0、high 0、failed conditions 0 を示す。",
   "deps_out": ["docs/spec/code-to-gate-2026-06-03/analysis-report.md"],
-  "deps_in": ["docs/spec/gate-acceptance-2026-06-03.md", "HUB.codex.md", "RUNBOOK.md", "EVALUATION.md"],
+  "deps_in": ["docs/spec/gate-acceptance-2026-06-03.md", "docs/agent/HUB.codex.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
   "risks": ["code-to-gate readiness passed を QEG の IPO controlled release approval と混同すると Gate 分離が崩れる"],
   "tests": ["code-to-gate readiness . --policy C:\\Users\\ryo-n\\Codex_dev\\code-to-gate\\.github\\ctg-policy.yaml"]
 }

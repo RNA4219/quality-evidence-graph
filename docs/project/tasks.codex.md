@@ -64,7 +64,7 @@ npm run typecheck
 node -e "const fs=require('fs'); for (const f of fs.readdirSync('schemas').filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync('schemas/'+f,'utf8')); console.log('schemas ok')"
 npm pack --dry-run --cache ./.npm-cache
 git status --short
-git ls-files docs/requirements.md TASK.codex.md fixtures/README.md docs/control-mapping.md docs/ipo-controlled-profile.md
+git ls-files docs/requirements.md docs/project/tasks.codex.md fixtures/README.md docs/control-mapping.md docs/ipo-controlled-profile.md
 ```
 
 ## Acceptance

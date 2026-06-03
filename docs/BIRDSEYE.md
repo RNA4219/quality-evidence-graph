@@ -18,13 +18,13 @@ QEG の主要契約を最小文脈で読むための fallback map。
 | Node | Role |
 |---|---|
 | `README.md` | overview / bootstrap |
-| `HUB.codex.md` | navigation |
-| `BLUEPRINT.md` | product blueprint |
+| `docs/agent/HUB.codex.md` | navigation |
+| `docs/project/blueprint.md` | product blueprint |
 | `docs/requirements.md` | requirements source of truth |
-| `RUNBOOK.md` | operations |
-| `EVALUATION.md` | acceptance |
-| `GUARDRAILS.md` | constraints |
-| `TASK.codex.md` | implementation task ledger |
+| `docs/project/runbook.md` | operations |
+| `docs/project/evaluation.md` | acceptance |
+| `docs/project/guardrails.md` | constraints |
+| `docs/project/tasks.codex.md` | implementation task ledger |
 | `fixtures/README.md` | fixture contract |
 | `docs/control-mapping.md` | control mapping |
 | `docs/ipo-controlled-profile.md` | IPO controlled profile |
@@ -38,18 +38,18 @@ QEG の主要契約を最小文脈で読むための fallback map。
 
 ## Edges
 
-- `README.md` -> `HUB.codex.md`
-- `HUB.codex.md` -> `docs/birdseye/index.json`
-- `HUB.codex.md` -> `BLUEPRINT.md`
-- `HUB.codex.md` -> `docs/requirements.md`
-- `HUB.codex.md` -> `TASK.codex.md`
-- `HUB.codex.md` -> `fixtures/README.md`
-- `HUB.codex.md` -> `docs/control-mapping.md`
-- `HUB.codex.md` -> `docs/ipo-controlled-profile.md`
-- `TASK.codex.md` -> `fixtures/README.md`
-- `TASK.codex.md` -> `docs/control-mapping.md`
-- `TASK.codex.md` -> `docs/ipo-controlled-profile.md`
-- `docs/implementation-prep-gate-2026-06-02.md` -> `TASK.codex.md`
+- `README.md` -> `docs/agent/HUB.codex.md`
+- `docs/agent/HUB.codex.md` -> `docs/birdseye/index.json`
+- `docs/agent/HUB.codex.md` -> `docs/project/blueprint.md`
+- `docs/agent/HUB.codex.md` -> `docs/requirements.md`
+- `docs/agent/HUB.codex.md` -> `docs/project/tasks.codex.md`
+- `docs/agent/HUB.codex.md` -> `fixtures/README.md`
+- `docs/agent/HUB.codex.md` -> `docs/control-mapping.md`
+- `docs/agent/HUB.codex.md` -> `docs/ipo-controlled-profile.md`
+- `docs/project/tasks.codex.md` -> `fixtures/README.md`
+- `docs/project/tasks.codex.md` -> `docs/control-mapping.md`
+- `docs/project/tasks.codex.md` -> `docs/ipo-controlled-profile.md`
+- `docs/implementation-prep-gate-2026-06-02.md` -> `docs/project/tasks.codex.md`
 - `docs/requirements.md` -> `src/types.ts`
 - `docs/requirements.md` -> `schemas/gate-verdict.schema.json`
 - `src/types.ts` -> `schemas/shared-defs.schema.json`

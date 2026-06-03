@@ -3,8 +3,8 @@
   "role": "deep-research-report",
   "public_api": [],
   "summary": "Quality Evidence Graph の要求・要件定義に向けた deep research report。仕様、実装差分、リスク、テスト配置、実行証跡、Gate 判定を証跡グラフへ統合する背景と要求を整理する。",
-  "deps_out": ["docs/requirements.md", "BLUEPRINT.md", "docs/spec/index.md"],
-  "deps_in": ["HUB.codex.md"],
+  "deps_out": ["docs/requirements.md", "docs/project/blueprint.md", "docs/spec/index.md"],
+  "deps_in": ["docs/agent/HUB.codex.md"],
   "risks": ["研究報告が requirements / spec と乖離すると前提理解を誤る"],
   "tests": ["npm run typecheck"]
 }

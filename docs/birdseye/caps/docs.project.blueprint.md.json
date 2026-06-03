@@ -1,10 +1,10 @@
 {
-  "id": "BLUEPRINT.md",
+  "id": "docs/project/blueprint.md",
   "role": "blueprint",
   "public_api": [],
   "summary": "QEG の problem、scope、I/O contract、minimal flow、next tasks を定義する。",
   "deps_out": ["docs/requirements.md", "src/types.ts", "schemas/shared-defs.schema.json"],
-  "deps_in": ["HUB.codex.md", "README.md"],
+  "deps_in": ["docs/agent/HUB.codex.md", "README.md"],
   "risks": ["requirements と scope がずれると実装判断が割れる"],
   "tests": ["npm run typecheck"]
 }

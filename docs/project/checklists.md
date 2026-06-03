@@ -27,7 +27,7 @@ next_review_due: 2026-07-02
 
 ## Implementation Preparation
 
-- [ ] `TASK.codex.md` が TASK-01〜TASK-10 の順序、対象、受入条件を固定している
+- [ ] `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の順序、対象、受入条件を固定している
 - [ ] `fixtures/README.md` が minimal / negative fixture の期待 verdict / DQ を固定している
 - [ ] `docs/implementation-prep-gate-2026-06-02.md` が implementation preparation = go と IPO release = no_go を分離している
 - [ ] 正本ファイルが Git tracked である

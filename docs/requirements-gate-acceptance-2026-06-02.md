@@ -14,7 +14,7 @@ method: manual-bb-test-harness
 - status: degraded
 - assumptions:
   - 本 Gate は要件定義と実装準備の検収であり、IPO controlled release Go 判定ではない。
-  - 正本は `docs/requirements.md`、実装準備台帳は `TASK.codex.md`、IPO 統制契約は `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` とする。
+  - 正本は `docs/requirements.md`、実装準備台帳は `docs/project/tasks.codex.md`、IPO 統制契約は `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` とする。
   - `manual-bb-test-harness` の出力順に従い、根拠付き観点、リスク、優先度、手動テストケース、工数、Gate、Go/No-Go brief を記録する。
 - blockers:
   - 要件定義/実装準備 Gate の blocker はなし。
@@ -24,15 +24,15 @@ method: manual-bb-test-harness
 
 | id | title | view | techniques | source | rationale | 判定 |
 |---|---|---|---|---|---|---|
-| OBS-01 | 目的とスコープ | rule | checklist / traceability | `docs/requirements.md`, `BLUEPRINT.md`, `README.md` | 3 必須接続先、workflow support only、memx 対象外、必須 / 任意 artifact、IPO 統制要求が明記されている。 | pass |
+| OBS-01 | 目的とスコープ | rule | checklist / traceability | `docs/requirements.md`, `docs/project/blueprint.md`, `README.md` | 3 必須接続先、workflow support only、memx 対象外、必須 / 任意 artifact、IPO 統制要求が明記されている。 | pass |
 | OBS-02 | Traceability | rule / data | checklist | `docs/requirements.md`, `src/types.ts`, `schemas/shared-defs.schema.json` | Gate reason、placement、DQ、node / edge は `sourceRefs`, `assumptions`, `confidence` へ辿る契約になっている。 | pass |
 | OBS-03 | Gate 契約 | state / rule | decision table | `docs/requirements.md`, `schemas/gate-verdict.schema.json`, `src/types.ts` | `go / conditional_go / no_go / disqualified`、DQ-01〜DQ-17、判定優先順位、profile 別 exit code policy が定義されている。 | pass |
 | OBS-04 | IPO 統制要求 | role / rule | checklist | `docs/control-mapping.md`, `docs/ipo-controlled-profile.md` | waiver governance、approval evidence、retention、immutability、職務分掌、リリース承認分離が最小契約として固定されている。 | pass |
 | OBS-05 | 型 / schema 同期 | regression | contract check | `src/types.ts`, `schemas/*.json` | `npm run typecheck` と schema JSON parse が成功。`GateProfile` と DQ enum は types / schema 上で一致している。 | pass |
 | OBS-06 | 配布対象 | regression | release dry-run | `package.json`, `npm pack --dry-run --cache ./.npm-cache` | tarball に `docs/requirements.md`、schemas、主要 docs、fixtures、IPO profile、control mapping、Gate record が含まれる。 | pass |
-| OBS-07 | Git 管理 | regression | source control check | `git ls-files` | `docs/requirements.md`、`TASK.codex.md`、fixture 契約、control mapping、IPO profile、実装準備 Gate record、要件 Gate record は Git tracked。 | pass |
+| OBS-07 | Git 管理 | regression | source control check | `git ls-files` | `docs/requirements.md`、`docs/project/tasks.codex.md`、fixture 契約、control mapping、IPO profile、実装準備 Gate record、要件 Gate record は Git tracked。 | pass |
 | OBS-08 | Birdseye | data / regression | parser check | `docs/birdseye/index.json`, `docs/birdseye/caps/*.json` | index は parse 可能で、主要 19 node と 19 capsule を持つ。 | pass |
-| OBS-09 | MVP 実装準備 | flow / regression | gap analysis | `TASK.codex.md`, `fixtures/README.md`, `src/` | TASK-01〜TASK-10 と fixture expected verdict / DQ は固定済み。実装本体と fixture 実体は次 Gate の対象。 | partial |
+| OBS-09 | MVP 実装準備 | flow / regression | gap analysis | `docs/project/tasks.codex.md`, `fixtures/README.md`, `src/` | TASK-01〜TASK-10 と fixture expected verdict / DQ は固定済み。実装本体と fixture 実体は次 Gate の対象。 | partial |
 
 ## 2. リスク
 
@@ -58,11 +58,11 @@ method: manual-bb-test-harness
 
 | tc_id | priority | title | preconditions | steps | expected | oracle | trace_to | minutes |
 |---|---|---|---|---|---|---|---|---:|
-| TC-REQ-01 | P0 | 要件正本の配布性確認 | repo root で実行 | `npm pack --dry-run --cache ./.npm-cache` を実行し、tarball contents を確認する。 | `docs/requirements.md`、schemas、主要 docs、fixtures、IPO profile、Gate records が含まれる。 | `RUNBOOK.md` Release dry-run | OBS-06 | 10 |
-| TC-REQ-02 | P0 | 要件正本の版管理確認 | Git repo が初期化済み | `git ls-files docs/requirements.md TASK.codex.md fixtures/README.md docs/control-mapping.md docs/ipo-controlled-profile.md docs/implementation-prep-gate-2026-06-02.md docs/requirements-gate-acceptance-2026-06-02.md` を確認する。 | すべて Git tracked。 | `EVALUATION.md` Acceptance Criteria | OBS-07 | 5 |
-| TC-REQ-03 | P0 | schema / type 契約確認 | Node.js 20 以上 | `npm run typecheck` と schema JSON parse を実行する。 | typecheck と parse が成功する。 | `RUNBOOK.md` Execute | OBS-05 | 10 |
+| TC-REQ-01 | P0 | 要件正本の配布性確認 | repo root で実行 | `npm pack --dry-run --cache ./.npm-cache` を実行し、tarball contents を確認する。 | `docs/requirements.md`、schemas、主要 docs、fixtures、IPO profile、Gate records が含まれる。 | `docs/project/runbook.md` Release dry-run | OBS-06 | 10 |
+| TC-REQ-02 | P0 | 要件正本の版管理確認 | Git repo が初期化済み | `git ls-files docs/requirements.md docs/project/tasks.codex.md fixtures/README.md docs/control-mapping.md docs/ipo-controlled-profile.md docs/implementation-prep-gate-2026-06-02.md docs/requirements-gate-acceptance-2026-06-02.md` を確認する。 | すべて Git tracked。 | `docs/project/evaluation.md` Acceptance Criteria | OBS-07 | 5 |
+| TC-REQ-03 | P0 | schema / type 契約確認 | Node.js 20 以上 | `npm run typecheck` と schema JSON parse を実行する。 | typecheck と parse が成功する。 | `docs/project/runbook.md` Execute | OBS-05 | 10 |
 | TC-REQ-04 | P1 | IPO 統制項目確認 | 文書正本が tracked | requirements / README / BLUEPRINT / RUNBOOK / GUARDRAILS / control mapping / IPO profile で `ipo_controlled`、waiver、approval evidence、retention を確認する。 | 統制要求が同期している。 | `docs/ipo-controlled-profile.md` | OBS-04 | 20 |
-| TC-REQ-05 | P1 | Birdseye 鮮度確認 | Birdseye docs が存在 | `docs/birdseye/index.json` を parse し、capsule の存在数と主要 node を確認する。 | index parse 成功、主要 docs / schemas / src の capsule 欠落なし。 | `HUB.codex.md` Birdseye 鮮度 | OBS-08 | 10 |
+| TC-REQ-05 | P1 | Birdseye 鮮度確認 | Birdseye docs が存在 | `docs/birdseye/index.json` を parse し、capsule の存在数と主要 node を確認する。 | index parse 成功、主要 docs / schemas / src の capsule 欠落なし。 | `docs/agent/HUB.codex.md` Birdseye 鮮度 | OBS-08 | 10 |
 | TC-REQ-06 | P1 | MVP 完了条件確認 | 実装前提の確認 | `fixtures/` と `src/` を確認する。 | 現時点では fixture 実体と evaluator 未実装が残課題として識別される。 | `docs/requirements.md` MVP 受入条件 | R-01, R-02 | 10 |
 
 ## 5. 工数

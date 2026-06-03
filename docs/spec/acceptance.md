@@ -32,7 +32,7 @@ next_review_due: 2026-07-03
 | TC-SPEC-02 | `docs/spec/gate-policy.md` を確認する。 | DQ が `disqualified` 最優先で、`conditional_go` exit code が `2` である。 |
 | TC-SPEC-03 | `docs/spec/waiver-approval.md` を確認する。 | waiver で DQ を消せず、approval evidence は QEG verdict と分離されている。 |
 | TC-SPEC-04 | `docs/spec/evidence-package.md` と `docs/spec/retention-immutability.md` を確認する。 | evidence package と保管要件が release 判定に使える粒度で固定されている。 |
-| TC-SPEC-05 | `HUB.codex.md`、`RUNBOOK.md`、`EVALUATION.md` を確認する。 | 仕様書群の読み順、検証コマンド、acceptance criteria が接続されている。 |
+| TC-SPEC-05 | `docs/agent/HUB.codex.md`、`docs/project/runbook.md`、`docs/project/evaluation.md` を確認する。 | 仕様書群の読み順、検証コマンド、acceptance criteria が接続されている。 |
 | TC-SPEC-06 | `docs/spec/review-2026-06-03.md` を確認する。 | 仕様書 review Gate、実装着手 Gate、IPO release Gate が分離されている。 |
 | TC-SPEC-07 | `docs/spec/gate-acceptance-2026-06-03.md` を確認する。 | 仕様内容 Gate、正式な実装前 Gate、実装着手 Gate、IPO release Gate が分離されている。 |
 

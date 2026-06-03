@@ -13,7 +13,7 @@ reviewed_at: 2026-06-02
 | 観点 | 判定 | 根拠 |
 |---|---|---|
 | Git baseline | pass | 正本ファイルを Git tracked にすることを Go 条件とし、baseline commit 後に `git ls-files docs/requirements.md` で確認する。 |
-| Task readiness | pass | `TASK.codex.md` が TASK-01〜TASK-10 の順序、対象、受入条件を固定している。 |
+| Task readiness | pass | `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の順序、対象、受入条件を固定している。 |
 | Fixture readiness | pass | `fixtures/README.md` が minimal / negative fixture の構成、期待 verdict、期待 DQ を固定している。 |
 | IPO control readiness | pass | `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が policy、waiver、approval evidence、retention、職務分掌を固定している。 |
 | Verification readiness | pass | `npm run typecheck`、schema parse、`npm pack --dry-run --cache ./.npm-cache` を実行対象とする。 |
@@ -41,7 +41,7 @@ reviewed_at: 2026-06-02
 | Case | 手順 | 期待結果 |
 |---|---|---|
 | TC-PREP-01 | `git status --short` と `git ls-files docs/requirements.md` を確認する | 正本ファイルが tracked |
-| TC-PREP-02 | `TASK.codex.md` を確認する | TASK-01〜TASK-10 が decision complete |
+| TC-PREP-02 | `docs/project/tasks.codex.md` を確認する | TASK-01〜TASK-10 が decision complete |
 | TC-PREP-03 | `fixtures/README.md` を確認する | minimal fixture と negative fixture 4 種以上が定義済み |
 | TC-PREP-04 | `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` を確認する | waiver、approval evidence、retention、職務分掌、immutability が定義済み |
 | TC-PREP-05 | `npm run typecheck`、schema parse、pack dry-run を実行する | すべて成功し、追加 docs / fixtures が package に含まれる |
@@ -63,6 +63,6 @@ IPO controlled release verdict: `no_go`
 
 ## 7. Go/No-Go brief
 
-実装準備は Go。次の作業者は `TASK.codex.md` の order 1 から順に、`fixtures/README.md` の expected verdict / DQ を崩さず実装できる。
+実装準備は Go。次の作業者は `docs/project/tasks.codex.md` の order 1 から順に、`fixtures/README.md` の expected verdict / DQ を崩さず実装できる。
 
 IPO controlled release は No-Go。実装完了後、minimal / negative fixture、own-output validation、evidence package、waiver / approval / retention の実証を揃えて再判定する。

@@ -12,12 +12,12 @@
 
 読む順番:
 
-1. `HUB.codex.md` - repo 内ドキュメントの入口とタスク分解ルール
+1. `docs/agent/HUB.codex.md` - repo 内ドキュメントの入口とタスク分解ルール
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
 4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
 5. `docs/spec/implementation-gate-2026-06-03.md` - 現在の実装 Gate 証跡
-6. `RUNBOOK.md` / `EVALUATION.md` - 実行手順と受入条件
+6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
 
 フォーカス手順:
 

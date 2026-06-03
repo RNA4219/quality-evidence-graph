@@ -16,14 +16,14 @@
       "caps": "docs/birdseye/caps/README_EN.md.json",
       "mtime": "00001"
     },
-    "HUB.codex.md": {
+    "docs/agent/HUB.codex.md": {
       "role": "navigation",
-      "caps": "docs/birdseye/caps/HUB.codex.md.json",
+      "caps": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
       "mtime": "00001"
     },
-    "BLUEPRINT.md": {
+    "docs/project/blueprint.md": {
       "role": "blueprint",
-      "caps": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "caps": "docs/birdseye/caps/docs.project.blueprint.md.json",
       "mtime": "00001"
     },
     "docs/research/quality-evidence-graph-requirements-report.md": {
@@ -36,29 +36,29 @@
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
       "mtime": "00001"
     },
-    "RUNBOOK.md": {
+    "docs/project/runbook.md": {
       "role": "operations",
-      "caps": "docs/birdseye/caps/RUNBOOK.md.json",
+      "caps": "docs/birdseye/caps/docs.project.runbook.md.json",
       "mtime": "00001"
     },
-    "EVALUATION.md": {
+    "docs/project/evaluation.md": {
       "role": "quality",
-      "caps": "docs/birdseye/caps/EVALUATION.md.json",
+      "caps": "docs/birdseye/caps/docs.project.evaluation.md.json",
       "mtime": "00001"
     },
-    "GUARDRAILS.md": {
+    "docs/project/guardrails.md": {
       "role": "policy",
-      "caps": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "caps": "docs/birdseye/caps/docs.project.guardrails.md.json",
       "mtime": "00001"
     },
-    "TASK.codex.md": {
+    "docs/project/tasks.codex.md": {
       "role": "task-template",
-      "caps": "docs/birdseye/caps/TASK.codex.md.json",
+      "caps": "docs/birdseye/caps/docs.project.tasks.codex.md.json",
       "mtime": "00001"
     },
-    "CHECKLISTS.md": {
+    "docs/project/checklists.md": {
       "role": "checklist",
-      "caps": "docs/birdseye/caps/CHECKLISTS.md.json",
+      "caps": "docs/birdseye/caps/docs.project.checklists.md.json",
       "mtime": "00001"
     },
     "fixtures/README.md": {
@@ -185,38 +185,38 @@
   "edges": [
     ["README.md", "README_JA.md"],
     ["README.md", "README_EN.md"],
-    ["README.md", "HUB.codex.md"],
-    ["README_JA.md", "HUB.codex.md"],
-    ["README_EN.md", "HUB.codex.md"],
-    ["HUB.codex.md", "docs/birdseye/index.json"],
-    ["HUB.codex.md", "README_JA.md"],
-    ["HUB.codex.md", "README_EN.md"],
-    ["HUB.codex.md", "BLUEPRINT.md"],
-    ["HUB.codex.md", "docs/research/quality-evidence-graph-requirements-report.md"],
-    ["HUB.codex.md", "docs/requirements.md"],
-    ["HUB.codex.md", "RUNBOOK.md"],
-    ["HUB.codex.md", "EVALUATION.md"],
-    ["HUB.codex.md", "GUARDRAILS.md"],
-    ["HUB.codex.md", "TASK.codex.md"],
-    ["HUB.codex.md", "fixtures/README.md"],
-    ["HUB.codex.md", "docs/control-mapping.md"],
-    ["HUB.codex.md", "docs/ipo-controlled-profile.md"],
-    ["HUB.codex.md", "docs/spec/index.md"],
-    ["HUB.codex.md", "docs/implementation-prep-gate-2026-06-02.md"],
+    ["README.md", "docs/agent/HUB.codex.md"],
+    ["README_JA.md", "docs/agent/HUB.codex.md"],
+    ["README_EN.md", "docs/agent/HUB.codex.md"],
+    ["docs/agent/HUB.codex.md", "docs/birdseye/index.json"],
+    ["docs/agent/HUB.codex.md", "README_JA.md"],
+    ["docs/agent/HUB.codex.md", "README_EN.md"],
+    ["docs/agent/HUB.codex.md", "docs/project/blueprint.md"],
+    ["docs/agent/HUB.codex.md", "docs/research/quality-evidence-graph-requirements-report.md"],
+    ["docs/agent/HUB.codex.md", "docs/requirements.md"],
+    ["docs/agent/HUB.codex.md", "docs/project/runbook.md"],
+    ["docs/agent/HUB.codex.md", "docs/project/evaluation.md"],
+    ["docs/agent/HUB.codex.md", "docs/project/guardrails.md"],
+    ["docs/agent/HUB.codex.md", "docs/project/tasks.codex.md"],
+    ["docs/agent/HUB.codex.md", "fixtures/README.md"],
+    ["docs/agent/HUB.codex.md", "docs/control-mapping.md"],
+    ["docs/agent/HUB.codex.md", "docs/ipo-controlled-profile.md"],
+    ["docs/agent/HUB.codex.md", "docs/spec/index.md"],
+    ["docs/agent/HUB.codex.md", "docs/implementation-prep-gate-2026-06-02.md"],
     ["docs/requirements.md", "src/types.ts"],
     ["docs/research/quality-evidence-graph-requirements-report.md", "docs/requirements.md"],
-    ["docs/research/quality-evidence-graph-requirements-report.md", "BLUEPRINT.md"],
+    ["docs/research/quality-evidence-graph-requirements-report.md", "docs/project/blueprint.md"],
     ["docs/research/quality-evidence-graph-requirements-report.md", "docs/spec/index.md"],
     ["docs/requirements.md", "schemas/gate-verdict.schema.json"],
-    ["docs/requirements.md", "TASK.codex.md"],
+    ["docs/requirements.md", "docs/project/tasks.codex.md"],
     ["docs/requirements.md", "fixtures/README.md"],
     ["docs/requirements.md", "docs/control-mapping.md"],
     ["docs/requirements.md", "docs/ipo-controlled-profile.md"],
     ["docs/requirements.md", "docs/spec/index.md"],
-    ["TASK.codex.md", "fixtures/README.md"],
-    ["TASK.codex.md", "docs/control-mapping.md"],
-    ["TASK.codex.md", "docs/ipo-controlled-profile.md"],
-    ["TASK.codex.md", "docs/spec/index.md"],
+    ["docs/project/tasks.codex.md", "fixtures/README.md"],
+    ["docs/project/tasks.codex.md", "docs/control-mapping.md"],
+    ["docs/project/tasks.codex.md", "docs/ipo-controlled-profile.md"],
+    ["docs/project/tasks.codex.md", "docs/spec/index.md"],
     ["docs/ipo-controlled-profile.md", "docs/spec/gate-policy.md"],
     ["docs/ipo-controlled-profile.md", "docs/spec/waiver-approval.md"],
     ["docs/ipo-controlled-profile.md", "docs/spec/evidence-package.md"],
@@ -231,28 +231,28 @@
     ["docs/spec/review-2026-06-03.md", "docs/spec/waiver-approval.md"],
     ["docs/spec/review-2026-06-03.md", "docs/spec/evidence-package.md"],
     ["docs/spec/review-2026-06-03.md", "docs/spec/acceptance.md"],
-    ["docs/spec/review-2026-06-03.md", "RUNBOOK.md"],
-    ["docs/spec/review-2026-06-03.md", "EVALUATION.md"],
+    ["docs/spec/review-2026-06-03.md", "docs/project/runbook.md"],
+    ["docs/spec/review-2026-06-03.md", "docs/project/evaluation.md"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/acceptance.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "RUNBOOK.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "EVALUATION.md"],
+    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/project/runbook.md"],
+    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/project/evaluation.md"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/kano.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/implementation-gate-2026-06-03.md"],
-    ["HUB.codex.md", "docs/release-notes/2026-06-03-controlled-gate.md"],
+    ["docs/agent/HUB.codex.md", "docs/release-notes/2026-06-03-controlled-gate.md"],
     ["docs/release-notes/2026-06-03-controlled-gate.md", "README.md"],
     ["docs/release-notes/2026-06-03-controlled-gate.md", "README_JA.md"],
     ["docs/release-notes/2026-06-03-controlled-gate.md", "README_EN.md"],
     ["docs/release-notes/2026-06-03-controlled-gate.md", "docs/spec/implementation-gate-2026-06-03.md"],
-    ["docs/spec/implementation-gate-2026-06-03.md", "RUNBOOK.md"],
-    ["docs/spec/implementation-gate-2026-06-03.md", "EVALUATION.md"],
+    ["docs/spec/implementation-gate-2026-06-03.md", "docs/project/runbook.md"],
+    ["docs/spec/implementation-gate-2026-06-03.md", "docs/project/evaluation.md"],
     ["docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],
     ["docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json", "docs/spec/kano-mode-2026-06-03/kano.json"],
-    ["docs/spec/acceptance.md", "RUNBOOK.md"],
-    ["docs/spec/acceptance.md", "EVALUATION.md"],
-    ["docs/implementation-prep-gate-2026-06-02.md", "TASK.codex.md"],
+    ["docs/spec/acceptance.md", "docs/project/runbook.md"],
+    ["docs/spec/acceptance.md", "docs/project/evaluation.md"],
+    ["docs/implementation-prep-gate-2026-06-02.md", "docs/project/tasks.codex.md"],
     ["src/types.ts", "schemas/shared-defs.schema.json"],
     ["schemas/shared-defs.schema.json", "schemas/gate-verdict.schema.json"],
     ["schemas/shared-defs.schema.json", "schemas/qeg.bundle.schema.json"],
@@ -260,7 +260,7 @@
     ["schemas/qeg.bundle.schema.json", "schemas/quality-evidence-record.schema.json"],
     ["schemas/test-placement-plan.schema.json", "schemas/quality-evidence-record.schema.json"],
     ["schemas/gate-verdict.schema.json", "schemas/quality-evidence-record.schema.json"],
-    ["RUNBOOK.md", "EVALUATION.md"],
-    ["GUARDRAILS.md", "docs/birdseye/index.json"]
+    ["docs/project/runbook.md", "docs/project/evaluation.md"],
+    ["docs/project/guardrails.md", "docs/birdseye/index.json"]
   ]
 }

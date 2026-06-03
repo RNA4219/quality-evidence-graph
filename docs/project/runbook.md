@@ -55,8 +55,8 @@ npm pack --dry-run --cache ./.npm-cache
 
 - `docs/requirements.md` が tarball contents に含まれる
 - `schemas/` が tarball contents に含まれる
-- `README.md`、`BLUEPRINT.md`、`RUNBOOK.md`、`EVALUATION.md`、`GUARDRAILS.md`、`HUB.codex.md` が配布対象に含まれる
-- `TASK.codex.md`、`fixtures/README.md`、`docs/control-mapping.md`、`docs/ipo-controlled-profile.md`、`docs/implementation-prep-gate-2026-06-02.md` が配布対象に含まれる
+- `README.md`、`docs/project/blueprint.md`、`docs/project/runbook.md`、`docs/project/evaluation.md`、`docs/project/guardrails.md`、`docs/agent/HUB.codex.md` が配布対象に含まれる
+- `docs/project/tasks.codex.md`、`fixtures/README.md`、`docs/control-mapping.md`、`docs/ipo-controlled-profile.md`、`docs/implementation-prep-gate-2026-06-02.md` が配布対象に含まれる
 - `docs/spec/` が配布対象に含まれる
 
 ### 5. IPO 統制仕様書確認
@@ -121,9 +121,9 @@ node dist/cli.js record fixtures/negative-approval-missing
 - `docs/requirements.md` が Git 管理対象である
 - `GateProfile` と schema の `gateProfile` enum が一致する
 - `DisqualificationCode` と `gate-verdict.schema.json` の DQ enum が一致する
-- `ipo_controlled` profile の要件が `docs/requirements.md`、`README.md`、`BLUEPRINT.md` に同期されている
+- `ipo_controlled` profile の要件が `docs/requirements.md`、`README.md`、`docs/project/blueprint.md` に同期されている
 - Birdseye index と capsule が変更対象を指している
-- `TASK.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している
+- `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している
 - `fixtures/README.md` が expected verdict / DQ を固定している
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備を固定している
 - `docs/spec/` が TASK-09 / TASK-10 の実装判断に必要な Gate policy、waiver、approval evidence、retention、immutability、evidence package を固定している

@@ -78,7 +78,7 @@ npm run record -- fixtures/positive-release-go
 
 ## 開発者・エージェント向け
 
-実装や検収に入る場合は、root の [README.md](README.md) と [HUB.codex.md](HUB.codex.md) を入口にしてください。
+実装や検収に入る場合は、root の [README.md](README.md) と [docs/agent/HUB.codex.md](docs/agent/HUB.codex.md) を入口にしてください。
 
 重要な正本:
 

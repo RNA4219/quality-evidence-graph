@@ -14,28 +14,28 @@
   "schema": "normalized-repo-graph@v1",
   "files": [
     {
-      "id": "file:BLUEPRINT.md",
-      "path": "BLUEPRINT.md",
+      "id": "file:docs/project/blueprint.md",
+      "path": "docs/project/blueprint.md",
       "language": "unknown",
       "role": "docs",
       "hash": "6914a70d491ff7e8880b902fb91243698f6b8c38168d9d7a6cb56c0f859f6fa8",
       "sizeBytes": 3968,
       "lineCount": 98,
-      "moduleId": "module:BLUEPRINT.md",
+      "moduleId": "module:docs/project/blueprint.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
       }
     },
     {
-      "id": "file:CHECKLISTS.md",
-      "path": "CHECKLISTS.md",
+      "id": "file:docs/project/checklists.md",
+      "path": "docs/project/checklists.md",
       "language": "unknown",
       "role": "docs",
       "hash": "0aaa1fb4f89ecbe2b1e87be25f494e942a9aff900970a4c4959fc22cca583674",
       "sizeBytes": 1364,
       "lineCount": 34,
-      "moduleId": "module:CHECKLISTS.md",
+      "moduleId": "module:docs/project/checklists.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -56,28 +56,28 @@
       }
     },
     {
-      "id": "file:docs/birdseye/caps/BLUEPRINT.md.json",
-      "path": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "id": "file:docs/birdseye/caps/docs.project.blueprint.md.json",
+      "path": "docs/birdseye/caps/docs.project.blueprint.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "7326b9eb1a69002cee0eb9abb7b86bb7ef0a9f71cb53ba1aaca3cad2297330a8",
       "sizeBytes": 420,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/BLUEPRINT.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.project.blueprint.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
       }
     },
     {
-      "id": "file:docs/birdseye/caps/CHECKLISTS.md.json",
-      "path": "docs/birdseye/caps/CHECKLISTS.md.json",
+      "id": "file:docs/birdseye/caps/docs.project.checklists.md.json",
+      "path": "docs/birdseye/caps/docs.project.checklists.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "9d3d553fd343557f37ba75cbc3b4c3cc6aa9968616022d0c4de1e048124313b7",
       "sizeBytes": 354,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/CHECKLISTS.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.project.checklists.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -252,14 +252,14 @@
       }
     },
     {
-      "id": "file:docs/birdseye/caps/EVALUATION.md.json",
-      "path": "docs/birdseye/caps/EVALUATION.md.json",
+      "id": "file:docs/birdseye/caps/docs.project.evaluation.md.json",
+      "path": "docs/birdseye/caps/docs.project.evaluation.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "06931ceda7f1df5b4c9b0c0fd097c64ce0cd58285799af2daae237305d138f20",
       "sizeBytes": 522,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/EVALUATION.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.project.evaluation.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -280,28 +280,28 @@
       }
     },
     {
-      "id": "file:docs/birdseye/caps/GUARDRAILS.md.json",
-      "path": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "id": "file:docs/birdseye/caps/docs.project.guardrails.md.json",
+      "path": "docs/birdseye/caps/docs.project.guardrails.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "13d1089326f6781e3676653c429b1c04aaaf1c981512623b97cc1f01c5f899fa",
       "sizeBytes": 436,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/GUARDRAILS.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.project.guardrails.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
       }
     },
     {
-      "id": "file:docs/birdseye/caps/HUB.codex.md.json",
-      "path": "docs/birdseye/caps/HUB.codex.md.json",
+      "id": "file:docs/birdseye/caps/docs.agent.HUB.codex.md.json",
+      "path": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "dc11ff5641037ee5912475077e2cf1a0236df0fc243cca6aa5ab354a92e41128",
       "sizeBytes": 596,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/HUB.codex.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.agent.HUB.codex.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -322,14 +322,14 @@
       }
     },
     {
-      "id": "file:docs/birdseye/caps/RUNBOOK.md.json",
-      "path": "docs/birdseye/caps/RUNBOOK.md.json",
+      "id": "file:docs/birdseye/caps/docs.project.runbook.md.json",
+      "path": "docs/birdseye/caps/docs.project.runbook.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "d0caa9ca62ce03408a6089a4a265fc9bddd78a1e4940fa22c8d89c5fdf18bd8b",
       "sizeBytes": 541,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/RUNBOOK.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.project.runbook.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -420,14 +420,14 @@
       }
     },
     {
-      "id": "file:docs/birdseye/caps/TASK.codex.md.json",
-      "path": "docs/birdseye/caps/TASK.codex.md.json",
+      "id": "file:docs/birdseye/caps/docs.project.tasks.codex.md.json",
+      "path": "docs/birdseye/caps/docs.project.tasks.codex.md.json",
       "language": "unknown",
       "role": "docs",
       "hash": "afa5566633a20a4f40be70872ffc6d59fc39348e254334eb34c50805b873eb49",
       "sizeBytes": 571,
       "lineCount": 11,
-      "moduleId": "module:docs/birdseye/caps/TASK.codex.md.json",
+      "moduleId": "module:docs/birdseye/caps/docs.project.tasks.codex.md.json",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -644,14 +644,14 @@
       }
     },
     {
-      "id": "file:EVALUATION.md",
-      "path": "EVALUATION.md",
+      "id": "file:docs/project/evaluation.md",
+      "path": "docs/project/evaluation.md",
       "language": "unknown",
       "role": "docs",
       "hash": "4e7b2076624d0e3ecbefc0312ba7b58add35e57317585cbc234ae5edd722230d",
       "sizeBytes": 3393,
       "lineCount": 55,
-      "moduleId": "module:EVALUATION.md",
+      "moduleId": "module:docs/project/evaluation.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -672,28 +672,28 @@
       }
     },
     {
-      "id": "file:GUARDRAILS.md",
-      "path": "GUARDRAILS.md",
+      "id": "file:docs/project/guardrails.md",
+      "path": "docs/project/guardrails.md",
       "language": "unknown",
       "role": "docs",
       "hash": "f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1",
       "sizeBytes": 1478,
       "lineCount": 36,
-      "moduleId": "module:GUARDRAILS.md",
+      "moduleId": "module:docs/project/guardrails.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
       }
     },
     {
-      "id": "file:HUB.codex.md",
-      "path": "HUB.codex.md",
+      "id": "file:docs/agent/HUB.codex.md",
+      "path": "docs/agent/HUB.codex.md",
       "language": "unknown",
       "role": "docs",
       "hash": "17c5eecc70768596ea9b1b70cd9a77986d5c1e35e2016b5604dabd9922fdebec",
       "sizeBytes": 3530,
       "lineCount": 77,
-      "moduleId": "module:HUB.codex.md",
+      "moduleId": "module:docs/agent/HUB.codex.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -728,14 +728,14 @@
       }
     },
     {
-      "id": "file:RUNBOOK.md",
-      "path": "RUNBOOK.md",
+      "id": "file:docs/project/runbook.md",
+      "path": "docs/project/runbook.md",
       "language": "unknown",
       "role": "docs",
       "hash": "ff1231736e7debb0878602d19a16357bcaa9597cb35ebc1a6293dd856ee4d521",
       "sizeBytes": 4189,
       "lineCount": 111,
-      "moduleId": "module:RUNBOOK.md",
+      "moduleId": "module:docs/project/runbook.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"
@@ -854,14 +854,14 @@
       }
     },
     {
-      "id": "file:TASK.codex.md",
-      "path": "TASK.codex.md",
+      "id": "file:docs/project/tasks.codex.md",
+      "path": "docs/project/tasks.codex.md",
       "language": "unknown",
       "role": "docs",
       "hash": "40f89dafe1b7eb0a72dee490bde5a23910d84233059a7aea8b156b1110e615e2",
       "sizeBytes": 4918,
       "lineCount": 84,
-      "moduleId": "module:TASK.codex.md",
+      "moduleId": "module:docs/project/tasks.codex.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"

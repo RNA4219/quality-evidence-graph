@@ -16,13 +16,6 @@
     "README.md",
     "README_JA.md",
     "README_EN.md",
-    "BLUEPRINT.md",
-    "HUB.codex.md",
-    "RUNBOOK.md",
-    "EVALUATION.md",
-    "GUARDRAILS.md",
-    "TASK.codex.md",
-    "CHECKLISTS.md",
     "LICENSE"
   ],
   "scripts": {

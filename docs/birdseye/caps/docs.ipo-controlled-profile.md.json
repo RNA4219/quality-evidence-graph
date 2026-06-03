@@ -4,7 +4,7 @@
   "public_api": ["GateProfile", "DisqualificationCode"],
   "summary": "ipo_controlled の Gate policy、waiver、approval evidence、retention、exit code policy の最小実装契約。",
   "deps_out": ["docs/requirements.md", "schemas/gate-verdict.schema.json"],
-  "deps_in": ["HUB.codex.md", "TASK.codex.md", "docs/control-mapping.md"],
+  "deps_in": ["docs/agent/HUB.codex.md", "docs/project/tasks.codex.md", "docs/control-mapping.md"],
   "risks": ["conditional_go を CI success と誤認すると IPO profile の統制が壊れる"],
   "tests": ["npm run typecheck", "schema JSON parse"]
 }

@@ -10,13 +10,13 @@ next_review_due: 2026-07-02
 
 ## Acceptance Criteria
 
-- `docs/requirements.md`、`BLUEPRINT.md`、`README.md`、`RUNBOOK.md`、`GUARDRAILS.md`、`HUB.codex.md` が矛盾しないこと。
+- `docs/requirements.md`、`docs/project/blueprint.md`、`README.md`、`docs/project/runbook.md`、`docs/project/guardrails.md`、`docs/agent/HUB.codex.md` が矛盾しないこと。
 - `src/types.ts` の `GateProfile` / `DisqualificationCode` と schema enum が一致すること。
 - `docs/requirements.md` が Git 管理対象かつ package 配布対象であること。
 - `docs/birdseye/index.json` と `docs/birdseye/caps/*.json` が主要ファイルを指すこと。
 - `ipo_controlled` profile、DQ-15〜DQ-17、waiver governance、evidence immutability が要件に明記されていること。
 - `conditional_go` の exit code policy が profile 依存として定義されていること。
-- `TASK.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定していること。
+- `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定していること。
 - `fixtures/README.md` が minimal / negative fixture の期待 verdict / DQ を固定していること。
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備の最小契約を固定していること。
 - `docs/spec/` が Gate policy、waiver、approval evidence、evidence package、retention、immutability、仕様書検収を章別に固定していること。

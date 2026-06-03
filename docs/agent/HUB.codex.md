@@ -6,7 +6,7 @@ last_reviewed_at: 2026-06-02
 next_review_due: 2026-07-02
 ---
 
-# HUB.codex.md
+# docs/agent/HUB.codex.md
 
 `quality-evidence-graph` の仕様、運用、検収、Birdseye を束ねる Codex 用ハブ。
 
@@ -16,13 +16,13 @@ next_review_due: 2026-07-02
 2. `README_JA.md` / `README_EN.md`
 3. `docs/birdseye/index.json`
 4. 必要な `docs/birdseye/caps/*.json`
-5. `BLUEPRINT.md`
+5. `docs/project/blueprint.md`
 6. `docs/research/quality-evidence-graph-requirements-report.md`
 7. `docs/requirements.md`
-8. `RUNBOOK.md`
-9. `EVALUATION.md`
-10. `GUARDRAILS.md`
-11. `TASK.codex.md`
+8. `docs/project/runbook.md`
+9. `docs/project/evaluation.md`
+10. `docs/project/guardrails.md`
+11. `docs/project/tasks.codex.md`
 12. `fixtures/README.md`
 13. `docs/control-mapping.md`
 14. `docs/ipo-controlled-profile.md`
@@ -43,13 +43,13 @@ next_review_due: 2026-07-02
 | `README.md` | repo overview / bootstrap | high |
 | `README_JA.md` | human-facing Japanese overview | high |
 | `README_EN.md` | human-facing English overview | high |
-| `BLUEPRINT.md` | problem, scope, I/O contract | high |
+| `docs/project/blueprint.md` | problem, scope, I/O contract | high |
 | `docs/research/quality-evidence-graph-requirements-report.md` | deep research / requirements report | high |
 | `docs/requirements.md` | requirements source of truth | high |
-| `RUNBOOK.md` | execution / validation / release operation | high |
-| `EVALUATION.md` | acceptance criteria / release checks | high |
-| `GUARDRAILS.md` | repo operating constraints | high |
-| `TASK.codex.md` | implementation task ledger | high |
+| `docs/project/runbook.md` | execution / validation / release operation | high |
+| `docs/project/evaluation.md` | acceptance criteria / release checks | high |
+| `docs/project/guardrails.md` | repo operating constraints | high |
+| `docs/project/tasks.codex.md` | implementation task ledger | high |
 | `fixtures/README.md` | fixture contract / expected verdict | high |
 | `docs/control-mapping.md` | IPO control mapping | high |
 | `docs/ipo-controlled-profile.md` | IPO profile contract | high |
@@ -71,9 +71,9 @@ next_review_due: 2026-07-02
 
 1. `docs/birdseye/index.json` から変更対象の node を特定する。
 2. 変更対象±2 hop の capsule を読む。
-3. `docs/requirements.md` の該当要求 ID と `EVALUATION.md` の検収条件へ紐づける。
-4. 実装タスクは `TASK.codex.md` の形式で Objective / Scope / Requirements / Commands / Acceptance を記録する。
-5. 完了時は `RUNBOOK.md` の確認手順と `EVALUATION.md` の acceptance criteria に従って証跡を残す。
+3. `docs/requirements.md` の該当要求 ID と `docs/project/evaluation.md` の検収条件へ紐づける。
+4. 実装タスクは `docs/project/tasks.codex.md` の形式で Objective / Scope / Requirements / Commands / Acceptance を記録する。
+5. 完了時は `docs/project/runbook.md` の確認手順と `docs/project/evaluation.md` の acceptance criteria に従って証跡を残す。
 6. 実装準備 Gate は `docs/implementation-prep-gate-2026-06-02.md` を起点に、release Gate と分離して判定する。
 7. IPO 統制実装に入る場合は `docs/spec/index.md` から policy / waiver / approval / retention / evidence package の仕様を読む。
 

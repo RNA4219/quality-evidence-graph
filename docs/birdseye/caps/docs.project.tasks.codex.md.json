@@ -1,10 +1,10 @@
 {
-  "id": "TASK.codex.md",
+  "id": "docs/project/tasks.codex.md",
   "role": "implementation-task-ledger",
   "public_api": [],
   "summary": "TASK-01〜TASK-10 の実装順、対象、完了条件、検証コマンドを固定する実装タスク台帳。",
-  "deps_out": ["docs/requirements.md", "fixtures/README.md", "docs/control-mapping.md", "docs/ipo-controlled-profile.md", "EVALUATION.md"],
-  "deps_in": ["HUB.codex.md"],
+  "deps_out": ["docs/requirements.md", "fixtures/README.md", "docs/control-mapping.md", "docs/ipo-controlled-profile.md", "docs/project/evaluation.md"],
+  "deps_in": ["docs/agent/HUB.codex.md"],
   "risks": ["TASK 順序や受入条件が曖昧だと adapter / gate 実装時に判断が揺れる"],
   "tests": ["npm run typecheck", "npm pack --dry-run --cache ./.npm-cache"]
 }
