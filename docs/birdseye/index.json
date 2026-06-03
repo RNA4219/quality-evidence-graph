@@ -116,9 +116,9 @@
       "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
       "mtime": "00001"
     },
-    "docs/release-notes/2026-06-03-ipo-controlled.md": {
+    "docs/release-notes/2026-06-03-controlled-gate.md": {
       "role": "release-notes",
-      "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-ipo-controlled.md.json",
+      "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-controlled-gate.md.json",
       "mtime": "00001"
     },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
@@ -232,11 +232,11 @@
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/kano.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
     ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/implementation-gate-2026-06-03.md"],
-    ["HUB.codex.md", "docs/release-notes/2026-06-03-ipo-controlled.md"],
-    ["docs/release-notes/2026-06-03-ipo-controlled.md", "README.md"],
-    ["docs/release-notes/2026-06-03-ipo-controlled.md", "README_JA.md"],
-    ["docs/release-notes/2026-06-03-ipo-controlled.md", "README_EN.md"],
-    ["docs/release-notes/2026-06-03-ipo-controlled.md", "docs/spec/implementation-gate-2026-06-03.md"],
+    ["HUB.codex.md", "docs/release-notes/2026-06-03-controlled-gate.md"],
+    ["docs/release-notes/2026-06-03-controlled-gate.md", "README.md"],
+    ["docs/release-notes/2026-06-03-controlled-gate.md", "README_JA.md"],
+    ["docs/release-notes/2026-06-03-controlled-gate.md", "README_EN.md"],
+    ["docs/release-notes/2026-06-03-controlled-gate.md", "docs/spec/implementation-gate-2026-06-03.md"],
     ["docs/spec/implementation-gate-2026-06-03.md", "RUNBOOK.md"],
     ["docs/spec/implementation-gate-2026-06-03.md", "EVALUATION.md"],
     ["docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],

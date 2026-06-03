@@ -15,7 +15,7 @@
 1. `HUB.codex.md` - repo 内ドキュメントの入口とタスク分解ルール
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
-4. `docs/spec/index.md` - IPO controlled 実装仕様書群の入口
+4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
 5. `docs/spec/implementation-gate-2026-06-03.md` - 現在の実装 Gate 証跡
 6. `RUNBOOK.md` / `EVALUATION.md` - 実行手順と受入条件
 
@@ -30,7 +30,7 @@
 ## Agent Rules
 
 - 要求正本は `docs/requirements.md`。
-- IPO controlled の実装仕様正本は `docs/spec/`。
+- controlled governance の実装仕様正本は `docs/spec/`。
 - public TypeScript contract は `src/types.ts` facade から辿る。
 - CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`。
 - `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
@@ -40,7 +40,7 @@
 
 ## Current Implementation
 
-- IPO controlled profile 実装済み。
+- controlled governance profile 実装済み。
 - DQ-01 から DQ-17 まで実装済み。
 - 21 fixture で negative / positive regression を保持。
 - `code-to-gate` findings は 0 を維持する方針。

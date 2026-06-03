@@ -1,8 +1,8 @@
 {
-  "id": "docs/release-notes/2026-06-03-ipo-controlled.md",
+  "id": "docs/release-notes/2026-06-03-controlled-gate.md",
   "role": "release-notes",
   "public_api": [],
-  "summary": "2026-06-03 IPO controlled Gate リリースノート。DQ-01〜DQ-17、21 fixture、CLI、own-output validation、code-to-gate finding 0、README 導線整備を記録する。",
+  "summary": "2026-06-03 Controlled Gate リリースノート。DQ-01〜DQ-17、21 fixture、CLI、own-output validation、code-to-gate finding 0、README 導線整備を記録する。",
   "deps_out": ["README.md", "README_JA.md", "README_EN.md", "docs/spec/implementation-gate-2026-06-03.md"],
   "deps_in": ["HUB.codex.md"],
   "risks": ["リリースノートが Gate 証跡や README と乖離すると利用者が現在状態を誤認する"],

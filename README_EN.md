@@ -26,9 +26,9 @@ QEG is built around four outputs:
 
 `disqualified` has the highest priority. If any DQ exists, a waiver cannot remove it.
 
-## IPO Controlled Profile
+## Controlled Governance Profile
 
-QEG includes an `ipo_controlled` profile for IPO-grade quality governance.
+QEG includes a controlled governance profile for audit-grade quality decisions.
 
 This profile requires:
 
@@ -70,7 +70,7 @@ npm run record -- fixtures/positive-release-go
 ## Reading Verdicts
 
 - `go`: release conditions are satisfied. Exit code `0`.
-- `conditional_go`: conditional approval is required. In `ipo_controlled`, this is not CI success. Exit code `2`.
+- `conditional_go`: conditional approval is required. In controlled governance mode, this is not CI success. Exit code `2`.
 - `no_go`: blockers remain. Exit code `2`.
 - `disqualified`: the gate is not qualified to decide because one or more DQs exist. Exit code `2`.
 
@@ -83,7 +83,7 @@ Use the root [README.md](README.md) and [HUB.codex.md](HUB.codex.md) as the impl
 Key sources of truth:
 
 - Requirements source: `docs/requirements.md`
-- IPO control specs: `docs/spec/`
+- Governance control specs: `docs/spec/`
 - Implementation gate record: `docs/spec/implementation-gate-2026-06-03.md`
 - Fixture contract: `fixtures/README.md`
 

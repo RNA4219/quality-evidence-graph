@@ -26,9 +26,9 @@ QEG の中心は 4 つです。
 
 `disqualified` は最優先です。DQ が 1 件でもある場合、waiver で消すことはできません。
 
-## IPO controlled profile
+## Controlled Governance Profile
 
-QEG は MVP だけでなく、IPO 水準の統制を前提にした `ipo_controlled` profile を持ちます。
+QEG は MVP だけでなく、監査・統制を前提にした controlled governance profile を持ちます。
 
 この profile では、次が重要です。
 
@@ -70,7 +70,7 @@ npm run record -- fixtures/positive-release-go
 ## 判定の読み方
 
 - `go`: release 条件を満たす。exit code `0`。
-- `conditional_go`: 条件付き。IPO controlled では CI success と扱わない。exit code `2`。
+- `conditional_go`: 条件付き。controlled governance では CI success と扱わない。exit code `2`。
 - `no_go`: blocker が残る。exit code `2`。
 - `disqualified`: DQ により判定資格なし。exit code `2`。
 
@@ -83,7 +83,7 @@ npm run record -- fixtures/positive-release-go
 重要な正本:
 
 - 要求正本: `docs/requirements.md`
-- IPO 統制仕様: `docs/spec/`
+- 統制仕様: `docs/spec/`
 - 実装 Gate 証跡: `docs/spec/implementation-gate-2026-06-03.md`
 - fixture 契約: `fixtures/README.md`
 
