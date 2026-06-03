@@ -1,0 +1,20 @@
+# code-to-gate risk-register
+# Generated: 2026-06-03T00:19:27.734Z
+# Run ID: ctg-202606030019
+
+version: ctg/v1
+generated_at: 2026-06-03T00:19:27.734Z
+run_id: ctg-202606030019
+artifact: risk-register
+schema: risk-register@v1
+completeness: partial
+
+repo:
+  root: .
+
+tool:
+  name: code-to-gate
+  version: 1.4.1
+  plugin_versions: []
+
+risks:

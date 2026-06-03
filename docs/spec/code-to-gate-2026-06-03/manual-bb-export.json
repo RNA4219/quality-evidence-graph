@@ -1,0 +1,15 @@
+{
+  "version": "ctg.manual-bb/v1",
+  "producer": "code-to-gate",
+  "run_id": "ctg-202606030019",
+  "scope": {
+    "repo": ".",
+    "changed_files": [],
+    "affected_entrypoints": []
+  },
+  "risk_seeds": [],
+  "invariant_seeds": [],
+  "test_seed_refs": [],
+  "known_gaps": [],
+  "oracle_gaps": []
+}

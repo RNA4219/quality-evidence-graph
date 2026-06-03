@@ -1,0 +1,4039 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-06-03T00:19:27.264Z",
+  "run_id": "ctg-202606030019",
+  "repo": {
+    "root": "."
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.4.1",
+    "plugin_versions": []
+  },
+  "artifact": "normalized-repo-graph",
+  "schema": "normalized-repo-graph@v1",
+  "files": [
+    {
+      "id": "file:BLUEPRINT.md",
+      "path": "BLUEPRINT.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "6914a70d491ff7e8880b902fb91243698f6b8c38168d9d7a6cb56c0f859f6fa8",
+      "sizeBytes": 3968,
+      "lineCount": 98,
+      "moduleId": "module:BLUEPRINT.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:CHECKLISTS.md",
+      "path": "CHECKLISTS.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "0aaa1fb4f89ecbe2b1e87be25f494e942a9aff900970a4c4959fc22cca583674",
+      "sizeBytes": 1364,
+      "lineCount": 34,
+      "moduleId": "module:CHECKLISTS.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:deep-research-report (9).md",
+      "path": "deep-research-report (9).md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0",
+      "sizeBytes": 59924,
+      "lineCount": 867,
+      "moduleId": "module:deep-research-report (9).md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/BLUEPRINT.md.json",
+      "path": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "7326b9eb1a69002cee0eb9abb7b86bb7ef0a9f71cb53ba1aaca3cad2297330a8",
+      "sizeBytes": 420,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/BLUEPRINT.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/CHECKLISTS.md.json",
+      "path": "docs/birdseye/caps/CHECKLISTS.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "9d3d553fd343557f37ba75cbc3b4c3cc6aa9968616022d0c4de1e048124313b7",
+      "sizeBytes": 354,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/CHECKLISTS.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.control-mapping.md.json",
+      "path": "docs/birdseye/caps/docs.control-mapping.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "4bdbe1584d6caee54c89af1d9b76b6d6883f8a7ed17724cb49ad40ca74bf2a2c",
+      "sizeBytes": 529,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.control-mapping.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
+      "path": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "a3acfe2d6abbef4b7ff17425192b64d9af746eac9da1a38c525130cd91cb4d65",
+      "sizeBytes": 631,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+      "path": "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "dd0bb29688757ae1fc4fdd2beaeff3a594a9bc95d13f8bf1cd6d0a5f4156fabe",
+      "sizeBytes": 564,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.requirements.md.json",
+      "path": "docs/birdseye/caps/docs.requirements.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "74aeadc8463377e23d1e3ceffa77afb9d36a98eea5b5ff0a3b273b4de2b7ea0c",
+      "sizeBytes": 605,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.requirements.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "path": "docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "9860885dc249b70a32731b8fbcf797c7b1b5fe95c68f66b01877eb96caed7c93",
+      "sizeBytes": 793,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "path": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "e4be0b09e2bd62bbcc50559c1ab1016ec64f74d72496160cfea9647cba178b1e",
+      "sizeBytes": 606,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "path": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "ef695b8b2fddd0dd02725a26dc02ae9aa6ab5c4148cc5c7416d9a6e3be2833e6",
+      "sizeBytes": 740,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "path": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "bfe7e65d2f73d8982cbdc5a61bb7e6e15422a40f857a0b9161ed02c7b3f94a31",
+      "sizeBytes": 610,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.index.md.json",
+      "path": "docs/birdseye/caps/docs.spec.index.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "e9c3fb12fa25e85604ef9a5841e97d37478eb9b6f241b810420ca0131e83881e",
+      "sizeBytes": 872,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.index.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "path": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "99e34cbed0e2512e3ecf8d452904fe6999a541d94d2a20b2e91376cbfdce1e44",
+      "sizeBytes": 573,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "path": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "8906fc96f0f31256d34c99797dc05df7283df22c585d15a0a9f25c57be605fbe",
+      "sizeBytes": 660,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "path": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "language": "unknown",
+      "role": "test",
+      "hash": "a718ee2fd75c2735cb78cf66ee631a48b1f8899d0efe3e8460170ee700a1d5e7",
+      "sizeBytes": 558,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/EVALUATION.md.json",
+      "path": "docs/birdseye/caps/EVALUATION.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "06931ceda7f1df5b4c9b0c0fd097c64ce0cd58285799af2daae237305d138f20",
+      "sizeBytes": 522,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/EVALUATION.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/fixtures.README.md.json",
+      "path": "docs/birdseye/caps/fixtures.README.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "7d88ab57a05ba94bcc60da7d382317c47ca76336ae1c347a66c1ef2733ecb6c0",
+      "sizeBytes": 476,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/fixtures.README.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/GUARDRAILS.md.json",
+      "path": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "13d1089326f6781e3676653c429b1c04aaaf1c981512623b97cc1f01c5f899fa",
+      "sizeBytes": 436,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/GUARDRAILS.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/HUB.codex.md.json",
+      "path": "docs/birdseye/caps/HUB.codex.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "dc11ff5641037ee5912475077e2cf1a0236df0fc243cca6aa5ab354a92e41128",
+      "sizeBytes": 596,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/HUB.codex.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/README.md.json",
+      "path": "docs/birdseye/caps/README.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "cfcb9e6bd17a5e8d328f900c03c4718c7d1d37f347f9348f68b98afa1d3115e2",
+      "sizeBytes": 362,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/README.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/RUNBOOK.md.json",
+      "path": "docs/birdseye/caps/RUNBOOK.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "d0caa9ca62ce03408a6089a4a265fc9bddd78a1e4940fa22c8d89c5fdf18bd8b",
+      "sizeBytes": 541,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/RUNBOOK.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
+      "path": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "479f21932cd4dce092c29c6a85a14b3bab787f6ccdd13485eea64adf84d2e7cc",
+      "sizeBytes": 506,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
+      "path": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "8a97b4ccac7d3f0160529e759abc416b518f34f25be36b3990760d8b036b78d7",
+      "sizeBytes": 452,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
+      "path": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "24ffea66ee67fd1324a1c27e47d575aa7518091d11be37f915aac2da567f3744",
+      "sizeBytes": 472,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/schemas.shared-defs.schema.json.json",
+      "path": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "9437817cfc826f5d30913518f81b7256fb36a21aa32b5583e458e17ce4c94c68",
+      "sizeBytes": 496,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/schemas.shared-defs.schema.json.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
+      "path": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "7684a829b43ae422269949794bb713592bfa2058201f110c8c69f2e376b1ebec",
+      "sizeBytes": 433,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/src.types.ts.json",
+      "path": "docs/birdseye/caps/src.types.ts.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "04e6f5041e3e4dd777f73f2af777902cc5901896672ef0ae456c91185028037e",
+      "sizeBytes": 486,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/src.types.ts.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/caps/TASK.codex.md.json",
+      "path": "docs/birdseye/caps/TASK.codex.md.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "afa5566633a20a4f40be70872ffc6d59fc39348e254334eb34c50805b873eb49",
+      "sizeBytes": 571,
+      "lineCount": 11,
+      "moduleId": "module:docs/birdseye/caps/TASK.codex.md.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/birdseye/index.json",
+      "path": "docs/birdseye/index.json",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "b6a7833bf08e19d141a036a8c58f51c12e5c6c82ef494e5c634abc595ab37477",
+      "sizeBytes": 7561,
+      "lineCount": 198,
+      "moduleId": "module:docs/birdseye/index.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/BIRDSEYE.md",
+      "path": "docs/BIRDSEYE.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "19b27dc890e3ec9d903d9347629bae257f1763ace15d290ed80c8d50dcf0fa23",
+      "sizeBytes": 2495,
+      "lineCount": 62,
+      "moduleId": "module:docs/BIRDSEYE.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/control-mapping.md",
+      "path": "docs/control-mapping.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157",
+      "sizeBytes": 3045,
+      "lineCount": 57,
+      "moduleId": "module:docs/control-mapping.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/implementation-prep-gate-2026-06-02.md",
+      "path": "docs/implementation-prep-gate-2026-06-02.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "933e5fb7013abd2fbb87f2629c4a9b2080f09d28e3d5a9a9f15ed0ad9737fbd4",
+      "sizeBytes": 3648,
+      "lineCount": 69,
+      "moduleId": "module:docs/implementation-prep-gate-2026-06-02.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/ipo-controlled-profile.md",
+      "path": "docs/ipo-controlled-profile.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "55a16c9a01a712b698d6abd6f248377cd7ad9c33f7fe2b7afebf28cc23475f80",
+      "sizeBytes": 2916,
+      "lineCount": 81,
+      "moduleId": "module:docs/ipo-controlled-profile.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/requirements-gate-acceptance-2026-06-02.md",
+      "path": "docs/requirements-gate-acceptance-2026-06-02.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "568e585e89382e0ac85dfa16830f016f0021c68a3602bcaf206b3ea88dca759b",
+      "sizeBytes": 9727,
+      "lineCount": 118,
+      "moduleId": "module:docs/requirements-gate-acceptance-2026-06-02.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/requirements.md",
+      "path": "docs/requirements.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "d0d23f7d6a4003f447696ae17c9e4e2c8c8dbe95cae693a2708d529b61afc41c",
+      "sizeBytes": 33608,
+      "lineCount": 427,
+      "moduleId": "module:docs/requirements.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/acceptance.md",
+      "path": "docs/spec/acceptance.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "af2e9d6cd3c906557ee24981482dcfcb69edb2b58bb53af725aacc666de93567",
+      "sizeBytes": 3935,
+      "lineCount": 66,
+      "moduleId": "module:docs/spec/acceptance.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/evidence-package.md",
+      "path": "docs/spec/evidence-package.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97",
+      "sizeBytes": 3754,
+      "lineCount": 89,
+      "moduleId": "module:docs/spec/evidence-package.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/gate-acceptance-2026-06-03.md",
+      "path": "docs/spec/gate-acceptance-2026-06-03.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "311373551afb646f877adae37037ffaad703b955cc9abc426f2a7c2f116bb1d3",
+      "sizeBytes": 12331,
+      "lineCount": 140,
+      "moduleId": "module:docs/spec/gate-acceptance-2026-06-03.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/gate-policy.md",
+      "path": "docs/spec/gate-policy.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "f85309b948ccdf588b9d58cf3c822f6e2e799b64e993d8fb676b78fe170611f1",
+      "sizeBytes": 4091,
+      "lineCount": 92,
+      "moduleId": "module:docs/spec/gate-policy.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/index.md",
+      "path": "docs/spec/index.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "fea03d153da1a59a4d5f01ace365a2b61f82e6a161c2ab8c79ff6cff8bc6afb4",
+      "sizeBytes": 3243,
+      "lineCount": 71,
+      "moduleId": "module:docs/spec/index.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/retention-immutability.md",
+      "path": "docs/spec/retention-immutability.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1",
+      "sizeBytes": 2649,
+      "lineCount": 65,
+      "moduleId": "module:docs/spec/retention-immutability.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/review-2026-06-03.md",
+      "path": "docs/spec/review-2026-06-03.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "3a20bc3bfb07cd5f223a4da366cbfdf27b57d3d33bf7b5660068325411c3d52f",
+      "sizeBytes": 4831,
+      "lineCount": 92,
+      "moduleId": "module:docs/spec/review-2026-06-03.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:docs/spec/waiver-approval.md",
+      "path": "docs/spec/waiver-approval.md",
+      "language": "unknown",
+      "role": "test",
+      "hash": "f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c",
+      "sizeBytes": 4167,
+      "lineCount": 92,
+      "moduleId": "module:docs/spec/waiver-approval.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:EVALUATION.md",
+      "path": "EVALUATION.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "4e7b2076624d0e3ecbefc0312ba7b58add35e57317585cbc234ae5edd722230d",
+      "sizeBytes": 3393,
+      "lineCount": 55,
+      "moduleId": "module:EVALUATION.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:fixtures/README.md",
+      "path": "fixtures/README.md",
+      "language": "unknown",
+      "role": "fixture",
+      "hash": "231b7484ca0df1167142c0d5d085078841eb409dc8a895cd2af2e13115f53d5d",
+      "sizeBytes": 3097,
+      "lineCount": 59,
+      "moduleId": "module:fixtures/README.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:GUARDRAILS.md",
+      "path": "GUARDRAILS.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1",
+      "sizeBytes": 1478,
+      "lineCount": 36,
+      "moduleId": "module:GUARDRAILS.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:HUB.codex.md",
+      "path": "HUB.codex.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "17c5eecc70768596ea9b1b70cd9a77986d5c1e35e2016b5604dabd9922fdebec",
+      "sizeBytes": 3530,
+      "lineCount": 77,
+      "moduleId": "module:HUB.codex.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:package.json",
+      "path": "package.json",
+      "language": "unknown",
+      "role": "config",
+      "hash": "66612d34d76afd7f1a16f2bcae19411103d205d7ad65439e1df006d863816f97",
+      "sizeBytes": 877,
+      "lineCount": 46,
+      "moduleId": "module:package.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:README.md",
+      "path": "README.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "dd94d8219939b9184b55ba515ee45c9a833eceee51fe37020b9adc124a1b0934",
+      "sizeBytes": 2179,
+      "lineCount": 48,
+      "moduleId": "module:README.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:RUNBOOK.md",
+      "path": "RUNBOOK.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "ff1231736e7debb0878602d19a16357bcaa9597cb35ebc1a6293dd856ee4d521",
+      "sizeBytes": 4189,
+      "lineCount": 111,
+      "moduleId": "module:RUNBOOK.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:schemas/gate-verdict.schema.json",
+      "path": "schemas/gate-verdict.schema.json",
+      "language": "unknown",
+      "role": "source",
+      "hash": "ab35e4194f83bdb46423f5d6e6c20f49f0d88993c593fc3943f36ffd43e31499",
+      "sizeBytes": 2507,
+      "lineCount": 90,
+      "moduleId": "module:schemas/gate-verdict.schema.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:schemas/qeg.bundle.schema.json",
+      "path": "schemas/qeg.bundle.schema.json",
+      "language": "unknown",
+      "role": "source",
+      "hash": "88126c11c060432a01acb366ff2913479d98a4e44d1e2ed5b231c2845e75b994",
+      "sizeBytes": 2857,
+      "lineCount": 92,
+      "moduleId": "module:schemas/qeg.bundle.schema.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:schemas/quality-evidence-record.schema.json",
+      "path": "schemas/quality-evidence-record.schema.json",
+      "language": "unknown",
+      "role": "source",
+      "hash": "7ce9d499c2169f6c2f7e3ea8ba82408988e0d73db0f1465608ef2c2d948ff782",
+      "sizeBytes": 963,
+      "lineCount": 28,
+      "moduleId": "module:schemas/quality-evidence-record.schema.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:schemas/README.md",
+      "path": "schemas/README.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "d6c5a72c88453499ad45cd86f19ba218e28e4e6aa779f35b3f09e35fbc10181c",
+      "sizeBytes": 613,
+      "lineCount": 14,
+      "moduleId": "module:schemas/README.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:schemas/shared-defs.schema.json",
+      "path": "schemas/shared-defs.schema.json",
+      "language": "unknown",
+      "role": "source",
+      "hash": "8bba551fa073232a34a6f3202164aa2cfba87cbcd256f89d9c55c3c800c83f8d",
+      "sizeBytes": 3878,
+      "lineCount": 129,
+      "moduleId": "module:schemas/shared-defs.schema.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:schemas/test-placement-plan.schema.json",
+      "path": "schemas/test-placement-plan.schema.json",
+      "language": "unknown",
+      "role": "source",
+      "hash": "7c54debba905415f44e946d7594ce3f9f81bf1c49401ba76dbddc406fc782473",
+      "sizeBytes": 2831,
+      "lineCount": 78,
+      "moduleId": "module:schemas/test-placement-plan.schema.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:src/index.ts",
+      "path": "src/index.ts",
+      "language": "ts",
+      "role": "source",
+      "hash": "1c7764ba79b08ea4de0d9435cff463fc4df1fe6c16d3e1a32a40e2c11508e147",
+      "sizeBytes": 28,
+      "lineCount": 2,
+      "moduleId": "module:src/index.ts",
+      "parser": {
+        "status": "parsed",
+        "adapter": "ts-morph-v0"
+      }
+    },
+    {
+      "id": "file:src/types.ts",
+      "path": "src/types.ts",
+      "language": "ts",
+      "role": "source",
+      "hash": "92c1903947e4e4267ce55d71368d64ea4f364ca1703ac9c3ed16278fa3d02b55",
+      "sizeBytes": 10594,
+      "lineCount": 431,
+      "moduleId": "module:src/types.ts",
+      "parser": {
+        "status": "parsed",
+        "adapter": "ts-morph-v0"
+      }
+    },
+    {
+      "id": "file:TASK.codex.md",
+      "path": "TASK.codex.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "40f89dafe1b7eb0a72dee490bde5a23910d84233059a7aea8b156b1110e615e2",
+      "sizeBytes": 4918,
+      "lineCount": 84,
+      "moduleId": "module:TASK.codex.md",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:tsconfig.json",
+      "path": "tsconfig.json",
+      "language": "unknown",
+      "role": "config",
+      "hash": "a264764bf2eed11dd7136d227e9be64f9923e79739d85f1ea79e7d912b08675b",
+      "sizeBytes": 453,
+      "lineCount": 19,
+      "moduleId": "module:tsconfig.json",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    }
+  ],
+  "modules": [],
+  "symbols": [
+    {
+      "id": "symbol:src/types.ts:SourceRef",
+      "fileId": "file:src/types.ts",
+      "name": "SourceRef",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 131,
+        "endLine": 139
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-07de28ea",
+          "path": "src/types.ts",
+          "startLine": 131,
+          "endLine": 139,
+          "kind": "ast",
+          "excerptHash": "66900c885f09808bce8291b516d6b9bcae2835320222201e8cc003003fc50a62",
+          "symbolId": "symbol:src/types.ts:SourceRef"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:EvidenceRef",
+      "fileId": "file:src/types.ts",
+      "name": "EvidenceRef",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 141,
+        "endLine": 152
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-0d4f4a1e",
+          "path": "src/types.ts",
+          "startLine": 141,
+          "endLine": 152,
+          "kind": "ast",
+          "excerptHash": "8d8a14009685ebbe89a4ab397cc2df4a59b9302038736b969ffef39f9ef48f9a",
+          "symbolId": "symbol:src/types.ts:EvidenceRef"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:Traceability",
+      "fileId": "file:src/types.ts",
+      "name": "Traceability",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 154,
+        "endLine": 158
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-68642ed3",
+          "path": "src/types.ts",
+          "startLine": 154,
+          "endLine": 158,
+          "kind": "ast",
+          "excerptHash": "caf168c4096d0ca2659df31047e6f2de9adfaa011316dfbe0d4509983e957e49",
+          "symbolId": "symbol:src/types.ts:Traceability"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:ArtifactRef",
+      "fileId": "file:src/types.ts",
+      "name": "ArtifactRef",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 160,
+        "endLine": 168
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-06eeb465",
+          "path": "src/types.ts",
+          "startLine": 160,
+          "endLine": 168,
+          "kind": "ast",
+          "excerptHash": "b3cdd2717cb7845bff8fa0d52dd9bebd923b07260ec38a0a28a9ba088205326e",
+          "symbolId": "symbol:src/types.ts:ArtifactRef"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:WorkflowCookbookRef",
+      "fileId": "file:src/types.ts",
+      "name": "WorkflowCookbookRef",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 170,
+        "endLine": 176
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-76c944ad",
+          "path": "src/types.ts",
+          "startLine": 170,
+          "endLine": 176,
+          "kind": "ast",
+          "excerptHash": "e9f94300406794275475c2299a24a5f7ca32b72f5871f72d746df00bda13782a",
+          "symbolId": "symbol:src/types.ts:WorkflowCookbookRef"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QegMetadata",
+      "fileId": "file:src/types.ts",
+      "name": "QegMetadata",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 178,
+        "endLine": 190
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-6be2a128",
+          "path": "src/types.ts",
+          "startLine": 178,
+          "endLine": 190,
+          "kind": "ast",
+          "excerptHash": "87f9dfff5303b34cbb802859d9888170c7d4890a128493293d7d94af2fbeaba9",
+          "symbolId": "symbol:src/types.ts:QegMetadata"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QegNodeBase",
+      "fileId": "file:src/types.ts",
+      "name": "QegNodeBase",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 192,
+        "endLine": 198
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-f7ebb861",
+          "path": "src/types.ts",
+          "startLine": 192,
+          "endLine": 198,
+          "kind": "ast",
+          "excerptHash": "5e8af22a8fb45af3226e53361e2679aded2e4df49eb9a37bfea9b826d8d81de6",
+          "symbolId": "symbol:src/types.ts:QegNodeBase"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:RequirementNode",
+      "fileId": "file:src/types.ts",
+      "name": "RequirementNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 200,
+        "endLine": 204
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-29da81b9",
+          "path": "src/types.ts",
+          "startLine": 200,
+          "endLine": 204,
+          "kind": "ast",
+          "excerptHash": "b47cc62461cc0ccafaf0e3359f2def7671ed0590bc5f144adba0599d9b2b411f",
+          "symbolId": "symbol:src/types.ts:RequirementNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:AcceptanceCriteriaNode",
+      "fileId": "file:src/types.ts",
+      "name": "AcceptanceCriteriaNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 206,
+        "endLine": 210
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-8d12ab86",
+          "path": "src/types.ts",
+          "startLine": 206,
+          "endLine": 210,
+          "kind": "ast",
+          "excerptHash": "cf69f7abf3b81e4020eed4524238f3323cb779c962094e9d70c937c61c374106",
+          "symbolId": "symbol:src/types.ts:AcceptanceCriteriaNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:RiskNode",
+      "fileId": "file:src/types.ts",
+      "name": "RiskNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 212,
+        "endLine": 221
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-c658a704",
+          "path": "src/types.ts",
+          "startLine": 212,
+          "endLine": 221,
+          "kind": "ast",
+          "excerptHash": "d6f5f29f72937acdb55964224f893ac7ab202d27fad5e131d4b5196441dac308",
+          "symbolId": "symbol:src/types.ts:RiskNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:FailureModeNode",
+      "fileId": "file:src/types.ts",
+      "name": "FailureModeNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 223,
+        "endLine": 227
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-0bb77053",
+          "path": "src/types.ts",
+          "startLine": 223,
+          "endLine": 227,
+          "kind": "ast",
+          "excerptHash": "590528d668156ce08fa2b92b3db91da10ea175491e1e0b24a357dafb6cc48a33",
+          "symbolId": "symbol:src/types.ts:FailureModeNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:ChangedCodeNode",
+      "fileId": "file:src/types.ts",
+      "name": "ChangedCodeNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 229,
+        "endLine": 236
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-24b40dbb",
+          "path": "src/types.ts",
+          "startLine": 229,
+          "endLine": 236,
+          "kind": "ast",
+          "excerptHash": "12775024545251391e0880173c722e566f5e6fefe5ae86364a1c4dc6899c1d4b",
+          "symbolId": "symbol:src/types.ts:ChangedCodeNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:FindingNode",
+      "fileId": "file:src/types.ts",
+      "name": "FindingNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 238,
+        "endLine": 243
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-6fdfc1fe",
+          "path": "src/types.ts",
+          "startLine": 238,
+          "endLine": 243,
+          "kind": "ast",
+          "excerptHash": "66183b112fd4ab145df7ed8cebf36ae6f2d270d9c438b8d3afd8f3604f4c76e4",
+          "symbolId": "symbol:src/types.ts:FindingNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:TestNode",
+      "fileId": "file:src/types.ts",
+      "name": "TestNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 245,
+        "endLine": 250
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-da796f42",
+          "path": "src/types.ts",
+          "startLine": 245,
+          "endLine": 250,
+          "kind": "ast",
+          "excerptHash": "5b434da1b0356f1d372c458f56f049acc89cb3648cbad74079b4628188b9abfa",
+          "symbolId": "symbol:src/types.ts:TestNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:TestPlacementNode",
+      "fileId": "file:src/types.ts",
+      "name": "TestPlacementNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 252,
+        "endLine": 260
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-03f386dc",
+          "path": "src/types.ts",
+          "startLine": 252,
+          "endLine": 260,
+          "kind": "ast",
+          "excerptHash": "c7731ca774ba2e86370a88192916cb3c3143968019fee4cf80db70afa3296dd8",
+          "symbolId": "symbol:src/types.ts:TestPlacementNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:ExecutionEvidenceNode",
+      "fileId": "file:src/types.ts",
+      "name": "ExecutionEvidenceNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 262,
+        "endLine": 266
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-c7cda195",
+          "path": "src/types.ts",
+          "startLine": 262,
+          "endLine": 266,
+          "kind": "ast",
+          "excerptHash": "b0035190924a099955fb5b0b56ccd5cfb3f4ebb2bdaeb0f7dc4813b5f444b24e",
+          "symbolId": "symbol:src/types.ts:ExecutionEvidenceNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GateVerdictNode",
+      "fileId": "file:src/types.ts",
+      "name": "GateVerdictNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 268,
+        "endLine": 275
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-542d60e8",
+          "path": "src/types.ts",
+          "startLine": 268,
+          "endLine": 275,
+          "kind": "ast",
+          "excerptHash": "f6d06cfa3fe2ea391a75e3189425283a5029cc79552cef02909a0cb16e8940ec",
+          "symbolId": "symbol:src/types.ts:GateVerdictNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:WaiverNode",
+      "fileId": "file:src/types.ts",
+      "name": "WaiverNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 277,
+        "endLine": 283
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-1d0306a7",
+          "path": "src/types.ts",
+          "startLine": 277,
+          "endLine": 283,
+          "kind": "ast",
+          "excerptHash": "cee94d78640ed446afd00e592e49a9c53d66f51513d1f65cd2b0e523fa61f017",
+          "symbolId": "symbol:src/types.ts:WaiverNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:PolicyNode",
+      "fileId": "file:src/types.ts",
+      "name": "PolicyNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 285,
+        "endLine": 289
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-1b781226",
+          "path": "src/types.ts",
+          "startLine": 285,
+          "endLine": 289,
+          "kind": "ast",
+          "excerptHash": "b4592140ee5b04b9be86814616b45078a172cef47bdab1fd36cdd138acd5e177",
+          "symbolId": "symbol:src/types.ts:PolicyNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:AcceptanceRecordNode",
+      "fileId": "file:src/types.ts",
+      "name": "AcceptanceRecordNode",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 291,
+        "endLine": 298
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-7577a10b",
+          "path": "src/types.ts",
+          "startLine": 291,
+          "endLine": 298,
+          "kind": "ast",
+          "excerptHash": "47da15708fc197ce46bb98f1b94d7f2701fe35d045e322d4b319273b643bc54f",
+          "symbolId": "symbol:src/types.ts:AcceptanceRecordNode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QegEdge",
+      "fileId": "file:src/types.ts",
+      "name": "QegEdge",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 315,
+        "endLine": 321
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-5f3c8f8f",
+          "path": "src/types.ts",
+          "startLine": 315,
+          "endLine": 321,
+          "kind": "ast",
+          "excerptHash": "af8a0f1549965bc66102ec80eeb6f6ecf3fc01e0c3bdf27c7ddbf8ed69474cf6",
+          "symbolId": "symbol:src/types.ts:QegEdge"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:PlacementCandidateScore",
+      "fileId": "file:src/types.ts",
+      "name": "PlacementCandidateScore",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 323,
+        "endLine": 331
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-da261254",
+          "path": "src/types.ts",
+          "startLine": 323,
+          "endLine": 331,
+          "kind": "ast",
+          "excerptHash": "24590ec8255e41fe21d0068017696a48db51cab55870ce559d3dc368c8d6eff1",
+          "symbolId": "symbol:src/types.ts:PlacementCandidateScore"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:LayerFitScore",
+      "fileId": "file:src/types.ts",
+      "name": "LayerFitScore",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 333,
+        "endLine": 341
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-2f64eb74",
+          "path": "src/types.ts",
+          "startLine": 333,
+          "endLine": 341,
+          "kind": "ast",
+          "excerptHash": "f0c3a5b2e28cff90b315eb2e31fe2cbdcf7746b7972c81af42462a1296d5ecff",
+          "symbolId": "symbol:src/types.ts:LayerFitScore"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:LayerCostPenalty",
+      "fileId": "file:src/types.ts",
+      "name": "LayerCostPenalty",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 343,
+        "endLine": 347
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-f5cc2277",
+          "path": "src/types.ts",
+          "startLine": 343,
+          "endLine": 347,
+          "kind": "ast",
+          "excerptHash": "be5af24e09817c3096c5a07ee1603988378c0deac7fd68e395e3ba4dd3d56570",
+          "symbolId": "symbol:src/types.ts:LayerCostPenalty"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:TestObligation",
+      "fileId": "file:src/types.ts",
+      "name": "TestObligation",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 349,
+        "endLine": 359
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-1df9e6d1",
+          "path": "src/types.ts",
+          "startLine": 349,
+          "endLine": 359,
+          "kind": "ast",
+          "excerptHash": "9c354785d19534a2aacf4212f36d4fb0e5bf67c7b9157055f5c90762fdecdbc7",
+          "symbolId": "symbol:src/types.ts:TestObligation"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:TestPlacementPlan",
+      "fileId": "file:src/types.ts",
+      "name": "TestPlacementPlan",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 361,
+        "endLine": 365
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-8adce152",
+          "path": "src/types.ts",
+          "startLine": 361,
+          "endLine": 365,
+          "kind": "ast",
+          "excerptHash": "4284125ad680e974742b419f7b5dbce0e224d6c43a39c360a76edeeaccad3ac7",
+          "symbolId": "symbol:src/types.ts:TestPlacementPlan"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:Disqualification",
+      "fileId": "file:src/types.ts",
+      "name": "Disqualification",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 367,
+        "endLine": 372
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-53d3b551",
+          "path": "src/types.ts",
+          "startLine": 367,
+          "endLine": 372,
+          "kind": "ast",
+          "excerptHash": "05bf060039a43c6d413462cfcf3819a4223d1d628f1d1339f20f13a467febe23",
+          "symbolId": "symbol:src/types.ts:Disqualification"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GateBlocker",
+      "fileId": "file:src/types.ts",
+      "name": "GateBlocker",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 374,
+        "endLine": 379
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-91cc581b",
+          "path": "src/types.ts",
+          "startLine": 374,
+          "endLine": 379,
+          "kind": "ast",
+          "excerptHash": "3f7a40e6ccb4b82e160f0a497604790eaa08d4378777b5875e64c90ad67337b4",
+          "symbolId": "symbol:src/types.ts:GateBlocker"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GateResult",
+      "fileId": "file:src/types.ts",
+      "name": "GateResult",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 381,
+        "endLine": 389
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-6bfcf66a",
+          "path": "src/types.ts",
+          "startLine": 381,
+          "endLine": 389,
+          "kind": "ast",
+          "excerptHash": "e81ad3a51aaf1e505433fcd37a62c33d767b9cbe0b849fae5d38414ab3bce1b6",
+          "symbolId": "symbol:src/types.ts:GateResult"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QualityEvidenceGraph",
+      "fileId": "file:src/types.ts",
+      "name": "QualityEvidenceGraph",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 391,
+        "endLine": 396
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-c52b3d30",
+          "path": "src/types.ts",
+          "startLine": 391,
+          "endLine": 396,
+          "kind": "ast",
+          "excerptHash": "68c9892350adf7a37227be9232815e9ae68e555a898e724737d5071d03a0be73",
+          "symbolId": "symbol:src/types.ts:QualityEvidenceGraph"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GraphCompleteness",
+      "fileId": "file:src/types.ts",
+      "name": "GraphCompleteness",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 398,
+        "endLine": 403
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-3c90f36d",
+          "path": "src/types.ts",
+          "startLine": 398,
+          "endLine": 403,
+          "kind": "ast",
+          "excerptHash": "65215989df2ed7bec340b1ad4d27f425012acd230de83ac512f49164a6ae4e14",
+          "symbolId": "symbol:src/types.ts:GraphCompleteness"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:ParserFailure",
+      "fileId": "file:src/types.ts",
+      "name": "ParserFailure",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 405,
+        "endLine": 409
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-8477e876",
+          "path": "src/types.ts",
+          "startLine": 405,
+          "endLine": 409,
+          "kind": "ast",
+          "excerptHash": "c16e01bf1307c43370da0de8cae3c4167d63b510b6f26e04b113377d21897060",
+          "symbolId": "symbol:src/types.ts:ParserFailure"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:UnsupportedClaim",
+      "fileId": "file:src/types.ts",
+      "name": "UnsupportedClaim",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 411,
+        "endLine": 416
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-a2d3b89a",
+          "path": "src/types.ts",
+          "startLine": 411,
+          "endLine": 416,
+          "kind": "ast",
+          "excerptHash": "5dc5006dff45b7cf2ba1a8b851c499f196a9a3057820a80b1867049d8a016d0b",
+          "symbolId": "symbol:src/types.ts:UnsupportedClaim"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QualityEvidenceRecord",
+      "fileId": "file:src/types.ts",
+      "name": "QualityEvidenceRecord",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 418,
+        "endLine": 424
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-c1c183cd",
+          "path": "src/types.ts",
+          "startLine": 418,
+          "endLine": 424,
+          "kind": "ast",
+          "excerptHash": "c7de77c0319d1ee2d85314e5c292a4794aa39e8a6bfbdd94f3c20e0c28b23d1c",
+          "symbolId": "symbol:src/types.ts:QualityEvidenceRecord"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:ExportRef",
+      "fileId": "file:src/types.ts",
+      "name": "ExportRef",
+      "kind": "interface",
+      "exported": true,
+      "location": {
+        "startLine": 426,
+        "endLine": 430
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-4c7f54a5",
+          "path": "src/types.ts",
+          "startLine": 426,
+          "endLine": 430,
+          "kind": "ast",
+          "excerptHash": "a96035189cc66bb42f0f6c036d86714a76988ce94ad4a8c8453ddffec76a1bbc",
+          "symbolId": "symbol:src/types.ts:ExportRef"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QegVersion",
+      "fileId": "file:src/types.ts",
+      "name": "QegVersion",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 1,
+        "endLine": 1
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-541486c7",
+          "path": "src/types.ts",
+          "startLine": 1,
+          "endLine": 1,
+          "kind": "ast",
+          "excerptHash": "00e47243e68189fb53fc8673b6507a8379460e68a490cc19b742005217f96296",
+          "symbolId": "symbol:src/types.ts:QegVersion"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:StableId",
+      "fileId": "file:src/types.ts",
+      "name": "StableId",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 3,
+        "endLine": 3
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-ad1d3627",
+          "path": "src/types.ts",
+          "startLine": 3,
+          "endLine": 3,
+          "kind": "ast",
+          "excerptHash": "508b117a04ae2b4db26dbceb1eee134361c51f57475d2378a971bf7f38fa337f",
+          "symbolId": "symbol:src/types.ts:StableId"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:IsoDateTime",
+      "fileId": "file:src/types.ts",
+      "name": "IsoDateTime",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 5,
+        "endLine": 5
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-1965da31",
+          "path": "src/types.ts",
+          "startLine": 5,
+          "endLine": 5,
+          "kind": "ast",
+          "excerptHash": "6805cb104808e21de127332f3b9c347f103bf90a56799990e33a290248a73ae5",
+          "symbolId": "symbol:src/types.ts:IsoDateTime"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:Confidence",
+      "fileId": "file:src/types.ts",
+      "name": "Confidence",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 7,
+        "endLine": 7
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-a677937d",
+          "path": "src/types.ts",
+          "startLine": 7,
+          "endLine": 7,
+          "kind": "ast",
+          "excerptHash": "1788f7523e2f139e2d8109eae6e03448a68fdb3c8a17273757e9cb60b45e4c01",
+          "symbolId": "symbol:src/types.ts:Confidence"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:Severity",
+      "fileId": "file:src/types.ts",
+      "name": "Severity",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 9,
+        "endLine": 9
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-77a3bf72",
+          "path": "src/types.ts",
+          "startLine": 9,
+          "endLine": 9,
+          "kind": "ast",
+          "excerptHash": "3a912ff7efc438d7d7e894c6f495ac85f5129f638d0960dbc8abb4e8236777d0",
+          "symbolId": "symbol:src/types.ts:Severity"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:Priority",
+      "fileId": "file:src/types.ts",
+      "name": "Priority",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 11,
+        "endLine": 11
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-b07c593a",
+          "path": "src/types.ts",
+          "startLine": 11,
+          "endLine": 11,
+          "kind": "ast",
+          "excerptHash": "b47f3cd159a77f2dd189ebce47ba73007f40dad5b8f1fc6a3ba1f7635c93b876",
+          "symbolId": "symbol:src/types.ts:Priority"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GateProfile",
+      "fileId": "file:src/types.ts",
+      "name": "GateProfile",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 13,
+        "endLine": 13
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-3ee240c8",
+          "path": "src/types.ts",
+          "startLine": 13,
+          "endLine": 13,
+          "kind": "ast",
+          "excerptHash": "529fcac471a9b6873f4d3a2aadfe69bb9233518e6be90437834f40932126433b",
+          "symbolId": "symbol:src/types.ts:GateProfile"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GateVerdict",
+      "fileId": "file:src/types.ts",
+      "name": "GateVerdict",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 15,
+        "endLine": 15
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-2898118b",
+          "path": "src/types.ts",
+          "startLine": 15,
+          "endLine": 15,
+          "kind": "ast",
+          "excerptHash": "9beda36421c3d31383107738aaff0e5973430aceb60ae138ced6ccb2cc4d1ee5",
+          "symbolId": "symbol:src/types.ts:GateVerdict"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:PlacementLayer",
+      "fileId": "file:src/types.ts",
+      "name": "PlacementLayer",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 17,
+        "endLine": 24
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-1c1fd69a",
+          "path": "src/types.ts",
+          "startLine": 17,
+          "endLine": 24,
+          "kind": "ast",
+          "excerptHash": "019cb4bebbcc1288188c4a932f2773787a01f0b569a131742bed05e12b3a91fa",
+          "symbolId": "symbol:src/types.ts:PlacementLayer"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:PlacementDisposition",
+      "fileId": "file:src/types.ts",
+      "name": "PlacementDisposition",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 26,
+        "endLine": 31
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-8f728456",
+          "path": "src/types.ts",
+          "startLine": 26,
+          "endLine": 31,
+          "kind": "ast",
+          "excerptHash": "4b7b4a041560e4385c1e98e572e8cb6ba55ba52c01e0bca58e6f50b557be0ae0",
+          "symbolId": "symbol:src/types.ts:PlacementDisposition"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:GateRelevance",
+      "fileId": "file:src/types.ts",
+      "name": "GateRelevance",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 33,
+        "endLine": 33
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-48c9d958",
+          "path": "src/types.ts",
+          "startLine": 33,
+          "endLine": 33,
+          "kind": "ast",
+          "excerptHash": "bc94b683f7a2db68d2b510175342e36fde3796b1de781b465c522d3f3eef04a5",
+          "symbolId": "symbol:src/types.ts:GateRelevance"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:NodeKind",
+      "fileId": "file:src/types.ts",
+      "name": "NodeKind",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 35,
+        "endLine": 48
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-f0d070cb",
+          "path": "src/types.ts",
+          "startLine": 35,
+          "endLine": 48,
+          "kind": "ast",
+          "excerptHash": "0c89b4b65ca492313c68e352d006c46db4b7f59ec69c2301ad28567f92368a52",
+          "symbolId": "symbol:src/types.ts:NodeKind"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:EdgeKind",
+      "fileId": "file:src/types.ts",
+      "name": "EdgeKind",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 50,
+        "endLine": 63
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-242db85a",
+          "path": "src/types.ts",
+          "startLine": 50,
+          "endLine": 63,
+          "kind": "ast",
+          "excerptHash": "695fef3d59835c89a0dbc6f4c0371053cf61472511fe65c9ae0002e9aebe15df",
+          "symbolId": "symbol:src/types.ts:EdgeKind"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:AdapterKind",
+      "fileId": "file:src/types.ts",
+      "name": "AdapterKind",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 65,
+        "endLine": 73
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-53b50120",
+          "path": "src/types.ts",
+          "startLine": 65,
+          "endLine": 73,
+          "kind": "ast",
+          "excerptHash": "bd047c81bb90ea4a1d4926249896af496e037810e5277336f720d9bd1eb25ac8",
+          "symbolId": "symbol:src/types.ts:AdapterKind"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:RequiredAdapterKind",
+      "fileId": "file:src/types.ts",
+      "name": "RequiredAdapterKind",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 75,
+        "endLine": 78
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-9e2f3477",
+          "path": "src/types.ts",
+          "startLine": 75,
+          "endLine": 78,
+          "kind": "ast",
+          "excerptHash": "8ac445580c35aad88b97f373c905b18c35a85a8f1c4727f12877e5c8472a2103",
+          "symbolId": "symbol:src/types.ts:RequiredAdapterKind"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:WorkflowCookbookRefKind",
+      "fileId": "file:src/types.ts",
+      "name": "WorkflowCookbookRefKind",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 80,
+        "endLine": 84
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-5bc049e0",
+          "path": "src/types.ts",
+          "startLine": 80,
+          "endLine": 84,
+          "kind": "ast",
+          "excerptHash": "036c5e9ca6a9f1a70c5dc77aa49aa9ea82124075da5d9f09373aa0aaf3a4346d",
+          "symbolId": "symbol:src/types.ts:WorkflowCookbookRefKind"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:ArtifactKind",
+      "fileId": "file:src/types.ts",
+      "name": "ArtifactKind",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 86,
+        "endLine": 110
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-151fef47",
+          "path": "src/types.ts",
+          "startLine": 86,
+          "endLine": 110,
+          "kind": "ast",
+          "excerptHash": "4a68a2a961f46cb3b2f5b49af84c7c75edee273b0f6cf3ec8488e34eadbe983b",
+          "symbolId": "symbol:src/types.ts:ArtifactKind"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:DisqualificationCode",
+      "fileId": "file:src/types.ts",
+      "name": "DisqualificationCode",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 112,
+        "endLine": 129
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-5b9361e7",
+          "path": "src/types.ts",
+          "startLine": 112,
+          "endLine": 129,
+          "kind": "ast",
+          "excerptHash": "f31bc7f0dab08c8691c2cddf5161995f8eff48f749afc7a2c095b8476c9d01fa",
+          "symbolId": "symbol:src/types.ts:DisqualificationCode"
+        }
+      ]
+    },
+    {
+      "id": "symbol:src/types.ts:QegNode",
+      "fileId": "file:src/types.ts",
+      "name": "QegNode",
+      "kind": "type",
+      "exported": true,
+      "location": {
+        "startLine": 300,
+        "endLine": 313
+      },
+      "evidence": [
+        {
+          "id": "ev-symbol-29cb6662",
+          "path": "src/types.ts",
+          "startLine": 300,
+          "endLine": 313,
+          "kind": "ast",
+          "excerptHash": "ba74bf5825ea1c15dc8bc1971471b48d255a712db686759f8781ca993c2127ce",
+          "symbolId": "symbol:src/types.ts:QegNode"
+        }
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "id": "relation:src/index.ts:export-reexport:1",
+      "from": "file:src/index.ts",
+      "to": "./types.js",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-b088b1cc",
+          "path": "src/index.ts",
+          "startLine": 1,
+          "endLine": 1,
+          "kind": "ast",
+          "excerptHash": "d93f36558c41365d54a32ef2aec2b9849d533ef0af40c324754fe44b44d3dcf8"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QegVersion",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QegVersion",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-1673d450",
+          "path": "src/index.ts",
+          "startLine": 1,
+          "endLine": 1,
+          "kind": "ast",
+          "excerptHash": "d93f36558c41365d54a32ef2aec2b9849d533ef0af40c324754fe44b44d3dcf8"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:StableId",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:StableId",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-d55d4da7",
+          "path": "src/index.ts",
+          "startLine": 3,
+          "endLine": 3,
+          "kind": "ast",
+          "excerptHash": "57362480151feeb6c97f7abd5b6d46e7d380b0191f3d5ed4478257145b576d75"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:IsoDateTime",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:IsoDateTime",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-f0f76e6e",
+          "path": "src/index.ts",
+          "startLine": 5,
+          "endLine": 5,
+          "kind": "ast",
+          "excerptHash": "7d51049ca3865110f917d015c0cc748a11e1c6866bdec9515d83227d0279cb0a"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:Confidence",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:Confidence",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-5361c4b8",
+          "path": "src/index.ts",
+          "startLine": 7,
+          "endLine": 7,
+          "kind": "ast",
+          "excerptHash": "0a3179ad27fe0d61630a32ff608694c36ea34c5fc0fad7f68763c1641b61a20a"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:Severity",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:Severity",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-4387280f",
+          "path": "src/index.ts",
+          "startLine": 9,
+          "endLine": 9,
+          "kind": "ast",
+          "excerptHash": "7283f9a3f6d3845cd3ddbf170b96b238e899a0931754acd91f017371342f05fa"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:Priority",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:Priority",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-24de8960",
+          "path": "src/index.ts",
+          "startLine": 11,
+          "endLine": 11,
+          "kind": "ast",
+          "excerptHash": "8b9ab20c5e0dcf05af137a12ea2b6f57157aada2a5f15b518d01244ab6f07f67"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GateProfile",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GateProfile",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-812199c2",
+          "path": "src/index.ts",
+          "startLine": 13,
+          "endLine": 13,
+          "kind": "ast",
+          "excerptHash": "0b8204691f2ba030827989c6fa7675a79fec7a98d81525c29711d51a610d009f"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GateVerdict",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GateVerdict",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-f0730e77",
+          "path": "src/index.ts",
+          "startLine": 15,
+          "endLine": 15,
+          "kind": "ast",
+          "excerptHash": "5377d59d25153230ff23d803abbf9bc58ceef266f3e10a096e65cf01e050484c"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:PlacementLayer",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:PlacementLayer",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-a19682d7",
+          "path": "src/index.ts",
+          "startLine": 17,
+          "endLine": 24,
+          "kind": "ast",
+          "excerptHash": "bf28428a8172d2feafa1877ee8a90968c64321bb585922761088409b22e76adb"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:PlacementDisposition",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:PlacementDisposition",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-5c5201c2",
+          "path": "src/index.ts",
+          "startLine": 26,
+          "endLine": 31,
+          "kind": "ast",
+          "excerptHash": "d28893d2d4e12f3902c376f1527ff3941bd116f9c33dcc28591f48383c7afea5"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GateRelevance",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GateRelevance",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-747f2431",
+          "path": "src/index.ts",
+          "startLine": 33,
+          "endLine": 33,
+          "kind": "ast",
+          "excerptHash": "950622cea19066e6778e2b695b8b474a08568b5c36a13c00412e9da5783f24cd"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:NodeKind",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:NodeKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-cbc28efc",
+          "path": "src/index.ts",
+          "startLine": 35,
+          "endLine": 48,
+          "kind": "ast",
+          "excerptHash": "54f656e88edb4f58c5c33ed9d355995277183bc542e77714e7065e697a447e4a"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:EdgeKind",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:EdgeKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-9510c50f",
+          "path": "src/index.ts",
+          "startLine": 50,
+          "endLine": 63,
+          "kind": "ast",
+          "excerptHash": "90f2facf56ae3068d20107310515c22f3932249fa9982022b11c54eb7ef9549e"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:AdapterKind",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:AdapterKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-94631d36",
+          "path": "src/index.ts",
+          "startLine": 65,
+          "endLine": 73,
+          "kind": "ast",
+          "excerptHash": "08ecf56a54c000e85ebed2c77c2e417e25c874005915dc3b8e0f444a295b554d"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:RequiredAdapterKind",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:RequiredAdapterKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-6bba3137",
+          "path": "src/index.ts",
+          "startLine": 75,
+          "endLine": 78,
+          "kind": "ast",
+          "excerptHash": "eb49fc8ab87cb2b457ae0bdb34868ae16a6fb9db52779959a0e5087a2b10a21e"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:WorkflowCookbookRefKind",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:WorkflowCookbookRefKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-35af6aef",
+          "path": "src/index.ts",
+          "startLine": 80,
+          "endLine": 84,
+          "kind": "ast",
+          "excerptHash": "23724f39c05e7b59aee88f2309cafece2a3d6f6d2b5ed1ec3dbe958f3a56bb07"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:ArtifactKind",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:ArtifactKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-89ea128e",
+          "path": "src/index.ts",
+          "startLine": 86,
+          "endLine": 110,
+          "kind": "ast",
+          "excerptHash": "f9ef5a57209701c4bc6c1fec69110cec4015ef0579ee33c69c3c3825280ddcdf"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:DisqualificationCode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:DisqualificationCode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-b4dab32a",
+          "path": "src/index.ts",
+          "startLine": 112,
+          "endLine": 129,
+          "kind": "ast",
+          "excerptHash": "1c441ea8ee45eaf137e78d9fddf71b7a469e8c0d85d044baaae749cecd477f28"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:SourceRef",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:SourceRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-d9f0f8cc",
+          "path": "src/index.ts",
+          "startLine": 131,
+          "endLine": 139,
+          "kind": "ast",
+          "excerptHash": "c8e70a305cf572f1fed1ee55e9f310ef0c0504c633ca6b1f58cd439a70da9144"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:EvidenceRef",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:EvidenceRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-f6949ecf",
+          "path": "src/index.ts",
+          "startLine": 141,
+          "endLine": 152,
+          "kind": "ast",
+          "excerptHash": "9b46416567eb254f0c166b3f073242837957171168fbcbf7ac3a9f51daf1bade"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:Traceability",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:Traceability",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-a752cd1d",
+          "path": "src/index.ts",
+          "startLine": 154,
+          "endLine": 158,
+          "kind": "ast",
+          "excerptHash": "108b8475431d64dc4dbfb02f3fcff826b44522f4bce7ed7caeb15d5dc3d79642"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:ArtifactRef",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:ArtifactRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-c4588f83",
+          "path": "src/index.ts",
+          "startLine": 160,
+          "endLine": 168,
+          "kind": "ast",
+          "excerptHash": "a550a0763a2324158d8e3b8477a41bdf73631a9e1698eadf204c9a0435bf4744"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:WorkflowCookbookRef",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:WorkflowCookbookRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-72e1b07f",
+          "path": "src/index.ts",
+          "startLine": 170,
+          "endLine": 176,
+          "kind": "ast",
+          "excerptHash": "f5be82e2fb146f18d6f64aad5ef6386367d2ddba43bf3f10ba0a96588778f2d4"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QegMetadata",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QegMetadata",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-911edcaa",
+          "path": "src/index.ts",
+          "startLine": 178,
+          "endLine": 190,
+          "kind": "ast",
+          "excerptHash": "6a665ba3230a78bab43ee0b9ba511bc2c83af1a1e7cbde9b3305ac9a1e6ff0c9"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QegNodeBase",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QegNodeBase",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-3421d5e5",
+          "path": "src/index.ts",
+          "startLine": 192,
+          "endLine": 198,
+          "kind": "ast",
+          "excerptHash": "fc6cdc705778f50023ee464f485d47c5352f3526464aeb9e0da4cf93075a8648"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:RequirementNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:RequirementNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-46e4bf28",
+          "path": "src/index.ts",
+          "startLine": 200,
+          "endLine": 204,
+          "kind": "ast",
+          "excerptHash": "33e0904ae94baccaaa190d906a92d387c05c05ccb891f6f973ed7f02dc92bd83"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:AcceptanceCriteriaNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:AcceptanceCriteriaNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-cfc4e855",
+          "path": "src/index.ts",
+          "startLine": 206,
+          "endLine": 210,
+          "kind": "ast",
+          "excerptHash": "27328b2e838a695c6500d404369739f8b8e7366a47bc9596e6c305a19b61a233"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:RiskNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:RiskNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-023c3565",
+          "path": "src/index.ts",
+          "startLine": 212,
+          "endLine": 221,
+          "kind": "ast",
+          "excerptHash": "bbe182d230fb5d35602ce456d26ac6a91174d1e7db35350047d361fc1b67e628"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:FailureModeNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:FailureModeNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-5d832a4a",
+          "path": "src/index.ts",
+          "startLine": 223,
+          "endLine": 227,
+          "kind": "ast",
+          "excerptHash": "a77218ef066c18f5f34e49c89ce55a165685d144122e21a5b7f6699e23aebe31"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:ChangedCodeNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:ChangedCodeNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-e25f4b36",
+          "path": "src/index.ts",
+          "startLine": 229,
+          "endLine": 236,
+          "kind": "ast",
+          "excerptHash": "8f4b38cb87101ba6d2332252fc390bbe73fe700fad7e67b841bf779ea5b7cb28"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:FindingNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:FindingNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-bb9c3e9e",
+          "path": "src/index.ts",
+          "startLine": 238,
+          "endLine": 243,
+          "kind": "ast",
+          "excerptHash": "799d4b7367622915fecd20f5e018890750bde95eada18062f2699d68a2fb5e39"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:TestNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:TestNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-7e30764b",
+          "path": "src/index.ts",
+          "startLine": 245,
+          "endLine": 250,
+          "kind": "ast",
+          "excerptHash": "7d651dd78ad0cd918b8c1ff575485a5580554500d07dcce26b033eb4ebf64e4d"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:TestPlacementNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:TestPlacementNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-a7af3efb",
+          "path": "src/index.ts",
+          "startLine": 252,
+          "endLine": 260,
+          "kind": "ast",
+          "excerptHash": "f260b096b759b34490f6ce1dcb95ea66f781e12fd313cb28e401ef48fd6b70ca"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:ExecutionEvidenceNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:ExecutionEvidenceNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-eea42c67",
+          "path": "src/index.ts",
+          "startLine": 262,
+          "endLine": 266,
+          "kind": "ast",
+          "excerptHash": "e36b02243b8cbba8c46d9efeddfaf46560d99bc01b41d8a6c8234fdead622f6d"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GateVerdictNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GateVerdictNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-98637e8d",
+          "path": "src/index.ts",
+          "startLine": 268,
+          "endLine": 275,
+          "kind": "ast",
+          "excerptHash": "0edb8eb9c36732752ccff57c337601cb93829b83979eecbf85fa7faa7c5f6d5a"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:WaiverNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:WaiverNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-3527d27c",
+          "path": "src/index.ts",
+          "startLine": 277,
+          "endLine": 283,
+          "kind": "ast",
+          "excerptHash": "b54f5c7c0b3254193e81ed48ab661a951675517e4b759a07a7d26ea408deb6cb"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:PolicyNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:PolicyNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-63c180be",
+          "path": "src/index.ts",
+          "startLine": 285,
+          "endLine": 289,
+          "kind": "ast",
+          "excerptHash": "a6d52e0a60ae7fa159ebb877459a77e58c8d9a06513159ba21dd34fc8330851f"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:AcceptanceRecordNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:AcceptanceRecordNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-fc2b7981",
+          "path": "src/index.ts",
+          "startLine": 291,
+          "endLine": 298,
+          "kind": "ast",
+          "excerptHash": "5d532928e364f37f5cc5f2c2e723ceddd168229d8ff5f74fe94cdd1e635726b8"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QegNode",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QegNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-01ec76fa",
+          "path": "src/index.ts",
+          "startLine": 300,
+          "endLine": 313,
+          "kind": "ast",
+          "excerptHash": "8e6d88d30191a2d2c38d146e8fbedbbe399ac2c36137d090862c53ef1a19b122"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QegEdge",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QegEdge",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-528a34a5",
+          "path": "src/index.ts",
+          "startLine": 315,
+          "endLine": 321,
+          "kind": "ast",
+          "excerptHash": "d7d0615aec9330f020417e01dc1b32c0402046d9527789aeeb554ac69132e230"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:PlacementCandidateScore",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:PlacementCandidateScore",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-451d527f",
+          "path": "src/index.ts",
+          "startLine": 323,
+          "endLine": 331,
+          "kind": "ast",
+          "excerptHash": "3bf92e700be457d4b757f134a49972123c6d9bf3faddb2607cf86b590bace7e0"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:LayerFitScore",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:LayerFitScore",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-0933311a",
+          "path": "src/index.ts",
+          "startLine": 333,
+          "endLine": 341,
+          "kind": "ast",
+          "excerptHash": "5e270c7c98780ee45bc3ad187d32847c56f8d89f38411be286e3c647ece107e2"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:LayerCostPenalty",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:LayerCostPenalty",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-c8c4c42a",
+          "path": "src/index.ts",
+          "startLine": 343,
+          "endLine": 347,
+          "kind": "ast",
+          "excerptHash": "82fa66116ce79dfda26822ad3d7d717adab75915202ba14b14f9c12dfd30f691"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:TestObligation",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:TestObligation",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-ef3d88ef",
+          "path": "src/index.ts",
+          "startLine": 349,
+          "endLine": 359,
+          "kind": "ast",
+          "excerptHash": "dbfbb870c3aee087dc6f75b50a42dd2b5ef8b3bd3ee828ff9f0e4128fcd8f8cc"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:TestPlacementPlan",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:TestPlacementPlan",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-21b81838",
+          "path": "src/index.ts",
+          "startLine": 361,
+          "endLine": 365,
+          "kind": "ast",
+          "excerptHash": "bc6b0d5824b4e08440060ae5f6083481258d8443d9d25557425f2735a8ebd26d"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:Disqualification",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:Disqualification",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-903c1f4a",
+          "path": "src/index.ts",
+          "startLine": 367,
+          "endLine": 372,
+          "kind": "ast",
+          "excerptHash": "f4b87cb81b362f4d6523cb692ec5264c8b9d072abe1f8843f5a1c991c1bfa001"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GateBlocker",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GateBlocker",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-e99ab7a8",
+          "path": "src/index.ts",
+          "startLine": 374,
+          "endLine": 379,
+          "kind": "ast",
+          "excerptHash": "0a79210ba4664e39de9b4952d07dafa738e4d2d5a52620cd3ab4bafb42ec2bea"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GateResult",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GateResult",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-b40a2c7b",
+          "path": "src/index.ts",
+          "startLine": 381,
+          "endLine": 389,
+          "kind": "ast",
+          "excerptHash": "db829a41622c9f53a9e0edc20d5f4477782b77627d5f3339244d1f01d10316c6"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QualityEvidenceGraph",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QualityEvidenceGraph",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-6de219fa",
+          "path": "src/index.ts",
+          "startLine": 391,
+          "endLine": 396,
+          "kind": "ast",
+          "excerptHash": "c7c456fb6c130b689498672a4951b0c1d93f57b6f9035bba1bb23e0c11056f65"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:GraphCompleteness",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:GraphCompleteness",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-fb005df6",
+          "path": "src/index.ts",
+          "startLine": 398,
+          "endLine": 403,
+          "kind": "ast",
+          "excerptHash": "23b1e3a1137f70272708e787f4f0e09e9b2448607712ae216674feb601cc1461"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:ParserFailure",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:ParserFailure",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-182270bd",
+          "path": "src/index.ts",
+          "startLine": 405,
+          "endLine": 409,
+          "kind": "ast",
+          "excerptHash": "6294b72e36a10201f45aa163432d76d631304032b648f56770c6be415ad72b86"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:UnsupportedClaim",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:UnsupportedClaim",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-813b4843",
+          "path": "src/index.ts",
+          "startLine": 411,
+          "endLine": 416,
+          "kind": "ast",
+          "excerptHash": "1a78793c99f5c2b5f9bef1e5aa2a6418305924756d068a597deaf7612baa4d30"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:QualityEvidenceRecord",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:QualityEvidenceRecord",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-e56421c3",
+          "path": "src/index.ts",
+          "startLine": 418,
+          "endLine": 424,
+          "kind": "ast",
+          "excerptHash": "7f69dee6ba54b492d9766c151c127b91d6604e803644b2bef1797be3da4bfe11"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/index.ts:export-local:ExportRef",
+      "from": "file:src/index.ts",
+      "to": "symbol:src/index.ts:ExportRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-01502b35",
+          "path": "src/index.ts",
+          "startLine": 426,
+          "endLine": 430,
+          "kind": "ast",
+          "excerptHash": "ab87ab1edc0ac10adc85e46389eee84c4b04147c5b00535f830348bd6fb6f19e"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QegVersion",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QegVersion",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-541486c7",
+          "path": "src/types.ts",
+          "startLine": 1,
+          "endLine": 1,
+          "kind": "ast",
+          "excerptHash": "00e47243e68189fb53fc8673b6507a8379460e68a490cc19b742005217f96296"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:StableId",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:StableId",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-ad1d3627",
+          "path": "src/types.ts",
+          "startLine": 3,
+          "endLine": 3,
+          "kind": "ast",
+          "excerptHash": "508b117a04ae2b4db26dbceb1eee134361c51f57475d2378a971bf7f38fa337f"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:IsoDateTime",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:IsoDateTime",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-1965da31",
+          "path": "src/types.ts",
+          "startLine": 5,
+          "endLine": 5,
+          "kind": "ast",
+          "excerptHash": "6805cb104808e21de127332f3b9c347f103bf90a56799990e33a290248a73ae5"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:Confidence",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:Confidence",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-a677937d",
+          "path": "src/types.ts",
+          "startLine": 7,
+          "endLine": 7,
+          "kind": "ast",
+          "excerptHash": "1788f7523e2f139e2d8109eae6e03448a68fdb3c8a17273757e9cb60b45e4c01"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:Severity",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:Severity",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-77a3bf72",
+          "path": "src/types.ts",
+          "startLine": 9,
+          "endLine": 9,
+          "kind": "ast",
+          "excerptHash": "3a912ff7efc438d7d7e894c6f495ac85f5129f638d0960dbc8abb4e8236777d0"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:Priority",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:Priority",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-b07c593a",
+          "path": "src/types.ts",
+          "startLine": 11,
+          "endLine": 11,
+          "kind": "ast",
+          "excerptHash": "b47f3cd159a77f2dd189ebce47ba73007f40dad5b8f1fc6a3ba1f7635c93b876"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GateProfile",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GateProfile",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-3ee240c8",
+          "path": "src/types.ts",
+          "startLine": 13,
+          "endLine": 13,
+          "kind": "ast",
+          "excerptHash": "529fcac471a9b6873f4d3a2aadfe69bb9233518e6be90437834f40932126433b"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GateVerdict",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GateVerdict",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-2898118b",
+          "path": "src/types.ts",
+          "startLine": 15,
+          "endLine": 15,
+          "kind": "ast",
+          "excerptHash": "9beda36421c3d31383107738aaff0e5973430aceb60ae138ced6ccb2cc4d1ee5"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:PlacementLayer",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:PlacementLayer",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-1c1fd69a",
+          "path": "src/types.ts",
+          "startLine": 17,
+          "endLine": 24,
+          "kind": "ast",
+          "excerptHash": "019cb4bebbcc1288188c4a932f2773787a01f0b569a131742bed05e12b3a91fa"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:PlacementDisposition",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:PlacementDisposition",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-8f728456",
+          "path": "src/types.ts",
+          "startLine": 26,
+          "endLine": 31,
+          "kind": "ast",
+          "excerptHash": "4b7b4a041560e4385c1e98e572e8cb6ba55ba52c01e0bca58e6f50b557be0ae0"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GateRelevance",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GateRelevance",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-48c9d958",
+          "path": "src/types.ts",
+          "startLine": 33,
+          "endLine": 33,
+          "kind": "ast",
+          "excerptHash": "bc94b683f7a2db68d2b510175342e36fde3796b1de781b465c522d3f3eef04a5"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:NodeKind",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:NodeKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-f0d070cb",
+          "path": "src/types.ts",
+          "startLine": 35,
+          "endLine": 48,
+          "kind": "ast",
+          "excerptHash": "0c89b4b65ca492313c68e352d006c46db4b7f59ec69c2301ad28567f92368a52"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:EdgeKind",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:EdgeKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-242db85a",
+          "path": "src/types.ts",
+          "startLine": 50,
+          "endLine": 63,
+          "kind": "ast",
+          "excerptHash": "695fef3d59835c89a0dbc6f4c0371053cf61472511fe65c9ae0002e9aebe15df"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:AdapterKind",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:AdapterKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-53b50120",
+          "path": "src/types.ts",
+          "startLine": 65,
+          "endLine": 73,
+          "kind": "ast",
+          "excerptHash": "bd047c81bb90ea4a1d4926249896af496e037810e5277336f720d9bd1eb25ac8"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:RequiredAdapterKind",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:RequiredAdapterKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-9e2f3477",
+          "path": "src/types.ts",
+          "startLine": 75,
+          "endLine": 78,
+          "kind": "ast",
+          "excerptHash": "8ac445580c35aad88b97f373c905b18c35a85a8f1c4727f12877e5c8472a2103"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:WorkflowCookbookRefKind",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:WorkflowCookbookRefKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-5bc049e0",
+          "path": "src/types.ts",
+          "startLine": 80,
+          "endLine": 84,
+          "kind": "ast",
+          "excerptHash": "036c5e9ca6a9f1a70c5dc77aa49aa9ea82124075da5d9f09373aa0aaf3a4346d"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:ArtifactKind",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:ArtifactKind",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-151fef47",
+          "path": "src/types.ts",
+          "startLine": 86,
+          "endLine": 110,
+          "kind": "ast",
+          "excerptHash": "4a68a2a961f46cb3b2f5b49af84c7c75edee273b0f6cf3ec8488e34eadbe983b"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:DisqualificationCode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:DisqualificationCode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-5b9361e7",
+          "path": "src/types.ts",
+          "startLine": 112,
+          "endLine": 129,
+          "kind": "ast",
+          "excerptHash": "f31bc7f0dab08c8691c2cddf5161995f8eff48f749afc7a2c095b8476c9d01fa"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:SourceRef",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:SourceRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-07de28ea",
+          "path": "src/types.ts",
+          "startLine": 131,
+          "endLine": 139,
+          "kind": "ast",
+          "excerptHash": "66900c885f09808bce8291b516d6b9bcae2835320222201e8cc003003fc50a62"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:EvidenceRef",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:EvidenceRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-0d4f4a1e",
+          "path": "src/types.ts",
+          "startLine": 141,
+          "endLine": 152,
+          "kind": "ast",
+          "excerptHash": "8d8a14009685ebbe89a4ab397cc2df4a59b9302038736b969ffef39f9ef48f9a"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:Traceability",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:Traceability",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-68642ed3",
+          "path": "src/types.ts",
+          "startLine": 154,
+          "endLine": 158,
+          "kind": "ast",
+          "excerptHash": "caf168c4096d0ca2659df31047e6f2de9adfaa011316dfbe0d4509983e957e49"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:ArtifactRef",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:ArtifactRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-06eeb465",
+          "path": "src/types.ts",
+          "startLine": 160,
+          "endLine": 168,
+          "kind": "ast",
+          "excerptHash": "b3cdd2717cb7845bff8fa0d52dd9bebd923b07260ec38a0a28a9ba088205326e"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:WorkflowCookbookRef",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:WorkflowCookbookRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-76c944ad",
+          "path": "src/types.ts",
+          "startLine": 170,
+          "endLine": 176,
+          "kind": "ast",
+          "excerptHash": "e9f94300406794275475c2299a24a5f7ca32b72f5871f72d746df00bda13782a"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QegMetadata",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QegMetadata",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-6be2a128",
+          "path": "src/types.ts",
+          "startLine": 178,
+          "endLine": 190,
+          "kind": "ast",
+          "excerptHash": "87f9dfff5303b34cbb802859d9888170c7d4890a128493293d7d94af2fbeaba9"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QegNodeBase",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QegNodeBase",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-f7ebb861",
+          "path": "src/types.ts",
+          "startLine": 192,
+          "endLine": 198,
+          "kind": "ast",
+          "excerptHash": "5e8af22a8fb45af3226e53361e2679aded2e4df49eb9a37bfea9b826d8d81de6"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:RequirementNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:RequirementNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-29da81b9",
+          "path": "src/types.ts",
+          "startLine": 200,
+          "endLine": 204,
+          "kind": "ast",
+          "excerptHash": "b47cc62461cc0ccafaf0e3359f2def7671ed0590bc5f144adba0599d9b2b411f"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:AcceptanceCriteriaNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:AcceptanceCriteriaNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-8d12ab86",
+          "path": "src/types.ts",
+          "startLine": 206,
+          "endLine": 210,
+          "kind": "ast",
+          "excerptHash": "cf69f7abf3b81e4020eed4524238f3323cb779c962094e9d70c937c61c374106"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:RiskNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:RiskNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-c658a704",
+          "path": "src/types.ts",
+          "startLine": 212,
+          "endLine": 221,
+          "kind": "ast",
+          "excerptHash": "d6f5f29f72937acdb55964224f893ac7ab202d27fad5e131d4b5196441dac308"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:FailureModeNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:FailureModeNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-0bb77053",
+          "path": "src/types.ts",
+          "startLine": 223,
+          "endLine": 227,
+          "kind": "ast",
+          "excerptHash": "590528d668156ce08fa2b92b3db91da10ea175491e1e0b24a357dafb6cc48a33"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:ChangedCodeNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:ChangedCodeNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-24b40dbb",
+          "path": "src/types.ts",
+          "startLine": 229,
+          "endLine": 236,
+          "kind": "ast",
+          "excerptHash": "12775024545251391e0880173c722e566f5e6fefe5ae86364a1c4dc6899c1d4b"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:FindingNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:FindingNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-6fdfc1fe",
+          "path": "src/types.ts",
+          "startLine": 238,
+          "endLine": 243,
+          "kind": "ast",
+          "excerptHash": "66183b112fd4ab145df7ed8cebf36ae6f2d270d9c438b8d3afd8f3604f4c76e4"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:TestNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:TestNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-da796f42",
+          "path": "src/types.ts",
+          "startLine": 245,
+          "endLine": 250,
+          "kind": "ast",
+          "excerptHash": "5b434da1b0356f1d372c458f56f049acc89cb3648cbad74079b4628188b9abfa"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:TestPlacementNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:TestPlacementNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-03f386dc",
+          "path": "src/types.ts",
+          "startLine": 252,
+          "endLine": 260,
+          "kind": "ast",
+          "excerptHash": "c7731ca774ba2e86370a88192916cb3c3143968019fee4cf80db70afa3296dd8"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:ExecutionEvidenceNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:ExecutionEvidenceNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-c7cda195",
+          "path": "src/types.ts",
+          "startLine": 262,
+          "endLine": 266,
+          "kind": "ast",
+          "excerptHash": "b0035190924a099955fb5b0b56ccd5cfb3f4ebb2bdaeb0f7dc4813b5f444b24e"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GateVerdictNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GateVerdictNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-542d60e8",
+          "path": "src/types.ts",
+          "startLine": 268,
+          "endLine": 275,
+          "kind": "ast",
+          "excerptHash": "f6d06cfa3fe2ea391a75e3189425283a5029cc79552cef02909a0cb16e8940ec"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:WaiverNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:WaiverNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-1d0306a7",
+          "path": "src/types.ts",
+          "startLine": 277,
+          "endLine": 283,
+          "kind": "ast",
+          "excerptHash": "cee94d78640ed446afd00e592e49a9c53d66f51513d1f65cd2b0e523fa61f017"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:PolicyNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:PolicyNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-1b781226",
+          "path": "src/types.ts",
+          "startLine": 285,
+          "endLine": 289,
+          "kind": "ast",
+          "excerptHash": "b4592140ee5b04b9be86814616b45078a172cef47bdab1fd36cdd138acd5e177"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:AcceptanceRecordNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:AcceptanceRecordNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-7577a10b",
+          "path": "src/types.ts",
+          "startLine": 291,
+          "endLine": 298,
+          "kind": "ast",
+          "excerptHash": "47da15708fc197ce46bb98f1b94d7f2701fe35d045e322d4b319273b643bc54f"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QegNode",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QegNode",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-29cb6662",
+          "path": "src/types.ts",
+          "startLine": 300,
+          "endLine": 313,
+          "kind": "ast",
+          "excerptHash": "ba74bf5825ea1c15dc8bc1971471b48d255a712db686759f8781ca993c2127ce"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QegEdge",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QegEdge",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-5f3c8f8f",
+          "path": "src/types.ts",
+          "startLine": 315,
+          "endLine": 321,
+          "kind": "ast",
+          "excerptHash": "af8a0f1549965bc66102ec80eeb6f6ecf3fc01e0c3bdf27c7ddbf8ed69474cf6"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:PlacementCandidateScore",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:PlacementCandidateScore",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-da261254",
+          "path": "src/types.ts",
+          "startLine": 323,
+          "endLine": 331,
+          "kind": "ast",
+          "excerptHash": "24590ec8255e41fe21d0068017696a48db51cab55870ce559d3dc368c8d6eff1"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:LayerFitScore",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:LayerFitScore",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-2f64eb74",
+          "path": "src/types.ts",
+          "startLine": 333,
+          "endLine": 341,
+          "kind": "ast",
+          "excerptHash": "f0c3a5b2e28cff90b315eb2e31fe2cbdcf7746b7972c81af42462a1296d5ecff"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:LayerCostPenalty",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:LayerCostPenalty",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-f5cc2277",
+          "path": "src/types.ts",
+          "startLine": 343,
+          "endLine": 347,
+          "kind": "ast",
+          "excerptHash": "be5af24e09817c3096c5a07ee1603988378c0deac7fd68e395e3ba4dd3d56570"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:TestObligation",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:TestObligation",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-1df9e6d1",
+          "path": "src/types.ts",
+          "startLine": 349,
+          "endLine": 359,
+          "kind": "ast",
+          "excerptHash": "9c354785d19534a2aacf4212f36d4fb0e5bf67c7b9157055f5c90762fdecdbc7"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:TestPlacementPlan",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:TestPlacementPlan",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-8adce152",
+          "path": "src/types.ts",
+          "startLine": 361,
+          "endLine": 365,
+          "kind": "ast",
+          "excerptHash": "4284125ad680e974742b419f7b5dbce0e224d6c43a39c360a76edeeaccad3ac7"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:Disqualification",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:Disqualification",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-53d3b551",
+          "path": "src/types.ts",
+          "startLine": 367,
+          "endLine": 372,
+          "kind": "ast",
+          "excerptHash": "05bf060039a43c6d413462cfcf3819a4223d1d628f1d1339f20f13a467febe23"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GateBlocker",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GateBlocker",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-91cc581b",
+          "path": "src/types.ts",
+          "startLine": 374,
+          "endLine": 379,
+          "kind": "ast",
+          "excerptHash": "3f7a40e6ccb4b82e160f0a497604790eaa08d4378777b5875e64c90ad67337b4"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GateResult",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GateResult",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-6bfcf66a",
+          "path": "src/types.ts",
+          "startLine": 381,
+          "endLine": 389,
+          "kind": "ast",
+          "excerptHash": "e81ad3a51aaf1e505433fcd37a62c33d767b9cbe0b849fae5d38414ab3bce1b6"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QualityEvidenceGraph",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QualityEvidenceGraph",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-c52b3d30",
+          "path": "src/types.ts",
+          "startLine": 391,
+          "endLine": 396,
+          "kind": "ast",
+          "excerptHash": "68c9892350adf7a37227be9232815e9ae68e555a898e724737d5071d03a0be73"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:GraphCompleteness",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:GraphCompleteness",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-3c90f36d",
+          "path": "src/types.ts",
+          "startLine": 398,
+          "endLine": 403,
+          "kind": "ast",
+          "excerptHash": "65215989df2ed7bec340b1ad4d27f425012acd230de83ac512f49164a6ae4e14"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:ParserFailure",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:ParserFailure",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-8477e876",
+          "path": "src/types.ts",
+          "startLine": 405,
+          "endLine": 409,
+          "kind": "ast",
+          "excerptHash": "c16e01bf1307c43370da0de8cae3c4167d63b510b6f26e04b113377d21897060"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:UnsupportedClaim",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:UnsupportedClaim",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-a2d3b89a",
+          "path": "src/types.ts",
+          "startLine": 411,
+          "endLine": 416,
+          "kind": "ast",
+          "excerptHash": "5dc5006dff45b7cf2ba1a8b851c499f196a9a3057820a80b1867049d8a016d0b"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:QualityEvidenceRecord",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:QualityEvidenceRecord",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-c1c183cd",
+          "path": "src/types.ts",
+          "startLine": 418,
+          "endLine": 424,
+          "kind": "ast",
+          "excerptHash": "c7de77c0319d1ee2d85314e5c292a4794aa39e8a6bfbdd94f3c20e0c28b23d1c"
+        }
+      ]
+    },
+    {
+      "id": "relation:src/types.ts:export-local:ExportRef",
+      "from": "file:src/types.ts",
+      "to": "symbol:src/types.ts:ExportRef",
+      "kind": "exports",
+      "confidence": 1,
+      "evidence": [
+        {
+          "id": "ev-export-local-4c7f54a5",
+          "path": "src/types.ts",
+          "startLine": 426,
+          "endLine": 430,
+          "kind": "ast",
+          "excerptHash": "a96035189cc66bb42f0f6c036d86714a76988ce94ad4a8c8453ddffec76a1bbc"
+        }
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "path": "docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "path": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "path": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "path": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.index.md.json",
+      "path": "docs/birdseye/caps/docs.spec.index.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "path": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "path": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "path": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/acceptance.md",
+      "path": "docs/spec/acceptance.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/evidence-package.md",
+      "path": "docs/spec/evidence-package.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/gate-acceptance-2026-06-03.md",
+      "path": "docs/spec/gate-acceptance-2026-06-03.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/gate-policy.md",
+      "path": "docs/spec/gate-policy.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/index.md",
+      "path": "docs/spec/index.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/retention-immutability.md",
+      "path": "docs/spec/retention-immutability.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/review-2026-06-03.md",
+      "path": "docs/spec/review-2026-06-03.md",
+      "framework": "vitest"
+    },
+    {
+      "id": "test:docs/spec/waiver-approval.md",
+      "path": "docs/spec/waiver-approval.md",
+      "framework": "vitest"
+    }
+  ],
+  "configs": [
+    {
+      "id": "config:package.json",
+      "path": "package.json"
+    },
+    {
+      "id": "config:tsconfig.json",
+      "path": "tsconfig.json"
+    }
+  ],
+  "entrypoints": [
+    {
+      "id": "entrypoint:docs/birdseye/index.json",
+      "path": "docs/birdseye/index.json",
+      "kind": "main-entry"
+    },
+    {
+      "id": "entrypoint:src/index.ts",
+      "path": "src/index.ts",
+      "kind": "main-entry"
+    }
+  ],
+  "diagnostics": [],
+  "stats": {
+    "partial": false
+  }
+}

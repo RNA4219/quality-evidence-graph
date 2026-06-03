@@ -1,0 +1,336 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-06-03T00:19:27.762Z",
+  "run_id": "ctg-202606030019",
+  "repo": {
+    "root": "."
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.4.1",
+    "plugin_versions": []
+  },
+  "artifact": "audit",
+  "schema": "audit@v1",
+  "inputs": [
+    {
+      "path": "BLUEPRINT.md",
+      "hash": "6914a70d491ff7e8880b902fb91243698f6b8c38168d9d7a6cb56c0f859f6fa8",
+      "kind": "source"
+    },
+    {
+      "path": "CHECKLISTS.md",
+      "hash": "0aaa1fb4f89ecbe2b1e87be25f494e942a9aff900970a4c4959fc22cca583674",
+      "kind": "source"
+    },
+    {
+      "path": "deep-research-report (9).md",
+      "hash": "548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/BLUEPRINT.md.json",
+      "hash": "7326b9eb1a69002cee0eb9abb7b86bb7ef0a9f71cb53ba1aaca3cad2297330a8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/CHECKLISTS.md.json",
+      "hash": "9d3d553fd343557f37ba75cbc3b4c3cc6aa9968616022d0c4de1e048124313b7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.control-mapping.md.json",
+      "hash": "4bdbe1584d6caee54c89af1d9b76b6d6883f8a7ed17724cb49ad40ca74bf2a2c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
+      "hash": "a3acfe2d6abbef4b7ff17425192b64d9af746eac9da1a38c525130cd91cb4d65",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+      "hash": "dd0bb29688757ae1fc4fdd2beaeff3a594a9bc95d13f8bf1cd6d0a5f4156fabe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.requirements.md.json",
+      "hash": "74aeadc8463377e23d1e3ceffa77afb9d36a98eea5b5ff0a3b273b4de2b7ea0c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "hash": "9860885dc249b70a32731b8fbcf797c7b1b5fe95c68f66b01877eb96caed7c93",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "hash": "e4be0b09e2bd62bbcc50559c1ab1016ec64f74d72496160cfea9647cba178b1e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "hash": "ef695b8b2fddd0dd02725a26dc02ae9aa6ab5c4148cc5c7416d9a6e3be2833e6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "hash": "bfe7e65d2f73d8982cbdc5a61bb7e6e15422a40f857a0b9161ed02c7b3f94a31",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.index.md.json",
+      "hash": "e9c3fb12fa25e85604ef9a5841e97d37478eb9b6f241b810420ca0131e83881e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "hash": "99e34cbed0e2512e3ecf8d452904fe6999a541d94d2a20b2e91376cbfdce1e44",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "hash": "8906fc96f0f31256d34c99797dc05df7283df22c585d15a0a9f25c57be605fbe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "hash": "a718ee2fd75c2735cb78cf66ee631a48b1f8899d0efe3e8460170ee700a1d5e7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/EVALUATION.md.json",
+      "hash": "06931ceda7f1df5b4c9b0c0fd097c64ce0cd58285799af2daae237305d138f20",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/fixtures.README.md.json",
+      "hash": "7d88ab57a05ba94bcc60da7d382317c47ca76336ae1c347a66c1ef2733ecb6c0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/GUARDRAILS.md.json",
+      "hash": "13d1089326f6781e3676653c429b1c04aaaf1c981512623b97cc1f01c5f899fa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/HUB.codex.md.json",
+      "hash": "dc11ff5641037ee5912475077e2cf1a0236df0fc243cca6aa5ab354a92e41128",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/README.md.json",
+      "hash": "cfcb9e6bd17a5e8d328f900c03c4718c7d1d37f347f9348f68b98afa1d3115e2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/RUNBOOK.md.json",
+      "hash": "d0caa9ca62ce03408a6089a4a265fc9bddd78a1e4940fa22c8d89c5fdf18bd8b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
+      "hash": "479f21932cd4dce092c29c6a85a14b3bab787f6ccdd13485eea64adf84d2e7cc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
+      "hash": "8a97b4ccac7d3f0160529e759abc416b518f34f25be36b3990760d8b036b78d7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
+      "hash": "24ffea66ee67fd1324a1c27e47d575aa7518091d11be37f915aac2da567f3744",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
+      "hash": "9437817cfc826f5d30913518f81b7256fb36a21aa32b5583e458e17ce4c94c68",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
+      "hash": "7684a829b43ae422269949794bb713592bfa2058201f110c8c69f2e376b1ebec",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.types.ts.json",
+      "hash": "04e6f5041e3e4dd777f73f2af777902cc5901896672ef0ae456c91185028037e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/TASK.codex.md.json",
+      "hash": "afa5566633a20a4f40be70872ffc6d59fc39348e254334eb34c50805b873eb49",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/index.json",
+      "hash": "b6a7833bf08e19d141a036a8c58f51c12e5c6c82ef494e5c634abc595ab37477",
+      "kind": "source"
+    },
+    {
+      "path": "docs/BIRDSEYE.md",
+      "hash": "19b27dc890e3ec9d903d9347629bae257f1763ace15d290ed80c8d50dcf0fa23",
+      "kind": "source"
+    },
+    {
+      "path": "docs/control-mapping.md",
+      "hash": "c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157",
+      "kind": "source"
+    },
+    {
+      "path": "docs/implementation-prep-gate-2026-06-02.md",
+      "hash": "933e5fb7013abd2fbb87f2629c4a9b2080f09d28e3d5a9a9f15ed0ad9737fbd4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/ipo-controlled-profile.md",
+      "hash": "55a16c9a01a712b698d6abd6f248377cd7ad9c33f7fe2b7afebf28cc23475f80",
+      "kind": "source"
+    },
+    {
+      "path": "docs/requirements-gate-acceptance-2026-06-02.md",
+      "hash": "568e585e89382e0ac85dfa16830f016f0021c68a3602bcaf206b3ea88dca759b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/requirements.md",
+      "hash": "d0d23f7d6a4003f447696ae17c9e4e2c8c8dbe95cae693a2708d529b61afc41c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/acceptance.md",
+      "hash": "af2e9d6cd3c906557ee24981482dcfcb69edb2b58bb53af725aacc666de93567",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/evidence-package.md",
+      "hash": "cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/gate-acceptance-2026-06-03.md",
+      "hash": "311373551afb646f877adae37037ffaad703b955cc9abc426f2a7c2f116bb1d3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/gate-policy.md",
+      "hash": "f85309b948ccdf588b9d58cf3c822f6e2e799b64e993d8fb676b78fe170611f1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/index.md",
+      "hash": "fea03d153da1a59a4d5f01ace365a2b61f82e6a161c2ab8c79ff6cff8bc6afb4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/retention-immutability.md",
+      "hash": "2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/review-2026-06-03.md",
+      "hash": "3a20bc3bfb07cd5f223a4da366cbfdf27b57d3d33bf7b5660068325411c3d52f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/waiver-approval.md",
+      "hash": "f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c",
+      "kind": "source"
+    },
+    {
+      "path": "EVALUATION.md",
+      "hash": "4e7b2076624d0e3ecbefc0312ba7b58add35e57317585cbc234ae5edd722230d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/README.md",
+      "hash": "231b7484ca0df1167142c0d5d085078841eb409dc8a895cd2af2e13115f53d5d",
+      "kind": "source"
+    },
+    {
+      "path": "GUARDRAILS.md",
+      "hash": "f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1",
+      "kind": "source"
+    },
+    {
+      "path": "HUB.codex.md",
+      "hash": "17c5eecc70768596ea9b1b70cd9a77986d5c1e35e2016b5604dabd9922fdebec",
+      "kind": "source"
+    },
+    {
+      "path": "package.json",
+      "hash": "66612d34d76afd7f1a16f2bcae19411103d205d7ad65439e1df006d863816f97",
+      "kind": "config"
+    },
+    {
+      "path": "README.md",
+      "hash": "dd94d8219939b9184b55ba515ee45c9a833eceee51fe37020b9adc124a1b0934",
+      "kind": "source"
+    },
+    {
+      "path": "RUNBOOK.md",
+      "hash": "ff1231736e7debb0878602d19a16357bcaa9597cb35ebc1a6293dd856ee4d521",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/gate-verdict.schema.json",
+      "hash": "ab35e4194f83bdb46423f5d6e6c20f49f0d88993c593fc3943f36ffd43e31499",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/qeg.bundle.schema.json",
+      "hash": "88126c11c060432a01acb366ff2913479d98a4e44d1e2ed5b231c2845e75b994",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/quality-evidence-record.schema.json",
+      "hash": "7ce9d499c2169f6c2f7e3ea8ba82408988e0d73db0f1465608ef2c2d948ff782",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/README.md",
+      "hash": "d6c5a72c88453499ad45cd86f19ba218e28e4e6aa779f35b3f09e35fbc10181c",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/shared-defs.schema.json",
+      "hash": "8bba551fa073232a34a6f3202164aa2cfba87cbcd256f89d9c55c3c800c83f8d",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/test-placement-plan.schema.json",
+      "hash": "7c54debba905415f44e946d7594ce3f9f81bf1c49401ba76dbddc406fc782473",
+      "kind": "source"
+    },
+    {
+      "path": "src/index.ts",
+      "hash": "1c7764ba79b08ea4de0d9435cff463fc4df1fe6c16d3e1a32a40e2c11508e147",
+      "kind": "source"
+    },
+    {
+      "path": "src/types.ts",
+      "hash": "92c1903947e4e4267ce55d71368d64ea4f364ca1703ac9c3ed16278fa3d02b55",
+      "kind": "source"
+    },
+    {
+      "path": "TASK.codex.md",
+      "hash": "40f89dafe1b7eb0a72dee490bde5a23910d84233059a7aea8b156b1110e615e2",
+      "kind": "source"
+    },
+    {
+      "path": "tsconfig.json",
+      "hash": "a264764bf2eed11dd7136d227e9be64f9923e79739d85f1ea79e7d912b08675b",
+      "kind": "config"
+    }
+  ],
+  "policy": {
+    "id": "default",
+    "hash": "none"
+  },
+  "exit": {
+    "code": 0,
+    "status": "passed",
+    "reason": "Analysis complete"
+  }
+}

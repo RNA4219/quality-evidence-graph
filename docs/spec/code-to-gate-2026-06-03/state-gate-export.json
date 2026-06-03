@@ -1,0 +1,22 @@
+{
+  "version": "ctg.state-gate/v1",
+  "producer": "code-to-gate",
+  "run_id": "ctg-202606030019",
+  "artifact_hash": "sha256:eyJ2ZXJzaW9uIjoiY3RnL3YxIiwiZ2Vu",
+  "release_readiness": {
+    "status": "passed",
+    "summary": "Release ready",
+    "failed_conditions": []
+  },
+  "evidence_refs": [
+    {
+      "artifact": "findings",
+      "path": "findings.json",
+      "hash": "sha256:eyJ2ZXJzaW9uIjoiY3RnL3YxIiwiZ2Vu"
+    }
+  ],
+  "approval_relevance": {
+    "requires_human_attention": false,
+    "reasons": []
+  }
+}

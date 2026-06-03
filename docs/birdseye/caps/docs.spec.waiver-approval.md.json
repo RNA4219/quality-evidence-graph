@@ -1,0 +1,10 @@
+{
+  "id": "docs/spec/waiver-approval.md",
+  "role": "ipo-spec",
+  "public_api": ["Waiver", "ApprovalEvidence", "ControlRoles"],
+  "summary": "waiver、approval evidence、ControlRoles、human review の必須項目と有効条件を固定する。",
+  "deps_out": ["docs/spec/index.md", "docs/spec/gate-policy.md"],
+  "deps_in": ["docs/spec/index.md", "docs/ipo-controlled-profile.md"],
+  "risks": ["source-backed でない waiver や approval evidence が Gate を良化させると DQ-15 を見逃す"],
+  "tests": ["docs/spec/acceptance.md TC-SPEC-03"]
+}

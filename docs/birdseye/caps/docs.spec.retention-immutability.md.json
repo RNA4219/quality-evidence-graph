@@ -1,0 +1,10 @@
+{
+  "id": "docs/spec/retention-immutability.md",
+  "role": "ipo-spec",
+  "public_api": ["Retention", "StorageClassification"],
+  "summary": "retention、storage location、tamper evidence、silent overwrite 判定、secret / PII 取り扱いを固定する。",
+  "deps_out": ["docs/spec/index.md", "docs/spec/evidence-package.md"],
+  "deps_in": ["docs/spec/index.md", "docs/ipo-controlled-profile.md"],
+  "risks": ["silent overwrite 可能な evidence を release 判定の唯一根拠にすると DQ-16 を見逃す"],
+  "tests": ["docs/spec/acceptance.md TC-SPEC-04"]
+}

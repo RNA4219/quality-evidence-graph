@@ -1,0 +1,10 @@
+{
+  "id": "docs/spec/evidence-package.md",
+  "role": "ipo-spec",
+  "public_api": ["EvidencePackage"],
+  "summary": "IPO controlled release 判定に必要な input artifact hash、QEG outputs、policy、waiver、approval evidence、manual evidence、record bundle を固定する。",
+  "deps_out": ["docs/spec/index.md", "docs/spec/retention-immutability.md"],
+  "deps_in": ["docs/spec/index.md", "docs/ipo-controlled-profile.md"],
+  "risks": ["evidence package hash と approval evidence の不一致を見逃すと承認対象が固定できない"],
+  "tests": ["docs/spec/acceptance.md TC-SPEC-04"]
+}

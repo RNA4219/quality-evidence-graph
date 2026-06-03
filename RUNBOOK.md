@@ -57,6 +57,48 @@ npm pack --dry-run --cache ./.npm-cache
 - `schemas/` が tarball contents に含まれる
 - `README.md`、`BLUEPRINT.md`、`RUNBOOK.md`、`EVALUATION.md`、`GUARDRAILS.md`、`HUB.codex.md` が配布対象に含まれる
 - `TASK.codex.md`、`fixtures/README.md`、`docs/control-mapping.md`、`docs/ipo-controlled-profile.md`、`docs/implementation-prep-gate-2026-06-02.md` が配布対象に含まれる
+- `docs/spec/` が配布対象に含まれる
+
+### 5. IPO 統制仕様書確認
+
+```sh
+git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/waiver-approval.md docs/spec/evidence-package.md docs/spec/retention-immutability.md docs/spec/acceptance.md docs/spec/review-2026-06-03.md docs/spec/gate-acceptance-2026-06-03.md
+```
+
+期待結果:
+
+- `docs/spec/*.md` が Git 管理対象である
+- `docs/spec/index.md` から Gate policy、waiver / approval、evidence package、retention / immutability、仕様書検収へ辿れる
+- `docs/spec/review-2026-06-03.md` が仕様書 review Gate と残リスクを記録している
+- `docs/spec/gate-acceptance-2026-06-03.md` が実装前 Gate の Go/No-Go 判定を記録している
+
+### 6. code-to-gate Gate 証跡
+
+```sh
+node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze . --emit all --out docs\spec\code-to-gate-2026-06-03
+node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js readiness . --policy C:\Users\ryo-n\Codex_dev\code-to-gate\.github\ctg-policy.yaml --from docs\spec\code-to-gate-2026-06-03 --out docs\spec\code-to-gate-2026-06-03
+node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js export manual-bb --from docs\spec\code-to-gate-2026-06-03 --out docs\spec\code-to-gate-2026-06-03\manual-bb-export.json
+node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js export state-gate --from docs\spec\code-to-gate-2026-06-03 --out docs\spec\code-to-gate-2026-06-03\state-gate-export.json
+```
+
+期待結果:
+
+- `analysis-report.md` が findings 0 件、critical 0 件、high 0 件を示す
+- `release-readiness.json` が status `passed`、failed conditions 0 件を示す
+- code-to-gate の `passed` は repository static gate の証跡であり、IPO controlled release approval ではない
+
+### 7. RanD KanoMode 監査証跡
+
+```sh
+cd C:\Users\ryo-n\Codex_dev\RanD\research-runtime
+uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0, r'C:\Users\ryo-n\Codex_dev\RanD\research-runtime\src'); from rand_research.fetchers import parse_audit_fixture_json; from rand_research.kano import build_audit_artifacts; q=Path(r'C:\Users\ryo-n\Codex_dev\quality-evidence-graph'); evidence=q/'docs/spec/kano-mode-2026-06-03/qeg-kano-audit-evidence.json'; out=q/'docs/spec/kano-mode-2026-06-03'; items=parse_audit_fixture_json({'name':'qeg_kano_audit'}, evidence, 20); preset={'audit_topic':'Quality Evidence Graph IPO Control Spec Kano Audit','audit_document_id':'QEG-IPO-SPEC-GATE-2026-06-03','audit_document_ref':'docs://quality-evidence-graph/docs/spec/gate-acceptance-2026-06-03.md','persona_modes':['researcher','gatekeeper','product'],'freshness_window_days':30,'audit_assumptions':['KanoMode output is a Kano-inspired audit hypothesis, not formal Kano survey result.','Audited evidence is the staged QEG spec gate documentation and generated gate artifacts.','QEG release approval remains separated from requirement/specification gate outcomes.']}; artifacts=build_audit_artifacts(items,preset,'qeg-ipo-spec-gate-2026-06-03','QEG-IPO-SPEC-GATE-2026-06-03'); out.mkdir(parents=True, exist_ok=True); (out/'kano.json').write_text(json.dumps(artifacts['kano'],ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); (out/'requirements_audit_packet.json').write_text(json.dumps(artifacts['requirements_audit_packet'],ensure_ascii=False,indent=2)+'\n',encoding='utf-8'); print(json.dumps(artifacts['requirements_audit_packet']['gate_summary'],ensure_ascii=False))"
+```
+
+期待結果:
+
+- `requirements_audit_packet.json.gate_summary.overall_assessment` が `go`
+- go=5、conditional_go=0、no_go=0
+- KanoMode の `go` は Kano-inspired requirements audit の証跡であり、正式な狩野調査または IPO controlled release approval ではない
 
 ## Confirm
 
@@ -68,6 +110,11 @@ npm pack --dry-run --cache ./.npm-cache
 - `TASK.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している
 - `fixtures/README.md` が expected verdict / DQ を固定している
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備を固定している
+- `docs/spec/` が TASK-09 / TASK-10 の実装判断に必要な Gate policy、waiver、approval evidence、retention、immutability、evidence package を固定している
+- `docs/spec/review-2026-06-03.md` が仕様書見直し結果、修正方針、残リスクを固定している
+- `docs/spec/gate-acceptance-2026-06-03.md` が仕様書 Gate、実装着手 Gate、IPO release Gate を分離している
+- `docs/spec/code-to-gate-2026-06-03/` が code-to-gate による静的 Gate 証跡を保持している
+- `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による要求価値監査証跡を保持している
 
 ## Rollback / Retry
 
@@ -76,7 +123,10 @@ npm pack --dry-run --cache ./.npm-cache
 - schema parse が失敗した
 - TypeScript typecheck が失敗した
 - `docs/requirements.md` が package から落ちた
+- `docs/spec/` が package から落ちた
 - `conditional_go` / `ipo_controlled` / DQ enum の契約が requirements / types / schema で不一致
+- code-to-gate の `passed` を IPO controlled release approval と誤読する導線がある
+- KanoMode の `go` を正式な狩野調査または IPO controlled release approval と誤読する導線がある
 
 ### 復旧手順
 
@@ -84,7 +134,7 @@ npm pack --dry-run --cache ./.npm-cache
 2. `docs/birdseye/index.json` から関連 capsule を読む。
 3. requirements / types / schema / README / BLUEPRINT のどれが正本と矛盾したかを特定する。
 4. 最小差分で修正する。
-5. Execute の 2〜4 を再実行する。
+5. Execute の 2〜7 を再実行する。
 
 ## Observability
 

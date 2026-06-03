@@ -24,6 +24,13 @@ next_review_due: 2026-07-02
 10. `fixtures/README.md`
 11. `docs/control-mapping.md`
 12. `docs/ipo-controlled-profile.md`
+13. `docs/spec/index.md`
+14. `docs/spec/review-2026-06-03.md`
+15. `docs/spec/gate-acceptance-2026-06-03.md`
+16. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
+17. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
+18. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
+19. `docs/spec/kano-mode-2026-06-03/kano.json`
 
 ## 2. 入力ファイル分類
 
@@ -39,6 +46,12 @@ next_review_due: 2026-07-02
 | `fixtures/README.md` | fixture contract / expected verdict | high |
 | `docs/control-mapping.md` | IPO control mapping | high |
 | `docs/ipo-controlled-profile.md` | IPO profile contract | high |
+| `docs/spec/index.md` | IPO control implementation spec index | high |
+| `docs/spec/*.md` | IPO control implementation specs | high |
+| `docs/spec/review-2026-06-03.md` | IPO control spec review record | high |
+| `docs/spec/gate-acceptance-2026-06-03.md` | IPO control spec gate acceptance record | high |
+| `docs/spec/code-to-gate-2026-06-03/*` | code-to-gate static gate evidence | high |
+| `docs/spec/kano-mode-2026-06-03/*` | RanD KanoMode requirements audit evidence | high |
 | `docs/implementation-prep-gate-2026-06-02.md` | implementation preparation gate record | high |
 | `schemas/*.schema.json` | JSON Schema contracts | high |
 | `src/types.ts` | TypeScript contract source | high |
@@ -53,6 +66,7 @@ next_review_due: 2026-07-02
 4. 実装タスクは `TASK.codex.md` の形式で Objective / Scope / Requirements / Commands / Acceptance を記録する。
 5. 完了時は `RUNBOOK.md` の確認手順と `EVALUATION.md` の acceptance criteria に従って証跡を残す。
 6. 実装準備 Gate は `docs/implementation-prep-gate-2026-06-02.md` を起点に、release Gate と分離して判定する。
+7. IPO 統制実装に入る場合は `docs/spec/index.md` から policy / waiver / approval / retention / evidence package の仕様を読む。
 
 ## 4. Birdseye 鮮度
 

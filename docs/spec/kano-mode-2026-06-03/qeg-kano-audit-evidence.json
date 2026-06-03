@@ -1,0 +1,193 @@
+{
+  "items": [
+    {
+      "id": "qeg-kano-001-gate-policy",
+      "kind": "audit_evidence",
+      "source_name": "qeg_spec_gate",
+      "url": "docs://docs/spec/gate-policy.md",
+      "title": "DQ-first gate policy is a must-be quality",
+      "summary": "QEG must keep DQ precedence, verdict priority, and conditional_go exit code policy unambiguous for IPO-controlled use.",
+      "claims": [
+        "DQ has highest precedence",
+        "waiver cannot erase DQ",
+        "conditional_go is exit code 2 in ipo_controlled"
+      ],
+      "evidence": [
+        "docs/spec/gate-policy.md",
+        "docs/spec/gate-acceptance-2026-06-03.md"
+      ],
+      "tags": ["audit", "must_be", "ipo_controlled"],
+      "priority": 10,
+      "high_priority": true,
+      "metadata": {
+        "requirement_id": "QEG-KANO-001",
+        "original_text": "IPO controlled Gate policy fixes DQ-first precedence, verdict priority, waiver limits, and conditional_go exit code 2.",
+        "source_type": "official",
+        "source_tier": "primary",
+        "locale": "ja-JP",
+        "freshness_days": 0,
+        "kano_type": "must_be",
+        "confidence": 0.95,
+        "weight": 0.95,
+        "testability": "high",
+        "implementation_alignment": "high",
+        "risks": [
+          "If DQ priority is ambiguous, waiver or CI success can invalidate the control model."
+        ],
+        "issues": [],
+        "suggested_action": "Maintain as hard gate. Map directly to TypeScript types, JSON Schema, evaluator tests, and negative fixtures."
+      }
+    },
+    {
+      "id": "qeg-kano-002-approval-separation",
+      "kind": "audit_evidence",
+      "source_name": "qeg_spec_gate",
+      "url": "docs://docs/spec/waiver-approval.md",
+      "title": "QEG verdict and human release approval separation is must-be",
+      "summary": "QEG must not synthesize human release approval; approval evidence remains a distinct artifact with authority, role, package hash, and policy refs.",
+      "claims": [
+        "QEG verdict is separated from release approval",
+        "ApprovalEvidence requires approver authority and package hash",
+        "ControlRoles prevent incompatible role consolidation"
+      ],
+      "evidence": [
+        "docs/spec/waiver-approval.md",
+        "docs/control-mapping.md"
+      ],
+      "tags": ["audit", "must_be", "approval"],
+      "priority": 10,
+      "high_priority": true,
+      "metadata": {
+        "requirement_id": "QEG-KANO-002",
+        "original_text": "QEG verdict and human release approval are separate controls, and approval evidence must be independently auditable.",
+        "source_type": "official",
+        "source_tier": "primary",
+        "locale": "ja-JP",
+        "freshness_days": 0,
+        "kano_type": "must_be",
+        "confidence": 0.94,
+        "weight": 0.94,
+        "testability": "high",
+        "implementation_alignment": "high",
+        "risks": [
+          "If QEG verdict is mistaken for release approval, IPO control evidence becomes invalid."
+        ],
+        "issues": [],
+        "suggested_action": "Maintain as hard gate and fixture mandatory invalid cases for missing or conflicting approval evidence."
+      }
+    },
+    {
+      "id": "qeg-kano-003-evidence-package",
+      "kind": "audit_evidence",
+      "source_name": "qeg_spec_gate",
+      "url": "docs://docs/spec/evidence-package.md",
+      "title": "Evidence package completeness is performance quality",
+      "summary": "The more complete and hash-linked the evidence package is, the more release confidence and audit efficiency improve.",
+      "claims": [
+        "EvidencePackage links inputs, outputs, policy, waiver, approval evidence, manual evidence, and retention evidence",
+        "Package phase prevents pre-release artifacts from being used as release Go evidence"
+      ],
+      "evidence": [
+        "docs/spec/evidence-package.md",
+        "docs/spec/gate-acceptance-2026-06-03.md"
+      ],
+      "tags": ["audit", "performance", "evidence"],
+      "priority": 9,
+      "high_priority": true,
+      "metadata": {
+        "requirement_id": "QEG-KANO-003",
+        "original_text": "EvidencePackage must make release judgment reproducible through artifact hashes, phase, policy refs, manual evidence, approval evidence, and retention evidence.",
+        "source_type": "official",
+        "source_tier": "primary",
+        "locale": "ja-JP",
+        "freshness_days": 0,
+        "kano_type": "performance",
+        "confidence": 0.91,
+        "weight": 0.91,
+        "testability": "high",
+        "implementation_alignment": "high",
+        "risks": [
+          "Package contract can be specified but still fail in implementation if hash and phase validation are incomplete."
+        ],
+        "issues": [],
+        "suggested_action": "Treat as threshold gate. Implement package schema and phase fixtures before any release Go."
+      }
+    },
+    {
+      "id": "qeg-kano-004-retention-immutability",
+      "kind": "audit_evidence",
+      "source_name": "qeg_spec_gate",
+      "url": "docs://docs/spec/retention-immutability.md",
+      "title": "Retention and tamper evidence are must-be for IPO control",
+      "summary": "Silent overwrite and missing retention evidence directly break release traceability, especially for DQ-16.",
+      "claims": [
+        "Storage classification and tamper evidence are release criteria",
+        "Silent overwrite can trigger disqualification",
+        "Retention metadata is required for release evidence"
+      ],
+      "evidence": [
+        "docs/spec/retention-immutability.md",
+        "docs/ipo-controlled-profile.md"
+      ],
+      "tags": ["audit", "must_be", "retention"],
+      "priority": 9,
+      "high_priority": true,
+      "metadata": {
+        "requirement_id": "QEG-KANO-004",
+        "original_text": "Retention, storage classification, tamper evidence, and silent overwrite detection are mandatory release control inputs.",
+        "source_type": "official",
+        "source_tier": "primary",
+        "locale": "ja-JP",
+        "freshness_days": 0,
+        "kano_type": "must_be",
+        "confidence": 0.93,
+        "weight": 0.93,
+        "testability": "high",
+        "implementation_alignment": "high",
+        "risks": [
+          "If tamper evidence is only documentary and not evaluated, DQ-16 will be weak."
+        ],
+        "issues": [],
+        "suggested_action": "Maintain as hard gate. Add storage and overwrite negative fixtures in TASK-10."
+      }
+    },
+    {
+      "id": "qeg-kano-005-dual-gate-evidence",
+      "kind": "audit_evidence",
+      "source_name": "qeg_spec_gate",
+      "url": "docs://docs/spec/gate-acceptance-2026-06-03.md",
+      "title": "manual-bb plus code-to-gate evidence is attractive but now strategic",
+      "summary": "Combining manual-bb-test-harness with code-to-gate makes the requirement gate unusually strong and differentiating, while not replacing release approval.",
+      "claims": [
+        "manual-bb-test-harness provides risk and black-box gate structure",
+        "code-to-gate provides repository static gate evidence",
+        "Both are explicitly separated from IPO release approval"
+      ],
+      "evidence": [
+        "docs/spec/gate-acceptance-2026-06-03.md",
+        "docs/spec/code-to-gate-2026-06-03/release-readiness.json"
+      ],
+      "tags": ["audit", "attractive", "differentiator"],
+      "priority": 8,
+      "high_priority": true,
+      "metadata": {
+        "requirement_id": "QEG-KANO-005",
+        "original_text": "The pre-implementation Gate combines manual-bb-test-harness and code-to-gate evidence while preserving IPO release No-Go separation.",
+        "source_type": "official",
+        "source_tier": "primary",
+        "locale": "ja-JP",
+        "freshness_days": 0,
+        "kano_type": "attractive",
+        "confidence": 0.86,
+        "weight": 0.86,
+        "testability": "high",
+        "implementation_alignment": "high",
+        "risks": [
+          "Differentiating evidence can be overclaimed as release approval if the boundary is not repeated."
+        ],
+        "issues": [],
+        "suggested_action": "Keep as differentiator. Continue to label code-to-gate passed as static gate evidence only."
+      }
+    }
+  ]
+}
