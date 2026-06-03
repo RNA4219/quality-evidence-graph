@@ -42,14 +42,14 @@
       }
     },
     {
-      "id": "file:deep-research-report (9).md",
-      "path": "deep-research-report (9).md",
+      "id": "file:docs/research/quality-evidence-graph-requirements-report.md",
+      "path": "docs/research/quality-evidence-graph-requirements-report.md",
       "language": "unknown",
       "role": "docs",
       "hash": "548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0",
       "sizeBytes": 59924,
       "lineCount": 867,
-      "moduleId": "module:deep-research-report (9).md",
+      "moduleId": "module:docs/research/quality-evidence-graph-requirements-report.md",
       "parser": {
         "status": "skipped",
         "adapter": "ctg-text-v0"

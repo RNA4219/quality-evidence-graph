@@ -26,6 +26,11 @@
       "caps": "docs/birdseye/caps/BLUEPRINT.md.json",
       "mtime": "00001"
     },
+    "docs/research/quality-evidence-graph-requirements-report.md": {
+      "role": "deep-research-report",
+      "caps": "docs/birdseye/caps/docs.research.quality-evidence-graph-requirements-report.md.json",
+      "mtime": "00001"
+    },
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
@@ -187,6 +192,7 @@
     ["HUB.codex.md", "README_JA.md"],
     ["HUB.codex.md", "README_EN.md"],
     ["HUB.codex.md", "BLUEPRINT.md"],
+    ["HUB.codex.md", "docs/research/quality-evidence-graph-requirements-report.md"],
     ["HUB.codex.md", "docs/requirements.md"],
     ["HUB.codex.md", "RUNBOOK.md"],
     ["HUB.codex.md", "EVALUATION.md"],
@@ -198,6 +204,9 @@
     ["HUB.codex.md", "docs/spec/index.md"],
     ["HUB.codex.md", "docs/implementation-prep-gate-2026-06-02.md"],
     ["docs/requirements.md", "src/types.ts"],
+    ["docs/research/quality-evidence-graph-requirements-report.md", "docs/requirements.md"],
+    ["docs/research/quality-evidence-graph-requirements-report.md", "BLUEPRINT.md"],
+    ["docs/research/quality-evidence-graph-requirements-report.md", "docs/spec/index.md"],
     ["docs/requirements.md", "schemas/gate-verdict.schema.json"],
     ["docs/requirements.md", "TASK.codex.md"],
     ["docs/requirements.md", "fixtures/README.md"],
