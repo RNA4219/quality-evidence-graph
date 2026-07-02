@@ -8,6 +8,11 @@ import type {
 } from "../types.js";
 import { CliError } from "./errors.js";
 import type { EvaluatedFixture } from "./fixture-io.js";
+import {
+  appendEscapedDefectNodes,
+  buildGateEfficacyRecords,
+  buildRecalibrationProposalsForFixture,
+} from "../gate-efficacy.js";
 
 function buildAuditTrail(evidencePackage: EvidencePackage | undefined, policy: GatePolicy): AuditTrail | undefined {
   if (!evidencePackage) {
@@ -35,16 +40,20 @@ export async function writeOutputRecord(evaluated: EvaluatedFixture): Promise<vo
     obligations: [],
     placements: [],
   };
+  const gateEfficacyRecords = buildGateEfficacyRecords(evaluated);
+  const recalibrationProposals = buildRecalibrationProposalsForFixture(evaluated);
 
   const record: QualityEvidenceRecord = {
     metadata: evaluated.metadata,
-    graph: evaluated.graph,
+    graph: appendEscapedDefectNodes(evaluated.graph, evaluated, placementPlan),
     placementPlan,
     gate: evaluated.gateResult,
     exports: [
       { kind: "json", path: "output-record.json" },
     ],
     auditTrail: buildAuditTrail(evaluated.evidencePackage, evaluated.policy),
+    ...(gateEfficacyRecords.length > 0 ? { gateEfficacyRecords } : {}),
+    ...(recalibrationProposals.length > 0 ? { recalibrationProposals } : {}),
   };
 
   const recordJson = JSON.stringify(record, null, 2);

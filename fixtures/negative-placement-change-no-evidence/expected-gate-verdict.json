@@ -1,0 +1,15 @@
+{
+  "fixture": "negative-placement-change-no-evidence",
+  "description": "Manual retirement without evidence_refs is disqualified",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-14"
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/requirements.md §9 Test Placement 要件"
+}

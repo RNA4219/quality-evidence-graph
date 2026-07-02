@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-waiver-dq-attempt",
+    "runId": "qeg:run-negative-waiver-dq-attempt",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-waiver-dq-attempt/input.json"
@@ -16,12 +16,12 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-waiver-dq-attempt",
+      "runId": "qeg:run-negative-waiver-dq-attempt",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-waiver-dq-attempt/input.json"
@@ -30,7 +30,7 @@
     },
     "nodes": [
       {
-        "id": "risk-001",
+        "id": "qeg:risk-001",
         "kind": "risk",
         "title": "Missing artifact risk",
         "priority": "P1",
@@ -43,7 +43,7 @@
         "traceability": {
           "sourceRefs": [
             {
-              "id": "sr-risk-001",
+              "id": "qeg:sr-risk-001",
               "path": "docs/risk-analysis.md"
             }
           ],
@@ -51,7 +51,7 @@
           "confidence": "medium"
         },
         "sourceArtifactIds": [
-          "artifact-001"
+          "qeg:artifact-001"
         ]
       }
     ],
@@ -65,7 +65,7 @@
           "reason": "Required artifact missing",
           "sourceRefs": [
             {
-              "id": "SR-DQ-01",
+              "id": "qeg:SR-DQ-01",
               "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
               "label": "missing artifact"
             }
@@ -78,7 +78,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-waiver-dq-attempt",
+      "runId": "qeg:run-negative-waiver-dq-attempt",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -89,12 +89,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-waiver-dq-attempt",
+      "runId": "qeg:run-negative-waiver-dq-attempt",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-waiver-dq-attempt/input.json"
@@ -118,7 +118,7 @@
         "nodeIds": [],
         "sourceRefs": [
           {
-            "id": "SR-DQ-01",
+            "id": "qeg:SR-DQ-01",
             "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
             "label": "missing artifact"
           }
@@ -127,25 +127,25 @@
     ],
     "blockers": [
       {
-        "id": "blocker-risk-001",
+        "id": "blocker-qeg:risk-001",
         "message": "High/critical risk \"Missing artifact risk\" with evidence gap",
         "riskIds": [
-          "risk-001"
+          "qeg:risk-001"
         ],
         "sourceRefs": [
           {
-            "id": "sr-risk-001",
+            "id": "qeg:sr-risk-001",
             "path": "docs/risk-analysis.md"
           }
         ]
       }
     ],
     "residualRisks": [
-      "risk-001"
+      "qeg:risk-001"
     ],
     "requiredHumanReview": [
-      "waiver-001",
-      "risk-001"
+      "qeg:waiver-001",
+      "qeg:risk-001"
     ]
   },
   "exports": [
@@ -158,6 +158,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

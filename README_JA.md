@@ -90,7 +90,8 @@ npm run record -- fixtures/positive-release-go
 ## 現在の状態
 
 - DQ-01 から DQ-17 まで実装済み。
-- 21 fixture で regression を保持。
+- 28 fixture で regression を保持。
+- Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings 0 を維持。
 - `positive-release-go` は `go / exit 0`。
 - negative fixture は原則 `disqualified / exit 2`。

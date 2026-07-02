@@ -1,0 +1,11 @@
+{
+  "fixture": "positive-gate-efficacy-record",
+  "description": "Escaped defect optional evidence links back to a historical go verdict without mutating verdict or policy",
+  "expectedVerdict": "go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 0,
+  "contractRef": "gate efficacy record: escaped defect backlinks and advisory recalibration proposal"
+}

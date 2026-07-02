@@ -20,6 +20,13 @@ next_review_due: 2026-07-02
 | `negative-revision-mismatch/` | `base_ref` / `head_ref` と artifact revision 不一致 | `disqualified` | `DQ-12` |
 | `negative-manual-oracle-gap/` | manual-scripted case の expected result / oracle / traceability 欠落 | `disqualified` | `DQ-08` または `DQ-14` |
 | `negative-optional-evidence-invalid/` | optional evidence invalid と必須 artifact の DQ を分離 | `go` / `conditional_go` / `no_go` のいずれか | none for optional-only invalid |
+| `positive-prefixed-ids/` | `<producer>:<local-id>` の namespaced ID happy path | `go` | none |
+| `positive-placement-change-retirement/` | source-backed な manual→automated 引退記録 | `go` | none |
+| `negative-direct-gate-policy/` | 外部 artifact が `gate_policy` を直接持ち込む | `disqualified` | `DQ-01` |
+| `negative-unknown-id-prefix/` | 未予約 prefix の stable ID を持つ | validation error | n/a |
+| `negative-placement-change-no-evidence/` | `evidence_refs` なしで manual case を引退 | `disqualified` | `DQ-14` |
+| `negative-placement-change-unreverted/` | replacement 自動証跡が policy 閾値を割ったのに manual case 未復帰 | `disqualified` | `DQ-14` |
+| `negative-manual-case-disappeared/` | `placement_change` なしに manual case が棚卸しから消失 | `disqualified` | `DQ-14` |
 
 ## Required Artifact Files
 
@@ -38,9 +45,13 @@ Optional artifact がある場合は `optional/` に置く。
 
 - 各 artifact は `path`, `schemaId`, `contentHash`, `revision` を QEG metadata に写像できる値を持つ。
 - Gate 関連 claim、blocker、disqualification、placement rationale は `sourceRefs` を 1 件以上持つ。
+- stable ID は `<producer>:<local-id>` を標準とし、予約 prefix は `rand` / `ctg` / `mbb` / `hate` / `qeg` とする。
+- prefix なし ID は deprecation warning 付きで受理する。未知 prefix は validation error として拒否する。
+- Gate policy 正本は QEG のみである。外部 artifact の policy 相当情報は `gatePolicyProposal` / `gatePolicyProposals[]` として明示し、verdict には直接影響させない。
 - `assumptions` は空配列を許容するが、判定に影響する assumption は expected output 側で `requiredHumanReview` または blocker にする。
 - `minimal-valid/` の `conditional_go` は accepted waiver、owner、期限、rollback / containment、follow-up を source-backed に持つ場合だけ許容する。
 - `negative-optional-evidence-invalid/` は optional parser failure を記録するが、それだけで DQ-01 にしない。
+- manual case の引退は `placement_changes[]` として記録する。`evidence_refs[]`、policy 参照、revert 条件を持たない引退、または棚卸しからの単純消失は DQ-14 として扱う。
 
 ## Acceptance Commands
 

@@ -1,0 +1,202 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "qeg:run-negative-placement-change-unreverted",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "standard",
+    "inputArtifacts": []
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-negative-placement-change-unreverted",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "standard",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "qeg:risk-login-regression",
+        "kind": "risk",
+        "title": "Login regression escapes release",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-risk-login",
+              "path": "docs/risks/login-regression.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [],
+        "priority": "P1",
+        "severity": "high",
+        "likelihood": 0.2,
+        "businessImpact": 0.8,
+        "complianceCriticality": 0.1,
+        "evidenceGap": 0,
+        "novelty": 0.2
+      },
+      {
+        "id": "hate:AETE-login-001",
+        "kind": "test",
+        "title": "Automated login regression evidence",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "hate:sr-aete-login-001",
+              "path": "hate/reports/login-aete.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [],
+        "layer": "e2e",
+        "existing": true,
+        "evidenceStrength": 0.62,
+        "recentGreenRuns": 1,
+        "coveredRiskIds": [
+          "qeg:risk-login-regression"
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "policy": {
+    "policyId": "qeg:policy-standard-retirement",
+    "policyHash": "sha256:retirement-policy",
+    "profile": "standard",
+    "effectiveDate": "2026-01-01T00:00:00.000Z",
+    "approver": "policy-approver-001",
+    "sourceRefs": [
+      {
+        "id": "qeg:sr-policy-retirement",
+        "path": "docs/policy/manual-retirement.md"
+      }
+    ],
+    "dqScope": [
+      "DQ-14"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    },
+    "placementRetirementPolicy": {
+      "minEvidenceStrength": 0.9,
+      "minConsecutiveGreen": 3,
+      "requireRiskCoverage": true,
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-policy-retirement",
+          "path": "docs/policy/manual-retirement.md"
+        }
+      ]
+    }
+  },
+  "waivers": [],
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-negative-placement-change-unreverted",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "standard",
+      "inputArtifacts": []
+    },
+    "obligations": [
+      {
+        "id": "qeg:obligation-login",
+        "requirementIds": [],
+        "riskIds": [
+          "qeg:risk-login-regression"
+        ],
+        "failureModeIds": [],
+        "changedCodeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 10,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-obligation-login",
+              "path": "placement/obligations/login.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      }
+    ],
+    "placements": [
+      {
+        "id": "qeg:placement-login-manual-original",
+        "kind": "test_placement",
+        "title": "Original manual login case placement",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-placement-login",
+              "path": "placement/original/login-manual.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [],
+        "obligationId": "qeg:obligation-login",
+        "primaryLayer": "manual-scripted",
+        "disposition": "manual-only",
+        "gateRelevance": "blocking",
+        "candidateScores": [],
+        "selectedTestIds": [
+          "mbb:CASE-login-001"
+        ]
+      }
+    ],
+    "placement_changes": [
+      {
+        "id": "qeg:placement-change-login-retirement",
+        "subject_id": "mbb:CASE-login-001",
+        "from_layer": "manual-scripted",
+        "to_layer": "automated",
+        "replacement_ids": [
+          "hate:AETE-login-001"
+        ],
+        "evidence_refs": [
+          {
+            "id": "hate:ev-login-weak",
+            "path": "hate/reports/login-aete.json",
+            "evidenceKind": "test_result",
+            "capturedAt": "2026-07-02T00:00:00.000Z"
+          }
+        ],
+        "policy_ref": "qeg:policy-standard-retirement",
+        "decided_by": "reviewer-001",
+        "decided_at": "2026-07-02T00:00:00.000Z",
+        "reversible": true,
+        "revert_condition": "replacement evidenceStrength < 0.9 or recentGreenRuns < 3 or risk coverage missing"
+      }
+    ],
+    "manual_case_inventory": {
+      "previous_subject_ids": [
+        "mbb:CASE-login-001"
+      ],
+      "current_subject_ids": [],
+      "sourceRefs": [
+        {
+          "id": "mbb:sr-manual-inventory",
+          "path": "manual-bb/manual-case-inventory.json"
+        }
+      ]
+    }
+  }
+}

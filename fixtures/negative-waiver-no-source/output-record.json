@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-waiver-no-source",
+    "runId": "qeg:run-negative-waiver-no-source",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-waiver-no-source/input.json"
@@ -16,20 +16,20 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-waiver-no-source",
+      "runId": "qeg:run-negative-waiver-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
     },
     "nodes": [
       {
-        "id": "risk-001",
+        "id": "qeg:risk-001",
         "kind": "risk",
         "title": "Missing test coverage",
         "traceability": {
           "sourceRefs": [
             {
-              "id": "sr-risk-001",
+              "id": "qeg:sr-risk-001",
               "path": "docs/risk-analysis.md"
             }
           ]
@@ -55,7 +55,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-waiver-no-source",
+      "runId": "qeg:run-negative-waiver-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -66,12 +66,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-waiver-no-source",
+      "runId": "qeg:run-negative-waiver-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-waiver-no-source/input.json"
@@ -81,26 +81,26 @@
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-15: Waiver \"waiver-001\" is not source-backed",
+      "- DQ-15: Waiver \"qeg:waiver-001\" is not source-backed",
       "Residual risks: 1",
       "Required human review: 1"
     ],
     "disqualifications": [
       {
         "code": "DQ-15",
-        "message": "Waiver \"waiver-001\" is not source-backed",
+        "message": "Waiver \"qeg:waiver-001\" is not source-backed",
         "nodeIds": [
-          "waiver-001"
+          "qeg:waiver-001"
         ],
         "sourceRefs": []
       }
     ],
     "blockers": [],
     "residualRisks": [
-      "risk-001"
+      "qeg:risk-001"
     ],
     "requiredHumanReview": [
-      "risk-001"
+      "qeg:risk-001"
     ]
   },
   "exports": [
@@ -113,6 +113,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

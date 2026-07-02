@@ -16,9 +16,9 @@ import {
   detectDQ11,
   detectDQ12,
   detectDQ13,
-  detectDQ14,
 } from "./dq/evidence.js";
 import { detectDQ15, detectDQ16, detectDQ17 } from "./dq/ipo.js";
+import { detectDQ14 } from "./dq/placement-change.js";
 
 export {
   detectDQ01,

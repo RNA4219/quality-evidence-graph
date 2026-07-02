@@ -23,6 +23,8 @@ export type PlacementLayer =
   | "manual-exploratory"
   | "spec-clarification";
 
+export type PlacementChangeLayer = PlacementLayer | "automated";
+
 export type PlacementDisposition =
   | "reuse"
   | "adapt"
@@ -43,6 +45,7 @@ export type NodeKind =
   | "test_placement"
   | "execution_evidence"
   | "gate_verdict"
+  | "escaped_defect"
   | "waiver"
   | "policy"
   | "acceptance_record";
@@ -57,6 +60,7 @@ export type EdgeKind =
   | "contradicts"
   | "requires_test"
   | "placed_at"
+  | "replaced_by"
   | "evidenced_by"
   | "waived_by"
   | "governed_by"

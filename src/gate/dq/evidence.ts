@@ -1,4 +1,4 @@
-import type { Disqualification, DisqualificationCode, QegNode, SourceRef, TestPlacementNode } from "../../types.js";
+import type { Disqualification, DisqualificationCode, SourceRef } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { getEvidencePackageText } from "../context.js";
 import { SR_DQ_09, SR_DQ_11 } from "./source-refs.js";
@@ -132,42 +132,4 @@ export function detectDQ13(input: DQDetectorInput): Disqualification | null {
     };
   }
   return null;
-}
-
-/**
- * Helper: Get test placement nodes for DQ-14 detection
- */
-function testPlacementNodes(input: DQDetectorInput): readonly TestPlacementNode[] {
-  return input.testPlacementNodes ?? input.graph.nodes.filter(
-    (node: QegNode): node is TestPlacementNode => node.kind === "test_placement"
-  );
-}
-
-/**
- * DQ-14: Manual-scripted placement without acceptable oracle
- *
- * Manual-scripted test placements must have acceptable oracle evidence.
- */
-export function detectDQ14(input: DQDetectorInput): Disqualification[] {
-  const disqualifications: Disqualification[] = [];
-
-  for (const placement of testPlacementNodes(input)) {
-    if (placement.primaryLayer !== "manual-scripted") continue;
-
-    const hasAcceptableOracle = input.evidencePackage?.manualEvidence.some(
-      (manual) => manual.oracleRefs.some((oracle) => oracle.evidenceKind === "human_review")
-    ) || placement.candidateScores.some(
-      (score) => score.sourceRefs.some((sourceRef) => sourceRef.label?.includes("oracle"))
-    );
-    if (!hasAcceptableOracle) {
-      disqualifications.push({
-        code: "DQ-14" as DisqualificationCode,
-        message: `Manual-scripted placement "${placement.id}" without acceptable oracle`,
-        nodeIds: [placement.id],
-        sourceRefs: placement.traceability.sourceRefs,
-      });
-    }
-  }
-
-  return disqualifications;
 }

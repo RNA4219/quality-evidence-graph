@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-approval-hash-mismatch",
+    "runId": "qeg:run-negative-approval-hash-mismatch",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-approval-hash-mismatch/input.json",
@@ -17,7 +17,7 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-approval-hash-mismatch",
+      "runId": "qeg:run-negative-approval-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -34,7 +34,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-approval-hash-mismatch",
+      "runId": "qeg:run-negative-approval-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -45,12 +45,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-approval-hash-mismatch",
+      "runId": "qeg:run-negative-approval-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-approval-hash-mismatch/input.json",
@@ -61,14 +61,14 @@
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-15: ApprovalEvidence \"approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\""
+      "- DQ-15: ApprovalEvidence \"qeg:approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\""
     ],
     "disqualifications": [
       {
         "code": "DQ-15",
-        "message": "ApprovalEvidence \"approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\"",
+        "message": "ApprovalEvidence \"qeg:approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\"",
         "nodeIds": [
-          "approval-001"
+          "qeg:approval-001"
         ],
         "sourceRefs": [
           {
@@ -95,14 +95,14 @@
     "evidencePackageHash": "sha256:correct-package-hash",
     "approvalEvidenceSummary": [
       {
-        "id": "approval-001",
+        "id": "qeg:approval-001",
         "approvedAt": "2026-06-03T04:00:00.000Z",
-        "policyId": "policy-ipo-controlled-001",
+        "policyId": "qeg:policy-ipo-controlled-001",
         "policyHash": "sha256:abc123",
         "evidencePackageHash": "sha256:MISMATCHED-hash"
       }
     ],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

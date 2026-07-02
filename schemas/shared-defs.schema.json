@@ -6,7 +6,8 @@
   "$defs": {
     "stableId": {
       "type": "string",
-      "minLength": 1
+      "minLength": 1,
+      "pattern": "^(?:(rand|ctg|mbb|hate|qeg):)?[^:\\s][^\\s]*$"
     },
     "isoDateTime": {
       "type": "string",
@@ -63,6 +64,18 @@
         "manual-scripted",
         "manual-exploratory",
         "spec-clarification"
+      ]
+    },
+    "placementChangeLayer": {
+      "enum": [
+        "unit",
+        "integration",
+        "system",
+        "e2e",
+        "manual-scripted",
+        "manual-exploratory",
+        "spec-clarification",
+        "automated"
       ]
     },
     "sourceRef": {

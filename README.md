@@ -42,7 +42,8 @@
 
 - controlled governance profile 実装済み。
 - DQ-01 から DQ-17 まで実装済み。
-- 21 fixture で negative / positive regression を保持。
+- 28 fixture で negative / positive regression を保持。
+- Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings は 0 を維持する方針。
 - Gate evaluator、CLI、types は facade + internal modules に分割済み。
 

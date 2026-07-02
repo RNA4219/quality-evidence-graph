@@ -1,13 +1,13 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-revision-mismatch",
+    "runId": "qeg:run-negative-revision-mismatch",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "headRef": "refs/heads/main",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-revision-mismatch/input.json",
@@ -18,7 +18,7 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-revision-mismatch",
+      "runId": "qeg:run-negative-revision-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -33,13 +33,31 @@
     }
   },
   "policy": {
-    "policyId": "policy-ipo-controlled-001",
+    "policyId": "qeg:policy-ipo-controlled-001",
     "policyHash": "sha256:abc123",
     "profile": "ipo_controlled",
     "effectiveDate": "2026-01-01T00:00:00.000Z",
     "approver": "policy-approver-001",
     "sourceRefs": [],
-    "dqScope": ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17"],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17"
+    ],
     "exitCodePolicy": {
       "go": 0,
       "conditional_go": 2,
@@ -49,44 +67,62 @@
   },
   "waivers": [],
   "evidencePackage": {
-    "id": "ep-001",
+    "id": "qeg:ep-001",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "createdBy": "creator-001",
     "inputArtifactHashes": [],
     "qegOutputs": {
       "qegBundle": {
-        "id": "qeg-001",
+        "id": "qeg:qeg-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
         "path": "output-record.json"
       },
       "testPlacementPlan": {
-        "id": "tpp-001",
+        "id": "qeg:tpp-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "placement-plan.json"
       },
       "gateVerdict": {
-        "id": "gv-001",
+        "id": "qeg:gv-001",
         "adapter": "qeg-native",
         "kind": "gate_decision",
         "path": "gate-verdict.json"
       },
       "qualityEvidenceRecord": {
-        "id": "qer-001",
+        "id": "qeg:qer-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
         "path": "output-record.json"
       }
     },
     "gatePolicy": {
-      "policyId": "policy-ipo-controlled-001",
+      "policyId": "qeg:policy-ipo-controlled-001",
       "policyHash": "sha256:abc123",
       "profile": "ipo_controlled",
       "effectiveDate": "2026-01-01T00:00:00.000Z",
       "approver": "policy-approver-001",
       "sourceRefs": [],
-      "dqScope": ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17"],
+      "dqScope": [
+        "DQ-01",
+        "DQ-02",
+        "DQ-03",
+        "DQ-04",
+        "DQ-05",
+        "DQ-06",
+        "DQ-07",
+        "DQ-08",
+        "DQ-09",
+        "DQ-10",
+        "DQ-11",
+        "DQ-12",
+        "DQ-13",
+        "DQ-14",
+        "DQ-15",
+        "DQ-16",
+        "DQ-17"
+      ],
       "exitCodePolicy": {
         "go": 0,
         "conditional_go": 2,
@@ -110,7 +146,7 @@
     },
     "sourceRefs": [
       {
-        "id": "sr-ep-001",
+        "id": "qeg:sr-ep-001",
         "path": "docs/evidence-package.md"
       }
     ],
@@ -127,7 +163,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-revision-mismatch",
+      "runId": "qeg:run-negative-revision-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []

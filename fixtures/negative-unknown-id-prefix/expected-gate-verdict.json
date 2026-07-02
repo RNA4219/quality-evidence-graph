@@ -1,0 +1,11 @@
+{
+  "fixture": "negative-unknown-id-prefix",
+  "description": "Unknown ID producer prefix is rejected during ingest validation",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 1,
+  "contractRef": "docs/spec/gate-policy.md §5"
+}

@@ -28,12 +28,14 @@ next_review_due: 2026-07-03
 
 1. `docs/spec/index.md`
 2. `docs/spec/gate-policy.md`
-3. `docs/spec/waiver-approval.md`
-4. `docs/spec/evidence-package.md`
-5. `docs/spec/retention-immutability.md`
-6. `docs/spec/acceptance.md`
-7. `docs/spec/review-2026-06-03.md`
-8. `docs/spec/gate-acceptance-2026-06-03.md`
+3. `docs/spec/node-identity-contract.md`
+4. `docs/spec/schema-migration-2026-07-02.md`
+5. `docs/spec/waiver-approval.md`
+6. `docs/spec/evidence-package.md`
+7. `docs/spec/retention-immutability.md`
+8. `docs/spec/acceptance.md`
+9. `docs/spec/review-2026-06-03.md`
+10. `docs/spec/gate-acceptance-2026-06-03.md`
 
 ## 3. 境界
 
@@ -61,10 +63,13 @@ next_review_due: 2026-07-03
 - waiver は blocker または residual risk の扱いを変更できるが、DQ を消すことはできない。
 - `ipo_controlled` では `conditional_go` を CI success として扱わず、exit code は `2` とする。
 - QEG は release decision の判断材料を生成する。人間の release approval そのものは external approval evidence として分離する。
+- Gate policy の正本は QEG のみとする。外部 artifact の policy 相当情報は proposal 扱いで、QEG policy として採用する場合は `policyHash` 照合を必須にする。
+- Graph / evidence join に使う stable ID は `<producer>:<local-id>` を標準とし、予約 prefix は `rand` / `ctg` / `mbb` / `hate` / `qeg` とする。
 
 ## 5. 実装者への固定事項
 
 - `GatePolicy`, `Waiver`, `ApprovalEvidence`, `EvidencePackage`, `ControlRoles` はこの仕様群を元に型と schema へ写像する。
+- `GatePolicy` は QEG 正本であり、`gatePolicyProposal` は verdict に直接影響させない。
 - すべての Gate 関連 reason、blocker、disqualification、waiver、approval evidence は `sourceRefs` を 1 件以上持つ。
 - `policyHash`、`contentHash`、`evidencePackageHash` は比較可能な文字列として扱い、アルゴリズムは MVP では固定しない。ただし同一内容で再計算できることを実装 acceptance にする。
 - IPO controlled release Gate は、実装、fixture、own-output validation、evidence package が揃うまで `no_go` のままとする。

@@ -1,0 +1,264 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "qeg:run-positive-gate-efficacy-record",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/positive-gate-efficacy-record/input.json",
+        "revision": "refs/heads/main"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-gate-efficacy-record",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "claim",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ]
+      },
+      {
+        "id": "qeg:escaped-defect-refund-001",
+        "kind": "escaped_defect",
+        "title": "Refund cancellation defect escaped the historical go verdict",
+        "severity": "high",
+        "discoveredAt": "2026-07-02T00:00:00.000Z",
+        "linkedVerdictRef": "qeg:gv-gate-efficacy-001",
+        "linkedPlacementPlanRef": "qeg:tpp-gate-efficacy-001",
+        "linkedEvidenceRefs": [
+          "qeg:sr-ep-gate-efficacy-001",
+          "qeg:approval-release-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-escaped-defect-refund-001",
+              "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+            }
+          ],
+          "assumptions": [
+            "Escaped defect is optional evidence and does not mutate historical verdicts."
+          ],
+          "confidence": "medium"
+        },
+        "sourceArtifactIds": [
+          "qeg:sr-escaped-defect-refund-001"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "qeg:escaped-defect-refund-001:contradicts-verdict",
+        "kind": "contradicts",
+        "from": "qeg:escaped-defect-refund-001",
+        "to": "qeg:gv-gate-efficacy-001",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-escaped-defect-refund-001",
+              "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "qeg:escaped-defect-refund-001:contradicts-placement",
+        "kind": "contradicts",
+        "from": "qeg:escaped-defect-refund-001",
+        "to": "qeg:tpp-gate-efficacy-001",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-escaped-defect-refund-001",
+              "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "qeg:escaped-defect-refund-001:evidenced-by:qeg-sr-ep-gate-efficacy-001",
+        "kind": "evidenced_by",
+        "from": "qeg:escaped-defect-refund-001",
+        "to": "qeg:sr-ep-gate-efficacy-001",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-escaped-defect-refund-001",
+              "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "medium"
+        }
+      },
+      {
+        "id": "qeg:escaped-defect-refund-001:evidenced-by:qeg-approval-release-001",
+        "kind": "evidenced_by",
+        "from": "qeg:escaped-defect-refund-001",
+        "to": "qeg:approval-release-001",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-escaped-defect-refund-001",
+              "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "medium"
+        }
+      }
+    ],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-gate-efficacy-record",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-gate-efficacy-record",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/positive-gate-efficacy-record/input.json",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "verdict": "go",
+    "reasons": [
+      "All gate conditions satisfied"
+    ],
+    "disqualifications": [],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:release-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "qeg:approval-release-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "qeg:policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
+  },
+  "gateEfficacyRecords": [
+    {
+      "verdict_ref": "qeg:gv-gate-efficacy-001",
+      "escaped_defects": [
+        {
+          "id": "qeg:escaped-defect-refund-001",
+          "title": "Refund cancellation defect escaped the historical go verdict",
+          "severity": "high",
+          "discoveredAt": "2026-07-02T00:00:00.000Z",
+          "linkedVerdictRef": "qeg:gv-gate-efficacy-001",
+          "linkedPlacementPlanRef": "qeg:tpp-gate-efficacy-001",
+          "linkedEvidenceRefs": [
+            "qeg:sr-ep-gate-efficacy-001",
+            "qeg:approval-release-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-escaped-defect-refund-001",
+              "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+            }
+          ]
+        }
+      ],
+      "evidence_used": [
+        "qeg:sr-ep-gate-efficacy-001",
+        "qeg:approval-release-001"
+      ],
+      "policy_hash_at_verdict": "sha256:abc123",
+      "analysis_notes": "Historical go verdict passed with available evidence, but escaped defect indicates policy and placement efficacy should be reviewed."
+    }
+  ],
+  "recalibrationProposals": [
+    {
+      "id": "qeg:recalibration-proposal:placement:qeg-tpp-gate-efficacy-001",
+      "scope": "placement",
+      "targetRef": "qeg:tpp-gate-efficacy-001",
+      "reason": "Escaped defects indicate degraded placement efficacy. Human approval is required before mutation.",
+      "escapedDefectRefs": [
+        "qeg:escaped-defect-refund-001"
+      ],
+      "status": "proposed",
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-escaped-defect-refund-001",
+          "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+        }
+      ]
+    },
+    {
+      "id": "qeg:recalibration-proposal:policy:qeg-policy-ipo-controlled-001",
+      "scope": "policy",
+      "targetRef": "qeg:policy-ipo-controlled-001",
+      "reason": "Escaped defects indicate degraded policy efficacy. Human approval is required before mutation.",
+      "escapedDefectRefs": [
+        "qeg:escaped-defect-refund-001"
+      ],
+      "status": "proposed",
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-escaped-defect-refund-001",
+          "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json"
+        }
+      ]
+    }
+  ]
+}

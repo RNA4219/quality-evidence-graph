@@ -90,7 +90,8 @@ Key sources of truth:
 ## Current Status
 
 - DQ-01 through DQ-17 are implemented.
-- 21 fixtures preserve regression coverage.
+- 28 fixtures preserve regression coverage.
+- The Test Placement Plan can record manual-to-automated retirement through `placement_changes[]`, including replacement evidence, policy, and revert conditions.
 - `code-to-gate` findings are kept at 0.
 - `positive-release-go` returns `go / exit 0`.
 - Negative fixtures generally return `disqualified / exit 2`.

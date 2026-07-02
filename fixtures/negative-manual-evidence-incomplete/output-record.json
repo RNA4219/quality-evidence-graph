@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-manual-evidence-incomplete",
+    "runId": "qeg:run-negative-manual-evidence-incomplete",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-manual-evidence-incomplete/input.json"
@@ -16,7 +16,7 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-manual-evidence-incomplete",
+      "runId": "qeg:run-negative-manual-evidence-incomplete",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -33,7 +33,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-manual-evidence-incomplete",
+      "runId": "qeg:run-negative-manual-evidence-incomplete",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -44,12 +44,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-manual-evidence-incomplete",
+      "runId": "qeg:run-negative-manual-evidence-incomplete",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-manual-evidence-incomplete/input.json"
@@ -59,14 +59,14 @@
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-08: Manual evidence \"manual-case-001\" incomplete"
+      "- DQ-08: Manual evidence \"qeg:manual-case-001\" incomplete"
     ],
     "disqualifications": [
       {
         "code": "DQ-08",
-        "message": "Manual evidence \"manual-case-001\" incomplete",
+        "message": "Manual evidence \"qeg:manual-case-001\" incomplete",
         "nodeIds": [
-          "manual-case-001"
+          "qeg:manual-case-001"
         ],
         "sourceRefs": []
       }
@@ -85,6 +85,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

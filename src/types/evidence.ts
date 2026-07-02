@@ -9,7 +9,7 @@ import type {
   StableId,
   WorkflowCookbookRefKind,
 } from "./primitives.js";
-import type { GatePolicy } from "./gate.js";
+import type { GatePolicy, GatePolicyProposal } from "./gate.js";
 
 export interface SourceRef {
   readonly id: StableId;
@@ -125,6 +125,7 @@ export interface EvidencePackage {
   readonly inputArtifactHashes: readonly ArtifactRef[];
   readonly qegOutputs: QegOutputRefs;
   readonly gatePolicy: GatePolicy;
+  readonly gatePolicyProposals?: readonly GatePolicyProposal[];
   readonly waivers: readonly Waiver[];
   readonly approvalEvidence: readonly ApprovalEvidence[];
   readonly manualEvidence: readonly ManualEvidenceItem[];

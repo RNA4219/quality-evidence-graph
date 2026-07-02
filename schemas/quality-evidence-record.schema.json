@@ -22,6 +22,94 @@
           "contentHash": { "type": "string" }
         }
       }
+    },
+    "auditTrail": { "type": "object" },
+    "gateEfficacyRecords": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/gateEfficacyRecord" }
+    },
+    "recalibrationProposals": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/recalibrationProposal" }
+    }
+  },
+  "$defs": {
+    "escapedDefectBacklink": {
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "severity",
+        "discoveredAt",
+        "linkedVerdictRef",
+        "linkedPlacementPlanRef",
+        "linkedEvidenceRefs",
+        "sourceRefs"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "title": { "type": "string", "minLength": 1 },
+        "severity": { "$ref": "shared-defs.schema.json#/$defs/severity" },
+        "discoveredAt": { "type": "string", "format": "date-time" },
+        "linkedVerdictRef": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "linkedPlacementPlanRef": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "linkedEvidenceRefs": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" },
+          "minItems": 1
+        }
+      }
+    },
+    "gateEfficacyRecord": {
+      "type": "object",
+      "required": [
+        "verdict_ref",
+        "escaped_defects",
+        "evidence_used",
+        "policy_hash_at_verdict",
+        "analysis_notes"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "verdict_ref": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "escaped_defects": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/escapedDefectBacklink" }
+        },
+        "evidence_used": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+        },
+        "policy_hash_at_verdict": { "type": "string", "minLength": 1 },
+        "analysis_notes": { "type": "string" }
+      }
+    },
+    "recalibrationProposal": {
+      "type": "object",
+      "required": ["id", "scope", "targetRef", "reason", "escapedDefectRefs", "status", "sourceRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "scope": { "enum": ["policy", "placement"] },
+        "targetRef": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "reason": { "type": "string", "minLength": 1 },
+        "escapedDefectRefs": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+          "minItems": 1
+        },
+        "status": { "const": "proposed" },
+        "sourceRefs": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" },
+          "minItems": 1
+        }
+      }
     }
   }
 }

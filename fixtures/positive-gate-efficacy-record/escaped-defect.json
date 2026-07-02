@@ -1,0 +1,15 @@
+{
+  "id": "qeg:escaped-defect-refund-001",
+  "title": "Refund cancellation defect escaped the historical go verdict",
+  "severity": "high",
+  "discoveredAt": "2026-07-02T00:00:00.000Z",
+  "observedImpact": "Cancellation refund path failed after a historical go verdict.",
+  "expectedBacklinks": {
+    "verdictRef": "qeg:gv-gate-efficacy-001",
+    "placementPlanRef": "qeg:tpp-gate-efficacy-001",
+    "evidenceRefs": [
+      "qeg:sr-ep-gate-efficacy-001",
+      "qeg:approval-release-001"
+    ]
+  }
+}

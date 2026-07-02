@@ -1,0 +1,88 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "qeg:run-negative-manual-case-disappeared",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "standard",
+    "inputArtifacts": []
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-negative-manual-case-disappeared",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "standard",
+      "inputArtifacts": []
+    },
+    "nodes": [],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-negative-manual-case-disappeared",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "standard",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": [],
+    "placement_changes": [],
+    "manual_case_inventory": {
+      "previous_subject_ids": [
+        "mbb:CASE-vanished-001"
+      ],
+      "current_subject_ids": [],
+      "sourceRefs": [
+        {
+          "id": "mbb:sr-manual-inventory",
+          "path": "manual-bb/manual-case-inventory.json"
+        }
+      ]
+    }
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-negative-manual-case-disappeared",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "standard",
+      "inputArtifacts": []
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-14: Manual case \"mbb:CASE-vanished-001\" disappeared without placement_change retirement record"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-14",
+        "message": "Manual case \"mbb:CASE-vanished-001\" disappeared without placement_change retirement record",
+        "nodeIds": [
+          "mbb:CASE-vanished-001"
+        ],
+        "sourceRefs": [
+          {
+            "id": "mbb:sr-manual-inventory",
+            "path": "manual-bb/manual-case-inventory.json"
+          }
+        ]
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "output-record.json"
+    }
+  ]
+}

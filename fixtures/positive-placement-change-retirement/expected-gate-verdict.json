@@ -1,0 +1,11 @@
+{
+  "fixture": "positive-placement-change-retirement",
+  "description": "Manual case retirement is accepted when the placement_change is source-backed, policy-backed, reversible, and the replacement automated evidence satisfies policy thresholds",
+  "expectedVerdict": "go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 0,
+  "contractRef": "docs/requirements.md §9 Test Placement 要件"
+}

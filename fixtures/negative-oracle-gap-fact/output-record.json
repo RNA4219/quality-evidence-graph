@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-oracle-gap-fact",
+    "runId": "qeg:run-negative-oracle-gap-fact",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-oracle-gap-fact/input.json"
@@ -16,14 +16,14 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-oracle-gap-fact",
+      "runId": "qeg:run-negative-oracle-gap-fact",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
     },
     "nodes": [
       {
-        "id": "risk-001",
+        "id": "qeg:risk-001",
         "kind": "risk",
         "title": "P0 Risk with Oracle Gap",
         "priority": "P0",
@@ -36,7 +36,7 @@
         "traceability": {
           "sourceRefs": [
             {
-              "id": "sr-risk-001",
+              "id": "qeg:sr-risk-001",
               "path": "docs/risk-analysis.md"
             }
           ],
@@ -46,7 +46,7 @@
           "confidence": "low"
         },
         "sourceArtifactIds": [
-          "artifact-001"
+          "qeg:artifact-001"
         ]
       }
     ],
@@ -61,7 +61,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-oracle-gap-fact",
+      "runId": "qeg:run-negative-oracle-gap-fact",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -72,12 +72,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-oracle-gap-fact",
+      "runId": "qeg:run-negative-oracle-gap-fact",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-oracle-gap-fact/input.json"
@@ -97,11 +97,11 @@
         "code": "DQ-04",
         "message": "P0/P1 risk \"P0 Risk with Oracle Gap\" with oracle gap treated as fact",
         "nodeIds": [
-          "risk-001"
+          "qeg:risk-001"
         ],
         "sourceRefs": [
           {
-            "id": "sr-risk-001",
+            "id": "qeg:sr-risk-001",
             "path": "docs/risk-analysis.md"
           }
         ]
@@ -109,14 +109,14 @@
     ],
     "blockers": [
       {
-        "id": "blocker-risk-001",
+        "id": "blocker-qeg:risk-001",
         "message": "High/critical risk \"P0 Risk with Oracle Gap\" with evidence gap",
         "riskIds": [
-          "risk-001"
+          "qeg:risk-001"
         ],
         "sourceRefs": [
           {
-            "id": "sr-risk-001",
+            "id": "qeg:sr-risk-001",
             "path": "docs/risk-analysis.md"
           }
         ]
@@ -124,7 +124,7 @@
     ],
     "residualRisks": [],
     "requiredHumanReview": [
-      "risk-001"
+      "qeg:risk-001"
     ]
   },
   "exports": [
@@ -137,6 +137,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

@@ -1,7 +1,7 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-required-connector-contract",
+    "runId": "qeg:run-negative-required-connector-contract",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "requiredConnectorStatus": {
@@ -9,7 +9,7 @@
     },
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-required-connector-contract/input.json"
@@ -19,7 +19,7 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-required-connector-contract",
+      "runId": "qeg:run-negative-required-connector-contract",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -36,7 +36,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-required-connector-contract",
+      "runId": "qeg:run-negative-required-connector-contract",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -47,7 +47,7 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-required-connector-contract",
+      "runId": "qeg:run-negative-required-connector-contract",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "requiredConnectorStatus": {
@@ -55,7 +55,7 @@
       },
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-required-connector-contract/input.json"
@@ -97,6 +97,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

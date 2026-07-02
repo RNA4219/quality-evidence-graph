@@ -2,11 +2,14 @@ import { readFile } from "fs/promises";
 import { join, resolve } from "path";
 import { CliError } from "./errors.js";
 import { evaluateGate } from "../gate.js";
+import { validateIngestContract } from "./ingest-contract.js";
 import type {
   Disqualification,
   EvidencePackage,
   GatePolicy,
   GateResult,
+  OptionalEvidence,
+  ParserFailure,
   QualityEvidenceGraph,
   QegMetadata,
   TestPlacementPlan,
@@ -33,6 +36,7 @@ export interface FixtureInput {
   waivers?: Waiver[];
   evidencePackage?: EvidencePackage;
   placementPlan?: TestPlacementPlan;
+  optionalEvidence?: OptionalEvidence;
 }
 
 export interface EvaluatedFixture {
@@ -43,12 +47,40 @@ export interface EvaluatedFixture {
   waivers: Waiver[];
   evidencePackage: EvidencePackage | undefined;
   placementPlan: TestPlacementPlan | undefined;
+  optionalEvidence: OptionalEvidence | undefined;
   gateResult: GateResult;
 }
 
 async function readJsonFile<T>(path: string): Promise<T> {
   const content = await readFile(path, "utf-8");
   return JSON.parse(content) as T;
+}
+
+function withParserFailures(input: FixtureInput, parserFailures: readonly ParserFailure[]): FixtureInput {
+  if (parserFailures.length === 0) return input;
+
+  return {
+    ...input,
+    graph: {
+      ...input.graph,
+      completeness: {
+        ...input.graph.completeness,
+        parserFailures: [...input.graph.completeness.parserFailures, ...parserFailures],
+      },
+    },
+  };
+}
+
+function emitDeprecationWarnings(warnings: readonly string[]): void {
+  if (warnings.length === 0) return;
+
+  const preview = warnings.slice(0, 5);
+  for (const warning of preview) {
+    console.warn(`Warning: ${warning}`);
+  }
+  if (warnings.length > preview.length) {
+    console.warn(`Warning: ${warnings.length - preview.length} additional prefixless IDs accepted during deprecation period`);
+  }
 }
 
 export async function readExpectedVerdict(fixtureDir: string): Promise<ExpectedGateVerdict> {
@@ -63,8 +95,14 @@ export async function readExpectedVerdict(fixtureDir: string): Promise<ExpectedG
 export async function readFixtureInput(fixtureDir: string): Promise<FixtureInput> {
   const inputPath = join(fixtureDir, "gate-input.json");
   try {
-    return await readJsonFile<FixtureInput>(inputPath);
+    const rawInput = await readJsonFile<FixtureInput>(inputPath);
+    const ingestValidation = validateIngestContract(rawInput);
+    emitDeprecationWarnings(ingestValidation.warnings);
+    return withParserFailures(rawInput, ingestValidation.parserFailures);
   } catch (error) {
+    if (error instanceof CliError) {
+      throw error;
+    }
     throw new CliError(
       `gate-input.json not found or invalid - IPO controlled requires real input artifacts\nInput file: ${inputPath}\nError: ${error}`,
       error instanceof Error ? error : undefined
@@ -87,6 +125,7 @@ export async function evaluateFixture(rawFixtureDir: string): Promise<EvaluatedF
     waivers,
     evidencePackage: input.evidencePackage,
     placementPlan: input.placementPlan,
+    optionalEvidence: input.optionalEvidence,
     gateResult: evaluateGate({
       metadata: input.metadata,
       graph: input.graph,

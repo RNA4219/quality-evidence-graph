@@ -14,6 +14,13 @@ export interface ExitCodePolicy {
   readonly disqualified: 2;
 }
 
+export interface PlacementRetirementPolicy {
+  readonly minEvidenceStrength: number;
+  readonly minConsecutiveGreen: number;
+  readonly requireRiskCoverage: boolean;
+  readonly sourceRefs: readonly SourceRef[];
+}
+
 export interface GatePolicy {
   readonly policyId: string;
   readonly policyHash: string;
@@ -23,6 +30,23 @@ export interface GatePolicy {
   readonly sourceRefs: readonly SourceRef[];
   readonly dqScope: readonly DisqualificationCode[];
   readonly exitCodePolicy: ExitCodePolicy;
+  readonly placementRetirementPolicy?: PlacementRetirementPolicy;
+}
+
+export interface RevertConditionStatus {
+  readonly placementChangeId: StableId;
+  readonly condition: string;
+  readonly triggered: boolean;
+  readonly sourceRefs: readonly SourceRef[];
+}
+
+export interface GatePolicyProposal {
+  readonly proposalId: StableId;
+  readonly producer: "rand" | "ctg" | "mbb" | "hate";
+  readonly proposedPolicy: Partial<GatePolicy>;
+  readonly rationale: string;
+  readonly sourceRefs: readonly SourceRef[];
+  readonly policyHash?: string;
 }
 
 export interface Disqualification {

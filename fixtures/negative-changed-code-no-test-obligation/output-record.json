@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-changed-code-no-test-obligation",
+    "runId": "qeg:run-negative-changed-code-no-test-obligation",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-changed-code-no-test-obligation/input.json"
@@ -16,14 +16,14 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-changed-code-no-test-obligation",
+      "runId": "qeg:run-negative-changed-code-no-test-obligation",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
     },
     "nodes": [
       {
-        "id": "changed-code-001",
+        "id": "qeg:changed-code-001",
         "kind": "changed_code",
         "title": "Changed code in src/auth.ts",
         "path": "src/auth.ts",
@@ -34,7 +34,7 @@
         ],
         "hunks": [
           {
-            "id": "hunk-001",
+            "id": "qeg:hunk-001",
             "path": "src/auth.ts",
             "startLine": 10,
             "endLine": 25
@@ -47,7 +47,7 @@
           "confidence": "high"
         },
         "sourceArtifactIds": [
-          "artifact-001"
+          "qeg:artifact-001"
         ]
       }
     ],
@@ -62,7 +62,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-changed-code-no-test-obligation",
+      "runId": "qeg:run-negative-changed-code-no-test-obligation",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -73,12 +73,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-changed-code-no-test-obligation",
+      "runId": "qeg:run-negative-changed-code-no-test-obligation",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-changed-code-no-test-obligation/input.json"
@@ -95,7 +95,7 @@
         "code": "DQ-05",
         "message": "Changed code \"src/auth.ts\" without test obligation or waiver",
         "nodeIds": [
-          "changed-code-001"
+          "qeg:changed-code-001"
         ],
         "sourceRefs": []
       }
@@ -114,6 +114,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

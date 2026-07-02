@@ -1,0 +1,16 @@
+{
+  "fixture": "negative-direct-gate-policy",
+  "description": "External artifact carries gate_policy directly - DQ-01",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-01"
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §5",
+  "expectedDisqualificationMode": "includes"
+}

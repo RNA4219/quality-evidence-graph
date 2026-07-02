@@ -4,6 +4,7 @@ import type {
   GateRelevance,
   GateVerdict,
   NodeKind,
+  PlacementChangeLayer,
   PlacementDisposition,
   PlacementLayer,
   Priority,
@@ -77,6 +78,10 @@ export interface TestNode extends QegNodeBase {
   readonly layer: PlacementLayer;
   readonly command?: string;
   readonly existing: boolean;
+  readonly evidenceStrength?: number;
+  readonly recentGreenRuns?: number;
+  readonly coveredRiskIds?: readonly StableId[];
+  readonly deleted?: boolean;
 }
 
 export interface TestPlacementNode extends QegNodeBase {
@@ -102,6 +107,15 @@ export interface GateVerdictNode extends QegNodeBase {
   readonly disqualifications: readonly Disqualification[];
   readonly blockers: readonly GateBlocker[];
   readonly residualRisks: readonly StableId[];
+}
+
+export interface EscapedDefectNode extends QegNodeBase {
+  readonly kind: "escaped_defect";
+  readonly severity: Severity;
+  readonly discoveredAt: string;
+  readonly linkedVerdictRef: StableId;
+  readonly linkedPlacementPlanRef: StableId;
+  readonly linkedEvidenceRefs: readonly StableId[];
 }
 
 export interface WaiverNode extends QegNodeBase {
@@ -138,6 +152,7 @@ export type QegNode =
   | TestPlacementNode
   | ExecutionEvidenceNode
   | GateVerdictNode
+  | EscapedDefectNode
   | WaiverNode
   | PolicyNode
   | AcceptanceRecordNode;
@@ -188,10 +203,32 @@ export interface TestObligation {
   readonly traceability: Traceability;
 }
 
+export interface PlacementChangeRecord {
+  readonly id: StableId;
+  readonly subject_id: StableId;
+  readonly from_layer: PlacementChangeLayer;
+  readonly to_layer: PlacementChangeLayer;
+  readonly replacement_ids: readonly StableId[];
+  readonly evidence_refs: readonly EvidenceRef[];
+  readonly policy_ref: StableId;
+  readonly decided_by: string;
+  readonly decided_at: string;
+  readonly reversible: true;
+  readonly revert_condition: string;
+}
+
+export interface ManualCaseInventory {
+  readonly previous_subject_ids: readonly StableId[];
+  readonly current_subject_ids: readonly StableId[];
+  readonly sourceRefs: readonly SourceRef[];
+}
+
 export interface TestPlacementPlan {
   readonly metadata: QegMetadata;
   readonly obligations: readonly TestObligation[];
   readonly placements: readonly TestPlacementNode[];
+  readonly placement_changes?: readonly PlacementChangeRecord[];
+  readonly manual_case_inventory?: ManualCaseInventory;
 }
 
 export interface QualityEvidenceGraph {

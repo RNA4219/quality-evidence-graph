@@ -1,0 +1,132 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "qeg:run-positive-release-go",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/positive-release-go/input.json",
+        "revision": "refs/heads/main"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "claim",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [
+        {
+          "path": "gate-input.json.externalArtifacts.rand_requirements_packet.gate_policy",
+          "reason": "External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only",
+          "sourceRefs": [
+            {
+              "id": "qeg:source-ingest-contract",
+              "path": "docs/spec/node-identity-contract.md",
+              "label": "gate-input.json.externalArtifacts.rand_requirements_packet.gate_policy"
+            }
+          ]
+        }
+      ],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "fixtures/positive-release-go/input.json",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-01: Parser failure: External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-01",
+        "message": "Parser failure: External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only",
+        "nodeIds": [],
+        "sourceRefs": [
+          {
+            "id": "qeg:source-ingest-contract",
+            "path": "docs/spec/node-identity-contract.md",
+            "label": "gate-input.json.externalArtifacts.rand_requirements_packet.gate_policy"
+          }
+        ]
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": []
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:release-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "qeg:approval-release-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "qeg:policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
+  }
+}

@@ -40,6 +40,10 @@
       }
     },
     "gatePolicy": { "$ref": "gate-policy.schema.json" },
+    "gatePolicyProposals": {
+      "type": "array",
+      "items": { "$ref": "gate-policy.schema.json#/$defs/gatePolicyProposal" }
+    },
     "waivers": {
       "type": "array",
       "items": { "$ref": "waiver.schema.json" }

@@ -14,6 +14,13 @@
     "placements": {
       "type": "array",
       "items": { "$ref": "#/$defs/placement" }
+    },
+    "placement_changes": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/placement_change" }
+    },
+    "manual_case_inventory": {
+      "$ref": "#/$defs/manual_case_inventory"
     }
   },
   "$defs": {
@@ -71,6 +78,63 @@
         "gateRelevance": { "enum": ["informational", "advisory", "blocking"] },
         "candidateScores": { "type": "array", "items": { "type": "object" } },
         "selectedTestIds": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "placement_change": {
+      "type": "object",
+      "required": [
+        "id",
+        "subject_id",
+        "from_layer",
+        "to_layer",
+        "replacement_ids",
+        "evidence_refs",
+        "policy_ref",
+        "decided_by",
+        "decided_at",
+        "reversible",
+        "revert_condition"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "subject_id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "from_layer": { "$ref": "shared-defs.schema.json#/$defs/placementChangeLayer" },
+        "to_layer": { "$ref": "shared-defs.schema.json#/$defs/placementChangeLayer" },
+        "replacement_ids": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+        },
+        "evidence_refs": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "$ref": "shared-defs.schema.json#/$defs/evidenceRef" }
+        },
+        "policy_ref": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "decided_by": { "type": "string", "minLength": 1 },
+        "decided_at": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "reversible": { "const": true },
+        "revert_condition": { "type": "string", "minLength": 1 }
+      }
+    },
+    "manual_case_inventory": {
+      "type": "object",
+      "required": ["previous_subject_ids", "current_subject_ids", "sourceRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "previous_subject_ids": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+        },
+        "current_subject_ids": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+        },
+        "sourceRefs": {
+          "type": "array",
+          "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" }
+        }
       }
     }
   }

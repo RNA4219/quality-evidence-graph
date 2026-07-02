@@ -1,12 +1,12 @@
 {
   "metadata": {
     "qegVersion": "0.1",
-    "runId": "run-negative-evidence-hash-mismatch",
+    "runId": "qeg:run-negative-evidence-hash-mismatch",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "inputArtifacts": [
       {
-        "id": "artifact-001",
+        "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-evidence-hash-mismatch/input.json",
@@ -17,7 +17,7 @@
   "graph": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-evidence-hash-mismatch",
+      "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -34,7 +34,7 @@
   "placementPlan": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-evidence-hash-mismatch",
+      "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": []
@@ -45,12 +45,12 @@
   "gate": {
     "metadata": {
       "qegVersion": "0.1",
-      "runId": "run-negative-evidence-hash-mismatch",
+      "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
       "inputArtifacts": [
         {
-          "id": "artifact-001",
+          "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-evidence-hash-mismatch/input.json",
@@ -61,14 +61,14 @@
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-06: Evidence hash mismatch for artifact \"artifact-001\""
+      "- DQ-06: Evidence hash mismatch for artifact \"qeg:artifact-001\""
     ],
     "disqualifications": [
       {
         "code": "DQ-06",
-        "message": "Evidence hash mismatch for artifact \"artifact-001\"",
+        "message": "Evidence hash mismatch for artifact \"qeg:artifact-001\"",
         "nodeIds": [
-          "artifact-001"
+          "qeg:artifact-001"
         ],
         "sourceRefs": []
       }
@@ -87,6 +87,6 @@
     "evidencePackageHash": "sha256:ep-hash-001",
     "approvalEvidenceSummary": [],
     "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "policy-ipo-controlled-001"
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
   }
 }

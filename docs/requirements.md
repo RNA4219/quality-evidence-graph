@@ -52,6 +52,8 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 | P-11 | controlled source of truth | 要件正本と Gate policy は Git 管理または同等の監査可能な版管理に置く |
 | P-12 | separation of duties | 生成者、レビュー者、承認者、例外承認者を同一人物前提にしない |
 | P-13 | evidence immutability | release 判定に使った証跡は後から silent overwrite できない |
+| P-14 | QEG policy authority | Gate policy の正本は QEG のみとし、外部 artifact の policy 相当情報は proposal として扱う |
+| P-15 | namespaced identity | cross-repo join に使う ID は `<producer>:<local-id>` を標準とする |
 
 ## 4. スコープ
 
@@ -119,15 +121,17 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 
 | Artifact | 必須度 | 期待フィールド | QEG での扱い |
 |---|---|---|---|
-| `requirements_packet` | 必須 | requirements, kpi, acceptance, risks, confidence, downstream_hooks, gate_policy | requirement / acceptance_criteria / risk の初期 source |
+| `requirements_packet` | 必須 | requirements, kpi, acceptance, risks, confidence, downstream_hooks, gatePolicyProposal | requirement / acceptance_criteria / risk の初期 source。policy proposal は QEG policy 正本ではない |
 | `requirements_audit_packet` | 必須 | requirements, testability, implementation_alignment, issues, suggested_action, gate_verdict, gate_summary, source_refs, assumptions | requirement readiness と oracle gap の source |
 
 受入条件:
 
 - `requirement_id` は stable ID の seed として使える。
+- `requirement_id` は ingest 時に `rand:<local-id>` へ正規化する。prefix なしは互換期間中 warning 付きで受理する。
 - `confidence`、`source_refs`、`assumptions` が欠ける場合は unsupported claim 候補として扱う。
 - `gate_verdict=no_go` の requirement は QEG の Gate で少なくとも blocker 候補になる。
 - `requirements_packet` と `requirements_audit_packet` の同一 requirement が矛盾する場合は、audit 側を readiness 判定の優先 source とし、packet 側の情報は requirement 内容の source として保持する。
+- `requirements_packet` が `gate_policy` または `gatePolicy` を直接持つ場合は DQ または validation error として拒否する。`gatePolicyProposal` として明示された場合のみ受理し、verdict には直接影響させない。
 
 ### 7.2 code-to-gate adapter
 
@@ -201,10 +205,12 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 | G-07 | unsupported claim を隔離できる | Gate に関係する unsupported claim は DQ-03、非 Gate 関連は completeness 低下として扱う |
 | G-08 | graph は部分構築できる | parser failure があっても失敗内容を completeness に保持し、成功 artifact と誤認させない |
 | G-09 | deterministic field を区別する | stable ID / placement / verdict は deterministic とし、`runId` / `createdAt` / output path は run 固有値として扱う |
+| G-10 | producer namespace を持つ | graph node / edge / obligation / evidence join ID は `<producer>:<local-id>` 形式を標準とし、予約 prefix は `rand` / `ctg` / `mbb` / `hate` / `qeg` とする |
 
 traceability の受入条件:
 
 - Gate 関連 node / edge / placement / disqualification / blocker は `sourceRefs` を 1 件以上持つ。
+- prefix なし ID は deprecation warning 付きで受理するが、未知 prefix は validation error にする。
 - `assumptions` は空配列でもよいが、判定に影響する assumption は requiredHumanReview または blocker へ昇格する。
 - `confidence=low` の claim は、単独では blocking risk の反証 evidence にできない。
 
@@ -221,6 +227,11 @@ traceability の受入条件:
 | T-07 | blocking obligation を表現できる | 必要な oracle や環境が欠ける場合、placement disposition を `blocked` にできる |
 | T-08 | manual coverage dimension を保持する | manual 由来の obligation は flow / state / rule / data / role / regression のいずれかへ分類できる |
 | T-09 | oracle type を区別する | specified / derived / implicit / human の oracle 種別を rationale または traceability に残せる |
+| T-10 | manual から automated への re-placement を記録できる | `placement_changes[]` は `subject_id`, `from_layer`, `to_layer`, `replacement_ids[]`, `evidence_refs[]`, `policy_ref`, `decided_by`, `decided_at`, `reversible=true`, `revert_condition` を持つ |
+| T-11 | manual case の引退 criteria を policy として扱う | 引退可否のしきい値は `GatePolicy.placementRetirementPolicy` に置き、QEG は `evidenceStrength`, 直近 green 回数, risk coverage を評価する |
+| T-12 | 引退後も risk coverage を逆引きできる | 引退済み manual case の risk は `replacement_ids[]` の自動 test node から `coveredRiskIds` と `replaced_by` edge で automated coverage として辿れる |
+| T-13 | 引退は可逆イベントとして扱う | replacement test の削除、`evidenceStrength` 低下、green 回数不足、risk coverage 欠落が起き、manual case が復帰していなければ revert 候補として DQ-14 にする |
+| T-14 | manual case の単純消失を検出する | `manual_case_inventory.previous_subject_ids` から消えた case が `current_subject_ids` にも `placement_changes[].subject_id` にも無い場合、無断消失として DQ-14 にする |
 
 placement score は MVP では次の入力を使う。
 
@@ -236,6 +247,8 @@ placement score は MVP では次の入力を使う。
 MVP では score の重みを policy として外出ししなくてよい。既定値を固定し、`profile` は Gate threshold の切り替えにだけ使う。
 
 manual-scripted に配置するには specified または derived oracle を原則必須にする。implicit oracle は補助 evidence に限定し、human oracle は reviewer または requiredHumanReview を必要とする。
+
+manual case の引退は waiver ではなく placement の変更として記録する。引退は risk node の削除を伴わず、risk は automated layer の replacement test によりカバー中として辿れる必要がある。引退 criteria の値は policy 側に固定し、QEG は policy を読んで判定する。waiver は例外承認、placement_change はテスト配置の変更履歴であり、互いに代替しない。
 
 ## 10. Gate 要件
 
@@ -253,6 +266,7 @@ manual-scripted に配置するには specified または derived oracle を原�
 | V-10 | conditional_go の責務を固定する | valid waiver、owner、期限、rollback / containment、follow-up のいずれかを source-backed に持つ |
 | V-11 | IPO profile を持つ | `ipo_controlled` profile では conditional_go を CI success として扱わず、waiver / human review / approval evidence を必須にする |
 | V-12 | Gate policy を版管理する | Gate threshold、profile、DQ 有効範囲、exit code policy は policyId / policyHash / sourceRefs を持つ |
+| V-13 | QEG policy 正本を一元化する | 外部 policy は proposal としてだけ受理し、採用時は QEG policyHash と approval evidence policyHash を照合する |
 
 verdict の既定:
 

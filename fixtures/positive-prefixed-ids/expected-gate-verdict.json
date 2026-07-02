@@ -1,0 +1,11 @@
+{
+  "fixture": "positive-prefixed-ids",
+  "description": "Namespaced stable IDs positive fixture",
+  "expectedVerdict": "go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 0,
+  "contractRef": "docs/spec/gate-policy.md §5"
+}

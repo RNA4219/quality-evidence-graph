@@ -11,6 +11,8 @@ next_review_due: 2026-07-03
 
 この文書は `ipo_controlled` profile の Gate policy を固定する。実装時は TypeScript 型、JSON Schema、fixture へ写像する。
 
+Gate policy の正本は QEG の `policy` と `evidencePackage.gatePolicy` のみである。RanD / code-to-gate / manual-bb-test-harness / HATE など外部 producer から渡される policy 相当情報は proposal として扱い、verdict には直接影響させない。
+
 ## 1. GatePolicy contract
 
 | Field | Required | Type | Rule |
@@ -34,6 +36,19 @@ next_review_due: 2026-07-03
 | `disqualified` | 2 |
 
 処理エラー、parse 不能、schema 読込失敗、出力書込失敗は verdict ではなく command failure とし、exit code `1` にする。
+
+## 1.1 外部 policy proposal
+
+外部 artifact が `gate_policy` または `gatePolicy` を直接持ち込むことは禁止する。受理できるのは `gatePolicyProposal` または `gatePolicyProposals[]` として明示された候補だけである。
+
+proposal 採用時の必須条件:
+
+- proposal は source-backed である。
+- QEG 側で採用後の `policy.policyHash` を再計算または固定する。
+- `evidencePackage.gatePolicy.policyHash` と `policy.policyHash` が一致する。
+- `approvalEvidence[].policyHash` と `policy.policyHash` が一致する。
+
+不一致または source-backed でない採用は DQ-15 とする。直接持ち込まれた `gate_policy` / `gatePolicy` は DQ-01 または validation error として fail closed にする。
 
 ## 2. Verdict 優先順位
 

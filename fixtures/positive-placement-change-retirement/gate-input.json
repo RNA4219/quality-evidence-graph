@@ -1,0 +1,340 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "qeg:run-positive-placement-change-retirement",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": []
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-placement-change-retirement",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "qeg:risk-login-regression",
+        "kind": "risk",
+        "title": "Login regression escapes release",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-risk-login",
+              "path": "docs/risks/login-regression.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [],
+        "priority": "P1",
+        "severity": "high",
+        "likelihood": 0.2,
+        "businessImpact": 0.8,
+        "complianceCriticality": 0.1,
+        "evidenceGap": 0,
+        "novelty": 0.2
+      },
+      {
+        "id": "hate:AETE-login-001",
+        "kind": "test",
+        "title": "Automated login regression evidence",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "hate:sr-aete-login-001",
+              "path": "hate/reports/login-aete.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [],
+        "layer": "e2e",
+        "command": "npm run test:e2e -- login",
+        "existing": true,
+        "evidenceStrength": 0.93,
+        "recentGreenRuns": 5,
+        "coveredRiskIds": [
+          "qeg:risk-login-regression"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "qeg:edge-risk-login-replaced-by-aete",
+        "kind": "replaced_by",
+        "from": "mbb:CASE-login-001",
+        "to": "hate:AETE-login-001",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-placement-change-login",
+              "path": "placement/changes/login-retirement.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      }
+    ],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "policy": {
+    "policyId": "qeg:policy-ipo-controlled-001",
+    "policyHash": "sha256:abc123",
+    "profile": "ipo_controlled",
+    "effectiveDate": "2026-01-01T00:00:00.000Z",
+    "approver": "policy-approver-001",
+    "sourceRefs": [
+      {
+        "id": "qeg:sr-policy-retirement",
+        "path": "docs/policy/manual-retirement.md"
+      }
+    ],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    },
+    "placementRetirementPolicy": {
+      "minEvidenceStrength": 0.9,
+      "minConsecutiveGreen": 3,
+      "requireRiskCoverage": true,
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-policy-retirement",
+          "path": "docs/policy/manual-retirement.md"
+        }
+      ]
+    }
+  },
+  "waivers": [],
+  "evidencePackage": {
+    "id": "qeg:ep-placement-change-retirement",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "createdBy": "creator-001",
+    "inputArtifactHashes": [],
+    "qegOutputs": {
+      "qegBundle": {
+        "id": "qeg:qeg-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "quality_evidence_record",
+        "path": "output-record.json"
+      },
+      "testPlacementPlan": {
+        "id": "qeg:tpp-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "placement-plan.json"
+      },
+      "gateVerdict": {
+        "id": "qeg:gv-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "gate_decision",
+        "path": "gate-verdict.json"
+      },
+      "qualityEvidenceRecord": {
+        "id": "qeg:qer-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "quality_evidence_record",
+        "path": "output-record.json"
+      }
+    },
+    "gatePolicy": {
+      "policyId": "qeg:policy-ipo-controlled-001",
+      "policyHash": "sha256:abc123",
+      "profile": "ipo_controlled",
+      "effectiveDate": "2026-01-01T00:00:00.000Z",
+      "approver": "policy-approver-001",
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-policy-retirement",
+          "path": "docs/policy/manual-retirement.md"
+        }
+      ],
+      "dqScope": [
+        "DQ-01",
+        "DQ-02",
+        "DQ-03",
+        "DQ-04",
+        "DQ-05",
+        "DQ-06",
+        "DQ-07",
+        "DQ-08",
+        "DQ-09",
+        "DQ-10",
+        "DQ-11",
+        "DQ-12",
+        "DQ-13",
+        "DQ-14",
+        "DQ-15",
+        "DQ-16",
+        "DQ-17"
+      ],
+      "exitCodePolicy": {
+        "go": 0,
+        "conditional_go": 2,
+        "no_go": 2,
+        "disqualified": 2
+      }
+    },
+    "waivers": [],
+    "approvalEvidence": [],
+    "manualEvidence": [],
+    "retention": {
+      "retentionPeriod": "7 years",
+      "retentionOwner": "retention-owner-001",
+      "storageLocation": "immutable-storage",
+      "contentHash": "sha256:retention-hash",
+      "capturedAt": "2026-07-02T00:00:00.000Z",
+      "tamperEvidence": "sha256:tamper-evidence",
+      "reverificationMethod": "hash verification",
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-retention",
+          "path": "docs/retention-policy.md"
+        }
+      ],
+      "storageClassification": "immutable"
+    },
+    "sourceRefs": [
+      {
+        "id": "qeg:sr-ep-placement-change-retirement",
+        "path": "docs/evidence-package.md"
+      }
+    ],
+    "phase": "implementation_preparation",
+    "evidencePackageHash": "sha256:placement-change-retirement",
+    "controlRoles": {
+      "producer": "producer-001",
+      "reviewer": "reviewer-001",
+      "approver": "approver-001",
+      "waiverApprover": "waiver-approver-001",
+      "releaseOwner": "release-owner-001"
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-placement-change-retirement",
+      "createdAt": "2026-07-02T00:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [
+      {
+        "id": "qeg:obligation-login",
+        "requirementIds": [],
+        "riskIds": [
+          "qeg:risk-login-regression"
+        ],
+        "failureModeIds": [],
+        "changedCodeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 10,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-obligation-login",
+              "path": "placement/obligations/login.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      }
+    ],
+    "placements": [
+      {
+        "id": "qeg:placement-login-manual-original",
+        "kind": "test_placement",
+        "title": "Original manual login case placement",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-placement-login",
+              "path": "placement/original/login-manual.json"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [],
+        "obligationId": "qeg:obligation-login",
+        "primaryLayer": "manual-scripted",
+        "disposition": "manual-only",
+        "gateRelevance": "blocking",
+        "candidateScores": [],
+        "selectedTestIds": [
+          "mbb:CASE-login-001"
+        ]
+      }
+    ],
+    "placement_changes": [
+      {
+        "id": "qeg:placement-change-login-retirement",
+        "subject_id": "mbb:CASE-login-001",
+        "from_layer": "manual-scripted",
+        "to_layer": "automated",
+        "replacement_ids": [
+          "hate:AETE-login-001"
+        ],
+        "evidence_refs": [
+          {
+            "id": "hate:ev-login-green",
+            "path": "hate/reports/login-aete.json",
+            "evidenceKind": "test_result",
+            "capturedAt": "2026-07-02T00:00:00.000Z"
+          }
+        ],
+        "policy_ref": "qeg:policy-ipo-controlled-001",
+        "decided_by": "reviewer-001",
+        "decided_at": "2026-07-02T00:00:00.000Z",
+        "reversible": true,
+        "revert_condition": "replacement evidenceStrength < 0.9 or recentGreenRuns < 3 or risk coverage missing"
+      }
+    ],
+    "manual_case_inventory": {
+      "previous_subject_ids": [
+        "mbb:CASE-login-001"
+      ],
+      "current_subject_ids": [],
+      "sourceRefs": [
+        {
+          "id": "mbb:sr-manual-inventory",
+          "path": "manual-bb/manual-case-inventory.json"
+        }
+      ]
+    }
+  }
+}
