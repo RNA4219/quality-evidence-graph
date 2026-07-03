@@ -68,6 +68,7 @@ GitHub Actions の標準 workflow は `.github/workflows/ci.yml` とする。
 - 実運用 repo では `QEG_REPORT_TARGETS` を実際の QEG target path に差し替える
 - manual demo では Actions の `CI` workflow を `qeg_report_targets=fixtures/negative-approval-missing` で実行し、赤 job でも report artifact が保存されることを確認する
 - `.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存する
+- `QEG cumulative report` step は QEG の exit code を step output に退避して成功終了し、GitHub の汎用 `Process completed with exit code ...` 表示を避ける
 - 最後の `Final CI verdict` step だけが各 step outcome を集約して job を失敗させる
 
 ### 5. Release dry-run

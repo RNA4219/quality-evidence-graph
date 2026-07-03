@@ -61,16 +61,22 @@ jobs:
       - name: QEG cumulative report
         id: qeg_report
         if: always()
-        continue-on-error: true
         run: |
           mkdir -p .qeg
+          report_exit=0
           if [ -f dist/cli.js ]; then
+            set +e
             npm run report -- --json --out .qeg/qeg-ci-report.json $QEG_REPORT_TARGETS
+            report_exit=$?
+            set -e
           else
             node -e "const fs=require('fs'); const report={reportVersion:'qeg-ci-report-v1',generatedAt:new Date().toISOString(),summary:{totalTargets:1,passed:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:'dist/cli.js',status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:'dist/cli.js not found; build failed before QEG report could run'}]}; fs.writeFileSync('.qeg/qeg-ci-report.json', JSON.stringify(report,null,2)+'\n');"
             cat .qeg/qeg-ci-report.json
-            exit 1
+            report_exit=1
           fi
+          echo "$report_exit" > .qeg/qeg-report-exit-code.txt
+          echo "exit_code=$report_exit" >> "$GITHUB_OUTPUT"
+          exit 0
 
       - name: Append QEG report summary
         if: always()
@@ -141,6 +147,7 @@ jobs:
           STEP_JSON_PARSE: ${{ steps.json_parse.outcome }}
           STEP_PACK: ${{ steps.pack.outcome }}
           STEP_QEG_REPORT: ${{ steps.qeg_report.outcome }}
+          QEG_REPORT_EXIT_CODE: ${{ steps.qeg_report.outputs.exit_code }}
         with:
           script: |
             const checks = [
@@ -149,16 +156,22 @@ jobs:
               ['build', process.env.STEP_BUILD],
               ['json_parse', process.env.STEP_JSON_PARSE],
               ['pack', process.env.STEP_PACK],
-              ['qeg_report', process.env.STEP_QEG_REPORT],
             ];
+            const qegReportExitCode = Number(process.env.QEG_REPORT_EXIT_CODE || '1');
 
             for (const [name, outcome] of checks) {
               core.info(`${name}: ${outcome}`);
             }
+            core.info(`qeg_report: ${process.env.STEP_QEG_REPORT}, exit ${qegReportExitCode}`);
 
-            const failed = checks.filter(([, outcome]) => outcome === 'failure');
+            const failed = checks
+              .filter(([, outcome]) => outcome === 'failure')
+              .map(([name]) => name);
+            if (qegReportExitCode !== 0) {
+              failed.push(`qeg_report(exit ${qegReportExitCode})`);
+            }
             if (failed.length > 0) {
-              const names = failed.map(([name]) => name).join(', ');
+              const names = failed.join(', ');
               core.setFailed(
                 `QEG CI failed after collecting diagnostics. Failed step(s): ${names}. ` +
                 `See the qeg-ci-report artifact and the job summary for cumulative missing evidence and gate failures.`

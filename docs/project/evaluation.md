@@ -46,6 +46,7 @@ next_review_due: 2026-08-04
   - `.github/workflows/ci.yml` が `.qeg/qeg-ci-report.json` を upload artifact 対象にしている
   - `Final CI verdict` が install / typecheck / build / JSON parse / package dry-run / QEG report の outcome を集約している
   - `workflow_dispatch` の `qeg_report_targets` で failing demo target を指定できる
+  - `QEG cumulative report` step が QEG exit code を output に退避し、step 自体は成功終了する
 - IPO control specs:
   - `git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/waiver-approval.md docs/spec/evidence-package.md docs/spec/retention-immutability.md docs/spec/acceptance.md docs/spec/review-2026-06-03.md docs/spec/gate-acceptance-2026-06-03.md`
 - code-to-gate:
@@ -68,6 +69,7 @@ next_review_due: 2026-08-04
 - [ ] `npm run report -- --json fixtures/positive-release-go` が成功し、`summary.totalTargets` と `targets[]` を出力した
 - [ ] `.github/workflows/ci.yml` が QEG report artifact を `if: always()` で upload する
 - [ ] `.github/workflows/ci.yml` が manual demo 用 `workflow_dispatch.inputs.qeg_report_targets` を持つ
+- [ ] `.github/workflows/ci.yml` が QEG report の非 0 exit を直接 shell failure にせず、`Final CI verdict` へ集約する
 - [ ] tarball contents に `docs/requirements.md` が含まれる
 - [ ] Birdseye index と capsule が主要ファイルを指す
 - [ ] IPO controlled profile の統制要件が requirements / README / BLUEPRINT に同期している
