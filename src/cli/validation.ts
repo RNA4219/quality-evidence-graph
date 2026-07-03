@@ -23,10 +23,23 @@ function dqCodesMatch(
     expectedCodes.every((code, index) => code === actualCodes[index]);
 }
 
-export function validateEvaluatedFixture(
+export interface FixtureValidationComparison {
+  readonly actualExitCode: number;
+  readonly verdictMatch: boolean;
+  readonly exitCodeMatch: boolean;
+  readonly expectedDqCodes: readonly DisqualificationCode[];
+  readonly actualDqCodes: readonly DisqualificationCode[];
+  readonly mode: "exact" | "includes";
+  readonly dqMatch: boolean;
+  readonly unexpectedDqCodes: readonly DisqualificationCode[];
+  readonly missingDqCodes: readonly DisqualificationCode[];
+  readonly passed: boolean;
+}
+
+export function compareEvaluatedFixture(
   expected: ExpectedGateVerdict,
   evaluated: EvaluatedFixture
-): void {
+): FixtureValidationComparison {
   const { gateResult, policy } = evaluated;
   const actualExitCode = getExitCode(gateResult.verdict, policy);
   const verdictMatch = gateResult.verdict === expected.expectedVerdict;
@@ -35,34 +48,57 @@ export function validateEvaluatedFixture(
   const actualDqCodes = sortedDqCodes(gateResult.disqualifications);
   const mode = expected.expectedDisqualificationMode ?? "exact";
   const dqMatch = dqCodesMatch(expectedDqCodes, actualDqCodes, mode);
+  const unexpectedDqCodes = mode === "exact"
+    ? actualDqCodes.filter((code) => !expectedDqCodes.includes(code))
+    : [];
+  const missingDqCodes = expectedDqCodes.filter((code) => !actualDqCodes.includes(code));
+
+  return {
+    actualExitCode,
+    verdictMatch,
+    exitCodeMatch,
+    expectedDqCodes,
+    actualDqCodes,
+    mode,
+    dqMatch,
+    unexpectedDqCodes,
+    missingDqCodes,
+    passed: verdictMatch && exitCodeMatch && dqMatch,
+  };
+}
+
+export function validateEvaluatedFixture(
+  expected: ExpectedGateVerdict,
+  evaluated: EvaluatedFixture
+): void {
+  const { gateResult } = evaluated;
+  const comparison = compareEvaluatedFixture(expected, evaluated);
 
   console.log(`Fixture: ${expected.fixture}`);
   console.log(`Description: ${expected.description}`);
   console.log(`Expected verdict: ${expected.expectedVerdict}`);
   console.log(`Actual verdict: ${gateResult.verdict}`);
-  console.log(`Verdict match: ${verdictMatch ? "PASS" : "FAIL"}`);
+  console.log(`Verdict match: ${comparison.verdictMatch ? "PASS" : "FAIL"}`);
   console.log(`Expected exit code: ${expected.expectedExitCode}`);
-  console.log(`Actual exit code: ${actualExitCode}`);
-  console.log(`Exit code match: ${exitCodeMatch ? "PASS" : "FAIL"}`);
+  console.log(`Actual exit code: ${comparison.actualExitCode}`);
+  console.log(`Exit code match: ${comparison.exitCodeMatch ? "PASS" : "FAIL"}`);
   console.log(`Contract ref: ${expected.contractRef}`);
-  console.log(`DQ validation mode: ${mode}`);
-  console.log(`Expected DQ codes: ${expectedDqCodes.join(", ")}`);
-  console.log(`Actual DQ codes: ${actualDqCodes.join(", ")}`);
+  console.log(`DQ validation mode: ${comparison.mode}`);
+  console.log(`Expected DQ codes: ${comparison.expectedDqCodes.join(", ")}`);
+  console.log(`Actual DQ codes: ${comparison.actualDqCodes.join(", ")}`);
 
-  if (mode === "exact" && !dqMatch) {
-    const unexpected = actualDqCodes.filter((code) => !expectedDqCodes.includes(code));
-    const missing = expectedDqCodes.filter((code) => !actualDqCodes.includes(code));
-    if (unexpected.length > 0) {
-      console.log(`Unexpected DQ codes (present but not expected): ${unexpected.join(", ")}`);
+  if (comparison.mode === "exact" && !comparison.dqMatch) {
+    if (comparison.unexpectedDqCodes.length > 0) {
+      console.log(`Unexpected DQ codes (present but not expected): ${comparison.unexpectedDqCodes.join(", ")}`);
     }
-    if (missing.length > 0) {
-      console.log(`Missing DQ codes (expected but not present): ${missing.join(", ")}`);
+    if (comparison.missingDqCodes.length > 0) {
+      console.log(`Missing DQ codes (expected but not present): ${comparison.missingDqCodes.join(", ")}`);
     }
   }
 
-  console.log(`DQ codes match: ${dqMatch ? "PASS" : "FAIL"}`);
+  console.log(`DQ codes match: ${comparison.dqMatch ? "PASS" : "FAIL"}`);
 
-  if (!verdictMatch || !exitCodeMatch || !dqMatch) {
+  if (!comparison.passed) {
     throw new CliError("Validation: FAIL");
   }
 

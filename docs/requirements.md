@@ -2,8 +2,8 @@
 intent_id: INT-QEG-REQ-001
 owner: quality-evidence-graph
 status: draft
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-07-04
+next_review_due: 2026-08-04
 ---
 
 # 要件定義
@@ -331,6 +331,7 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-03 | `place-tests` | risk ごとの obligation と placement を作る | placement rationale と candidate scores を出力できる |
 | C-04 | `gate` | Gate verdict を計算する | DQ / blocker / residual risk / human review を区別できる |
 | C-05 | `record` | Quality Evidence Record を生成する | 4 JSON artifact と Markdown summary を束ねられる |
+| C-06 | `report` | CI で複数 target を最後まで評価し、不足証跡と Gate failure を累積表示する | `gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review を target 別 / DQ 別に出力し、CI artifact として保存できる |
 
 CLI の exit code は MVP では最小限にする。
 
@@ -339,6 +340,8 @@ CLI の exit code は MVP では最小限にする。
 - `2`: QEG としては正常に判定したが、verdict が `no_go` または `disqualified` だった。
 
 `conditional_go` の exit code は `profile` で切り替える。MVP の `standard` では `0` を許容するが、`strict` と `ipo_controlled` では `2` にする。
+
+`report` は target を最後まで評価してから exit code を返す。CLI error が 1 件でもある場合は `1`、CLI error がなく Gate failure が 1 件でもある場合は `2`、全 target が `go` の場合は `0` とする。
 
 ## 14. Governance / Control 要件
 

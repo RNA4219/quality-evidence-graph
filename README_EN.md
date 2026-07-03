@@ -67,6 +67,19 @@ Generate a Quality Evidence Record:
 npm run record -- fixtures/positive-release-go
 ```
 
+In CI, generate a cumulative report instead of stopping at the first missing evidence item:
+
+```sh
+npm run report -- fixtures
+npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
+```
+
+`report` evaluates every target it can reach and summarizes missing `gate-input.json`, ingest errors, DQs, blockers, residual risks, and human-review requirements. Its exit code is `1` when CLI errors exist, `2` when gate failures exist, and `0` when every target is `go`.
+
+In GitHub Actions, `.github/workflows/ci.yml` runs this report and uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact. Install, typecheck, build, JSON parse, package dry-run, and QEG report are allowed to finish before the final verdict step fails the job.
+
+For a demo, manually run the `CI` workflow with `qeg_report_targets=fixtures/negative-approval-missing`. The job becomes red, but the Step Summary and `qeg-ci-report` artifact keep the cumulative missing-evidence report.
+
 ## Reading Verdicts
 
 - `go`: release conditions are satisfied. Exit code `0`.

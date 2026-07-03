@@ -2,6 +2,7 @@ import { exit } from "process";
 import { getExitCode } from "../gate.js";
 import { CliError } from "./errors.js";
 import { evaluateFixture, readExpectedVerdict } from "./fixture-io.js";
+import { runReportCommand } from "./report.js";
 import { writeOutputRecord } from "./record.js";
 import { validateEvaluatedFixture } from "./validation.js";
 
@@ -46,3 +47,5 @@ export async function runRecordCommand(fixtureDir: string): Promise<void> {
     throw error;
   }
 }
+
+export { runReportCommand };

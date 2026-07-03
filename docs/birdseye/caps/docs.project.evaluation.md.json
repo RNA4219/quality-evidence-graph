@@ -2,9 +2,9 @@
   "id": "docs/project/evaluation.md",
   "role": "quality",
   "public_api": [],
-  "summary": "requirements、types、schema、Birdseye、IPO 統制仕様書、仕様書レビュー記録、Gate 記録、code-to-gate 証跡、KanoMode 監査証跡、実装 Gate 記録、package dry-run の acceptance criteria と checklist。",
-  "deps_out": ["docs/project/runbook.md", "docs/project/checklists.md", "docs/spec/index.md", "docs/spec/review-2026-06-03.md", "docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json", "docs/spec/implementation-gate-2026-06-03.md"],
+  "summary": "requirements、types、schema、Birdseye、GitHub Actions CI、CI 累積 report、IPO 統制仕様書、仕様書レビュー記録、Gate 記録、code-to-gate 証跡、KanoMode 監査証跡、実装 Gate 記録、package dry-run の acceptance criteria と checklist。",
+  "deps_out": ["docs/project/runbook.md", "docs/project/checklists.md", "src/cli/report.ts", ".github/workflows/ci.yml", "docs/spec/index.md", "docs/spec/review-2026-06-03.md", "docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json", "docs/spec/implementation-gate-2026-06-03.md"],
   "deps_in": ["docs/agent/HUB.codex.md"],
   "risks": ["acceptance が古いと release readiness が甘くなる"],
-  "tests": ["npm run typecheck", "schema JSON parse", "npm pack --dry-run --cache ./.npm-cache", "code-to-gate analyze/readiness", "RanD KanoMode requirements audit", "fixture validate/gate/record"]
+  "tests": ["npm run typecheck", "schema JSON parse", "npm run report -- fixtures/positive-release-go", "npm run report -- --json fixtures/positive-release-go", "npm pack --dry-run --cache ./.npm-cache", "code-to-gate analyze/readiness", "RanD KanoMode requirements audit", "fixture validate/gate/record"]
 }

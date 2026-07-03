@@ -1,0 +1,156 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+    inputs:
+      qeg_report_targets:
+        description: QEG report targets for a manual demo run
+        required: false
+        default: fixtures/negative-approval-missing
+
+permissions:
+  contents: read
+
+env:
+  QEG_REPORT_TARGETS: ${{ inputs.qeg_report_targets || 'fixtures/positive-release-go' }}
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        id: install
+        continue-on-error: true
+        run: npm ci
+
+      - name: Typecheck
+        id: typecheck
+        continue-on-error: true
+        run: npm run typecheck
+
+      - name: Build
+        id: build
+        continue-on-error: true
+        run: npm run build
+
+      - name: Parse JSON contracts
+        id: json_parse
+        continue-on-error: true
+        run: |
+          node -e "const fs=require('fs'); for (const f of fs.readdirSync('schemas').filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync('schemas/'+f,'utf8')); JSON.parse(fs.readFileSync('docs/birdseye/index.json','utf8')); for (const f of fs.readdirSync('docs/birdseye/caps').filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync('docs/birdseye/caps/'+f,'utf8')); console.log('json ok')"
+
+      - name: Package dry-run
+        id: pack
+        continue-on-error: true
+        run: npm pack --dry-run --cache ./.npm-cache
+
+      - name: QEG cumulative report
+        id: qeg_report
+        if: always()
+        continue-on-error: true
+        run: |
+          mkdir -p .qeg
+          if [ -f dist/cli.js ]; then
+            npm run report -- --json --out .qeg/qeg-ci-report.json $QEG_REPORT_TARGETS
+          else
+            node -e "const fs=require('fs'); const report={reportVersion:'qeg-ci-report-v1',generatedAt:new Date().toISOString(),summary:{totalTargets:1,passed:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:'dist/cli.js',status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:'dist/cli.js not found; build failed before QEG report could run'}]}; fs.writeFileSync('.qeg/qeg-ci-report.json', JSON.stringify(report,null,2)+'\n');"
+            cat .qeg/qeg-ci-report.json
+            exit 1
+          fi
+
+      - name: Append QEG report summary
+        if: always()
+        run: |
+          if [ ! -f .qeg/qeg-ci-report.json ]; then
+            echo "## QEG CI Report" >> "$GITHUB_STEP_SUMMARY"
+            echo "" >> "$GITHUB_STEP_SUMMARY"
+            echo "No QEG report artifact was produced." >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          node <<'NODE'
+          const fs = require('fs');
+          const report = JSON.parse(fs.readFileSync('.qeg/qeg-ci-report.json', 'utf8'));
+          const summary = report.summary;
+          const lines = [
+            '## QEG CI Report',
+            '',
+            `- targets: ${summary.totalTargets}`,
+            `- passed: ${summary.passed}`,
+            `- gate failed: ${summary.gateFailed}`,
+            `- cli errors: ${summary.cliErrors}`,
+            `- blockers: ${summary.blockerCount}`,
+            `- residual risks: ${summary.residualRiskCount}`,
+            `- required human review: ${summary.humanReviewCount}`,
+            '',
+          ];
+
+          if (summary.dqCounts.length > 0) {
+            lines.push('### Disqualifications', '');
+            for (const dq of summary.dqCounts) {
+              lines.push(`- ${dq.code}: ${dq.count} - ${dq.remediation}`);
+            }
+            lines.push('');
+          }
+
+          const failedTargets = report.targets.filter((target) => target.status !== 'passed');
+          if (failedTargets.length > 0) {
+            lines.push('### Failing targets', '');
+            for (const target of failedTargets) {
+              lines.push(`- ${target.target}: ${target.status}${target.verdict ? ` / ${target.verdict}` : ''}`);
+              if (target.error) {
+                lines.push(`  - ${target.error}`);
+              }
+              for (const disqualification of target.disqualifications ?? []) {
+                lines.push(`  - ${disqualification.code}: ${disqualification.message}`);
+              }
+            }
+          }
+
+          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
+          NODE
+
+      - name: Upload QEG report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qeg-ci-report
+          path: .qeg/qeg-ci-report.json
+          if-no-files-found: warn
+
+      - name: Final CI verdict
+        if: always()
+        run: |
+          failed=0
+          for step in INSTALL TYPECHECK BUILD JSON_PARSE PACK QEG_REPORT; do
+            outcome_var="STEP_$step"
+            outcome="${!outcome_var}"
+            echo "$step: $outcome"
+            if [ "$outcome" = "failure" ]; then
+              failed=1
+            fi
+          done
+          if [ "$failed" -ne 0 ]; then
+            echo "CI failed. See the QEG report artifact and job summary for cumulative missing evidence and gate failures."
+            exit 1
+          fi
+        env:
+          STEP_INSTALL: ${{ steps.install.outcome }}
+          STEP_TYPECHECK: ${{ steps.typecheck.outcome }}
+          STEP_BUILD: ${{ steps.build.outcome }}
+          STEP_JSON_PARSE: ${{ steps.json_parse.outcome }}
+          STEP_PACK: ${{ steps.pack.outcome }}
+          STEP_QEG_REPORT: ${{ steps.qeg_report.outcome }}

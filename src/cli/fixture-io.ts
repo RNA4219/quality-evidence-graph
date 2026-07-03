@@ -51,6 +51,10 @@ export interface EvaluatedFixture {
   gateResult: GateResult;
 }
 
+export interface FixtureIoOptions {
+  readonly quiet?: boolean;
+}
+
 async function readJsonFile<T>(path: string): Promise<T> {
   const content = await readFile(path, "utf-8");
   return JSON.parse(content) as T;
@@ -92,12 +96,14 @@ export async function readExpectedVerdict(fixtureDir: string): Promise<ExpectedG
   }
 }
 
-export async function readFixtureInput(fixtureDir: string): Promise<FixtureInput> {
+export async function readFixtureInput(fixtureDir: string, options: FixtureIoOptions = {}): Promise<FixtureInput> {
   const inputPath = join(fixtureDir, "gate-input.json");
   try {
     const rawInput = await readJsonFile<FixtureInput>(inputPath);
     const ingestValidation = validateIngestContract(rawInput);
-    emitDeprecationWarnings(ingestValidation.warnings);
+    if (!options.quiet) {
+      emitDeprecationWarnings(ingestValidation.warnings);
+    }
     return withParserFailures(rawInput, ingestValidation.parserFailures);
   } catch (error) {
     if (error instanceof CliError) {
@@ -110,12 +116,17 @@ export async function readFixtureInput(fixtureDir: string): Promise<FixtureInput
   }
 }
 
-export async function evaluateFixture(rawFixtureDir: string): Promise<EvaluatedFixture> {
+export async function evaluateFixture(
+  rawFixtureDir: string,
+  options: FixtureIoOptions = {}
+): Promise<EvaluatedFixture> {
   const fixtureDir = resolve(rawFixtureDir);
-  const input = await readFixtureInput(fixtureDir);
+  const input = await readFixtureInput(fixtureDir, options);
   const waivers = [...(input.waivers ?? [])];
 
-  console.log("Using gate-input.json (real input artifacts)");
+  if (!options.quiet) {
+    console.log("Using gate-input.json (real input artifacts)");
+  }
 
   return {
     fixtureDir,

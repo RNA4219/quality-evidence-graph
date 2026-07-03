@@ -1,20 +1,20 @@
 {
-  "generated_at": "00001",
+  "generated_at": "00003",
   "nodes": {
     "README.md": {
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
-      "mtime": "00001"
+      "mtime": "00003"
     },
     "README_JA.md": {
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
-      "mtime": "00001"
+      "mtime": "00003"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
-      "mtime": "00001"
+      "mtime": "00003"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
@@ -34,17 +34,17 @@
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00001"
+      "mtime": "00003"
     },
     "docs/project/runbook.md": {
       "role": "operations",
       "caps": "docs/birdseye/caps/docs.project.runbook.md.json",
-      "mtime": "00001"
+      "mtime": "00003"
     },
     "docs/project/evaluation.md": {
       "role": "quality",
       "caps": "docs/birdseye/caps/docs.project.evaluation.md.json",
-      "mtime": "00001"
+      "mtime": "00003"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
@@ -156,6 +156,16 @@
       "caps": "docs/birdseye/caps/src.types.ts.json",
       "mtime": "00001"
     },
+    "src/cli/report.ts": {
+      "role": "ci-report-cli",
+      "caps": "docs/birdseye/caps/src.cli.report.ts.json",
+      "mtime": "00002"
+    },
+    ".github/workflows/ci.yml": {
+      "role": "github-actions-ci",
+      "caps": "docs/birdseye/caps/.github.workflows.ci.yml.json",
+      "mtime": "00003"
+    },
     "schemas/shared-defs.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
@@ -186,6 +196,8 @@
     ["README.md", "README_JA.md"],
     ["README.md", "README_EN.md"],
     ["README.md", "docs/agent/HUB.codex.md"],
+    ["README.md", "src/cli/report.ts"],
+    ["README.md", ".github/workflows/ci.yml"],
     ["README_JA.md", "docs/agent/HUB.codex.md"],
     ["README_EN.md", "docs/agent/HUB.codex.md"],
     ["docs/agent/HUB.codex.md", "docs/birdseye/index.json"],
@@ -204,6 +216,8 @@
     ["docs/agent/HUB.codex.md", "docs/spec/index.md"],
     ["docs/agent/HUB.codex.md", "docs/implementation-prep-gate-2026-06-02.md"],
     ["docs/requirements.md", "src/types.ts"],
+    ["docs/requirements.md", "src/cli/report.ts"],
+    ["docs/requirements.md", ".github/workflows/ci.yml"],
     ["docs/research/quality-evidence-graph-requirements-report.md", "docs/requirements.md"],
     ["docs/research/quality-evidence-graph-requirements-report.md", "docs/project/blueprint.md"],
     ["docs/research/quality-evidence-graph-requirements-report.md", "docs/spec/index.md"],
@@ -261,6 +275,12 @@
     ["schemas/test-placement-plan.schema.json", "schemas/quality-evidence-record.schema.json"],
     ["schemas/gate-verdict.schema.json", "schemas/quality-evidence-record.schema.json"],
     ["docs/project/runbook.md", "docs/project/evaluation.md"],
+    ["docs/project/runbook.md", "src/cli/report.ts"],
+    ["docs/project/runbook.md", ".github/workflows/ci.yml"],
+    ["docs/project/evaluation.md", "src/cli/report.ts"],
+    ["docs/project/evaluation.md", ".github/workflows/ci.yml"],
+    ["src/cli/report.ts", "src/types.ts"],
+    [".github/workflows/ci.yml", "src/cli/report.ts"],
     ["docs/project/guardrails.md", "docs/birdseye/index.json"]
   ]
 }

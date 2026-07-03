@@ -1,0 +1,10 @@
+{
+  "id": "src/cli/report.ts",
+  "role": "ci-report-cli",
+  "public_api": ["runReportCommand", "createCiReport", "formatCiReportText", "collectReportTargets"],
+  "summary": "CI 向け累積 report コマンド。複数 target を最後まで評価し、CLI error、DQ、blocker、residual risk、human review、expected mismatch を text / JSON で出力する。",
+  "deps_out": ["src/cli/fixture-io.ts", "src/cli/validation.ts", "src/gate.ts", "src/types.ts"],
+  "deps_in": ["README.md", "README_JA.md", "README_EN.md", "docs/requirements.md", "docs/project/runbook.md", "docs/project/evaluation.md", "src/cli.ts"],
+  "risks": ["CI report が単発 gate と違う exit code 集約をするため、runbook と requirements の説明がずれると運用者が誤読する"],
+  "tests": ["npm run typecheck", "npm run build", "npm run report -- fixtures/positive-release-go", "npm run report -- --json fixtures/positive-release-go"]
+}

@@ -2,8 +2,8 @@
 intent_id: INT-QEG-EVAL-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-07-04
+next_review_due: 2026-08-04
 ---
 
 # Evaluation
@@ -27,6 +27,8 @@ next_review_due: 2026-07-02
 - `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による requirements audit 証跡を保持し、正式な狩野調査または release approval と混同されないこと。
 - `docs/spec/implementation-gate-2026-06-03.md` が実装完了範囲、未実装 DQ code、IPO controlled release Gate `no_go` 維持理由を記録していること。
 - `docs/implementation-prep-gate-2026-06-02.md` が implementation preparation Go と IPO controlled release No-Go を分離していること。
+- CI 用 `report` コマンドが複数 target を最後まで評価し、CLI error / DQ / blocker / residual risk / human review を累積表示できること。
+- `.github/workflows/ci.yml` が QEG report artifact を保存し、各診断 step を完走させてから最終判定で job を落とすこと。
 
 ## Test Outline
 
@@ -37,6 +39,13 @@ next_review_due: 2026-07-02
   - `package.json` の parse
 - Release dry-run:
   - `npm pack --dry-run --cache ./.npm-cache`
+- CI cumulative report:
+  - `npm run report -- fixtures/positive-release-go`
+  - `npm run report -- --json fixtures/positive-release-go`
+- GitHub Actions workflow:
+  - `.github/workflows/ci.yml` が `.qeg/qeg-ci-report.json` を upload artifact 対象にしている
+  - `Final CI verdict` が install / typecheck / build / JSON parse / package dry-run / QEG report の outcome を集約している
+  - `workflow_dispatch` の `qeg_report_targets` で failing demo target を指定できる
 - IPO control specs:
   - `git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/waiver-approval.md docs/spec/evidence-package.md docs/spec/retention-immutability.md docs/spec/acceptance.md docs/spec/review-2026-06-03.md docs/spec/gate-acceptance-2026-06-03.md`
 - code-to-gate:
@@ -55,6 +64,10 @@ next_review_due: 2026-07-02
 - [ ] `npm run typecheck` が成功した
 - [ ] schema JSON parse が成功した
 - [ ] `npm pack --dry-run --cache ./.npm-cache` が成功した
+- [ ] `npm run report -- fixtures/positive-release-go` が成功した
+- [ ] `npm run report -- --json fixtures/positive-release-go` が成功し、`summary.totalTargets` と `targets[]` を出力した
+- [ ] `.github/workflows/ci.yml` が QEG report artifact を `if: always()` で upload する
+- [ ] `.github/workflows/ci.yml` が manual demo 用 `workflow_dispatch.inputs.qeg_report_targets` を持つ
 - [ ] tarball contents に `docs/requirements.md` が含まれる
 - [ ] Birdseye index と capsule が主要ファイルを指す
 - [ ] IPO controlled profile の統制要件が requirements / README / BLUEPRINT に同期している

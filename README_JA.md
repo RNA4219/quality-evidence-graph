@@ -67,6 +67,19 @@ Quality Evidence Record を生成します。
 npm run record -- fixtures/positive-release-go
 ```
 
+CI では、単発のエラーで止まらず不足している証跡や DQ を累積レポートとして出せます。
+
+```sh
+npm run report -- fixtures
+npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
+```
+
+`report` は複数 fixture / target を最後まで評価し、`gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review 要求をまとめて表示します。exit code は CLI error があれば `1`、Gate failure があれば `2`、全 target が `go` なら `0` です。
+
+GitHub Actions では `.github/workflows/ci.yml` がこの report を実行し、`.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存します。install / typecheck / build / JSON parse / package dry-run / QEG report は完走させ、最後の集約ステップで CI を失敗させます。
+
+デモは Actions の `CI` workflow を手動実行し、`qeg_report_targets=fixtures/negative-approval-missing` を指定します。job は赤になりますが、Step Summary と `qeg-ci-report` artifact に累積不足が残ります。
+
 ## 判定の読み方
 
 - `go`: release 条件を満たす。exit code `0`。

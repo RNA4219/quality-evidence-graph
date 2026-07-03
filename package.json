@@ -24,7 +24,8 @@
     "qeg": "node dist/cli.js",
     "validate": "node dist/cli.js validate",
     "gate": "node dist/cli.js gate",
-    "record": "node dist/cli.js record"
+    "record": "node dist/cli.js record",
+    "report": "node dist/cli.js report"
   },
   "keywords": [
     "quality-gate",

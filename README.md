@@ -32,9 +32,10 @@
 - 要求正本は `docs/requirements.md`。
 - controlled governance の実装仕様正本は `docs/spec/`。
 - public TypeScript contract は `src/types.ts` facade から辿る。
-- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`。
+- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`。
 - `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
 - `gate-input.json` 欠落・invalid は CLI failure として exit code `1`。
+- `report` は複数 target を最後まで評価し、CLI failure / DQ / blocker / human review を累積レポートとして出す。
 - DQ は最優先で、waiver では DQ を消せない。
 - `output-record.json` は own-output validation の証跡として扱う。
 
@@ -61,7 +62,21 @@ Fixture regression:
 npm run validate -- fixtures/positive-release-go
 npm run gate -- fixtures/positive-release-go
 npm run record -- fixtures/positive-release-go
+npm run report -- fixtures/positive-release-go
 ```
+
+CI cumulative report:
+
+```sh
+npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
+```
+
+GitHub Actions integration:
+
+- `.github/workflows/ci.yml` runs install, typecheck, build, JSON parse, package dry-run, and QEG report with `continue-on-error`.
+- The job uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact even when the Gate fails.
+- The final CI verdict step fails only after all diagnostic steps have finished.
+- Manual demo: run the `CI` workflow with `qeg_report_targets=fixtures/negative-approval-missing` to see a red job that still preserves the cumulative QEG report artifact.
 
 `code-to-gate`:
 
