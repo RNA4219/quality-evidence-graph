@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-15",
+        "count": 1,
+        "remediation": "Provide source-backed waiver, policy hash, and approval evidence that match the evidence package."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-approval-missing",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-15: Approval evidence missing in release_decision phase"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-15",
+          "message": "Approval evidence missing in release_decision phase",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-15-APPROVAL",
+              "path": "docs/spec/evidence-package.md",
+              "startLine": 1,
+              "endLine": 10,
+              "label": "approval evidence required for release_decision"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-approval-missing",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/evidence-package.md: release_decision phase requires approval evidence",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-15"
+        ],
+        "actualDqCodes": [
+          "DQ-15"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

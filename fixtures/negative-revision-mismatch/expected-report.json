@@ -1,0 +1,64 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-12",
+        "count": 1,
+        "remediation": "Regenerate artifacts from the same headRef/revision used by the QEG metadata."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-revision-mismatch",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-12: Artifact revision \"refs/heads/feature-branch\" mismatch with headRef \"refs/heads/main\""
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-12",
+          "message": "Artifact revision \"refs/heads/feature-branch\" mismatch with headRef \"refs/heads/main\"",
+          "nodeIds": [
+            "qeg:artifact-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-revision-mismatch",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-12"
+        ],
+        "actualDqCodes": [
+          "DQ-12"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

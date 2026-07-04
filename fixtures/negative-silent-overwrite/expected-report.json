@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-16",
+        "count": 1,
+        "remediation": "Move release evidence to immutable, append-only, or versioned storage before using it for release judgment."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-silent-overwrite",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-16: Evidence used for release judgment exists only in silent-overwrite capable storage"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-16",
+          "message": "Evidence used for release judgment exists only in silent-overwrite capable storage",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-16",
+              "path": "docs/spec/retention-immutability.md",
+              "startLine": 1,
+              "endLine": 10,
+              "label": "storage classification must be immutable/versioned"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-silent-overwrite",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/retention-immutability.md: silent overwrite capable evidence alone triggers DQ-16",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-16"
+        ],
+        "actualDqCodes": [
+          "DQ-16"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

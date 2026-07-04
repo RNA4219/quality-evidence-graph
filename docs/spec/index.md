@@ -3,8 +3,8 @@ intent_id: INT-QEG-SPEC-INDEX-001
 owner: quality-evidence-graph
 status: active
 profile: ipo_controlled
-last_reviewed_at: 2026-06-03
-next_review_due: 2026-07-03
+last_reviewed_at: 2026-07-04
+next_review_due: 2026-08-04
 ---
 
 # IPO 統制仕様
@@ -34,8 +34,9 @@ next_review_due: 2026-07-03
 6. `docs/spec/evidence-package.md`
 7. `docs/spec/retention-immutability.md`
 8. `docs/spec/acceptance.md`
-9. `docs/spec/review-2026-06-03.md`
-10. `docs/spec/gate-acceptance-2026-06-03.md`
+9. `docs/spec/operational-cli-extensions.md`
+10. `docs/spec/review-2026-06-03.md`
+11. `docs/spec/gate-acceptance-2026-06-03.md`
 
 ## 3. 境界
 
@@ -47,6 +48,7 @@ next_review_due: 2026-07-03
 - waiver / approval evidence / retention / immutability / 職務分掌の最小 artifact contract
 - evidence package に含める最小要素
 - 仕様書検収と package 配布確認
+- CI cumulative report、doctor、DQ explain、schema/enum drift check、snapshot、baseline、changed-only、GitHub Action の運用 contract
 
 ### MVP 実装で扱わない
 

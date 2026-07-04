@@ -4,6 +4,9 @@
   "description": "Local-first Quality Evidence Graph and Test Placement Engine contracts",
   "type": "module",
   "main": "./dist/index.js",
+  "bin": {
+    "qeg": "./dist/cli.js"
+  },
   "exports": {
     ".": "./dist/index.js"
   },
@@ -13,6 +16,7 @@
     "schemas/",
     "docs/",
     "fixtures/",
+    "qeg-report-action/",
     "README.md",
     "README_JA.md",
     "README_EN.md",
@@ -25,7 +29,13 @@
     "validate": "node dist/cli.js validate",
     "gate": "node dist/cli.js gate",
     "record": "node dist/cli.js record",
-    "report": "node dist/cli.js report"
+    "report": "node dist/cli.js report",
+    "doctor": "node dist/cli.js doctor",
+    "explain": "node dist/cli.js explain",
+    "schema-check": "node dist/cli.js schema-check",
+    "enum-check": "node dist/cli.js enum-check",
+    "init": "node dist/cli.js init",
+    "snapshot": "node dist/cli.js snapshot"
   },
   "keywords": [
     "quality-gate",
@@ -41,6 +51,7 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "ajv": "^8.20.0",
     "typescript": "^5.9.3"
   }
 }

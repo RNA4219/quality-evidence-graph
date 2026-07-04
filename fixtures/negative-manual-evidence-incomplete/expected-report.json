@@ -1,0 +1,64 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-08",
+        "count": 1,
+        "remediation": "Complete manual evidence with expectedResult, oracleRefs, traceTo, and evidenceRefs."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-manual-evidence-incomplete",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-08: Manual evidence \"qeg:manual-case-001\" incomplete"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-08",
+          "message": "Manual evidence \"qeg:manual-case-001\" incomplete",
+          "nodeIds": [
+            "qeg:manual-case-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-manual-evidence-incomplete",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-08"
+        ],
+        "actualDqCodes": [
+          "DQ-08"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

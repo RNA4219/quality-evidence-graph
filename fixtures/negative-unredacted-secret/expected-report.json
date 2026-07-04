@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-09",
+        "count": 1,
+        "remediation": "Redact sensitive values from the evidence package and regenerate the record."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-unredacted-secret",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-09: Unredacted sensitive value detected in evidence package"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-09",
+          "message": "Unredacted sensitive value detected in evidence package",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-09",
+              "path": "docs/spec/retention-immutability.md",
+              "startLine": 63,
+              "endLine": 65,
+              "label": "sensitive value redaction requirement"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-unredacted-secret",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/retention-immutability.md §63-65",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-09"
+        ],
+        "actualDqCodes": [
+          "DQ-09"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

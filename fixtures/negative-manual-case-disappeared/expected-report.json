@@ -1,0 +1,69 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-14",
+        "count": 1,
+        "remediation": "Add source-backed manual oracle or placement-change retirement/revert evidence."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-manual-case-disappeared",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-14: Manual case \"mbb:CASE-vanished-001\" disappeared without placement_change retirement record"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-14",
+          "message": "Manual case \"mbb:CASE-vanished-001\" disappeared without placement_change retirement record",
+          "nodeIds": [
+            "mbb:CASE-vanished-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "mbb:sr-manual-inventory",
+              "path": "manual-bb/manual-case-inventory.json"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-manual-case-disappeared",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/requirements.md §9 Test Placement 要件",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-14"
+        ],
+        "actualDqCodes": [
+          "DQ-14"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

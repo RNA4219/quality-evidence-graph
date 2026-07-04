@@ -1,0 +1,10 @@
+{
+  "id": "src/cli/schema-check.ts",
+  "role": "schema-check-cli",
+  "public_api": ["createAjv", "createSchemaCheckReport", "runSchemaCheckCommand", "assertSchemasCompile"],
+  "summary": "Ajv 2020 で schemas/*.schema.json を compile し、指定 target の gate-input 内 graph / policy / evidencePackage / placementPlan / waivers を schema validation する。",
+  "deps_out": ["schemas/*.schema.json", "src/cli/report.ts"],
+  "deps_in": ["src/cli/doctor.ts", "src/cli.ts", "docs/spec/operational-cli-extensions.md"],
+  "risks": ["fixture/schema drift を検出する command なので、全 fixture を標準 CI に入れる場合は既存 fixture 更新計画が必要"],
+  "tests": ["npm run build", "node dist/cli.js schema-check"]
+}

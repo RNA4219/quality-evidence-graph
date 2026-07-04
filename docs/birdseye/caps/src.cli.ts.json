@@ -1,0 +1,10 @@
+{
+  "id": "src/cli.ts",
+  "role": "cli-entrypoint",
+  "public_api": ["qeg validate", "qeg gate", "qeg record", "qeg report", "qeg doctor", "qeg explain", "qeg schema-check", "qeg enum-check", "qeg init", "qeg snapshot"],
+  "summary": "QEG CLI entrypoint。コマンド名を各 CLI module へ dispatch し、unknown command と missing fixture usage を処理する。",
+  "deps_out": ["src/cli/report.ts", "src/cli/doctor.ts", "src/cli/dq-explain.ts", "src/cli/schema-check.ts", "src/cli/enum-check.ts", "src/cli/init.ts", "src/cli/snapshot.ts"],
+  "deps_in": ["package.json", "README.md"],
+  "risks": ["command wiring が commands.ts とずれると npm scripts や GitHub Action の entrypoint が動かない"],
+  "tests": ["npm run build", "node dist/cli.js explain DQ-15", "node dist/cli.js schema-check"]
+}

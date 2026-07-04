@@ -1,0 +1,64 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-05",
+        "count": 1,
+        "remediation": "Add test placement obligations for changed code, or provide an accepted waiver."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-changed-code-no-test-obligation",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-05: Changed code \"src/auth.ts\" without test obligation or waiver"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-05",
+          "message": "Changed code \"src/auth.ts\" without test obligation or waiver",
+          "nodeIds": [
+            "qeg:changed-code-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-changed-code-no-test-obligation",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-05"
+        ],
+        "actualDqCodes": [
+          "DQ-05"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

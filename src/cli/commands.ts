@@ -1,9 +1,15 @@
 import { exit } from "process";
 import { getExitCode } from "../gate.js";
+import { runDoctorCommand } from "./doctor.js";
+import { runEnumCheckCommand } from "./enum-check.js";
+import { runExplainCommand } from "./dq-explain.js";
 import { CliError } from "./errors.js";
 import { evaluateFixture, readExpectedVerdict } from "./fixture-io.js";
+import { runInitCommand } from "./init.js";
 import { runReportCommand } from "./report.js";
 import { writeOutputRecord } from "./record.js";
+import { runSchemaCheckCommand } from "./schema-check.js";
+import { runSnapshotCommand } from "./snapshot.js";
 import { validateEvaluatedFixture } from "./validation.js";
 
 export async function runValidateCommand(fixtureDir: string): Promise<void> {
@@ -48,4 +54,12 @@ export async function runRecordCommand(fixtureDir: string): Promise<void> {
   }
 }
 
-export { runReportCommand };
+export {
+  runDoctorCommand,
+  runEnumCheckCommand,
+  runExplainCommand,
+  runInitCommand,
+  runReportCommand,
+  runSchemaCheckCommand,
+  runSnapshotCommand,
+};

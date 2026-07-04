@@ -1,0 +1,28 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 0,
+    "cliErrors": 1,
+    "dqCounts": [],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-unknown-id-prefix",
+      "status": "cli_error",
+      "exitCode": 1,
+      "reasons": [],
+      "disqualifications": [],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "error": "Unknown ID producer prefix \"vendor\" at gate-input.json.metadata.runId; reserved prefixes are rand, ctg, mbb, hate, qeg"
+    }
+  ]
+}

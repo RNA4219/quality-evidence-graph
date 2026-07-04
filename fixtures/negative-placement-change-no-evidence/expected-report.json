@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-14",
+        "count": 1,
+        "remediation": "Add source-backed manual oracle or placement-change retirement/revert evidence."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-placement-change-no-evidence",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-14: Placement change \"qeg:placement-change-login-retirement\" retires manual case \"mbb:CASE-login-001\" without evidence_refs"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-14",
+          "message": "Placement change \"qeg:placement-change-login-retirement\" retires manual case \"mbb:CASE-login-001\" without evidence_refs",
+          "nodeIds": [
+            "qeg:placement-change-login-retirement",
+            "mbb:CASE-login-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-policy-retirement",
+              "path": "docs/policy/manual-retirement.md"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-placement-change-no-evidence",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/requirements.md §9 Test Placement 要件",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-14"
+        ],
+        "actualDqCodes": [
+          "DQ-14"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

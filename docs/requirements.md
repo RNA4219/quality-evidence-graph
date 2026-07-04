@@ -332,6 +332,16 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-04 | `gate` | Gate verdict を計算する | DQ / blocker / residual risk / human review を区別できる |
 | C-05 | `record` | Quality Evidence Record を生成する | 4 JSON artifact と Markdown summary を束ねられる |
 | C-06 | `report` | CI で複数 target を最後まで評価し、不足証跡と Gate failure を累積表示する | `gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review を target 別 / DQ 別に出力し、CI artifact として保存できる |
+| C-07 | `doctor` | ローカル環境、build 出力、schema、CI workflow、target artifact の不足を事前診断する | hard failure と warning を分け、warning だけなら exit code `0` にする |
+| C-08 | `explain <DQ>` | DQ code の意味、原因、必要証跡、最小修正、参照仕様を説明する | 例: `DQ-15` の approval / policy / waiver 証跡不足を人間が直せる粒度で表示できる |
+| C-09 | `schema-check` | JSON Schema の compile と fixture 内 artifact の schema validation を行う | schema 自体の破損と fixture/schema drift を分けて報告できる |
+| C-10 | `enum-check` | TypeScript 型と JSON Schema enum の drift を検出する | `GateProfile`、`GateVerdict`、`DisqualificationCode` の差分を列挙できる |
+| C-11 | `snapshot` | CI report の golden snapshot を fixture ごとに検証する | `generatedAt` と absolute path を正規化し、差分を安定して検出できる |
+| C-12 | `init` | 他 repo へ最小 QEG 設定を導入する | `.qeg/gate-input.json`、`.qeg/qeg-baseline.json`、GitHub Actions workflow を生成できる |
+| C-13 | `report --github-summary` | GitHub Actions Job Summary に人間向け累積レポートを書く | CI log の末尾だけに依存せず、DQ 別 / target 別の不足を Step Summary で読める |
+| C-14 | `report --baseline` | 既知の DQ を baseline として受理し、新規 DQ だけを赤にする | baseline が全 current DQ を覆い、blocker / residual risk / human review / expected mismatch がない場合だけ pass 扱いにできる |
+| C-15 | `report --changed-only` | 変更に関係する target だけを評価する | `QEG_CHANGED_FILES` または git diff から対象を絞り、対象なしの場合は空 report / exit `0` にできる |
+| C-16 | `qeg-report-action` | OSS 利用者が GitHub Actions へ QEG report を組み込みやすくする | report step 自体は成功終了し、`exit_code` output、artifact、Step Summary を残してから呼び出し側の final verdict で失敗させられる |
 
 CLI の exit code は MVP では最小限にする。
 
@@ -342,6 +352,10 @@ CLI の exit code は MVP では最小限にする。
 `conditional_go` の exit code は `profile` で切り替える。MVP の `standard` では `0` を許容するが、`strict` と `ipo_controlled` では `2` にする。
 
 `report` は target を最後まで評価してから exit code を返す。CLI error が 1 件でもある場合は `1`、CLI error がなく Gate failure が 1 件でもある場合は `2`、全 target が `go` の場合は `0` とする。
+
+GitHub Actions では、QEG report の非 0 exit を shell step の即時 failure として扱わず、artifact / Step Summary / exit code output を保存してから最終判定 step で job を失敗させる。これにより `Process completed with exit code 1` だけで原因が読めない状態を避ける。
+
+baseline は DQ を消す仕組みではなく、既知の不足を明示して「新規不足だけを赤にする」ための移行補助である。baseline が適用された target は report 上 `baseline_accepted` として数え、通常の `passed` と区別する。
 
 ## 14. Governance / Control 要件
 

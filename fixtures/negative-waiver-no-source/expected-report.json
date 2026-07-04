@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-15",
+        "count": 1,
+        "remediation": "Provide source-backed waiver, policy hash, and approval evidence that match the evidence package."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 1,
+    "humanReviewCount": 1
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-waiver-no-source",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-15: Waiver \"qeg:waiver-001\" is not source-backed",
+        "Residual risks: 1",
+        "Required human review: 1"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-15",
+          "message": "Waiver \"qeg:waiver-001\" is not source-backed",
+          "nodeIds": [
+            "qeg:waiver-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [
+        "qeg:risk-001"
+      ],
+      "requiredHumanReview": [
+        "qeg:risk-001"
+      ],
+      "expected": {
+        "fixture": "negative-waiver-no-source",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/waiver-approval.md §2: waiver must have sourceRefs minimum 1, §3: invalid waiver does not improve gate",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-15"
+        ],
+        "actualDqCodes": [
+          "DQ-15"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

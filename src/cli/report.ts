@@ -1,7 +1,9 @@
-import { mkdir, readdir, stat, writeFile } from "fs/promises";
+import { appendFile, mkdir, readFile, readdir, stat, writeFile } from "fs/promises";
 import type { Dirent } from "fs";
-import { dirname, join, resolve } from "path";
+import { dirname, join, relative, resolve } from "path";
 import { exit } from "process";
+import { execFile } from "child_process";
+import { promisify } from "util";
 import { getExitCode } from "../gate.js";
 import type {
   Disqualification,
@@ -11,6 +13,7 @@ import type {
   SourceRef,
   StableId,
 } from "../types.js";
+import { getDqExplanation } from "./dq-explain.js";
 import { CliError } from "./errors.js";
 import {
   evaluateFixture,
@@ -23,12 +26,17 @@ import {
   type FixtureValidationComparison,
 } from "./validation.js";
 
-export type ReportTargetStatus = "passed" | "gate_failed" | "cli_error";
+const execFileAsync = promisify(execFile);
+
+export type ReportTargetStatus = "passed" | "baseline_accepted" | "gate_failed" | "cli_error";
 export type ReportFormat = "text" | "json";
 
 export interface ReportOptions {
   readonly format: ReportFormat;
   readonly outPath?: string;
+  readonly githubSummary?: boolean;
+  readonly baselinePath?: string;
+  readonly changedOnly?: boolean;
 }
 
 export interface ReportExpectedComparison {
@@ -69,6 +77,7 @@ export interface DqSummaryItem {
 export interface ReportSummary {
   readonly totalTargets: number;
   readonly passed: number;
+  readonly baselineAccepted: number;
   readonly gateFailed: number;
   readonly cliErrors: number;
   readonly dqCounts: readonly DqSummaryItem[];
@@ -84,25 +93,33 @@ export interface CiReport {
   readonly targets: readonly ReportTargetResult[];
 }
 
-const DQ_REMEDIATION: Record<DisqualificationCode, string> = {
-  "DQ-01": "Fix parser/input failures and make required gate artifacts available before QEG runs.",
-  "DQ-02": "Add sourceRefs to each gate-relevant blocker so the release decision is auditable.",
-  "DQ-03": "Replace gate-relevant unsupported claims with source-backed evidence or mark them non-gate-relevant.",
-  "DQ-04": "Add reviewer notes or accepted waivers for P0/P1 oracle gaps, or close the evidence gap.",
-  "DQ-05": "Add test placement obligations for changed code, or provide an accepted waiver.",
-  "DQ-06": "Regenerate or relink evidence artifacts so recorded content hashes match actual inputs.",
-  "DQ-07": "Record an explicit completeness score when using a partial graph.",
-  "DQ-08": "Complete manual evidence with expectedResult, oracleRefs, traceTo, and evidenceRefs.",
-  "DQ-09": "Redact sensitive values from the evidence package and regenerate the record.",
-  "DQ-10": "Remove hidden-oracle access from benchmark-mode runs and regenerate evidence.",
-  "DQ-11": "Fix required connector contract violations before treating connector output as successful.",
-  "DQ-12": "Regenerate artifacts from the same headRef/revision used by the QEG metadata.",
-  "DQ-13": "Add sourceRefs to the evidence package.",
-  "DQ-14": "Add source-backed manual oracle or placement-change retirement/revert evidence.",
-  "DQ-15": "Provide source-backed waiver, policy hash, and approval evidence that match the evidence package.",
-  "DQ-16": "Move release evidence to immutable, append-only, or versioned storage before using it for release judgment.",
-  "DQ-17": "Record producer, reviewer, approver, waiverApprover, and releaseOwner control roles.",
-};
+interface BaselineEntry {
+  readonly target?: string;
+  readonly code: DisqualificationCode;
+  readonly message?: string;
+  readonly nodeIds?: readonly StableId[];
+}
+
+interface ReportBaseline {
+  readonly entries: readonly BaselineEntry[];
+}
+
+interface CreateCiReportOptions {
+  readonly baselinePath?: string;
+  readonly changedOnly?: boolean;
+}
+
+interface GateInputForChangedOnly {
+  readonly graph?: {
+    readonly nodes?: readonly {
+      readonly kind?: string;
+      readonly path?: string;
+    }[];
+  };
+  readonly metadata?: {
+    readonly inputArtifacts?: readonly { readonly path?: string }[];
+  };
+}
 
 async function safeStat(path: string): Promise<Awaited<ReturnType<typeof stat>> | null> {
   try {
@@ -110,6 +127,137 @@ async function safeStat(path: string): Promise<Awaited<ReturnType<typeof stat>> 
   } catch {
     return null;
   }
+}
+
+async function readJsonFile<T>(path: string): Promise<T> {
+  return JSON.parse(await readFile(path, "utf-8")) as T;
+}
+
+function portable(path: string): string {
+  return path.replace(/\\/g, "/");
+}
+
+function relativeTarget(target: string): string {
+  return portable(relative(process.cwd(), target));
+}
+
+async function readBaseline(path: string | undefined): Promise<ReportBaseline | undefined> {
+  if (!path) return undefined;
+  return readJsonFile<ReportBaseline>(path);
+}
+
+function sameNodeIds(left: readonly StableId[] | undefined, right: readonly StableId[]): boolean {
+  if (!left) return true;
+  const sortedLeft = [...left].sort();
+  const sortedRight = [...right].sort();
+  return sortedLeft.length === sortedRight.length &&
+    sortedLeft.every((value, index) => value === sortedRight[index]);
+}
+
+function baselineCovers(
+  baseline: ReportBaseline | undefined,
+  target: string,
+  disqualification: Disqualification
+): boolean {
+  if (!baseline) return false;
+  const relTarget = relativeTarget(target);
+  return baseline.entries.some((entry) => {
+    const targetMatches = !entry.target || portable(entry.target) === relTarget || relTarget.endsWith(portable(entry.target));
+    const messageMatches = !entry.message || entry.message === disqualification.message;
+    return targetMatches &&
+      entry.code === disqualification.code &&
+      messageMatches &&
+      sameNodeIds(entry.nodeIds, disqualification.nodeIds);
+  });
+}
+
+function applyBaseline(target: ReportTargetResult, baseline: ReportBaseline | undefined): ReportTargetResult {
+  if (!baseline || target.status !== "gate_failed" || target.disqualifications.length === 0) {
+    return target;
+  }
+  const allDisqualificationsCovered = target.disqualifications.every((disqualification) =>
+    baselineCovers(baseline, target.target, disqualification)
+  );
+  const hasOtherFailures = target.blockers.length > 0 ||
+    target.residualRisks.length > 0 ||
+    target.requiredHumanReview.length > 0 ||
+    target.expected?.validationPassed === false;
+
+  if (!allDisqualificationsCovered || hasOtherFailures) {
+    return target;
+  }
+
+  return {
+    ...target,
+    status: "baseline_accepted",
+    exitCode: 0,
+    reasons: [
+      ...target.reasons,
+      "All current DQs are accepted by baseline; report fails only on new DQs.",
+    ],
+  };
+}
+
+async function gitChangedFiles(): Promise<string[]> {
+  if (process.env.QEG_CHANGED_FILES) {
+    return process.env.QEG_CHANGED_FILES
+      .split(/[,\r\n]+/)
+      .map((file) => file.trim())
+      .filter(Boolean)
+      .map(portable);
+  }
+
+  const attempts = [
+    ["diff", "--name-only", "--diff-filter=ACMRTUXB", "origin/main...HEAD"],
+    ["diff", "--name-only", "--diff-filter=ACMRTUXB", "HEAD~1...HEAD"],
+    ["diff", "--name-only", "--diff-filter=ACMRTUXB"],
+  ];
+
+  for (const args of attempts) {
+    try {
+      const { stdout } = await execFileAsync("git", args);
+      const files = stdout.split(/\r?\n/).map((file) => file.trim()).filter(Boolean).map(portable);
+      if (files.length > 0) return files;
+    } catch {
+      // Try the next diff strategy.
+    }
+  }
+  return [];
+}
+
+async function targetMentionsChangedFile(target: string, changedFiles: readonly string[]): Promise<boolean> {
+  const relTarget = relativeTarget(target);
+  if (changedFiles.some((file) => file === relTarget || file.startsWith(`${relTarget}/`))) {
+    return true;
+  }
+
+  try {
+    const input = await readJsonFile<GateInputForChangedOnly>(join(target, "gate-input.json"));
+    const artifactPaths = (input.metadata?.inputArtifacts ?? [])
+      .map((artifact) => artifact.path)
+      .filter((path): path is string => Boolean(path))
+      .map(portable);
+    const changedCodePaths = (input.graph?.nodes ?? [])
+      .filter((node) => node.kind === "changed_code" && node.path)
+      .map((node) => portable(node.path as string));
+    return [...artifactPaths, ...changedCodePaths].some((path) => changedFiles.includes(path));
+  } catch {
+    return false;
+  }
+}
+
+async function filterChangedTargets(targets: readonly string[], changedOnly: boolean | undefined): Promise<string[]> {
+  if (!changedOnly) return [...targets];
+  const changedFiles = await gitChangedFiles();
+  if (changedFiles.length === 0) return [];
+
+  const filtered: string[] = [];
+  for (const target of targets) {
+    if (await targetMentionsChangedFile(target, changedFiles)) {
+      filtered.push(target);
+    }
+  }
+  return filtered;
 }
 
 async function isFixtureLikeDirectory(path: string): Promise<boolean> {
@@ -246,7 +394,7 @@ function countByDq(targets: readonly ReportTargetResult[]): DqSummaryItem[] {
     .map(([code, count]) => ({
       code,
       count,
-      remediation: DQ_REMEDIATION[code],
+      remediation: getDqExplanation(code).remediation,
     }));
 }
 
@@ -254,6 +402,7 @@ function buildSummary(targets: readonly ReportTargetResult[]): ReportSummary {
   return {
     totalTargets: targets.length,
     passed: targets.filter((target) => target.status === "passed").length,
+    baselineAccepted: targets.filter((target) => target.status === "baseline_accepted").length,
     gateFailed: targets.filter((target) => target.status === "gate_failed").length,
     cliErrors: targets.filter((target) => target.status === "cli_error").length,
     dqCounts: countByDq(targets),
@@ -263,11 +412,16 @@ function buildSummary(targets: readonly ReportTargetResult[]): ReportSummary {
   };
 }
 
-export async function createCiReport(rawTargets: readonly string[]): Promise<CiReport> {
-  const targets = await collectReportTargets(rawTargets);
+export async function createCiReport(
+  rawTargets: readonly string[],
+  options: CreateCiReportOptions = {}
+): Promise<CiReport> {
+  const collectedTargets = await collectReportTargets(rawTargets);
+  const targets = await filterChangedTargets(collectedTargets, options.changedOnly);
+  const baseline = await readBaseline(options.baselinePath);
   const results: ReportTargetResult[] = [];
   for (const target of targets) {
-    results.push(await evaluateReportTarget(target));
+    results.push(applyBaseline(await evaluateReportTarget(target), baseline));
   }
 
   return {
@@ -340,9 +494,14 @@ function appendGateFailure(lines: string[], target: ReportTargetResult): void {
   appendExpectedMismatch(lines, target.expected);
 }
 
+function isFailureTarget(target: ReportTargetResult): boolean {
+  return target.status === "gate_failed" || target.status === "cli_error";
+}
+
 export function formatCiReportText(report: CiReport): string {
   const { summary } = report;
-  const failingTargets = report.targets.filter((target) => target.status !== "passed");
+  const failingTargets = report.targets.filter(isFailureTarget);
+  const baselineTargets = report.targets.filter((target) => target.status === "baseline_accepted");
   const lines: string[] = [
     "Quality Evidence Graph CI Report",
     `Generated at: ${report.generatedAt}`,
@@ -351,6 +510,7 @@ export function formatCiReportText(report: CiReport): string {
     "Summary",
     `- targets: ${summary.totalTargets}`,
     `- passed: ${summary.passed}`,
+    `- baseline accepted: ${summary.baselineAccepted}`,
     `- gate failed: ${summary.gateFailed}`,
     `- cli errors: ${summary.cliErrors}`,
     `- blockers: ${summary.blockerCount}`,
@@ -373,6 +533,65 @@ export function formatCiReportText(report: CiReport): string {
     }
   }
 
+  if (baselineTargets.length > 0) {
+    lines.push("", "Baseline accepted targets");
+    for (const target of baselineTargets) {
+      appendGateFailure(lines, target);
+    }
+  }
+
+  return `${lines.join("\n")}\n`;
+}
+
+export function formatGithubSummary(report: CiReport): string {
+  const { summary } = report;
+  const lines = [
+    "## QEG CI Report",
+    "",
+    `- targets: ${summary.totalTargets}`,
+    `- passed: ${summary.passed}`,
+    `- baseline accepted: ${summary.baselineAccepted}`,
+    `- gate failed: ${summary.gateFailed}`,
+    `- cli errors: ${summary.cliErrors}`,
+    `- blockers: ${summary.blockerCount}`,
+    `- residual risks: ${summary.residualRiskCount}`,
+    `- required human review: ${summary.humanReviewCount}`,
+    "",
+  ];
+
+  if (summary.dqCounts.length > 0) {
+    lines.push("### Disqualifications", "");
+    for (const dq of summary.dqCounts) {
+      lines.push(`- ${dq.code}: ${dq.count} - ${dq.remediation}`);
+    }
+    lines.push("");
+  }
+
+  const failedTargets = report.targets.filter(isFailureTarget);
+  if (failedTargets.length > 0) {
+    lines.push("### Targets", "");
+    for (const target of failedTargets) {
+      lines.push(`- ${target.target}: ${target.status}${target.verdict ? ` / ${target.verdict}` : ""}`);
+      if (target.error) {
+        lines.push(`  - ${target.error}`);
+      }
+      for (const disqualification of target.disqualifications) {
+        lines.push(`  - ${disqualification.code}: ${disqualification.message}`);
+      }
+    }
+  }
+
+  const baselineTargets = report.targets.filter((target) => target.status === "baseline_accepted");
+  if (baselineTargets.length > 0) {
+    lines.push("### Baseline accepted targets", "");
+    for (const target of baselineTargets) {
+      lines.push(`- ${target.target}: ${target.status}${target.verdict ? ` / ${target.verdict}` : ""}`);
+      for (const disqualification of target.disqualifications) {
+        lines.push(`  - ${disqualification.code}: ${disqualification.message}`);
+      }
+    }
+  }
+
   return `${lines.join("\n")}\n`;
 }
 
@@ -380,6 +599,9 @@ function parseReportArgs(args: readonly string[]): { options: ReportOptions; tar
   const targets: string[] = [];
   let format: ReportFormat = "text";
   let outPath: string | undefined;
+  let githubSummary = false;
+  let baselinePath: string | undefined;
+  let changedOnly = false;
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -405,14 +627,33 @@ function parseReportArgs(args: readonly string[]): { options: ReportOptions; tar
       index += 1;
       continue;
     }
+    if (arg === "--github-summary") {
+      githubSummary = true;
+      continue;
+    }
+    if (arg === "--baseline") {
+      const value = args[index + 1];
+      if (!value) {
+        throw new CliError("Expected baseline path after --baseline");
+      }
+      baselinePath = value;
+      index += 1;
+      continue;
+    }
+    if (arg === "--changed-only") {
+      changedOnly = true;
+      continue;
+    }
     targets.push(arg);
   }
 
   if (targets.length === 0) {
-    throw new CliError("Usage: qeg report [--json|--format text|json] [--out <path>] <fixture-dir-or-parent> [...]");
+    throw new CliError(
+      "Usage: qeg report [--json|--format text|json] [--out <path>] [--github-summary] [--baseline <path>] [--changed-only] <fixture-dir-or-parent> [...]"
+    );
   }
 
-  return { options: { format, outPath }, targets };
+  return { options: { format, outPath, githubSummary, baselinePath, changedOnly }, targets };
 }
 
 function formatReport(report: CiReport, format: ReportFormat): string {
@@ -429,13 +670,24 @@ function reportExitCode(report: CiReport): number {
 
 export async function runReportCommand(args: readonly string[]): Promise<void> {
   const { options, targets } = parseReportArgs(args);
-  const report = await createCiReport(targets);
+  const report = await createCiReport(targets, {
+    baselinePath: options.baselinePath,
+    changedOnly: options.changedOnly,
+  });
   const output = formatReport(report, options.format);
 
   if (options.outPath) {
     const outputPath = resolve(options.outPath);
     await mkdir(dirname(outputPath), { recursive: true });
     await writeFile(outputPath, output, "utf-8");
+  }
+
+  if (options.githubSummary) {
+    const summaryPath = process.env.GITHUB_STEP_SUMMARY;
+    if (!summaryPath) {
+      throw new CliError("--github-summary requires GITHUB_STEP_SUMMARY to be set");
+    }
+    await appendFile(summaryPath, formatGithubSummary(report), "utf-8");
   }
 
   console.log(output.trimEnd());

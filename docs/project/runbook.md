@@ -11,7 +11,7 @@ next_review_due: 2026-08-04
 ## Environments
 
 - Local: Node.js 20 以上
-- CI: `npm run typecheck` と JSON schema parse を必須確認にする
+- CI: Node.js 24、`npm run typecheck`、JSON schema parse、schema/enum drift check、QEG cumulative report を必須確認にする
 - Release dry-run: `npm pack --dry-run --cache ./.npm-cache`
 
 ## Execute
@@ -45,6 +45,18 @@ node -e "const fs=require('fs'); for (const f of fs.readdirSync('schemas').filte
 
 - `schemas/*.json` が JSON として parse できる
 
+### 3.5 schema / enum drift check
+
+```sh
+npm run schema-check
+npm run enum-check
+```
+
+期待結果:
+
+- `schemas/*.schema.json` が Ajv で compile できる
+- `GateProfile`、`GateVerdict`、`DisqualificationCode` が TypeScript 型と JSON Schema enum で一致する
+
 ### 4. CI cumulative report
 
 ```sh
@@ -56,20 +68,37 @@ npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
 
 - `report` が対象 fixture / target を最後まで評価する
 - `gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review が累積レポートに出る
+- `--github-summary` 指定時は GitHub Step Summary に人間向け要約を追記する
+- `--baseline <path>` 指定時は既知 DQ を `baseline_accepted` として通常 pass と分けて数える
+- `--changed-only` 指定時は変更に関係する target だけを評価する
 - CLI error がある場合は exit code `1`
 - Gate failure だけの場合は exit code `2`
 - 全 target が `go` の場合は exit code `0`
 - CI では `.qeg/qeg-ci-report.json` を artifact として保存する
 
-GitHub Actions の標準 workflow は `.github/workflows/ci.yml` とする。
+GitHub Actions の標準 workflow は `.github/workflows/ci.yml` とし、report 生成は `qeg-report-action` へ寄せる。
 
 - install、typecheck、build、JSON parse、package dry-run、QEG report は `continue-on-error` で完走させる
 - `QEG_REPORT_TARGETS` の既定値は repo self-check 用の `fixtures/positive-release-go`
 - 実運用 repo では `QEG_REPORT_TARGETS` を実際の QEG target path に差し替える
 - manual demo では Actions の `CI` workflow を `qeg_report_targets=fixtures/negative-approval-missing` で実行し、赤 job でも report artifact が保存されることを確認する
 - `.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存する
-- `QEG cumulative report` step は QEG の exit code を step output に退避して成功終了し、GitHub の汎用 `Process completed with exit code ...` 表示を避ける
+- `qeg-report-action` は QEG の exit code を `exit_code` step output に退避して成功終了し、GitHub の汎用 `Process completed with exit code ...` 表示を避ける
 - 最後の `Final CI verdict` step だけが各 step outcome を集約して job を失敗させる
+
+### 4.5 運用補助コマンド
+
+```sh
+npm run explain -- DQ-15
+npm run doctor -- fixtures/positive-release-go
+npm run snapshot -- fixtures/positive-release-go
+```
+
+期待結果:
+
+- `explain` が DQ の意味、原因、必要証跡、最小修正、参照仕様を表示する
+- `doctor` が Node version、`dist/cli.js`、schema compile、workflow、target artifact を診断する
+- `snapshot` が `expected-report.json` と現在の report を比較する
 
 ### 5. Release dry-run
 
@@ -84,6 +113,7 @@ npm pack --dry-run --cache ./.npm-cache
 - `README.md`、`docs/project/blueprint.md`、`docs/project/runbook.md`、`docs/project/evaluation.md`、`docs/project/guardrails.md`、`docs/agent/HUB.codex.md` が配布対象に含まれる
 - `docs/project/tasks.codex.md`、`fixtures/README.md`、`docs/control-mapping.md`、`docs/ipo-controlled-profile.md`、`docs/implementation-prep-gate-2026-06-02.md` が配布対象に含まれる
 - `docs/spec/` が配布対象に含まれる
+- `qeg-report-action/` が配布対象に含まれる
 
 ### 6. IPO 統制仕様書確認
 
@@ -149,6 +179,8 @@ node dist/cli.js record fixtures/negative-approval-missing
 - `DisqualificationCode` と `gate-verdict.schema.json` の DQ enum が一致する
 - `ipo_controlled` profile の要件が `docs/requirements.md`、`README.md`、`docs/project/blueprint.md` に同期されている
 - Birdseye index と capsule が変更対象を指している
+- `qeg-report-action/action.yml` が Node.js 24 action を使い、`exit_code` output を持つ
+- `docs/spec/operational-cli-extensions.md` が report / doctor / explain / schema-check / enum-check / snapshot / init / Action の contract を固定している
 - `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している
 - `fixtures/README.md` が expected verdict / DQ を固定している
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備を固定している

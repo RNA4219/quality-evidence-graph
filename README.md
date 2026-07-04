@@ -32,7 +32,7 @@
 - 要求正本は `docs/requirements.md`。
 - controlled governance の実装仕様正本は `docs/spec/`。
 - public TypeScript contract は `src/types.ts` facade から辿る。
-- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`。
+- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`snapshot`、`init`。
 - `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
 - `gate-input.json` 欠落・invalid は CLI failure として exit code `1`。
 - `report` は複数 target を最後まで評価し、CLI failure / DQ / blocker / human review を累積レポートとして出す。
@@ -43,7 +43,7 @@
 
 - controlled governance profile 実装済み。
 - DQ-01 から DQ-17 まで実装済み。
-- 28 fixture で negative / positive regression を保持。
+- 29 fixture で negative / positive regression を保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings は 0 を維持する方針。
 - Gate evaluator、CLI、types は facade + internal modules に分割済み。
@@ -53,6 +53,8 @@
 ```sh
 npm run typecheck
 npm run build
+npm run schema-check
+npm run enum-check
 npm pack --dry-run --cache ./.npm-cache
 ```
 
@@ -63,6 +65,9 @@ npm run validate -- fixtures/positive-release-go
 npm run gate -- fixtures/positive-release-go
 npm run record -- fixtures/positive-release-go
 npm run report -- fixtures/positive-release-go
+npm run explain -- DQ-15
+npm run doctor -- fixtures/positive-release-go
+npm run snapshot -- fixtures/positive-release-go
 ```
 
 CI cumulative report:
@@ -74,6 +79,7 @@ npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
 GitHub Actions integration:
 
 - `.github/workflows/ci.yml` runs install, typecheck, build, JSON parse, package dry-run, and QEG report with `continue-on-error`.
+- `qeg-report-action` wraps report generation, Step Summary output, artifact upload, and `exit_code` output.
 - The job uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact even when the Gate fails.
 - The final CI verdict step fails only after all diagnostic steps have finished.
 - Manual demo: run the `CI` workflow with `qeg_report_targets=fixtures/negative-approval-missing` to see a red job that still preserves the cumulative QEG report artifact.

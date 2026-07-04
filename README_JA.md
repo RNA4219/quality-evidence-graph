@@ -72,11 +72,36 @@ CI では、単発のエラーで止まらず不足している証跡や DQ を�
 ```sh
 npm run report -- fixtures
 npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
+npm run report -- --json --github-summary --out .qeg/qeg-ci-report.json fixtures
 ```
 
 `report` は複数 fixture / target を最後まで評価し、`gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review 要求をまとめて表示します。exit code は CLI error があれば `1`、Gate failure があれば `2`、全 target が `go` なら `0` です。
 
-GitHub Actions では `.github/workflows/ci.yml` がこの report を実行し、`.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存します。install / typecheck / build / JSON parse / package dry-run / QEG report は完走させ、最後の集約ステップで CI を失敗させます。
+運用補助コマンド:
+
+```sh
+npm run explain -- DQ-15
+npm run doctor -- fixtures/positive-release-go
+npm run schema-check
+npm run enum-check
+npm run snapshot -- fixtures/positive-release-go
+npm run init -- --root ../your-repo
+```
+
+`--baseline <path>` は既知 DQ を `baseline_accepted` として扱い、新規 DQ だけを赤にしたい移行期間に使います。`--changed-only` は `QEG_CHANGED_FILES` または git diff から変更に関係する target だけを評価します。
+
+GitHub Actions では `.github/workflows/ci.yml` が `qeg-report-action` 経由で report を実行し、`.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存します。install / typecheck / build / JSON parse / package dry-run / QEG report は完走させ、最後の集約ステップで CI を失敗させます。
+
+他 repo から使う最小例:
+
+```yaml
+- uses: RNA4219/quality-evidence-graph/qeg-report-action@v1
+  id: qeg_report
+  with:
+    targets: .qeg
+    output-path: .qeg/qeg-ci-report.json
+    github-summary: "true"
+```
 
 デモは Actions の `CI` workflow を手動実行し、`qeg_report_targets=fixtures/negative-approval-missing` を指定します。job は赤になりますが、Step Summary と `qeg-ci-report` artifact に累積不足が残ります。
 
@@ -103,7 +128,7 @@ GitHub Actions では `.github/workflows/ci.yml` がこの report を実行し�
 ## 現在の状態
 
 - DQ-01 から DQ-17 まで実装済み。
-- 28 fixture で regression を保持。
+- 29 fixture で regression を保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings 0 を維持。
 - `positive-release-go` は `go / exit 0`。

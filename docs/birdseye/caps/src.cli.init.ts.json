@@ -1,0 +1,10 @@
+{
+  "id": "src/cli/init.ts",
+  "role": "oss-init-cli",
+  "public_api": ["runInitCommand"],
+  "summary": "他 repo へ最小 QEG starter を生成する CLI。.qeg/gate-input.json、.qeg/qeg-baseline.json、.github/workflows/qeg.yml を作成し、--force で上書きできる。",
+  "deps_out": ["qeg-report-action/action.yml", "docs/spec/operational-cli-extensions.md"],
+  "deps_in": ["src/cli.ts", "README_JA.md", "README_EN.md"],
+  "risks": ["starter workflow の action ref が release tag とずれると外部 repo 導入が壊れる"],
+  "tests": ["npm run build", "node dist/cli.js init --root .qeg/init-smoke"]
+}

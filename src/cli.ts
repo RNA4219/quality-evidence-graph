@@ -1,8 +1,15 @@
+#!/usr/bin/env node
 import { exit } from "process";
 import {
+  runDoctorCommand,
+  runEnumCheckCommand,
+  runExplainCommand,
   runGateCommand,
+  runInitCommand,
   runRecordCommand,
   runReportCommand,
+  runSchemaCheckCommand,
+  runSnapshotCommand,
   runValidateCommand,
 } from "./cli/commands.js";
 
@@ -11,7 +18,7 @@ async function main(): Promise<void> {
 
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
-    console.error("Commands: validate, gate, record, report");
+    console.error("Commands: validate, gate, record, report, doctor, explain, schema-check, enum-check, init, snapshot");
     exit(1);
   }
 
@@ -42,6 +49,24 @@ async function main(): Promise<void> {
       break;
     case "report":
       await runReportCommand(commandArgs);
+      break;
+    case "doctor":
+      await runDoctorCommand(commandArgs);
+      break;
+    case "explain":
+      await runExplainCommand(commandArgs);
+      break;
+    case "schema-check":
+      await runSchemaCheckCommand(commandArgs);
+      break;
+    case "enum-check":
+      await runEnumCheckCommand(commandArgs);
+      break;
+    case "init":
+      await runInitCommand(commandArgs);
+      break;
+    case "snapshot":
+      await runSnapshotCommand(commandArgs);
       break;
     default:
       console.error(`Unknown command: ${command}`);

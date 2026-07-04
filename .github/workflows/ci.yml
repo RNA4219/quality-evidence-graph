@@ -61,81 +61,15 @@ jobs:
       - name: QEG cumulative report
         id: qeg_report
         if: always()
-        run: |
-          mkdir -p .qeg
-          report_exit=0
-          if [ -f dist/cli.js ]; then
-            set +e
-            npm run report -- --json --out .qeg/qeg-ci-report.json $QEG_REPORT_TARGETS
-            report_exit=$?
-            set -e
-          else
-            node -e "const fs=require('fs'); const report={reportVersion:'qeg-ci-report-v1',generatedAt:new Date().toISOString(),summary:{totalTargets:1,passed:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:'dist/cli.js',status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:'dist/cli.js not found; build failed before QEG report could run'}]}; fs.writeFileSync('.qeg/qeg-ci-report.json', JSON.stringify(report,null,2)+'\n');"
-            cat .qeg/qeg-ci-report.json
-            report_exit=1
-          fi
-          echo "$report_exit" > .qeg/qeg-report-exit-code.txt
-          echo "exit_code=$report_exit" >> "$GITHUB_OUTPUT"
-          exit 0
-
-      - name: Append QEG report summary
-        if: always()
-        run: |
-          if [ ! -f .qeg/qeg-ci-report.json ]; then
-            echo "## QEG CI Report" >> "$GITHUB_STEP_SUMMARY"
-            echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "No QEG report artifact was produced." >> "$GITHUB_STEP_SUMMARY"
-            exit 0
-          fi
-          node <<'NODE'
-          const fs = require('fs');
-          const report = JSON.parse(fs.readFileSync('.qeg/qeg-ci-report.json', 'utf8'));
-          const summary = report.summary;
-          const lines = [
-            '## QEG CI Report',
-            '',
-            `- targets: ${summary.totalTargets}`,
-            `- passed: ${summary.passed}`,
-            `- gate failed: ${summary.gateFailed}`,
-            `- cli errors: ${summary.cliErrors}`,
-            `- blockers: ${summary.blockerCount}`,
-            `- residual risks: ${summary.residualRiskCount}`,
-            `- required human review: ${summary.humanReviewCount}`,
-            '',
-          ];
-
-          if (summary.dqCounts.length > 0) {
-            lines.push('### Disqualifications', '');
-            for (const dq of summary.dqCounts) {
-              lines.push(`- ${dq.code}: ${dq.count} - ${dq.remediation}`);
-            }
-            lines.push('');
-          }
-
-          const failedTargets = report.targets.filter((target) => target.status !== 'passed');
-          if (failedTargets.length > 0) {
-            lines.push('### Failing targets', '');
-            for (const target of failedTargets) {
-              lines.push(`- ${target.target}: ${target.status}${target.verdict ? ` / ${target.verdict}` : ''}`);
-              if (target.error) {
-                lines.push(`  - ${target.error}`);
-              }
-              for (const disqualification of target.disqualifications ?? []) {
-                lines.push(`  - ${disqualification.code}: ${disqualification.message}`);
-              }
-            }
-          }
-
-          fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY, `${lines.join('\n')}\n`);
-          NODE
-
-      - name: Upload QEG report artifact
-        if: always()
-        uses: actions/upload-artifact@v7.0.1
+        uses: ./qeg-report-action
         with:
-          name: qeg-ci-report
-          path: .qeg/qeg-ci-report.json
-          if-no-files-found: warn
+          install-command: ""
+          build-command: ""
+          targets: ${{ env.QEG_REPORT_TARGETS }}
+          output-path: .qeg/qeg-ci-report.json
+          github-summary: "true"
+          report-command: node dist/cli.js
+          artifact-name: qeg-ci-report
 
       - name: Final CI verdict
         if: always()

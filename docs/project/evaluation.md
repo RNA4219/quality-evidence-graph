@@ -29,6 +29,9 @@ next_review_due: 2026-08-04
 - `docs/implementation-prep-gate-2026-06-02.md` が implementation preparation Go と IPO controlled release No-Go を分離していること。
 - CI 用 `report` コマンドが複数 target を最後まで評価し、CLI error / DQ / blocker / residual risk / human review を累積表示できること。
 - `.github/workflows/ci.yml` が QEG report artifact を保存し、各診断 step を完走させてから最終判定で job を落とすこと。
+- `qeg-report-action` が report 生成、Step Summary、artifact upload、`exit_code` output を提供し、report step 自体で直接失敗しないこと。
+- `doctor`、`explain`、`schema-check`、`enum-check`、`snapshot`、`init` の contract が `docs/spec/operational-cli-extensions.md` に固定されていること。
+- `report --baseline` と `report --changed-only` が移行期間と大規模 repo の差分 CI を支援できること。
 
 ## Test Outline
 
@@ -37,6 +40,13 @@ next_review_due: 2026-08-04
 - JSON:
   - `schemas/*.json` の parse
   - `package.json` の parse
+- Schema / enum drift:
+  - `npm run schema-check`
+  - `npm run enum-check`
+- Operational helpers:
+  - `npm run explain -- DQ-15`
+  - `npm run doctor -- fixtures/positive-release-go`
+  - `npm run snapshot -- fixtures/positive-release-go`
 - Release dry-run:
   - `npm pack --dry-run --cache ./.npm-cache`
 - CI cumulative report:
@@ -44,6 +54,7 @@ next_review_due: 2026-08-04
   - `npm run report -- --json fixtures/positive-release-go`
 - GitHub Actions workflow:
   - `.github/workflows/ci.yml` が `.qeg/qeg-ci-report.json` を upload artifact 対象にしている
+  - `.github/workflows/ci.yml` が `qeg-report-action` を使っている
   - `Final CI verdict` が install / typecheck / build / JSON parse / package dry-run / QEG report の outcome を集約している
   - `workflow_dispatch` の `qeg_report_targets` で failing demo target を指定できる
   - `QEG cumulative report` step が QEG exit code を output に退避し、step 自体は成功終了する
@@ -63,13 +74,20 @@ next_review_due: 2026-08-04
 ## Verification Checklist
 
 - [ ] `npm run typecheck` が成功した
+- [ ] `npm run build` が成功した
+- [ ] `npm run schema-check` が成功した
+- [ ] `npm run enum-check` が成功した
+- [ ] `npm run explain -- DQ-15` が DQ-15 の必要証跡を説明した
+- [ ] `npm run doctor -- fixtures/positive-release-go` が hard failure なしで終了した
+- [ ] `npm run snapshot -- fixtures/positive-release-go` が成功した
 - [ ] schema JSON parse が成功した
 - [ ] `npm pack --dry-run --cache ./.npm-cache` が成功した
 - [ ] `npm run report -- fixtures/positive-release-go` が成功した
 - [ ] `npm run report -- --json fixtures/positive-release-go` が成功し、`summary.totalTargets` と `targets[]` を出力した
-- [ ] `.github/workflows/ci.yml` が QEG report artifact を `if: always()` で upload する
+- [ ] `.github/workflows/ci.yml` が `qeg-report-action` を通じて QEG report artifact を `if: always()` で upload する
 - [ ] `.github/workflows/ci.yml` が manual demo 用 `workflow_dispatch.inputs.qeg_report_targets` を持つ
 - [ ] `.github/workflows/ci.yml` が QEG report の非 0 exit を直接 shell failure にせず、`Final CI verdict` へ集約する
+- [ ] `qeg-report-action/action.yml` が Node 24 action、artifact upload、`exit_code` output を持つ
 - [ ] tarball contents に `docs/requirements.md` が含まれる
 - [ ] Birdseye index と capsule が主要ファイルを指す
 - [ ] IPO controlled profile の統制要件が requirements / README / BLUEPRINT に同期している

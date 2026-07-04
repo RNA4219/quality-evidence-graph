@@ -1,0 +1,64 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-06",
+        "count": 1,
+        "remediation": "Regenerate or relink evidence artifacts so recorded content hashes match actual inputs."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-evidence-hash-mismatch",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-06: Evidence hash mismatch for artifact \"qeg:artifact-001\""
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-06",
+          "message": "Evidence hash mismatch for artifact \"qeg:artifact-001\"",
+          "nodeIds": [
+            "qeg:artifact-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-evidence-hash-mismatch",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-06"
+        ],
+        "actualDqCodes": [
+          "DQ-06"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

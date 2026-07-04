@@ -1,0 +1,44 @@
+{
+  "reportVersion": "qeg-ci-report-v1",
+  "generatedAt": "<snapshot>",
+  "summary": {
+    "totalTargets": 1,
+    "passed": 1,
+    "baselineAccepted": 0,
+    "gateFailed": 0,
+    "cliErrors": 0,
+    "dqCounts": [],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/positive-release-go",
+      "status": "passed",
+      "exitCode": 0,
+      "verdict": "go",
+      "reasons": [
+        "All gate conditions satisfied"
+      ],
+      "disqualifications": [],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "positive-release-go",
+        "expectedVerdict": "go",
+        "expectedExitCode": 0,
+        "contractRef": "docs/spec/gate-policy.md §5",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [],
+        "actualDqCodes": [],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}
