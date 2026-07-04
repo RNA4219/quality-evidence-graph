@@ -1,0 +1,10 @@
+{
+  "id": "src/cli/repro-bundle.ts",
+  "role": "repro-bundle-cli",
+  "public_api": ["runReproBundleCommand"],
+  "summary": "repro-bundle CLI。CI report、doctor、schema inventory、package version、workflow config、gate-input を redaction 付きで束ね、赤 CI の再現材料を artifact 化する。",
+  "deps_out": ["src/cli/doctor.ts", "schemas/*.schema.json", ".github/workflows/ci.yml"],
+  "deps_in": ["src/cli.ts", "docs/requirements.md", "docs/spec/operational-cli-extensions.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
+  "risks": ["bundle に secret を含めると OSS artifact として危険なため、key/value 双方の redaction を維持する必要がある"],
+  "tests": ["npm run build", "node dist/cli.js repro-bundle --report .qeg/qeg-ci-report.json --out .qeg/repro-smoke fixtures/negative-approval-missing"]
+}

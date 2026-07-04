@@ -1,13 +1,18 @@
 #!/usr/bin/env node
 import { exit } from "process";
 import {
+  runBaselineCommand,
+  runCheckCommand,
   runDoctorCommand,
   runEnumCheckCommand,
+  runEvidenceVerifyCommand,
   runExplainCommand,
   runGateCommand,
   runInitCommand,
+  runPolicyLintCommand,
   runRecordCommand,
   runReportCommand,
+  runReproBundleCommand,
   runSchemaCheckCommand,
   runSnapshotCommand,
   runValidateCommand,
@@ -18,7 +23,7 @@ async function main(): Promise<void> {
 
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
-    console.error("Commands: validate, gate, record, report, doctor, explain, schema-check, enum-check, init, snapshot");
+    console.error("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit(1);
   }
 
@@ -50,6 +55,9 @@ async function main(): Promise<void> {
     case "report":
       await runReportCommand(commandArgs);
       break;
+    case "baseline":
+      await runBaselineCommand(commandArgs);
+      break;
     case "doctor":
       await runDoctorCommand(commandArgs);
       break;
@@ -61,6 +69,26 @@ async function main(): Promise<void> {
       break;
     case "enum-check":
       await runEnumCheckCommand(commandArgs);
+      break;
+    case "evidence":
+      if (commandArgs[0] !== "verify") {
+        console.error("Usage: qeg evidence verify <fixture-dir-or-parent> [...]");
+        exit(1);
+      }
+      await runEvidenceVerifyCommand(commandArgs.slice(1));
+      break;
+    case "policy":
+      if (commandArgs[0] !== "lint") {
+        console.error("Usage: qeg policy lint <fixture-dir-or-parent> [...]");
+        exit(1);
+      }
+      await runPolicyLintCommand(commandArgs.slice(1));
+      break;
+    case "repro-bundle":
+      await runReproBundleCommand(commandArgs);
+      break;
+    case "check":
+      await runCheckCommand(commandArgs);
       break;
     case "init":
       await runInitCommand(commandArgs);

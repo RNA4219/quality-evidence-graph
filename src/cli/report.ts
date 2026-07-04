@@ -37,6 +37,7 @@ export interface ReportOptions {
   readonly githubSummary?: boolean;
   readonly baselinePath?: string;
   readonly changedOnly?: boolean;
+  readonly diffPath?: string;
 }
 
 export interface ReportExpectedComparison {
@@ -91,6 +92,21 @@ export interface CiReport {
   readonly generatedAt: string;
   readonly summary: ReportSummary;
   readonly targets: readonly ReportTargetResult[];
+  readonly diff?: ReportDiff;
+}
+
+export interface ReportDiffItem {
+  readonly target: string;
+  readonly code: DisqualificationCode;
+  readonly message: string;
+  readonly nodeIds: readonly StableId[];
+}
+
+export interface ReportDiff {
+  readonly previousReport: string;
+  readonly new: readonly ReportDiffItem[];
+  readonly resolved: readonly ReportDiffItem[];
+  readonly unchanged: readonly ReportDiffItem[];
 }
 
 interface BaselineEntry {
@@ -107,6 +123,7 @@ interface ReportBaseline {
 interface CreateCiReportOptions {
   readonly baselinePath?: string;
   readonly changedOnly?: boolean;
+  readonly diffPath?: string;
 }
 
 interface GateInputForChangedOnly {
@@ -144,6 +161,50 @@ function relativeTarget(target: string): string {
 async function readBaseline(path: string | undefined): Promise<ReportBaseline | undefined> {
   if (!path) return undefined;
   return readJsonFile<ReportBaseline>(path);
+}
+
+function normalizeTargetForDiff(target: string): string {
+  return portable(target).replace(portable(process.cwd()), "<repo>");
+}
+
+function diffItemKey(item: ReportDiffItem): string {
+  return JSON.stringify({
+    target: normalizeTargetForDiff(item.target),
+    code: item.code,
+    message: item.message,
+    nodeIds: [...item.nodeIds].sort(),
+  });
+}
+
+function reportDiffItems(report: CiReport): ReportDiffItem[] {
+  const items: ReportDiffItem[] = [];
+  for (const target of report.targets) {
+    for (const disqualification of target.disqualifications) {
+      items.push({
+        target: normalizeTargetForDiff(target.target),
+        code: disqualification.code,
+        message: disqualification.message,
+        nodeIds: disqualification.nodeIds,
+      });
+    }
+  }
+  return items.sort((left, right) => diffItemKey(left).localeCompare(diffItemKey(right)));
+}
+
+async function createReportDiff(current: CiReport, previousPath: string | undefined): Promise<ReportDiff | undefined> {
+  if (!previousPath) return undefined;
+  const previous = await readJsonFile<CiReport>(previousPath);
+  const currentItems = reportDiffItems(current);
+  const previousItems = reportDiffItems(previous);
+  const currentKeys = new Set(currentItems.map(diffItemKey));
+  const previousKeys = new Set(previousItems.map(diffItemKey));
+
+  return {
+    previousReport: previousPath,
+    new: currentItems.filter((item) => !previousKeys.has(diffItemKey(item))),
+    resolved: previousItems.filter((item) => !currentKeys.has(diffItemKey(item))),
+    unchanged: currentItems.filter((item) => previousKeys.has(diffItemKey(item))),
+  };
 }
 
 function sameNodeIds(left: readonly StableId[] | undefined, right: readonly StableId[]): boolean {
@@ -424,12 +485,14 @@ export async function createCiReport(
     results.push(applyBaseline(await evaluateReportTarget(target), baseline));
   }
 
-  return {
+  const report: CiReport = {
     reportVersion: "qeg-ci-report-v1",
     generatedAt: new Date().toISOString(),
     summary: buildSummary(results),
     targets: results,
   };
+  const diff = await createReportDiff(report, options.diffPath);
+  return diff ? { ...report, diff } : report;
 }
 
 function sourceRefLabel(sourceRef: SourceRef): string {
@@ -526,6 +589,23 @@ export function formatCiReportText(report: CiReport): string {
     }
   }
 
+  if (report.diff) {
+    lines.push(
+      "",
+      "Diff summary",
+      `- previous report: ${report.diff.previousReport}`,
+      `- new DQs: ${report.diff.new.length}`,
+      `- resolved DQs: ${report.diff.resolved.length}`,
+      `- unchanged DQs: ${report.diff.unchanged.length}`
+    );
+    for (const item of report.diff.new) {
+      lines.push(`  new ${item.code}: ${item.target} - ${item.message}`);
+    }
+    for (const item of report.diff.resolved) {
+      lines.push(`  resolved ${item.code}: ${item.target} - ${item.message}`);
+    }
+  }
+
   if (failingTargets.length > 0) {
     lines.push("", "Target details");
     for (const target of failingTargets) {
@@ -567,6 +647,24 @@ export function formatGithubSummary(report: CiReport): string {
     lines.push("");
   }
 
+  if (report.diff) {
+    lines.push("### Diff", "");
+    lines.push(`- previous report: ${report.diff.previousReport}`);
+    lines.push(`- new DQs: ${report.diff.new.length}`);
+    lines.push(`- resolved DQs: ${report.diff.resolved.length}`);
+    lines.push(`- unchanged DQs: ${report.diff.unchanged.length}`);
+    lines.push("");
+    for (const item of report.diff.new) {
+      lines.push(`- new ${item.code}: ${item.target} - ${item.message}`);
+    }
+    for (const item of report.diff.resolved) {
+      lines.push(`- resolved ${item.code}: ${item.target} - ${item.message}`);
+    }
+    if (report.diff.new.length > 0 || report.diff.resolved.length > 0) {
+      lines.push("");
+    }
+  }
+
   const failedTargets = report.targets.filter(isFailureTarget);
   if (failedTargets.length > 0) {
     lines.push("### Targets", "");
@@ -602,6 +700,7 @@ function parseReportArgs(args: readonly string[]): { options: ReportOptions; tar
   let githubSummary = false;
   let baselinePath: string | undefined;
   let changedOnly = false;
+  let diffPath: string | undefined;
 
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
@@ -644,16 +743,25 @@ function parseReportArgs(args: readonly string[]): { options: ReportOptions; tar
       changedOnly = true;
       continue;
     }
+    if (arg === "--diff") {
+      const value = args[index + 1];
+      if (!value) {
+        throw new CliError("Expected previous report path after --diff");
+      }
+      diffPath = value;
+      index += 1;
+      continue;
+    }
     targets.push(arg);
   }
 
   if (targets.length === 0) {
     throw new CliError(
-      "Usage: qeg report [--json|--format text|json] [--out <path>] [--github-summary] [--baseline <path>] [--changed-only] <fixture-dir-or-parent> [...]"
+      "Usage: qeg report [--json|--format text|json] [--out <path>] [--github-summary] [--baseline <path>] [--changed-only] [--diff <previous-report.json>] <fixture-dir-or-parent> [...]"
     );
   }
 
-  return { options: { format, outPath, githubSummary, baselinePath, changedOnly }, targets };
+  return { options: { format, outPath, githubSummary, baselinePath, changedOnly, diffPath }, targets };
 }
 
 function formatReport(report: CiReport, format: ReportFormat): string {
@@ -673,6 +781,7 @@ export async function runReportCommand(args: readonly string[]): Promise<void> {
   const report = await createCiReport(targets, {
     baselinePath: options.baselinePath,
     changedOnly: options.changedOnly,
+    diffPath: options.diffPath,
   });
   const output = formatReport(report, options.format);
 

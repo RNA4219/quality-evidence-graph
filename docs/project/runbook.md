@@ -91,6 +91,10 @@ GitHub Actions の標準 workflow は `.github/workflows/ci.yml` とし、report
 ```sh
 npm run explain -- DQ-15
 npm run doctor -- fixtures/positive-release-go
+npm run check -- fixtures/positive-release-go
+npm run evidence -- verify fixtures/positive-release-go
+npm run policy -- lint fixtures/positive-release-go
+npm run baseline -- audit .qeg/qeg-baseline.json fixtures
 npm run snapshot -- fixtures/positive-release-go
 ```
 
@@ -98,6 +102,10 @@ npm run snapshot -- fixtures/positive-release-go
 
 - `explain` が DQ の意味、原因、必要証跡、最小修正、参照仕様を表示する
 - `doctor` が Node version、`dist/cli.js`、schema compile、workflow、target artifact を診断する
+- `check` が schema-check、enum-check、doctor、snapshot、report を一括実行する
+- `evidence verify` が artifact path、hash、revision、retention、storageClassification を Gate 前に検査する
+- `policy lint` が GatePolicy の hash、sourceRefs、exitCodePolicy、dqScope、profile を検査する
+- `baseline audit` が owner 未設定、期限切れ、解消済み DQ、存在しない target を検出する
 - `snapshot` が `expected-report.json` と現在の report を比較する
 
 ### 5. Release dry-run
@@ -179,8 +187,8 @@ node dist/cli.js record fixtures/negative-approval-missing
 - `DisqualificationCode` と `gate-verdict.schema.json` の DQ enum が一致する
 - `ipo_controlled` profile の要件が `docs/requirements.md`、`README.md`、`docs/project/blueprint.md` に同期されている
 - Birdseye index と capsule が変更対象を指している
-- `qeg-report-action/action.yml` が Node.js 24 action を使い、`exit_code` output を持つ
-- `docs/spec/operational-cli-extensions.md` が report / doctor / explain / schema-check / enum-check / snapshot / init / Action の contract を固定している
+- `qeg-report-action/action.yml` が Node.js 24 action を使い、`exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` output を持つ
+- `docs/spec/operational-cli-extensions.md` が report / baseline audit / doctor / explain / schema-check / enum-check / evidence verify / policy lint / repro-bundle / check / snapshot / init / Action の contract を固定している
 - `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している
 - `fixtures/README.md` が expected verdict / DQ を固定している
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備を固定している

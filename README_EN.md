@@ -84,13 +84,20 @@ npm run explain -- DQ-15
 npm run doctor -- fixtures/positive-release-go
 npm run schema-check
 npm run enum-check
+npm run check -- fixtures/positive-release-go
+npm run baseline -- audit .qeg/qeg-baseline.json fixtures
+npm run evidence -- verify fixtures/positive-release-go
+npm run policy -- lint fixtures/positive-release-go
+npm run repro-bundle -- --report .qeg/qeg-ci-report.json --out .qeg/repro fixtures/positive-release-go
 npm run snapshot -- fixtures/positive-release-go
 npm run init -- --root ../your-repo
 ```
 
-Use `--baseline <path>` to accept known DQs as `baseline_accepted` during migration so only new DQs fail the run. Use `--changed-only` to evaluate only targets related to `QEG_CHANGED_FILES` or git diff output.
+Use `--baseline <path>` to accept known DQs as `baseline_accepted` during migration so only new DQs fail the run. `baseline audit` detects missing owners, expired entries, resolved DQs, and missing targets. Use `--changed-only` to evaluate only targets related to `QEG_CHANGED_FILES` or git diff output. Use `--diff <previous-report.json>` to classify DQs as `new`, `resolved`, or `unchanged`.
 
 In GitHub Actions, `.github/workflows/ci.yml` runs this report through `qeg-report-action` and uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact. Install, typecheck, build, JSON parse, package dry-run, and QEG report are allowed to finish before the final verdict step fails the job.
+
+The Action exposes `exit_code`, `gate_failed`, `cli_errors`, `dq_count`, `report_path`, and `summary_markdown_path` outputs for caller-side branching.
 
 Minimal use from another repository:
 

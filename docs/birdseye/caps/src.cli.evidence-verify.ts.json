@@ -1,0 +1,10 @@
+{
+  "id": "src/cli/evidence-verify.ts",
+  "role": "evidence-verify-cli",
+  "public_api": ["runEvidenceVerifyCommand", "createEvidenceVerifyReport"],
+  "summary": "evidence verify CLI。gate-input の input artifact、hash、revision、retention.storageClassification を Gate 前に軽量検査し、証跡不足や mutable storage を早く見つける。",
+  "deps_out": ["src/cli/report.ts"],
+  "deps_in": ["src/cli.ts", "docs/requirements.md", "docs/spec/operational-cli-extensions.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
+  "risks": ["artifact path や hash を Gate 実行後まで検出しないと、CI の赤が修正可能な証跡不足として読めない"],
+  "tests": ["npm run build", "node dist/cli.js evidence verify fixtures/positive-release-go"]
+}

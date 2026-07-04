@@ -9,7 +9,7 @@ interface SnapshotOptions {
   readonly targets: readonly string[];
 }
 
-interface SnapshotResult {
+export interface SnapshotResult {
   readonly target: string;
   readonly status: "pass" | "updated" | "missing" | "mismatch";
   readonly path: string;
@@ -86,14 +86,21 @@ async function checkTargetSnapshot(target: string, update: boolean): Promise<Sna
   };
 }
 
-export async function runSnapshotCommand(args: readonly string[]): Promise<void> {
-  const options = parseSnapshotArgs(args);
-  const targets = await collectReportTargets(options.targets);
+export async function createSnapshotResults(
+  rawTargets: readonly string[],
+  update = false
+): Promise<SnapshotResult[]> {
+  const targets = await collectReportTargets(rawTargets);
   const results: SnapshotResult[] = [];
   for (const target of targets) {
-    results.push(await checkTargetSnapshot(target, options.update));
+    results.push(await checkTargetSnapshot(target, update));
   }
+  return results;
+}
 
+export async function runSnapshotCommand(args: readonly string[]): Promise<void> {
+  const options = parseSnapshotArgs(args);
+  const results = await createSnapshotResults(options.targets, options.update);
   console.log("QEG Report Snapshots");
   for (const result of results) {
     console.log(`- ${result.status.toUpperCase()} ${relative(process.cwd(), result.target)} -> ${relative(process.cwd(), result.path)}`);
@@ -102,4 +109,3 @@ export async function runSnapshotCommand(args: readonly string[]): Promise<void>
   const failed = results.some((result) => result.status === "missing" || result.status === "mismatch");
   exit(failed ? 2 : 0);
 }
-

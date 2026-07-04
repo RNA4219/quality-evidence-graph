@@ -34,6 +34,11 @@
     "explain": "node dist/cli.js explain",
     "schema-check": "node dist/cli.js schema-check",
     "enum-check": "node dist/cli.js enum-check",
+    "baseline": "node dist/cli.js baseline",
+    "evidence": "node dist/cli.js evidence",
+    "policy": "node dist/cli.js policy",
+    "repro-bundle": "node dist/cli.js repro-bundle",
+    "check": "node dist/cli.js check",
     "init": "node dist/cli.js init",
     "snapshot": "node dist/cli.js snapshot"
   },

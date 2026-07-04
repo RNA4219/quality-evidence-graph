@@ -342,6 +342,13 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-14 | `report --baseline` | 既知の DQ を baseline として受理し、新規 DQ だけを赤にする | baseline が全 current DQ を覆い、blocker / residual risk / human review / expected mismatch がない場合だけ pass 扱いにできる |
 | C-15 | `report --changed-only` | 変更に関係する target だけを評価する | `QEG_CHANGED_FILES` または git diff から対象を絞り、対象なしの場合は空 report / exit `0` にできる |
 | C-16 | `qeg-report-action` | OSS 利用者が GitHub Actions へ QEG report を組み込みやすくする | report step 自体は成功終了し、`exit_code` output、artifact、Step Summary を残してから呼び出し側の final verdict で失敗させられる |
+| C-17 | `baseline audit` | baseline の放置を防ぐ | 期限切れ、owner 未設定、存在しない target、すでに解消済みの DQ を検出できる |
+| C-18 | `report --diff <previous-report.json>` | 前回 CI との差分を表示する | DQ を `new` / `resolved` / `unchanged` に分類し、今回増えた不足と解消した不足を読める |
+| C-19 | `repro-bundle` | CI 失敗の再現材料をまとめる | report、doctor、schema inventory、package version、workflow、対象 `gate-input.json` を secret redaction 付きで bundle 化できる |
+| C-20 | `evidence verify` | Gate 前に証跡実体だけを高速検証する | artifact path、hash、revision、retention、storageClassification の不足や矛盾を Gate 全体より前に切り分けられる |
+| C-21 | `policy lint` | GatePolicy 正本の矛盾を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile 設定の不整合を検出できる |
+| C-22 | `check` | ローカル総合確認入口を提供する | schema-check、enum-check、doctor、snapshot、report を一括実行し、導入者が最初に見るコマンドにできる |
+| C-23 | Action outputs 拡充 | workflow 側の条件分岐を容易にする | `exit_code` に加え、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を出力できる |
 
 CLI の exit code は MVP では最小限にする。
 
@@ -356,6 +363,10 @@ CLI の exit code は MVP では最小限にする。
 GitHub Actions では、QEG report の非 0 exit を shell step の即時 failure として扱わず、artifact / Step Summary / exit code output を保存してから最終判定 step で job を失敗させる。これにより `Process completed with exit code 1` だけで原因が読めない状態を避ける。
 
 baseline は DQ を消す仕組みではなく、既知の不足を明示して「新規不足だけを赤にする」ための移行補助である。baseline が適用された target は report 上 `baseline_accepted` として数え、通常の `passed` と区別する。
+
+baseline は owner と期限を持つ運用証跡として扱う。owner 未設定、期限切れ、target 消失、現在の report に存在しない DQ は `baseline audit` で検出し、永久免罪符化を防ぐ。
+
+`report --diff` は DQ 単位で前回 report と比較する。比較 key は target、DQ code、message、nodeIds とし、今回だけ存在するものを `new`、前回だけ存在するものを `resolved`、両方に存在するものを `unchanged` とする。
 
 ## 14. Governance / Control 要件
 

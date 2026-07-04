@@ -38,6 +38,11 @@ QEG の主要契約を最小文脈で読むための fallback map。
 | `src/cli/enum-check.ts` | TypeScript / JSON Schema enum drift check |
 | `src/cli/init.ts` | OSS starter scaffolding CLI |
 | `src/cli/snapshot.ts` | report golden snapshot CLI |
+| `src/cli/baseline.ts` | baseline audit CLI |
+| `src/cli/evidence-verify.ts` | evidence artifact preflight CLI |
+| `src/cli/policy-lint.ts` | GatePolicy lint CLI |
+| `src/cli/repro-bundle.ts` | CI reproduction bundle CLI |
+| `src/cli/check.ts` | local aggregate check CLI |
 | `qeg-report-action/action.yml` | GitHub Action wrapper for cumulative report |
 | `schemas/shared-defs.schema.json` | shared schema definitions |
 | `schemas/gate-verdict.schema.json` | Gate verdict schema |
@@ -62,6 +67,11 @@ QEG の主要契約を最小文脈で読むための fallback map。
 - `docs/implementation-prep-gate-2026-06-02.md` -> `docs/project/tasks.codex.md`
 - `docs/requirements.md` -> `src/types.ts`
 - `docs/requirements.md` -> `src/cli/report.ts`
+- `docs/requirements.md` -> `src/cli/baseline.ts`
+- `docs/requirements.md` -> `src/cli/evidence-verify.ts`
+- `docs/requirements.md` -> `src/cli/policy-lint.ts`
+- `docs/requirements.md` -> `src/cli/repro-bundle.ts`
+- `docs/requirements.md` -> `src/cli/check.ts`
 - `docs/requirements.md` -> `qeg-report-action/action.yml`
 - `docs/requirements.md` -> `docs/spec/operational-cli-extensions.md`
 - `docs/requirements.md` -> `schemas/gate-verdict.schema.json`
@@ -72,7 +82,22 @@ QEG の主要契約を最小文脈で読むための fallback map。
 - `docs/spec/operational-cli-extensions.md` -> `src/cli/enum-check.ts`
 - `docs/spec/operational-cli-extensions.md` -> `src/cli/init.ts`
 - `docs/spec/operational-cli-extensions.md` -> `src/cli/snapshot.ts`
+- `docs/spec/operational-cli-extensions.md` -> `src/cli/baseline.ts`
+- `docs/spec/operational-cli-extensions.md` -> `src/cli/evidence-verify.ts`
+- `docs/spec/operational-cli-extensions.md` -> `src/cli/policy-lint.ts`
+- `docs/spec/operational-cli-extensions.md` -> `src/cli/repro-bundle.ts`
+- `docs/spec/operational-cli-extensions.md` -> `src/cli/check.ts`
 - `docs/spec/operational-cli-extensions.md` -> `qeg-report-action/action.yml`
+- `src/cli.ts` -> `src/cli/baseline.ts`
+- `src/cli.ts` -> `src/cli/evidence-verify.ts`
+- `src/cli.ts` -> `src/cli/policy-lint.ts`
+- `src/cli.ts` -> `src/cli/repro-bundle.ts`
+- `src/cli.ts` -> `src/cli/check.ts`
+- `src/cli/check.ts` -> `src/cli/schema-check.ts`
+- `src/cli/check.ts` -> `src/cli/enum-check.ts`
+- `src/cli/check.ts` -> `src/cli/snapshot.ts`
+- `src/cli/check.ts` -> `src/cli/doctor.ts`
+- `src/cli/check.ts` -> `src/cli/report.ts`
 - `.github/workflows/ci.yml` -> `qeg-report-action/action.yml`
 - `src/types.ts` -> `schemas/shared-defs.schema.json`
 - `schemas/shared-defs.schema.json` -> `schemas/gate-verdict.schema.json`

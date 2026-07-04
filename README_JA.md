@@ -84,13 +84,20 @@ npm run explain -- DQ-15
 npm run doctor -- fixtures/positive-release-go
 npm run schema-check
 npm run enum-check
+npm run check -- fixtures/positive-release-go
+npm run baseline -- audit .qeg/qeg-baseline.json fixtures
+npm run evidence -- verify fixtures/positive-release-go
+npm run policy -- lint fixtures/positive-release-go
+npm run repro-bundle -- --report .qeg/qeg-ci-report.json --out .qeg/repro fixtures/positive-release-go
 npm run snapshot -- fixtures/positive-release-go
 npm run init -- --root ../your-repo
 ```
 
-`--baseline <path>` は既知 DQ を `baseline_accepted` として扱い、新規 DQ だけを赤にしたい移行期間に使います。`--changed-only` は `QEG_CHANGED_FILES` または git diff から変更に関係する target だけを評価します。
+`--baseline <path>` は既知 DQ を `baseline_accepted` として扱い、新規 DQ だけを赤にしたい移行期間に使います。`baseline audit` は owner 未設定、期限切れ、解消済み DQ、存在しない target を検出します。`--changed-only` は `QEG_CHANGED_FILES` または git diff から変更に関係する target だけを評価します。`--diff <previous-report.json>` は DQ を `new` / `resolved` / `unchanged` に分けます。
 
 GitHub Actions では `.github/workflows/ci.yml` が `qeg-report-action` 経由で report を実行し、`.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存します。install / typecheck / build / JSON parse / package dry-run / QEG report は完走させ、最後の集約ステップで CI を失敗させます。
+
+Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を outputs として返します。
 
 他 repo から使う最小例:
 
