@@ -2,7 +2,7 @@
   "id": "docs/requirements.md",
   "role": "requirements",
   "public_api": ["RequiredAdapterKind", "GateProfile", "GateVerdict", "DisqualificationCode", "report CLI", "doctor CLI", "DQ explain", "schema/enum drift check", "snapshot", "init", "baseline audit", "evidence verify", "policy lint", "repro-bundle", "check", "qeg-report-action", "CI artifact"],
-  "summary": "必須 3 接続、canonical graph、placement、Gate、CI workflow、CI 累積 report、運用補助CLI、Action outputs、IPO governance、security、schema hardening の正本要件。",
+  "summary": "必須 3 接続、canonical graph、placement、Gate、producer check consistency、CI workflow、CI 累積 report、運用補助CLI、Action outputs、IPO governance、security、schema hardening の正本要件。",
   "deps_out": ["src/types.ts", "src/cli/report.ts", "src/cli/doctor.ts", "src/cli/dq-explain.ts", "src/cli/schema-check.ts", "src/cli/enum-check.ts", "src/cli/init.ts", "src/cli/snapshot.ts", "src/cli/baseline.ts", "src/cli/evidence-verify.ts", "src/cli/policy-lint.ts", "src/cli/repro-bundle.ts", "src/cli/check.ts", "qeg-report-action/action.yml", ".github/workflows/ci.yml", "docs/spec/operational-cli-extensions.md", "schemas/gate-verdict.schema.json", "schemas/shared-defs.schema.json"],
   "deps_in": ["docs/agent/HUB.codex.md", "docs/project/blueprint.md"],
   "risks": ["Git 管理外や package 対象外になると統制証跡が壊れる"],

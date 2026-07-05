@@ -126,13 +126,13 @@ const DQ_EXPLANATIONS: Record<DisqualificationCode, DqExplanation> = {
   },
   "DQ-12": {
     code: "DQ-12",
-    title: "Artifact revision mismatch",
-    meaning: "Input artifact revision does not match metadata.headRef.",
-    commonCauses: ["Artifact from a different commit", "headRef updated without regenerating evidence"],
-    requiredEvidence: ["Artifact revision equal to headRef"],
-    minimalFix: ["Regenerate artifacts from current head", "Correct metadata headRef"],
+    title: "Producer evidence identity mismatch",
+    meaning: "Input artifact revision or producer check identity/verdict does not match metadata.headRef and exported readiness.",
+    commonCauses: ["Artifact from a different commit", "headRef updated without regenerating evidence", "Producer check attached to a stale SHA", "Producer check conclusion contradicts its readiness artifact"],
+    requiredEvidence: ["Artifact revision equal to headRef", "Producer check headSha equal to headRef", "Producer check conclusion consistent with readiness status"],
+    minimalFix: ["Regenerate artifacts from current head", "Correct metadata headRef", "Attach producer checks to the PR head SHA", "Align producer check conclusion with readiness status"],
     references: ["docs/spec/evidence-package.md"],
-    remediation: "Regenerate artifacts from the same headRef/revision used by the QEG metadata.",
+    remediation: "Regenerate artifacts and producer checks from the same headRef, then ensure producer conclusions reflect their readiness status.",
   },
   "DQ-13": {
     code: "DQ-13",
@@ -248,4 +248,3 @@ export async function runExplainCommand(args: readonly string[]): Promise<void> 
   console.log(json ? JSON.stringify(explanation, null, 2) : formatExplanationText(explanation).trimEnd());
   exit(0);
 }
-

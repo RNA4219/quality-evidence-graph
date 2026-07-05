@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "qegVersion": "0.1",
+    "runId": "qeg:run-negative-producer-check-inconsistent",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "headRef": "8d6b301ea72821ab76b67d5d151782f5410f49a5",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "fixtures/positive-release-go/input.json",
+        "revision": "8d6b301ea72821ab76b67d5d151782f5410f49a5"
+      }
+    ],
+    "producerChecks": [
+      {
+        "id": "ctg:check-code-to-gate-analysis",
+        "producer": "code-to-gate",
+        "name": "code-to-gate Analysis",
+        "conclusion": "failure",
+        "readinessStatus": "passed",
+        "headSha": "8d6b301ea72821ab76b67d5d151782f5410f49a5",
+        "runId": "ctg:check-run-85226205920",
+        "url": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+        "sourceRefs": [
+          {
+            "id": "ctg:sr-check-code-to-gate-analysis",
+            "path": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+            "label": "Producer check summary reported failure while readiness status was passed"
+          }
+        ]
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "claim",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "policy": {
+    "policyId": "qeg:policy-ipo-controlled-001",
+    "policyHash": "sha256:abc123",
+    "profile": "ipo_controlled",
+    "effectiveDate": "2026-01-01T00:00:00.000Z",
+    "approver": "policy-approver-001",
+    "sourceRefs": [
+      {
+        "id": "qeg:sr-policy-001",
+        "path": "docs/policy/ipo-controlled-001.md"
+      }
+    ],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    }
+  },
+  "waivers": [],
+  "evidencePackage": {
+    "id": "qeg:ep-release-001",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "createdBy": "creator-001",
+    "inputArtifactHashes": [
+      {
+        "artifactId": "artifact-001",
+        "hash": "sha256:input-hash-001"
+      }
+    ],
+    "qegOutputs": {
+      "qegBundle": {
+        "id": "qeg:qeg-001",
+        "adapter": "qeg-native",
+        "kind": "quality_evidence_record",
+        "path": "output-record.json"
+      },
+      "testPlacementPlan": {
+        "id": "qeg:tpp-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "placement-plan.json"
+      },
+      "gateVerdict": {
+        "id": "qeg:gv-001",
+        "adapter": "qeg-native",
+        "kind": "gate_decision",
+        "path": "gate-verdict.json"
+      },
+      "qualityEvidenceRecord": {
+        "id": "qeg:qer-001",
+        "adapter": "qeg-native",
+        "kind": "quality_evidence_record",
+        "path": "output-record.json"
+      }
+    },
+    "gatePolicy": {
+      "policyId": "qeg:policy-ipo-controlled-001",
+      "policyHash": "sha256:abc123",
+      "profile": "ipo_controlled",
+      "effectiveDate": "2026-01-01T00:00:00.000Z",
+      "approver": "policy-approver-001",
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-policy-001",
+          "path": "docs/policy/ipo-controlled-001.md"
+        }
+      ],
+      "dqScope": [
+        "DQ-01",
+        "DQ-02",
+        "DQ-03",
+        "DQ-04",
+        "DQ-05",
+        "DQ-06",
+        "DQ-07",
+        "DQ-08",
+        "DQ-09",
+        "DQ-10",
+        "DQ-11",
+        "DQ-12",
+        "DQ-13",
+        "DQ-14",
+        "DQ-15",
+        "DQ-16",
+        "DQ-17"
+      ],
+      "exitCodePolicy": {
+        "go": 0,
+        "conditional_go": 2,
+        "no_go": 2,
+        "disqualified": 2
+      }
+    },
+    "waivers": [],
+    "approvalEvidence": [
+      {
+        "id": "qeg:approval-release-001",
+        "policyId": "qeg:policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash",
+        "approvedBy": "approver-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-approval-001",
+            "path": "docs/approvals/release-001.md"
+          }
+        ]
+      }
+    ],
+    "manualEvidence": [],
+    "retention": {
+      "retentionPeriod": "7 years",
+      "retentionOwner": "retention-owner-001",
+      "storageLocation": "immutable-storage",
+      "contentHash": "sha256:retention-hash",
+      "capturedAt": "2026-06-03T04:00:00.000Z",
+      "tamperEvidence": "sha256:tamper-evidence",
+      "reverificationMethod": "hash verification",
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-retention-001",
+          "path": "docs/retention-policy.md"
+        }
+      ],
+      "storageClassification": "immutable"
+    },
+    "sourceRefs": [
+      {
+        "id": "qeg:sr-ep-001",
+        "path": "docs/evidence-package.md"
+      },
+      {
+        "id": "qeg:sr-ep-002",
+        "path": "docs/release-checklist.md"
+      }
+    ],
+    "phase": "release_decision",
+    "evidencePackageHash": "sha256:release-package-hash",
+    "controlRoles": {
+      "producer": "producer-001",
+      "reviewer": "reviewer-001",
+      "approver": "approver-001",
+      "waiverApprover": "waiver-approver-001",
+      "releaseOwner": "release-owner-001"
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.1",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  }
+}

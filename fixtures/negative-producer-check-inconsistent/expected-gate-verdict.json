@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-producer-check-inconsistent",
+  "description": "Producer check conclusion contradicts exported readiness status - DQ-12",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-12",
+      "message": "Producer check \"code-to-gate Analysis\" conclusion \"failure\" contradicts readiness status \"passed\"",
+      "nodeIds": ["ctg:check-code-to-gate-analysis"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

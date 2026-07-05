@@ -44,6 +44,36 @@ export interface ArtifactRef {
   readonly revision?: string;
 }
 
+export type ProducerReadinessStatus =
+  | "passed"
+  | "passed_with_risk"
+  | "needs_review"
+  | "blocked_input"
+  | "failed"
+  | "unknown";
+
+export type ProducerCheckConclusion =
+  | "success"
+  | "failure"
+  | "neutral"
+  | "cancelled"
+  | "timed_out"
+  | "action_required"
+  | "skipped"
+  | "unknown";
+
+export interface ProducerCheckRef {
+  readonly id: StableId;
+  readonly producer: AdapterKind | string;
+  readonly name: string;
+  readonly conclusion: ProducerCheckConclusion;
+  readonly readinessStatus?: ProducerReadinessStatus;
+  readonly headSha?: string;
+  readonly runId?: string;
+  readonly url?: string;
+  readonly sourceRefs?: readonly SourceRef[];
+}
+
 export interface WorkflowCookbookRef {
   readonly id: StableId;
   readonly kind: WorkflowCookbookRefKind;
@@ -147,6 +177,7 @@ export interface QegMetadata {
   readonly policyId?: string;
   readonly policyHash?: string;
   readonly inputArtifacts: readonly ArtifactRef[];
+  readonly producerChecks?: readonly ProducerCheckRef[];
   readonly workflowRefs?: readonly WorkflowCookbookRef[];
   readonly benchmarkMode?: boolean;
   readonly hiddenOracleAccessed?: boolean;

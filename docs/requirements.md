@@ -147,7 +147,8 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 
 受入条件:
 
-- `base_ref` / `head_ref` と artifact revision の不一致は DQ-12 にする。
+- `base_ref` / `head_ref` と artifact revision / producer check head SHA の不一致は DQ-12 にする。
+- producer check の conclusion が producer artifact の readiness status と矛盾する場合は DQ-12 にする。
 - changed path が 1 件以上ある場合、test obligation または accepted waiver が必要。
 - `test-seeds.suggestedLevel` は候補として扱い、最終 placement は QEG が決める。
 - `release-readiness=blocked_input` 相当の状態は QEG Gate で `disqualified` 候補にする。
@@ -292,7 +293,7 @@ Gate profile の既定は `standard` とする。`strict` は認証、決済、�
 | DQ-09 | secret / token / PII を unredacted で artifact に保存した |
 | DQ-10 | benchmark mode で hidden oracle に candidate がアクセスした |
 | DQ-11 | 必須 3 接続先の契約違反を成功扱いした |
-| DQ-12 | base_ref / head_ref と artifact revision が不一致 |
+| DQ-12 | base_ref / head_ref と artifact revision / producer check head SHA / producer readiness verdict が不一致 |
 | DQ-13 | Gate 関連 node / edge / placement / blocker / disqualification の sourceRefs が空 |
 | DQ-14 | manual-scripted placement が acceptable oracle を持たない |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない |

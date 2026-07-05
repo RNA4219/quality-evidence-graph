@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-producer-check-stale-sha",
+  "description": "Producer check head SHA does not match QEG headRef - DQ-12",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-12",
+      "message": "Producer check \"code-to-gate Analysis\" headSha \"856ff4ffc4afd9744e781c67e99b1f6d8aae2db0\" mismatch with headRef \"8d6b301ea72821ab76b67d5d151782f5410f49a5\"",
+      "nodeIds": ["ctg:check-code-to-gate-analysis"]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-policy.md §2"
+}

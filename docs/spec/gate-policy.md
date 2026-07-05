@@ -78,7 +78,7 @@ Gate evaluator は次の順で判定する。
 | DQ-09 | secret / token / PII を unredacted で artifact に保存した。 |
 | DQ-10 | benchmark mode で hidden oracle に candidate がアクセスした。 |
 | DQ-11 | 必須 3 接続先の契約違反を成功扱いした。 |
-| DQ-12 | base_ref / head_ref と artifact revision が不一致。 |
+| DQ-12 | base_ref / head_ref と artifact revision、producer check head SHA、または producer readiness verdict が不一致。 |
 | DQ-13 | Gate 関連 sourceRefs が空。 |
 | DQ-14 | manual-scripted placement が acceptable oracle を持たない。 |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない。 |

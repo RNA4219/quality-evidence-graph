@@ -1,5 +1,5 @@
 {
-  "generated_at": "00005",
+  "generated_at": "00006",
   "nodes": {
     "README.md": {
       "role": "overview",
@@ -34,7 +34,7 @@
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00005"
+      "mtime": "00006"
     },
     "docs/project/runbook.md": {
       "role": "operations",
@@ -64,7 +64,7 @@
     "fixtures/README.md": {
       "role": "fixture-contract",
       "caps": "docs/birdseye/caps/fixtures.README.md.json",
-      "mtime": "00001"
+      "mtime": "00006"
     },
     "docs/control-mapping.md": {
       "role": "control-mapping",
@@ -89,7 +89,7 @@
     "docs/spec/gate-policy.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
-      "mtime": "00001"
+      "mtime": "00006"
     },
     "docs/spec/waiver-approval.md": {
       "role": "ipo-spec",
@@ -159,7 +159,7 @@
     "src/types.ts": {
       "role": "types",
       "caps": "docs/birdseye/caps/src.types.ts.json",
-      "mtime": "00001"
+      "mtime": "00006"
     },
     "src/cli/report.ts": {
       "role": "ci-report-cli",
@@ -174,7 +174,7 @@
     "src/cli/dq-explain.ts": {
       "role": "dq-explain-cli",
       "caps": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
-      "mtime": "00004"
+      "mtime": "00006"
     },
     "src/cli/doctor.ts": {
       "role": "doctor-cli",
@@ -239,7 +239,7 @@
     "schemas/shared-defs.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
-      "mtime": "00001"
+      "mtime": "00006"
     },
     "schemas/gate-verdict.schema.json": {
       "role": "schema",

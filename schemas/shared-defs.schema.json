@@ -140,6 +140,10 @@
           "type": "array",
           "items": { "$ref": "#/$defs/artifactRef" }
         },
+        "producerChecks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/producerCheckRef" }
+        },
         "workflowRefs": {
           "type": "array",
           "items": {
@@ -161,6 +165,45 @@
               "contentHash": { "type": "string" }
             }
           }
+        }
+      }
+    },
+    "producerCheckRef": {
+      "type": "object",
+      "required": ["id", "producer", "name", "conclusion"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "producer": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "conclusion": {
+          "enum": [
+            "success",
+            "failure",
+            "neutral",
+            "cancelled",
+            "timed_out",
+            "action_required",
+            "skipped",
+            "unknown"
+          ]
+        },
+        "readinessStatus": {
+          "enum": [
+            "passed",
+            "passed_with_risk",
+            "needs_review",
+            "blocked_input",
+            "failed",
+            "unknown"
+          ]
+        },
+        "headSha": { "type": "string" },
+        "runId": { "type": "string" },
+        "url": { "type": "string" },
+        "sourceRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sourceRef" }
         }
       }
     },
