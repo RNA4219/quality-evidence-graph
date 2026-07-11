@@ -96,6 +96,7 @@ npm run init -- --root ../your-repo
 Use `--baseline <path>` to accept known DQs as `baseline_accepted` during migration so only new DQs fail the run. `baseline audit` detects missing owners, expired entries, resolved DQs, and missing targets. Use `--changed-only` to evaluate only targets related to `QEG_CHANGED_FILES` or git diff output. Use `--diff <previous-report.json>` to classify DQs as `new`, `resolved`, or `unchanged`.
 
 In GitHub Actions, `.github/workflows/ci.yml` runs this report through `qeg-report-action` and uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact. Install, typecheck, build, JSON parse, package dry-run, and QEG report are allowed to finish before the final verdict step fails the job.
+The external Action installs and builds its checked-out GitHub source by default, so it does not require a published QEG npm package.
 
 The Action exposes `exit_code`, `gate_failed`, `cli_errors`, `dq_count`, `report_path`, and `summary_markdown_path` outputs for caller-side branching.
 

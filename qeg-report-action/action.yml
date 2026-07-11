@@ -15,9 +15,9 @@ inputs:
     required: false
     default: ""
   report-command:
-    description: Command used to invoke the QEG CLI before report arguments.
+    description: Optional command used to invoke the QEG CLI before report arguments. Leave empty to run the Action's checked-out source.
     required: false
-    default: "npx -y @quality-harness/quality-evidence-graph@0.2.0"
+    default: ""
   targets:
     description: Space-separated fixture directories or parent directories to report.
     required: false
@@ -84,6 +84,18 @@ runs:
       with:
         node-version: ${{ inputs.node-version }}
 
+    - name: Install QEG Action dependencies
+      id: qeg-action-install
+      shell: bash
+      continue-on-error: true
+      run: npm ci --prefix "$GITHUB_ACTION_PATH"
+
+    - name: Build QEG Action
+      id: qeg-action-build
+      shell: bash
+      continue-on-error: true
+      run: npm run build --prefix "$GITHUB_ACTION_PATH"
+
     - name: Install dependencies
       if: ${{ inputs.install-command != '' }}
       id: install
@@ -103,6 +115,7 @@ runs:
       shell: bash
       env:
         QEG_REPORT_COMMAND: ${{ inputs.report-command }}
+        QEG_ACTION_CLI: ${{ github.action_path }}/dist/cli.js
         QEG_TARGETS: ${{ inputs.targets }}
         QEG_OUTPUT_PATH: ${{ inputs.output-path }}
         QEG_GITHUB_SUMMARY: ${{ inputs.github-summary }}
@@ -112,6 +125,8 @@ runs:
         QEG_SUMMARY_PATH: ${{ inputs.output-path }}.summary.md
         QEG_INSTALL_OUTCOME: ${{ steps.install.outcome }}
         QEG_BUILD_OUTCOME: ${{ steps.build.outcome }}
+        QEG_ACTION_INSTALL_OUTCOME: ${{ steps.qeg-action-install.outcome }}
+        QEG_ACTION_BUILD_OUTCOME: ${{ steps.qeg-action-build.outcome }}
       run: |
         mkdir -p "$(dirname "$QEG_OUTPUT_PATH")"
         report_exit=0
@@ -126,6 +141,10 @@ runs:
         if [ "$QEG_CHANGED_ONLY" = "true" ]; then
           report_args+=(--changed-only)
         fi
+        if [ -z "$QEG_REPORT_COMMAND" ]; then
+          QEG_REPORT_COMMAND="node $QEG_ACTION_CLI"
+        fi
+
         if [ -n "$QEG_PREVIOUS_REPORT" ]; then
           report_args+=(--diff "$QEG_PREVIOUS_REPORT")
         fi
@@ -165,8 +184,8 @@ runs:
           report_exit=1
         fi
 
-        if [ "$QEG_INSTALL_OUTCOME" = "failure" ] || [ "$QEG_BUILD_OUTCOME" = "failure" ]; then
-          node -e "const fs=require('fs'); const p=process.env.QEG_OUTPUT_PATH; const r=JSON.parse(fs.readFileSync(p,'utf8')); r.errors=[...(r.errors||[]),{code:'ACTION_PREFLIGHT_FAILED',message:'install or build command failed'}]; r.summary=r.summary||{}; r.summary.cliErrors=(r.summary.cliErrors||0)+1; fs.writeFileSync(p,JSON.stringify(r,null,2)+'\n');"
+        if [ "$QEG_INSTALL_OUTCOME" = "failure" ] || [ "$QEG_BUILD_OUTCOME" = "failure" ] || [ "$QEG_ACTION_INSTALL_OUTCOME" = "failure" ] || [ "$QEG_ACTION_BUILD_OUTCOME" = "failure" ]; then
+          node -e "const fs=require('fs'); const p=process.env.QEG_OUTPUT_PATH; const r=JSON.parse(fs.readFileSync(p,'utf8')); r.errors=[...(r.errors||[]),{code:'ACTION_PREFLIGHT_FAILED',message:'QEG Action dependency setup, QEG Action build, install command, or build command failed'}]; r.summary=r.summary||{}; r.summary.cliErrors=(r.summary.cliErrors||0)+1; fs.writeFileSync(p,JSON.stringify(r,null,2)+'\n');"
           report_exit=1
         fi
 

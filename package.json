@@ -19,9 +19,6 @@
   "bugs": {
     "url": "https://github.com/RNA4219/quality-evidence-graph/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "dist/",
     "schemas/",
@@ -79,5 +76,6 @@
   "devDependencies": {
     "@types/node": "^25.9.1",
     "typescript": "^5.9.3"
-  }
+  },
+  "private": true
 }

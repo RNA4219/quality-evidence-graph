@@ -106,6 +106,7 @@ baseline は既知 DQ の移行補助であり、DQ を削除する仕組みで�
 必須 contract:
 
 - Node.js helper step は Node 24 を既定にする。
+- `report-command` が空の場合、Action自身のチェックアウト済みGitHubソースを `npm ci` と `npm run build` で準備し、その `dist/cli.js` を実行する。QEG npm packageの公開を前提にしない。
 - install / build step は optional input とし、既存 CI では空にできる。
 - report step は QEG exit code を `exit_code` output に保存し、step 自体は成功終了する。
 - `.qeg/qeg-ci-report.json` を artifact として保存できる。

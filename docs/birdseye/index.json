@@ -5,19 +5,19 @@
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
       "mtime": "00008",
-      "contentHash": "sha256:a695649c218de4ca16a18a66f4a1f53537ca88b9762c3801e80802a76e63cc37"
+      "contentHash": "sha256:104d3a827d917584504af81bc6c012f76867d126efdeb9a58b63aad20abde23d"
     },
     "README_JA.md": {
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
       "mtime": "00008",
-      "contentHash": "sha256:c0d763920e0c2e1b3c51e44de42d5f103b61cb74bd66ae06c8383883c6964b84"
+      "contentHash": "sha256:947ec92f1b595e39460795ceee40424dc127c2774e970587db11fc5f355c21d4"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
       "mtime": "00008",
-      "contentHash": "sha256:57a9cf40ea0d3a2839c000bbfd0fbd63d281f125a779fec389386af136e0b284"
+      "contentHash": "sha256:9756680c1bd3f4736fc31c00609c4970a5eaae2fa750ff520311ab0ecfbf30c8"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
@@ -101,7 +101,7 @@
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
       "mtime": "00008",
-      "contentHash": "sha256:69812d9db035ae4a2f8d800f7001ea2f35a38f9a52a781609222cdcdb04fa8d7"
+      "contentHash": "sha256:6d1743d83f1e6b75f364a133464f0259a805d29d6d71c99932a300d6c306c189"
     },
     "docs/spec/gate-policy.md": {
       "role": "ipo-spec",
@@ -281,7 +281,7 @@
       "role": "github-action",
       "caps": "docs/birdseye/caps/qeg-report-action.action.yml.json",
       "mtime": "00008",
-      "contentHash": "sha256:aa478bfecb54a21c2136398e56575a473850216f1d29a0f45830e436c204ff96"
+      "contentHash": "sha256:4ccf7564add52f36f51a2de13c1d01200eb29f29bd0881b4dc804496db31b08b"
     },
     "schemas/shared-defs.schema.json": {
       "role": "schema",

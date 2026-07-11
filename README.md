@@ -83,6 +83,7 @@ GitHub Actions integration:
 
 - `.github/workflows/ci.yml` runs install, typecheck, build, JSON parse, package dry-run, and QEG report with `continue-on-error`.
 - `qeg-report-action` wraps report generation, Step Summary output, artifact upload, and outputs such as `exit_code`, `gate_failed`, `cli_errors`, `dq_count`, `report_path`, and `summary_markdown_path`.
+- The Action installs and builds its checked-out GitHub source by default; publishing a QEG npm package is not required.
 - The job uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact even when the Gate fails.
 - The final CI verdict step fails only after all diagnostic steps have finished.
 - Manual demo: run the `CI` workflow with `qeg_report_targets=fixtures/negative-approval-missing` to see a red job that still preserves the cumulative QEG report artifact.

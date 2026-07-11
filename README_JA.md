@@ -96,6 +96,7 @@ npm run init -- --root ../your-repo
 `--baseline <path>` は既知 DQ を `baseline_accepted` として扱い、新規 DQ だけを赤にしたい移行期間に使います。`baseline audit` は owner 未設定、期限切れ、解消済み DQ、存在しない target を検出します。`--changed-only` は `QEG_CHANGED_FILES` または git diff から変更に関係する target だけを評価します。`--diff <previous-report.json>` は DQ を `new` / `resolved` / `unchanged` に分けます。
 
 GitHub Actions では `.github/workflows/ci.yml` が `qeg-report-action` 経由で report を実行し、`.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存します。install / typecheck / build / JSON parse / package dry-run / QEG report は完走させ、最後の集約ステップで CI を失敗させます。
+外部Actionはチェックアウト済みのGitHubソースを既定でinstall・buildするため、QEGのnpm公開は不要です。
 
 Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を outputs として返します。
 
