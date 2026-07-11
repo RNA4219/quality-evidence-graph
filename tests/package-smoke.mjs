@@ -15,7 +15,7 @@ const packed = spawnSync(process.execPath, [npmCli, "pack", "--json", "--pack-de
 assert.equal(packed.status, 0, packed.stderr || packed.stdout);
 const [{ filename }] = JSON.parse(packed.stdout);
 const tarball = join(temp, filename);
-const installed = spawnSync(process.execPath, [npmCli, "install", tarball, "--prefix", temp, "--ignore-scripts", "--no-audit", "--no-fund", "--offline", "--cache", npmCache], { encoding: "utf-8" });
+const installed = spawnSync(process.execPath, [npmCli, "install", tarball, "--prefix", temp, "--ignore-scripts", "--no-audit", "--no-fund", "--prefer-offline", "--cache", npmCache], { encoding: "utf-8" });
 assert.equal(installed.status, 0, installed.stderr || installed.stdout);
 const packageRoot = join(temp, "node_modules", "@quality-harness", "quality-evidence-graph");
 const qegBin = join(temp, "node_modules", ".bin", process.platform === "win32" ? "qeg.cmd" : "qeg");
