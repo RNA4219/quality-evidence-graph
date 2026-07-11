@@ -23,5 +23,5 @@
     "npm run report -- fixtures/positive-release-go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:369625e2ddd34868da166bc4fd2f39098929a640014abd56a209dced6045cd35"
+  "contentHash": "sha256:57a9cf40ea0d3a2839c000bbfd0fbd63d281f125a779fec389386af136e0b284"
 }

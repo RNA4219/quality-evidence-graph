@@ -28,5 +28,5 @@
     "node dist/cli.js check fixtures/positive-release-go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:ee42782b0f7e1168ea29d36046645a532aa838a9538d323b1523b218cc39dcdc"
+  "contentHash": "sha256:64d86a6998b58b031b5cf8710bb308e53e393670630d41f72a0aefe77201d6bc"
 }

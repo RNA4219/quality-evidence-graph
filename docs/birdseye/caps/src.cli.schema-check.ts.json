@@ -25,5 +25,5 @@
     "node dist/cli.js schema-check"
   ],
   "generation": "00008",
-  "contentHash": "sha256:7a6f4228f719f7c893be96ba7a8eccd4e2e3dd6ecb41922d9182408404121bd5"
+  "contentHash": "sha256:6c111e962b4d63c1730add8d8ef28ed9eecd07c5f227c658cd1b87a8dea77ce1"
 }

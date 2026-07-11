@@ -24,5 +24,5 @@
     "node dist/cli.js evidence verify fixtures/positive-release-go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:cc77a504d61725b19224cc9f679bec9328041d721603fd401add82d2242b5043"
+  "contentHash": "sha256:967677439972e82d731d6a8eca73e349b39ff695a13f35679742b2cd238bb79a"
 }

@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 const generation = "00008";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
-const hash = (value) => "sha256:" + createHash("sha256").update(value).digest("hex");
+const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
 const index = JSON.parse(await readFile(indexPath, "utf-8"));
 
@@ -40,7 +40,7 @@ for (const [path, node] of Object.entries(additions)) {
 }
 for (const [sourcePath, node] of Object.entries(index.nodes)) {
   node.mtime = generation;
-  const sourceHash = hash(await readFile(resolve(root, sourcePath)));
+  const sourceHash = hash(await readFile(resolve(root, sourcePath), "utf-8"));
   node.contentHash = sourceHash;
   const capsulePath = resolve(root, node.caps);
   const capsule = JSON.parse(await readFile(capsulePath, "utf-8"));

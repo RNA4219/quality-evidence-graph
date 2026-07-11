@@ -35,5 +35,5 @@
     "npm run report -- --json --out .qeg/qeg-ci-report.json fixtures/positive-release-go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:b16b0d377d32fb71acc52d94494aa1277d4f77261b3eb749e21bc6a979c9e113"
+  "contentHash": "sha256:aa478bfecb54a21c2136398e56575a473850216f1d29a0f45830e436c204ff96"
 }

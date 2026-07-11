@@ -22,5 +22,5 @@
     "node dist/cli.js init --root .qeg/init-smoke"
   ],
   "generation": "00008",
-  "contentHash": "sha256:b0239d3e5aa44b8c54231af5355ddbff4055912c1d916569660466563ad5d277"
+  "contentHash": "sha256:33d214fcbf1344b708390c69755a39eb228a10f01b33e7f68699e6361ceefc79"
 }

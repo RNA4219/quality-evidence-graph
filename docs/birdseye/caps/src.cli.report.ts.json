@@ -45,5 +45,5 @@
     "npm run snapshot -- fixtures/positive-release-go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:6ab680355e34bdb3d7f5f53f793f02660d1eef00d6df85dd4699e27dd1ec50f0"
+  "contentHash": "sha256:d5eee76abfae4f1df02fcfc4011f78a38bd3f687b49de72d4db4afa62d2c9d19"
 }

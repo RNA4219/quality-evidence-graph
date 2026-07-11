@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
 const readJson = async (path) => JSON.parse(await readFile(resolve(root, path), "utf-8"));
-const hash = (value) => "sha256:" + createHash("sha256").update(value).digest("hex");
+const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const index = await readJson("docs/birdseye/index.json");
 
 assert.match(index.generated_at, /^\d{5}$/, "generated_at must be a five-digit generation");
@@ -23,7 +23,7 @@ const requiredNodes = [
 for (const path of requiredNodes) assert.ok(index.nodes[path], "Birdseye node missing: " + path);
 for (const [path, node] of Object.entries(index.nodes)) {
   await access(resolve(root, path));
-  const sourceHash = hash(await readFile(resolve(root, path)));
+  const sourceHash = hash(await readFile(resolve(root, path), "utf-8"));
   assert.equal(node.mtime, index.generated_at, "stale node generation: " + path);
   assert.equal(node.contentHash, sourceHash, "stale node content hash: " + path);
   assert.ok(node.caps, "capsule path missing: " + path);

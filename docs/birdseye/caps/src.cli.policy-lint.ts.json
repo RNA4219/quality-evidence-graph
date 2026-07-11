@@ -22,5 +22,5 @@
     "node dist/cli.js policy lint fixtures/positive-release-go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:10a2898dffa65451356ad32acee5bb95cbe067cd3c4544a018cb476df7e584c8"
+  "contentHash": "sha256:e29fb0babbd0697d4df811c55cdb60a651a611e708820cb140db65a462152933"
 }

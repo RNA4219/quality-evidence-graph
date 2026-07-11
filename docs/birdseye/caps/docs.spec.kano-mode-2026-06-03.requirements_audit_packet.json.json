@@ -19,5 +19,5 @@
     "requirements_audit_packet.json gate_summary overall_assessment == go"
   ],
   "generation": "00008",
-  "contentHash": "sha256:33ef374195acdce943d4e2575fbda4f6a7fdba48f291fe3ac9ef90d6e8f9f110"
+  "contentHash": "sha256:0c0c9d3dea624290dceeca699a2a5addc833a81f91493b4d207a75a0b8e74852"
 }
