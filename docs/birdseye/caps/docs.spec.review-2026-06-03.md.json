@@ -3,8 +3,25 @@
   "role": "ipo-spec-review",
   "public_api": [],
   "summary": "IPO 統制仕様書の見直し結果、指摘、修正方針、Gate 判定、残リスク、次アクションを記録する。",
-  "deps_out": ["docs/spec/waiver-approval.md", "docs/spec/evidence-package.md", "docs/spec/acceptance.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
-  "deps_in": ["docs/spec/index.md", "docs/agent/HUB.codex.md"],
-  "risks": ["レビュー Gate と IPO controlled release Gate を混同すると未実装のまま release Go と誤認する"],
-  "tests": ["npm run typecheck", "schema JSON parse", "npm pack --dry-run --cache ./.npm-cache"]
+  "deps_out": [
+    "docs/spec/waiver-approval.md",
+    "docs/spec/evidence-package.md",
+    "docs/spec/acceptance.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "deps_in": [
+    "docs/spec/index.md",
+    "docs/agent/HUB.codex.md"
+  ],
+  "risks": [
+    "レビュー Gate と IPO controlled release Gate を混同すると未実装のまま release Go と誤認する"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "schema JSON parse",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e"
 }

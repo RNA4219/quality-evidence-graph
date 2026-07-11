@@ -1,10 +1,27 @@
 {
   "id": "docs/spec/gate-policy.md",
   "role": "ipo-spec",
-  "public_api": ["GatePolicy", "DisqualificationCode", "GateVerdict"],
+  "public_api": [
+    "GatePolicy",
+    "DisqualificationCode",
+    "GateVerdict"
+  ],
   "summary": "ipo_controlled の Gate policy、DQ-01〜DQ-17、producer evidence identity mismatch、exit code、verdict 優先順位、waiver と DQ の関係を固定する。",
-  "deps_out": ["docs/spec/index.md", "docs/ipo-controlled-profile.md"],
-  "deps_in": ["docs/spec/index.md", "docs/ipo-controlled-profile.md"],
-  "risks": ["conditional_go を CI success と扱うと IPO 統制が壊れる", "waiver で DQ を消すと判定資格の失格を隠す"],
-  "tests": ["docs/spec/acceptance.md TC-SPEC-02"]
+  "deps_out": [
+    "docs/spec/index.md",
+    "docs/ipo-controlled-profile.md"
+  ],
+  "deps_in": [
+    "docs/spec/index.md",
+    "docs/ipo-controlled-profile.md"
+  ],
+  "risks": [
+    "conditional_go を CI success と扱うと IPO 統制が壊れる",
+    "waiver で DQ を消すと判定資格の失格を隠す"
+  ],
+  "tests": [
+    "docs/spec/acceptance.md TC-SPEC-02"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:a631c8aed606aaa40a116d9c62e6772cc599b75d3546c46ba9d2ff4e7702e5f7"
 }

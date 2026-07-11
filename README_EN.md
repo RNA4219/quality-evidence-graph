@@ -102,7 +102,7 @@ The Action exposes `exit_code`, `gate_failed`, `cli_errors`, `dq_count`, `report
 Minimal use from another repository:
 
 ```yaml
-- uses: RNA4219/quality-evidence-graph/qeg-report-action@v1
+- uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
   id: qeg_report
   with:
     targets: .qeg
@@ -135,10 +135,32 @@ Key sources of truth:
 ## Current Status
 
 - DQ-01 through DQ-17 are implemented.
-- 29 fixtures preserve regression coverage.
+- Fixture regression uses fixtures/manifest.json as its source of truth.
 - The Test Placement Plan can record manual-to-automated retirement through `placement_changes[]`, including replacement evidence, policy, and revert conditions.
 - `code-to-gate` findings are kept at 0.
 - `positive-release-go` returns `go / exit 0`.
 - Negative fixtures generally return `disqualified / exit 2`.
 
 QEG makes quality accountable by turning release judgment into evidence, policy, and executable gate contracts.
+
+## 0.2.0 contract
+
+All CLI commands share runtime schema/evidence preflight. Broken JSON or a missing decision envelope is a CLI error (exit 1); a parseable invalid required component is DQ-01 (exit 2). Required evidence is verified against real files, SHA-256, and revision; optional-only failures are warnings.
+
+changed-only returns no_relevant_changes/exit 0 only after successful detection. Detection failure is detection_failed/exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth.
+
+The v0.2.0 external Action enforces after artifact upload by default. Set enforce: "false" only for diagnostic collection and consume its exit_code output.
+
+Enforced example:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      with:
+        targets: .qeg
+
+Diagnostic-only example:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      id: qeg_report
+      with:
+        targets: .qeg
+        enforce: "false"

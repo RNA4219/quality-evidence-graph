@@ -1,10 +1,51 @@
 {
   "id": "src/cli.ts",
   "role": "cli-entrypoint",
-  "public_api": ["qeg validate", "qeg gate", "qeg record", "qeg report", "qeg doctor", "qeg explain", "qeg schema-check", "qeg enum-check", "qeg init", "qeg snapshot", "qeg baseline", "qeg evidence", "qeg policy", "qeg repro-bundle", "qeg check"],
+  "public_api": [
+    "qeg validate",
+    "qeg gate",
+    "qeg record",
+    "qeg report",
+    "qeg doctor",
+    "qeg explain",
+    "qeg schema-check",
+    "qeg enum-check",
+    "qeg init",
+    "qeg snapshot",
+    "qeg baseline",
+    "qeg evidence",
+    "qeg policy",
+    "qeg repro-bundle",
+    "qeg check"
+  ],
   "summary": "QEG CLI entrypoint。コマンド名を各 CLI module へ dispatch し、unknown command と missing fixture usage を処理する。",
-  "deps_out": ["src/cli/report.ts", "src/cli/doctor.ts", "src/cli/dq-explain.ts", "src/cli/schema-check.ts", "src/cli/enum-check.ts", "src/cli/init.ts", "src/cli/snapshot.ts", "src/cli/baseline.ts", "src/cli/evidence-verify.ts", "src/cli/policy-lint.ts", "src/cli/repro-bundle.ts", "src/cli/check.ts"],
-  "deps_in": ["package.json", "README.md"],
-  "risks": ["command wiring が commands.ts とずれると npm scripts や GitHub Action の entrypoint が動かない"],
-  "tests": ["npm run build", "node dist/cli.js explain DQ-15", "node dist/cli.js schema-check", "node dist/cli.js check fixtures/positive-release-go"]
+  "deps_out": [
+    "src/cli/report.ts",
+    "src/cli/doctor.ts",
+    "src/cli/dq-explain.ts",
+    "src/cli/schema-check.ts",
+    "src/cli/enum-check.ts",
+    "src/cli/init.ts",
+    "src/cli/snapshot.ts",
+    "src/cli/baseline.ts",
+    "src/cli/evidence-verify.ts",
+    "src/cli/policy-lint.ts",
+    "src/cli/repro-bundle.ts",
+    "src/cli/check.ts"
+  ],
+  "deps_in": [
+    "package.json",
+    "README.md"
+  ],
+  "risks": [
+    "command wiring が commands.ts とずれると npm scripts や GitHub Action の entrypoint が動かない"
+  ],
+  "tests": [
+    "npm run build",
+    "node dist/cli.js explain DQ-15",
+    "node dist/cli.js schema-check",
+    "node dist/cli.js check fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:69621511e01e1a5ebf16b7109225a1fb8dd34bd3dbe2f869a8cd2d987ed837d6"
 }

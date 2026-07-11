@@ -1,6 +1,14 @@
 {
-  "reportVersion": "qeg-ci-report-v1",
+  "reportVersion": "qeg-ci-report-v2",
   "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
   "summary": {
     "totalTargets": 1,
     "passed": 0,
@@ -26,12 +34,12 @@
       "verdict": "disqualified",
       "reasons": [
         "Disqualified: 1 DQ code(s)",
-        "- DQ-06: Evidence hash mismatch for artifact \"qeg:artifact-001\""
+        "- DQ-06: qeg:artifact-001: artifact hash mismatch: expected sha256:0000000000000000000000000000000000000000000000000000000000000000, got sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
       ],
       "disqualifications": [
         {
           "code": "DQ-06",
-          "message": "Evidence hash mismatch for artifact \"qeg:artifact-001\"",
+          "message": "qeg:artifact-001: artifact hash mismatch: expected sha256:0000000000000000000000000000000000000000000000000000000000000000, got sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e",
           "nodeIds": [
             "qeg:artifact-001"
           ],

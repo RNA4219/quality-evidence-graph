@@ -1,6 +1,14 @@
 {
-  "reportVersion": "qeg-ci-report-v1",
+  "reportVersion": "qeg-ci-report-v2",
   "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
   "summary": {
     "totalTargets": 1,
     "passed": 1,

@@ -19,7 +19,7 @@ next_review_due: 2026-08-04
 
 | Command | 目的 | 成功条件 |
 |---|---|---|
-| `qeg report` | 複数 target の累積 Gate report を作る | target を最後まで評価し、`qeg-ci-report-v1` を出力する |
+| `qeg report` | 複数 target の累積 Gate report を作る | target を最後まで評価し、`qeg-ci-report-v2` を出力する |
 | `qeg report --github-summary` | GitHub Actions Step Summary へ人間向け要約を書く | `GITHUB_STEP_SUMMARY` がある場合に Markdown summary を追記する |
 | `qeg report --baseline <path>` | 既知 DQ を baseline として受理する | すべての current DQ が baseline で覆われ、他の failure がない場合だけ `baseline_accepted` にする |
 | `qeg report --changed-only` | 変更に関係する target だけを評価する | `QEG_CHANGED_FILES` または git diff で target を絞り込む |
@@ -32,7 +32,7 @@ next_review_due: 2026-08-04
 | `qeg evidence verify` | 証跡実体を高速検証する | artifact path、hash、revision、retention、storageClassification を検査する |
 | `qeg policy lint` | GatePolicy を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile の矛盾を検出する |
 | `qeg repro-bundle` | CI failure の再現 bundle を作る | report、doctor、schema inventory、package version、workflow、gate-input を redaction 付きでまとめる |
-| `qeg check` | ローカル総合確認を行う | schema-check、enum-check、doctor、snapshot、report をまとめて実行する |
+| `qeg check` | ローカル総合確認を行う | schema-check、enum-check、doctor、evidence verify、policy lint、snapshot、report をまとめて実行する |
 | `qeg snapshot` | report の golden snapshot を検証する | `generatedAt` と絶対 path を正規化して比較する |
 | `qeg init` | 他 repo へ最小構成を導入する | `.qeg/` と GitHub Actions workflow の starter を生成する |
 
@@ -136,3 +136,9 @@ npm pack --dry-run --cache ./.npm-cache
 ```
 
 GitHub Actions では、manual demo target として `fixtures/negative-approval-missing` を指定し、job が最終的に赤でも `qeg-ci-report` artifact と Step Summary が残ることを検収する。
+
+## 0.2.0 report / Action contract
+
+report JSONはqeg-ci-report-v2とし、selectionとトップレベルerrorsを持つ。Git差分取得成功後の関連targetなしだけno_relevant_changes/exit 0とする。Git未初期化、shallow clone不足、全strategy失敗はdetection_failed/exit 1である。QEG_CHANGED_FILES指定時はGitを参照しない。
+
+checkはschema-check、enum-check、doctor、evidence verify、policy lint、snapshot、reportを集約する。外部Actionは0.2.0 CLIへ固定し、既定enforce trueとする。install/build/report失敗もreport errorとexit 1へ反映し、artifact upload後にfailureを返す。

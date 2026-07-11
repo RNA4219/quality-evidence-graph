@@ -1,10 +1,29 @@
 {
   "id": "src/types.ts",
   "role": "types",
-  "public_api": ["GateProfile", "GateVerdict", "AdapterKind", "ArtifactKind", "ProducerCheckRef", "DisqualificationCode", "QualityEvidenceRecord"],
+  "public_api": [
+    "GateProfile",
+    "GateVerdict",
+    "AdapterKind",
+    "ArtifactKind",
+    "ProducerCheckRef",
+    "DisqualificationCode",
+    "QualityEvidenceRecord"
+  ],
   "summary": "QEG の TypeScript canonical contract facade。primitive / evidence / graph / gate / record 型は src/types/ 配下へ分割し、producer check contract を含めて既存 public export 名は維持する。",
-  "deps_out": ["schemas/shared-defs.schema.json", "schemas/gate-verdict.schema.json"],
-  "deps_in": ["docs/requirements.md"],
-  "risks": ["types と schema の enum drift"],
-  "tests": ["npm run typecheck"]
+  "deps_out": [
+    "schemas/shared-defs.schema.json",
+    "schemas/gate-verdict.schema.json"
+  ],
+  "deps_in": [
+    "docs/requirements.md"
+  ],
+  "risks": [
+    "types と schema の enum drift"
+  ],
+  "tests": [
+    "npm run typecheck"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:232e678340fefe3881c7acdf126dc06bb41a161d6d1e0a2c871acdbc124c8163"
 }

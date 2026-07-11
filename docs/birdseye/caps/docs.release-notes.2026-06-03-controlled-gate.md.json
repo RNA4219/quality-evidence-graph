@@ -3,8 +3,24 @@
   "role": "release-notes",
   "public_api": [],
   "summary": "2026-06-03 Controlled Gate リリースノート。DQ-01〜DQ-17、21 fixture、CLI、own-output validation、code-to-gate finding 0、README 導線整備を記録する。",
-  "deps_out": ["README.md", "README_JA.md", "README_EN.md", "docs/spec/implementation-gate-2026-06-03.md"],
-  "deps_in": ["docs/agent/HUB.codex.md"],
-  "risks": ["リリースノートが Gate 証跡や README と乖離すると利用者が現在状態を誤認する"],
-  "tests": ["npm run typecheck", "npm run build", "npm pack --dry-run --cache ./.npm-cache", "code-to-gate analyze --emit all"]
+  "deps_out": [
+    "README.md",
+    "README_JA.md",
+    "README_EN.md",
+    "docs/spec/implementation-gate-2026-06-03.md"
+  ],
+  "deps_in": [
+    "docs/agent/HUB.codex.md"
+  ],
+  "risks": [
+    "リリースノートが Gate 証跡や README と乖離すると利用者が現在状態を誤認する"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run build",
+    "npm pack --dry-run --cache ./.npm-cache",
+    "code-to-gate analyze --emit all"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:9786b9d358e0f7d485dafe2f05adb782657822a43c74611a31d357af03e7c78e"
 }

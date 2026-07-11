@@ -3,8 +3,23 @@
   "role": "implementation-task-ledger",
   "public_api": [],
   "summary": "TASK-01〜TASK-10 の実装順、対象、完了条件、検証コマンドを固定する実装タスク台帳。",
-  "deps_out": ["docs/requirements.md", "fixtures/README.md", "docs/control-mapping.md", "docs/ipo-controlled-profile.md", "docs/project/evaluation.md"],
-  "deps_in": ["docs/agent/HUB.codex.md"],
-  "risks": ["TASK 順序や受入条件が曖昧だと adapter / gate 実装時に判断が揺れる"],
-  "tests": ["npm run typecheck", "npm pack --dry-run --cache ./.npm-cache"]
+  "deps_out": [
+    "docs/requirements.md",
+    "fixtures/README.md",
+    "docs/control-mapping.md",
+    "docs/ipo-controlled-profile.md",
+    "docs/project/evaluation.md"
+  ],
+  "deps_in": [
+    "docs/agent/HUB.codex.md"
+  ],
+  "risks": [
+    "TASK 順序や受入条件が曖昧だと adapter / gate 実装時に判断が揺れる"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:fee3ad6a8d7cba74208fee32da73717fdba304f53381ad4e8b98c6d4cbe5dcc5"
 }

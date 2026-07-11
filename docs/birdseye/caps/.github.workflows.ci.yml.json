@@ -1,10 +1,33 @@
 {
   "id": ".github/workflows/ci.yml",
   "role": "github-actions-ci",
-  "public_api": ["QEG_REPORT_TARGETS", "workflow_dispatch.inputs.qeg_report_targets", "qeg-ci-report artifact", "qeg_report.outputs.exit_code"],
+  "public_api": [
+    "QEG_REPORT_TARGETS",
+    "workflow_dispatch.inputs.qeg_report_targets",
+    "qeg-ci-report artifact",
+    "qeg_report.outputs.exit_code"
+  ],
   "summary": "GitHub Actions CI。install / typecheck / build / JSON parse / package dry-run / QEG report を完走し、QEG report は qeg-report-action に委譲する。.qeg/qeg-ci-report.json を artifact と Step Summary に残してから Final CI verdict で集約失敗させる。manual demo では qeg_report_targets に failing fixture を指定できる。",
-  "deps_out": ["qeg-report-action/action.yml", "src/cli/report.ts", "package.json", "docs/project/runbook.md"],
-  "deps_in": ["README.md", "docs/requirements.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
-  "risks": ["QEG_REPORT_TARGETS が実運用 target とずれると CI artifact は生成されるが不足証跡の対象を誤る"],
-  "tests": ["npm run typecheck", "npm run build", "npm run report -- fixtures/positive-release-go"]
+  "deps_out": [
+    "qeg-report-action/action.yml",
+    "src/cli/report.ts",
+    "package.json",
+    "docs/project/runbook.md"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/requirements.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "risks": [
+    "QEG_REPORT_TARGETS が実運用 target とずれると CI artifact は生成されるが不足証跡の対象を誤る"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run build",
+    "npm run report -- fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:28a17503ab7eb2f8c55e6035ca0ef343663e3250a76cb7c484701f00f01b3828"
 }

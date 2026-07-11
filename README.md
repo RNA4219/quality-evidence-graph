@@ -43,7 +43,7 @@
 
 - controlled governance profile 実装済み。
 - DQ-01 から DQ-17 まで実装済み。
-- 29 fixture で negative / positive regression を保持。
+- fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings は 0 を維持する方針。
 - Gate evaluator、CLI、types は facade + internal modules に分割済み。
@@ -99,3 +99,9 @@ node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze C:\Users\ryo-n\Co
 
 - [README_JA.md](README_JA.md)
 - [README_EN.md](README_EN.md)
+
+## 0.2.0 release contract
+
+QEG 0.2.0 uses one runtime schema/evidence preflight. Broken JSON or a missing decision envelope is exit 1; parseable required-component violations are DQ-01/exit 2. Required evidence is checked against real files, SHA-256, and revision. Optional-only failures remain warnings.
+
+changed-only returns no_relevant_changes/exit 0 only after successful detection; detection failure is exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth. The v0.2.0 external Action enforces after artifact upload by default; set enforce: "false" only for diagnostic-only use.

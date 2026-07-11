@@ -45,3 +45,5 @@ npm pack --dry-run --cache ./.npm-cache
 - `conditional_go`、`no_go`、`disqualified` は exit code `2` のまま。
 - DQ は最優先であり、waiver では DQ を消せない。
 - `output-record.json` の `exports[].path` は fixture 安定化のため `output-record.json` の相対表記にした。
+
+> 履歴注記: 本文の21 fixtureは2026-06-03時点のsnapshotである。現在のfixture一覧と期待値の正本はfixtures/manifest.jsonを参照すること。

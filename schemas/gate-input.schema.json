@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/gate-input.schema.json",
+  "title": "QEG Gate Input 0.2",
+  "type": "object",
+  "required": ["metadata", "graph", "policy"],
+  "additionalProperties": false,
+  "properties": {
+    "metadata": { "$ref": "shared-defs.schema.json#/$defs/metadata" },
+    "graph": { "$ref": "qeg.bundle.schema.json" },
+    "policy": { "$ref": "gate-policy.schema.json" },
+    "waivers": {
+      "type": "array",
+      "items": { "$ref": "waiver.schema.json" }
+    },
+    "evidencePackage": { "$ref": "evidence-package.schema.json" },
+    "placementPlan": { "$ref": "test-placement-plan.schema.json" },
+    "optionalEvidence": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  }
+}

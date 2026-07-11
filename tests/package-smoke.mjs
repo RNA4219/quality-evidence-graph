@@ -1,0 +1,35 @@
+import assert from "node:assert/strict";
+import { mkdtemp, readFile } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, resolve } from "node:path";
+import { spawnSync } from "node:child_process";
+
+const temp = await mkdtemp(join(tmpdir(), "qeg-package-smoke-"));
+const npmCli = process.env.npm_execpath;
+assert.ok(npmCli, "npm_execpath is required; run this smoke test through npm run test:package");
+const packed = spawnSync(process.execPath, [npmCli, "pack", "--json", "--pack-destination", temp, "--cache", resolve(".npm-cache")], { encoding: "utf-8" });
+assert.equal(packed.status, 0, packed.stderr || packed.stdout);
+const [{ filename }] = JSON.parse(packed.stdout);
+const tarball = join(temp, filename);
+const installed = spawnSync(process.execPath, [npmCli, "install", tarball, "--prefix", temp, "--ignore-scripts", "--no-audit", "--no-fund", "--offline"], { encoding: "utf-8" });
+assert.equal(installed.status, 0, installed.stderr || installed.stdout);
+const packageRoot = join(temp, "node_modules", "@quality-harness", "quality-evidence-graph");
+const qegBin = join(temp, "node_modules", ".bin", process.platform === "win32" ? "qeg.cmd" : "qeg");
+function runQeg(args) {
+  if (process.platform === "win32") {
+    return spawnSync(process.env.ComSpec ?? "cmd.exe", ["/d", "/c", "call", qegBin, ...args], { encoding: "utf-8", cwd: temp });
+  }
+  return spawnSync(qegBin, args, { encoding: "utf-8", cwd: temp });
+}
+const help = runQeg(["--help"]);
+assert.equal(help.status, 0, help.stderr || help.stdout);
+assert.match(help.stdout, /Usage: qeg/);
+const schemaCheck = runQeg(["schema-check"]);
+assert.equal(schemaCheck.status, 0, schemaCheck.stderr || schemaCheck.stdout);
+const imported = await import(new URL(`file:///${join(packageRoot, "dist", "index.js").replaceAll("\\", "/")}`));
+assert.equal(typeof imported.evaluateGate, "function");
+assert.equal(typeof imported.validateGateInput, "function");
+assert.equal(typeof imported.verifyEvidenceArtifacts, "function");
+assert.equal(typeof imported.getExitCode, "function");
+assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.2.0");
+console.log("Clean tarball install, qeg bin help/schema-check, and Library imports passed");

@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-manual-evidence-incomplete",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
@@ -9,17 +9,26 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-manual-evidence-incomplete/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:d4cab77a725d1b194112c560ce284ac55845750932d30d89a293f4501a7e8c5c"
       }
     ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-manual-evidence-incomplete",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:d4cab77a725d1b194112c560ce284ac55845750932d30d89a293f4501a7e8c5c"
+        }
+      ]
     },
     "nodes": [],
     "edges": [],
@@ -68,31 +77,43 @@
     "id": "qeg:ep-001",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "createdBy": "creator-001",
-    "inputArtifactHashes": [],
+    "inputArtifactHashes": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:d4cab77a725d1b194112c560ce284ac55845750932d30d89a293f4501a7e8c5c"
+      }
+    ],
     "qegOutputs": {
       "qegBundle": {
         "id": "qeg:qeg-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/qeg-bundle.json",
+        "contentHash": "sha256:a302bebc1f2495a1cd55f32cc2c87b5f4d4677023e4f96c89458f1d5daece0b4"
       },
       "testPlacementPlan": {
         "id": "qeg:tpp-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "placement-plan.json"
+        "path": "artifacts/test-placement-plan.json",
+        "contentHash": "sha256:c4711673a9f902138f4d65174b1bfbfb549ccf5f7ae7c2470479a34dda23892d"
       },
       "gateVerdict": {
         "id": "qeg:gv-001",
         "adapter": "qeg-native",
         "kind": "gate_decision",
-        "path": "gate-verdict.json"
+        "path": "artifacts/gate-verdict.json",
+        "contentHash": "sha256:c2663a577029961e68ec46aa1243402c803199dc8570155b42773dc4a0151ff4"
       },
       "qualityEvidenceRecord": {
         "id": "qeg:qer-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/quality-evidence-record.json",
+        "contentHash": "sha256:3cab7c272ecc7b8ba173d05a3dc01497cf41b84727573a617e500ee06477c272"
       }
     },
     "gatePolicy": {
@@ -133,9 +154,8 @@
     "manualEvidence": [
       {
         "executedCaseId": "qeg:manual-case-001",
-        "executedAt": "2026-06-03T04:00:00.000Z",
-        "executedBy": "tester-001",
-        "expectedResult": null,
+        "result": "pass",
+        "expectedResult": "",
         "oracleRefs": [],
         "traceTo": [],
         "evidenceRefs": []
@@ -170,11 +190,19 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-manual-evidence-incomplete",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:d4cab77a725d1b194112c560ce284ac55845750932d30d89a293f4501a7e8c5c"
+        }
+      ]
     },
     "obligations": [],
     "placements": []

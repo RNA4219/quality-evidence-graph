@@ -1,6 +1,6 @@
 {
   "name": "@quality-harness/quality-evidence-graph",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Local-first Quality Evidence Graph and Test Placement Engine contracts",
   "type": "module",
   "main": "./dist/index.js",
@@ -11,6 +11,17 @@
     ".": "./dist/index.js"
   },
   "types": "./dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RNA4219/quality-evidence-graph.git"
+  },
+  "homepage": "https://github.com/RNA4219/quality-evidence-graph#readme",
+  "bugs": {
+    "url": "https://github.com/RNA4219/quality-evidence-graph/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "dist/",
     "schemas/",
@@ -19,6 +30,10 @@
     "qeg-report-action/",
     "README.md",
     "README_JA.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
+    "CODE_OF_CONDUCT.md",
     "README_EN.md",
     "LICENSE"
   ],
@@ -40,7 +55,11 @@
     "repro-bundle": "node dist/cli.js repro-bundle",
     "check": "node dist/cli.js check",
     "init": "node dist/cli.js init",
-    "snapshot": "node dist/cli.js snapshot"
+    "snapshot": "node dist/cli.js snapshot",
+    "test": "npm run build && node --test tests/runtime.test.mjs tests/action-contract.test.mjs && npm run test:fixtures && npm run test:package",
+    "test:fixtures": "node tests/fixture-regression.mjs",
+    "test:package": "node tests/package-smoke.mjs",
+    "birdseye-check": "node tools/birdseye-check.mjs"
   },
   "keywords": [
     "quality-gate",
@@ -54,9 +73,11 @@
   "engines": {
     "node": ">=20"
   },
+  "dependencies": {
+    "ajv": "^8.20.0"
+  },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "ajv": "^8.20.0",
     "typescript": "^5.9.3"
   }
 }

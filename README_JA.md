@@ -102,7 +102,7 @@ Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_pat
 他 repo から使う最小例:
 
 ```yaml
-- uses: RNA4219/quality-evidence-graph/qeg-report-action@v1
+- uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
   id: qeg_report
   with:
     targets: .qeg
@@ -135,10 +135,32 @@ Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_pat
 ## 現在の状態
 
 - DQ-01 から DQ-17 まで実装済み。
-- 29 fixture で regression を保持。
+- fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings 0 を維持。
 - `positive-release-go` は `go / exit 0`。
 - negative fixture は原則 `disqualified / exit 2`。
 
 QEG は、品質を「説明」ではなく「証跡と判定契約」に落とすための基盤です。
+
+## 0.2.0 契約
+
+全CLIは共通runtime schema/evidence preflightを通る。壊れたJSONまたは判定envelope欠落はCLI error・exit 1、parse可能な必須component不適合はDQ-01・exit 2である。必須evidenceは実ファイル、SHA-256、revisionを検証し、optional evidenceだけの不適合はwarningとする。
+
+changed-onlyは差分取得成功かつ関連targetなしの場合だけno_relevant_changes・exit 0である。差分検出不能はdetection_failed・exit 1、QEG_CHANGED_FILES指定時はその値を正本にする。fixture一覧の正本はfixtures/manifest.jsonである。
+
+外部Actionはv0.2.0を使い既定でenforceする。診断だけを収集する場合に限りenforce: "false"を明示し、exit_code outputを呼び出し側で判定する。
+
+強制判定の例:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      with:
+        targets: .qeg
+
+診断のみの例:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      id: qeg_report
+      with:
+        targets: .qeg
+        enforce: "false"

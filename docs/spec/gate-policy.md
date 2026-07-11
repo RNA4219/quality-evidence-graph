@@ -104,3 +104,7 @@ Gate evaluator は次の順で判定する。
 - approval evidence
 
 Gate 関連の要約元が `sourceRefs` を持たない場合は DQ-02 または DQ-13 とする。
+
+## 0.2.0 preflight
+
+Gate評価前に必須componentのruntime schemaと必須evidence実体を検証する。parse可能な必須schema不適合はDQ-01、ipo_controlledのpath/hash欠落、不存在、hash不一致はDQ-06とする。revision不一致はrevision整合性DQとして扱う。Optional artifactだけの不適合はwarningであり、それ単独でDQにしない。

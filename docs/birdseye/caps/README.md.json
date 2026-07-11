@@ -3,8 +3,30 @@
   "role": "overview",
   "public_api": [],
   "summary": "QEG の agent / maintainer 向け入口。人間向け README、読み順、Agent Rules、CI workflow、qeg-report-action、運用CLI、検証コマンド、controlled governance の現在状態を示す。",
-  "deps_out": ["README_JA.md", "README_EN.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md", "docs/requirements.md", "docs/spec/index.md", "docs/spec/operational-cli-extensions.md", "docs/spec/implementation-gate-2026-06-03.md", "src/cli/report.ts", "qeg-report-action/action.yml", ".github/workflows/ci.yml"],
+  "deps_out": [
+    "README_JA.md",
+    "README_EN.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/requirements.md",
+    "docs/spec/index.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/spec/implementation-gate-2026-06-03.md",
+    "src/cli/report.ts",
+    "qeg-report-action/action.yml",
+    ".github/workflows/ci.yml"
+  ],
   "deps_in": [],
-  "risks": ["bootstrap と Birdseye がずれると読込順が崩れる"],
-  "tests": ["npm run typecheck", "npm run schema-check", "npm run enum-check", "npm run report -- fixtures/positive-release-go", "npm pack --dry-run --cache ./.npm-cache"]
+  "risks": [
+    "bootstrap と Birdseye がずれると読込順が崩れる"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run report -- fixtures/positive-release-go",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:c15381675d2fb00dda33ba57fbda3146da0b0f4ef1c78b6189e7a4e29b1c13a8"
 }

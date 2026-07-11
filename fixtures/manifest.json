@@ -1,0 +1,315 @@
+{
+  "manifestVersion": "qeg-fixtures-v2",
+  "fixtures": [
+    {
+      "name": "negative-approval-hash-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-15"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-approval-missing",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-15"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-changed-code-no-test-obligation",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-05"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-control-roles-missing",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-17"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-direct-gate-policy",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-01"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-empty-gate-source-refs",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-13"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-evidence-hash-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-06"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-final-reason-no-source",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-02"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-hidden-oracle-access",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-10"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-manual-case-disappeared",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-manual-evidence-incomplete",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-08"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-manual-scripted-no-oracle",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-oracle-gap-fact",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-04"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-partial-graph-no-completeness",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-07"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-placement-change-no-evidence",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-placement-change-unreverted",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-policy-hash-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-15"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-producer-check-inconsistent",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-12"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-producer-check-stale-sha",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-12"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-required-connector-contract",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-11"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-revision-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-12"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-silent-overwrite",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-16"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-unknown-id-prefix",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 1,
+        "primaryDq": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-unredacted-secret",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-09"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-unsupported-claim",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-03"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-waiver-dq-attempt",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-01"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-waiver-no-source",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-15"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "positive-gate-efficacy-record",
+      "classification": "positive",
+      "expected": {
+        "verdict": "go",
+        "exitCode": 0,
+        "primaryDq": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "positive-placement-change-retirement",
+      "classification": "positive",
+      "expected": {
+        "verdict": "go",
+        "exitCode": 0,
+        "primaryDq": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "positive-prefixed-ids",
+      "classification": "positive",
+      "expected": {
+        "verdict": "go",
+        "exitCode": 0,
+        "primaryDq": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "positive-release-go",
+      "classification": "positive",
+      "expected": {
+        "verdict": "go",
+        "exitCode": 0,
+        "primaryDq": null
+      },
+      "snapshot": true
+    }
+  ]
+}

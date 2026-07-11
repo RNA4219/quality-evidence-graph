@@ -1,18 +1,34 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-placement-change-no-evidence",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "profile": "standard",
-    "inputArtifacts": []
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-negative-placement-change-no-evidence",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:9e5631a95a6fc479fa53242b12031ae50857f554dc8ed624ec8a1975cd9d67d7"
+      }
+    ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-placement-change-no-evidence",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-negative-placement-change-no-evidence",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9e5631a95a6fc479fa53242b12031ae50857f554dc8ed624ec8a1975cd9d67d7"
+        }
+      ]
     },
     "nodes": [
       {
@@ -106,11 +122,19 @@
   "waivers": [],
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-placement-change-no-evidence",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-negative-placement-change-no-evidence",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9e5631a95a6fc479fa53242b12031ae50857f554dc8ed624ec8a1975cd9d67d7"
+        }
+      ]
     },
     "obligations": [
       {

@@ -3,8 +3,23 @@
   "role": "gate-record",
   "public_api": [],
   "summary": "implementation preparation を go、IPO controlled release を no_go と分離して再検収した record。",
-  "deps_out": ["docs/project/tasks.codex.md", "fixtures/README.md", "docs/control-mapping.md", "docs/ipo-controlled-profile.md"],
-  "deps_in": ["docs/agent/HUB.codex.md", "docs/requirements-gate-acceptance-2026-06-02.md"],
-  "risks": ["実装準備 Go と release Go を混同すると未実装機能を release 可と誤認する"],
-  "tests": ["git ls-files docs/requirements.md", "npm pack --dry-run --cache ./.npm-cache"]
+  "deps_out": [
+    "docs/project/tasks.codex.md",
+    "fixtures/README.md",
+    "docs/control-mapping.md",
+    "docs/ipo-controlled-profile.md"
+  ],
+  "deps_in": [
+    "docs/agent/HUB.codex.md",
+    "docs/requirements-gate-acceptance-2026-06-02.md"
+  ],
+  "risks": [
+    "実装準備 Go と release Go を混同すると未実装機能を release 可と誤認する"
+  ],
+  "tests": [
+    "git ls-files docs/requirements.md",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda"
 }

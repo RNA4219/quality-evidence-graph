@@ -3,8 +3,25 @@
   "role": "blueprint",
   "public_api": [],
   "summary": "QEG の problem、scope、I/O contract、minimal flow、CI report の運用原則、next tasks を定義する。",
-  "deps_out": ["docs/requirements.md", "docs/spec/operational-cli-extensions.md", "src/types.ts", "schemas/shared-defs.schema.json", "qeg-report-action/action.yml"],
-  "deps_in": ["docs/agent/HUB.codex.md", "README.md"],
-  "risks": ["requirements と scope がずれると実装判断が割れる"],
-  "tests": ["npm run typecheck", "npm run schema-check", "npm run enum-check"]
+  "deps_out": [
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "src/types.ts",
+    "schemas/shared-defs.schema.json",
+    "qeg-report-action/action.yml"
+  ],
+  "deps_in": [
+    "docs/agent/HUB.codex.md",
+    "README.md"
+  ],
+  "risks": [
+    "requirements と scope がずれると実装判断が割れる"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run schema-check",
+    "npm run enum-check"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:379c1dbdb73a80f7d75c34ae98fc2b2ccfda743f14f872d9ca55cb4f39ffc468"
 }

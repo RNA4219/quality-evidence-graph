@@ -164,6 +164,7 @@ export interface EvidencePackage {
   readonly phase: PackagePhase;
   readonly evidencePackageHash: string;
   readonly controlRoles?: ControlRoles;
+  readonly notes?: string;
 }
 
 export interface QegMetadata {
@@ -181,9 +182,5 @@ export interface QegMetadata {
   readonly workflowRefs?: readonly WorkflowCookbookRef[];
   readonly benchmarkMode?: boolean;
   readonly hiddenOracleAccessed?: boolean;
-  readonly requiredConnectorStatus?: {
-    readonly "manual-bb-test-harness": "success" | "contract_violation";
-    readonly "code-to-gate": "success" | "contract_violation";
-    readonly "RanD": "success" | "contract_violation";
-  };
+  readonly requiredConnectorStatus?: Readonly<Record<string, "success" | "contract_violation">>;
 }

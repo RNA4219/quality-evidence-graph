@@ -3,8 +3,25 @@
   "role": "human-overview-ja",
   "public_api": [],
   "summary": "人間向け日本語 README。QEG の目的、解決する QA 課題、基本概念、controlled governance profile、CLI、運用補助コマンド、qeg-report-action、GitHub Actions CI、CI 累積 report、verdict の読み方、現在状態を説明する。",
-  "deps_out": ["README.md", "docs/agent/HUB.codex.md", "docs/requirements.md", "docs/spec/index.md", "docs/spec/operational-cli-extensions.md", "qeg-report-action/action.yml"],
-  "deps_in": ["README.md", "docs/agent/HUB.codex.md"],
-  "risks": ["人間向け説明が仕様正本と乖離すると製品理解を誤る"],
-  "tests": ["npm run typecheck", "npm run report -- fixtures/positive-release-go"]
+  "deps_out": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/requirements.md",
+    "docs/spec/index.md",
+    "docs/spec/operational-cli-extensions.md",
+    "qeg-report-action/action.yml"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md"
+  ],
+  "risks": [
+    "人間向け説明が仕様正本と乖離すると製品理解を誤る"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run report -- fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:e1c79eea7d723cb47f47a40355dfca25603908226cdd00dee4e0c24a614bf535"
 }

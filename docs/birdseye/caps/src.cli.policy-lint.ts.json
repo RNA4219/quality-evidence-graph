@@ -1,10 +1,26 @@
 {
   "id": "src/cli/policy-lint.ts",
   "role": "policy-lint-cli",
-  "public_api": ["runPolicyLintCommand", "createPolicyLintReport"],
+  "public_api": [
+    "runPolicyLintCommand",
+    "createPolicyLintReport"
+  ],
   "summary": "policy lint CLI。GatePolicy の policyHash、sourceRefs、exitCodePolicy、dqScope、profile と evidencePackage 側 policy metadata の整合を検査する。",
   "deps_out": [],
-  "deps_in": ["src/cli.ts", "docs/requirements.md", "docs/spec/operational-cli-extensions.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
-  "risks": ["policy metadata が壊れると、同じ verdict でもどの統制条件で判定したか再現できなくなる"],
-  "tests": ["npm run build", "node dist/cli.js policy lint fixtures/positive-release-go"]
+  "deps_in": [
+    "src/cli.ts",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "risks": [
+    "policy metadata が壊れると、同じ verdict でもどの統制条件で判定したか再現できなくなる"
+  ],
+  "tests": [
+    "npm run build",
+    "node dist/cli.js policy lint fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:10a2898dffa65451356ad32acee5bb95cbe067cd3c4544a018cb476df7e584c8"
 }

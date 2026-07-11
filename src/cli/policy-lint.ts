@@ -13,7 +13,7 @@ interface PolicyLintItem {
   readonly message: string;
 }
 
-interface PolicyLintReport {
+export interface PolicyLintReport {
   readonly reportVersion: "qeg-policy-lint-v1";
   readonly generatedAt: string;
   readonly status: LintSeverity;

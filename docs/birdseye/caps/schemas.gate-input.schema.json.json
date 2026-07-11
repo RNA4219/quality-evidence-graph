@@ -1,0 +1,16 @@
+{
+  "id": "schemas/gate-input.schema.json",
+  "role": "top-level-runtime-schema",
+  "generation": "00008",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:37c8467f17853889f0247e60bb83949645299f78a303800acf5334647e8da8b8"
+}

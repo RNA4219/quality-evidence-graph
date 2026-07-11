@@ -1,0 +1,16 @@
+{
+  "id": "src/validation.ts",
+  "role": "public-validation-api",
+  "generation": "00008",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:b466eeb23cfec933a9dbad7d4694a4de0b4e8674c5570cc1e2f0a2b603a2b587"
+}

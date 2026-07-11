@@ -21,6 +21,16 @@ import {
 async function main(): Promise<void> {
   const args = process.argv.slice(2);
 
+  if (args[0] === "--help" || args[0] === "-h") {
+    console.log("Usage: qeg <command> [options] <fixture-dir-or-parent>");
+    console.log("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    exit(0);
+  }
+  if (args[0] === "--version" || args[0] === "-v") {
+    console.log("0.2.0");
+    exit(0);
+  }
+
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
     console.error("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");

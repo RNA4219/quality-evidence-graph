@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-evidence-hash-mismatch",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
@@ -10,13 +10,13 @@
         "adapter": "qeg-native",
         "kind": "test_model",
         "path": "fixtures/negative-evidence-hash-mismatch/input.json",
-        "contentHash": "sha256:mismatch-hash-001"
+        "contentHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
       }
     ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
@@ -33,7 +33,7 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
@@ -44,7 +44,7 @@
   },
   "gate": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
@@ -54,7 +54,7 @@
           "adapter": "qeg-native",
           "kind": "test_model",
           "path": "fixtures/negative-evidence-hash-mismatch/input.json",
-          "contentHash": "sha256:mismatch-hash-001"
+          "contentHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
         }
       ]
     },

@@ -3,8 +3,20 @@
   "role": "code-to-gate-analysis",
   "public_api": [],
   "summary": "code-to-gate v1.4.1 の QEG repository 解析レポート。findings 0、critical 0、high 0、suppression 0 を示す静的 Gate 証跡。",
-  "deps_out": ["docs/spec/code-to-gate-2026-06-03/release-readiness.json"],
-  "deps_in": ["docs/spec/gate-acceptance-2026-06-03.md", "docs/agent/HUB.codex.md", "docs/project/runbook.md"],
-  "risks": ["静的解析で findings 0 でも IPO controlled release に必要な evidence package 実証は代替できない"],
-  "tests": ["code-to-gate analyze . --emit all"]
+  "deps_out": [
+    "docs/spec/code-to-gate-2026-06-03/release-readiness.json"
+  ],
+  "deps_in": [
+    "docs/spec/gate-acceptance-2026-06-03.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/runbook.md"
+  ],
+  "risks": [
+    "静的解析で findings 0 でも IPO controlled release に必要な evidence package 実証は代替できない"
+  ],
+  "tests": [
+    "code-to-gate analyze . --emit all"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d"
 }

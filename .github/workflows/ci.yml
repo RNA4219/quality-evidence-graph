@@ -21,6 +21,10 @@ env:
 jobs:
   quality:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: [20, 24]
 
     steps:
       - name: Checkout
@@ -29,7 +33,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6.4.0
         with:
-          node-version: 24
+          node-version: ${{ matrix.node-version }}
           cache: npm
 
       - name: Install dependencies
@@ -46,6 +50,31 @@ jobs:
         id: build
         continue-on-error: true
         run: npm run build
+
+      - name: Schema validation
+        id: schema
+        continue-on-error: true
+        run: npm run schema-check
+
+      - name: Enum consistency
+        id: enum
+        continue-on-error: true
+        run: npm run enum-check
+
+      - name: Fixture and snapshot regression
+        id: fixtures
+        continue-on-error: true
+        run: npm run test:fixtures
+
+      - name: Package install smoke
+        id: package_smoke
+        continue-on-error: true
+        run: npm run test:package
+
+      - name: Birdseye freshness
+        id: birdseye
+        continue-on-error: true
+        run: npm run birdseye-check
 
       - name: Parse JSON contracts
         id: json_parse
@@ -66,10 +95,11 @@ jobs:
           install-command: ""
           build-command: ""
           targets: ${{ env.QEG_REPORT_TARGETS }}
-          output-path: .qeg/qeg-ci-report.json
+          output-path: .qeg/qeg-ci-report-node-${{ matrix.node-version }}.json
           github-summary: "true"
           report-command: node dist/cli.js
-          artifact-name: qeg-ci-report
+          artifact-name: qeg-ci-report-node-${{ matrix.node-version }}
+          enforce: "false"
 
       - name: Final CI verdict
         if: always()
@@ -78,6 +108,11 @@ jobs:
           STEP_INSTALL: ${{ steps.install.outcome }}
           STEP_TYPECHECK: ${{ steps.typecheck.outcome }}
           STEP_BUILD: ${{ steps.build.outcome }}
+          STEP_SCHEMA: ${{ steps.schema.outcome }}
+          STEP_ENUM: ${{ steps.enum.outcome }}
+          STEP_FIXTURES: ${{ steps.fixtures.outcome }}
+          STEP_PACKAGE_SMOKE: ${{ steps.package_smoke.outcome }}
+          STEP_BIRDSEYE: ${{ steps.birdseye.outcome }}
           STEP_JSON_PARSE: ${{ steps.json_parse.outcome }}
           STEP_PACK: ${{ steps.pack.outcome }}
           STEP_QEG_REPORT: ${{ steps.qeg_report.outcome }}
@@ -88,6 +123,11 @@ jobs:
               ['install', process.env.STEP_INSTALL],
               ['typecheck', process.env.STEP_TYPECHECK],
               ['build', process.env.STEP_BUILD],
+              ['schema', process.env.STEP_SCHEMA],
+              ['enum', process.env.STEP_ENUM],
+              ['fixtures', process.env.STEP_FIXTURES],
+              ['package_smoke', process.env.STEP_PACKAGE_SMOKE],
+              ['birdseye', process.env.STEP_BIRDSEYE],
               ['json_parse', process.env.STEP_JSON_PARSE],
               ['pack', process.env.STEP_PACK],
             ];

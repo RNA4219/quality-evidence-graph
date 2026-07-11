@@ -467,3 +467,12 @@ MVP は次を満たしたら完了とする。
 | TASK-08 | negative fixture を追加する | 欠落、根拠空、revision 不一致、manual oracle 欠落、optional evidence invalid を検収できる |
 | TASK-09 | control mapping を追加する | 変更管理、例外承認、証跡保全、リリース承認への対応表がある |
 | TASK-10 | `ipo_controlled` profile を設計する | conditional_go exit code、waiver 必須項目、approval evidence、retention 方針が定義される |
+
+## 21. 0.2.0 fail-closed追加要件
+
+- 全判定CLIはgate-input.schema.jsonを起点とする共通preflightを使用する。
+- unreadable JSON/envelope欠落はexit 1、parse可能な必須schema不適合はDQ-01/exit 2とする。
+- ipo_controlledの必須evidenceは実体path、SHA-256、revisionを照合する。
+- qeg-ci-report-v2はselectionとreport-level errorsを保持し、changed-onlyの差分検出失敗をexit 1とする。
+- 外部Actionはartifact upload後に既定でenforceし、自repoの集約CIだけdiagnostic-onlyとする。
+- fixtureの一覧と期待結果はfixtures/manifest.jsonを正本とする。

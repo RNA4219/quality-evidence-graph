@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-placement-change-no-evidence",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "profile": "standard",
@@ -8,7 +8,7 @@
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-placement-change-no-evidence",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
@@ -72,7 +72,7 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-placement-change-no-evidence",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
@@ -160,7 +160,7 @@
   },
   "gate": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-placement-change-no-evidence",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",

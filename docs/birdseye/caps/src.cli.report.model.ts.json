@@ -1,0 +1,16 @@
+{
+  "id": "src/cli/report/model.ts",
+  "role": "report-model",
+  "generation": "00008",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:f599f7d3a5098ba949bed11307ae375ff482a5c4c4d896bdca84c9375303b82a"
+}

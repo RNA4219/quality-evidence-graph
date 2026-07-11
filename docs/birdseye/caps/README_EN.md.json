@@ -3,8 +3,25 @@
   "role": "human-overview-en",
   "public_api": [],
   "summary": "Human-facing English README describing QEG's purpose, QA problems solved, core concepts, controlled governance profile, CLI usage, operational helper commands, qeg-report-action, GitHub Actions CI, CI cumulative report, verdict semantics, and current implementation status.",
-  "deps_out": ["README.md", "docs/agent/HUB.codex.md", "docs/requirements.md", "docs/spec/index.md", "docs/spec/operational-cli-extensions.md", "qeg-report-action/action.yml"],
-  "deps_in": ["README.md", "docs/agent/HUB.codex.md"],
-  "risks": ["English human-facing copy can drift from normative specs"],
-  "tests": ["npm run typecheck", "npm run report -- fixtures/positive-release-go"]
+  "deps_out": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/requirements.md",
+    "docs/spec/index.md",
+    "docs/spec/operational-cli-extensions.md",
+    "qeg-report-action/action.yml"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md"
+  ],
+  "risks": [
+    "English human-facing copy can drift from normative specs"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run report -- fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:369625e2ddd34868da166bc4fd2f39098929a640014abd56a209dced6045cd35"
 }

@@ -1,10 +1,26 @@
 {
   "id": "schemas/gate-verdict.schema.json",
   "role": "schema",
-  "public_api": ["GateVerdict", "DisqualificationCode"],
+  "public_api": [
+    "GateVerdict",
+    "DisqualificationCode"
+  ],
   "summary": "Gate verdict の schema。DQ enum と blocker/disqualification sourceRefs minItems を定義する。",
-  "deps_out": ["schemas/quality-evidence-record.schema.json"],
-  "deps_in": ["docs/requirements.md", "src/types.ts", "schemas/shared-defs.schema.json"],
-  "risks": ["DQ enum drift", "sourceRefs 空を schema が許す"],
-  "tests": ["node -e JSON parse schemas"]
+  "deps_out": [
+    "schemas/quality-evidence-record.schema.json"
+  ],
+  "deps_in": [
+    "docs/requirements.md",
+    "src/types.ts",
+    "schemas/shared-defs.schema.json"
+  ],
+  "risks": [
+    "DQ enum drift",
+    "sourceRefs 空を schema が許す"
+  ],
+  "tests": [
+    "node -e JSON parse schemas"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:ab35e4194f83bdb46423f5d6e6c20f49f0d88993c593fc3943f36ffd43e31499"
 }

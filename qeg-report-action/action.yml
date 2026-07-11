@@ -17,7 +17,7 @@ inputs:
   report-command:
     description: Command used to invoke the QEG CLI before report arguments.
     required: false
-    default: "npx -y @quality-harness/quality-evidence-graph@latest"
+    default: "npx -y @quality-harness/quality-evidence-graph@0.2.0"
   targets:
     description: Space-separated fixture directories or parent directories to report.
     required: false
@@ -48,6 +48,10 @@ inputs:
     default: "qeg-ci-report"
   upload-artifact:
     description: Upload the QEG JSON report artifact.
+    required: false
+    default: "true"
+  enforce:
+    description: Fail the Action after artifact upload when QEG returns a non-zero exit code.
     required: false
     default: "true"
 
@@ -82,12 +86,14 @@ runs:
 
     - name: Install dependencies
       if: ${{ inputs.install-command != '' }}
+      id: install
       shell: bash
       continue-on-error: true
       run: ${{ inputs.install-command }}
 
     - name: Build package
       if: ${{ inputs.build-command != '' }}
+      id: build
       shell: bash
       continue-on-error: true
       run: ${{ inputs.build-command }}
@@ -104,6 +110,8 @@ runs:
         QEG_CHANGED_ONLY: ${{ inputs.changed-only }}
         QEG_PREVIOUS_REPORT: ${{ inputs.previous-report }}
         QEG_SUMMARY_PATH: ${{ inputs.output-path }}.summary.md
+        QEG_INSTALL_OUTCOME: ${{ steps.install.outcome }}
+        QEG_BUILD_OUTCOME: ${{ steps.build.outcome }}
       run: |
         mkdir -p "$(dirname "$QEG_OUTPUT_PATH")"
         report_exit=0
@@ -136,7 +144,7 @@ runs:
         set -e
 
         if [ ! -f "$QEG_OUTPUT_PATH" ]; then
-          node -e "const fs=require('fs'); const report={reportVersion:'qeg-ci-report-v1',generatedAt:new Date().toISOString(),summary:{totalTargets:1,passed:0,baselineAccepted:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:process.env.QEG_REPORT_COMMAND,status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:'QEG report command failed before producing a report artifact'}]}; fs.writeFileSync(process.env.QEG_OUTPUT_PATH, JSON.stringify(report,null,2)+'\n');"
+          node -e "const fs=require('fs'); const message='QEG report command failed before producing a report artifact'; const report={reportVersion:'qeg-ci-report-v2',generatedAt:new Date().toISOString(),selection:{mode:'all',status:'detection_failed',strategy:'all',changedFileCount:0,selectedTargetCount:0,error:message},errors:[{code:'ACTION_REPORT_FAILED',message}],summary:{totalTargets:1,passed:0,baselineAccepted:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:process.env.QEG_REPORT_COMMAND,status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:message}]}; fs.writeFileSync(process.env.QEG_OUTPUT_PATH, JSON.stringify(report,null,2)+'\n');"
           if [ "$QEG_GITHUB_SUMMARY" = "true" ] && [ -n "$GITHUB_STEP_SUMMARY" ]; then
             {
               echo "## QEG CI Report"
@@ -157,6 +165,11 @@ runs:
           report_exit=1
         fi
 
+        if [ "$QEG_INSTALL_OUTCOME" = "failure" ] || [ "$QEG_BUILD_OUTCOME" = "failure" ]; then
+          node -e "const fs=require('fs'); const p=process.env.QEG_OUTPUT_PATH; const r=JSON.parse(fs.readFileSync(p,'utf8')); r.errors=[...(r.errors||[]),{code:'ACTION_PREFLIGHT_FAILED',message:'install or build command failed'}]; r.summary=r.summary||{}; r.summary.cliErrors=(r.summary.cliErrors||0)+1; fs.writeFileSync(p,JSON.stringify(r,null,2)+'\n');"
+          report_exit=1
+        fi
+
         echo "$report_exit" > "$(dirname "$QEG_OUTPUT_PATH")/qeg-report-exit-code.txt"
         node -e "const fs=require('fs'); const report=JSON.parse(fs.readFileSync(process.env.QEG_OUTPUT_PATH,'utf8')); const s=report.summary||{}; const dq=(s.dqCounts||[]).reduce((n,d)=>n+(d.count||0),0); const diff=report.diff; const lines=['## QEG CI Report','',\`- targets: \${s.totalTargets||0}\`,\`- passed: \${s.passed||0}\`,\`- baseline accepted: \${s.baselineAccepted||0}\`,\`- gate failed: \${s.gateFailed||0}\`,\`- cli errors: \${s.cliErrors||0}\`,\`- DQs: \${dq}\`]; if(diff){lines.push(\`- new DQs: \${diff.new?.length||0}\`,\`- resolved DQs: \${diff.resolved?.length||0}\`,\`- unchanged DQs: \${diff.unchanged?.length||0}\`);} lines.push(''); fs.writeFileSync(process.env.QEG_SUMMARY_PATH, lines.join('\n')+'\n'); fs.appendFileSync(process.env.GITHUB_OUTPUT, \`gate_failed=\${s.gateFailed||0}\ncli_errors=\${s.cliErrors||0}\ndq_count=\${dq}\nreport_path=\${process.env.QEG_OUTPUT_PATH}\nsummary_markdown_path=\${process.env.QEG_SUMMARY_PATH}\n\`);"
         echo "exit_code=$report_exit" >> "$GITHUB_OUTPUT"
@@ -171,3 +184,11 @@ runs:
           ${{ inputs.output-path }}
           ${{ inputs.output-path }}.summary.md
         if-no-files-found: warn
+
+    - name: Enforce QEG verdict
+      if: ${{ always() && inputs.enforce == 'true' }}
+      shell: bash
+      env:
+        QEG_EXIT_CODE: ${{ steps.report.outputs.exit_code }}
+      run: |
+        exit "${QEG_EXIT_CODE:-1}"

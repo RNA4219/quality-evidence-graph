@@ -21,7 +21,7 @@ function minimalGateInput(): string {
   const now = new Date().toISOString();
   return `${JSON.stringify({
     metadata: {
-      qegVersion: "0.1",
+      qegVersion: "0.2",
       runId: "qeg:run-local-init",
       createdAt: now,
       profile: "standard",
@@ -29,7 +29,7 @@ function minimalGateInput(): string {
     },
     graph: {
       metadata: {
-        qegVersion: "0.1",
+        qegVersion: "0.2",
         runId: "qeg:run-local-init",
         createdAt: now,
         profile: "standard",
@@ -107,7 +107,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: RNA4219/quality-evidence-graph/qeg-report-action@v1
+      - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
         with:
           targets: .qeg
           output-path: .qeg/qeg-ci-report.json

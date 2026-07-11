@@ -127,7 +127,7 @@
       "required": ["qegVersion", "runId", "createdAt", "profile", "inputArtifacts"],
       "additionalProperties": false,
       "properties": {
-        "qegVersion": { "const": "0.1" },
+        "qegVersion": { "const": "0.2" },
         "runId": { "$ref": "#/$defs/stableId" },
         "createdAt": { "$ref": "#/$defs/isoDateTime" },
         "baseRef": { "type": "string" },
@@ -163,6 +163,25 @@
               "path": { "type": "string", "minLength": 1 },
               "nodeId": { "type": "string" },
               "contentHash": { "type": "string" }
+            }
+          }
+        },
+        "benchmarkMode": { "type": "boolean" },
+        "hiddenOracleAccessed": { "type": "boolean" },
+        "requiredConnectorStatus": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": ["success", "contract_violation"]
+          },
+          "properties": {
+            "manual-bb-test-harness": {
+              "enum": ["success", "contract_violation"]
+            },
+            "code-to-gate": {
+              "enum": ["success", "contract_violation"]
+            },
+            "RanD": {
+              "enum": ["success", "contract_violation"]
             }
           }
         }

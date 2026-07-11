@@ -1,429 +1,1039 @@
 {
-  "generated_at": "00006",
+  "generated_at": "00008",
   "nodes": {
     "README.md": {
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:c15381675d2fb00dda33ba57fbda3146da0b0f4ef1c78b6189e7a4e29b1c13a8"
     },
     "README_JA.md": {
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:e1c79eea7d723cb47f47a40355dfca25603908226cdd00dee4e0c24a614bf535"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:369625e2ddd34868da166bc4fd2f39098929a640014abd56a209dced6045cd35"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
       "caps": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:c0b1e45c3791aabab90a37a6f39c2e4aed40ba876156fae4e090898ee1c42f29"
     },
     "docs/project/blueprint.md": {
       "role": "blueprint",
       "caps": "docs/birdseye/caps/docs.project.blueprint.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:379c1dbdb73a80f7d75c34ae98fc2b2ccfda743f14f872d9ca55cb4f39ffc468"
     },
     "docs/research/quality-evidence-graph-requirements-report.md": {
       "role": "deep-research-report",
       "caps": "docs/birdseye/caps/docs.research.quality-evidence-graph-requirements-report.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0"
     },
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00006"
+      "mtime": "00008",
+      "contentHash": "sha256:fc53c0e6c4fbfdd9368256ffe997af1fb14cd8b6550fb894f1de38d75632ddad"
     },
     "docs/project/runbook.md": {
       "role": "operations",
       "caps": "docs/birdseye/caps/docs.project.runbook.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:8c10fc6929d1920f4602ac5775c8a94ce9ba0273805394971ac568fc1a8be9da"
     },
     "docs/project/evaluation.md": {
       "role": "quality",
       "caps": "docs/birdseye/caps/docs.project.evaluation.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:c2cd8923d686ae6aff3f88dded8237f1b9d97371aff31c171e7168e61da5bdaa"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
       "caps": "docs/birdseye/caps/docs.project.guardrails.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1"
     },
     "docs/project/tasks.codex.md": {
       "role": "task-template",
       "caps": "docs/birdseye/caps/docs.project.tasks.codex.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:fee3ad6a8d7cba74208fee32da73717fdba304f53381ad4e8b98c6d4cbe5dcc5"
     },
     "docs/project/checklists.md": {
       "role": "checklist",
       "caps": "docs/birdseye/caps/docs.project.checklists.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:2718c34ee1b160b596ed695dbf53bbb72ba2d312e3df26a3771c2df2fe73ddde"
     },
     "fixtures/README.md": {
       "role": "fixture-contract",
       "caps": "docs/birdseye/caps/fixtures.README.md.json",
-      "mtime": "00006"
+      "mtime": "00008",
+      "contentHash": "sha256:cee4fb4f8f14a6374acd14fc15bd098a2f4696db61d45ead2e97b0fbb9793b2c"
     },
     "docs/control-mapping.md": {
       "role": "control-mapping",
       "caps": "docs/birdseye/caps/docs.control-mapping.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157"
     },
     "docs/ipo-controlled-profile.md": {
       "role": "ipo-profile",
       "caps": "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:55a16c9a01a712b698d6abd6f248377cd7ad9c33f7fe2b7afebf28cc23475f80"
     },
     "docs/spec/index.md": {
       "role": "ipo-spec-index",
       "caps": "docs/birdseye/caps/docs.spec.index.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:4fae53715aed3c62b8c3eb3063cae74e5364d020da549bf56d6b46a939defc06"
     },
     "docs/spec/operational-cli-extensions.md": {
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:532af27402e78f6a28241a18b026c1b73d4cbac7a6a765b34efb2f27e9a9cd62"
     },
     "docs/spec/gate-policy.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
-      "mtime": "00006"
+      "mtime": "00008",
+      "contentHash": "sha256:a631c8aed606aaa40a116d9c62e6772cc599b75d3546c46ba9d2ff4e7702e5f7"
     },
     "docs/spec/waiver-approval.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c"
     },
     "docs/spec/evidence-package.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97"
     },
     "docs/spec/retention-immutability.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1"
     },
     "docs/spec/acceptance.md": {
       "role": "ipo-spec-acceptance",
       "caps": "docs/birdseye/caps/docs.spec.acceptance.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:62d2ebbf57d666c8bd2908d5f76f6878466689add6d4f59a0e0695152d2328ae"
     },
     "docs/spec/review-2026-06-03.md": {
       "role": "ipo-spec-review",
       "caps": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e"
     },
     "docs/spec/gate-acceptance-2026-06-03.md": {
       "role": "ipo-spec-gate-acceptance",
       "caps": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b"
     },
     "docs/spec/implementation-gate-2026-06-03.md": {
       "role": "ipo-implementation-gate",
       "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:cb50ac1d1c61f7cd046d9e7b463e2ac89b0c547e2ab5ad98fb3cddf3feb920f5"
     },
     "docs/release-notes/2026-06-03-controlled-gate.md": {
       "role": "release-notes",
       "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-controlled-gate.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:9786b9d358e0f7d485dafe2f05adb782657822a43c74611a31d357af03e7c78e"
     },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
       "role": "code-to-gate-analysis",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d"
     },
     "docs/spec/code-to-gate-2026-06-03/release-readiness.json": {
       "role": "code-to-gate-readiness",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.release-readiness.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a"
     },
     "docs/spec/kano-mode-2026-06-03/kano.json": {
       "role": "kano-mode-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.kano.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:cee0f90f7c07edfa2044bd01fd9894ec0f5319efe351104526e7de0d02b9a00c"
     },
     "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json": {
       "role": "kano-mode-requirements-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.requirements_audit_packet.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:33ef374195acdce943d4e2575fbda4f6a7fdba48f291fe3ac9ef90d6e8f9f110"
     },
     "docs/implementation-prep-gate-2026-06-02.md": {
       "role": "gate-record",
       "caps": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda"
     },
     "src/types.ts": {
       "role": "types",
       "caps": "docs/birdseye/caps/src.types.ts.json",
-      "mtime": "00006"
+      "mtime": "00008",
+      "contentHash": "sha256:232e678340fefe3881c7acdf126dc06bb41a161d6d1e0a2c871acdbc124c8163"
     },
     "src/cli/report.ts": {
       "role": "ci-report-cli",
       "caps": "docs/birdseye/caps/src.cli.report.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:6ab680355e34bdb3d7f5f53f793f02660d1eef00d6df85dd4699e27dd1ec50f0"
     },
     "src/cli.ts": {
       "role": "cli-entrypoint",
       "caps": "docs/birdseye/caps/src.cli.ts.json",
-      "mtime": "00004"
+      "mtime": "00008",
+      "contentHash": "sha256:69621511e01e1a5ebf16b7109225a1fb8dd34bd3dbe2f869a8cd2d987ed837d6"
     },
     "src/cli/dq-explain.ts": {
       "role": "dq-explain-cli",
       "caps": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
-      "mtime": "00006"
+      "mtime": "00008",
+      "contentHash": "sha256:9427c201c13e1b204e356d2d23b82957791fb990c4a2e34e90d3718dfdf09092"
     },
     "src/cli/doctor.ts": {
       "role": "doctor-cli",
       "caps": "docs/birdseye/caps/src.cli.doctor.ts.json",
-      "mtime": "00004"
+      "mtime": "00008",
+      "contentHash": "sha256:9f51aa6cd70bcacf6b0321cff2e6b50911da72ec24167f9f94f3263cf69cdced"
     },
     "src/cli/schema-check.ts": {
       "role": "schema-check-cli",
       "caps": "docs/birdseye/caps/src.cli.schema-check.ts.json",
-      "mtime": "00004"
+      "mtime": "00008",
+      "contentHash": "sha256:7a6f4228f719f7c893be96ba7a8eccd4e2e3dd6ecb41922d9182408404121bd5"
     },
     "src/cli/enum-check.ts": {
       "role": "enum-drift-cli",
       "caps": "docs/birdseye/caps/src.cli.enum-check.ts.json",
-      "mtime": "00004"
+      "mtime": "00008",
+      "contentHash": "sha256:f30d3166623d8788339bc959adb074daea74774f3029ee9760ca31ea0a8000b6"
     },
     "src/cli/init.ts": {
       "role": "oss-init-cli",
       "caps": "docs/birdseye/caps/src.cli.init.ts.json",
-      "mtime": "00004"
+      "mtime": "00008",
+      "contentHash": "sha256:b0239d3e5aa44b8c54231af5355ddbff4055912c1d916569660466563ad5d277"
     },
     "src/cli/snapshot.ts": {
       "role": "report-snapshot-cli",
       "caps": "docs/birdseye/caps/src.cli.snapshot.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:65a58ebdfa8839a4c836fda8f0ef783dd5e0da46ba4097c5ade68032c5b80c81"
     },
     "src/cli/baseline.ts": {
       "role": "baseline-audit-cli",
       "caps": "docs/birdseye/caps/src.cli.baseline.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:3e58e363fa931153f13da06aa55b4b82963fa9a4486cafb3c4bef367e38208ce"
     },
     "src/cli/evidence-verify.ts": {
       "role": "evidence-verify-cli",
       "caps": "docs/birdseye/caps/src.cli.evidence-verify.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:cc77a504d61725b19224cc9f679bec9328041d721603fd401add82d2242b5043"
     },
     "src/cli/policy-lint.ts": {
       "role": "policy-lint-cli",
       "caps": "docs/birdseye/caps/src.cli.policy-lint.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:10a2898dffa65451356ad32acee5bb95cbe067cd3c4544a018cb476df7e584c8"
     },
     "src/cli/repro-bundle.ts": {
       "role": "repro-bundle-cli",
       "caps": "docs/birdseye/caps/src.cli.repro-bundle.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:25d0cfaafc17302e3b464c33f7b156c3eacf1e854d63ed2c7da7ce7f4f2e2abb"
     },
     "src/cli/check.ts": {
       "role": "local-check-cli",
       "caps": "docs/birdseye/caps/src.cli.check.ts.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:ee42782b0f7e1168ea29d36046645a532aa838a9538d323b1523b218cc39dcdc"
     },
     ".github/workflows/ci.yml": {
       "role": "github-actions-ci",
       "caps": "docs/birdseye/caps/.github.workflows.ci.yml.json",
-      "mtime": "00005"
+      "mtime": "00008",
+      "contentHash": "sha256:28a17503ab7eb2f8c55e6035ca0ef343663e3250a76cb7c484701f00f01b3828"
     },
     "qeg-report-action/action.yml": {
       "role": "github-action",
       "caps": "docs/birdseye/caps/qeg-report-action.action.yml.json",
-      "mtime": "00004"
+      "mtime": "00008",
+      "contentHash": "sha256:b16b0d377d32fb71acc52d94494aa1277d4f77261b3eb749e21bc6a979c9e113"
     },
     "schemas/shared-defs.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
-      "mtime": "00006"
+      "mtime": "00008",
+      "contentHash": "sha256:70fb9e840f22f644ab0305f710fd4b2b4a32f27da6e3b201f7de5fb72129e4f1"
     },
     "schemas/gate-verdict.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:ab35e4194f83bdb46423f5d6e6c20f49f0d88993c593fc3943f36ffd43e31499"
     },
     "schemas/qeg.bundle.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:18d422f00abc15d2671d075458dbc99045cc4b689b1ec80b98f094c6219b58d0"
     },
     "schemas/test-placement-plan.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:1b35c797a79210a16665fe9819d7d0aee5d990425be81f109be88d8c85b2d624"
     },
     "schemas/quality-evidence-record.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
-      "mtime": "00001"
+      "mtime": "00008",
+      "contentHash": "sha256:629439ddcf2ad1d950f033a397213e53c3bcfbb89020cf936ca55eaa20242a7f"
+    },
+    "schemas/gate-input.schema.json": {
+      "role": "top-level-runtime-schema",
+      "caps": "docs/birdseye/caps/schemas.gate-input.schema.json.json",
+      "mtime": "00008",
+      "contentHash": "sha256:37c8467f17853889f0247e60bb83949645299f78a303800acf5334647e8da8b8"
+    },
+    "fixtures/manifest.json": {
+      "role": "fixture-manifest",
+      "caps": "docs/birdseye/caps/fixtures.manifest.json.json",
+      "mtime": "00008",
+      "contentHash": "sha256:baa68eb60d8f7c31686a9f87012097fe4d49f85cf9ff4d6eb0093c3a68d96d25"
+    },
+    "src/validation.ts": {
+      "role": "public-validation-api",
+      "caps": "docs/birdseye/caps/src.validation.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:b466eeb23cfec933a9dbad7d4694a4de0b4e8674c5570cc1e2f0a2b603a2b587"
+    },
+    "src/cli/report/change-selection.ts": {
+      "role": "changed-target-selection",
+      "caps": "docs/birdseye/caps/src.cli.report.change-selection.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:0a9ebc9c0ba659534a484570153766f3f15438d375894361334cae3c5449b823"
+    },
+    "src/validation/schema.ts": {
+      "role": "runtime-schema-validation",
+      "caps": "docs/birdseye/caps/src.validation.schema.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:2f4abd27633d432a2440b9f7b53c55566ddd97598740b94e47155ea6053c5768"
+    },
+    "src/validation/evidence.ts": {
+      "role": "runtime-evidence-validation",
+      "caps": "docs/birdseye/caps/src.validation.evidence.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:2d142dca4707d2f256b96cb0c540c1a993579e136c9675482e69de3ffeb62a0e"
+    },
+    "src/cli/report/model.ts": {
+      "role": "report-model",
+      "caps": "docs/birdseye/caps/src.cli.report.model.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:f599f7d3a5098ba949bed11307ae375ff482a5c4c4d896bdca84c9375303b82a"
+    },
+    "src/cli/report/targets.ts": {
+      "role": "report-targets",
+      "caps": "docs/birdseye/caps/src.cli.report.targets.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:869bb7a283f98734d9e27c23b93e535ccf929aa12c44f0b0b4e0f66004a98471"
+    },
+    "src/cli/report/baseline-diff.ts": {
+      "role": "report-baseline-diff",
+      "caps": "docs/birdseye/caps/src.cli.report.baseline-diff.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:99ea39e442f2cd3b7b7f9eb549bdea00164bad37fafcc1d052256c8a570cc02a"
+    },
+    "src/cli/report/core.ts": {
+      "role": "report-core",
+      "caps": "docs/birdseye/caps/src.cli.report.core.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:bb83f61bc9405dbd0ec7fd05d9409906ca4bda04a3736c20172bf94776892992"
+    },
+    "src/cli/report/formatter.ts": {
+      "role": "report-formatter",
+      "caps": "docs/birdseye/caps/src.cli.report.formatter.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:c3dff6f0af5e636bfe479b7158b27da711965eda15f51416da1dbd20a0561f36"
+    },
+    "src/cli/report/command.ts": {
+      "role": "report-command",
+      "caps": "docs/birdseye/caps/src.cli.report.command.ts.json",
+      "mtime": "00008",
+      "contentHash": "sha256:676909c9ba24a905d96089f0e36ee41c286218668896f57dacd50836991cae60"
     }
   },
   "edges": [
-    ["README.md", "README_JA.md"],
-    ["README.md", "README_EN.md"],
-    ["README.md", "docs/agent/HUB.codex.md"],
-    ["README.md", "src/cli/report.ts"],
-    ["README.md", ".github/workflows/ci.yml"],
-    ["README.md", "qeg-report-action/action.yml"],
-    ["README.md", "docs/spec/operational-cli-extensions.md"],
-    ["README_JA.md", "docs/agent/HUB.codex.md"],
-    ["README_JA.md", "qeg-report-action/action.yml"],
-    ["README_EN.md", "docs/agent/HUB.codex.md"],
-    ["README_EN.md", "qeg-report-action/action.yml"],
-    ["docs/agent/HUB.codex.md", "docs/birdseye/index.json"],
-    ["docs/agent/HUB.codex.md", "README_JA.md"],
-    ["docs/agent/HUB.codex.md", "README_EN.md"],
-    ["docs/agent/HUB.codex.md", "docs/project/blueprint.md"],
-    ["docs/agent/HUB.codex.md", "docs/research/quality-evidence-graph-requirements-report.md"],
-    ["docs/agent/HUB.codex.md", "docs/requirements.md"],
-    ["docs/agent/HUB.codex.md", "docs/project/runbook.md"],
-    ["docs/agent/HUB.codex.md", "docs/project/evaluation.md"],
-    ["docs/agent/HUB.codex.md", "docs/project/guardrails.md"],
-    ["docs/agent/HUB.codex.md", "docs/project/tasks.codex.md"],
-    ["docs/agent/HUB.codex.md", "fixtures/README.md"],
-    ["docs/agent/HUB.codex.md", "docs/control-mapping.md"],
-    ["docs/agent/HUB.codex.md", "docs/ipo-controlled-profile.md"],
-    ["docs/agent/HUB.codex.md", "docs/spec/index.md"],
-    ["docs/agent/HUB.codex.md", "docs/spec/operational-cli-extensions.md"],
-    ["docs/agent/HUB.codex.md", "docs/implementation-prep-gate-2026-06-02.md"],
-    ["docs/requirements.md", "src/types.ts"],
-    ["docs/requirements.md", "src/cli/report.ts"],
-    ["docs/requirements.md", "src/cli/doctor.ts"],
-    ["docs/requirements.md", "src/cli/dq-explain.ts"],
-    ["docs/requirements.md", "src/cli/schema-check.ts"],
-    ["docs/requirements.md", "src/cli/enum-check.ts"],
-    ["docs/requirements.md", "src/cli/init.ts"],
-    ["docs/requirements.md", "src/cli/snapshot.ts"],
-    ["docs/requirements.md", "src/cli/baseline.ts"],
-    ["docs/requirements.md", "src/cli/evidence-verify.ts"],
-    ["docs/requirements.md", "src/cli/policy-lint.ts"],
-    ["docs/requirements.md", "src/cli/repro-bundle.ts"],
-    ["docs/requirements.md", "src/cli/check.ts"],
-    ["docs/requirements.md", ".github/workflows/ci.yml"],
-    ["docs/requirements.md", "qeg-report-action/action.yml"],
-    ["docs/requirements.md", "docs/spec/operational-cli-extensions.md"],
-    ["docs/research/quality-evidence-graph-requirements-report.md", "docs/requirements.md"],
-    ["docs/research/quality-evidence-graph-requirements-report.md", "docs/project/blueprint.md"],
-    ["docs/research/quality-evidence-graph-requirements-report.md", "docs/spec/index.md"],
-    ["docs/requirements.md", "schemas/gate-verdict.schema.json"],
-    ["docs/requirements.md", "docs/project/tasks.codex.md"],
-    ["docs/requirements.md", "fixtures/README.md"],
-    ["docs/requirements.md", "docs/control-mapping.md"],
-    ["docs/requirements.md", "docs/ipo-controlled-profile.md"],
-    ["docs/requirements.md", "docs/spec/index.md"],
-    ["docs/project/tasks.codex.md", "fixtures/README.md"],
-    ["docs/project/tasks.codex.md", "docs/control-mapping.md"],
-    ["docs/project/tasks.codex.md", "docs/ipo-controlled-profile.md"],
-    ["docs/project/tasks.codex.md", "docs/spec/index.md"],
-    ["docs/ipo-controlled-profile.md", "docs/spec/gate-policy.md"],
-    ["docs/ipo-controlled-profile.md", "docs/spec/waiver-approval.md"],
-    ["docs/ipo-controlled-profile.md", "docs/spec/evidence-package.md"],
-    ["docs/ipo-controlled-profile.md", "docs/spec/retention-immutability.md"],
-    ["docs/spec/index.md", "docs/spec/gate-policy.md"],
-    ["docs/spec/index.md", "docs/spec/operational-cli-extensions.md"],
-    ["docs/spec/index.md", "docs/spec/waiver-approval.md"],
-    ["docs/spec/index.md", "docs/spec/evidence-package.md"],
-    ["docs/spec/index.md", "docs/spec/retention-immutability.md"],
-    ["docs/spec/index.md", "docs/spec/acceptance.md"],
-    ["docs/spec/index.md", "docs/spec/review-2026-06-03.md"],
-    ["docs/spec/index.md", "docs/spec/gate-acceptance-2026-06-03.md"],
-    ["docs/spec/review-2026-06-03.md", "docs/spec/waiver-approval.md"],
-    ["docs/spec/review-2026-06-03.md", "docs/spec/evidence-package.md"],
-    ["docs/spec/review-2026-06-03.md", "docs/spec/acceptance.md"],
-    ["docs/spec/review-2026-06-03.md", "docs/project/runbook.md"],
-    ["docs/spec/review-2026-06-03.md", "docs/project/evaluation.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/acceptance.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/project/runbook.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/project/evaluation.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/code-to-gate-2026-06-03/release-readiness.json"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/kano.json"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
-    ["docs/spec/gate-acceptance-2026-06-03.md", "docs/spec/implementation-gate-2026-06-03.md"],
-    ["docs/agent/HUB.codex.md", "docs/release-notes/2026-06-03-controlled-gate.md"],
-    ["docs/release-notes/2026-06-03-controlled-gate.md", "README.md"],
-    ["docs/release-notes/2026-06-03-controlled-gate.md", "README_JA.md"],
-    ["docs/release-notes/2026-06-03-controlled-gate.md", "README_EN.md"],
-    ["docs/release-notes/2026-06-03-controlled-gate.md", "docs/spec/implementation-gate-2026-06-03.md"],
-    ["docs/spec/implementation-gate-2026-06-03.md", "docs/project/runbook.md"],
-    ["docs/spec/implementation-gate-2026-06-03.md", "docs/project/evaluation.md"],
-    ["docs/spec/code-to-gate-2026-06-03/release-readiness.json", "docs/spec/code-to-gate-2026-06-03/analysis-report.md"],
-    ["docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json", "docs/spec/kano-mode-2026-06-03/kano.json"],
-    ["docs/spec/acceptance.md", "docs/project/runbook.md"],
-    ["docs/spec/acceptance.md", "docs/project/evaluation.md"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/report.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/doctor.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/dq-explain.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/schema-check.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/enum-check.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/init.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/snapshot.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/baseline.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/evidence-verify.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/policy-lint.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/repro-bundle.ts"],
-    ["docs/spec/operational-cli-extensions.md", "src/cli/check.ts"],
-    ["docs/spec/operational-cli-extensions.md", "qeg-report-action/action.yml"],
-    ["docs/implementation-prep-gate-2026-06-02.md", "docs/project/tasks.codex.md"],
-    ["src/types.ts", "schemas/shared-defs.schema.json"],
-    ["schemas/shared-defs.schema.json", "schemas/gate-verdict.schema.json"],
-    ["schemas/shared-defs.schema.json", "schemas/qeg.bundle.schema.json"],
-    ["schemas/shared-defs.schema.json", "schemas/test-placement-plan.schema.json"],
-    ["schemas/qeg.bundle.schema.json", "schemas/quality-evidence-record.schema.json"],
-    ["schemas/test-placement-plan.schema.json", "schemas/quality-evidence-record.schema.json"],
-    ["schemas/gate-verdict.schema.json", "schemas/quality-evidence-record.schema.json"],
-    ["docs/project/runbook.md", "docs/project/evaluation.md"],
-    ["docs/project/runbook.md", "src/cli/report.ts"],
-    ["docs/project/runbook.md", "src/cli/baseline.ts"],
-    ["docs/project/runbook.md", "src/cli/evidence-verify.ts"],
-    ["docs/project/runbook.md", "src/cli/policy-lint.ts"],
-    ["docs/project/runbook.md", "src/cli/repro-bundle.ts"],
-    ["docs/project/runbook.md", "src/cli/check.ts"],
-    ["docs/project/runbook.md", "qeg-report-action/action.yml"],
-    ["docs/project/runbook.md", "docs/spec/operational-cli-extensions.md"],
-    ["docs/project/runbook.md", ".github/workflows/ci.yml"],
-    ["docs/project/evaluation.md", "src/cli/report.ts"],
-    ["docs/project/evaluation.md", "src/cli/baseline.ts"],
-    ["docs/project/evaluation.md", "src/cli/evidence-verify.ts"],
-    ["docs/project/evaluation.md", "src/cli/policy-lint.ts"],
-    ["docs/project/evaluation.md", "src/cli/repro-bundle.ts"],
-    ["docs/project/evaluation.md", "src/cli/check.ts"],
-    ["docs/project/evaluation.md", "qeg-report-action/action.yml"],
-    ["docs/project/evaluation.md", "docs/spec/operational-cli-extensions.md"],
-    ["docs/project/evaluation.md", ".github/workflows/ci.yml"],
-    ["src/cli.ts", "src/cli/report.ts"],
-    ["src/cli.ts", "src/cli/doctor.ts"],
-    ["src/cli.ts", "src/cli/dq-explain.ts"],
-    ["src/cli.ts", "src/cli/schema-check.ts"],
-    ["src/cli.ts", "src/cli/enum-check.ts"],
-    ["src/cli.ts", "src/cli/init.ts"],
-    ["src/cli.ts", "src/cli/snapshot.ts"],
-    ["src/cli.ts", "src/cli/baseline.ts"],
-    ["src/cli.ts", "src/cli/evidence-verify.ts"],
-    ["src/cli.ts", "src/cli/policy-lint.ts"],
-    ["src/cli.ts", "src/cli/repro-bundle.ts"],
-    ["src/cli.ts", "src/cli/check.ts"],
-    ["src/cli/report.ts", "src/types.ts"],
-    ["src/cli/report.ts", "src/cli/dq-explain.ts"],
-    ["src/cli/doctor.ts", "src/cli/report.ts"],
-    ["src/cli/doctor.ts", "src/cli/schema-check.ts"],
-    ["src/cli/schema-check.ts", "src/cli/report.ts"],
-    ["src/cli/snapshot.ts", "src/cli/report.ts"],
-    ["src/cli/baseline.ts", "src/cli/report.ts"],
-    ["src/cli/evidence-verify.ts", "src/cli/report.ts"],
-    ["src/cli/repro-bundle.ts", "src/cli/doctor.ts"],
-    ["src/cli/check.ts", "src/cli/schema-check.ts"],
-    ["src/cli/check.ts", "src/cli/enum-check.ts"],
-    ["src/cli/check.ts", "src/cli/snapshot.ts"],
-    ["src/cli/check.ts", "src/cli/doctor.ts"],
-    ["src/cli/check.ts", "src/cli/report.ts"],
-    [".github/workflows/ci.yml", "src/cli/report.ts"],
-    [".github/workflows/ci.yml", "qeg-report-action/action.yml"],
-    ["qeg-report-action/action.yml", "src/cli/report.ts"],
-    ["docs/project/guardrails.md", "docs/birdseye/index.json"]
+    [
+      "README.md",
+      "README_JA.md"
+    ],
+    [
+      "README.md",
+      "README_EN.md"
+    ],
+    [
+      "README.md",
+      "docs/agent/HUB.codex.md"
+    ],
+    [
+      "README.md",
+      "src/cli/report.ts"
+    ],
+    [
+      "README.md",
+      ".github/workflows/ci.yml"
+    ],
+    [
+      "README.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "README.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "README_JA.md",
+      "docs/agent/HUB.codex.md"
+    ],
+    [
+      "README_JA.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "README_EN.md",
+      "docs/agent/HUB.codex.md"
+    ],
+    [
+      "README_EN.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/birdseye/index.json"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "README_JA.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "README_EN.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/project/blueprint.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/research/quality-evidence-graph-requirements-report.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/project/runbook.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/project/evaluation.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/project/guardrails.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/project/tasks.codex.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "fixtures/README.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/control-mapping.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/ipo-controlled-profile.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/spec/index.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/implementation-prep-gate-2026-06-02.md"
+    ],
+    [
+      "docs/requirements.md",
+      "src/types.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/report.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/doctor.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/dq-explain.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/schema-check.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/enum-check.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/init.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/snapshot.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/baseline.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/evidence-verify.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/policy-lint.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/repro-bundle.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "src/cli/check.ts"
+    ],
+    [
+      "docs/requirements.md",
+      ".github/workflows/ci.yml"
+    ],
+    [
+      "docs/requirements.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "docs/research/quality-evidence-graph-requirements-report.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/research/quality-evidence-graph-requirements-report.md",
+      "docs/project/blueprint.md"
+    ],
+    [
+      "docs/research/quality-evidence-graph-requirements-report.md",
+      "docs/spec/index.md"
+    ],
+    [
+      "docs/requirements.md",
+      "schemas/gate-verdict.schema.json"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/project/tasks.codex.md"
+    ],
+    [
+      "docs/requirements.md",
+      "fixtures/README.md"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/control-mapping.md"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/ipo-controlled-profile.md"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/spec/index.md"
+    ],
+    [
+      "docs/project/tasks.codex.md",
+      "fixtures/README.md"
+    ],
+    [
+      "docs/project/tasks.codex.md",
+      "docs/control-mapping.md"
+    ],
+    [
+      "docs/project/tasks.codex.md",
+      "docs/ipo-controlled-profile.md"
+    ],
+    [
+      "docs/project/tasks.codex.md",
+      "docs/spec/index.md"
+    ],
+    [
+      "docs/ipo-controlled-profile.md",
+      "docs/spec/gate-policy.md"
+    ],
+    [
+      "docs/ipo-controlled-profile.md",
+      "docs/spec/waiver-approval.md"
+    ],
+    [
+      "docs/ipo-controlled-profile.md",
+      "docs/spec/evidence-package.md"
+    ],
+    [
+      "docs/ipo-controlled-profile.md",
+      "docs/spec/retention-immutability.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/gate-policy.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/waiver-approval.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/evidence-package.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/retention-immutability.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/acceptance.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/review-2026-06-03.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/gate-acceptance-2026-06-03.md"
+    ],
+    [
+      "docs/spec/review-2026-06-03.md",
+      "docs/spec/waiver-approval.md"
+    ],
+    [
+      "docs/spec/review-2026-06-03.md",
+      "docs/spec/evidence-package.md"
+    ],
+    [
+      "docs/spec/review-2026-06-03.md",
+      "docs/spec/acceptance.md"
+    ],
+    [
+      "docs/spec/review-2026-06-03.md",
+      "docs/project/runbook.md"
+    ],
+    [
+      "docs/spec/review-2026-06-03.md",
+      "docs/project/evaluation.md"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/spec/acceptance.md"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/project/runbook.md"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/project/evaluation.md"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/spec/code-to-gate-2026-06-03/analysis-report.md"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/spec/code-to-gate-2026-06-03/release-readiness.json"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/spec/kano-mode-2026-06-03/kano.json"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"
+    ],
+    [
+      "docs/spec/gate-acceptance-2026-06-03.md",
+      "docs/spec/implementation-gate-2026-06-03.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/release-notes/2026-06-03-controlled-gate.md"
+    ],
+    [
+      "docs/release-notes/2026-06-03-controlled-gate.md",
+      "README.md"
+    ],
+    [
+      "docs/release-notes/2026-06-03-controlled-gate.md",
+      "README_JA.md"
+    ],
+    [
+      "docs/release-notes/2026-06-03-controlled-gate.md",
+      "README_EN.md"
+    ],
+    [
+      "docs/release-notes/2026-06-03-controlled-gate.md",
+      "docs/spec/implementation-gate-2026-06-03.md"
+    ],
+    [
+      "docs/spec/implementation-gate-2026-06-03.md",
+      "docs/project/runbook.md"
+    ],
+    [
+      "docs/spec/implementation-gate-2026-06-03.md",
+      "docs/project/evaluation.md"
+    ],
+    [
+      "docs/spec/code-to-gate-2026-06-03/release-readiness.json",
+      "docs/spec/code-to-gate-2026-06-03/analysis-report.md"
+    ],
+    [
+      "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json",
+      "docs/spec/kano-mode-2026-06-03/kano.json"
+    ],
+    [
+      "docs/spec/acceptance.md",
+      "docs/project/runbook.md"
+    ],
+    [
+      "docs/spec/acceptance.md",
+      "docs/project/evaluation.md"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/report.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/doctor.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/dq-explain.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/schema-check.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/enum-check.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/init.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/snapshot.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/baseline.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/evidence-verify.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/policy-lint.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/repro-bundle.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "src/cli/check.ts"
+    ],
+    [
+      "docs/spec/operational-cli-extensions.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "docs/implementation-prep-gate-2026-06-02.md",
+      "docs/project/tasks.codex.md"
+    ],
+    [
+      "src/types.ts",
+      "schemas/shared-defs.schema.json"
+    ],
+    [
+      "schemas/shared-defs.schema.json",
+      "schemas/gate-verdict.schema.json"
+    ],
+    [
+      "schemas/shared-defs.schema.json",
+      "schemas/qeg.bundle.schema.json"
+    ],
+    [
+      "schemas/shared-defs.schema.json",
+      "schemas/test-placement-plan.schema.json"
+    ],
+    [
+      "schemas/qeg.bundle.schema.json",
+      "schemas/quality-evidence-record.schema.json"
+    ],
+    [
+      "schemas/test-placement-plan.schema.json",
+      "schemas/quality-evidence-record.schema.json"
+    ],
+    [
+      "schemas/gate-verdict.schema.json",
+      "schemas/quality-evidence-record.schema.json"
+    ],
+    [
+      "docs/project/runbook.md",
+      "docs/project/evaluation.md"
+    ],
+    [
+      "docs/project/runbook.md",
+      "src/cli/report.ts"
+    ],
+    [
+      "docs/project/runbook.md",
+      "src/cli/baseline.ts"
+    ],
+    [
+      "docs/project/runbook.md",
+      "src/cli/evidence-verify.ts"
+    ],
+    [
+      "docs/project/runbook.md",
+      "src/cli/policy-lint.ts"
+    ],
+    [
+      "docs/project/runbook.md",
+      "src/cli/repro-bundle.ts"
+    ],
+    [
+      "docs/project/runbook.md",
+      "src/cli/check.ts"
+    ],
+    [
+      "docs/project/runbook.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "docs/project/runbook.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "docs/project/runbook.md",
+      ".github/workflows/ci.yml"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "src/cli/report.ts"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "src/cli/baseline.ts"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "src/cli/evidence-verify.ts"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "src/cli/policy-lint.ts"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "src/cli/repro-bundle.ts"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "src/cli/check.ts"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "docs/project/evaluation.md",
+      ".github/workflows/ci.yml"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/doctor.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/dq-explain.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/schema-check.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/enum-check.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/init.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/snapshot.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/baseline.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/evidence-verify.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/policy-lint.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/repro-bundle.ts"
+    ],
+    [
+      "src/cli.ts",
+      "src/cli/check.ts"
+    ],
+    [
+      "src/cli/report.ts",
+      "src/types.ts"
+    ],
+    [
+      "src/cli/report.ts",
+      "src/cli/dq-explain.ts"
+    ],
+    [
+      "src/cli/doctor.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      "src/cli/doctor.ts",
+      "src/cli/schema-check.ts"
+    ],
+    [
+      "src/cli/schema-check.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      "src/cli/snapshot.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      "src/cli/baseline.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      "src/cli/evidence-verify.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      "src/cli/repro-bundle.ts",
+      "src/cli/doctor.ts"
+    ],
+    [
+      "src/cli/check.ts",
+      "src/cli/schema-check.ts"
+    ],
+    [
+      "src/cli/check.ts",
+      "src/cli/enum-check.ts"
+    ],
+    [
+      "src/cli/check.ts",
+      "src/cli/snapshot.ts"
+    ],
+    [
+      "src/cli/check.ts",
+      "src/cli/doctor.ts"
+    ],
+    [
+      "src/cli/check.ts",
+      "src/cli/report.ts"
+    ],
+    [
+      ".github/workflows/ci.yml",
+      "src/cli/report.ts"
+    ],
+    [
+      ".github/workflows/ci.yml",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "qeg-report-action/action.yml",
+      "src/cli/report.ts"
+    ],
+    [
+      "docs/project/guardrails.md",
+      "docs/birdseye/index.json"
+    ]
   ]
 }

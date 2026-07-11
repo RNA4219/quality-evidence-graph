@@ -1,6 +1,14 @@
 {
-  "reportVersion": "qeg-ci-report-v1",
+  "reportVersion": "qeg-ci-report-v2",
   "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
   "summary": {
     "totalTargets": 1,
     "passed": 0,
@@ -11,7 +19,7 @@
       {
         "code": "DQ-12",
         "count": 1,
-        "remediation": "Regenerate artifacts from the same headRef/revision used by the QEG metadata."
+        "remediation": "Regenerate artifacts and producer checks from the same headRef, then ensure producer conclusions reflect their readiness status."
       }
     ],
     "blockerCount": 0,

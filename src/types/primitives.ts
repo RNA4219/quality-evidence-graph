@@ -1,4 +1,4 @@
-export type QegVersion = "0.1";
+export type QegVersion = "0.2";
 
 export type StableId = string;
 
