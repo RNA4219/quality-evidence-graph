@@ -1,0 +1,4 @@
+{
+  "fixture": "negative-producer-check-stale-sha",
+  "role": "gate-verdict"
+}

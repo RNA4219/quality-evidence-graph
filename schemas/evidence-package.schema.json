@@ -56,12 +56,12 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["executedCaseId", "result", "expectedResult", "oracleRefs", "traceTo", "evidenceRefs"],
+        "required": ["executedCaseId", "result"],
         "additionalProperties": false,
         "properties": {
           "executedCaseId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
           "result": { "enum": ["pass", "fail", "blocked", "skipped"] },
-          "expectedResult": { "type": "string", "minLength": 1 },
+          "expectedResult": { "type": "string" },
           "oracleRefs": {
             "type": "array",
             "items": { "$ref": "shared-defs.schema.json#/$defs/evidenceRef" }
@@ -81,11 +81,11 @@
     "retention": { "$ref": "retention.schema.json" },
     "sourceRefs": {
       "type": "array",
-      "minItems": 1,
       "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" }
     },
     "phase": { "$ref": "shared-defs.schema.json#/$defs/packagePhase" },
     "evidencePackageHash": { "type": "string", "minLength": 1 },
-    "controlRoles": { "$ref": "shared-defs.schema.json#/$defs/controlRoles" }
+    "controlRoles": { "$ref": "shared-defs.schema.json#/$defs/controlRoles" },
+    "notes": { "type": "string" }
   }
 }

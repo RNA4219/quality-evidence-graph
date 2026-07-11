@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-final-reason-no-source",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
@@ -9,17 +9,26 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-final-reason-no-source/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
       }
     ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-final-reason-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
+        }
+      ]
     },
     "nodes": [
       {
@@ -89,31 +98,43 @@
     "id": "qeg:ep-001",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "createdBy": "creator-001",
-    "inputArtifactHashes": [],
+    "inputArtifactHashes": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
+      }
+    ],
     "qegOutputs": {
       "qegBundle": {
         "id": "qeg:qeg-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/qeg-bundle.json",
+        "contentHash": "sha256:23edfe257273f669ebabe8da79ff24f7a7ac04e4f402a918d44ee2cbdac75809"
       },
       "testPlacementPlan": {
         "id": "qeg:tpp-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "placement-plan.json"
+        "path": "artifacts/test-placement-plan.json",
+        "contentHash": "sha256:026fa81fa8cc7a30b527bf98da3f53d598260e8650c8b673bc223de1e8f7f73b"
       },
       "gateVerdict": {
         "id": "qeg:gv-001",
         "adapter": "qeg-native",
         "kind": "gate_decision",
-        "path": "gate-verdict.json"
+        "path": "artifacts/gate-verdict.json",
+        "contentHash": "sha256:d6677265d504e308d29a6073294a89f1c2dfb36a4d321f762a2c0fc59d3c8765"
       },
       "qualityEvidenceRecord": {
         "id": "qeg:qer-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/quality-evidence-record.json",
+        "contentHash": "sha256:62260db96c13becd0a02d8a6ea4906d2933697b8622b9a81f30ff3f85e40d13d"
       }
     },
     "gatePolicy": {
@@ -154,14 +175,12 @@
     "manualEvidence": [
       {
         "executedCaseId": "qeg:manual-review-001",
-        "description": "Reviewer note to suppress DQ-04",
-        "executedAt": "2026-06-03T04:00:00.000Z",
-        "executor": "reviewer-001",
+        "result": "pass",
         "expectedResult": "Risk acknowledged",
-        "actualResult": "Risk acknowledged",
         "oracleRefs": [
           {
-            "evidenceId": "oracle-001",
+            "id": "oracle-001",
+            "path": "gate-input.json",
             "evidenceKind": "human_review"
           }
         ],
@@ -170,12 +189,12 @@
         ],
         "evidenceRefs": [
           {
-            "evidenceId": "evidence-001",
-            "relation": "supports"
+            "id": "evidence-001",
+            "path": "gate-input.json",
+            "evidenceKind": "human_review"
           }
         ],
-        "reviewerNote": "Risk acknowledged by review board - DQ-04 suppressed",
-        "sourceRefs": []
+        "reviewerNote": "Risk acknowledged by review board - DQ-04 suppressed"
       }
     ],
     "retention": {
@@ -207,11 +226,19 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-final-reason-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
+        }
+      ]
     },
     "obligations": [],
     "placements": []

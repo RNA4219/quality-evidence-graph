@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-required-connector-contract",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
@@ -12,17 +12,26 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-required-connector-contract/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822"
       }
     ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-required-connector-contract",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822"
+        }
+      ]
     },
     "nodes": [],
     "edges": [],
@@ -71,31 +80,43 @@
     "id": "qeg:ep-001",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "createdBy": "creator-001",
-    "inputArtifactHashes": [],
+    "inputArtifactHashes": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822"
+      }
+    ],
     "qegOutputs": {
       "qegBundle": {
         "id": "qeg:qeg-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/qeg-bundle.json",
+        "contentHash": "sha256:d395b3ab9881c206b2ff33d44749cb39a280caef62862d0093d51642f757ae10"
       },
       "testPlacementPlan": {
         "id": "qeg:tpp-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "placement-plan.json"
+        "path": "artifacts/test-placement-plan.json",
+        "contentHash": "sha256:2635b97742f01ec89057abb5369d11f698a1a7a7ef31384fd32e075eaa311a6c"
       },
       "gateVerdict": {
         "id": "qeg:gv-001",
         "adapter": "qeg-native",
         "kind": "gate_decision",
-        "path": "gate-verdict.json"
+        "path": "artifacts/gate-verdict.json",
+        "contentHash": "sha256:f64f511f8b0456c4e25afd6d9c86262c8197fe00a4234dd753a19b1eec016c29"
       },
       "qualityEvidenceRecord": {
         "id": "qeg:qer-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/quality-evidence-record.json",
+        "contentHash": "sha256:8608a6e00092990663fb3e58d271aa585a7d26e480f5a34b5e71b9c9b23ecae4"
       }
     },
     "gatePolicy": {
@@ -163,11 +184,19 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-required-connector-contract",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822"
+        }
+      ]
     },
     "obligations": [],
     "placements": []

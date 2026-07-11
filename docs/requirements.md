@@ -2,8 +2,8 @@
 intent_id: INT-QEG-REQ-001
 owner: quality-evidence-graph
 status: draft
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-07-04
+next_review_due: 2026-08-04
 ---
 
 # 要件定義
@@ -147,7 +147,8 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 
 受入条件:
 
-- `base_ref` / `head_ref` と artifact revision の不一致は DQ-12 にする。
+- `base_ref` / `head_ref` と artifact revision / producer check head SHA の不一致は DQ-12 にする。
+- producer check の conclusion が producer artifact の readiness status と矛盾する場合は DQ-12 にする。
 - changed path が 1 件以上ある場合、test obligation または accepted waiver が必要。
 - `test-seeds.suggestedLevel` は候補として扱い、最終 placement は QEG が決める。
 - `release-readiness=blocked_input` 相当の状態は QEG Gate で `disqualified` 候補にする。
@@ -292,7 +293,7 @@ Gate profile の既定は `standard` とする。`strict` は認証、決済、�
 | DQ-09 | secret / token / PII を unredacted で artifact に保存した |
 | DQ-10 | benchmark mode で hidden oracle に candidate がアクセスした |
 | DQ-11 | 必須 3 接続先の契約違反を成功扱いした |
-| DQ-12 | base_ref / head_ref と artifact revision が不一致 |
+| DQ-12 | base_ref / head_ref と artifact revision / producer check head SHA / producer readiness verdict が不一致 |
 | DQ-13 | Gate 関連 node / edge / placement / blocker / disqualification の sourceRefs が空 |
 | DQ-14 | manual-scripted placement が acceptable oracle を持たない |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない |
@@ -331,6 +332,24 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-03 | `place-tests` | risk ごとの obligation と placement を作る | placement rationale と candidate scores を出力できる |
 | C-04 | `gate` | Gate verdict を計算する | DQ / blocker / residual risk / human review を区別できる |
 | C-05 | `record` | Quality Evidence Record を生成する | 4 JSON artifact と Markdown summary を束ねられる |
+| C-06 | `report` | CI で複数 target を最後まで評価し、不足証跡と Gate failure を累積表示する | `gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review を target 別 / DQ 別に出力し、CI artifact として保存できる |
+| C-07 | `doctor` | ローカル環境、build 出力、schema、CI workflow、target artifact の不足を事前診断する | hard failure と warning を分け、warning だけなら exit code `0` にする |
+| C-08 | `explain <DQ>` | DQ code の意味、原因、必要証跡、最小修正、参照仕様を説明する | 例: `DQ-15` の approval / policy / waiver 証跡不足を人間が直せる粒度で表示できる |
+| C-09 | `schema-check` | JSON Schema の compile と fixture 内 artifact の schema validation を行う | schema 自体の破損と fixture/schema drift を分けて報告できる |
+| C-10 | `enum-check` | TypeScript 型と JSON Schema enum の drift を検出する | `GateProfile`、`GateVerdict`、`DisqualificationCode` の差分を列挙できる |
+| C-11 | `snapshot` | CI report の golden snapshot を fixture ごとに検証する | `generatedAt` と absolute path を正規化し、差分を安定して検出できる |
+| C-12 | `init` | 他 repo へ最小 QEG 設定を導入する | `.qeg/gate-input.json`、`.qeg/qeg-baseline.json`、GitHub Actions workflow を生成できる |
+| C-13 | `report --github-summary` | GitHub Actions Job Summary に人間向け累積レポートを書く | CI log の末尾だけに依存せず、DQ 別 / target 別の不足を Step Summary で読める |
+| C-14 | `report --baseline` | 既知の DQ を baseline として受理し、新規 DQ だけを赤にする | baseline が全 current DQ を覆い、blocker / residual risk / human review / expected mismatch がない場合だけ pass 扱いにできる |
+| C-15 | `report --changed-only` | 変更に関係する target だけを評価する | `QEG_CHANGED_FILES` または git diff から対象を絞り、対象なしの場合は空 report / exit `0` にできる |
+| C-16 | `qeg-report-action` | OSS 利用者が GitHub Actions へ QEG report を組み込みやすくする | report step 自体は成功終了し、`exit_code` output、artifact、Step Summary を残してから呼び出し側の final verdict で失敗させられる |
+| C-17 | `baseline audit` | baseline の放置を防ぐ | 期限切れ、owner 未設定、存在しない target、すでに解消済みの DQ を検出できる |
+| C-18 | `report --diff <previous-report.json>` | 前回 CI との差分を表示する | DQ を `new` / `resolved` / `unchanged` に分類し、今回増えた不足と解消した不足を読める |
+| C-19 | `repro-bundle` | CI 失敗の再現材料をまとめる | report、doctor、schema inventory、package version、workflow、対象 `gate-input.json` を secret redaction 付きで bundle 化できる |
+| C-20 | `evidence verify` | Gate 前に証跡実体だけを高速検証する | artifact path、hash、revision、retention、storageClassification の不足や矛盾を Gate 全体より前に切り分けられる |
+| C-21 | `policy lint` | GatePolicy 正本の矛盾を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile 設定の不整合を検出できる |
+| C-22 | `check` | ローカル総合確認入口を提供する | schema-check、enum-check、doctor、snapshot、report を一括実行し、導入者が最初に見るコマンドにできる |
+| C-23 | Action outputs 拡充 | workflow 側の条件分岐を容易にする | `exit_code` に加え、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を出力できる |
 
 CLI の exit code は MVP では最小限にする。
 
@@ -339,6 +358,16 @@ CLI の exit code は MVP では最小限にする。
 - `2`: QEG としては正常に判定したが、verdict が `no_go` または `disqualified` だった。
 
 `conditional_go` の exit code は `profile` で切り替える。MVP の `standard` では `0` を許容するが、`strict` と `ipo_controlled` では `2` にする。
+
+`report` は target を最後まで評価してから exit code を返す。CLI error が 1 件でもある場合は `1`、CLI error がなく Gate failure が 1 件でもある場合は `2`、全 target が `go` の場合は `0` とする。
+
+GitHub Actions では、QEG report の非 0 exit を shell step の即時 failure として扱わず、artifact / Step Summary / exit code output を保存してから最終判定 step で job を失敗させる。これにより `Process completed with exit code 1` だけで原因が読めない状態を避ける。
+
+baseline は DQ を消す仕組みではなく、既知の不足を明示して「新規不足だけを赤にする」ための移行補助である。baseline が適用された target は report 上 `baseline_accepted` として数え、通常の `passed` と区別する。
+
+baseline は owner と期限を持つ運用証跡として扱う。owner 未設定、期限切れ、target 消失、現在の report に存在しない DQ は `baseline audit` で検出し、永久免罪符化を防ぐ。
+
+`report --diff` は DQ 単位で前回 report と比較する。比較 key は target、DQ code、message、nodeIds とし、今回だけ存在するものを `new`、前回だけ存在するものを `resolved`、両方に存在するものを `unchanged` とする。
 
 ## 14. Governance / Control 要件
 
@@ -438,3 +467,12 @@ MVP は次を満たしたら完了とする。
 | TASK-08 | negative fixture を追加する | 欠落、根拠空、revision 不一致、manual oracle 欠落、optional evidence invalid を検収できる |
 | TASK-09 | control mapping を追加する | 変更管理、例外承認、証跡保全、リリース承認への対応表がある |
 | TASK-10 | `ipo_controlled` profile を設計する | conditional_go exit code、waiver 必須項目、approval evidence、retention 方針が定義される |
+
+## 21. 0.2.0 fail-closed追加要件
+
+- 全判定CLIはgate-input.schema.jsonを起点とする共通preflightを使用する。
+- unreadable JSON/envelope欠落はexit 1、parse可能な必須schema不適合はDQ-01/exit 2とする。
+- ipo_controlledの必須evidenceは実体path、SHA-256、revisionを照合する。
+- qeg-ci-report-v2はselectionとreport-level errorsを保持し、changed-onlyの差分検出失敗をexit 1とする。
+- 外部Actionはartifact upload後に既定でenforceし、自repoの集約CIだけdiagnostic-onlyとする。
+- fixtureの一覧と期待結果はfixtures/manifest.jsonを正本とする。

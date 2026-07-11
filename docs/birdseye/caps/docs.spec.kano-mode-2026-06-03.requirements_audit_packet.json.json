@@ -3,8 +3,21 @@
   "role": "kano-mode-requirements-audit",
   "public_api": [],
   "summary": "RanD KanoMode の QEG requirements audit packet。QEG-KANO-001〜005 がすべて gate_verdict `go`、overall_assessment `go` を示す。",
-  "deps_out": ["docs/spec/kano-mode-2026-06-03/kano.json"],
-  "deps_in": ["docs/spec/gate-acceptance-2026-06-03.md", "docs/agent/HUB.codex.md", "docs/project/runbook.md", "docs/project/evaluation.md"],
-  "risks": ["overall go は requirements audit の結果であり、IPO controlled release approval ではない"],
-  "tests": ["requirements_audit_packet.json gate_summary overall_assessment == go"]
+  "deps_out": [
+    "docs/spec/kano-mode-2026-06-03/kano.json"
+  ],
+  "deps_in": [
+    "docs/spec/gate-acceptance-2026-06-03.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "risks": [
+    "overall go は requirements audit の結果であり、IPO controlled release approval ではない"
+  ],
+  "tests": [
+    "requirements_audit_packet.json gate_summary overall_assessment == go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:0c0c9d3dea624290dceeca699a2a5addc833a81f91493b4d207a75a0b8e74852"
 }

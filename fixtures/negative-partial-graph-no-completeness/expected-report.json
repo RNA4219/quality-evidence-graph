@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-07",
+        "count": 1,
+        "remediation": "Record an explicit completeness score when using a partial graph."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-partial-graph-no-completeness",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-07: Partial graph without explicit completeness score"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-07",
+          "message": "Partial graph without explicit completeness score",
+          "nodeIds": [],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-partial-graph-no-completeness",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-07"
+        ],
+        "actualDqCodes": [
+          "DQ-07"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "id": "src/cli/report/change-selection.ts",
+  "role": "changed-target-selection",
+  "generation": "00008",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:e70d804b3fa1b0ad00cda48107d2b992a9371781da6532d3fc6c3b65046c9dfc"
+}

@@ -1,10 +1,22 @@
 {
   "id": "schemas/qeg.bundle.schema.json",
   "role": "schema",
-  "public_api": ["QualityEvidenceGraph"],
+  "public_api": [
+    "QualityEvidenceGraph"
+  ],
   "summary": "canonical graph bundle の schema。nodes、edges、completeness を定義する。",
-  "deps_out": ["schemas/quality-evidence-record.schema.json"],
-  "deps_in": ["schemas/shared-defs.schema.json"],
-  "risks": ["additionalProperties の緩さは IPO strict schema で hardening 対象"],
-  "tests": ["node -e JSON parse schemas"]
+  "deps_out": [
+    "schemas/quality-evidence-record.schema.json"
+  ],
+  "deps_in": [
+    "schemas/shared-defs.schema.json"
+  ],
+  "risks": [
+    "additionalProperties の緩さは IPO strict schema で hardening 対象"
+  ],
+  "tests": [
+    "node -e JSON parse schemas"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:8a9fe748cd5647afdd2040ba9f9516d7ddaf13630284830c9d7b496e1d5ff98a"
 }

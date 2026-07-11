@@ -2,8 +2,8 @@
 intent_id: INT-QEG-001
 owner: quality-evidence-graph
 status: draft
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-07-04
+next_review_due: 2026-08-04
 ---
 
 # Blueprint
@@ -25,6 +25,7 @@ In:
 - GraphML / SARIF export の型上の拡張点
 - `workflow-cookbook` の Birdseye / Capsule / Task Seed 型を実装準備に流用する契約
 - IPO レベル運用に向けた `ipo_controlled` profile、統制 mapping、waiver governance、監査用 evidence package の契約
+- CI で不足証跡を累積表示する `report`、`doctor`、`explain`、schema/enum drift check、snapshot、GitHub Action の運用契約
 
 Out:
 
@@ -44,6 +45,7 @@ Out:
 - `sourceRefs`, `assumptions`, `confidence` を落とした Gate 判定は失格対象にする。
 - schema drift は adapter contract test と golden fixture で検出する。
 - manual layer は first-class な配置層として扱う。
+- CI report は最初の失敗で停止せず、artifact / Step Summary / exit code output を残してから最終判定で job を失敗させる。
 
 ## 4. I/O Contract
 
@@ -74,6 +76,7 @@ Output:
 - `disqualified` は `no_go` と別物として扱う。
 - `sourceRefs`, `assumptions`, `confidence` のない Gate reason は失格対象。
 - IPO レベルでは `conditional_go` を CI success として扱わず、waiver / approval / retention / evidence immutability の統制を要求する。
+- QEG report の非 0 exit は GitHub Actions shell step の即時 failure ではなく、`qeg-report-action` の `exit_code` output と final verdict step で扱う。
 
 ## 6. Minimal Flow
 
@@ -95,3 +98,4 @@ flowchart LR
 - graph builder の pure function を追加する
 - Gate 失格条件 DQ-01 / DQ-02 / DQ-03 から実装する
 - `ipo_controlled` profile と control mapping を V1 hardening として設計する
+- `qeg-report-action`、`doctor`、`explain`、`schema-check`、`enum-check`、`snapshot` を CI / OSS 導入の標準運用として保守する

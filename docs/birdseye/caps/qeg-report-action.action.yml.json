@@ -1,0 +1,39 @@
+{
+  "id": "qeg-report-action/action.yml",
+  "role": "github-action",
+  "public_api": [
+    "inputs.targets",
+    "inputs.output-path",
+    "inputs.github-summary",
+    "inputs.baseline",
+    "inputs.changed-only",
+    "inputs.previous-report",
+    "outputs.exit_code",
+    "outputs.gate_failed",
+    "outputs.cli_errors",
+    "outputs.dq_count",
+    "outputs.report_path",
+    "outputs.summary_markdown_path"
+  ],
+  "summary": "QEG report 用 composite GitHub Action。Node 24 helper、optional install/build、report 実行、Step Summary、artifact upload、exit_code と集約メトリクス output を提供し、report step 自体は成功終了する。",
+  "deps_out": [
+    "src/cli/report.ts",
+    ".github/workflows/ci.yml"
+  ],
+  "deps_in": [
+    "README_JA.md",
+    "README_EN.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "risks": [
+    "Action が report exit を直接 failure にすると、CI が累積診断を残す前に止まる"
+  ],
+  "tests": [
+    "npm run build",
+    "npm run report -- --json --out .qeg/qeg-ci-report.json fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:aa478bfecb54a21c2136398e56575a473850216f1d29a0f45830e436c204ff96"
+}

@@ -67,6 +67,51 @@ Quality Evidence Record を生成します。
 npm run record -- fixtures/positive-release-go
 ```
 
+CI では、単発のエラーで止まらず不足している証跡や DQ を累積レポートとして出せます。
+
+```sh
+npm run report -- fixtures
+npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
+npm run report -- --json --github-summary --out .qeg/qeg-ci-report.json fixtures
+```
+
+`report` は複数 fixture / target を最後まで評価し、`gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review 要求をまとめて表示します。exit code は CLI error があれば `1`、Gate failure があれば `2`、全 target が `go` なら `0` です。
+
+運用補助コマンド:
+
+```sh
+npm run explain -- DQ-15
+npm run doctor -- fixtures/positive-release-go
+npm run schema-check
+npm run enum-check
+npm run check -- fixtures/positive-release-go
+npm run baseline -- audit .qeg/qeg-baseline.json fixtures
+npm run evidence -- verify fixtures/positive-release-go
+npm run policy -- lint fixtures/positive-release-go
+npm run repro-bundle -- --report .qeg/qeg-ci-report.json --out .qeg/repro fixtures/positive-release-go
+npm run snapshot -- fixtures/positive-release-go
+npm run init -- --root ../your-repo
+```
+
+`--baseline <path>` は既知 DQ を `baseline_accepted` として扱い、新規 DQ だけを赤にしたい移行期間に使います。`baseline audit` は owner 未設定、期限切れ、解消済み DQ、存在しない target を検出します。`--changed-only` は `QEG_CHANGED_FILES` または git diff から変更に関係する target だけを評価します。`--diff <previous-report.json>` は DQ を `new` / `resolved` / `unchanged` に分けます。
+
+GitHub Actions では `.github/workflows/ci.yml` が `qeg-report-action` 経由で report を実行し、`.qeg/qeg-ci-report.json` を `qeg-ci-report` artifact として保存します。install / typecheck / build / JSON parse / package dry-run / QEG report は完走させ、最後の集約ステップで CI を失敗させます。
+
+Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を outputs として返します。
+
+他 repo から使う最小例:
+
+```yaml
+- uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+  id: qeg_report
+  with:
+    targets: .qeg
+    output-path: .qeg/qeg-ci-report.json
+    github-summary: "true"
+```
+
+デモは Actions の `CI` workflow を手動実行し、`qeg_report_targets=fixtures/negative-approval-missing` を指定します。job は赤になりますが、Step Summary と `qeg-ci-report` artifact に累積不足が残ります。
+
 ## 判定の読み方
 
 - `go`: release 条件を満たす。exit code `0`。
@@ -90,10 +135,32 @@ npm run record -- fixtures/positive-release-go
 ## 現在の状態
 
 - DQ-01 から DQ-17 まで実装済み。
-- 28 fixture で regression を保持。
+- fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - `code-to-gate` findings 0 を維持。
 - `positive-release-go` は `go / exit 0`。
 - negative fixture は原則 `disqualified / exit 2`。
 
 QEG は、品質を「説明」ではなく「証跡と判定契約」に落とすための基盤です。
+
+## 0.2.0 契約
+
+全CLIは共通runtime schema/evidence preflightを通る。壊れたJSONまたは判定envelope欠落はCLI error・exit 1、parse可能な必須component不適合はDQ-01・exit 2である。必須evidenceは実ファイル、SHA-256、revisionを検証し、optional evidenceだけの不適合はwarningとする。
+
+changed-onlyは差分取得成功かつ関連targetなしの場合だけno_relevant_changes・exit 0である。差分検出不能はdetection_failed・exit 1、QEG_CHANGED_FILES指定時はその値を正本にする。fixture一覧の正本はfixtures/manifest.jsonである。
+
+外部Actionはv0.2.0を使い既定でenforceする。診断だけを収集する場合に限りenforce: "false"を明示し、exit_code outputを呼び出し側で判定する。
+
+強制判定の例:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      with:
+        targets: .qeg
+
+診断のみの例:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      id: qeg_report
+      with:
+        targets: .qeg
+        enforce: "false"

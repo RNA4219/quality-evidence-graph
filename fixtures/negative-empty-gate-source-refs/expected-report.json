@@ -1,0 +1,70 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-13",
+        "count": 1,
+        "remediation": "Add sourceRefs to the evidence package."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-empty-gate-source-refs",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-13: Evidence package sourceRefs is empty"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-13",
+          "message": "Evidence package sourceRefs is empty",
+          "nodeIds": [],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-empty-gate-source-refs",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-13"
+        ],
+        "actualDqCodes": [
+          "DQ-13"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

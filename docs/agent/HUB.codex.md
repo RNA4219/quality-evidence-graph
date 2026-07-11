@@ -2,8 +2,8 @@
 intent_id: INT-QEG-HUB-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-07-04
+next_review_due: 2026-08-04
 ---
 
 # docs/agent/HUB.codex.md
@@ -27,14 +27,15 @@ next_review_due: 2026-07-02
 13. `docs/control-mapping.md`
 14. `docs/ipo-controlled-profile.md`
 15. `docs/spec/index.md`
-16. `docs/spec/review-2026-06-03.md`
-17. `docs/spec/gate-acceptance-2026-06-03.md`
-18. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
-19. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
-20. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
-21. `docs/spec/kano-mode-2026-06-03/kano.json`
-22. `docs/spec/implementation-gate-2026-06-03.md`
-23. `docs/release-notes/2026-06-03-controlled-gate.md`
+16. `docs/spec/operational-cli-extensions.md`
+17. `docs/spec/review-2026-06-03.md`
+18. `docs/spec/gate-acceptance-2026-06-03.md`
+19. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
+20. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
+21. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
+22. `docs/spec/kano-mode-2026-06-03/kano.json`
+23. `docs/spec/implementation-gate-2026-06-03.md`
+24. `docs/release-notes/2026-06-03-controlled-gate.md`
 
 ## 2. 入力ファイル分類
 
@@ -54,6 +55,7 @@ next_review_due: 2026-07-02
 | `docs/control-mapping.md` | IPO control mapping | high |
 | `docs/ipo-controlled-profile.md` | IPO profile contract | high |
 | `docs/spec/index.md` | IPO control implementation spec index | high |
+| `docs/spec/operational-cli-extensions.md` | CI / OSS operational CLI contract | high |
 | `docs/spec/*.md` | IPO control implementation specs | high |
 | `docs/spec/review-2026-06-03.md` | IPO control spec review record | high |
 | `docs/spec/gate-acceptance-2026-06-03.md` | IPO control spec gate acceptance record | high |

@@ -2,9 +2,31 @@
   "id": "README.md",
   "role": "overview",
   "public_api": [],
-  "summary": "QEG の agent / maintainer 向け入口。人間向け README、読み順、Agent Rules、検証コマンド、controlled governance の現在状態を示す。",
-  "deps_out": ["README_JA.md", "README_EN.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md", "docs/requirements.md", "docs/spec/index.md", "docs/spec/implementation-gate-2026-06-03.md"],
+  "summary": "QEG の agent / maintainer 向け入口。人間向け README、読み順、Agent Rules、CI workflow、qeg-report-action、運用CLI、検証コマンド、controlled governance の現在状態を示す。",
+  "deps_out": [
+    "README_JA.md",
+    "README_EN.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/requirements.md",
+    "docs/spec/index.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/spec/implementation-gate-2026-06-03.md",
+    "src/cli/report.ts",
+    "qeg-report-action/action.yml",
+    ".github/workflows/ci.yml"
+  ],
   "deps_in": [],
-  "risks": ["bootstrap と Birdseye がずれると読込順が崩れる"],
-  "tests": ["npm run typecheck", "npm pack --dry-run --cache ./.npm-cache"]
+  "risks": [
+    "bootstrap と Birdseye がずれると読込順が崩れる"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run report -- fixtures/positive-release-go",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:a695649c218de4ca16a18a66f4a1f53537ca88b9762c3801e80802a76e63cc37"
 }

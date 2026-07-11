@@ -1,0 +1,78 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-12",
+        "count": 1,
+        "remediation": "Regenerate artifacts and producer checks from the same headRef, then ensure producer conclusions reflect their readiness status."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-producer-check-inconsistent",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-12: Producer check \"code-to-gate Analysis\" conclusion \"failure\" contradicts readiness status \"passed\""
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-12",
+          "message": "Producer check \"code-to-gate Analysis\" conclusion \"failure\" contradicts readiness status \"passed\"",
+          "nodeIds": [
+            "ctg:check-code-to-gate-analysis"
+          ],
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-check-code-to-gate-analysis",
+              "path": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+              "label": "Producer check summary reported failure while readiness status was passed"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-producer-check-inconsistent",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-12"
+        ],
+        "actualDqCodes": [
+          "DQ-12"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

@@ -1,0 +1,86 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-02",
+        "count": 1,
+        "remediation": "Add sourceRefs to each gate-relevant blocker so the release decision is auditable."
+      }
+    ],
+    "blockerCount": 1,
+    "residualRiskCount": 0,
+    "humanReviewCount": 1
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-final-reason-no-source",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-02: Blocker \"High/critical risk \"Critical Security Risk\" with evidence gap\" has no sourceRefs",
+        "No-go blockers: 1",
+        "- High/critical risk \"Critical Security Risk\" with evidence gap",
+        "Required human review: 1"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-02",
+          "message": "Blocker \"High/critical risk \"Critical Security Risk\" with evidence gap\" has no sourceRefs",
+          "nodeIds": [
+            "qeg:risk-critical-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "blockers": [
+        {
+          "id": "blocker-qeg:risk-critical-001",
+          "message": "High/critical risk \"Critical Security Risk\" with evidence gap",
+          "riskIds": [
+            "qeg:risk-critical-001"
+          ],
+          "sourceRefs": []
+        }
+      ],
+      "residualRisks": [],
+      "requiredHumanReview": [
+        "qeg:risk-critical-001"
+      ],
+      "expected": {
+        "fixture": "negative-final-reason-no-source",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-02"
+        ],
+        "actualDqCodes": [
+          "DQ-02"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

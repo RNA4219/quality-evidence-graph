@@ -78,7 +78,7 @@ Gate evaluator は次の順で判定する。
 | DQ-09 | secret / token / PII を unredacted で artifact に保存した。 |
 | DQ-10 | benchmark mode で hidden oracle に candidate がアクセスした。 |
 | DQ-11 | 必須 3 接続先の契約違反を成功扱いした。 |
-| DQ-12 | base_ref / head_ref と artifact revision が不一致。 |
+| DQ-12 | base_ref / head_ref と artifact revision、producer check head SHA、または producer readiness verdict が不一致。 |
 | DQ-13 | Gate 関連 sourceRefs が空。 |
 | DQ-14 | manual-scripted placement が acceptable oracle を持たない。 |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない。 |
@@ -104,3 +104,7 @@ Gate evaluator は次の順で判定する。
 - approval evidence
 
 Gate 関連の要約元が `sourceRefs` を持たない場合は DQ-02 または DQ-13 とする。
+
+## 0.2.0 preflight
+
+Gate評価前に必須componentのruntime schemaと必須evidence実体を検証する。parse可能な必須schema不適合はDQ-01、ipo_controlledのpath/hash欠落、不存在、hash不一致はDQ-06とする。revision不一致はrevision整合性DQとして扱う。Optional artifactだけの不適合はwarningであり、それ単独でDQにしない。

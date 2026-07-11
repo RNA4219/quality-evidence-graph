@@ -1,0 +1,28 @@
+{
+  "id": "src/cli/baseline.ts",
+  "role": "baseline-audit-cli",
+  "public_api": [
+    "runBaselineCommand",
+    "createBaselineAuditReport"
+  ],
+  "summary": "baseline audit CLI。既知 DQ baseline の owner、expiresAt、target 存在、現在も残っている DQ かを確認し、移行用 baseline が放置されるリスクを検出する。",
+  "deps_out": [
+    "src/cli/report.ts"
+  ],
+  "deps_in": [
+    "src/cli.ts",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "risks": [
+    "baseline が期限や owner なしで残ると、新規 DQ だけ fail させる運用が恒久的な見逃しに変わる"
+  ],
+  "tests": [
+    "npm run build",
+    "node dist/cli.js baseline audit .qeg/baseline-audit-ok.json fixtures/negative-approval-missing"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:3e58e363fa931153f13da06aa55b4b82963fa9a4486cafb3c4bef367e38208ce"
+}

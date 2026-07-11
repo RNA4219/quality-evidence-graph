@@ -1,0 +1,100 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-01",
+        "count": 1,
+        "remediation": "Fix parser/input failures and make required gate artifacts available before QEG runs."
+      }
+    ],
+    "blockerCount": 1,
+    "residualRiskCount": 1,
+    "humanReviewCount": 2
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-waiver-dq-attempt",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-01: Parser failure: Required artifact missing",
+        "No-go blockers: 1",
+        "- High/critical risk \"Missing artifact risk\" with evidence gap",
+        "Valid waivers: 1 (conditional_go required)",
+        "Residual risks: 1",
+        "Required human review: 2"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-01",
+          "message": "Parser failure: Required artifact missing",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "qeg:SR-DQ-01",
+              "path": "fixtures/negative-waiver-dq-attempt/metadata.json",
+              "label": "missing artifact"
+            }
+          ]
+        }
+      ],
+      "blockers": [
+        {
+          "id": "blocker-qeg:risk-001",
+          "message": "High/critical risk \"Missing artifact risk\" with evidence gap",
+          "riskIds": [
+            "qeg:risk-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-risk-001",
+              "path": "docs/risk-analysis.md"
+            }
+          ]
+        }
+      ],
+      "residualRisks": [
+        "qeg:risk-001"
+      ],
+      "requiredHumanReview": [
+        "qeg:waiver-001",
+        "qeg:risk-001"
+      ],
+      "expected": {
+        "fixture": "negative-waiver-dq-attempt",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/waiver-approval.md §3: waiver cannot remove DQ, verdict stays disqualified",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-01"
+        ],
+        "actualDqCodes": [
+          "DQ-01"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

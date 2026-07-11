@@ -1,18 +1,34 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-positive-placement-change-retirement",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "profile": "ipo_controlled",
-    "inputArtifacts": []
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-positive-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+      }
+    ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-positive-placement-change-retirement",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+        }
+      ]
     },
     "nodes": [
       {
@@ -142,31 +158,43 @@
     "id": "qeg:ep-placement-change-retirement",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "createdBy": "creator-001",
-    "inputArtifactHashes": [],
+    "inputArtifactHashes": [
+      {
+        "id": "qeg:artifact-positive-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+      }
+    ],
     "qegOutputs": {
       "qegBundle": {
         "id": "qeg:qeg-placement-change-retirement",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/qeg-bundle.json",
+        "contentHash": "sha256:14e4dfeecfa433d920d6b83f065ea37586d0452b4908c8aa4341f0651393ef07"
       },
       "testPlacementPlan": {
         "id": "qeg:tpp-placement-change-retirement",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "placement-plan.json"
+        "path": "artifacts/test-placement-plan.json",
+        "contentHash": "sha256:71655d0873c1cb7d87befe91795b5f6ce51949f0cabaf552464f68fafb08ee04"
       },
       "gateVerdict": {
         "id": "qeg:gv-placement-change-retirement",
         "adapter": "qeg-native",
         "kind": "gate_decision",
-        "path": "gate-verdict.json"
+        "path": "artifacts/gate-verdict.json",
+        "contentHash": "sha256:2bbcb10e34cc23909455692347fd4685805135640e62dc16fa1b6c26559b9ce6"
       },
       "qualityEvidenceRecord": {
         "id": "qeg:qer-placement-change-retirement",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/quality-evidence-record.json",
+        "contentHash": "sha256:7d995bc08deb6b0e09ce3320332f5bb097b01a9fae5426ddda2a54946d72836d"
       }
     },
     "gatePolicy": {
@@ -244,11 +272,19 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-positive-placement-change-retirement",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+        }
+      ]
     },
     "obligations": [
       {

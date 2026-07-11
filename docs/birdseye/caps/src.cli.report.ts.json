@@ -1,0 +1,49 @@
+{
+  "id": "src/cli/report.ts",
+  "role": "ci-report-cli",
+  "public_api": [
+    "runReportCommand",
+    "createCiReport",
+    "formatCiReportText",
+    "formatGithubSummary",
+    "collectReportTargets",
+    "report --diff"
+  ],
+  "summary": "CI 向け累積 report コマンド。複数 target を最後まで評価し、CLI error、DQ、blocker、residual risk、human review、expected mismatch、baseline_accepted を text / JSON / GitHub Summary で出力する。baseline、changed-only、前回 report との差分分類も扱う。",
+  "deps_out": [
+    "src/cli/fixture-io.ts",
+    "src/cli/validation.ts",
+    "src/cli/dq-explain.ts",
+    "src/gate.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "README.md",
+    "README_JA.md",
+    "README_EN.md",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md",
+    "src/cli.ts",
+    "src/cli/doctor.ts",
+    "src/cli/schema-check.ts",
+    "src/cli/snapshot.ts",
+    "src/cli/baseline.ts",
+    "src/cli/evidence-verify.ts",
+    "src/cli/check.ts",
+    "qeg-report-action/action.yml"
+  ],
+  "risks": [
+    "CI report が単発 gate と違う exit code 集約をするため、runbook と requirements の説明がずれると運用者が誤読する"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run build",
+    "npm run report -- fixtures/positive-release-go",
+    "npm run report -- --json fixtures/positive-release-go",
+    "npm run snapshot -- fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:d5eee76abfae4f1df02fcfc4011f78a38bd3f687b49de72d4db4afa62d2c9d19"
+}

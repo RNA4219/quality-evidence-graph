@@ -67,6 +67,51 @@ Generate a Quality Evidence Record:
 npm run record -- fixtures/positive-release-go
 ```
 
+In CI, generate a cumulative report instead of stopping at the first missing evidence item:
+
+```sh
+npm run report -- fixtures
+npm run report -- --json --out .qeg/qeg-ci-report.json fixtures
+npm run report -- --json --github-summary --out .qeg/qeg-ci-report.json fixtures
+```
+
+`report` evaluates every target it can reach and summarizes missing `gate-input.json`, ingest errors, DQs, blockers, residual risks, and human-review requirements. Its exit code is `1` when CLI errors exist, `2` when gate failures exist, and `0` when every target is `go`.
+
+Operational helpers:
+
+```sh
+npm run explain -- DQ-15
+npm run doctor -- fixtures/positive-release-go
+npm run schema-check
+npm run enum-check
+npm run check -- fixtures/positive-release-go
+npm run baseline -- audit .qeg/qeg-baseline.json fixtures
+npm run evidence -- verify fixtures/positive-release-go
+npm run policy -- lint fixtures/positive-release-go
+npm run repro-bundle -- --report .qeg/qeg-ci-report.json --out .qeg/repro fixtures/positive-release-go
+npm run snapshot -- fixtures/positive-release-go
+npm run init -- --root ../your-repo
+```
+
+Use `--baseline <path>` to accept known DQs as `baseline_accepted` during migration so only new DQs fail the run. `baseline audit` detects missing owners, expired entries, resolved DQs, and missing targets. Use `--changed-only` to evaluate only targets related to `QEG_CHANGED_FILES` or git diff output. Use `--diff <previous-report.json>` to classify DQs as `new`, `resolved`, or `unchanged`.
+
+In GitHub Actions, `.github/workflows/ci.yml` runs this report through `qeg-report-action` and uploads `.qeg/qeg-ci-report.json` as the `qeg-ci-report` artifact. Install, typecheck, build, JSON parse, package dry-run, and QEG report are allowed to finish before the final verdict step fails the job.
+
+The Action exposes `exit_code`, `gate_failed`, `cli_errors`, `dq_count`, `report_path`, and `summary_markdown_path` outputs for caller-side branching.
+
+Minimal use from another repository:
+
+```yaml
+- uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+  id: qeg_report
+  with:
+    targets: .qeg
+    output-path: .qeg/qeg-ci-report.json
+    github-summary: "true"
+```
+
+For a demo, manually run the `CI` workflow with `qeg_report_targets=fixtures/negative-approval-missing`. The job becomes red, but the Step Summary and `qeg-ci-report` artifact keep the cumulative missing-evidence report.
+
 ## Reading Verdicts
 
 - `go`: release conditions are satisfied. Exit code `0`.
@@ -90,10 +135,32 @@ Key sources of truth:
 ## Current Status
 
 - DQ-01 through DQ-17 are implemented.
-- 28 fixtures preserve regression coverage.
+- Fixture regression uses fixtures/manifest.json as its source of truth.
 - The Test Placement Plan can record manual-to-automated retirement through `placement_changes[]`, including replacement evidence, policy, and revert conditions.
 - `code-to-gate` findings are kept at 0.
 - `positive-release-go` returns `go / exit 0`.
 - Negative fixtures generally return `disqualified / exit 2`.
 
 QEG makes quality accountable by turning release judgment into evidence, policy, and executable gate contracts.
+
+## 0.2.0 contract
+
+All CLI commands share runtime schema/evidence preflight. Broken JSON or a missing decision envelope is a CLI error (exit 1); a parseable invalid required component is DQ-01 (exit 2). Required evidence is verified against real files, SHA-256, and revision; optional-only failures are warnings.
+
+changed-only returns no_relevant_changes/exit 0 only after successful detection. Detection failure is detection_failed/exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth.
+
+The v0.2.0 external Action enforces after artifact upload by default. Set enforce: "false" only for diagnostic collection and consume its exit_code output.
+
+Enforced example:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      with:
+        targets: .qeg
+
+Diagnostic-only example:
+
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      id: qeg_report
+      with:
+        targets: .qeg
+        enforce: "false"

@@ -127,7 +127,7 @@
       "required": ["qegVersion", "runId", "createdAt", "profile", "inputArtifacts"],
       "additionalProperties": false,
       "properties": {
-        "qegVersion": { "const": "0.1" },
+        "qegVersion": { "const": "0.2" },
         "runId": { "$ref": "#/$defs/stableId" },
         "createdAt": { "$ref": "#/$defs/isoDateTime" },
         "baseRef": { "type": "string" },
@@ -139,6 +139,10 @@
         "inputArtifacts": {
           "type": "array",
           "items": { "$ref": "#/$defs/artifactRef" }
+        },
+        "producerChecks": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/producerCheckRef" }
         },
         "workflowRefs": {
           "type": "array",
@@ -161,6 +165,64 @@
               "contentHash": { "type": "string" }
             }
           }
+        },
+        "benchmarkMode": { "type": "boolean" },
+        "hiddenOracleAccessed": { "type": "boolean" },
+        "requiredConnectorStatus": {
+          "type": "object",
+          "additionalProperties": {
+            "enum": ["success", "contract_violation"]
+          },
+          "properties": {
+            "manual-bb-test-harness": {
+              "enum": ["success", "contract_violation"]
+            },
+            "code-to-gate": {
+              "enum": ["success", "contract_violation"]
+            },
+            "RanD": {
+              "enum": ["success", "contract_violation"]
+            }
+          }
+        }
+      }
+    },
+    "producerCheckRef": {
+      "type": "object",
+      "required": ["id", "producer", "name", "conclusion"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "#/$defs/stableId" },
+        "producer": { "type": "string", "minLength": 1 },
+        "name": { "type": "string", "minLength": 1 },
+        "conclusion": {
+          "enum": [
+            "success",
+            "failure",
+            "neutral",
+            "cancelled",
+            "timed_out",
+            "action_required",
+            "skipped",
+            "unknown"
+          ]
+        },
+        "readinessStatus": {
+          "enum": [
+            "passed",
+            "passed_with_risk",
+            "needs_review",
+            "blocked_input",
+            "failed",
+            "unknown"
+          ]
+        },
+        "headSha": { "type": "string" },
+        "runId": { "type": "string" },
+        "url": { "type": "string" },
+        "sourceRefs": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/sourceRef" }
         }
       }
     },

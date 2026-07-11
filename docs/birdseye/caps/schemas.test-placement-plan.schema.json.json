@@ -1,10 +1,23 @@
 {
   "id": "schemas/test-placement-plan.schema.json",
   "role": "schema",
-  "public_api": ["TestPlacementPlan"],
+  "public_api": [
+    "TestPlacementPlan"
+  ],
   "summary": "test obligation と placement node の schema。",
-  "deps_out": ["schemas/quality-evidence-record.schema.json"],
-  "deps_in": ["schemas/shared-defs.schema.json", "docs/requirements.md"],
-  "risks": ["candidateScores が緩いため V1 strict schema の対象"],
-  "tests": ["node -e JSON parse schemas"]
+  "deps_out": [
+    "schemas/quality-evidence-record.schema.json"
+  ],
+  "deps_in": [
+    "schemas/shared-defs.schema.json",
+    "docs/requirements.md"
+  ],
+  "risks": [
+    "candidateScores が緩いため V1 strict schema の対象"
+  ],
+  "tests": [
+    "node -e JSON parse schemas"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:db7ff07b16f786f5272b1aeadb4e89079e3bdb37e7cb8d2c7bd9c9ccbe705ef1"
 }

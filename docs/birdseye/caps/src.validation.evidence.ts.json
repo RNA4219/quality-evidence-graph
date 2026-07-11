@@ -1,0 +1,16 @@
+{
+  "id": "src/validation/evidence.ts",
+  "role": "runtime-evidence-validation",
+  "generation": "00008",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:548af4b27ac88721d3a1d4eaa2474d3996f23ab652a4532ce7ce73b5de5be7b1"
+}

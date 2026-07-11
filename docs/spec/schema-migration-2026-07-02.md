@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-SCHEMA-MIGRATION-2026-07-02
 owner: quality-evidence-graph
-status: active
+status: superseded
 profile: ipo_controlled
 last_reviewed_at: 2026-07-02
 next_review_due: 2026-08-02
@@ -15,7 +15,7 @@ Gate policy 正本の一元化と cross-repo ID namespace 契約を導入する�
 
 ## Compatibility
 
-- `qegVersion` は `0.1` のまま維持する。
+- `qegVersion` は当時 `0.1`。この方針は0.2.0で終了し、現在の正本は `0.2` とする。
 - `stableId` schema は `<producer>:<local-id>` を標準化しつつ、prefix なし ID を互換期間中は許容する。
 - CLI ingest validation は prefix なし ID を warning 付きで受理する。
 - 未予約 prefix は validation error として拒否する。

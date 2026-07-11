@@ -1,0 +1,78 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-17",
+        "count": 1,
+        "remediation": "Record producer, reviewer, approver, waiverApprover, and releaseOwner control roles."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-control-roles-missing",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-17: Control roles (producer/reviewer/approver/waiverApprover/releaseOwner) not recorded"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-17",
+          "message": "Control roles (producer/reviewer/approver/waiverApprover/releaseOwner) not recorded",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-17",
+              "path": "docs/spec/waiver-approval.md",
+              "startLine": 69,
+              "endLine": 79,
+              "label": "ControlRoles required for IPO controlled"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-control-roles-missing",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/waiver-approval.md §5: IPO controlled release Go requires ControlRoles recorded, missing triggers DQ-17",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-17"
+        ],
+        "actualDqCodes": [
+          "DQ-17"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

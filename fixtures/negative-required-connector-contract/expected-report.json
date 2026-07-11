@@ -1,0 +1,78 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-11",
+        "count": 1,
+        "remediation": "Fix required connector contract violations before treating connector output as successful."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-required-connector-contract",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-11: Required connector \"connector-001\" contract violation treated as success"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-11",
+          "message": "Required connector \"connector-001\" contract violation treated as success",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-11",
+              "path": "docs/spec/gate-policy.md",
+              "startLine": 65,
+              "endLine": 66,
+              "label": "required connector contract violation"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-required-connector-contract",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §65-66",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-11"
+        ],
+        "actualDqCodes": [
+          "DQ-11"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

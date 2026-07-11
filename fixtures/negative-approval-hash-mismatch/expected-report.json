@@ -1,0 +1,79 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-15",
+        "count": 1,
+        "remediation": "Provide source-backed waiver, policy hash, and approval evidence that match the evidence package."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-approval-hash-mismatch",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-15: ApprovalEvidence \"qeg:approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\""
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-15",
+          "message": "ApprovalEvidence \"qeg:approval-001\" evidencePackageHash mismatch - expected \"sha256:correct-package-hash\", got \"sha256:MISMATCHED-hash\"",
+          "nodeIds": [
+            "qeg:approval-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-15-APPROVAL-PKGHASH",
+              "path": "docs/spec/waiver-approval.md",
+              "startLine": 1,
+              "endLine": 10,
+              "label": "ApprovalEvidence evidencePackageHash must match EvidencePackage"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-approval-hash-mismatch",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-15"
+        ],
+        "actualDqCodes": [
+          "DQ-15"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

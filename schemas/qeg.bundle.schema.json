@@ -17,7 +17,7 @@
     },
     "completeness": {
       "type": "object",
-      "required": ["score", "partial", "parserFailures", "unsupportedClaims"],
+      "required": ["partial", "parserFailures", "unsupportedClaims"],
       "additionalProperties": false,
       "properties": {
         "score": { "type": "number", "minimum": 0, "maximum": 1 },

@@ -1,0 +1,96 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-04",
+        "count": 1,
+        "remediation": "Add reviewer notes or accepted waivers for P0/P1 oracle gaps, or close the evidence gap."
+      }
+    ],
+    "blockerCount": 1,
+    "residualRiskCount": 0,
+    "humanReviewCount": 1
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-oracle-gap-fact",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-04: P0/P1 risk \"P0 Risk with Oracle Gap\" with oracle gap treated as fact",
+        "No-go blockers: 1",
+        "- High/critical risk \"P0 Risk with Oracle Gap\" with evidence gap",
+        "Required human review: 1"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-04",
+          "message": "P0/P1 risk \"P0 Risk with Oracle Gap\" with oracle gap treated as fact",
+          "nodeIds": [
+            "qeg:risk-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-risk-001",
+              "path": "docs/risk-analysis.md"
+            }
+          ]
+        }
+      ],
+      "blockers": [
+        {
+          "id": "blocker-qeg:risk-001",
+          "message": "High/critical risk \"P0 Risk with Oracle Gap\" with evidence gap",
+          "riskIds": [
+            "qeg:risk-001"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-risk-001",
+              "path": "docs/risk-analysis.md"
+            }
+          ]
+        }
+      ],
+      "residualRisks": [],
+      "requiredHumanReview": [
+        "qeg:risk-001"
+      ],
+      "expected": {
+        "fixture": "negative-oracle-gap-fact",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §2",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-04"
+        ],
+        "actualDqCodes": [
+          "DQ-04"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

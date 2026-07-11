@@ -1,0 +1,32 @@
+{
+  "id": "src/cli/dq-explain.ts",
+  "role": "dq-explain-cli",
+  "public_api": [
+    "getDqExplanation",
+    "allDqExplanations",
+    "runExplainCommand"
+  ],
+  "summary": "DQ-01 から DQ-17 の意味、よくある原因、必要証跡、最小修正、参照仕様を保持し、DQ-12 の producer evidence identity mismatch を含めて qeg explain で text / JSON 出力する。",
+  "deps_out": [
+    "src/types.ts",
+    "docs/spec/gate-policy.md",
+    "docs/spec/waiver-approval.md",
+    "docs/spec/evidence-package.md",
+    "docs/spec/retention-immutability.md"
+  ],
+  "deps_in": [
+    "src/cli/report.ts",
+    "src/cli.ts",
+    "docs/spec/operational-cli-extensions.md"
+  ],
+  "risks": [
+    "DQ remediation が実際の evaluator とずれると、CI failure の直し方を誤誘導する"
+  ],
+  "tests": [
+    "npm run build",
+    "node dist/cli.js explain DQ-15",
+    "node dist/cli.js report fixtures/negative-approval-missing"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:9427c201c13e1b204e356d2d23b82957791fb990c4a2e34e90d3718dfdf09092"
+}

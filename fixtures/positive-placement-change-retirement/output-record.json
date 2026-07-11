@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-positive-placement-change-retirement",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "profile": "ipo_controlled",
@@ -8,7 +8,7 @@
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
@@ -90,7 +90,7 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
@@ -185,7 +185,7 @@
   },
   "gate": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",

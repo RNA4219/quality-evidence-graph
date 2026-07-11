@@ -95,25 +95,77 @@ export function detectDQ11(input: DQDetectorInput): Disqualification[] {
   return disqualifications;
 }
 
+function sourceRefsForProducerCheck(
+  check: { readonly sourceRefs?: readonly SourceRef[] }
+): readonly SourceRef[] {
+  return check.sourceRefs ?? [];
+}
+
+function producerConclusionMatchesReadiness(
+  readinessStatus: string | undefined,
+  conclusion: string
+): boolean {
+  switch (readinessStatus) {
+    case "passed":
+    case "passed_with_risk":
+      return conclusion === "success";
+    case "needs_review":
+      return conclusion === "neutral" || conclusion === "action_required";
+    case "blocked_input":
+    case "failed":
+      return conclusion === "failure" || conclusion === "action_required";
+    case undefined:
+    case "unknown":
+      return true;
+    default:
+      return true;
+  }
+}
+
 /**
- * DQ-12: Artifact revision mismatch with headRef
+ * DQ-12: Artifact/check revision or producer verdict mismatch with headRef
  *
- * Input artifacts must have revision matching metadata.headRef.
+ * Input artifacts and producer checks must match metadata.headRef, and producer
+ * check conclusions must not contradict their exported readiness status.
  */
 export function detectDQ12(input: DQDetectorInput): Disqualification[] {
-  if (!input.metadata.headRef) return [];
-
   const disqualifications: Disqualification[] = [];
-  for (const artifact of input.metadata.inputArtifacts) {
-    if (artifact.revision && artifact.revision !== input.metadata.headRef) {
+
+  if (input.metadata.headRef) {
+    for (const artifact of input.metadata.inputArtifacts) {
+      if (artifact.revision && artifact.revision !== input.metadata.headRef) {
+        disqualifications.push({
+          code: "DQ-12" as DisqualificationCode,
+          message: `Artifact revision "${artifact.revision}" mismatch with headRef "${input.metadata.headRef}"`,
+          nodeIds: [artifact.id],
+          sourceRefs: [] as SourceRef[],
+        });
+      }
+    }
+
+    for (const check of input.metadata.producerChecks ?? []) {
+      if (check.headSha && check.headSha !== input.metadata.headRef) {
+        disqualifications.push({
+          code: "DQ-12" as DisqualificationCode,
+          message: `Producer check "${check.name}" headSha "${check.headSha}" mismatch with headRef "${input.metadata.headRef}"`,
+          nodeIds: [check.id],
+          sourceRefs: sourceRefsForProducerCheck(check),
+        });
+      }
+    }
+  }
+
+  for (const check of input.metadata.producerChecks ?? []) {
+    if (!producerConclusionMatchesReadiness(check.readinessStatus, check.conclusion)) {
       disqualifications.push({
         code: "DQ-12" as DisqualificationCode,
-        message: `Artifact revision "${artifact.revision}" mismatch with headRef "${input.metadata.headRef}"`,
-        nodeIds: [artifact.id],
-        sourceRefs: [] as SourceRef[],
+        message: `Producer check "${check.name}" conclusion "${check.conclusion}" contradicts readiness status "${check.readinessStatus}"`,
+        nodeIds: [check.id],
+        sourceRefs: sourceRefsForProducerCheck(check),
       });
     }
   }
+
   return disqualifications;
 }
 

@@ -25,12 +25,13 @@ function blockers(input: DQDetectorInput): readonly GateBlocker[] {
 }
 
 export function detectDQ01(input: DQDetectorInput): Disqualification[] {
-  return input.graph.completeness.parserFailures.map((failure) => ({
+  const parserDqs = input.graph.completeness.parserFailures.map((failure) => ({
     code: "DQ-01" as DisqualificationCode,
     message: `Parser failure: ${failure.reason}`,
     nodeIds: [],
     sourceRefs: failure.sourceRefs,
   }));
+  return [...input.preflightDisqualifications.filter((dq) => dq.code === "DQ-01"), ...parserDqs];
 }
 
 export function detectDQ02(input: DQDetectorInput): Disqualification[] {
@@ -109,20 +110,7 @@ export function detectDQ05(input: DQDetectorInput): Disqualification[] {
 }
 
 export function detectDQ06(input: DQDetectorInput): Disqualification[] {
-  if (!input.evidencePackage) return [];
-
-  const disqualifications: Disqualification[] = [];
-  for (const artifact of input.evidencePackage.inputArtifactHashes) {
-    if (artifact.contentHash?.startsWith("sha256:mismatch")) {
-      disqualifications.push({
-        code: "DQ-06" as DisqualificationCode,
-        message: `Evidence hash mismatch for artifact "${artifact.id}"`,
-        nodeIds: [artifact.id],
-        sourceRefs: [] as SourceRef[],
-      });
-    }
-  }
-  return disqualifications;
+  return input.preflightDisqualifications.filter((dq) => dq.code === "DQ-06");
 }
 
 export function detectDQ07(input: DQDetectorInput): Disqualification | null {

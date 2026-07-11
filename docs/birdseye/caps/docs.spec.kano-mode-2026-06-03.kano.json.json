@@ -3,8 +3,19 @@
   "role": "kano-mode-audit",
   "public_api": [],
   "summary": "RanD KanoMode の QEG IPO 統制仕様 Gate 監査 artifact。5 件の候補を must_be 3、performance 1、attractive 1 と仮分類する。",
-  "deps_out": ["docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"],
-  "deps_in": ["docs/spec/gate-acceptance-2026-06-03.md", "docs/agent/HUB.codex.md"],
-  "risks": ["KanoMode は正式な狩野調査ではなく、公開・文書証跡に基づく仮説である"],
-  "tests": ["RanD KanoMode build_audit_artifacts"]
+  "deps_out": [
+    "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"
+  ],
+  "deps_in": [
+    "docs/spec/gate-acceptance-2026-06-03.md",
+    "docs/agent/HUB.codex.md"
+  ],
+  "risks": [
+    "KanoMode は正式な狩野調査ではなく、公開・文書証跡に基づく仮説である"
+  ],
+  "tests": [
+    "RanD KanoMode build_audit_artifacts"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:914385a71a9e2d917aae2a3267662d8213e55b20741ec63bd7d46655cfd71144"
 }

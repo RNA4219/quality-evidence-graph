@@ -1,0 +1,96 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-01",
+        "count": 1,
+        "remediation": "Fix parser/input failures and make required gate artifacts available before QEG runs."
+      },
+      {
+        "code": "DQ-17",
+        "count": 1,
+        "remediation": "Record producer, reviewer, approver, waiverApprover, and releaseOwner control roles."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-direct-gate-policy",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 2 DQ code(s)",
+        "- DQ-01: Gate input schema invalid: / must NOT have additional properties",
+        "- DQ-17: Control roles (producer/reviewer/approver/waiverApprover/releaseOwner) not recorded"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-01",
+          "message": "Gate input schema invalid: / must NOT have additional properties",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "qeg:schema-validation",
+              "path": "schemas/gate-input.schema.json"
+            }
+          ]
+        },
+        {
+          "code": "DQ-17",
+          "message": "Control roles (producer/reviewer/approver/waiverApprover/releaseOwner) not recorded",
+          "nodeIds": [],
+          "sourceRefs": [
+            {
+              "id": "SR-DQ-17",
+              "path": "docs/spec/waiver-approval.md",
+              "startLine": 69,
+              "endLine": 79,
+              "label": "ControlRoles required for IPO controlled"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-direct-gate-policy",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/gate-policy.md §5",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-01"
+        ],
+        "actualDqCodes": [
+          "DQ-01",
+          "DQ-17"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

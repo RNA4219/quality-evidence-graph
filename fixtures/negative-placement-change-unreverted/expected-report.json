@@ -1,0 +1,80 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-14",
+        "count": 1,
+        "remediation": "Add source-backed manual oracle or placement-change retirement/revert evidence."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-placement-change-unreverted",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-14: Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-14",
+          "message": "Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy",
+          "nodeIds": [
+            "qeg:placement-change-login-retirement",
+            "mbb:CASE-login-001",
+            "hate:AETE-login-001",
+            "qeg:risk-login-regression"
+          ],
+          "sourceRefs": [
+            {
+              "id": "hate:ev-login-weak",
+              "path": "hate/reports/login-aete.json"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "expected": {
+        "fixture": "negative-placement-change-unreverted",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/requirements.md §9 Test Placement 要件",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-14"
+        ],
+        "actualDqCodes": [
+          "DQ-14"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": []
+      }
+    }
+  ]
+}

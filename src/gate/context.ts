@@ -22,6 +22,7 @@ export interface GateEvaluationInput {
   waivers: readonly Waiver[];
   evidencePackage?: EvidencePackage;
   placementPlan?: TestPlacementPlan;
+  preflightDisqualifications?: readonly Disqualification[];
   executionTime?: Date;
 }
 
@@ -33,6 +34,7 @@ export interface DQDetectorInput {
   evidencePackage: EvidencePackage | undefined;
   placementPlan: TestPlacementPlan | undefined;
   validWaivers: readonly Waiver[];
+  preflightDisqualifications: readonly Disqualification[];
   riskNodes?: readonly RiskNode[];
   changedCodeNodes?: readonly ChangedCodeNode[];
   testPlacementNodes?: readonly TestPlacementNode[];
@@ -96,6 +98,7 @@ export function createGateEvaluationContext(
     waivers: input.waivers,
     evidencePackage: input.evidencePackage,
     placementPlan: input.placementPlan,
+    preflightDisqualifications: input.preflightDisqualifications ?? [],
     validWaivers,
     riskNodes,
     changedCodeNodes,

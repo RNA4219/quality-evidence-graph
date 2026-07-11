@@ -1,10 +1,37 @@
 {
   "id": "docs/spec/index.md",
   "role": "ipo-spec-index",
-  "public_api": ["GatePolicy", "Waiver", "ApprovalEvidence", "EvidencePackage", "ControlRoles"],
-  "summary": "IPO 統制仕様群の入口、正本関係、読み順、MVP / IPO controlled 境界、共通判定原則、レビュー記録と Gate 検収記録への導線を定義する。",
-  "deps_out": ["docs/spec/gate-policy.md", "docs/spec/waiver-approval.md", "docs/spec/evidence-package.md", "docs/spec/retention-immutability.md", "docs/spec/acceptance.md", "docs/spec/review-2026-06-03.md", "docs/spec/gate-acceptance-2026-06-03.md"],
-  "deps_in": ["docs/agent/HUB.codex.md", "docs/requirements.md", "docs/project/tasks.codex.md"],
-  "risks": ["仕様正本と要求正本が矛盾すると TASK-09 / TASK-10 の実装判断が揺れる"],
-  "tests": ["git ls-files docs/spec/*.md", "npm pack --dry-run --cache ./.npm-cache"]
+  "public_api": [
+    "GatePolicy",
+    "Waiver",
+    "ApprovalEvidence",
+    "EvidencePackage",
+    "ControlRoles",
+    "operational CLI contract"
+  ],
+  "summary": "IPO 統制仕様群の入口、正本関係、読み順、MVP / IPO controlled 境界、共通判定原則、運用CLI仕様、レビュー記録と Gate 検収記録への導線を定義する。",
+  "deps_out": [
+    "docs/spec/gate-policy.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/spec/waiver-approval.md",
+    "docs/spec/evidence-package.md",
+    "docs/spec/retention-immutability.md",
+    "docs/spec/acceptance.md",
+    "docs/spec/review-2026-06-03.md",
+    "docs/spec/gate-acceptance-2026-06-03.md"
+  ],
+  "deps_in": [
+    "docs/agent/HUB.codex.md",
+    "docs/requirements.md",
+    "docs/project/tasks.codex.md"
+  ],
+  "risks": [
+    "仕様正本と要求正本が矛盾すると TASK-09 / TASK-10 の実装判断が揺れる"
+  ],
+  "tests": [
+    "git ls-files docs/spec/*.md",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:4fae53715aed3c62b8c3eb3063cae74e5364d020da549bf56d6b46a939defc06"
 }

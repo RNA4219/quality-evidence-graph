@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "qegVersion": "0.1",
+    "qegVersion": "0.2",
     "runId": "qeg:run-negative-manual-scripted-no-oracle",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
@@ -9,17 +9,26 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-manual-scripted-no-oracle/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
       }
     ]
   },
   "graph": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-manual-scripted-no-oracle",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
+        }
+      ]
     },
     "nodes": [
       {
@@ -27,7 +36,9 @@
         "kind": "test_placement",
         "title": "Manual scripted placement without oracle",
         "traceability": {
-          "sourceRefs": []
+          "sourceRefs": [],
+          "assumptions": [],
+          "confidence": "high"
         },
         "sourceArtifactIds": [],
         "obligationId": "qeg:obligation-001",
@@ -84,31 +95,43 @@
     "id": "qeg:ep-001",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "createdBy": "creator-001",
-    "inputArtifactHashes": [],
+    "inputArtifactHashes": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
+      }
+    ],
     "qegOutputs": {
       "qegBundle": {
         "id": "qeg:qeg-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/qeg-bundle.json",
+        "contentHash": "sha256:4f1b2acd90617728a1a9ad6ecd27472107103f0b80b9972db9772cb50379f69b"
       },
       "testPlacementPlan": {
         "id": "qeg:tpp-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "placement-plan.json"
+        "path": "artifacts/test-placement-plan.json",
+        "contentHash": "sha256:010331c5225ba1edb220bd09517448a990ba131cc0f9ec671afc9121b143fb6c"
       },
       "gateVerdict": {
         "id": "qeg:gv-001",
         "adapter": "qeg-native",
         "kind": "gate_decision",
-        "path": "gate-verdict.json"
+        "path": "artifacts/gate-verdict.json",
+        "contentHash": "sha256:042e1880c2cc55163f9cf94ed3ebce991be8f2bafa57134d8b17338f041300c9"
       },
       "qualityEvidenceRecord": {
         "id": "qeg:qer-001",
         "adapter": "qeg-native",
         "kind": "quality_evidence_record",
-        "path": "output-record.json"
+        "path": "artifacts/quality-evidence-record.json",
+        "contentHash": "sha256:61e2cf93bf7aa27815d4a77475c2d73595ff3140f2c8b10a852d369cb3d36ffc"
       }
     },
     "gatePolicy": {
@@ -176,11 +199,19 @@
   },
   "placementPlan": {
     "metadata": {
-      "qegVersion": "0.1",
+      "qegVersion": "0.2",
       "runId": "qeg:run-negative-manual-scripted-no-oracle",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
+        }
+      ]
     },
     "obligations": [],
     "placements": []

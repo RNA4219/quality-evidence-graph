@@ -18,6 +18,8 @@ next_review_due: 2026-07-02
 | `negative-missing-required-artifact/` | 必須 artifact 欠落 | `disqualified` | `DQ-01` |
 | `negative-empty-source-refs/` | Gate 関連 sourceRefs 空 | `disqualified` | `DQ-02` または `DQ-13` |
 | `negative-revision-mismatch/` | `base_ref` / `head_ref` と artifact revision 不一致 | `disqualified` | `DQ-12` |
+| `negative-producer-check-inconsistent/` | producer check の conclusion / readiness / head SHA 不整合 | `disqualified` | `DQ-12` |
+| `negative-producer-check-stale-sha/` | producer check が古い commit SHA に紐づく | `disqualified` | `DQ-12` |
 | `negative-manual-oracle-gap/` | manual-scripted case の expected result / oracle / traceability 欠落 | `disqualified` | `DQ-08` または `DQ-14` |
 | `negative-optional-evidence-invalid/` | optional evidence invalid と必須 artifact の DQ を分離 | `go` / `conditional_go` / `no_go` のいずれか | none for optional-only invalid |
 | `positive-prefixed-ids/` | `<producer>:<local-id>` の namespaced ID happy path | `go` | none |

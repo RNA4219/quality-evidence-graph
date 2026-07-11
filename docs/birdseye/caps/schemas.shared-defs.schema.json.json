@@ -1,10 +1,29 @@
 {
   "id": "schemas/shared-defs.schema.json",
   "role": "schema",
-  "public_api": ["gateProfile", "gateVerdict", "placementLayer", "metadata", "traceability"],
-  "summary": "共通 schema 定義。Gate profile、metadata、traceability の schema source。",
-  "deps_out": ["schemas/gate-verdict.schema.json", "schemas/qeg.bundle.schema.json", "schemas/test-placement-plan.schema.json"],
-  "deps_in": ["src/types.ts"],
-  "risks": ["shared enum drift"],
-  "tests": ["node -e JSON parse schemas"]
+  "public_api": [
+    "gateProfile",
+    "gateVerdict",
+    "placementLayer",
+    "metadata",
+    "producerCheckRef",
+    "traceability"
+  ],
+  "summary": "共通 schema 定義。Gate profile、metadata、producerChecks、traceability の schema source。",
+  "deps_out": [
+    "schemas/gate-verdict.schema.json",
+    "schemas/qeg.bundle.schema.json",
+    "schemas/test-placement-plan.schema.json"
+  ],
+  "deps_in": [
+    "src/types.ts"
+  ],
+  "risks": [
+    "shared enum drift"
+  ],
+  "tests": [
+    "node -e JSON parse schemas"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:fbcb2f831334e752856e7103606b9e8e6887c6a8c0374efc587cd3843b9a1e41"
 }

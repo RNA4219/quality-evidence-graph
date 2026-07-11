@@ -1,0 +1,56 @@
+{
+  "id": "docs/spec/operational-cli-extensions.md",
+  "role": "operational-cli-spec",
+  "public_api": [
+    "qeg report",
+    "qeg report --diff",
+    "qeg doctor",
+    "qeg explain",
+    "qeg schema-check",
+    "qeg enum-check",
+    "qeg snapshot",
+    "qeg init",
+    "qeg baseline audit",
+    "qeg evidence verify",
+    "qeg policy lint",
+    "qeg repro-bundle",
+    "qeg check",
+    "qeg-report-action"
+  ],
+  "summary": "CI と OSS 導入の作業性を高める運用 CLI 仕様。report の GitHub Summary、baseline、changed-only、diff、doctor、DQ explain、schema/enum drift check、golden snapshot、init、baseline audit、evidence verify、policy lint、repro-bundle、check、qeg-report-action の contract と exit code を固定する。",
+  "deps_out": [
+    "src/cli/report.ts",
+    "src/cli/doctor.ts",
+    "src/cli/dq-explain.ts",
+    "src/cli/schema-check.ts",
+    "src/cli/enum-check.ts",
+    "src/cli/init.ts",
+    "src/cli/snapshot.ts",
+    "src/cli/baseline.ts",
+    "src/cli/evidence-verify.ts",
+    "src/cli/policy-lint.ts",
+    "src/cli/repro-bundle.ts",
+    "src/cli/check.ts",
+    "qeg-report-action/action.yml"
+  ],
+  "deps_in": [
+    "docs/spec/index.md",
+    "docs/requirements.md",
+    "docs/project/runbook.md",
+    "docs/project/evaluation.md"
+  ],
+  "risks": [
+    "report step が直接失敗すると GitHub Actions の汎用 exit code 表示に戻り、累積不足の可視性が落ちる"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run explain -- DQ-15",
+    "npm run doctor -- fixtures/positive-release-go",
+    "npm run snapshot -- fixtures/positive-release-go",
+    "node dist/cli.js check fixtures/positive-release-go"
+  ],
+  "generation": "00008",
+  "contentHash": "sha256:69812d9db035ae4a2f8d800f7001ea2f35a38f9a52a781609222cdcdb04fa8d7"
+}
