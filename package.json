@@ -5,7 +5,7 @@
   "type": "module",
   "main": "./dist/index.js",
   "bin": {
-    "qeg": "./dist/cli.js"
+    "qeg": "dist/cli.js"
   },
   "exports": {
     ".": "./dist/index.js"
