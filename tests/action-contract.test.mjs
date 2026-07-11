@@ -9,9 +9,9 @@ const initSource = await readFile("src/cli/init.ts", "utf-8");
 test("external Action runs its checked-out source and is fail-closed by default", () => {
   assert.doesNotMatch(action, /@quality-harness\/quality-evidence-graph@0\.2\.0/);
   assert.match(action, /report-command:[\s\S]*?default: ""/);
-  assert.match(action, /npm ci --prefix "\$GITHUB_ACTION_PATH"/);
-  assert.match(action, /npm run build --prefix "\$GITHUB_ACTION_PATH"/);
-  assert.match(action, /QEG_ACTION_CLI: \$\{\{ github\.action_path \}\}\/dist\/cli\.js/);
+  assert.match(action, /npm ci --prefix "\$GITHUB_ACTION_PATH\/\.\."/);
+  assert.match(action, /npm run build --prefix "\$GITHUB_ACTION_PATH\/\.\."/);
+  assert.match(action, /QEG_ACTION_CLI: \$\{\{ github\.action_path \}\}\/\.\.\/dist\/cli\.js/);
   assert.match(action, /QEG_ACTION_INSTALL_OUTCOME/);
   assert.match(action, /enforce:[\s\S]*?default: "true"/);
 });

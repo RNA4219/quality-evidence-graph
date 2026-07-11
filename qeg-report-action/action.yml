@@ -88,13 +88,13 @@ runs:
       id: qeg-action-install
       shell: bash
       continue-on-error: true
-      run: npm ci --prefix "$GITHUB_ACTION_PATH"
+      run: npm ci --prefix "$GITHUB_ACTION_PATH/.."
 
     - name: Build QEG Action
       id: qeg-action-build
       shell: bash
       continue-on-error: true
-      run: npm run build --prefix "$GITHUB_ACTION_PATH"
+      run: npm run build --prefix "$GITHUB_ACTION_PATH/.."
 
     - name: Install dependencies
       if: ${{ inputs.install-command != '' }}
@@ -115,7 +115,7 @@ runs:
       shell: bash
       env:
         QEG_REPORT_COMMAND: ${{ inputs.report-command }}
-        QEG_ACTION_CLI: ${{ github.action_path }}/dist/cli.js
+        QEG_ACTION_CLI: ${{ github.action_path }}/../dist/cli.js
         QEG_TARGETS: ${{ inputs.targets }}
         QEG_OUTPUT_PATH: ${{ inputs.output-path }}
         QEG_GITHUB_SUMMARY: ${{ inputs.github-summary }}
