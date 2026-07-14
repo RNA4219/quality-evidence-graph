@@ -1,5 +1,6 @@
 export * from "./types.js";
 export { evaluateGate, getExitCode } from "./gate.js";
+export { isGateEligibleTestEvidence } from "./gate/test-evidence.js";
 export { validateGateInput, verifyEvidenceArtifacts } from "./validation.js";
 export type {
   EvidenceVerificationItem,

@@ -22,6 +22,6 @@
     "npm run build",
     "node dist/cli.js enum-check"
   ],
-  "generation": "00008",
+  "generation": "00009",
   "contentHash": "sha256:f30d3166623d8788339bc959adb074daea74774f3029ee9760ca31ea0a8000b6"
 }

@@ -9,6 +9,7 @@ import {
   computeResidualRisks,
   computeVerdict,
 } from "./verdict.js";
+import { buildTestEvidenceAccounting } from "./test-evidence.js";
 
 export function evaluateGate(input: GateEvaluationInput): GateResult {
   const { executionTime = new Date() } = input;
@@ -44,5 +45,6 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
     blockers,
     residualRisks,
     requiredHumanReview,
+    testEvidenceAccounting: buildTestEvidenceAccounting(input.graph),
   };
 }

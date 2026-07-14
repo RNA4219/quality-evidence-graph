@@ -30,6 +30,6 @@
     "code-to-gate analyze/readiness/export",
     "RanD KanoMode build_audit_artifacts"
   ],
-  "generation": "00008",
+  "generation": "00009",
   "contentHash": "sha256:937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b"
 }

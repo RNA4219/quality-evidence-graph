@@ -22,6 +22,6 @@
     "npm run schema-check",
     "npm run enum-check"
   ],
-  "generation": "00008",
+  "generation": "00009",
   "contentHash": "sha256:379c1dbdb73a80f7d75c34ae98fc2b2ccfda743f14f872d9ca55cb4f39ffc468"
 }

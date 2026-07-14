@@ -1,6 +1,6 @@
 {
-  "id": "src/cli/report/formatter.ts",
-  "role": "report-formatter",
+  "id": "src/gate/evaluate.ts",
+  "role": "gate-evaluator",
   "generation": "00009",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:47e2a7a8b91a2801b668f8985d99e43fbde90489f807faa8cc4731071a87ee8c"
+  "contentHash": "sha256:1c56a3ada465e6ce29ff3f56ed9457475613d94f5e31a07e76a8b45e57c43154"
 }

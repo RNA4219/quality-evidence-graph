@@ -1,6 +1,6 @@
 {
-  "id": "src/cli/report/formatter.ts",
-  "role": "report-formatter",
+  "id": "src/types/graph.ts",
+  "role": "graph-types",
   "generation": "00009",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:47e2a7a8b91a2801b668f8985d99e43fbde90489f807faa8cc4731071a87ee8c"
+  "contentHash": "sha256:5e8dbf03e222a6981bf9ef8999faa4364ae9e708ed7d8894e255dafdc598f37e"
 }

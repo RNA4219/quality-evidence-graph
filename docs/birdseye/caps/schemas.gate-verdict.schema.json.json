@@ -21,6 +21,6 @@
   "tests": [
     "node -e JSON parse schemas"
   ],
-  "generation": "00008",
-  "contentHash": "sha256:ab35e4194f83bdb46423f5d6e6c20f49f0d88993c593fc3943f36ffd43e31499"
+  "generation": "00009",
+  "contentHash": "sha256:c674af7b8c9b51b1018c1e9de43dccbc5a1e507f58f15ea2a063decdc17e2b83"
 }

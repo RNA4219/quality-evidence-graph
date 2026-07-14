@@ -9,5 +9,6 @@
 - Gate、schema、evidence検証をLibrary APIとして公開。
 - 31 fixtureをmanifestで管理し、全snapshotを回帰検証。
 - Actionを0.2.0へ固定し、既定enforce trueへ変更。
+- test node に `testExecutionMode=real|mock` を必須化し、mock test を Gate 証跡の件数・強度・green 回数・risk coverage から除外。除外結果は `testEvidenceAccounting` に記録。
 
 Breaking: qegVersionは0.2。必須schema不適合はDQ-01、差分検出不能はexit 1。

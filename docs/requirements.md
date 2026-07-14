@@ -54,6 +54,7 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 | P-13 | evidence immutability | release 判定に使った証跡は後から silent overwrite できない |
 | P-14 | QEG policy authority | Gate policy の正本は QEG のみとし、外部 artifact の policy 相当情報は proposal として扱う |
 | P-15 | namespaced identity | cross-repo join に使う ID は `<producer>:<local-id>` を標準とする |
+| P-16 | mock evidence exclusion | `testExecutionMode=mock` の test node は graph に監査記録として残すが、Gate 証跡の件数・強度・連続 green 回数・risk coverage には算入しない |
 
 ## 4. スコープ
 
@@ -233,6 +234,7 @@ traceability の受入条件:
 | T-12 | 引退後も risk coverage を逆引きできる | 引退済み manual case の risk は `replacement_ids[]` の自動 test node から `coveredRiskIds` と `replaced_by` edge で automated coverage として辿れる |
 | T-13 | 引退は可逆イベントとして扱う | replacement test の削除、`evidenceStrength` 低下、green 回数不足、risk coverage 欠落が起き、manual case が復帰していなければ revert 候補として DQ-14 にする |
 | T-14 | manual case の単純消失を検出する | `manual_case_inventory.previous_subject_ids` から消えた case が `current_subject_ids` にも `placement_changes[].subject_id` にも無い場合、無断消失として DQ-14 にする |
+| T-15 | mock test を Gate 証跡から除外する | test node は `testExecutionMode=real|mock` を必須とし、`mock` は placement retirement の `evidenceStrength`、直近 green 回数、risk coverage を満たさない。除外 ID と理由は Gate 出力に残す |
 
 placement score は MVP では次の入力を使う。
 
@@ -295,7 +297,7 @@ Gate profile の既定は `standard` とする。`strict` は認証、決済、�
 | DQ-11 | 必須 3 接続先の契約違反を成功扱いした |
 | DQ-12 | base_ref / head_ref と artifact revision / producer check head SHA / producer readiness verdict が不一致 |
 | DQ-13 | Gate 関連 node / edge / placement / blocker / disqualification の sourceRefs が空 |
-| DQ-14 | manual-scripted placement が acceptable oracle を持たない |
+| DQ-14 | manual-scripted placement が acceptable oracle を持たない、または manual→automated の replacement が mock test 証跡だけで成立している |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない |
 | DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない |
@@ -308,7 +310,7 @@ DQ-13 は schema だけでは全 Gate 関連 node / edge / placement を完全�
 |---|---|---|---|
 | O-01 | `qeg.bundle.json` | canonical graph、metadata、completeness | node / edge / sourceArtifactIds が schema validation を通る |
 | O-02 | `test-placement-plan.json` | obligations、placements、candidate scores | 全 blocking risk に placement または accepted waiver がある |
-| O-03 | `gate-verdict.json` | verdict、reasons、disqualifications、blockers、residualRisks、requiredHumanReview | verdict と reasons が source-backed な判定材料へ逆引きできる |
+| O-03 | `gate-verdict.json` | verdict、reasons、disqualifications、blockers、residualRisks、requiredHumanReview、testEvidenceAccounting | verdict と reasons が source-backed な判定材料へ逆引きでき、mock test の非算入を監査できる |
 | O-04 | `quality-evidence-record.json` | run 全体の最終 record | metadata、graph、placementPlan、gate、exports を含む |
 | O-05 | Markdown record | 人間向け要約 | verdict、主要 blocker、placement summary、証跡参照を含む |
 

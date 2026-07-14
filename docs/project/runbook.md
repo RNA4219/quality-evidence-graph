@@ -56,6 +56,7 @@ npm run enum-check
 
 - `schemas/*.schema.json` が Ajv で compile できる
 - `GateProfile`、`GateVerdict`、`DisqualificationCode` が TypeScript 型と JSON Schema enum で一致する
+- test node の `testExecutionMode=real|mock` が schema/type で一致し、mock test が `testEvidenceAccounting.excludedMockTests` に記録される
 
 ### 4. CI cumulative report
 
@@ -187,6 +188,7 @@ node dist/cli.js record fixtures/negative-approval-missing
 - `DisqualificationCode` と `gate-verdict.schema.json` の DQ enum が一致する
 - `ipo_controlled` profile の要件が `docs/requirements.md`、`README.md`、`docs/project/blueprint.md` に同期されている
 - Birdseye index と capsule が変更対象を指している
+- mock test は placement retirement の `evidenceStrength`、連続 green 回数、risk coverage に算入されず DQ-14 になる
 - `qeg-report-action/action.yml` が Node.js 24 action を使い、`exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` output を持つ
 - `docs/spec/operational-cli-extensions.md` が report / baseline audit / doctor / explain / schema-check / enum-check / evidence verify / policy lint / repro-bundle / check / snapshot / init / Action の contract を固定している
 - `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している

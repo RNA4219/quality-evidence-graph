@@ -54,6 +54,7 @@ Optional artifact がある場合は `optional/` に置く。
 - `minimal-valid/` の `conditional_go` は accepted waiver、owner、期限、rollback / containment、follow-up を source-backed に持つ場合だけ許容する。
 - `negative-optional-evidence-invalid/` は optional parser failure を記録するが、それだけで DQ-01 にしない。
 - manual case の引退は `placement_changes[]` として記録する。`evidence_refs[]`、policy 参照、revert 条件を持たない引退、または棚卸しからの単純消失は DQ-14 として扱う。
+- test node は `testExecutionMode=real|mock` を必須とする。`mock` の replacement は強度・green 回数・risk coverage の値にかかわらず Gate 証跡へ算入せず、manual case 未復帰なら DQ-14 とする。
 
 ## Acceptance Commands
 
