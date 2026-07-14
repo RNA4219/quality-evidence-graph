@@ -12,6 +12,7 @@ next_review_due: 2026-08-04
 
 - `docs/requirements.md`、`docs/project/blueprint.md`、`README.md`、`docs/project/runbook.md`、`docs/project/guardrails.md`、`docs/agent/HUB.codex.md` が矛盾しないこと。
 - `src/types.ts` の `GateProfile` / `DisqualificationCode` と schema enum が一致すること。
+- test node の `testExecutionMode` が schema/type で必須となり、`mock` は Gate 証跡に算入されず `testEvidenceAccounting.excludedMockTests` へ記録されること。
 - `docs/requirements.md` が Git 管理対象かつ package 配布対象であること。
 - `docs/birdseye/index.json` と `docs/birdseye/caps/*.json` が主要ファイルを指すこと。
 - `ipo_controlled` profile、DQ-15〜DQ-17、waiver governance、evidence immutability が要件に明記されていること。

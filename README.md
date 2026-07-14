@@ -45,6 +45,7 @@
 - DQ-01 から DQ-17 まで実装済み。
 - fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
+- test node は `testExecutionMode=real|mock` を持ち、mock test は graph に残しても Gate 証跡の件数・強度・green 回数・risk coverage には算入しない。
 - `code-to-gate` findings は 0 を維持する方針。
 - Gate evaluator、CLI、types は facade + internal modules に分割済み。
 

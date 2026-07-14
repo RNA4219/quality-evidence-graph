@@ -23,6 +23,6 @@
     "schema JSON parse",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00008",
+  "generation": "00009",
   "contentHash": "sha256:62d2ebbf57d666c8bd2908d5f76f6878466689add6d4f59a0e0695152d2328ae"
 }

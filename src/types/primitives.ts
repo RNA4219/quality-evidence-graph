@@ -34,6 +34,8 @@ export type PlacementDisposition =
 
 export type GateRelevance = "informational" | "advisory" | "blocking";
 
+export type TestExecutionMode = "real" | "mock";
+
 export type NodeKind =
   | "requirement"
   | "acceptance_criteria"

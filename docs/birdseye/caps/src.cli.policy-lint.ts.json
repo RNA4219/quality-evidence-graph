@@ -21,6 +21,6 @@
     "npm run build",
     "node dist/cli.js policy lint fixtures/positive-release-go"
   ],
-  "generation": "00008",
+  "generation": "00009",
   "contentHash": "sha256:e29fb0babbd0697d4df811c55cdb60a651a611e708820cb140db65a462152933"
 }

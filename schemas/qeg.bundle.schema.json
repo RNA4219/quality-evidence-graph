@@ -53,12 +53,22 @@
           ]
         },
         "title": { "type": "string", "minLength": 1 },
+        "testExecutionMode": { "enum": ["real", "mock"] },
         "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" },
         "sourceArtifactIds": {
           "type": "array",
           "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
         }
-      }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "kind": { "const": "test" } },
+            "required": ["kind"]
+          },
+          "then": { "required": ["testExecutionMode"] }
+        }
+      ]
     },
     "edge": {
       "type": "object",

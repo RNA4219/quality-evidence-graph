@@ -63,6 +63,17 @@ export interface GateBlocker {
   readonly sourceRefs: readonly SourceRef[];
 }
 
+export interface ExcludedTestEvidence {
+  readonly testId: StableId;
+  readonly reason: "mock_test";
+  readonly sourceRefs: readonly SourceRef[];
+}
+
+export interface TestEvidenceAccounting {
+  readonly countedTestIds: readonly StableId[];
+  readonly excludedMockTests: readonly ExcludedTestEvidence[];
+}
+
 export interface GateResult {
   readonly metadata: QegMetadata;
   readonly verdict: GateVerdict;
@@ -71,4 +82,5 @@ export interface GateResult {
   readonly blockers: readonly GateBlocker[];
   readonly residualRisks: readonly StableId[];
   readonly requiredHumanReview: readonly StableId[];
+  readonly testEvidenceAccounting: TestEvidenceAccounting;
 }

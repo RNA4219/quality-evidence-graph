@@ -10,6 +10,7 @@ import type {
   TestPlacementNode,
 } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
+import { isGateEligibleTestEvidence } from "../test-evidence.js";
 
 function testPlacementNodes(input: DQDetectorInput): readonly TestPlacementNode[] {
   return input.testPlacementNodes ?? input.graph.nodes.filter(
@@ -131,7 +132,11 @@ function detectPlacementChangeRetirementGaps(input: DQDetectorInput): Disqualifi
     }
 
     const concreteReplacementTests = replacementTests.filter((test): test is TestNode => test !== undefined);
+    const hasMockEvidence = concreteReplacementTests.some(
+      (test) => !isGateEligibleTestEvidence(test)
+    );
     const evidenceTooWeak = concreteReplacementTests.some((test) =>
+      !isGateEligibleTestEvidence(test) ||
       (test.evidenceStrength ?? 0) < retirementPolicy.minEvidenceStrength ||
       (test.recentGreenRuns ?? 0) < retirementPolicy.minConsecutiveGreen
     );
@@ -141,7 +146,11 @@ function detectPlacementChangeRetirementGaps(input: DQDetectorInput): Disqualifi
       requiredRiskIds.some((riskId) => !coveredRiskIds.has(riskId));
 
     if ((evidenceTooWeak || riskCoverageMissing) && !isRestored(input, change.subject_id)) {
-      const reason = evidenceTooWeak ? "evidence strength or green-run threshold fell below policy" : "required risk coverage is missing";
+      const reason = hasMockEvidence
+        ? "mock test evidence is not Gate-eligible"
+        : evidenceTooWeak
+          ? "evidence strength or green-run threshold fell below policy"
+          : "required risk coverage is missing";
       disqualifications.push({
         code: "DQ-14" as DisqualificationCode,
         message: `Placement change "${change.id}" is a revert candidate: ${reason}`,

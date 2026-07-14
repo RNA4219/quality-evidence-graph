@@ -200,3 +200,27 @@ test("qeg init generates a schema-valid 0.2 enforced integration", async () => {
   assert.match(workflow, /qeg-report-action@v0\.2\.0/);
   assert.doesNotMatch(workflow, /enforce: "false"/);
 });
+
+test("mock tests remain auditable but do not count as Gate evidence", async () => {
+  const source = resolve("fixtures/positive-placement-change-retirement");
+  const fixture = await mkdtemp(join(tmpdir(), "qeg-mock-evidence-"));
+  await cp(source, fixture, { recursive: true });
+  const inputPath = join(fixture, "gate-input.json");
+  const input = JSON.parse(await readFile(inputPath, "utf-8"));
+  const replacement = input.graph.nodes.find((node) => node.id === "hate:AETE-login-001");
+  replacement.testExecutionMode = "mock";
+  await writeFile(inputPath, JSON.stringify(input), "utf-8");
+
+  const result = run(["gate", fixture]);
+  assert.equal(result.status, 2, result.stderr || result.stdout);
+  const gate = JSON.parse(result.stdout);
+  assert.equal(gate.verdict, "disqualified");
+  assert.ok(gate.disqualifications.some(
+    (item) => item.code === "DQ-14" && item.message.includes("mock test evidence is not Gate-eligible")
+  ));
+  assert.deepEqual(gate.testEvidenceAccounting.countedTestIds, []);
+  assert.deepEqual(
+    gate.testEvidenceAccounting.excludedMockTests.map((item) => item.testId),
+    ["hate:AETE-login-001"]
+  );
+});

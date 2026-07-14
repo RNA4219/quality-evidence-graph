@@ -54,6 +54,7 @@
         },
         "sourceArtifactIds": [],
         "layer": "e2e",
+        "testExecutionMode": "real",
         "existing": true,
         "evidenceStrength": 0.93,
         "recentGreenRuns": 5,

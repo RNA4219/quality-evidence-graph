@@ -1,6 +1,6 @@
 {
-  "id": "src/cli/report/formatter.ts",
-  "role": "report-formatter",
+  "id": "tests/runtime.test.mjs",
+  "role": "runtime-contract-tests",
   "generation": "00009",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:47e2a7a8b91a2801b668f8985d99e43fbde90489f807faa8cc4731071a87ee8c"
+  "contentHash": "sha256:4e207a4c2126f587687023d7e1c2e05ebcbcab7da53bae396d099cdf88f85519"
 }

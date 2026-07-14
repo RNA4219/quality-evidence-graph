@@ -10,6 +10,7 @@ import type {
   Priority,
   Severity,
   StableId,
+  TestExecutionMode,
 } from "./primitives.js";
 import type { EvidenceRef, QegMetadata, SourceRef } from "./evidence.js";
 import type { Disqualification, GateBlocker } from "./gate.js";
@@ -76,6 +77,8 @@ export interface FindingNode extends QegNodeBase {
 export interface TestNode extends QegNodeBase {
   readonly kind: "test";
   readonly layer: PlacementLayer;
+  /** Mock executions are auditable but never count as Gate evidence. */
+  readonly testExecutionMode: TestExecutionMode;
   readonly command?: string;
   readonly existing: boolean;
   readonly evidenceStrength?: number;
