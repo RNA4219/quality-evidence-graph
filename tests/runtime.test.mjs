@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { cp, mkdtemp, readFile, symlink, writeFile } from "node:fs/promises";
+import {
+  cp,
+  mkdir,
+  mkdtemp,
+  readFile,
+  readdir,
+  symlink,
+  writeFile,
+} from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -641,10 +649,38 @@ test("evidence normalize supports four MVP adapters and fails safely on bad path
 
   await writeFile(join(dir, "toxiproxy-incomplete.json"), JSON.stringify({ runId: "qeg:run-toxi-incomplete", attempt: 1, commit: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", status: "pass", toxic: { type: "timeout", attributes: {} } }), "utf-8");
   const incompleteToxiproxy = run(["evidence", "normalize", "--adapter", "toxiproxy", "--input", "toxiproxy-incomplete.json", "--context", "context.json", "--out", "toxiproxy-incomplete.evidence.json", "--base-dir", dir]);
-  assert.equal(incompleteToxiproxy.status, 0, incompleteToxiproxy.stderr || incompleteToxiproxy.stdout);
-  assert.equal("fault" in JSON.parse(await readFile(join(dir, "toxiproxy-incomplete.evidence.json"), "utf-8")), false);
+  assert.equal(incompleteToxiproxy.status, 1);
+  assert.doesNotMatch(incompleteToxiproxy.stderr, /undefined|null/);
+  await assert.rejects(readFile(join(dir, "toxiproxy-incomplete.evidence.json")));
   const existing = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "shell.evidence.json", "--base-dir", dir]);
   assert.equal(existing.status, 1);
+  const forced = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "shell.evidence.json", "--base-dir", dir, "--force"]);
+  assert.equal(forced.status, 0, forced.stderr || forced.stdout);
+  assert.equal(JSON.parse(await readFile(join(dir, "shell.evidence.json"), "utf-8")).adapter, "shell");
+
+  await mkdir(join(dir, "rename-failure.evidence.json"));
+  const renameFailure = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "rename-failure.evidence.json", "--base-dir", dir, "--force"]);
+  assert.equal(renameFailure.status, 1);
+  assert.deepEqual(
+    (await readdir(dir)).filter(
+      (name) => name.startsWith(".rename-failure.evidence.json.") && name.endsWith(".tmp"),
+    ),
+    [],
+  );
+
+  const schemaInvalidRaw = JSON.parse(await readFile(join(dir, "shell.json"), "utf-8"));
+  schemaInvalidRaw.attempt = "not-a-number";
+  await writeFile(join(dir, "schema-invalid.json"), JSON.stringify(schemaInvalidRaw), "utf-8");
+  const schemaInvalid = run(["evidence", "normalize", "--adapter", "shell", "--input", "schema-invalid.json", "--context", "context.json", "--out", "schema-invalid.evidence.json", "--base-dir", dir]);
+  assert.equal(schemaInvalid.status, 1);
+  await assert.rejects(readFile(join(dir, "schema-invalid.evidence.json")));
+  assert.deepEqual(
+    (await readdir(dir)).filter(
+      (name) => name.startsWith(".schema-invalid.evidence.json.") && name.endsWith(".tmp"),
+    ),
+    [],
+  );
+
   const escaped = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "../escape.json", "--base-dir", dir]);
   assert.equal(escaped.status, 1);
   const unsupported = run(["evidence", "normalize", "--adapter", "custom", "--input", "shell.json", "--context", "context.json", "--out", "custom.json", "--base-dir", dir]);

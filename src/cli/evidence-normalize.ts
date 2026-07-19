@@ -149,15 +149,6 @@ function parseJson(bytes: Buffer | string, label: string): JsonObject {
   return asObject(parsed, label);
 }
 
-async function readJson(path: string, label: string): Promise<JsonObject> {
-  try {
-    return parseJson(await readFile(path), label);
-  } catch (error) {
-    if (error instanceof CliError) throw error;
-    throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
-  }
-}
-
 async function readBytes(path: string, label: string): Promise<Buffer> {
   try {
     return await readFile(path);
@@ -248,6 +239,11 @@ function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
     const fault = toxicObject !== undefined && mappedFaultType !== undefined && faultStartedAt !== undefined && faultEndedAt !== undefined && actualTargetIds !== undefined && appliedDurationMs !== undefined
       ? { type: mappedFaultType, parameters: toxicObject, faultStartedAt, faultEndedAt, actualTargetIds, appliedDurationMs }
       : undefined;
+    if (toxicObject !== undefined && fault === undefined) {
+      throw new CliError(
+        "Toxiproxy input requires measured fault timestamps, targets, and duration",
+      );
+    }
     return {
       experimentId: rawValue(raw, "runId", "experimentId", "name") as string | undefined,
       attempt: rawValue(raw, "attempt") as number | undefined,
@@ -328,9 +324,12 @@ export async function normalizeResilienceEvidence(options: NormalizeOptions): Pr
   if (sameFilesystemPath(realOutputPath, realInputPath) || sameFilesystemPath(realOutputPath, realContextPath)) {
     throw new CliError("--out must not overwrite --input or --context");
   }
-  const [rawBytes, contextRaw] = await Promise.all([readBytes(inputPath, "raw input"), readJson(contextPath, "context")]);
+  const [rawBytes, contextBytes] = await Promise.all([
+    readBytes(inputPath, "raw input"),
+    readBytes(contextPath, "context"),
+  ]);
   const raw = parseJson(rawBytes, "raw input");
-  const context = await validateContext(contextRaw);
+  const context = await validateContext(parseJson(contextBytes, "context"));
   const fields = adapterFields(options.adapter as NormalizeAdapter, raw);
   const lifecycle = context.lifecycle ?? {};
   const rawStartedAt = choose("raw startedAt", fields.startedAt, fields.lifecycle?.startedAt as string | undefined, false);
@@ -394,10 +393,24 @@ export async function normalizeResilienceEvidence(options: NormalizeOptions): Pr
     signalManifest,
   };
   await validateEvidence(evidence);
-  try { await stat(outPath); if (!options.force) throw new CliError(`Output already exists: ${options.out} (use --force to replace it)`); } catch (error) {
-    if (error instanceof CliError) throw error;
+  let outputExists = false;
+  try {
+    await stat(outPath);
+    outputExists = true;
+  } catch (error) {
+    if ((error as NodeJS.ErrnoException).code !== "ENOENT") {
+      throw new CliError("Cannot inspect --out destination");
+    }
   }
-  const tempPath = resolve(dirname(outPath), `.${basename(outPath)}.${process.pid}.${randomUUID()}.tmp`);
+  if (outputExists && !options.force) {
+    throw new CliError(
+      `Output already exists: ${options.out} (use --force to replace it)`,
+    );
+  }
+  const tempPath = resolve(
+    dirname(outPath),
+    `.${basename(outPath)}.${process.pid}.${randomUUID()}.tmp`,
+  );
   try {
     await writeFile(tempPath, `${JSON.stringify(evidence, null, 2)}\n`, { encoding: "utf-8", flag: "wx" });
     await rename(tempPath, outPath);
