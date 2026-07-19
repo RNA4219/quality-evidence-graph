@@ -1,0 +1,16 @@
+{
+  "id": "schemas/resilience-normalize-context.schema.json",
+  "role": "resilience-normalize-context-schema",
+  "generation": "00009",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:ebf1449d378b54392e394dd15353f92a27f100d4f75a6a78fc85b4111a17b377"
+}

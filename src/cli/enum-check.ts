@@ -18,9 +18,16 @@ export interface EnumCheckReport {
 }
 
 const CHECKS = [
-  { typeName: "GateProfile", schemaDef: "gateProfile" },
-  { typeName: "GateVerdict", schemaDef: "gateVerdict" },
-  { typeName: "DisqualificationCode", schemaDef: "disqualificationCode" },
+  { typeName: "GateProfile", schemaDef: "gateProfile", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
+  { typeName: "GateVerdict", schemaDef: "gateVerdict", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
+  { typeName: "DisqualificationCode", schemaDef: "disqualificationCode", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
+  { typeName: "EvidenceKind", schemaDef: "evidenceKind", typeFile: "src/types/evidence.ts", schemaFile: "schemas/shared-defs.schema.json" },
+  { typeName: "TestType", schemaDef: "testType", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
+  { typeName: "ResilienceAdapter", schemaDef: "resilienceAdapter", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
+  { typeName: "ResilienceFaultModel", schemaDef: "resilienceFaultModel", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
+  { typeName: "SignalPhase", schemaDef: "signalPhase", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
+  { typeName: "SignalSemanticRole", schemaDef: "signalSemanticRole", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
+  { typeName: "SignalAggregation", schemaDef: "signalAggregation", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
 ] as const;
 
 async function readJson<T>(path: string): Promise<T> {
@@ -38,13 +45,23 @@ function diff(left: readonly string[], right: readonly string[]): string[] {
 }
 
 export async function createEnumCheckReport(): Promise<EnumCheckReport> {
-  const primitives = await readFile("src/types/primitives.ts", "utf-8");
-  const sharedDefs = await readJson<{ $defs: Record<string, { enum?: string[] }> }>("schemas/shared-defs.schema.json");
   const items: EnumCheckItem[] = [];
+  const sourceCache = new Map<string, string>();
+  const schemaCache = new Map<string, { $defs: Record<string, { enum?: string[] }> }>();
 
   for (const check of CHECKS) {
-    const typeValues = extractStringUnion(primitives, check.typeName);
-    const schemaValues = [...(sharedDefs.$defs[check.schemaDef]?.enum ?? [])].sort();
+    let typeSource = sourceCache.get(check.typeFile);
+    if (!typeSource) {
+      typeSource = await readFile(check.typeFile, "utf-8");
+      sourceCache.set(check.typeFile, typeSource);
+    }
+    let schema = schemaCache.get(check.schemaFile);
+    if (!schema) {
+      schema = await readJson<{ $defs: Record<string, { enum?: string[] }> }>(check.schemaFile);
+      schemaCache.set(check.schemaFile, schema);
+    }
+    const typeValues = extractStringUnion(typeSource, check.typeName);
+    const schemaValues = [...(schema.$defs[check.schemaDef]?.enum ?? [])].sort();
     const missingInSchema = diff(typeValues, schemaValues);
     const missingInTypes = diff(schemaValues, typeValues);
     const status = missingInSchema.length === 0 && missingInTypes.length === 0 ? "pass" : "fail";
@@ -93,4 +110,3 @@ export async function runEnumCheckCommand(args: readonly string[]): Promise<void
   console.log(json ? JSON.stringify(report, null, 2) : formatEnumCheckText(report).trimEnd());
   exit(report.status === "pass" ? 0 : 2);
 }
-

@@ -1,0 +1,97 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 1,
+    "baselineAccepted": 0,
+    "gateFailed": 0,
+    "cliErrors": 0,
+    "dqCounts": [],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/positive-reliability-go",
+      "status": "passed",
+      "exitCode": 0,
+      "verdict": "go",
+      "reasons": [
+        "All gate conditions satisfied"
+      ],
+      "disqualifications": [],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "reliability": {
+        "enabled": true,
+        "requiredRiskCount": 1,
+        "qualifiedRiskCount": 1,
+        "passingRiskCount": 1,
+        "riskCoverageRate": 1,
+        "requiredExecutionCount": 1,
+        "qualifiedExecutionCount": 1,
+        "passingExecutionCount": 1,
+        "resiliencePassRate": 1,
+        "recoverySecondsP50": 30,
+        "recoverySecondsP95": 30,
+        "recoverySampleCount": 1,
+        "duplicateSideEffectsCount": 0,
+        "dataInconsistenciesCount": 0,
+        "evidenceAgeHours": {
+          "qeg:evidence-reliability-fixture": 23.966666666666665
+        },
+        "excludedMockTests": [],
+        "dqCountByRule": {
+          "DQ-12": 0,
+          "DQ-18": 0,
+          "DQ-19": 0,
+          "DQ-20": 0,
+          "DQ-21": 0
+        },
+        "drillDown": [
+          {
+            "riskId": "qeg:risk-reliability-fixture",
+            "testId": "qeg:test-reliability-fixture",
+            "selectedEvidenceId": "qeg:evidence-reliability-fixture",
+            "adapter": "shell",
+            "experimentId": "qeg:experiment-reliability-fixture",
+            "attempt": 1,
+            "targetRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "ci:fixture",
+            "selectionReason": "latest_current_execution",
+            "disqualificationCodes": [],
+            "blockerIds": []
+          }
+        ]
+      },
+      "expected": {
+        "fixture": "positive-reliability-go",
+        "expectedVerdict": "go",
+        "expectedExitCode": 0,
+        "contractRef": "docs/spec/reliability-extension.md §11",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [],
+        "actualDqCodes": [],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
+      }
+    }
+  ]
+}

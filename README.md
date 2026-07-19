@@ -32,7 +32,7 @@
 - 要求正本は `docs/requirements.md`。
 - controlled governance の実装仕様正本は `docs/spec/`。
 - public TypeScript contract は `src/types.ts` facade から辿る。
-- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`、`baseline audit`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`evidence verify`、`policy lint`、`repro-bundle`、`check`、`snapshot`、`init`。
+- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`、`baseline audit`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`evidence verify`、`evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>`、`policy lint`、`repro-bundle`、`check`、`snapshot`、`init`。
 - `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
 - `gate-input.json` 欠落・invalid は CLI failure として exit code `1`。
 - `report` は複数 target を最後まで評価し、CLI failure / DQ / blocker / human review を累積レポートとして出す。

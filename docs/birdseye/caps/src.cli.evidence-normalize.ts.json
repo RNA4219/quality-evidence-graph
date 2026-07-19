@@ -1,0 +1,16 @@
+{
+  "id": "src/cli/evidence-normalize.ts",
+  "role": "resilience-evidence-normalize",
+  "generation": "00009",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:cd3654525d8d4e1c492fcfb6ee00eab97bef9468426cc33024042d84837e2e62"
+}

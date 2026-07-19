@@ -46,8 +46,15 @@
         "DQ-14",
         "DQ-15",
         "DQ-16",
-        "DQ-17"
+        "DQ-17",
+        "DQ-18",
+        "DQ-19",
+        "DQ-20",
+        "DQ-21"
       ]
+    },
+    "evidenceKind": {
+      "enum": ["code", "spec", "test_result", "coverage", "sarif", "human_review", "audit", "policy", "observability_metric", "observability_trace", "observability_log"]
     },
     "packagePhase": {
       "enum": ["implementation_preparation", "pre_release_review", "release_decision"]
@@ -261,9 +268,8 @@
         "excerptHash": { "type": "string" },
         "revision": { "type": "string" },
         "label": { "type": "string" },
-        "evidenceKind": {
-          "enum": ["code", "spec", "test_result", "coverage", "sarif", "human_review", "audit", "policy"]
-        },
+        "contentHash": { "type": "string" },
+        "evidenceKind": { "$ref": "#/$defs/evidenceKind" },
         "capturedAt": { "$ref": "#/$defs/isoDateTime" }
       }
     }

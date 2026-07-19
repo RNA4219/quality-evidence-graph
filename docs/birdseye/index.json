@@ -5,7 +5,7 @@
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:ca878ea3dc9c74dc4bbf88a0af1ffb57806a6324632760213e247a884211ebbb"
+      "contentHash": "sha256:5275a169ea7c982036a78d823138ea0b028d0ea2badef4431d5eb5ac98aca987"
     },
     "README_JA.md": {
       "role": "human-overview-ja",
@@ -23,7 +23,7 @@
       "role": "navigation",
       "caps": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:c0b1e45c3791aabab90a37a6f39c2e4aed40ba876156fae4e090898ee1c42f29"
+      "contentHash": "sha256:8d767f8be1bee1fd725419d5bdc72a92fc8eec88a6862c6e64b0033b96154987"
     },
     "docs/project/blueprint.md": {
       "role": "blueprint",
@@ -41,7 +41,7 @@
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:dd3f9357cefaa0e02b4b6d9f8aea9035ae1711725b79eef314d443ab9fe20fbd"
+      "contentHash": "sha256:651f3f8d07ba3997196a2146bcdc9e7bee07a6fb37deb2cb73060251b069371c"
     },
     "docs/project/runbook.md": {
       "role": "operations",
@@ -53,7 +53,7 @@
       "role": "quality",
       "caps": "docs/birdseye/caps/docs.project.evaluation.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:e24db023608a4772cdece3486a8e2f6c20f561bb8481038bbe5505fb9f3bb0c2"
+      "contentHash": "sha256:d96aa2b9c463290ded1b6e1360f386ccbd1902920b4a0664cd93755387f26c40"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
@@ -95,19 +95,19 @@
       "role": "ipo-spec-index",
       "caps": "docs/birdseye/caps/docs.spec.index.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:4fae53715aed3c62b8c3eb3063cae74e5364d020da549bf56d6b46a939defc06"
+      "contentHash": "sha256:9e5e79e7f861c765d875486862e58fbc510f94ac4df4bf6473fd0cd9f3e23bf7"
     },
     "docs/spec/operational-cli-extensions.md": {
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:69812d9db035ae4a2f8d800f7001ea2f35a38f9a52a781609222cdcdb04fa8d7"
+      "contentHash": "sha256:282e21f449e69f5e8205b6f3562a3d7c3562503159d5b1d4ab2edb6dd96dd767"
     },
     "docs/spec/gate-policy.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
       "mtime": "00009",
-      "contentHash": "sha256:c058b96ee314d5c303d62ce0232460d5d6b8f58aa2ece33c74e4f393530e962c"
+      "contentHash": "sha256:a007e9a10b57d9826ceb8fb8534135592ce05c871b340f3a7a7adc250d5f3259"
     },
     "docs/spec/waiver-approval.md": {
       "role": "ipo-spec",
@@ -203,13 +203,13 @@
       "role": "cli-entrypoint",
       "caps": "docs/birdseye/caps/src.cli.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:193eab441b8c696897267bf376d8b0ff8bd81cbd0f338f1a7b7683ccdedf48ce"
+      "contentHash": "sha256:cf0fb162e6366ca4581e9dccb5385e5bccc125b7c2913407c8f1cf33182337f9"
     },
     "src/cli/dq-explain.ts": {
       "role": "dq-explain-cli",
       "caps": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:9427c201c13e1b204e356d2d23b82957791fb990c4a2e34e90d3718dfdf09092"
+      "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3"
     },
     "src/cli/doctor.ts": {
       "role": "doctor-cli",
@@ -227,13 +227,13 @@
       "role": "enum-drift-cli",
       "caps": "docs/birdseye/caps/src.cli.enum-check.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:f30d3166623d8788339bc959adb074daea74774f3029ee9760ca31ea0a8000b6"
+      "contentHash": "sha256:1a04578e936a9b3f61c04284234a01fba646f78a2726e886a7e982fa5f7b7dc0"
     },
     "src/cli/init.ts": {
       "role": "oss-init-cli",
       "caps": "docs/birdseye/caps/src.cli.init.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:33d214fcbf1344b708390c69755a39eb228a10f01b33e7f68699e6361ceefc79"
+      "contentHash": "sha256:217fcf8b5983a48700299bd56c82d6ffe1c2c3818edc770d7923a115e62789ae"
     },
     "src/cli/snapshot.ts": {
       "role": "report-snapshot-cli",
@@ -257,7 +257,7 @@
       "role": "policy-lint-cli",
       "caps": "docs/birdseye/caps/src.cli.policy-lint.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:e29fb0babbd0697d4df811c55cdb60a651a611e708820cb140db65a462152933"
+      "contentHash": "sha256:a12e59444879c596eb31be6a307f198ea83c5e4c841b4905db9cee2e4e4e0bb2"
     },
     "src/cli/repro-bundle.ts": {
       "role": "repro-bundle-cli",
@@ -275,7 +275,7 @@
       "role": "github-actions-ci",
       "caps": "docs/birdseye/caps/.github.workflows.ci.yml.json",
       "mtime": "00009",
-      "contentHash": "sha256:22ed08286e3165cbf167b5558dce2dd82623ff40252c2446ec04b0da9c4b11fc"
+      "contentHash": "sha256:daaf64fea28d663341d5eadde30dc030c4c40e5ef715d37a3c1624b7795126cf"
     },
     "qeg-report-action/action.yml": {
       "role": "github-action",
@@ -287,19 +287,19 @@
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:fbcb2f831334e752856e7103606b9e8e6887c6a8c0374efc587cd3843b9a1e41"
+      "contentHash": "sha256:7d61104f46aed9d4febf2ad9604c3fa9b7cccf07e549b09a93ae6d4ec1980ad2"
     },
     "schemas/gate-verdict.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:c674af7b8c9b51b1018c1e9de43dccbc5a1e507f58f15ea2a063decdc17e2b83"
+      "contentHash": "sha256:a8aa330e0c8c262e87efff35e69d2c02e2420c6fec6cd89312a0befd1414de23"
     },
     "schemas/qeg.bundle.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:8a97b4b72492277014e63051e2cd5a56668578e169a3bbb3e5fb38e74f824053"
+      "contentHash": "sha256:39785a8e61e84db53462ca7077e19ffc4fefbe51b9760c672a769fdb417ff8a9"
     },
     "schemas/test-placement-plan.schema.json": {
       "role": "schema",
@@ -317,13 +317,13 @@
       "role": "top-level-runtime-schema",
       "caps": "docs/birdseye/caps/schemas.gate-input.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:1ca30c600c2b2658f7542ba3b9cc02331fb0b1824bcd1c754a4aff0d0e7516c9"
+      "contentHash": "sha256:782d530d4832e34caeec5d97f9784cefc0490d6cc14e86f30e3accf6487fd72c"
     },
     "fixtures/manifest.json": {
       "role": "fixture-manifest",
       "caps": "docs/birdseye/caps/fixtures.manifest.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:baa68eb60d8f7c31686a9f87012097fe4d49f85cf9ff4d6eb0093c3a68d96d25"
+      "contentHash": "sha256:71418f00c97e951e0ecbac221e6be69b6924ecd5da239460e6eda82ada12c382"
     },
     "src/validation.ts": {
       "role": "public-validation-api",
@@ -347,13 +347,13 @@
       "role": "runtime-evidence-validation",
       "caps": "docs/birdseye/caps/src.validation.evidence.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:548af4b27ac88721d3a1d4eaa2474d3996f23ab652a4532ce7ce73b5de5be7b1"
+      "contentHash": "sha256:f671b3bf1ff2c5a6d077ee8dd64dbbb396723b3e5794abfcb481241f04710a26"
     },
     "src/cli/report/model.ts": {
       "role": "report-model",
       "caps": "docs/birdseye/caps/src.cli.report.model.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:25862312eedc4a04f9817821ea74a7f89d8b2222d0297abcb86c9df43014664c"
+      "contentHash": "sha256:f0d8d2eb751bb18a52ae9ccf39fc95a42cc58e2ad8314586a9b9b7f659e06c12"
     },
     "src/cli/report/targets.ts": {
       "role": "report-targets",
@@ -371,7 +371,7 @@
       "role": "report-core",
       "caps": "docs/birdseye/caps/src.cli.report.core.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:98800602137d4d39eae4b5c9700bb15b2c06524247604dc892866be65774fce2"
+      "contentHash": "sha256:409c030fac31e48c262e4f20e93a5da61cc701b6662184ddcc689bb67f19ca74"
     },
     "src/cli/report/formatter.ts": {
       "role": "report-formatter",
@@ -389,19 +389,19 @@
       "role": "primitive-types",
       "caps": "docs/birdseye/caps/src.types.primitives.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:96a478ce8f8c034b50f3646083f0ae01870503de76645c36d57684492a0daa32"
+      "contentHash": "sha256:9d92e2e3f433920fb51d96a5ccd27abff66864b1188e1f682d717f89a04238b5"
     },
     "src/types/graph.ts": {
       "role": "graph-types",
       "caps": "docs/birdseye/caps/src.types.graph.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:5e8dbf03e222a6981bf9ef8999faa4364ae9e708ed7d8894e255dafdc598f37e"
+      "contentHash": "sha256:170172da67b0f4921e242f5875808bac77af51112c5937cf0b04f6709e6c8a37"
     },
     "src/types/gate.ts": {
       "role": "gate-types",
       "caps": "docs/birdseye/caps/src.types.gate.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:8240bca1cd90fb87c986e517ea86a4a9a3e5db404b4cbbfdccb2d846a58033b5"
+      "contentHash": "sha256:c800f850f2a21c36802c8227db0604b3b9a209baa203efad21a10007e7eafb05"
     },
     "src/gate/test-evidence.ts": {
       "role": "test-evidence-accounting",
@@ -419,13 +419,96 @@
       "role": "gate-evaluator",
       "caps": "docs/birdseye/caps/src.gate.evaluate.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:1c56a3ada465e6ce29ff3f56ed9457475613d94f5e31a07e76a8b45e57c43154"
+      "contentHash": "sha256:4374f1852a6c068155aa4fb19a1e68bd4a703c4d91f6c07c654487bfa92d743c"
     },
     "tests/runtime.test.mjs": {
       "role": "runtime-contract-tests",
       "caps": "docs/birdseye/caps/tests.runtime.test.mjs.json",
       "mtime": "00009",
-      "contentHash": "sha256:4e207a4c2126f587687023d7e1c2e05ebcbcab7da53bae396d099cdf88f85519"
+      "contentHash": "sha256:d1bd6ad720295387ec77de56cc59f930101ba16e9665a7ac66e3fba3924d2e58"
+    },
+    "docs/spec/reliability-extension.md": {
+      "role": "reliability-resilience-spec",
+      "caps": "docs/birdseye/caps/docs.spec.reliability-extension.md.json",
+      "summary": "外部 producer の resilience evidence を QEG が検証、会計、Gate 判定するための discriminator、policy、DQ / blocker、report、fixture contract。",
+      "depsOut": [
+        "schemas/qeg.bundle.schema.json",
+        "schemas/gate-policy.schema.json",
+        "schemas/shared-defs.schema.json",
+        "schemas/reliability.schema.json",
+        "schemas/resilience-normalize-context.schema.json",
+        "docs/spec/operational-cli-extensions.md",
+        "src/types/graph.ts",
+        "src/types/gate.ts",
+        "src/validation/evidence.ts",
+        "src/gate/evaluate.ts",
+        "src/gate/reliability.ts",
+        "src/cli/evidence-normalize.ts"
+      ],
+      "depsIn": [
+        "docs/requirements.md",
+        "docs/spec/index.md"
+      ],
+      "risks": [
+        "実験 runner 化、mock の誤計上、revision / signal / safety の検証漏れ"
+      ],
+      "tests": [
+        "npm run birdseye-check",
+        "npm run schema-check",
+        "npm run enum-check"
+      ],
+      "mtime": "00009",
+      "contentHash": "sha256:8503037517cbdc0b3392d4eba21a1e7cedd1a49e99a07bc034043c09988975a5"
+    },
+    "docs/spec/reliability-extension-review-2026-07-19.md": {
+      "role": "reliability-resilience-spec-review",
+      "caps": "docs/birdseye/caps/docs.spec.reliability-extension-review-2026-07-19.md.json",
+      "summary": "Reliability / Resilience 拡張仕様の解消済み finding、決定済み contract、残リスク、仕様 / 実装 / release Gate split。",
+      "depsOut": [
+        "docs/spec/reliability-extension.md"
+      ],
+      "depsIn": [
+        "docs/spec/index.md"
+      ],
+      "risks": [
+        "仕様 review Go を implementation completion または release approval と誤認しない"
+      ],
+      "tests": [
+        "npm run birdseye-check",
+        "git diff --check"
+      ],
+      "mtime": "00009",
+      "contentHash": "sha256:2520bb6ce0681bc2316970939f91e87a86640ff27dc62f4d0f4166fd945dfe10"
+    },
+    "src/types/evidence.ts": {
+      "role": "evidence-types",
+      "caps": "docs/birdseye/caps/src.types.evidence.ts.json",
+      "mtime": "00009",
+      "contentHash": "sha256:22c866b90d093be81e21d44d34bcfa1f06ea6ae03dbeb7c9a5a6b562d788a04b"
+    },
+    "src/gate/reliability.ts": {
+      "role": "reliability-evaluator",
+      "caps": "docs/birdseye/caps/src.gate.reliability.ts.json",
+      "mtime": "00009",
+      "contentHash": "sha256:d39b2801102881e30419cc1948b34acb0da8f722295aa6a1b8e1e333616adcc4"
+    },
+    "src/cli/evidence-normalize.ts": {
+      "role": "resilience-evidence-normalize",
+      "caps": "docs/birdseye/caps/src.cli.evidence-normalize.ts.json",
+      "mtime": "00009",
+      "contentHash": "sha256:cd3654525d8d4e1c492fcfb6ee00eab97bef9468426cc33024042d84837e2e62"
+    },
+    "schemas/reliability.schema.json": {
+      "role": "reliability-schema",
+      "caps": "docs/birdseye/caps/schemas.reliability.schema.json.json",
+      "mtime": "00009",
+      "contentHash": "sha256:43f7f144edb99445d5296d86ede46753390505f49da46d26ed8dd29b7ccbb80d"
+    },
+    "schemas/resilience-normalize-context.schema.json": {
+      "role": "resilience-normalize-context-schema",
+      "caps": "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json",
+      "mtime": "00009",
+      "contentHash": "sha256:ebf1449d378b54392e394dd15353f92a27f100d4f75a6a78fc85b4111a17b377"
     }
   },
   "edges": [
@@ -1108,6 +1191,78 @@
     [
       "tests/runtime.test.mjs",
       "src/gate/test-evidence.ts"
+    ],
+    [
+      "docs/requirements.md",
+      "docs/spec/reliability-extension.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/reliability-extension.md"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "schemas/qeg.bundle.schema.json"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "schemas/gate-policy.schema.json"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "src/types/graph.ts"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "src/types/gate.ts"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "src/gate/evaluate.ts"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/reliability-extension-review-2026-07-19.md"
+    ],
+    [
+      "docs/spec/reliability-extension-review-2026-07-19.md",
+      "docs/spec/reliability-extension.md"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "schemas/shared-defs.schema.json"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "docs/spec/operational-cli-extensions.md"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "src/validation/evidence.ts"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "schemas/reliability.schema.json"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "schemas/resilience-normalize-context.schema.json"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "src/gate/reliability.ts"
+    ],
+    [
+      "docs/spec/reliability-extension.md",
+      "src/cli/evidence-normalize.ts"
+    ],
+    [
+      "src/gate/evaluate.ts",
+      "src/gate/reliability.ts"
+    ],
+    [
+      "src/gate/reliability.ts",
+      "src/validation/evidence.ts"
     ]
   ]
 }

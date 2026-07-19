@@ -10,7 +10,9 @@
     "disqualifications",
     "blockers",
     "residualRisks",
-    "requiredHumanReview"
+    "requiredHumanReview",
+    "testEvidenceAccounting",
+    "reliability"
   ],
   "additionalProperties": false,
   "properties": {
@@ -35,6 +37,9 @@
     },
     "testEvidenceAccounting": {
       "$ref": "#/$defs/testEvidenceAccounting"
+    },
+    "reliability": {
+      "$ref": "#/$defs/reliability"
     }
   },
   "$defs": {
@@ -61,7 +66,11 @@
             "DQ-14",
             "DQ-15",
             "DQ-16",
-            "DQ-17"
+            "DQ-17",
+            "DQ-18",
+            "DQ-19",
+            "DQ-20",
+            "DQ-21"
           ]
         },
         "message": { "type": "string", "minLength": 1 },
@@ -85,7 +94,12 @@
           "type": "array",
           "minItems": 1,
           "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" }
-        }
+        },
+        "ruleId": { "enum": ["BLK-REL-01", "BLK-REL-02", "BLK-REL-03", "BLK-REL-04"] },
+        "testId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "evidenceId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "effective": { "type": "boolean" },
+        "waiverId": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
       }
     },
     "testEvidenceAccounting": {
@@ -114,6 +128,60 @@
             }
           }
         }
+      }
+    },
+    "reliability": {
+      "oneOf": [
+        {
+          "type": "object",
+          "required": ["enabled"],
+          "additionalProperties": false,
+          "properties": { "enabled": { "const": false } }
+        },
+        {
+          "type": "object",
+          "required": ["enabled", "requiredRiskCount", "qualifiedRiskCount", "passingRiskCount", "riskCoverageRate", "requiredExecutionCount", "qualifiedExecutionCount", "passingExecutionCount", "resiliencePassRate", "recoverySecondsP50", "recoverySecondsP95", "recoverySampleCount", "duplicateSideEffectsCount", "dataInconsistenciesCount", "evidenceAgeHours", "excludedMockTests", "dqCountByRule", "drillDown"],
+          "additionalProperties": false,
+          "properties": {
+            "enabled": { "const": true },
+            "requiredRiskCount": { "type": "integer", "minimum": 0 },
+            "qualifiedRiskCount": { "type": "integer", "minimum": 0 },
+            "passingRiskCount": { "type": "integer", "minimum": 0 },
+            "riskCoverageRate": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+            "requiredExecutionCount": { "type": "integer", "minimum": 0 },
+            "qualifiedExecutionCount": { "type": "integer", "minimum": 0 },
+            "passingExecutionCount": { "type": "integer", "minimum": 0 },
+            "resiliencePassRate": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+            "recoverySecondsP50": { "type": ["number", "null"], "minimum": 0 },
+            "recoverySecondsP95": { "type": ["number", "null"], "minimum": 0 },
+            "recoverySampleCount": { "type": "integer", "minimum": 0 },
+            "duplicateSideEffectsCount": { "type": "integer", "minimum": 0 },
+            "dataInconsistenciesCount": { "type": "integer", "minimum": 0 },
+            "evidenceAgeHours": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 } },
+            "excludedMockTests": { "type": "array", "items": { "$ref": "#/$defs/testEvidenceAccounting/properties/excludedMockTests/items" } },
+            "dqCountByRule": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+            "drillDown": { "type": "array", "items": { "$ref": "#/$defs/reliabilityDrillDown" } }
+          }
+        }
+      ]
+    },
+    "reliabilityDrillDown": {
+      "type": "object",
+      "required": ["riskId", "testId", "selectionReason", "disqualificationCodes", "blockerIds"],
+      "additionalProperties": false,
+      "properties": {
+        "riskId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "testId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "selectedEvidenceId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "adapter": { "type": "string" },
+        "experimentId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "targetRevision": { "type": "string" },
+        "environmentId": { "type": "string" },
+        "selectionReason": { "type": "string", "minLength": 1 },
+        "exclusionReason": { "type": "string" },
+        "disqualificationCodes": { "type": "array", "items": { "type": "string" } },
+        "blockerIds": { "type": "array", "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" } }
       }
     }
   }

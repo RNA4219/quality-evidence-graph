@@ -46,6 +46,6 @@ function appendBlockers(reasons: string[], blockers: readonly GateBlocker[]): vo
 
   reasons.push(`No-go blockers: ${blockers.length}`);
   for (const blocker of blockers) {
-    reasons.push(`- ${blocker.message}`);
+    reasons.push(`- ${blocker.message}${blocker.effective === false ? " (waived)" : ""}`);
   }
 }

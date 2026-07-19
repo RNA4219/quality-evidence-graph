@@ -30,6 +30,9 @@
       "blockers": [],
       "residualRisks": [],
       "requiredHumanReview": [],
+      "reliability": {
+        "enabled": false
+      },
       "error": "Unknown ID producer prefix \"vendor\" at gate-input.json.metadata.runId; reserved prefixes are rand, ctg, mbb, hate, qeg"
     }
   ]

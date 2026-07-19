@@ -1,0 +1,21 @@
+{
+  "id": "docs/spec/reliability-extension-review-2026-07-19.md",
+  "role": "reliability-resilience-spec-review",
+  "generation": "00009",
+  "public_api": [],
+  "summary": "Reliability / Resilience 拡張仕様の解消済み finding、決定済み contract、残リスク、仕様 / 実装 / release Gate split。",
+  "deps_out": [
+    "docs/spec/reliability-extension.md"
+  ],
+  "deps_in": [
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "仕様 review Go を implementation completion または release approval と誤認しない"
+  ],
+  "tests": [
+    "npm run birdseye-check",
+    "git diff --check"
+  ],
+  "contentHash": "sha256:2520bb6ce0681bc2316970939f91e87a86640ff27dc62f4d0f4166fd945dfe10"
+}

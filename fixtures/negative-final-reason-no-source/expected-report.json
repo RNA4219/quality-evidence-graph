@@ -63,6 +63,9 @@
       "requiredHumanReview": [
         "qeg:risk-critical-001"
       ],
+      "reliability": {
+        "enabled": false
+      },
       "expected": {
         "fixture": "negative-final-reason-no-source",
         "expectedVerdict": "disqualified",
@@ -79,7 +82,12 @@
           "DQ-02"
         ],
         "unexpectedDqCodes": [],
-        "missingDqCodes": []
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": [
+          "blocker-qeg:risk-critical-001"
+        ]
       }
     }
   ]

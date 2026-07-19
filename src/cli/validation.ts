@@ -1,5 +1,5 @@
 import { getExitCode } from "../gate.js";
-import type { Disqualification, DisqualificationCode } from "../types.js";
+import type { Disqualification, DisqualificationCode, GateBlocker } from "../types.js";
 import { CliError } from "./errors.js";
 import type { EvaluatedFixture, ExpectedGateVerdict } from "./fixture-io.js";
 
@@ -33,6 +33,9 @@ export interface FixtureValidationComparison {
   readonly dqMatch: boolean;
   readonly unexpectedDqCodes: readonly DisqualificationCode[];
   readonly missingDqCodes: readonly DisqualificationCode[];
+  readonly expectedBlockerIds: readonly string[];
+  readonly actualBlockerIds: readonly string[];
+  readonly blockerMatch: boolean;
   readonly passed: boolean;
 }
 
@@ -52,6 +55,14 @@ export function compareEvaluatedFixture(
     ? actualDqCodes.filter((code) => !expectedDqCodes.includes(code))
     : [];
   const missingDqCodes = expectedDqCodes.filter((code) => !actualDqCodes.includes(code));
+  const expectedBlockers = expected.expectedBlockers ?? [];
+  const expectedBlockerIds = expectedBlockers.map((blocker) => blocker.id).sort();
+  const actualBlockerIds = gateResult.blockers.map((blocker: GateBlocker) => blocker.id).sort();
+  const blockerMode = expected.expectedBlockerMode ?? (expectedBlockers.length > 0 ? "exact" : undefined);
+  const blockerMatch = blockerMode === undefined || (
+    (blockerMode === "includes" || (expectedBlockerIds.length === actualBlockerIds.length && expectedBlockerIds.every((id, index) => id === actualBlockerIds[index]))) &&
+    expectedBlockers.every((blocker) => gateResult.blockers.some((actual) => actual.id === blocker.id && actual.message === blocker.message))
+  );
 
   return {
     actualExitCode,
@@ -63,7 +74,10 @@ export function compareEvaluatedFixture(
     dqMatch,
     unexpectedDqCodes,
     missingDqCodes,
-    passed: verdictMatch && exitCodeMatch && dqMatch,
+    expectedBlockerIds,
+    actualBlockerIds,
+    blockerMatch,
+    passed: verdictMatch && exitCodeMatch && dqMatch && blockerMatch,
   };
 }
 
@@ -97,6 +111,9 @@ export function validateEvaluatedFixture(
   }
 
   console.log(`DQ codes match: ${comparison.dqMatch ? "PASS" : "FAIL"}`);
+  console.log(`Expected blocker IDs: ${comparison.expectedBlockerIds.join(", ")}`);
+  console.log(`Actual blocker IDs: ${comparison.actualBlockerIds.join(", ")}`);
+  console.log(`Blockers match: ${comparison.blockerMatch ? "PASS" : "FAIL"}`);
 
   if (!comparison.passed) {
     throw new CliError("Validation: FAIL");

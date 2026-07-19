@@ -14,6 +14,7 @@ import type {
   TestPlacementPlan,
   Waiver,
 } from "../types.js";
+import type { EvidenceVerificationReport } from "../validation/evidence.js";
 
 export interface GateEvaluationInput {
   metadata: QegMetadata;
@@ -22,8 +23,13 @@ export interface GateEvaluationInput {
   waivers: readonly Waiver[];
   evidencePackage?: EvidencePackage;
   placementPlan?: TestPlacementPlan;
+  /**
+   * Verification is part of the reliability contract.  It is deliberately
+   * carried into programmatic evaluation so callers cannot claim a reliable
+   * verdict without having verified the referenced raw and signal artifacts.
+   */
+  evidenceVerification?: EvidenceVerificationReport;
   preflightDisqualifications?: readonly Disqualification[];
-  executionTime?: Date;
 }
 
 export interface DQDetectorInput {
@@ -33,6 +39,7 @@ export interface DQDetectorInput {
   waivers: readonly Waiver[];
   evidencePackage: EvidencePackage | undefined;
   placementPlan: TestPlacementPlan | undefined;
+  evidenceVerification: EvidenceVerificationReport | undefined;
   validWaivers: readonly Waiver[];
   preflightDisqualifications: readonly Disqualification[];
   riskNodes?: readonly RiskNode[];
@@ -98,6 +105,7 @@ export function createGateEvaluationContext(
     waivers: input.waivers,
     evidencePackage: input.evidencePackage,
     placementPlan: input.placementPlan,
+    evidenceVerification: input.evidenceVerification,
     preflightDisqualifications: input.preflightDisqualifications ?? [],
     validWaivers,
     riskNodes,

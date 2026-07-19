@@ -28,8 +28,9 @@ next_review_due: 2026-08-04
 | `qeg doctor` | 導入環境を診断する | Node version、`dist/cli.js`、schema compile、workflow、target artifact を検査する |
 | `qeg explain <DQ>` | DQ の直し方を説明する | 意味、原因、必要証跡、最小修正、参照仕様を表示する |
 | `qeg schema-check` | schema compile と fixture validation を行う | schema 破損と fixture/schema drift を item 別に報告する |
-| `qeg enum-check` | 型と schema enum の drift を検出する | `GateProfile`、`GateVerdict`、`DisqualificationCode` の差分を報告する |
+| `qeg enum-check` | 型と schema enum の drift を検出する | Gate / DQ に加え、EvidenceKind、test type、resilience adapter・fault・signal enum の差分を報告する |
 | `qeg evidence verify` | 証跡実体を高速検証する | artifact path、hash、revision、retention、storageClassification を検査する |
+| `qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json> [--base-dir <dir>] [--force]` | 外部 resilience evidence を canonical node へ変換する | base-dir containment、raw/context conflict、schema validation、atomic output を実施し、provenance と hash を保持した qeg-resilience-evidence-v1 を出力する |
 | `qeg policy lint` | GatePolicy を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile の矛盾を検出する |
 | `qeg repro-bundle` | CI failure の再現 bundle を作る | report、doctor、schema inventory、package version、workflow、gate-input を redaction 付きでまとめる |
 | `qeg check` | ローカル総合確認を行う | schema-check、enum-check、doctor、evidence verify、policy lint、snapshot、report をまとめて実行する |

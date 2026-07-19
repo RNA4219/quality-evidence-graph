@@ -8,7 +8,7 @@ import type {
 export function validateWaiver(
   waiver: Waiver,
   graph: QualityEvidenceGraph,
-  executionTime: Date = new Date()
+  executionTime: Date
 ): { valid: boolean; invalidReason?: string } {
   const reasons: string[] = [];
   const riskIds = new Set(

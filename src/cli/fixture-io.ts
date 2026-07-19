@@ -24,7 +24,8 @@ export interface ExpectedGateVerdict {
   description: string;
   expectedVerdict: "go" | "conditional_go" | "no_go" | "disqualified";
   expectedDisqualifications: Partial<Disqualification>[];
-  expectedBlockers: { id: string; message: string }[];
+  expectedBlockers?: { id: string; message: string }[];
+  expectedBlockerMode?: "exact" | "includes";
   expectedResidualRisks: string[];
   expectedHumanReview: string[];
   expectedExitCode: number;
@@ -122,7 +123,7 @@ function fallbackPolicy(raw: Record<string, unknown>, metadata: QegMetadata): Ga
     effectiveDate: typeof source.effectiveDate === "string" ? source.effectiveDate : "1970-01-01T00:00:00.000Z",
     approver: typeof source.approver === "string" ? source.approver : "qeg-runtime-validator",
     sourceRefs: [{ id: "qeg:schema-validation", path: "schemas/gate-input.schema.json" }],
-    dqScope: ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17"],
+    dqScope: ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17", "DQ-18", "DQ-19", "DQ-20", "DQ-21"],
     exitCodePolicy: { go: 0, conditional_go: 2, no_go: 2, disqualified: 2 },
   };
 }
@@ -180,6 +181,7 @@ export async function evaluateFixture(rawFixtureDir: string, options: FixtureIoO
       waivers,
       evidencePackage: input.evidencePackage,
       placementPlan: input.placementPlan,
+      evidenceVerification,
       preflightDisqualifications: evidenceDq(evidenceVerification),
     }),
     schemaValidation,

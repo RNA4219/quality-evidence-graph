@@ -12,13 +12,21 @@ for (const fixture of manifest.fixtures) {
   assert.match(fixture.expected.verdict, /^(go|conditional_go|no_go|disqualified|cli_error)$/);
   assert.ok([0, 1, 2].includes(fixture.expected.exitCode));
   if (fixture.classification === "negative" && fixture.expected.exitCode !== 1) {
-    assert.match(fixture.expected.primaryDq, /^DQ-\d{2}$/);
+    assert.ok(
+      /^DQ-\d{2}$/.test(fixture.expected.primaryDq ?? "") || typeof fixture.expected.primaryBlocker === "string",
+      `${fixture.name} must declare primaryDq or primaryBlocker`
+    );
   }
   const target = `fixtures/${fixture.name}`;
   const args = fixture.expected.exitCode === 1 ? ["gate", target] : ["validate", target];
   const result = spawnSync(process.execPath, [cli, ...args], { encoding: "utf-8" });
   const expectedProcessExit = fixture.expected.exitCode === 1 ? 1 : 0;
   assert.equal(result.status, expectedProcessExit, `${fixture.name}\n${result.stdout}\n${result.stderr}`);
+  if (fixture.expected.primaryBlocker) {
+    const gate = spawnSync(process.execPath, [cli, "gate", target], { encoding: "utf-8" });
+    const output = JSON.parse(gate.stdout);
+    assert.ok(output.blockers.some((blocker) => blocker.id === fixture.expected.primaryBlocker), `${fixture.name} primaryBlocker missing`);
+  }
 }
 const snapshots = spawnSync(process.execPath, [cli, "snapshot", "fixtures"], { encoding: "utf-8" });
 assert.equal(snapshots.status, 0, `${snapshots.stdout}\n${snapshots.stderr}`);

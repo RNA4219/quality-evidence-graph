@@ -73,6 +73,9 @@
       "requiredHumanReview": [
         "qeg:risk-001"
       ],
+      "reliability": {
+        "enabled": false
+      },
       "expected": {
         "fixture": "negative-oracle-gap-fact",
         "expectedVerdict": "disqualified",
@@ -89,7 +92,12 @@
           "DQ-04"
         ],
         "unexpectedDqCodes": [],
-        "missingDqCodes": []
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": [
+          "blocker-qeg:risk-001"
+        ]
       }
     }
   ]

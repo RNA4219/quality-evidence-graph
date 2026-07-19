@@ -200,10 +200,50 @@ const DQ_EXPLANATIONS: Record<DisqualificationCode, DqExplanation> = {
     references: ["docs/spec/evidence-package.md", "docs/ipo-controlled-profile.md"],
     remediation: "Record producer, reviewer, approver, waiverApprover, and releaseOwner control roles.",
   },
+  "DQ-18": {
+    code: "DQ-18",
+    title: "Resilience evidence is stale, future-dated, or has an invalid lifecycle",
+    meaning: "The selected resilience execution cannot be used at the recorded Gate evaluation time.",
+    commonCauses: ["Evidence exceeds the policy age", "endedAt is after the evaluation clock", "Fault/steady-state/recovery lifecycle is incomplete"],
+    requiredEvidence: ["Recorded metadata.createdAt", "Started/ended timestamps", "Scenario lifecycle observations"],
+    minimalFix: ["Run a current real experiment", "Correct the lifecycle evidence"],
+    references: ["docs/spec/reliability-extension.md"],
+    remediation: "Provide a current, internally consistent real resilience execution.",
+  },
+  "DQ-19": {
+    code: "DQ-19",
+    title: "Ambiguous current resilience evidence selection",
+    meaning: "Two equally latest current executions disagree, so a safe evidence choice is impossible.",
+    commonCauses: ["Same endedAt with different decision fingerprints", "Duplicate adapter attempts"],
+    requiredEvidence: ["Canonical, uniquely selected latest execution"],
+    minimalFix: ["Resolve or supersede the conflicting executions", "Regenerate the evidence graph"],
+    references: ["docs/spec/reliability-extension.md"],
+    remediation: "Eliminate the current-evidence ambiguity; QEG never falls back to an older pass.",
+  },
+  "DQ-20": {
+    code: "DQ-20",
+    title: "Required resilience signal is absent or inconsistent",
+    meaning: "Metrics, traces, logs, or signal evidence references cannot support the scenario judgment.",
+    commonCauses: ["Missing required metric", "Signal reference revision differs", "Wrong phase or semantic role"],
+    requiredEvidence: ["Hash-backed signal manifest", "Required scenario and policy signals"],
+    minimalFix: ["Publish the missing signals", "Correct the manifest and rerun"],
+    references: ["docs/spec/reliability-extension.md"],
+    remediation: "Supply hash-backed required signals whose phase and revision match the experiment.",
+  },
+  "DQ-21": {
+    code: "DQ-21",
+    title: "Reliability policy identity or integrity mismatch",
+    meaning: "The Gate, graph, and policy do not name the same immutable reliability policy and revision.",
+    commonCauses: ["Short SHA", "Policy hash mismatch", "Profile or policy ID mismatch"],
+    requiredEvidence: ["Full Git object ID", "SHA-256 policy hash", "Matching policy identity in all three locations"],
+    minimalFix: ["Regenerate the policy and graph metadata from one revision"],
+    references: ["docs/spec/reliability-extension.md"],
+    remediation: "Align the recorded revision, profile, policy ID, and SHA-256 policy hash.",
+  },
 };
 
 export function isDisqualificationCode(value: string): value is DisqualificationCode {
-  return /^DQ-(0[1-9]|1[0-7])$/.test(value);
+  return /^DQ-(0[1-9]|1[0-9]|2[0-1])$/.test(value);
 }
 
 export function getDqExplanation(code: DisqualificationCode): DqExplanation {
@@ -241,7 +281,7 @@ export async function runExplainCommand(args: readonly string[]): Promise<void> 
   const json = rest.includes("--json");
 
   if (!rawCode || !isDisqualificationCode(rawCode)) {
-    throw new CliError("Usage: qeg explain <DQ-01..DQ-17> [--json]");
+    throw new CliError("Usage: qeg explain <DQ-01..DQ-21> [--json]");
   }
 
   const explanation = getDqExplanation(rawCode);

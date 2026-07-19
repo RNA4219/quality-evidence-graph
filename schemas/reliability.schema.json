@@ -1,0 +1,299 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/reliability.schema.json",
+  "title": "QEG Reliability / Resilience Contracts",
+  "type": "object",
+  "$defs": {
+    "sha256": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "gitObjectId": { "type": "string", "pattern": "^[a-f0-9]{40}([a-f0-9]{24})?$" },
+    "testType": { "enum": ["functional", "security", "performance", "resilience"] },
+    "resilienceAdapter": { "enum": ["lakda", "toxiproxy", "chaos-mesh", "litmus-chaos", "docker-compose", "shell", "ci", "custom"] },
+    "resilienceFaultModel": { "enum": ["dependency_timeout", "dependency_http_error", "network_latency", "packet_loss", "process_crash", "container_restart", "pod_kill", "duplicate_event", "out_of_order_event", "resource_pressure", "custom"] },
+    "resilienceEnvironment": { "enum": ["local", "ci", "staging", "preprod", "production"] },
+    "resilienceEvidenceStatus": { "enum": ["pass", "fail", "aborted", "error", "timeout", "skipped"] },
+    "signalPhase": { "enum": ["steady_state", "fault", "recovery", "experiment"] },
+    "signalSemanticRole": { "enum": ["traffic_count", "error_rate", "latency_p95", "saturation", "duplicate_side_effects", "data_inconsistencies", "custom"] },
+    "signalAggregation": { "enum": ["latest", "min", "max", "avg", "p50", "p95", "p99", "rate", "count"] },
+    "abortSignalSource": { "enum": ["metric", "trace_count", "log_count"] },
+    "relativePath": { "type": "string", "minLength": 1, "pattern": "^(?![A-Za-z]:)(?![\\\\/])(?!.*(?:^|[\\\\/])\\.\\.(?:[\\\\/]|$)).+$" },
+    "traceabilityWithSource": {
+      "type": "object",
+      "required": ["sourceRefs", "assumptions", "confidence"],
+      "additionalProperties": false,
+      "properties": {
+        "sourceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" } },
+        "assumptions": { "type": "array", "items": { "type": "string" } },
+        "confidence": { "$ref": "shared-defs.schema.json#/$defs/confidence" }
+      }
+    },
+    "sloTarget": {
+      "oneOf": [
+        { "type": "object", "required": ["targetType", "value"], "additionalProperties": false, "properties": { "targetType": { "const": "max" }, "value": { "type": "number" } } },
+        { "type": "object", "required": ["targetType", "value"], "additionalProperties": false, "properties": { "targetType": { "const": "min" }, "value": { "type": "number" } } },
+        { "type": "object", "required": ["targetType", "min", "max"], "additionalProperties": false, "properties": { "targetType": { "const": "range" }, "min": { "type": "number" }, "max": { "type": "number" } } }
+      ]
+    },
+    "slo": {
+      "type": "object",
+      "required": ["name", "metricName", "semanticRole", "aggregation", "unit", "evaluationPhases", "target"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "minLength": 1 },
+        "metricName": { "type": "string", "minLength": 1 },
+        "semanticRole": { "$ref": "#/$defs/signalSemanticRole" },
+        "customSemanticRoleName": { "type": "string", "minLength": 1 },
+        "aggregation": { "$ref": "#/$defs/signalAggregation" },
+        "unit": { "type": "string", "minLength": 1 },
+        "evaluationPhases": { "type": "array", "minItems": 1, "uniqueItems": true, "contains": { "const": "steady_state" }, "items": { "enum": ["steady_state", "fault", "recovery"] } },
+        "target": { "$ref": "#/$defs/sloTarget" }
+      },
+      "allOf": [
+        { "if": { "properties": { "semanticRole": { "const": "custom" } }, "required": ["semanticRole"] }, "then": { "required": ["customSemanticRoleName"] }, "else": { "not": { "required": ["customSemanticRoleName"] } } }
+      ]
+    },
+    "resilienceScenario": {
+      "type": "object",
+      "required": ["faultModel", "steadyState", "blastRadius", "abortConditions"],
+      "additionalProperties": false,
+      "properties": {
+        "faultModel": { "$ref": "#/$defs/resilienceFaultModel" },
+        "customFaultModelName": { "type": "string", "minLength": 1 },
+        "steadyState": {
+          "type": "object",
+          "required": ["slos", "requiredMetrics", "requiredTraces", "requiredLogs"],
+          "additionalProperties": false,
+          "properties": {
+            "slos": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/slo" } },
+            "requiredMetrics": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+            "requiredTraces": { "type": "boolean" },
+            "requiredLogs": { "type": "boolean" }
+          }
+        },
+        "blastRadius": {
+          "type": "object",
+          "required": ["environment", "allowedTargets", "maxTargets", "maxDurationSeconds"],
+          "additionalProperties": false,
+          "properties": {
+          "environment": { "$ref": "#/$defs/resilienceEnvironment" },
+            "allowedTargets": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+            "maxTargets": { "type": "integer", "minimum": 1 },
+            "maxDurationSeconds": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "abortConditions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["id", "source", "signal", "aggregation", "operator", "threshold", "unit"],
+            "additionalProperties": false,
+            "properties": {
+              "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+              "source": { "$ref": "#/$defs/abortSignalSource" },
+              "signal": { "type": "string", "minLength": 1 },
+              "aggregation": { "$ref": "#/$defs/signalAggregation" },
+              "operator": { "enum": ["gt", "gte", "lt", "lte", "eq", "ne"] },
+              "threshold": { "type": "number" },
+              "unit": { "type": "string", "minLength": 1 }
+            }
+          }
+        }
+      },
+      "allOf": [
+        { "if": { "properties": { "faultModel": { "const": "custom" } }, "required": ["faultModel"] }, "then": { "required": ["customFaultModelName"] }, "else": { "not": { "required": ["customFaultModelName"] } } }
+      ]
+    },
+    "resilienceTestNode": {
+      "type": "object",
+      "required": ["id", "kind", "title", "traceability", "sourceArtifactIds", "testExecutionMode", "testType", "resilienceScenario", "coveredRiskIds"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "kind": { "const": "test" },
+        "title": { "type": "string", "minLength": 1 },
+        "traceability": { "$ref": "#/$defs/traceabilityWithSource" },
+        "sourceArtifactIds": { "type": "array", "minItems": 1, "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" } },
+        "layer": { "$ref": "shared-defs.schema.json#/$defs/placementLayer" },
+        "testExecutionMode": { "enum": ["real", "mock"] },
+        "command": { "type": "string" },
+        "existing": { "type": "boolean" },
+        "evidenceStrength": { "type": "number" },
+        "recentGreenRuns": { "type": "number" },
+        "deleted": { "type": "boolean" },
+        "coveredRiskIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" } },
+        "testType": { "const": "resilience" },
+        "resilienceScenario": { "$ref": "#/$defs/resilienceScenario" }
+      }
+    },
+    "signalEvidenceRef": {
+      "type": "object",
+      "required": ["id", "path", "contentHash", "evidenceKind", "capturedAt", "revision"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "path": { "$ref": "#/$defs/relativePath" },
+        "startLine": { "type": "integer", "minimum": 1 },
+        "endLine": { "type": "integer", "minimum": 1 },
+        "excerptHash": { "type": "string" },
+        "revision": { "$ref": "#/$defs/gitObjectId" },
+        "label": { "type": "string" },
+        "contentHash": { "$ref": "#/$defs/sha256" },
+        "evidenceKind": { "enum": ["observability_metric", "observability_trace", "observability_log"] },
+        "capturedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" }
+      }
+    },
+    "metricSignal": {
+      "type": "object",
+      "required": ["id", "phase", "metricName", "semanticRole", "aggregation", "windowStart", "windowEnd", "observedValue", "unit", "evidenceRefId"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "phase": { "$ref": "#/$defs/signalPhase" },
+        "metricName": { "type": "string", "minLength": 1 },
+        "semanticRole": { "$ref": "#/$defs/signalSemanticRole" },
+        "customSemanticRoleName": { "type": "string", "minLength": 1 },
+        "aggregation": { "$ref": "#/$defs/signalAggregation" },
+        "windowStart": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "windowEnd": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "observedValue": { "type": "number" },
+        "unit": { "type": "string", "minLength": 1 },
+        "evidenceRefId": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+      },
+      "allOf": [
+        { "if": { "properties": { "semanticRole": { "const": "custom" } }, "required": ["semanticRole"] }, "then": { "required": ["customSemanticRoleName"] }, "else": { "not": { "required": ["customSemanticRoleName"] } } }
+      ]
+    },
+    "traceOrLogSignal": {
+      "type": "object",
+      "required": ["id", "signalName", "phase", "querySummary", "matchedCount", "windowStart", "windowEnd", "evidenceRefId"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "signalName": { "type": "string", "minLength": 1 },
+        "phase": { "$ref": "#/$defs/signalPhase" },
+        "querySummary": { "type": "string", "minLength": 1 },
+        "matchedCount": { "type": "integer", "minimum": 0 },
+        "windowStart": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "windowEnd": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "evidenceRefId": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+      }
+    },
+    "signalManifest": {
+      "type": "object",
+      "required": ["metrics", "traces", "logs"],
+      "additionalProperties": false,
+      "properties": {
+        "metrics": { "type": "array", "items": { "$ref": "#/$defs/metricSignal" } },
+        "traces": { "type": "array", "items": { "$ref": "#/$defs/traceOrLogSignal" } },
+        "logs": { "type": "array", "items": { "$ref": "#/$defs/traceOrLogSignal" } }
+      }
+    },
+    "resilienceExecutionEvidenceNode": {
+      "type": "object",
+      "required": ["id", "kind", "title", "traceability", "sourceArtifactIds", "evidenceRefs", "evidenceType", "testId", "adapter", "adapterVersion", "normalizationVersion", "experimentId", "attempt", "rawArtifactRef", "targetRevision", "environment", "environmentId", "startedAt", "endedAt", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "kind": { "const": "execution_evidence" },
+        "title": { "type": "string", "minLength": 1 },
+        "traceability": { "$ref": "#/$defs/traceabilityWithSource" },
+        "sourceArtifactIds": { "type": "array", "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" } },
+        "evidenceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "#/$defs/signalEvidenceRef" } },
+        "passed": { "type": "boolean" },
+        "evidenceType": { "const": "resilience" },
+        "testId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "adapter": { "$ref": "#/$defs/resilienceAdapter" },
+        "adapterVersion": { "type": "string", "minLength": 1 },
+        "customAdapterName": { "type": "string", "minLength": 1 },
+        "normalizationVersion": { "const": "qeg-resilience-evidence-v1" },
+        "experimentId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+        "attempt": { "type": "integer", "minimum": 1 },
+        "rawArtifactRef": {
+          "type": "object",
+          "required": ["id", "path", "contentHash", "revision"],
+          "additionalProperties": false,
+          "properties": {
+            "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+            "path": { "$ref": "#/$defs/relativePath" },
+            "contentHash": { "$ref": "#/$defs/sha256" },
+            "revision": { "$ref": "#/$defs/gitObjectId" }
+          }
+        },
+        "targetRevision": { "$ref": "#/$defs/gitObjectId" },
+        "environment": { "$ref": "#/$defs/resilienceEnvironment" },
+        "environmentId": { "type": "string", "minLength": 1 },
+        "startedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "endedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "status": { "$ref": "#/$defs/resilienceEvidenceStatus" },
+        "steadyStateConfirmed": { "type": "boolean" },
+        "fault": {
+          "type": "object",
+          "required": ["type", "parameters", "faultStartedAt", "faultEndedAt", "actualTargetIds", "appliedDurationMs"],
+          "additionalProperties": false,
+          "properties": {
+            "type": { "$ref": "#/$defs/resilienceFaultModel" },
+            "parameters": { "type": "object", "additionalProperties": true },
+            "faultStartedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+            "faultEndedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+            "actualTargetIds": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
+            "appliedDurationMs": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "abortRecord": {
+          "type": "object",
+          "required": ["conditionId", "signalEntryId", "triggeredAt", "observedValue", "unit"],
+          "additionalProperties": false,
+          "properties": {
+            "conditionId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+            "signalEntryId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+            "triggeredAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+            "observedValue": { "type": "number" },
+            "unit": { "type": "string", "minLength": 1 }
+          }
+        },
+        "recovered": { "type": "boolean" },
+        "recoveryConfirmedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
+        "recoveryDurationMs": { "type": "integer", "minimum": 0 },
+        "observed": {
+          "type": "object",
+          "required": ["requestCount", "errorRate", "latencyP95Ms", "saturationPct", "duplicateSideEffects", "dataInconsistencies"],
+          "additionalProperties": false,
+          "properties": {
+            "requestCount": { "type": "integer", "minimum": 0 },
+            "errorRate": { "type": "number", "minimum": 0, "maximum": 1 },
+            "latencyP95Ms": { "type": "number", "minimum": 0 },
+            "saturationPct": { "type": "number", "minimum": 0, "maximum": 100 },
+            "duplicateSideEffects": { "type": "integer", "minimum": 0 },
+            "dataInconsistencies": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "signalManifest": { "$ref": "#/$defs/signalManifest" }
+      },
+      "allOf": [
+        { "if": { "properties": { "adapter": { "const": "custom" } }, "required": ["adapter"] }, "then": { "required": ["customAdapterName"] }, "else": { "not": { "required": ["customAdapterName"] } } },
+        { "if": { "properties": { "status": { "const": "pass" } }, "required": ["status"] }, "then": { "properties": { "passed": { "const": true } } } },
+        { "if": { "properties": { "status": { "enum": ["fail", "aborted", "error", "timeout", "skipped"] } }, "required": ["status"] }, "then": { "properties": { "passed": { "const": false } } } },
+        { "if": { "required": ["abortRecord"] }, "then": { "properties": { "status": { "const": "aborted" } } } }
+      ]
+    },
+    "reliabilityPolicy": {
+      "type": "object",
+      "required": ["enabled", "requiredForSeverities", "requiredEnvironment", "allowedExecutionModes", "maxEvidenceAgeHours", "requireRevisionMatch", "requireSteadyStateBeforeFault", "requireRecoveryObservation", "requiredSignals", "thresholds", "safety", "sourceRefs"],
+      "additionalProperties": false,
+      "properties": {
+        "enabled": { "const": true },
+        "requiredForSeverities": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "shared-defs.schema.json#/$defs/severity" } },
+        "requiredEnvironment": { "enum": ["local", "ci", "staging", "preprod"] },
+        "allowedExecutionModes": { "const": ["real"] },
+        "maxEvidenceAgeHours": { "type": "number", "minimum": 1 },
+        "requireRevisionMatch": { "const": true },
+        "requireSteadyStateBeforeFault": { "const": true },
+        "requireRecoveryObservation": { "const": true },
+        "requiredSignals": { "type": "object", "required": ["metrics", "traces", "logs"], "additionalProperties": false, "properties": { "metrics": { "const": true }, "traces": { "type": "boolean" }, "logs": { "type": "boolean" } } },
+        "thresholds": { "type": "object", "required": ["minRequestCount", "maxErrorRate", "maxLatencyP95Ms", "maxSaturationPct", "maxRecoverySeconds", "maxDuplicateSideEffects", "maxDataInconsistencies"], "additionalProperties": false, "properties": { "minRequestCount": { "type": "integer", "minimum": 1 }, "maxErrorRate": { "type": "number", "minimum": 0, "maximum": 1 }, "maxLatencyP95Ms": { "type": "number", "minimum": 0 }, "maxSaturationPct": { "type": "number", "minimum": 0, "maximum": 100 }, "maxRecoverySeconds": { "type": "number", "minimum": 0 }, "maxDuplicateSideEffects": { "type": "integer", "minimum": 0 }, "maxDataInconsistencies": { "type": "integer", "minimum": 0 } } },
+        "safety": { "type": "object", "required": ["allowedEnvironments", "forbidProduction", "maxBlastRadiusTargets", "maxFaultDurationSeconds"], "additionalProperties": false, "properties": { "allowedEnvironments": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["local", "ci", "staging", "preprod"] } }, "forbidProduction": { "const": true }, "maxBlastRadiusTargets": { "type": "integer", "minimum": 1 }, "maxFaultDurationSeconds": { "type": "integer", "minimum": 1 } } },
+        "sourceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" } }
+      }
+    }
+  }
+}

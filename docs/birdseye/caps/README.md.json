@@ -28,5 +28,5 @@
     "npm pack --dry-run --cache ./.npm-cache"
   ],
   "generation": "00009",
-  "contentHash": "sha256:ca878ea3dc9c74dc4bbf88a0af1ffb57806a6324632760213e247a884211ebbb"
+  "contentHash": "sha256:5275a169ea7c982036a78d823138ea0b028d0ea2badef4431d5eb5ac98aca987"
 }

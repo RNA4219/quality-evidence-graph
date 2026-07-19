@@ -74,6 +74,10 @@ function minimalGateInput(): string {
         "DQ-15",
         "DQ-16",
         "DQ-17",
+        "DQ-18",
+        "DQ-19",
+        "DQ-20",
+        "DQ-21",
       ],
       exitCodePolicy: {
         go: 0,

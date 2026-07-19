@@ -51,6 +51,11 @@ jobs:
         continue-on-error: true
         run: npm run build
 
+      - name: Runtime and action contracts
+        id: runtime
+        continue-on-error: true
+        run: npm run test:runtime
+
       - name: Schema validation
         id: schema
         continue-on-error: true
@@ -108,6 +113,7 @@ jobs:
           STEP_INSTALL: ${{ steps.install.outcome }}
           STEP_TYPECHECK: ${{ steps.typecheck.outcome }}
           STEP_BUILD: ${{ steps.build.outcome }}
+          STEP_RUNTIME: ${{ steps.runtime.outcome }}
           STEP_SCHEMA: ${{ steps.schema.outcome }}
           STEP_ENUM: ${{ steps.enum.outcome }}
           STEP_FIXTURES: ${{ steps.fixtures.outcome }}
@@ -123,6 +129,7 @@ jobs:
               ['install', process.env.STEP_INSTALL],
               ['typecheck', process.env.STEP_TYPECHECK],
               ['build', process.env.STEP_BUILD],
+              ['runtime', process.env.STEP_RUNTIME],
               ['schema', process.env.STEP_SCHEMA],
               ['enum', process.env.STEP_ENUM],
               ['fixtures', process.env.STEP_FIXTURES],

@@ -28,5 +28,5 @@
     "node dist/cli.js report fixtures/negative-approval-missing"
   ],
   "generation": "00009",
-  "contentHash": "sha256:9427c201c13e1b204e356d2d23b82957791fb990c4a2e34e90d3718dfdf09092"
+  "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3"
 }

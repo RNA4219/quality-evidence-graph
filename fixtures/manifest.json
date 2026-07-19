@@ -310,6 +310,16 @@
         "primaryDq": null
       },
       "snapshot": true
+    },
+    {
+      "name": "positive-reliability-go",
+      "classification": "positive",
+      "expected": {
+        "verdict": "go",
+        "exitCode": 0,
+        "primaryDq": null
+      },
+      "snapshot": true
     }
   ]
 }

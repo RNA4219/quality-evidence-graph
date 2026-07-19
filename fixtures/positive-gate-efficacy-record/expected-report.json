@@ -33,6 +33,9 @@
       "blockers": [],
       "residualRisks": [],
       "requiredHumanReview": [],
+      "reliability": {
+        "enabled": false
+      },
       "expected": {
         "fixture": "positive-gate-efficacy-record",
         "expectedVerdict": "go",
@@ -45,7 +48,10 @@
         "expectedDqCodes": [],
         "actualDqCodes": [],
         "unexpectedDqCodes": [],
-        "missingDqCodes": []
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
       }
     }
   ]

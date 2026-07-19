@@ -23,7 +23,7 @@ Gate policy の正本は QEG の `policy` と `evidencePackage.gatePolicy` の�
 | `effectiveDate` | yes | ISO date | policy 適用開始日。 |
 | `approver` | yes | string | policy 承認者。 |
 | `sourceRefs` | yes | SourceRef[] | 1 件以上。版管理された policy source を指す。 |
-| `dqScope` | yes | DisqualificationCode[] | DQ-01〜DQ-17 を含む。 |
+| `dqScope` | yes | DisqualificationCode[] | 基本 DQ-01〜DQ-17 を含む。reliabilityPolicy を有効化する policy は DQ-18〜DQ-21 も含む。 |
 | `exitCodePolicy` | yes | object | verdict ごとの exit code を持つ。 |
 
 `exitCodePolicy` は次を固定する。
@@ -63,7 +63,7 @@ Gate evaluator は次の順で判定する。
 
 ## 3. DQ scope
 
-`ipo_controlled` では DQ-01〜DQ-17 を有効にする。
+`ipo_controlled` では DQ-01〜DQ-17 を有効にする。reliabilityPolicy を有効にする場合は、`docs/spec/reliability-extension.md` に従い DQ-18〜DQ-21 も有効にする。
 
 | Code | Gate policy 上の扱い |
 |---|---|
@@ -84,6 +84,10 @@ Gate evaluator は次の順で判定する。
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない。 |
 | DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する。 |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない。 |
+| DQ-18 | 必須 risk に matching real resilience evidence がない、mock-only、wrong scenario / environment、または selected status が error / timeout / skipped。 |
+| DQ-19 | resilience evidence が stale、envelope timestamp が未来・逆順、または latest evidence の選択が曖昧。 |
+| DQ-20 | required observed / signal が存在しない、phase / metric / resolvable hash-backed EvidenceRef と結び付かない、または observed summary と一致しない。 |
+| DQ-21 | required な steady state、fault、abort、recovery、actual target / duration の field または時系列が欠落・矛盾する。 |
 
 ## 4. Waiver と DQ の関係
 

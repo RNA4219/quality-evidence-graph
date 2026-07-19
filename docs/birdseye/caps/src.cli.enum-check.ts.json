@@ -23,5 +23,5 @@
     "node dist/cli.js enum-check"
   ],
   "generation": "00009",
-  "contentHash": "sha256:f30d3166623d8788339bc959adb074daea74774f3029ee9760ca31ea0a8000b6"
+  "contentHash": "sha256:1a04578e936a9b3f61c04284234a01fba646f78a2726e886a7e982fa5f7b7dc0"
 }

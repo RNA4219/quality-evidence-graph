@@ -1,0 +1,16 @@
+{
+  "id": "schemas/reliability.schema.json",
+  "role": "reliability-schema",
+  "generation": "00009",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:43f7f144edb99445d5296d86ede46753390505f49da46d26ed8dd29b7ccbb80d"
+}
