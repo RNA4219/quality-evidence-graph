@@ -21,5 +21,5 @@
     "npm run birdseye-check",
     "git diff --check"
   ],
-  "contentHash": "sha256:f701b3e931d4fff07c17ea437f18310b6b1f9f8e172e29a83c93c7b9c4a60f76"
+  "contentHash": "sha256:9cdbcc7adc118c56f7a852bd2e267810ee7aef0520d26c34687e6981ea81bf51"
 }
