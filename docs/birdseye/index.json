@@ -347,7 +347,7 @@
       "role": "runtime-evidence-validation",
       "caps": "docs/birdseye/caps/src.validation.evidence.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:f671b3bf1ff2c5a6d077ee8dd64dbbb396723b3e5794abfcb481241f04710a26"
+      "contentHash": "sha256:93a07598bd4e61b63c66efa0d9635f8881a07f672e9d1b2f338d321353e56529"
     },
     "src/cli/report/model.ts": {
       "role": "report-model",
@@ -496,7 +496,7 @@
       "role": "resilience-evidence-normalize",
       "caps": "docs/birdseye/caps/src.cli.evidence-normalize.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:cd3654525d8d4e1c492fcfb6ee00eab97bef9468426cc33024042d84837e2e62"
+      "contentHash": "sha256:bb16bb08600d47b15503d1cb0fa21c8e2c16068d3c3ee4087a254d74375b8921"
     },
     "schemas/reliability.schema.json": {
       "role": "reliability-schema",

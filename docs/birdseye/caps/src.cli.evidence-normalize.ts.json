@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:cd3654525d8d4e1c492fcfb6ee00eab97bef9468426cc33024042d84837e2e62"
+  "contentHash": "sha256:bb16bb08600d47b15503d1cb0fa21c8e2c16068d3c3ee4087a254d74375b8921"
 }

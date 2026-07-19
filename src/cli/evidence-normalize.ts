@@ -82,10 +82,15 @@ function asObject(value: unknown, label: string): JsonObject {
 function containedPath(baseDir: string, rawPath: string, label: string): string {
   const resolved = resolve(baseDir, rawPath);
   const offset = relative(baseDir, resolved);
-  if (isAbsolute(rawPath) || offset === "" || offset === ".." || offset.startsWith(`..${String.fromCharCode(92)}`) || isAbsolute(offset)) {
+  if (isAbsolute(rawPath) || isOutsideBase(offset)) {
     throw new CliError(`${label} must be contained within --base-dir`);
   }
   return resolved;
+}
+
+/** `relative()` uses the current platform separator; accept both forms for portable input. */
+function isOutsideBase(offset: string): boolean {
+  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute(offset);
 }
 
 async function readJson(path: string, label: string): Promise<JsonObject> {

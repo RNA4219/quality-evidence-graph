@@ -34,6 +34,10 @@ function hash(bytes: Buffer): string { return "sha256:" + createHash("sha256").u
 function severity(strict: boolean, required: boolean): "warn" | "fail" {
   return strict && required ? "fail" : "warn";
 }
+/** `relative()` uses the current platform separator; accept both forms for portable input. */
+function isOutsideBase(offset: string): boolean {
+  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute(offset);
+}
 function isResilienceEvidence(node: unknown): node is ResilienceExecutionEvidenceNode {
   return Boolean(node) && typeof node === "object" &&
     (node as { kind?: string }).kind === "execution_evidence" &&
@@ -94,7 +98,7 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
     }
     const path = isAbsolute(artifact.path) ? artifact.path : resolve(baseDir, artifact.path);
     const lexicalRelative = relative(baseDir, path);
-    if (requireContainedRelativePath && (lexicalRelative === "" || lexicalRelative === ".." || lexicalRelative.startsWith(`..${String.fromCharCode(92)}`) || isAbsolute(lexicalRelative))) {
+    if (requireContainedRelativePath && isOutsideBase(lexicalRelative)) {
       items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path escapes the Gate target directory" });
       continue;
     }
@@ -105,7 +109,7 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
     if (requireContainedRelativePath) {
       const realArtifactPath = await realpath(path);
       const actualRelative = relative(realBaseDir, realArtifactPath);
-      if (actualRelative === "" || actualRelative === ".." || actualRelative.startsWith(`..${String.fromCharCode(92)}`) || isAbsolute(actualRelative)) {
+      if (isOutsideBase(actualRelative)) {
         items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact symlink escapes the Gate target directory" });
         continue;
       }
