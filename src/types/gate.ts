@@ -153,7 +153,7 @@ export interface ReliabilityAccountingEnabled {
   readonly dataInconsistenciesCount: number;
   readonly evidenceAgeHours: Readonly<Record<StableId, number>>;
   readonly excludedMockTests: readonly ExcludedTestEvidence[];
-  readonly dqCountByRule: Readonly<Partial<Record<"DQ-12" | "DQ-18" | "DQ-19" | "DQ-20" | "DQ-21", number>>>;
+  readonly dqCountByRule: Readonly<Record<"DQ-12" | "DQ-18" | "DQ-19" | "DQ-20" | "DQ-21", number>>;
   readonly drillDown: readonly ReliabilityDrillDown[];
 }
 

@@ -79,7 +79,7 @@
                 "metricName": "requests",
                 "semanticRole": "traffic_count",
                 "aggregation": "count",
-                "unit": "requests",
+                "unit": "count",
                 "evaluationPhases": [
                   "steady_state",
                   "fault",
@@ -109,7 +109,7 @@
             {
               "id": "qeg:abort-reliability-fixture",
               "source": "metric",
-              "signal": "error_rate",
+              "signal": "errors",
               "aggregation": "rate",
               "operator": "gt",
               "threshold": 0.9,
@@ -196,9 +196,9 @@
               "semanticRole": "traffic_count",
               "aggregation": "count",
               "windowStart": "2026-01-01T00:00:00.000Z",
-              "windowEnd": "2026-01-01T00:02:00.000Z",
+              "windowEnd": "2026-01-01T00:00:30.000Z",
               "observedValue": 100,
-              "unit": "requests",
+              "unit": "count",
               "evidenceRefId": "qeg:signal-reliability-fixture"
             },
             {
@@ -207,10 +207,10 @@
               "metricName": "requests",
               "semanticRole": "traffic_count",
               "aggregation": "count",
-              "windowStart": "2026-01-01T00:00:00.000Z",
-              "windowEnd": "2026-01-01T00:02:00.000Z",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
               "observedValue": 100,
-              "unit": "requests",
+              "unit": "count",
               "evidenceRefId": "qeg:signal-reliability-fixture"
             },
             {
@@ -219,10 +219,70 @@
               "metricName": "requests",
               "semanticRole": "traffic_count",
               "aggregation": "count",
+              "windowStart": "2026-01-01T00:01:00.000Z",
+              "windowEnd": "2026-01-01T00:01:30.000Z",
+              "observedValue": 100,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-error-fixture",
+              "phase": "fault",
+              "metricName": "errors",
+              "semanticRole": "error_rate",
+              "aggregation": "rate",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 0.01,
+              "unit": "ratio",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-latency-fixture",
+              "phase": "fault",
+              "metricName": "latency",
+              "semanticRole": "latency_p95",
+              "aggregation": "p95",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 30,
+              "unit": "ms",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-saturation-fixture",
+              "phase": "fault",
+              "metricName": "saturation",
+              "semanticRole": "saturation",
+              "aggregation": "max",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 10,
+              "unit": "percent",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-duplicates-fixture",
+              "phase": "experiment",
+              "metricName": "duplicates",
+              "semanticRole": "duplicate_side_effects",
+              "aggregation": "count",
               "windowStart": "2026-01-01T00:00:00.000Z",
               "windowEnd": "2026-01-01T00:02:00.000Z",
-              "observedValue": 100,
-              "unit": "requests",
+              "observedValue": 0,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-inconsistencies-fixture",
+              "phase": "experiment",
+              "metricName": "inconsistencies",
+              "semanticRole": "data_inconsistencies",
+              "aggregation": "count",
+              "windowStart": "2026-01-01T00:00:00.000Z",
+              "windowEnd": "2026-01-01T00:02:00.000Z",
+              "observedValue": 0,
+              "unit": "count",
               "evidenceRefId": "qeg:signal-reliability-fixture"
             }
           ],

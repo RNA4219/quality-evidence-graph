@@ -159,7 +159,18 @@
             "dataInconsistenciesCount": { "type": "integer", "minimum": 0 },
             "evidenceAgeHours": { "type": "object", "additionalProperties": { "type": "number", "minimum": 0 } },
             "excludedMockTests": { "type": "array", "items": { "$ref": "#/$defs/testEvidenceAccounting/properties/excludedMockTests/items" } },
-            "dqCountByRule": { "type": "object", "additionalProperties": { "type": "integer", "minimum": 0 } },
+            "dqCountByRule": {
+              "type": "object",
+              "required": ["DQ-12", "DQ-18", "DQ-19", "DQ-20", "DQ-21"],
+              "additionalProperties": false,
+              "properties": {
+                "DQ-12": { "type": "integer", "minimum": 0 },
+                "DQ-18": { "type": "integer", "minimum": 0 },
+                "DQ-19": { "type": "integer", "minimum": 0 },
+                "DQ-20": { "type": "integer", "minimum": 0 },
+                "DQ-21": { "type": "integer", "minimum": 0 }
+              }
+            },
             "drillDown": { "type": "array", "items": { "$ref": "#/$defs/reliabilityDrillDown" } }
           }
         }

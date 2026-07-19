@@ -1,6 +1,6 @@
-import { createHash } from "crypto";
-import { readFile, rename, stat, unlink, writeFile } from "fs/promises";
-import { dirname, isAbsolute, relative, resolve } from "path";
+import { createHash, randomUUID } from "crypto";
+import { readFile, realpath, rename, stat, unlink, writeFile } from "fs/promises";
+import { basename, dirname, isAbsolute, relative, resolve } from "path";
 import { exit } from "process";
 import type { ResilienceAdapter, ResilienceEvidenceStatus, ResilienceExecutionEvidenceNode } from "../types.js";
 import { loadSchemaRegistry } from "../validation/schema.js";
@@ -45,11 +45,29 @@ function isObject(value: unknown): value is JsonObject {
 }
 
 function jsonEqual(left: unknown, right: unknown): boolean {
-  return JSON.stringify(left) === JSON.stringify(right);
+  return canonicalJson(left) === canonicalJson(right);
+}
+
+function lexicalCompare(left: string, right: string): number {
+  return left < right ? -1 : left > right ? 1 : 0;
+}
+
+function canonicalJson(value: unknown): string {
+  if (value === undefined) return "undefined";
+  if (Array.isArray(value)) return `[${value.map(canonicalJson).join(",")}]`;
+  if (value && typeof value === "object") {
+    return `{${Object.entries(value as JsonObject)
+      .sort(([left], [right]) => lexicalCompare(left, right))
+      .map(([key, child]) => `${JSON.stringify(key)}:${canonicalJson(child)}`)
+      .join(",")}}`;
+  }
+  return JSON.stringify(value);
 }
 
 function conflict(label: string, raw: unknown, context: unknown): never {
-  throw new CliError(`Raw input conflicts with context for ${label}: ${JSON.stringify(raw)} != ${JSON.stringify(context)}`);
+  void raw;
+  void context;
+  throw new CliError(`Raw input conflicts with context for ${label}`);
 }
 
 function choose<T>(label: string, raw: T | undefined, context: T | undefined, required = true): T | undefined {
@@ -93,9 +111,56 @@ function isOutsideBase(offset: string): boolean {
   return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute(offset);
 }
 
+async function assertRealContained(realBaseDir: string, path: string, label: string): Promise<string> {
+  let actual: string;
+  try {
+    actual = await realpath(path);
+  } catch (error) {
+    throw new CliError(`Cannot resolve ${label}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+  const offset = relative(realBaseDir, actual);
+  if (offset !== "" && isOutsideBase(offset)) throw new CliError(`${label} resolves outside --base-dir`);
+  return actual;
+}
+
+async function assertOutputParentContained(realBaseDir: string, outPath: string): Promise<string> {
+  let actualParent: string;
+  try {
+    actualParent = await realpath(dirname(outPath));
+  } catch (error) {
+    throw new CliError(`Cannot resolve --out parent directory: ${error instanceof Error ? error.message : String(error)}`);
+  }
+  const offset = relative(realBaseDir, actualParent);
+  if (offset !== "" && isOutsideBase(offset)) throw new CliError("--out parent resolves outside --base-dir");
+  return actualParent;
+}
+
+function sameFilesystemPath(left: string, right: string): boolean {
+  return process.platform === "win32" ? left.toLowerCase() === right.toLowerCase() : left === right;
+}
+
+function parseJson(bytes: Buffer | string, label: string): JsonObject {
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(bytes.toString());
+  } catch {
+    throw new CliError(`Cannot read ${label}: invalid JSON`);
+  }
+  return asObject(parsed, label);
+}
+
 async function readJson(path: string, label: string): Promise<JsonObject> {
   try {
-    return asObject(JSON.parse(await readFile(path, "utf-8")), label);
+    return parseJson(await readFile(path), label);
+  } catch (error) {
+    if (error instanceof CliError) throw error;
+    throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+
+async function readBytes(path: string, label: string): Promise<Buffer> {
+  try {
+    return await readFile(path);
   } catch (error) {
     throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -164,6 +229,25 @@ function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
   }
   if (adapter === "toxiproxy") {
     const toxic = Array.isArray(raw.toxics) ? raw.toxics[0] : raw.toxic;
+    const toxicObject = isObject(toxic) ? toxic : undefined;
+    const toxicType = toxicObject?.type;
+    const mappedFaultType = rawValue(raw, "faultModel") ?? (
+      toxicType === "timeout" ? "dependency_timeout" :
+      toxicType === "latency" ? "network_latency" :
+      toxicType === undefined ? undefined : "custom"
+    );
+    const faultStartedAt = rawValue(raw, "faultStartedAt");
+    const faultEndedAt = rawValue(raw, "faultEndedAt");
+    const proxyName = rawValue(raw, "proxyName", "proxy");
+    const actualTargetIds = rawValue(raw, "targetIds") ?? (typeof proxyName === "string" ? [proxyName] : undefined);
+    const explicitDuration = rawValue(raw, "appliedDurationMs", "durationMs");
+    const measuredDuration = typeof faultStartedAt === "string" && typeof faultEndedAt === "string"
+      ? Date.parse(faultEndedAt) - Date.parse(faultStartedAt)
+      : undefined;
+    const appliedDurationMs = explicitDuration ?? (Number.isFinite(measuredDuration) ? measuredDuration : undefined);
+    const fault = toxicObject !== undefined && mappedFaultType !== undefined && faultStartedAt !== undefined && faultEndedAt !== undefined && actualTargetIds !== undefined && appliedDurationMs !== undefined
+      ? { type: mappedFaultType, parameters: toxicObject, faultStartedAt, faultEndedAt, actualTargetIds, appliedDurationMs }
+      : undefined;
     return {
       experimentId: rawValue(raw, "runId", "experimentId", "name") as string | undefined,
       attempt: rawValue(raw, "attempt") as number | undefined,
@@ -172,14 +256,7 @@ function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
       endedAt: rawValue(raw, "endedAt") as string | undefined,
       status: normalizeStatus(rawValue(raw, "status", "passed")),
       adapterVersion: rawValue(raw, "adapterVersion") as string | undefined,
-      fault: toxic === undefined ? undefined : {
-        type: rawValue(raw, "faultModel") ?? "custom",
-        parameters: toxic,
-        faultStartedAt: rawValue(raw, "faultStartedAt", "startedAt"),
-        faultEndedAt: rawValue(raw, "faultEndedAt", "endedAt"),
-        actualTargetIds: rawValue(raw, "targetIds") ?? [rawValue(raw, "proxyName", "proxy") ?? "toxiproxy"],
-        appliedDurationMs: rawValue(raw, "appliedDurationMs", "durationMs") ?? 1,
-      },
+      fault,
       observed: raw.observed,
       lifecycle: isObject(raw.lifecycle) ? raw.lifecycle : undefined,
     };
@@ -236,47 +313,73 @@ export async function normalizeResilienceEvidence(options: NormalizeOptions): Pr
   const inputPath = containedPath(options.baseDir, options.input, "--input");
   const contextPath = containedPath(options.baseDir, options.context, "--context");
   const outPath = containedPath(options.baseDir, options.out, "--out");
-  const [raw, contextRaw, rawBytes] = await Promise.all([readJson(inputPath, "raw input"), readJson(contextPath, "context"), readFile(inputPath)]);
+  let realBaseDir: string;
+  try {
+    realBaseDir = await realpath(options.baseDir);
+  } catch (error) {
+    throw new CliError(`Cannot resolve --base-dir: ${error instanceof Error ? error.message : String(error)}`);
+  }
+  const [realInputPath, realContextPath, realOutputParent] = await Promise.all([
+    assertRealContained(realBaseDir, inputPath, "--input"),
+    assertRealContained(realBaseDir, contextPath, "--context"),
+    assertOutputParentContained(realBaseDir, outPath),
+  ]);
+  const realOutputPath = resolve(realOutputParent, basename(outPath));
+  if (sameFilesystemPath(realOutputPath, realInputPath) || sameFilesystemPath(realOutputPath, realContextPath)) {
+    throw new CliError("--out must not overwrite --input or --context");
+  }
+  const [rawBytes, contextRaw] = await Promise.all([readBytes(inputPath, "raw input"), readJson(contextPath, "context")]);
+  const raw = parseJson(rawBytes, "raw input");
   const context = await validateContext(contextRaw);
   const fields = adapterFields(options.adapter as NormalizeAdapter, raw);
   const lifecycle = context.lifecycle ?? {};
-  const startedAt = choose("startedAt", fields.startedAt ?? fields.lifecycle?.startedAt as string | undefined, lifecycle.startedAt) as string;
-  const endedAt = choose("endedAt", fields.endedAt ?? fields.lifecycle?.endedAt as string | undefined, lifecycle.endedAt) as string;
-  const status = choose("status", fields.status ?? normalizeStatus(fields.lifecycle?.status), lifecycle.status as ResilienceEvidenceStatus | undefined) as ResilienceEvidenceStatus;
+  const rawStartedAt = choose("raw startedAt", fields.startedAt, fields.lifecycle?.startedAt as string | undefined, false);
+  const rawEndedAt = choose("raw endedAt", fields.endedAt, fields.lifecycle?.endedAt as string | undefined, false);
+  const rawStatus = choose("raw status", fields.status, normalizeStatus(fields.lifecycle?.status), false);
+  const startedAt = choose("startedAt", rawStartedAt, lifecycle.startedAt) as string;
+  const endedAt = choose("endedAt", rawEndedAt, lifecycle.endedAt) as string;
+  const status = choose("status", rawStatus, lifecycle.status as ResilienceEvidenceStatus | undefined) as ResilienceEvidenceStatus;
   const targetRevision = choose("targetRevision", fields.targetRevision, context.targetRevision) as string;
   const experimentId = choose("experimentId", fields.experimentId, context.experimentId) as string;
   const attempt = choose("attempt", fields.attempt, context.attempt) as number;
   const adapterVersion = choose("adapterVersion", fields.adapterVersion, context.adapterVersion) as string;
   const observed = choose("observed", fields.observed as ResilienceExecutionEvidenceNode["observed"], context.observed) as ResilienceExecutionEvidenceNode["observed"];
-  const fault = choose("fault", fields.fault as ResilienceExecutionEvidenceNode["fault"], lifecycle.fault as ResilienceExecutionEvidenceNode["fault"], false);
+  const rawFault = choose("raw fault", fields.fault as ResilienceExecutionEvidenceNode["fault"], fields.lifecycle?.fault as ResilienceExecutionEvidenceNode["fault"], false);
+  const fault = choose("fault", rawFault, lifecycle.fault as ResilienceExecutionEvidenceNode["fault"], false);
   const steadyStateConfirmed = choose("steadyStateConfirmed", fields.lifecycle?.steadyStateConfirmed as boolean | undefined, lifecycle.steadyStateConfirmed, false);
   const recovered = choose("recovered", fields.lifecycle?.recovered as boolean | undefined, lifecycle.recovered, false);
   const recoveryConfirmedAt = choose("recoveryConfirmedAt", fields.lifecycle?.recoveryConfirmedAt as string | undefined, lifecycle.recoveryConfirmedAt, false);
   const recoveryDurationMs = choose("recoveryDurationMs", fields.lifecycle?.recoveryDurationMs as number | undefined, lifecycle.recoveryDurationMs, false);
   const abortRecord = choose("abortRecord", fields.lifecycle?.abortRecord as ResilienceExecutionEvidenceNode["abortRecord"], lifecycle.abortRecord as ResilienceExecutionEvidenceNode["abortRecord"], false);
+  const node = choose("node", isObject(raw.node) ? raw.node as unknown as NormalizeContext["node"] : undefined, context.node) as NormalizeContext["node"];
+  const testId = choose("testId", rawValue(raw, "testId") as string | undefined, context.testId) as string;
+  const environment = choose("environment", rawValue(raw, "environment") as ResilienceExecutionEvidenceNode["environment"] | undefined, context.environment) as ResilienceExecutionEvidenceNode["environment"];
+  const environmentId = choose("environmentId", rawValue(raw, "environmentId") as string | undefined, context.environmentId) as string;
+  const evidenceRefs = choose("evidenceRefs", Array.isArray(raw.evidenceRefs) ? raw.evidenceRefs as ResilienceExecutionEvidenceNode["evidenceRefs"] : undefined, context.evidenceRefs) as ResilienceExecutionEvidenceNode["evidenceRefs"];
+  const signalManifest = choose("signalManifest", isObject(raw.signalManifest) ? raw.signalManifest as unknown as ResilienceExecutionEvidenceNode["signalManifest"] : undefined, context.signalManifest) as NonNullable<ResilienceExecutionEvidenceNode["signalManifest"]>;
   const evidence: ResilienceExecutionEvidenceNode = {
-    id: context.node.id,
+    id: node.id,
     kind: "execution_evidence",
-    title: context.node.title,
-    traceability: context.node.traceability,
-    sourceArtifactIds: context.node.sourceArtifactIds,
-    evidenceRefs: context.evidenceRefs,
+    title: node.title,
+    traceability: node.traceability,
+    sourceArtifactIds: node.sourceArtifactIds,
+    evidenceRefs,
     evidenceType: "resilience",
-    testId: context.testId,
+    testId,
     adapter: options.adapter,
     adapterVersion,
     normalizationVersion: "qeg-resilience-evidence-v1",
     experimentId,
     attempt,
     rawArtifactRef: {
-      id: `${context.node.id}:raw`,
+      id: `${node.id}:raw`,
       path: relative(options.baseDir, inputPath).replaceAll("\\", "/"),
       contentHash: sha256(rawBytes),
       revision: targetRevision,
     },
     targetRevision,
-    environment: context.environment,
-    environmentId: context.environmentId,
+    environment,
+    environmentId,
     startedAt,
     endedAt,
     status,
@@ -288,15 +391,15 @@ export async function normalizeResilienceEvidence(options: NormalizeOptions): Pr
     ...(recoveryConfirmedAt === undefined ? {} : { recoveryConfirmedAt }),
     ...(recoveryDurationMs === undefined ? {} : { recoveryDurationMs }),
     ...(observed === undefined ? {} : { observed }),
-    signalManifest: context.signalManifest,
+    signalManifest,
   };
   await validateEvidence(evidence);
   try { await stat(outPath); if (!options.force) throw new CliError(`Output already exists: ${options.out} (use --force to replace it)`); } catch (error) {
     if (error instanceof CliError) throw error;
   }
-  const tempPath = resolve(dirname(outPath), `.${relative(dirname(outPath), outPath)}.${process.pid}.${Date.now()}.tmp`);
+  const tempPath = resolve(dirname(outPath), `.${basename(outPath)}.${process.pid}.${randomUUID()}.tmp`);
   try {
-    await writeFile(tempPath, `${JSON.stringify(evidence, null, 2)}\n`, "utf-8");
+    await writeFile(tempPath, `${JSON.stringify(evidence, null, 2)}\n`, { encoding: "utf-8", flag: "wx" });
     await rename(tempPath, outPath);
   } catch (error) {
     try { await unlink(tempPath); } catch { /* no incomplete output remains */ }

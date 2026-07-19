@@ -127,15 +127,26 @@ export interface ResilienceBlastRadius {
   readonly maxDurationSeconds: number;
 }
 
-export interface ResilienceAbortCondition {
+export interface ResilienceAbortConditionBase {
   readonly id: StableId;
-  readonly source: AbortSignalSource;
   readonly signal: string;
-  readonly aggregation: SignalAggregation;
   readonly operator: ThresholdOperator;
   readonly threshold: number;
   readonly unit: string;
 }
+
+export interface ResilienceMetricAbortCondition extends ResilienceAbortConditionBase {
+  readonly source: "metric";
+  readonly aggregation: SignalAggregation;
+}
+
+export interface ResilienceCountAbortCondition extends ResilienceAbortConditionBase {
+  readonly source: Exclude<AbortSignalSource, "metric">;
+  readonly aggregation: "count";
+  readonly unit: "count";
+}
+
+export type ResilienceAbortCondition = ResilienceMetricAbortCondition | ResilienceCountAbortCondition;
 
 export interface ResilienceScenario {
   readonly faultModel: ResilienceFaultModel;

@@ -43,7 +43,12 @@
           "nodeIds": [
             "qeg:artifact-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:evidence-verification",
+              "path": "src/validation/evidence.ts"
+            }
+          ]
         }
       ],
       "blockers": [],

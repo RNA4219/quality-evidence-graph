@@ -146,7 +146,7 @@ function evidenceDq(report: EvidenceVerificationReport): Disqualification[] {
     code: "DQ-06",
     message: failures.map((item) => `${item.artifactId}: ${item.message}`).join("; "),
     nodeIds: [...new Set(failures.map((item) => item.artifactId))],
-    sourceRefs: [],
+    sourceRefs: [{ id: "qeg:evidence-verification", path: "src/validation/evidence.ts" }],
   }];
 }
 

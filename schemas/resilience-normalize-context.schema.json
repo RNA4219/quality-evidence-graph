@@ -32,8 +32,8 @@
         "endedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
         "status": { "$ref": "reliability.schema.json#/$defs/resilienceEvidenceStatus" },
         "steadyStateConfirmed": { "type": "boolean" },
-        "fault": { "type": "object" },
-        "abortRecord": { "type": "object" },
+        "fault": { "$ref": "reliability.schema.json#/$defs/resilienceExecutionEvidenceNode/properties/fault" },
+        "abortRecord": { "$ref": "reliability.schema.json#/$defs/resilienceExecutionEvidenceNode/properties/abortRecord" },
         "recovered": { "type": "boolean" },
         "recoveryConfirmedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
         "recoveryDurationMs": { "type": "integer", "minimum": 0 }

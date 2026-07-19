@@ -55,6 +55,7 @@
         "title": { "type": "string", "minLength": 1 },
         "testExecutionMode": { "enum": ["real", "mock"] },
         "testType": { "$ref": "reliability.schema.json#/$defs/testType" },
+        "evidenceType": { "const": "resilience" },
         "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" },
         "sourceArtifactIds": {
           "type": "array",
@@ -89,6 +90,41 @@
             "required": ["evidenceType"]
           },
           "then": { "$ref": "reliability.schema.json#/$defs/resilienceExecutionEvidenceNode" }
+        },
+        {
+          "if": {
+            "allOf": [
+              { "properties": { "kind": { "const": "execution_evidence" } }, "required": ["kind"] },
+              { "anyOf": [
+                { "required": ["testId"] },
+                { "required": ["adapter"] },
+                { "required": ["adapterVersion"] },
+                { "required": ["customAdapterName"] },
+                { "required": ["rawArtifactRef"] },
+                { "required": ["normalizationVersion"] },
+                { "required": ["experimentId"] },
+                { "required": ["attempt"] },
+                { "required": ["targetRevision"] },
+                { "required": ["environment"] },
+                { "required": ["environmentId"] },
+                { "required": ["startedAt"] },
+                { "required": ["endedAt"] },
+                { "required": ["status"] },
+                { "required": ["steadyStateConfirmed"] },
+                { "required": ["fault"] },
+                { "required": ["abortRecord"] },
+                { "required": ["recovered"] },
+                { "required": ["recoveryConfirmedAt"] },
+                { "required": ["recoveryDurationMs"] },
+                { "required": ["observed"] },
+                { "required": ["signalManifest"] }
+              ] }
+            ]
+          },
+          "then": {
+            "properties": { "kind": { "const": "execution_evidence" }, "evidenceType": { "const": "resilience" } },
+            "required": ["evidenceType"]
+          }
         }
       ]
     },

@@ -293,13 +293,13 @@
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:a8aa330e0c8c262e87efff35e69d2c02e2420c6fec6cd89312a0befd1414de23"
+      "contentHash": "sha256:440cf5522131cdca026eaa2a11173608b4fe609474257372e6f2a4f4650ba087"
     },
     "schemas/qeg.bundle.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:39785a8e61e84db53462ca7077e19ffc4fefbe51b9760c672a769fdb417ff8a9"
+      "contentHash": "sha256:90b542653ff1afdbd70e0de421264ce1ad7bd96e4f116cbaa84508e30712237c"
     },
     "schemas/test-placement-plan.schema.json": {
       "role": "schema",
@@ -341,7 +341,7 @@
       "role": "runtime-schema-validation",
       "caps": "docs/birdseye/caps/src.validation.schema.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:5fd255488a5b57c343b291e2ec52b0a243c2b5508fef585e980cc88539fcf918"
+      "contentHash": "sha256:eba39ca3a0d2ef780528ded77d47fe2b9a1d2965830a08b298ff67287058a593"
     },
     "src/validation/evidence.ts": {
       "role": "runtime-evidence-validation",
@@ -377,7 +377,7 @@
       "role": "report-formatter",
       "caps": "docs/birdseye/caps/src.cli.report.formatter.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:47e2a7a8b91a2801b668f8985d99e43fbde90489f807faa8cc4731071a87ee8c"
+      "contentHash": "sha256:3ec7a989eb2c796ba53e5768541ef5fcc88012e8dd83f10743e954ffe6fdd1e6"
     },
     "src/cli/report/command.ts": {
       "role": "report-command",
@@ -395,13 +395,13 @@
       "role": "graph-types",
       "caps": "docs/birdseye/caps/src.types.graph.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:170172da67b0f4921e242f5875808bac77af51112c5937cf0b04f6709e6c8a37"
+      "contentHash": "sha256:aa4fdd35451568c58a5252af697aa8934fb5b939f6d45460704f084f64ac694b"
     },
     "src/types/gate.ts": {
       "role": "gate-types",
       "caps": "docs/birdseye/caps/src.types.gate.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:c800f850f2a21c36802c8227db0604b3b9a209baa203efad21a10007e7eafb05"
+      "contentHash": "sha256:0f487b38fc07b08095045176ddc981e332a1b7aaf4a5bb8b9d7c800b5add71e1"
     },
     "src/gate/test-evidence.ts": {
       "role": "test-evidence-accounting",
@@ -419,13 +419,13 @@
       "role": "gate-evaluator",
       "caps": "docs/birdseye/caps/src.gate.evaluate.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:4374f1852a6c068155aa4fb19a1e68bd4a703c4d91f6c07c654487bfa92d743c"
+      "contentHash": "sha256:85d1f05b67fcc65aed31b2206603b7975f380e7e2d8df477d75e9abf9136a6e8"
     },
     "tests/runtime.test.mjs": {
       "role": "runtime-contract-tests",
       "caps": "docs/birdseye/caps/tests.runtime.test.mjs.json",
       "mtime": "00009",
-      "contentHash": "sha256:d1bd6ad720295387ec77de56cc59f930101ba16e9665a7ac66e3fba3924d2e58"
+      "contentHash": "sha256:91e9bfadc13b0d40246091852371d1c57635fe0c659b7d2e3d6cc77b4dd2f3f0"
     },
     "docs/spec/reliability-extension.md": {
       "role": "reliability-resilience-spec",
@@ -490,25 +490,25 @@
       "role": "reliability-evaluator",
       "caps": "docs/birdseye/caps/src.gate.reliability.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:d39b2801102881e30419cc1948b34acb0da8f722295aa6a1b8e1e333616adcc4"
+      "contentHash": "sha256:0636593c8046a0739cc67aa6a7c95653a7d3228746f76992b144269e54aeda25"
     },
     "src/cli/evidence-normalize.ts": {
       "role": "resilience-evidence-normalize",
       "caps": "docs/birdseye/caps/src.cli.evidence-normalize.ts.json",
       "mtime": "00009",
-      "contentHash": "sha256:bb16bb08600d47b15503d1cb0fa21c8e2c16068d3c3ee4087a254d74375b8921"
+      "contentHash": "sha256:5091bb560ace2dd1fa70e8d136c914fea99e956646d4907da68012bc0efc66dc"
     },
     "schemas/reliability.schema.json": {
       "role": "reliability-schema",
       "caps": "docs/birdseye/caps/schemas.reliability.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:43f7f144edb99445d5296d86ede46753390505f49da46d26ed8dd29b7ccbb80d"
+      "contentHash": "sha256:5adafd504e603703afb1e19d6995012d3e3f72c9de3997d3548cc85c43980ad0"
     },
     "schemas/resilience-normalize-context.schema.json": {
       "role": "resilience-normalize-context-schema",
       "caps": "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json",
       "mtime": "00009",
-      "contentHash": "sha256:ebf1449d378b54392e394dd15353f92a27f100d4f75a6a78fc85b4111a17b377"
+      "contentHash": "sha256:f6777125b4ee250360185cd81a5a28439f6070cf24f4c3a3e6cb7571c38db4f1"
     }
   },
   "edges": [

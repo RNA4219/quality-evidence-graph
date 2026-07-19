@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
-import { cp, mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { cp, mkdtemp, readFile, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -256,7 +256,7 @@ function reliabilityInput() {
     resilienceScenario: {
       faultModel: "dependency_timeout",
       steadyState: {
-        slos: [{ name: "traffic", metricName: "requests", semanticRole: "traffic_count", aggregation: "count", unit: "requests", evaluationPhases: ["steady_state", "fault", "recovery"], target: { targetType: "min", value: 1 } }],
+        slos: [{ name: "traffic", metricName: "requests", semanticRole: "traffic_count", aggregation: "count", unit: "count", evaluationPhases: ["steady_state", "fault", "recovery"], target: { targetType: "min", value: 1 } }],
         requiredMetrics: ["requests"], requiredTraces: false, requiredLogs: false,
       },
       blastRadius: { environment: "ci", allowedTargets: ["dependency-a"], maxTargets: 1, maxDurationSeconds: 30 },
@@ -292,7 +292,16 @@ function reliabilityInput() {
     recoveryDurationMs: 30000,
     observed: { requestCount: 100, errorRate: 0.01, latencyP95Ms: 30, saturationPct: 10, duplicateSideEffects: 0, dataInconsistencies: 0 },
     signalManifest: {
-      metrics: ["steady_state", "fault", "recovery"].map((phase) => ({ id: `qeg:metric-${phase}`, phase, metricName: "requests", semanticRole: "traffic_count", aggregation: "count", windowStart: "2026-01-01T00:00:00.000Z", windowEnd: "2026-01-01T00:02:00.000Z", observedValue: 100, unit: "requests", evidenceRefId: "qeg:signal-evidence" })),
+      metrics: [
+        { id: "qeg:metric-steady_state", phase: "steady_state", metricName: "requests", semanticRole: "traffic_count", aggregation: "count", windowStart: "2026-01-01T00:00:00.000Z", windowEnd: "2026-01-01T00:00:30.000Z", observedValue: 100, unit: "count", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-fault", phase: "fault", metricName: "requests", semanticRole: "traffic_count", aggregation: "count", windowStart: "2026-01-01T00:00:30.000Z", windowEnd: "2026-01-01T00:01:00.000Z", observedValue: 100, unit: "count", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-recovery", phase: "recovery", metricName: "requests", semanticRole: "traffic_count", aggregation: "count", windowStart: "2026-01-01T00:01:00.000Z", windowEnd: "2026-01-01T00:01:30.000Z", observedValue: 100, unit: "count", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-error", phase: "fault", metricName: "errors", semanticRole: "error_rate", aggregation: "rate", windowStart: "2026-01-01T00:00:30.000Z", windowEnd: "2026-01-01T00:01:00.000Z", observedValue: 0.01, unit: "ratio", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-latency", phase: "fault", metricName: "latency", semanticRole: "latency_p95", aggregation: "p95", windowStart: "2026-01-01T00:00:30.000Z", windowEnd: "2026-01-01T00:01:00.000Z", observedValue: 30, unit: "ms", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-saturation", phase: "fault", metricName: "saturation", semanticRole: "saturation", aggregation: "max", windowStart: "2026-01-01T00:00:30.000Z", windowEnd: "2026-01-01T00:01:00.000Z", observedValue: 10, unit: "percent", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-duplicates", phase: "experiment", metricName: "duplicates", semanticRole: "duplicate_side_effects", aggregation: "count", windowStart: "2026-01-01T00:00:00.000Z", windowEnd: "2026-01-01T00:02:00.000Z", observedValue: 0, unit: "count", evidenceRefId: "qeg:signal-evidence" },
+        { id: "qeg:metric-inconsistencies", phase: "experiment", metricName: "inconsistencies", semanticRole: "data_inconsistencies", aggregation: "count", windowStart: "2026-01-01T00:00:00.000Z", windowEnd: "2026-01-01T00:02:00.000Z", observedValue: 0, unit: "count", evidenceRefId: "qeg:signal-evidence" },
+      ],
       traces: [], logs: [],
     },
   };
@@ -346,6 +355,7 @@ test("reliability waives only linked risk/test threshold blockers and never safe
   const waived = reliabilityInput();
   const evidence = waived.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
   evidence.observed.errorRate = 0.5;
+  evidence.signalManifest.metrics.find((metric) => metric.semanticRole === "error_rate").observedValue = 0.5;
   waived.waivers.push({ id: "qeg:waiver-resilience", linkedRiskIds: ["qeg:risk-resilience"], linkedTestIds: ["qeg:test-resilience"], approver: "qa", approvalAuthority: "qa", reason: "temporary", expiry: "2026-02-01T00:00:00.000Z", impactScope: "ci", rollbackOrContainment: "stop", followUpOwner: "qa", recheckCondition: "rerun", sourceRefs: relSource });
   const conditional = evaluateGate(waived);
   assert.equal(conditional.verdict, "conditional_go");
@@ -365,6 +375,16 @@ test("reliability detects policy identity and latest-evidence ambiguity", () => 
   mismatch.graph.metadata.policyHash = `sha256:${"c".repeat(64)}`;
   assert.ok(evaluateGate(mismatch).disqualifications.some((item) => item.code === "DQ-21"));
 
+  const invalidProfile = reliabilityInput();
+  invalidProfile.metadata.profile = "lean";
+  invalidProfile.graph.metadata.profile = "lean";
+  invalidProfile.policy.profile = "lean";
+  assert.ok(evaluateGate(invalidProfile).disqualifications.some((item) => item.code === "DQ-21"));
+
+  const incompleteScope = reliabilityInput();
+  incompleteScope.policy.dqScope = incompleteScope.policy.dqScope.filter((code) => code !== "DQ-20");
+  assert.ok(evaluateGate(incompleteScope).disqualifications.some((item) => item.code === "DQ-21"));
+
   const ambiguous = reliabilityInput();
   const first = ambiguous.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
   const second = structuredClone(first);
@@ -373,6 +393,118 @@ test("reliability detects policy identity and latest-evidence ambiguity", () => 
   second.passed = false;
   ambiguous.graph.nodes.push(second);
   assert.ok(evaluateGate(ambiguous).disqualifications.some((item) => item.code === "DQ-19"));
+});
+
+test("reliability accounting excludes DQ evidence and does not emit blockers for it", () => {
+  const input = reliabilityInput();
+  const evidence = input.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
+  evidence.signalManifest.metrics.find((metric) => metric.semanticRole === "error_rate").observedValue = 0.5;
+  const result = evaluateGate(input);
+  assert.equal(result.verdict, "disqualified");
+  assert.ok(result.disqualifications.some((item) => item.code === "DQ-20"));
+  assert.equal(result.blockers.length, 0);
+  assert.equal(result.reliability.qualifiedExecutionCount, 0);
+  assert.equal(result.reliability.passingExecutionCount, 0);
+  assert.equal(result.reliability.resiliencePassRate, null);
+});
+
+test("non-completing resilience statuses remain qualified blockers without fabricated lifecycle DQs", () => {
+  const input = reliabilityInput();
+  const evidence = input.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
+  evidence.status = "error";
+  evidence.passed = false;
+  delete evidence.steadyStateConfirmed;
+  delete evidence.fault;
+  delete evidence.recovered;
+  delete evidence.recoveryConfirmedAt;
+  delete evidence.recoveryDurationMs;
+  delete evidence.observed;
+  delete evidence.signalManifest;
+  const result = evaluateGate(input);
+  assert.equal(result.verdict, "no_go");
+  assert.equal(result.disqualifications.some((item) => ["DQ-18", "DQ-20"].includes(item.code)), false);
+  assert.deepEqual(result.blockers.map((item) => item.ruleId), ["BLK-REL-03"]);
+  assert.equal(result.reliability.qualifiedExecutionCount, 1);
+  assert.equal(result.reliability.passingExecutionCount, 0);
+});
+
+test("reliability canonicalizes decision fingerprints and treats passed as optional", () => {
+  const input = reliabilityInput();
+  const first = input.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
+  delete first.passed;
+  first.fault.parameters = { alpha: 1, beta: 2 };
+  const duplicate = structuredClone(first);
+  duplicate.id = "qeg:evidence-resilience-duplicate";
+  duplicate.fault.parameters = { beta: 2, alpha: 1 };
+  input.graph.nodes.push(duplicate);
+  const result = evaluateGate(input);
+  assert.equal(result.verdict, "go");
+  assert.equal(result.disqualifications.some((item) => item.code === "DQ-19"), false);
+  assert.equal(result.reliability.passingExecutionCount, 1);
+});
+
+test("reliability propagates an unsafe attempt to every covered required risk", () => {
+  const input = reliabilityInput();
+  const firstRisk = input.graph.nodes.find((node) => node.id === "qeg:risk-resilience");
+  const secondRisk = structuredClone(firstRisk);
+  secondRisk.id = "qeg:risk-resilience-secondary";
+  secondRisk.title = "secondary impact";
+  input.graph.nodes.push(secondRisk);
+  const resilienceTest = input.graph.nodes.find((node) => node.id === "qeg:test-resilience");
+  resilienceTest.coveredRiskIds.push(secondRisk.id);
+  const evidence = input.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
+  evidence.fault.actualTargetIds.push("dependency-b");
+  const result = evaluateGate(input);
+  assert.equal(result.verdict, "no_go");
+  assert.deepEqual(result.blockers.filter((item) => item.ruleId === "BLK-REL-04").map((item) => item.riskIds[0]).sort(), [firstRisk.id, secondRisk.id].sort());
+  assert.equal(result.reliability.passingRiskCount, 0);
+  assert.equal(result.reliability.passingExecutionCount, 0);
+});
+
+test("reliability fails closed on invalid clocks and invalid current timestamps", () => {
+  const invalidClock = reliabilityInput();
+  invalidClock.metadata.createdAt = "not-a-date";
+  const clockResult = evaluateGate(invalidClock);
+  assert.ok(clockResult.disqualifications.some((item) => item.code === "DQ-01"));
+  assert.deepEqual(clockResult.reliability.evidenceAgeHours, {});
+
+  const invalidEvidence = reliabilityInput();
+  invalidEvidence.graph.nodes.find((node) => node.id === "qeg:evidence-resilience").endedAt = "not-a-date";
+  const evidenceResult = evaluateGate(invalidEvidence);
+  assert.ok(evidenceResult.disqualifications.some((item) => item.code === "DQ-18"));
+  assert.equal(evidenceResult.reliability.qualifiedExecutionCount, 0);
+});
+
+test("reliability schema enforces strict discriminators and semantic invariants", async () => {
+  const missingDiscriminator = reliabilityInput();
+  const evidence = missingDiscriminator.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
+  delete evidence.evidenceType;
+  assert.equal((await validateGateInput(missingDiscriminator)).valid, false);
+
+  const leakedResilienceField = reliabilityInput();
+  leakedResilienceField.graph.nodes = leakedResilienceField.graph.nodes
+    .filter((node) => node.kind !== "execution_evidence");
+  leakedResilienceField.graph.nodes.push({
+    id: "qeg:legacy-evidence-with-adapter", kind: "execution_evidence", title: "invalid legacy evidence",
+    traceability: { sourceRefs: relSource, assumptions: [], confidence: "high" }, sourceArtifactIds: [], adapter: "shell",
+  });
+  assert.equal((await validateGateInput(leakedResilienceField)).valid, false);
+
+  const missingBaseField = reliabilityInput();
+  delete missingBaseField.graph.nodes.find((node) => node.id === "qeg:test-resilience").layer;
+  assert.equal((await validateGateInput(missingBaseField)).valid, false);
+
+  const unsafePolicy = reliabilityInput();
+  unsafePolicy.policy.reliabilityPolicy.safety.allowedEnvironments = ["staging"];
+  assert.equal((await validateGateInput(unsafePolicy)).valid, false);
+
+  const invalidRange = reliabilityInput();
+  invalidRange.graph.nodes.find((node) => node.id === "qeg:test-resilience").resilienceScenario.steadyState.slos[0].target = { targetType: "range", min: 2, max: 1 };
+  assert.equal((await validateGateInput(invalidRange)).valid, false);
+
+  const invalidCountAbort = reliabilityInput();
+  invalidCountAbort.graph.nodes.find((node) => node.id === "qeg:test-resilience").resilienceScenario.abortConditions[0] = { id: "qeg:abort-trace", source: "trace_count", signal: "errors", aggregation: "count", operator: "gt", threshold: 0, unit: "matches" };
+  assert.equal((await validateGateInput(invalidCountAbort)).valid, false);
 });
 
 function normalizeContext(signalHash) {
@@ -394,7 +526,7 @@ test("evidence normalize supports four MVP adapters and fails safely on bad path
   await writeFile(join(dir, "context.json"), JSON.stringify(normalizeContext(signalHash)), "utf-8");
   const cases = [
     ["lakda", { contractVersion: "HATE/v1", runId: "qeg:run-lakda", attempt: 1, commit: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", status: "pass" }],
-    ["toxiproxy", { runId: "qeg:run-toxi", attempt: 1, commit: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", status: "pass", toxic: { type: "timeout", attributes: {} } }],
+    ["toxiproxy", { runId: "qeg:run-toxi", attempt: 1, commit: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", status: "pass", toxic: { type: "timeout", attributes: {} }, faultStartedAt: "2026-01-01T00:00:10.000Z", faultEndedAt: "2026-01-01T00:00:20.000Z", targetIds: ["dependency-a"] }],
     ["shell", { schema: "qeg-resilience-shell-v1", runId: "qeg:run-shell", attempt: 1, commit: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", status: "pass" }],
     ["ci", { schema: "qeg-resilience-ci-v1", providerRunId: "qeg:run-ci", attempt: 1, headSha: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", conclusion: "success" }],
   ];
@@ -406,6 +538,14 @@ test("evidence normalize supports four MVP adapters and fails safely on bad path
     assert.equal(result.status, 0, result.stderr || result.stdout);
     assert.equal(JSON.parse(await readFile(join(dir, outName), "utf-8")).adapter, adapter);
   }
+  const normalizedToxiproxy = JSON.parse(await readFile(join(dir, "toxiproxy.evidence.json"), "utf-8"));
+  assert.equal(normalizedToxiproxy.fault.type, "dependency_timeout");
+  assert.equal(normalizedToxiproxy.fault.appliedDurationMs, 10000);
+
+  await writeFile(join(dir, "toxiproxy-incomplete.json"), JSON.stringify({ runId: "qeg:run-toxi-incomplete", attempt: 1, commit: REL_SHA, startedAt: "2026-01-01T00:00:00.000Z", endedAt: "2026-01-01T00:01:00.000Z", status: "pass", toxic: { type: "timeout", attributes: {} } }), "utf-8");
+  const incompleteToxiproxy = run(["evidence", "normalize", "--adapter", "toxiproxy", "--input", "toxiproxy-incomplete.json", "--context", "context.json", "--out", "toxiproxy-incomplete.evidence.json", "--base-dir", dir]);
+  assert.equal(incompleteToxiproxy.status, 0, incompleteToxiproxy.stderr || incompleteToxiproxy.stdout);
+  assert.equal("fault" in JSON.parse(await readFile(join(dir, "toxiproxy-incomplete.evidence.json"), "utf-8")), false);
   const existing = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "shell.evidence.json", "--base-dir", dir]);
   assert.equal(existing.status, 1);
   const escaped = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "../escape.json", "--base-dir", dir]);
@@ -417,4 +557,53 @@ test("evidence normalize supports four MVP adapters and fails safely on bad path
   await writeFile(join(dir, "conflict.json"), JSON.stringify(conflict), "utf-8");
   const conflictResult = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "conflict.json", "--out", "conflict.evidence.json", "--base-dir", dir]);
   assert.equal(conflictResult.status, 1);
+  assert.doesNotMatch(conflictResult.stderr, new RegExp("b{40}"));
+
+  await writeFile(join(dir, "secret-invalid.json"), "password=supersecret", "utf-8");
+  const invalidJson = run(["evidence", "normalize", "--adapter", "shell", "--input", "secret-invalid.json", "--context", "context.json", "--out", "invalid.evidence.json", "--base-dir", dir]);
+  assert.equal(invalidJson.status, 1);
+  assert.doesNotMatch(invalidJson.stderr, /supersecret/);
+
+  const originalRaw = await readFile(join(dir, "shell.json"), "utf-8");
+  const overwriteInput = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "shell.json", "--base-dir", dir, "--force"]);
+  assert.equal(overwriteInput.status, 1);
+  assert.equal(await readFile(join(dir, "shell.json"), "utf-8"), originalRaw);
+  if (process.platform === "win32") {
+    const caseVariantOverwrite = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "SHELL.JSON", "--base-dir", dir, "--force"]);
+    assert.equal(caseVariantOverwrite.status, 1);
+    assert.equal(await readFile(join(dir, "shell.json"), "utf-8"), originalRaw);
+  }
+
+  const signalConflictRaw = JSON.parse(originalRaw);
+  signalConflictRaw.signalManifest = { metrics: [{ id: "different" }], traces: [], logs: [] };
+  await writeFile(join(dir, "signal-conflict.json"), JSON.stringify(signalConflictRaw), "utf-8");
+  const signalConflict = run(["evidence", "normalize", "--adapter", "shell", "--input", "signal-conflict.json", "--context", "context.json", "--out", "signal-conflict.evidence.json", "--base-dir", dir]);
+  assert.equal(signalConflict.status, 1);
+
+  if (process.platform !== "win32") {
+    const outside = await mkdtemp(join(tmpdir(), "qeg-normalize-outside-"));
+    await writeFile(join(outside, "outside.json"), originalRaw, "utf-8");
+    await symlink(join(outside, "outside.json"), join(dir, "outside-input.json"));
+    const linkedInput = run(["evidence", "normalize", "--adapter", "shell", "--input", "outside-input.json", "--context", "context.json", "--out", "linked-input.evidence.json", "--base-dir", dir]);
+    assert.equal(linkedInput.status, 1);
+    await symlink(outside, join(dir, "outside-output"), "dir");
+    const linkedOutput = run(["evidence", "normalize", "--adapter", "shell", "--input", "shell.json", "--context", "context.json", "--out", "outside-output/evidence.json", "--base-dir", dir]);
+    assert.equal(linkedOutput.status, 1);
+  }
+});
+
+test("text report exposes reliability accounting and drill-down", () => {
+  const report = run(["report", "fixtures/positive-reliability-go"]);
+  assert.equal(report.status, 0, report.stderr || report.stdout);
+  assert.match(report.stdout, /Reliability/);
+  assert.match(report.stdout, /enabled: true/);
+  assert.match(report.stdout, /risk coverage: 1\/1/);
+  assert.match(report.stdout, /DQ counts: DQ-12=0, DQ-18=0, DQ-19=0, DQ-20=0, DQ-21=0/);
+  assert.match(report.stdout, /selection: risk=qeg:risk-reliability-fixture/);
+  assert.match(report.stdout, /adapter=shell/);
+
+  const legacyReport = run(["report", "fixtures/positive-release-go"]);
+  assert.equal(legacyReport.status, 0, legacyReport.stderr || legacyReport.stdout);
+  assert.match(legacyReport.stdout, /Reliability/);
+  assert.match(legacyReport.stdout, /enabled: false/);
 });

@@ -95,7 +95,13 @@
               "operator": { "enum": ["gt", "gte", "lt", "lte", "eq", "ne"] },
               "threshold": { "type": "number" },
               "unit": { "type": "string", "minLength": 1 }
-            }
+            },
+            "allOf": [
+              {
+                "if": { "properties": { "source": { "enum": ["trace_count", "log_count"] } }, "required": ["source"] },
+                "then": { "properties": { "aggregation": { "const": "count" }, "unit": { "const": "count" } } }
+              }
+            ]
           }
         }
       },
@@ -105,7 +111,7 @@
     },
     "resilienceTestNode": {
       "type": "object",
-      "required": ["id", "kind", "title", "traceability", "sourceArtifactIds", "testExecutionMode", "testType", "resilienceScenario", "coveredRiskIds"],
+      "required": ["id", "kind", "title", "traceability", "sourceArtifactIds", "layer", "testExecutionMode", "existing", "testType", "resilienceScenario", "coveredRiskIds"],
       "additionalProperties": false,
       "properties": {
         "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
@@ -293,7 +299,25 @@
         "thresholds": { "type": "object", "required": ["minRequestCount", "maxErrorRate", "maxLatencyP95Ms", "maxSaturationPct", "maxRecoverySeconds", "maxDuplicateSideEffects", "maxDataInconsistencies"], "additionalProperties": false, "properties": { "minRequestCount": { "type": "integer", "minimum": 1 }, "maxErrorRate": { "type": "number", "minimum": 0, "maximum": 1 }, "maxLatencyP95Ms": { "type": "number", "minimum": 0 }, "maxSaturationPct": { "type": "number", "minimum": 0, "maximum": 100 }, "maxRecoverySeconds": { "type": "number", "minimum": 0 }, "maxDuplicateSideEffects": { "type": "integer", "minimum": 0 }, "maxDataInconsistencies": { "type": "integer", "minimum": 0 } } },
         "safety": { "type": "object", "required": ["allowedEnvironments", "forbidProduction", "maxBlastRadiusTargets", "maxFaultDurationSeconds"], "additionalProperties": false, "properties": { "allowedEnvironments": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["local", "ci", "staging", "preprod"] } }, "forbidProduction": { "const": true }, "maxBlastRadiusTargets": { "type": "integer", "minimum": 1 }, "maxFaultDurationSeconds": { "type": "integer", "minimum": 1 } } },
         "sourceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" } }
-      }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "requiredEnvironment": { "const": "local" } }, "required": ["requiredEnvironment"] },
+          "then": { "properties": { "safety": { "properties": { "allowedEnvironments": { "contains": { "const": "local" } } } } } }
+        },
+        {
+          "if": { "properties": { "requiredEnvironment": { "const": "ci" } }, "required": ["requiredEnvironment"] },
+          "then": { "properties": { "safety": { "properties": { "allowedEnvironments": { "contains": { "const": "ci" } } } } } }
+        },
+        {
+          "if": { "properties": { "requiredEnvironment": { "const": "staging" } }, "required": ["requiredEnvironment"] },
+          "then": { "properties": { "safety": { "properties": { "allowedEnvironments": { "contains": { "const": "staging" } } } } } }
+        },
+        {
+          "if": { "properties": { "requiredEnvironment": { "const": "preprod" } }, "required": ["requiredEnvironment"] },
+          "then": { "properties": { "safety": { "properties": { "allowedEnvironments": { "contains": { "const": "preprod" } } } } } }
+        }
+      ]
     }
   }
 }
