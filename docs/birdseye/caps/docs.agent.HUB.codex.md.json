@@ -33,6 +33,6 @@
   "tests": [
     "node -e JSON parse docs/birdseye/index.json"
   ],
-  "generation": "00010",
+  "generation": "00011",
   "contentHash": "sha256:7a1af57bdd73746050f037c414df0825497028fb4315c1c43b75d5fac0269d09"
 }

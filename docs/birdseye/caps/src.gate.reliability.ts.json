@@ -1,7 +1,7 @@
 {
   "id": "src/gate/reliability.ts",
   "role": "reliability-evaluator",
-  "generation": "00010",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:0636593c8046a0739cc67aa6a7c95653a7d3228746f76992b144269e54aeda25"
+  "contentHash": "sha256:0c855392e95cd921498b22cc959b34bfb6b637411aa422e05c574e3a6986ac73"
 }

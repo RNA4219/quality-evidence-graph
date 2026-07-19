@@ -1,7 +1,7 @@
 {
   "id": "fixtures/manifest.json",
   "role": "fixture-manifest",
-  "generation": "00010",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:71418f00c97e951e0ecbac221e6be69b6924ecd5da239460e6eda82ada12c382"
+  "contentHash": "sha256:8835efc920920a93023662d567ca007b402ce3b3016519777a6631c558ea81ec"
 }

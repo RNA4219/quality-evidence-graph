@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00010";
+const generation = "00011";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -23,6 +23,16 @@ const additions = {
   "src/gate/dq/placement-change.ts": { role: "placement-change-dq", caps: "docs/birdseye/caps/src.gate.dq.placement-change.ts.json" },
   "src/gate/evaluate.ts": { role: "gate-evaluator", caps: "docs/birdseye/caps/src.gate.evaluate.ts.json" },
   "src/gate/reliability.ts": { role: "reliability-evaluator", caps: "docs/birdseye/caps/src.gate.reliability.ts.json" },
+  "src/gate/reliability/contracts.ts": { role: "reliability-stage-contracts", caps: "docs/birdseye/caps/src.gate.reliability.contracts.ts.json" },
+  "src/gate/reliability/utils.ts": { role: "reliability-deterministic-utils", caps: "docs/birdseye/caps/src.gate.reliability.utils.ts.json" },
+  "src/gate/reliability/indexing.ts": { role: "reliability-indexing-stage", caps: "docs/birdseye/caps/src.gate.reliability.indexing.ts.json" },
+  "src/gate/reliability/selection.ts": { role: "reliability-selection-stage", caps: "docs/birdseye/caps/src.gate.reliability.selection.ts.json" },
+  "src/gate/reliability/qualification.ts": { role: "reliability-qualification-stage", caps: "docs/birdseye/caps/src.gate.reliability.qualification.ts.json" },
+  "src/gate/reliability/signals.ts": { role: "reliability-signal-stage", caps: "docs/birdseye/caps/src.gate.reliability.signals.ts.json" },
+  "src/gate/reliability/blockers.ts": { role: "reliability-blocker-stage", caps: "docs/birdseye/caps/src.gate.reliability.blockers.ts.json" },
+  "src/gate/reliability/accounting.ts": { role: "reliability-accounting-stage", caps: "docs/birdseye/caps/src.gate.reliability.accounting.ts.json" },
+  "src/gate/reliability/evaluator.ts": { role: "reliability-stage-orchestrator", caps: "docs/birdseye/caps/src.gate.reliability.evaluator.ts.json" },
+  "src/validation/reliability-semantics.ts": { role: "reliability-semantic-validator", caps: "docs/birdseye/caps/src.validation.reliability-semantics.ts.json" },
   "src/cli/evidence-normalize.ts": { role: "resilience-evidence-normalize", caps: "docs/birdseye/caps/src.cli.evidence-normalize.ts.json" },
   "schemas/reliability.schema.json": { role: "reliability-schema", caps: "docs/birdseye/caps/schemas.reliability.schema.json.json" },
   "schemas/resilience-normalize-context.schema.json": { role: "resilience-normalize-context-schema", caps: "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json" },
@@ -85,6 +95,10 @@ const additions = {
     tests: ["npm run birdseye-check", "git diff --check"],
   },
   "tests/runtime.test.mjs": { role: "runtime-contract-tests", caps: "docs/birdseye/caps/tests.runtime.test.mjs.json" },
+  "tests/fixture-regression.mjs": { role: "fixture-e2e-harness", caps: "docs/birdseye/caps/tests.fixture-regression.mjs.json" },
+  "tests/package-smoke.mjs": { role: "package-and-packed-types-smoke", caps: "docs/birdseye/caps/tests.package-smoke.mjs.json" },
+  "tests/type-contract/contract.ts": { role: "public-type-contract", caps: "docs/birdseye/caps/tests.type-contract.contract.ts.json" },
+  "tools/json-check.mjs": { role: "tracked-json-parser", caps: "docs/birdseye/caps/tools.json-check.mjs.json" },
   "src/cli/report/change-selection.ts": { role: "changed-target-selection", caps: "docs/birdseye/caps/src.cli.report.change-selection.ts.json" },
 };
 for (const name of ["model", "targets", "baseline-diff", "core", "formatter", "command"]) {
@@ -155,6 +169,17 @@ const newEdges = [
   ["src/gate/evaluate.ts", "src/gate/test-evidence.ts"],
   ["src/gate/evaluate.ts", "src/gate/reliability.ts"],
   ["src/gate/reliability.ts", "src/validation/evidence.ts"],
+  ["src/gate/reliability.ts", "src/gate/reliability/evaluator.ts"],
+  ["src/gate/reliability/evaluator.ts", "src/gate/reliability/indexing.ts"],
+  ["src/gate/reliability/evaluator.ts", "src/gate/reliability/selection.ts"],
+  ["src/gate/reliability/evaluator.ts", "src/gate/reliability/qualification.ts"],
+  ["src/gate/reliability/evaluator.ts", "src/gate/reliability/blockers.ts"],
+  ["src/gate/reliability/evaluator.ts", "src/gate/reliability/accounting.ts"],
+  ["src/gate/reliability/qualification.ts", "src/gate/reliability/signals.ts"],
+  ["src/gate/reliability/qualification.ts", "src/validation/reliability-semantics.ts"],
+  ["src/validation/schema.ts", "src/validation/reliability-semantics.ts"],
+  ["tests/fixture-regression.mjs", "fixtures/manifest.json"],
+  ["tests/type-contract/contract.ts", "src/types/graph.ts"],
   ["src/gate/dq/placement-change.ts", "src/gate/test-evidence.ts"],
   ["tests/runtime.test.mjs", "src/gate/test-evidence.ts"],
 ];

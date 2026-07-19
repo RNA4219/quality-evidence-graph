@@ -1,0 +1,16 @@
+{
+  "id": "src/gate/reliability/blockers.ts",
+  "role": "reliability-blocker-stage",
+  "generation": "00011",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:de061f3a9b6d5dc287c1bbcea53968b994be027ea97eab6316e8d9fe067465b6"
+}

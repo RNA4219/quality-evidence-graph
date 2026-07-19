@@ -327,12 +327,12 @@
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-06: qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:7ec0714e428cb70c7ea9810db1705ff884be668592e5c3ea6c31ea5e5c8a5952"
+      "- DQ-06: qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77"
     ],
     "disqualifications": [
       {
         "code": "DQ-06",
-        "message": "qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:7ec0714e428cb70c7ea9810db1705ff884be668592e5c3ea6c31ea5e5c8a5952",
+        "message": "qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77",
         "nodeIds": [
           "qeg:artifact-raw"
         ],

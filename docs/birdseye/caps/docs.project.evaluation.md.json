@@ -43,6 +43,6 @@
     "RanD KanoMode requirements audit",
     "fixture validate/gate/record"
   ],
-  "generation": "00010",
+  "generation": "00011",
   "contentHash": "sha256:d96aa2b9c463290ded1b6e1360f386ccbd1902920b4a0664cd93755387f26c40"
 }

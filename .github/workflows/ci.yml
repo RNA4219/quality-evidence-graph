@@ -51,6 +51,11 @@ jobs:
         continue-on-error: true
         run: npm run build
 
+      - name: Public type contracts
+        id: types
+        continue-on-error: true
+        run: npm run test:types
+
       - name: Runtime and action contracts
         id: runtime
         continue-on-error: true
@@ -81,11 +86,10 @@ jobs:
         continue-on-error: true
         run: npm run birdseye-check
 
-      - name: Parse JSON contracts
+      - name: Parse all tracked JSON
         id: json_parse
         continue-on-error: true
-        run: |
-          node -e "const fs=require('fs'); for (const f of fs.readdirSync('schemas').filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync('schemas/'+f,'utf8')); JSON.parse(fs.readFileSync('docs/birdseye/index.json','utf8')); for (const f of fs.readdirSync('docs/birdseye/caps').filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync('docs/birdseye/caps/'+f,'utf8')); console.log('json ok')"
+        run: npm run json-check
 
       - name: Package dry-run
         id: pack
@@ -113,6 +117,7 @@ jobs:
           STEP_INSTALL: ${{ steps.install.outcome }}
           STEP_TYPECHECK: ${{ steps.typecheck.outcome }}
           STEP_BUILD: ${{ steps.build.outcome }}
+          STEP_TYPES: ${{ steps.types.outcome }}
           STEP_RUNTIME: ${{ steps.runtime.outcome }}
           STEP_SCHEMA: ${{ steps.schema.outcome }}
           STEP_ENUM: ${{ steps.enum.outcome }}
@@ -129,6 +134,7 @@ jobs:
               ['install', process.env.STEP_INSTALL],
               ['typecheck', process.env.STEP_TYPECHECK],
               ['build', process.env.STEP_BUILD],
+              ['types', process.env.STEP_TYPES],
               ['runtime', process.env.STEP_RUNTIME],
               ['schema', process.env.STEP_SCHEMA],
               ['enum', process.env.STEP_ENUM],

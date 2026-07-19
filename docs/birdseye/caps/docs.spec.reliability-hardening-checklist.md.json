@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-hardening-checklist.md",
   "role": "reliability-resilience-hardening-checklist",
-  "generation": "00010",
+  "generation": "00011",
   "public_api": [],
   "summary": "Reliability / Resilience hardening の実装、fixture、local validation、Node 20 / 24 CI 証跡チェックリスト。",
   "deps_out": [

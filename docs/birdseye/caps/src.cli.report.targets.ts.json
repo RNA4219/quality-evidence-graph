@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report/targets.ts",
   "role": "report-targets",
-  "generation": "00010",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],

@@ -24,6 +24,6 @@
     "npm run build",
     "node dist/cli.js repro-bundle --report .qeg/qeg-ci-report.json --out .qeg/repro-smoke fixtures/negative-approval-missing"
   ],
-  "generation": "00010",
+  "generation": "00011",
   "contentHash": "sha256:25d0cfaafc17302e3b464c33f7b156c3eacf1e854d63ed2c7da7ce7f4f2e2abb"
 }

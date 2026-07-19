@@ -1,7 +1,7 @@
 {
   "id": "src/types/graph.ts",
   "role": "graph-types",
-  "generation": "00010",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:aa4fdd35451568c58a5252af697aa8934fb5b939f6d45460704f084f64ac694b"
+  "contentHash": "sha256:00eb747e325e55ce65da42cecf4beb729e3f8ca3150938eedf76874598505bfa"
 }

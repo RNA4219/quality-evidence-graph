@@ -46,6 +46,6 @@
     "node dist/cli.js schema-check",
     "node dist/cli.js check fixtures/positive-release-go"
   ],
-  "generation": "00010",
+  "generation": "00011",
   "contentHash": "sha256:cf0fb162e6366ca4581e9dccb5385e5bccc125b7c2913407c8f1cf33182337f9"
 }

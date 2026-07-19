@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-hardening.md",
   "role": "reliability-resilience-hardening-spec",
-  "generation": "00010",
+  "generation": "00011",
   "public_api": [],
   "summary": "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
   "deps_out": [
