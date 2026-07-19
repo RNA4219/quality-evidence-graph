@@ -3,8 +3,8 @@ intent_id: INT-QEG-SPEC-INDEX-001
 owner: quality-evidence-graph
 status: active
 profile: ipo_controlled
-last_reviewed_at: 2026-07-04
-next_review_due: 2026-08-04
+last_reviewed_at: 2026-07-19
+next_review_due: 2026-10-19
 ---
 
 # IPO 統制仕様
@@ -36,9 +36,11 @@ next_review_due: 2026-08-04
 8. `docs/spec/acceptance.md`
 9. `docs/spec/operational-cli-extensions.md`
 10. `docs/spec/reliability-extension.md`
-11. `docs/spec/reliability-extension-review-2026-07-19.md`
-12. `docs/spec/review-2026-06-03.md`
-13. `docs/spec/gate-acceptance-2026-06-03.md`
+11. `docs/spec/reliability-hardening.md`
+12. `docs/spec/reliability-hardening-checklist.md`
+13. `docs/spec/reliability-extension-review-2026-07-19.md`（初期 review 履歴）
+14. `docs/spec/review-2026-06-03.md`
+15. `docs/spec/gate-acceptance-2026-06-03.md`
 
 ## 3. 境界
 
@@ -75,7 +77,9 @@ next_review_due: 2026-08-04
 
 - `GatePolicy`, `Waiver`, `ApprovalEvidence`, `EvidencePackage`, `ControlRoles` はこの仕様群を元に型と schema へ写像する。
 - resilience evidence は `docs/spec/reliability-extension.md` の discriminator、DQ / blocker、report contract に従う。
-- resilience 拡張の未実装範囲と Gate split は `docs/spec/reliability-extension-review-2026-07-19.md` に従う。
+- resilience 実装の保守性、公開型、DQ ownership、negative fixture、CI 完了条件は `docs/spec/reliability-hardening.md` に従う。
+- resilience hardening の実装状況と証跡は `docs/spec/reliability-hardening-checklist.md` に記録する。
+- `docs/spec/reliability-extension-review-2026-07-19.md` は初期仕様レビューの履歴であり、現在の未完了項目の正本にはしない。
 - `GatePolicy` は QEG 正本であり、`gatePolicyProposal` は verdict に直接影響させない。
 - すべての Gate 関連 reason、blocker、disqualification、waiver、approval evidence は `sourceRefs` を 1 件以上持つ。
 - `policyHash`、`contentHash`、`evidencePackageHash` は比較可能な文字列として扱い、アルゴリズムは原則として MVP では固定しない。ただし reliabilityPolicy 有効時の policyHash と resilience raw / signal artifact の contentHash は `docs/spec/reliability-extension.md` に従い SHA-256 に固定する。同一内容で再計算できることを実装 acceptance にする。

@@ -1,13 +1,15 @@
 ---
 intent_id: INT-QEG-RELIABILITY-REVIEW-2026-07-19
 owner: quality-evidence-graph
-status: active
+status: superseded
 profile: standard,strict,ipo_controlled
 last_reviewed_at: 2026-07-19
 next_review_due: 2026-10-19
 ---
 
 # Reliability / Resilience 拡張仕様レビュー
+
+> この文書は初期仕様レビュー時点の履歴である。現在の実装修正 contract と未完了項目は `docs/spec/reliability-hardening.md` および `docs/spec/reliability-hardening-checklist.md` を正本とする。
 
 ## 1. 対象
 

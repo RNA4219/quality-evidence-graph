@@ -1,430 +1,430 @@
 {
-  "generated_at": "00009",
+  "generated_at": "00010",
   "nodes": {
     "README.md": {
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:5275a169ea7c982036a78d823138ea0b028d0ea2badef4431d5eb5ac98aca987"
     },
     "README_JA.md": {
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:c0d763920e0c2e1b3c51e44de42d5f103b61cb74bd66ae06c8383883c6964b84"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:57a9cf40ea0d3a2839c000bbfd0fbd63d281f125a779fec389386af136e0b284"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
       "caps": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
-      "mtime": "00009",
-      "contentHash": "sha256:8d767f8be1bee1fd725419d5bdc72a92fc8eec88a6862c6e64b0033b96154987"
+      "mtime": "00010",
+      "contentHash": "sha256:7a1af57bdd73746050f037c414df0825497028fb4315c1c43b75d5fac0269d09"
     },
     "docs/project/blueprint.md": {
       "role": "blueprint",
       "caps": "docs/birdseye/caps/docs.project.blueprint.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:379c1dbdb73a80f7d75c34ae98fc2b2ccfda743f14f872d9ca55cb4f39ffc468"
     },
     "docs/research/quality-evidence-graph-requirements-report.md": {
       "role": "deep-research-report",
       "caps": "docs/birdseye/caps/docs.research.quality-evidence-graph-requirements-report.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0"
     },
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:651f3f8d07ba3997196a2146bcdc9e7bee07a6fb37deb2cb73060251b069371c"
     },
     "docs/project/runbook.md": {
       "role": "operations",
       "caps": "docs/birdseye/caps/docs.project.runbook.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:c35845b8b2b73eae28434c5b5206344b7022a54dbeadf695de89b5f5fce485da"
     },
     "docs/project/evaluation.md": {
       "role": "quality",
       "caps": "docs/birdseye/caps/docs.project.evaluation.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:d96aa2b9c463290ded1b6e1360f386ccbd1902920b4a0664cd93755387f26c40"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
       "caps": "docs/birdseye/caps/docs.project.guardrails.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1"
     },
     "docs/project/tasks.codex.md": {
       "role": "task-template",
       "caps": "docs/birdseye/caps/docs.project.tasks.codex.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:fee3ad6a8d7cba74208fee32da73717fdba304f53381ad4e8b98c6d4cbe5dcc5"
     },
     "docs/project/checklists.md": {
       "role": "checklist",
       "caps": "docs/birdseye/caps/docs.project.checklists.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:2718c34ee1b160b596ed695dbf53bbb72ba2d312e3df26a3771c2df2fe73ddde"
     },
     "fixtures/README.md": {
       "role": "fixture-contract",
       "caps": "docs/birdseye/caps/fixtures.README.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:b65fa08ac0bc9cf5763a15fb04dcae2af96e959d8b2cf7e841251861356d7814"
     },
     "docs/control-mapping.md": {
       "role": "control-mapping",
       "caps": "docs/birdseye/caps/docs.control-mapping.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157"
     },
     "docs/ipo-controlled-profile.md": {
       "role": "ipo-profile",
       "caps": "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:55a16c9a01a712b698d6abd6f248377cd7ad9c33f7fe2b7afebf28cc23475f80"
     },
     "docs/spec/index.md": {
       "role": "ipo-spec-index",
       "caps": "docs/birdseye/caps/docs.spec.index.md.json",
-      "mtime": "00009",
-      "contentHash": "sha256:9e5e79e7f861c765d875486862e58fbc510f94ac4df4bf6473fd0cd9f3e23bf7"
+      "mtime": "00010",
+      "contentHash": "sha256:0d8512e255f21f03dd50949f42bc8d7e57783e7d7f96528b81c8908318491d59"
     },
     "docs/spec/operational-cli-extensions.md": {
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:282e21f449e69f5e8205b6f3562a3d7c3562503159d5b1d4ab2edb6dd96dd767"
     },
     "docs/spec/gate-policy.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:a007e9a10b57d9826ceb8fb8534135592ce05c871b340f3a7a7adc250d5f3259"
     },
     "docs/spec/waiver-approval.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c"
     },
     "docs/spec/evidence-package.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97"
     },
     "docs/spec/retention-immutability.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1"
     },
     "docs/spec/acceptance.md": {
       "role": "ipo-spec-acceptance",
       "caps": "docs/birdseye/caps/docs.spec.acceptance.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:62d2ebbf57d666c8bd2908d5f76f6878466689add6d4f59a0e0695152d2328ae"
     },
     "docs/spec/review-2026-06-03.md": {
       "role": "ipo-spec-review",
       "caps": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e"
     },
     "docs/spec/gate-acceptance-2026-06-03.md": {
       "role": "ipo-spec-gate-acceptance",
       "caps": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b"
     },
     "docs/spec/implementation-gate-2026-06-03.md": {
       "role": "ipo-implementation-gate",
       "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:cb50ac1d1c61f7cd046d9e7b463e2ac89b0c547e2ab5ad98fb3cddf3feb920f5"
     },
     "docs/release-notes/2026-06-03-controlled-gate.md": {
       "role": "release-notes",
       "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-controlled-gate.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:5cd627f4a110f5c55bc4130fec78db3437f4c76d34e831334cffcf4f0f92e4c3"
     },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
       "role": "code-to-gate-analysis",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d"
     },
     "docs/spec/code-to-gate-2026-06-03/release-readiness.json": {
       "role": "code-to-gate-readiness",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.release-readiness.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a"
     },
     "docs/spec/kano-mode-2026-06-03/kano.json": {
       "role": "kano-mode-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.kano.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:914385a71a9e2d917aae2a3267662d8213e55b20741ec63bd7d46655cfd71144"
     },
     "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json": {
       "role": "kano-mode-requirements-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.requirements_audit_packet.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:0c0c9d3dea624290dceeca699a2a5addc833a81f91493b4d207a75a0b8e74852"
     },
     "docs/implementation-prep-gate-2026-06-02.md": {
       "role": "gate-record",
       "caps": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda"
     },
     "src/types.ts": {
       "role": "types",
       "caps": "docs/birdseye/caps/src.types.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:71128629c070d034acb6bcaecf462874ff564c6528beafbd5e4ac2880f5a4764"
     },
     "src/cli/report.ts": {
       "role": "ci-report-cli",
       "caps": "docs/birdseye/caps/src.cli.report.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:d5eee76abfae4f1df02fcfc4011f78a38bd3f687b49de72d4db4afa62d2c9d19"
     },
     "src/cli.ts": {
       "role": "cli-entrypoint",
       "caps": "docs/birdseye/caps/src.cli.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:cf0fb162e6366ca4581e9dccb5385e5bccc125b7c2913407c8f1cf33182337f9"
     },
     "src/cli/dq-explain.ts": {
       "role": "dq-explain-cli",
       "caps": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3"
     },
     "src/cli/doctor.ts": {
       "role": "doctor-cli",
       "caps": "docs/birdseye/caps/src.cli.doctor.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:9f51aa6cd70bcacf6b0321cff2e6b50911da72ec24167f9f94f3263cf69cdced"
     },
     "src/cli/schema-check.ts": {
       "role": "schema-check-cli",
       "caps": "docs/birdseye/caps/src.cli.schema-check.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:6c111e962b4d63c1730add8d8ef28ed9eecd07c5f227c658cd1b87a8dea77ce1"
     },
     "src/cli/enum-check.ts": {
       "role": "enum-drift-cli",
       "caps": "docs/birdseye/caps/src.cli.enum-check.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:1a04578e936a9b3f61c04284234a01fba646f78a2726e886a7e982fa5f7b7dc0"
     },
     "src/cli/init.ts": {
       "role": "oss-init-cli",
       "caps": "docs/birdseye/caps/src.cli.init.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:217fcf8b5983a48700299bd56c82d6ffe1c2c3818edc770d7923a115e62789ae"
     },
     "src/cli/snapshot.ts": {
       "role": "report-snapshot-cli",
       "caps": "docs/birdseye/caps/src.cli.snapshot.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:65a58ebdfa8839a4c836fda8f0ef783dd5e0da46ba4097c5ade68032c5b80c81"
     },
     "src/cli/baseline.ts": {
       "role": "baseline-audit-cli",
       "caps": "docs/birdseye/caps/src.cli.baseline.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:3e58e363fa931153f13da06aa55b4b82963fa9a4486cafb3c4bef367e38208ce"
     },
     "src/cli/evidence-verify.ts": {
       "role": "evidence-verify-cli",
       "caps": "docs/birdseye/caps/src.cli.evidence-verify.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:967677439972e82d731d6a8eca73e349b39ff695a13f35679742b2cd238bb79a"
     },
     "src/cli/policy-lint.ts": {
       "role": "policy-lint-cli",
       "caps": "docs/birdseye/caps/src.cli.policy-lint.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:a12e59444879c596eb31be6a307f198ea83c5e4c841b4905db9cee2e4e4e0bb2"
     },
     "src/cli/repro-bundle.ts": {
       "role": "repro-bundle-cli",
       "caps": "docs/birdseye/caps/src.cli.repro-bundle.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:25d0cfaafc17302e3b464c33f7b156c3eacf1e854d63ed2c7da7ce7f4f2e2abb"
     },
     "src/cli/check.ts": {
       "role": "local-check-cli",
       "caps": "docs/birdseye/caps/src.cli.check.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:64d86a6998b58b031b5cf8710bb308e53e393670630d41f72a0aefe77201d6bc"
     },
     ".github/workflows/ci.yml": {
       "role": "github-actions-ci",
       "caps": "docs/birdseye/caps/.github.workflows.ci.yml.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:daaf64fea28d663341d5eadde30dc030c4c40e5ef715d37a3c1624b7795126cf"
     },
     "qeg-report-action/action.yml": {
       "role": "github-action",
       "caps": "docs/birdseye/caps/qeg-report-action.action.yml.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:aa478bfecb54a21c2136398e56575a473850216f1d29a0f45830e436c204ff96"
     },
     "schemas/shared-defs.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:7d61104f46aed9d4febf2ad9604c3fa9b7cccf07e549b09a93ae6d4ec1980ad2"
     },
     "schemas/gate-verdict.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:440cf5522131cdca026eaa2a11173608b4fe609474257372e6f2a4f4650ba087"
     },
     "schemas/qeg.bundle.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:90b542653ff1afdbd70e0de421264ce1ad7bd96e4f116cbaa84508e30712237c"
     },
     "schemas/test-placement-plan.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:db7ff07b16f786f5272b1aeadb4e89079e3bdb37e7cb8d2c7bd9c9ccbe705ef1"
     },
     "schemas/quality-evidence-record.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:629439ddcf2ad1d950f033a397213e53c3bcfbb89020cf936ca55eaa20242a7f"
     },
     "schemas/gate-input.schema.json": {
       "role": "top-level-runtime-schema",
       "caps": "docs/birdseye/caps/schemas.gate-input.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:782d530d4832e34caeec5d97f9784cefc0490d6cc14e86f30e3accf6487fd72c"
     },
     "fixtures/manifest.json": {
       "role": "fixture-manifest",
       "caps": "docs/birdseye/caps/fixtures.manifest.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:71418f00c97e951e0ecbac221e6be69b6924ecd5da239460e6eda82ada12c382"
     },
     "src/validation.ts": {
       "role": "public-validation-api",
       "caps": "docs/birdseye/caps/src.validation.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:9e2080fc291f7e79b4ba73c53d948efd28f6ca3d2951e9f707fdb693973004fe"
     },
     "src/cli/report/change-selection.ts": {
       "role": "changed-target-selection",
       "caps": "docs/birdseye/caps/src.cli.report.change-selection.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:e70d804b3fa1b0ad00cda48107d2b992a9371781da6532d3fc6c3b65046c9dfc"
     },
     "src/validation/schema.ts": {
       "role": "runtime-schema-validation",
       "caps": "docs/birdseye/caps/src.validation.schema.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:eba39ca3a0d2ef780528ded77d47fe2b9a1d2965830a08b298ff67287058a593"
     },
     "src/validation/evidence.ts": {
       "role": "runtime-evidence-validation",
       "caps": "docs/birdseye/caps/src.validation.evidence.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:93a07598bd4e61b63c66efa0d9635f8881a07f672e9d1b2f338d321353e56529"
     },
     "src/cli/report/model.ts": {
       "role": "report-model",
       "caps": "docs/birdseye/caps/src.cli.report.model.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:f0d8d2eb751bb18a52ae9ccf39fc95a42cc58e2ad8314586a9b9b7f659e06c12"
     },
     "src/cli/report/targets.ts": {
       "role": "report-targets",
       "caps": "docs/birdseye/caps/src.cli.report.targets.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:9c6d1398bf73152832682ff44e97c2295aceb6761a865eb6a011eb725e3c4888"
     },
     "src/cli/report/baseline-diff.ts": {
       "role": "report-baseline-diff",
       "caps": "docs/birdseye/caps/src.cli.report.baseline-diff.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:9de5ba1b4e462c9b5e4e971ab8ce89acee3e2ce9d2999bead0da71e46c9f9905"
     },
     "src/cli/report/core.ts": {
       "role": "report-core",
       "caps": "docs/birdseye/caps/src.cli.report.core.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:409c030fac31e48c262e4f20e93a5da61cc701b6662184ddcc689bb67f19ca74"
     },
     "src/cli/report/formatter.ts": {
       "role": "report-formatter",
       "caps": "docs/birdseye/caps/src.cli.report.formatter.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:3ec7a989eb2c796ba53e5768541ef5fcc88012e8dd83f10743e954ffe6fdd1e6"
     },
     "src/cli/report/command.ts": {
       "role": "report-command",
       "caps": "docs/birdseye/caps/src.cli.report.command.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:4c6ddd1a7dbc97adc8f9eb6fab71ba9ad38a0b4732f59ea17f2855e6f0fc73f5"
     },
     "src/types/primitives.ts": {
       "role": "primitive-types",
       "caps": "docs/birdseye/caps/src.types.primitives.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:9d92e2e3f433920fb51d96a5ccd27abff66864b1188e1f682d717f89a04238b5"
     },
     "src/types/graph.ts": {
       "role": "graph-types",
       "caps": "docs/birdseye/caps/src.types.graph.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:aa4fdd35451568c58a5252af697aa8934fb5b939f6d45460704f084f64ac694b"
     },
     "src/types/gate.ts": {
       "role": "gate-types",
       "caps": "docs/birdseye/caps/src.types.gate.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:0f487b38fc07b08095045176ddc981e332a1b7aaf4a5bb8b9d7c800b5add71e1"
     },
     "src/gate/test-evidence.ts": {
       "role": "test-evidence-accounting",
       "caps": "docs/birdseye/caps/src.gate.test-evidence.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:90f5af6b6f76eda9168c826c483d4e7b09f7ec04703582b0e6a03e20fde90fee"
     },
     "src/gate/dq/placement-change.ts": {
       "role": "placement-change-dq",
       "caps": "docs/birdseye/caps/src.gate.dq.placement-change.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:8bed45be1c39d1add2473c57646a7bbeb5aea2d840f4f894945b6cd57d4ca6e9"
     },
     "src/gate/evaluate.ts": {
       "role": "gate-evaluator",
       "caps": "docs/birdseye/caps/src.gate.evaluate.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:85d1f05b67fcc65aed31b2206603b7975f380e7e2d8df477d75e9abf9136a6e8"
     },
     "tests/runtime.test.mjs": {
       "role": "runtime-contract-tests",
       "caps": "docs/birdseye/caps/tests.runtime.test.mjs.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:91e9bfadc13b0d40246091852371d1c57635fe0c659b7d2e3d6cc77b4dd2f3f0"
     },
     "docs/spec/reliability-extension.md": {
@@ -457,58 +457,113 @@
         "npm run schema-check",
         "npm run enum-check"
       ],
-      "mtime": "00009",
-      "contentHash": "sha256:8503037517cbdc0b3392d4eba21a1e7cedd1a49e99a07bc034043c09988975a5"
+      "mtime": "00010",
+      "contentHash": "sha256:667727e1ab5ef03f53b55c6e6a716573512313c1f33c05d2a62e9aa61f5b7add"
     },
     "docs/spec/reliability-extension-review-2026-07-19.md": {
       "role": "reliability-resilience-spec-review",
       "caps": "docs/birdseye/caps/docs.spec.reliability-extension-review-2026-07-19.md.json",
-      "summary": "Reliability / Resilience 拡張仕様の解消済み finding、決定済み contract、残リスク、仕様 / 実装 / release Gate split。",
+      "summary": "Reliability / Resilience 拡張の初期仕様レビュー履歴。現在の修正 contract と残作業は hardening 仕様・チェックリストへ移管済み。",
       "depsOut": [
-        "docs/spec/reliability-extension.md"
+        "docs/spec/reliability-extension.md",
+        "docs/spec/reliability-hardening.md"
       ],
       "depsIn": [
         "docs/spec/index.md"
       ],
       "risks": [
-        "仕様 review Go を implementation completion または release approval と誤認しない"
+        "historical review の旧 DQ 分類や未実装記録を現在の正本と誤認しない"
       ],
       "tests": [
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00009",
-      "contentHash": "sha256:2520bb6ce0681bc2316970939f91e87a86640ff27dc62f4d0f4166fd945dfe10"
+      "mtime": "00010",
+      "contentHash": "sha256:81112d3a7ae73874e4a56a09d01485f346228a271d26d74c9aed6c79deec2de7"
     },
     "src/types/evidence.ts": {
       "role": "evidence-types",
       "caps": "docs/birdseye/caps/src.types.evidence.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:22c866b90d093be81e21d44d34bcfa1f06ea6ae03dbeb7c9a5a6b562d788a04b"
     },
     "src/gate/reliability.ts": {
       "role": "reliability-evaluator",
       "caps": "docs/birdseye/caps/src.gate.reliability.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:0636593c8046a0739cc67aa6a7c95653a7d3228746f76992b144269e54aeda25"
     },
     "src/cli/evidence-normalize.ts": {
       "role": "resilience-evidence-normalize",
       "caps": "docs/birdseye/caps/src.cli.evidence-normalize.ts.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:5091bb560ace2dd1fa70e8d136c914fea99e956646d4907da68012bc0efc66dc"
     },
     "schemas/reliability.schema.json": {
       "role": "reliability-schema",
       "caps": "docs/birdseye/caps/schemas.reliability.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:5adafd504e603703afb1e19d6995012d3e3f72c9de3997d3548cc85c43980ad0"
     },
     "schemas/resilience-normalize-context.schema.json": {
       "role": "resilience-normalize-context-schema",
       "caps": "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json",
-      "mtime": "00009",
+      "mtime": "00010",
       "contentHash": "sha256:f6777125b4ee250360185cd81a5a28439f6070cf24f4c3a3e6cb7571c38db4f1"
+    },
+    "docs/spec/reliability-hardening.md": {
+      "role": "reliability-resilience-hardening-spec",
+      "caps": "docs/birdseye/caps/docs.spec.reliability-hardening.md.json",
+      "summary": "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
+      "depsOut": [
+        "docs/spec/reliability-extension.md",
+        "docs/spec/reliability-hardening-checklist.md",
+        "src/types/graph.ts",
+        "src/gate/reliability.ts",
+        "src/validation/schema.ts",
+        "src/cli/evidence-normalize.ts",
+        "fixtures/manifest.json",
+        "tests/runtime.test.mjs"
+      ],
+      "depsIn": [
+        "docs/spec/index.md"
+      ],
+      "risks": [
+        "refactor による判定 drift、legacy 型互換性の破壊、runtime test だけでの negative path 見逃し"
+      ],
+      "tests": [
+        "npm run typecheck",
+        "npm run test:runtime",
+        "npm run test:fixtures",
+        "npm run test:package",
+        "npm run birdseye-check"
+      ],
+      "mtime": "00010",
+      "contentHash": "sha256:3272db2965a1d860c26341dd50c9e79acb629de72790413f691f9aa02a828b7d"
+    },
+    "docs/spec/reliability-hardening-checklist.md": {
+      "role": "reliability-resilience-hardening-checklist",
+      "caps": "docs/birdseye/caps/docs.spec.reliability-hardening-checklist.md.json",
+      "summary": "Reliability / Resilience hardening の実装、fixture、local validation、Node 20 / 24 CI 証跡チェックリスト。",
+      "depsOut": [
+        "docs/spec/reliability-extension.md",
+        "docs/spec/reliability-hardening.md",
+        "fixtures/manifest.json"
+      ],
+      "depsIn": [
+        "docs/spec/index.md",
+        "docs/spec/reliability-hardening.md"
+      ],
+      "risks": [
+        "証跡なしの完了扱い、古い commit の CI 成功の流用、fixture を real acceptance と誤認する"
+      ],
+      "tests": [
+        "npm run test:fixtures",
+        "npm run birdseye-check",
+        "git diff --check"
+      ],
+      "mtime": "00010",
+      "contentHash": "sha256:f701b3e931d4fff07c17ea437f18310b6b1f9f8e172e29a83c93c7b9c4a60f76"
     }
   },
   "edges": [
@@ -1263,6 +1318,54 @@
     [
       "src/gate/reliability.ts",
       "src/validation/evidence.ts"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/reliability-hardening.md"
+    ],
+    [
+      "docs/spec/index.md",
+      "docs/spec/reliability-hardening-checklist.md"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "docs/spec/reliability-extension.md"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "docs/spec/reliability-hardening-checklist.md"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "src/types/graph.ts"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "src/gate/reliability.ts"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "src/validation/schema.ts"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "src/cli/evidence-normalize.ts"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "fixtures/manifest.json"
+    ],
+    [
+      "docs/spec/reliability-hardening.md",
+      "tests/runtime.test.mjs"
+    ],
+    [
+      "docs/spec/reliability-hardening-checklist.md",
+      "fixtures/manifest.json"
+    ],
+    [
+      "docs/spec/reliability-extension-review-2026-07-19.md",
+      "docs/spec/reliability-hardening.md"
     ]
   ]
 }

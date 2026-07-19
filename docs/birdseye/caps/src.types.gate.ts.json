@@ -1,7 +1,7 @@
 {
   "id": "src/types/gate.ts",
   "role": "gate-types",
-  "generation": "00009",
+  "generation": "00010",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],

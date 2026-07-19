@@ -69,7 +69,7 @@ policy 条件により必要になる field は schema 上で省略可能でも�
 
 reliabilityPolicy が存在する gate input は、top-level metadata.headRef、policyId、policyHash を必須とする。headRef は完全な lower-case Git SHA-1 または SHA-256、policyHash は sha256: に続く lower-case 64 桁 hex とする。この条件は gate-input schema の if / then で検証し、欠落または形式不正は DQ-01 とする。
 
-判定時刻と revision の正本は top-level metadata、policy の正本は gate input の policy とする。input.policy の policyId / policyHash、top-level metadata の policyId / policyHash、graph.metadata の policyId / policyHash は 3 者で一致しなければならない。input.policy.profile、top-level metadata.profile、graph.metadata.profile も一致しなければならず、reliabilityPolicy を使える profile は standard、strict、ipo_controlled に限定する。完全 SHA、SHA-256 policyHash、policyId、profile の欠落・形式不正・不一致は DQ-21 とする。個別 evidence の targetRevision / rawArtifactRef / signal EvidenceRef revision が headRef と異なる場合は DQ-12 とする。
+判定時刻と revision の正本は top-level metadata、policy の正本は gate input の policy とする。input.policy の policyId / policyHash、top-level metadata の policyId / policyHash、graph.metadata の policyId / policyHash は 3 者で一致しなければならない。input.policy.profile、top-level metadata.profile、graph.metadata.profile も一致しなければならず、reliabilityPolicy を使える profile は standard、strict、ipo_controlled に限定する。top-level gate input 自体の required / format 違反は前段 schema preflight の DQ-01 とする。schema-valid な input に対し、graph metadata を含む完全 SHA、SHA-256 policyHash、policyId、profile の cross-object 欠落・形式不正・不一致、または reliabilityPolicy 有効時に policy.dqScope が DQ-18〜DQ-21 をすべて含まない場合は DQ-21 とする。個別 evidence の targetRevision / rawArtifactRef / signal EvidenceRef revision が headRef と異なる場合は DQ-12 とする。
 
 ## 3. Graph contract
 
@@ -162,13 +162,13 @@ status が pass、fail、aborted の場合、次を Gate qualification の必須
 | observed | pass / fail / aborted | requestCount、errorRate、latencyP95Ms、saturationPct、duplicateSideEffects、dataInconsistencies を持つ。 |
 | signalManifest | pass / fail / aborted | 3.4 の contract を満たす。 |
 
-qualification field は schema で型と object shape を検証するが、policy と status をまたぐ必須性は evaluator で判定する。steadyStateConfirmed、fault、abort、recovery の不足は DQ-21、observed または signalManifest の不足は DQ-20 とする。
+qualification field は schema で型と object shape を検証するが、policy と status をまたぐ必須性は evaluator で判定する。steadyStateConfirmed、fault、abort lifecycle の不足は DQ-18、observed または signalManifest の不足は DQ-20 とする。recovery 観測が必要な実行で `recovered=false` または recovery field が不足する場合は BLK-REL-02 とし、存在する recovery field の時系列または再計算値が矛盾する場合は DQ-18 とする。
 
 fault.actualTargetIds は 1 件以上とし、scenario.blastRadius.allowedTargets の部分集合でなければならない。fault.appliedDurationMs は 1 以上の整数とし、faultEndedAt - faultStartedAt の millisecond 値と一致しなければならない。
 
-recoveryDurationMs は recoveryConfirmedAt - faultEndedAt の millisecond 値と一致しなければならない。steady state、fault、abort、recovery の timestamp が startedAt から endedAt の範囲外、または順序矛盾する場合は DQ-21 とする。
+recoveryDurationMs は recoveryConfirmedAt - faultEndedAt の millisecond 値と一致しなければならない。steady state、fault、abort、recovery の timestamp が startedAt から endedAt の範囲外、または順序矛盾する場合は DQ-18 とする。
 
-abortRecord.conditionId は scenario.abortConditions の id、signalEntryId は signalManifest 内の entry id と一致しなければならない。entry の source、signalName または metricName、aggregation、unit は abort condition と一致し、triggeredAt は entry の window 内かつ faultStartedAt から faultEndedAt の範囲内でなければならない。metric entry の observedValue、trace / log entry の matchedCount は abortRecord.observedValue と一致し、operator を適用した結果が true でなければならない。不一致は DQ-21 とする。status=aborted 以外で abortRecord を持ってはならない。
+abortRecord.conditionId は scenario.abortConditions の id、signalEntryId は signalManifest 内の entry id と一致しなければならない。entry の source、signalName または metricName、aggregation、unit は abort condition と一致し、triggeredAt は entry の window 内かつ faultStartedAt から faultEndedAt の範囲内でなければならない。metric entry の observedValue、trace / log entry の matchedCount は abortRecord.observedValue と一致し、operator を適用した結果が true でなければならない。不一致は DQ-18 とする。status=aborted 以外で abortRecord を持ってはならない。
 
 environment は scenario.blastRadius.environment および policy.requiredEnvironment と一致しなければならない。fault.type が scenario.faultModel と一致しない evidence は、その test の matching evidence として数えない。
 
@@ -286,7 +286,7 @@ evidenceAgeHours が 0 未満なら future evidence として DQ-18、maxEvidenc
 
 1. requiredForSeverities に該当する risk を required risk とする。
 2. 3.1 の定義に従い、non-deleted required resilience test を risk に join する。
-3. testId と evidenced_by edge が一致する resilience evidence を linked candidate とする。
+3. testId が一致する resilience evidence を linked candidate とする。evidenced_by edge は存在する場合に provenance として監査するが、edge 不在だけで candidate を除外しない。edge が別 test を指すなど明示的に矛盾する場合は既存の graph traceability DQ を適用する。
 4. testExecutionMode=real に一致する evidence を base candidate とする。base candidate が 0 件なら DQ-18 とする。scenario、environment、lifecycle の妥当性は selected evidence を対象に DQ-18 で検証する。
 5. base candidate のうち targetRevision が metadata.headRef と一致するものを current candidate とする。base candidate はあるが current candidate が 0 件で revision mismatch が検出できる場合は DQ-12 とし、DQ-18 を重ねない。
 6. current candidate の endedAt を UTC instant に正規化し、最も新しい 1 件を selected evidence とする。environmentId または experimentId が異なっても別の selected evidence を作らない。
@@ -305,7 +305,7 @@ metadata.headRef と異なる evidence は base candidate として認識した�
 | DQ-18 | 必須 risk に real candidate がない、mock-only、stale / future / invalid timestamp、required environment・steady state・fault・abort lifecycle が不整合である。 |
 | DQ-19 | 同じ最新 endedAt の current evidence が異なる canonical decision fingerprint を持ち、選択が曖昧である。 |
 | DQ-20 | required observed summary / signal が存在しない、phase / metric / resolvable hash-backed EvidenceRef と結び付かない、または observed summary と signal measurement が一致しない。 |
-| DQ-21 | full revision、SHA-256 policyHash、policyId、profile が Gate metadata、graph metadata、policy の間で欠落・形式不正・不一致である。 |
+| DQ-21 | schema-valid な reliability input で、graph metadata を含む full revision、SHA-256 policyHash、policyId、profile の cross-object identity が欠落・形式不正・不一致である、または policy.dqScope が DQ-18〜DQ-21 をすべて含まない。top-level gate-input schema 違反は DQ-01 を優先する。 |
 
 mock evidence は単独では DQ にしない。しかし mock しかないため必須 risk を満たせない場合は DQ-18 とする。これは既存の mock evidence exclusion を維持する。
 
@@ -321,7 +321,7 @@ sourceRefs または evidenceRefs 自体が空なら DQ-13、evidence の path�
 |---|---|
 | BLK-REL-01 | requestCount、error rate、latency、saturation、duplicate side effect、data inconsistency、または SLO が effective threshold に違反する。 |
 | BLK-REL-02 | recovery が観測されたが未完了、または recoveryDurationMs が maxRecoverySeconds × 1000 を超える。 |
-| BLK-REL-03 | selected evidence の status が pass 以外、または passed が true 以外。 |
+| BLK-REL-03 | selected evidence の status が pass 以外、または passed が存在して status と矛盾する。passed が未指定であることだけでは blocker にしない。 |
 | BLK-REL-04 | actualTargetIds の集合・件数、appliedDurationMs、environment が scenario または safety policy に違反する。 |
 
 status=pass は producer の自己申告であり、QEG は observed と signal manifest により再判定する。status=aborted で abort record が欠ける、または abort condition を満たさない場合は BLK-REL-03 ではなく DQ-18 とする。
@@ -349,7 +349,7 @@ GateResult.reliability と JSON/text report の reliability section は必須で
 | passingRiskCount | required test のすべてが status=pass かつ blocker なしの risk 数。 |
 | riskCoverageRate | qualifiedRiskCount / requiredRiskCount。分母が 0 の場合は null。 |
 | requiredExecutionCount | required risk に requires_test で紐付く non-deleted resilience test 数。 |
-| qualifiedExecutionCount | DQ なしの selected evidence 数。required resilience test ごとに最大 1。fail / aborted / blocker を含む。 |
+| qualifiedExecutionCount | DQ なしの selected evidence 数。required resilience test ごとに最大 1。fail / aborted / error / timeout / skipped / blocker を含む。 |
 | passingExecutionCount | status=pass で、selected evidence または同じ test の attempt に blocker がない selected evidence 数。 |
 | resiliencePassRate | passingExecutionCount / qualifiedExecutionCount。分母が 0 の場合は null。 |
 | recoverySecondsP50、recoverySecondsP95 | DQ でない selected evidence の recoveryDurationMs を秒へ変換した分位値。0 件なら null。 |
@@ -358,7 +358,7 @@ GateResult.reliability と JSON/text report の reliability section は必須で
 | excludedMockTests | 既存 testEvidenceAccounting と同じ理由と sourceRefs を持つ。 |
 | dqCountByRule | DQ-12、DQ-18〜DQ-21 を code ごとに集計する。 |
 
-report は risk ID、test ID、evidence ID、adapter、experimentId、attempt、targetRevision、environmentId、選択理由を含む drill-down を出力する。DQ、excluded mock、stale evidence は pass rate の分母から除外する。fail、aborted、threshold blocker、safety blocker は decision-grade execution として分母に含め、分子には含めない。
+report は risk ID、test ID、evidence ID、adapter、experimentId、attempt、targetRevision、environmentId、選択理由を含む drill-down を出力する。DQ、excluded mock、stale evidence は pass rate の分母から除外する。fail、aborted、error、timeout、skipped、threshold blocker、safety blocker は decision-grade execution として分母に含め、分子には含めない。
 
 resiliencePassRate は execution 単位、riskCoverageRate は risk 単位とし、相互に代用してはならない。risk ごとに複数 test が required の場合は test 単位で一度計算し、risk 単位の qualified / passing は required test がすべて条件を満たす場合だけ成立する。
 
@@ -382,7 +382,7 @@ MVP で normalize を実装する adapter は Lakda（HATE/v1 manifest の run I
 
 normalizationVersion=qeg-resilience-evidence-v1 の output は evidenceType=resilience の node contract を直接満たす。adapter 固有 field は rawArtifactRef が指す raw artifact に残し、normalized node 直下へ追加してはならない。
 
-adapter が必要な signal を生成できない場合、空配列や placeholder を作って成功扱いしてはならない。正規化済み evidence を出力しても、Gate では DQ-20 または DQ-21 になり得る。
+adapter が必要な signal または qualification field を生成できない場合、空配列や placeholder を捏造して成功扱いしてはならない。入力に存在する事実だけで schema-valid な evidence を出力できる場合は normalize success としてよいが、後続 Gate では DQ-18 または DQ-20 になり得る。policy identity の不成立は normalize ではなく Gate の DQ-21 とする。
 
 normalize command で raw JSON が unreadable、adapter が unsupported、または normalized output が schema invalid の場合は command failure、exit code 1 とし、不完全な output file を残さない。schema valid な output の Gate 資格不足は normalize failure にせず、後続 Gate の DQ / blocker として扱う。
 

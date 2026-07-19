@@ -17,6 +17,6 @@
   "tests": [
     "code-to-gate analyze . --emit all"
   ],
-  "generation": "00009",
+  "generation": "00010",
   "contentHash": "sha256:8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d"
 }

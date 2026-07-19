@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00009";
+const generation = "00010";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -48,13 +48,40 @@ const additions = {
     risks: ["実験 runner 化、mock の誤計上、revision / signal / safety の検証漏れ"],
     tests: ["npm run birdseye-check", "npm run schema-check", "npm run enum-check"],
   },
+  "docs/spec/reliability-hardening.md": {
+    role: "reliability-resilience-hardening-spec",
+    caps: "docs/birdseye/caps/docs.spec.reliability-hardening.md.json",
+    summary: "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
+    depsOut: [
+      "docs/spec/reliability-extension.md",
+      "docs/spec/reliability-hardening-checklist.md",
+      "src/types/graph.ts",
+      "src/gate/reliability.ts",
+      "src/validation/schema.ts",
+      "src/cli/evidence-normalize.ts",
+      "fixtures/manifest.json",
+      "tests/runtime.test.mjs",
+    ],
+    depsIn: ["docs/spec/index.md"],
+    risks: ["refactor による判定 drift、legacy 型互換性の破壊、runtime test だけでの negative path 見逃し"],
+    tests: ["npm run typecheck", "npm run test:runtime", "npm run test:fixtures", "npm run test:package", "npm run birdseye-check"],
+  },
+  "docs/spec/reliability-hardening-checklist.md": {
+    role: "reliability-resilience-hardening-checklist",
+    caps: "docs/birdseye/caps/docs.spec.reliability-hardening-checklist.md.json",
+    summary: "Reliability / Resilience hardening の実装、fixture、local validation、Node 20 / 24 CI 証跡チェックリスト。",
+    depsOut: ["docs/spec/reliability-extension.md", "docs/spec/reliability-hardening.md", "fixtures/manifest.json"],
+    depsIn: ["docs/spec/index.md", "docs/spec/reliability-hardening.md"],
+    risks: ["証跡なしの完了扱い、古い commit の CI 成功の流用、fixture を real acceptance と誤認する"],
+    tests: ["npm run test:fixtures", "npm run birdseye-check", "git diff --check"],
+  },
   "docs/spec/reliability-extension-review-2026-07-19.md": {
     role: "reliability-resilience-spec-review",
     caps: "docs/birdseye/caps/docs.spec.reliability-extension-review-2026-07-19.md.json",
-    summary: "Reliability / Resilience 拡張仕様の解消済み finding、決定済み contract、残リスク、仕様 / 実装 / release Gate split。",
-    depsOut: ["docs/spec/reliability-extension.md"],
+    summary: "Reliability / Resilience 拡張の初期仕様レビュー履歴。現在の修正 contract と残作業は hardening 仕様・チェックリストへ移管済み。",
+    depsOut: ["docs/spec/reliability-extension.md", "docs/spec/reliability-hardening.md"],
     depsIn: ["docs/spec/index.md"],
-    risks: ["仕様 review Go を implementation completion または release approval と誤認しない"],
+    risks: ["historical review の旧 DQ 分類や未実装記録を現在の正本と誤認しない"],
     tests: ["npm run birdseye-check", "git diff --check"],
   },
   "tests/runtime.test.mjs": { role: "runtime-contract-tests", caps: "docs/birdseye/caps/tests.runtime.test.mjs.json" },
@@ -97,8 +124,20 @@ const newEdges = [
   ["docs/requirements.md", "src/gate/test-evidence.ts"],
   ["docs/requirements.md", "docs/spec/reliability-extension.md"],
   ["docs/spec/index.md", "docs/spec/reliability-extension.md"],
+  ["docs/spec/index.md", "docs/spec/reliability-hardening.md"],
+  ["docs/spec/index.md", "docs/spec/reliability-hardening-checklist.md"],
   ["docs/spec/index.md", "docs/spec/reliability-extension-review-2026-07-19.md"],
+  ["docs/spec/reliability-hardening.md", "docs/spec/reliability-extension.md"],
+  ["docs/spec/reliability-hardening.md", "docs/spec/reliability-hardening-checklist.md"],
+  ["docs/spec/reliability-hardening.md", "src/types/graph.ts"],
+  ["docs/spec/reliability-hardening.md", "src/gate/reliability.ts"],
+  ["docs/spec/reliability-hardening.md", "src/validation/schema.ts"],
+  ["docs/spec/reliability-hardening.md", "src/cli/evidence-normalize.ts"],
+  ["docs/spec/reliability-hardening.md", "fixtures/manifest.json"],
+  ["docs/spec/reliability-hardening.md", "tests/runtime.test.mjs"],
+  ["docs/spec/reliability-hardening-checklist.md", "fixtures/manifest.json"],
   ["docs/spec/reliability-extension-review-2026-07-19.md", "docs/spec/reliability-extension.md"],
+  ["docs/spec/reliability-extension-review-2026-07-19.md", "docs/spec/reliability-hardening.md"],
   ["docs/spec/reliability-extension.md", "schemas/qeg.bundle.schema.json"],
   ["docs/spec/reliability-extension.md", "schemas/gate-policy.schema.json"],
   ["docs/spec/reliability-extension.md", "schemas/shared-defs.schema.json"],

@@ -32,6 +32,6 @@
     "git ls-files docs/spec/*.md",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00009",
-  "contentHash": "sha256:9e5e79e7f861c765d875486862e58fbc510f94ac4df4bf6473fd0cd9f3e23bf7"
+  "generation": "00010",
+  "contentHash": "sha256:0d8512e255f21f03dd50949f42bc8d7e57783e7d7f96528b81c8908318491d59"
 }
