@@ -475,6 +475,74 @@ test("reliability fails closed on invalid clocks and invalid current timestamps"
   assert.equal(evidenceResult.reliability.qualifiedExecutionCount, 0);
 });
 
+test("reliability semantic validator is shared by schema preflight and direct evaluation", async () => {
+  const invalid = reliabilityInput();
+  const evidence = invalid.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
+  evidence.status = "fail";
+  evidence.passed = true;
+
+  const validation = await validateGateInput(invalid);
+  assert.equal(validation.valid, false);
+  assert.ok(validation.issues.some((item) => item.keyword === "REL-SEM-007"));
+
+  const result = evaluateGate(invalid);
+  assert.ok(
+    result.disqualifications.some(
+      (item) => item.code === "DQ-01" && item.message.includes("REL-SEM-007"),
+    ),
+  );
+});
+
+test("artifact failures classify DQ-06 and DQ-12 by artifact with non-revision priority", () => {
+  const revisionOnly = reliabilityInput();
+  const revisionEvidence = revisionOnly.graph.nodes.find(
+    (node) => node.id === "qeg:evidence-resilience",
+  );
+  revisionEvidence.rawArtifactRef.revision = "c".repeat(40);
+  revisionOnly.evidenceVerification = {
+    reportVersion: "qeg-evidence-verification-v2",
+    status: "fail",
+    items: [
+      {
+        artifactId: revisionEvidence.rawArtifactRef.id,
+        severity: "fail",
+        code: "REVISION_MISMATCH",
+        message: "revision mismatch",
+      },
+    ],
+  };
+  const revisionResult = evaluateGate(revisionOnly);
+  assert.ok(revisionResult.disqualifications.some((item) => item.code === "DQ-12"));
+  assert.equal(revisionResult.disqualifications.some((item) => item.code === "DQ-06"), false);
+
+  const mixed = reliabilityInput();
+  const mixedEvidence = mixed.graph.nodes.find(
+    (node) => node.id === "qeg:evidence-resilience",
+  );
+  mixedEvidence.rawArtifactRef.revision = "c".repeat(40);
+  mixed.evidenceVerification = {
+    reportVersion: "qeg-evidence-verification-v2",
+    status: "fail",
+    items: [
+      {
+        artifactId: mixedEvidence.rawArtifactRef.id,
+        severity: "fail",
+        code: "HASH_MISMATCH",
+        message: "hash mismatch",
+      },
+      {
+        artifactId: mixedEvidence.rawArtifactRef.id,
+        severity: "fail",
+        code: "REVISION_MISMATCH",
+        message: "revision mismatch",
+      },
+    ],
+  };
+  const mixedResult = evaluateGate(mixed);
+  assert.ok(mixedResult.disqualifications.some((item) => item.code === "DQ-06"));
+  assert.equal(mixedResult.disqualifications.some((item) => item.code === "DQ-12"), false);
+});
+
 test("reliability schema enforces strict discriminators and semantic invariants", async () => {
   const missingDiscriminator = reliabilityInput();
   const evidence = missingDiscriminator.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");

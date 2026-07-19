@@ -15,6 +15,7 @@ import type {
   TraceOrLogSignalEntry,
 } from "../types.js";
 import type { DQDetectorInput } from "./context.js";
+import { validateReliabilitySemantics } from "../validation/reliability-semantics.js";
 
 export interface ReliabilityEvaluation {
   readonly accounting: ReliabilityAccounting;
@@ -150,19 +151,90 @@ function abortTriggered(condition: ResilienceTestNode["resilienceScenario"]["abo
   }
 }
 
+type ArtifactFailureClass = "non_revision" | "revision";
+
+function artifactFailureClasses(input: DQDetectorInput): ReadonlyMap<string, ArtifactFailureClass> {
+  const byArtifact = new Map<string, ArtifactFailureClass>();
+  for (const item of input.evidenceVerification?.items ?? []) {
+    if (item.severity !== "fail" || item.code === "VERIFIED") continue;
+    const current = byArtifact.get(item.artifactId);
+    if (item.code !== "REVISION_MISMATCH" || current === "non_revision") {
+      byArtifact.set(item.artifactId, "non_revision");
+    } else {
+      byArtifact.set(item.artifactId, "revision");
+    }
+  }
+  return byArtifact;
+}
+
+function artifactVerificationDqs(input: DQDetectorInput): Disqualification[] {
+  const report = input.evidenceVerification;
+  if (!report) {
+    return [dq("DQ-06", "Reliability policy is enabled but artifact verification report is missing", [])];
+  }
+  const classes = artifactFailureClasses(input);
+  const result: Disqualification[] = [];
+  const preflightOwnsDq06 = input.preflightDisqualifications.some((item) => item.code === "DQ-06");
+  for (const artifactId of [...classes.keys()].sort(lexicalCompare)) {
+    const failureClass = classes.get(artifactId);
+    if (failureClass === "non_revision") {
+      if (!preflightOwnsDq06) {
+        result.push(dq("DQ-06", "Artifact verification failed for " + artifactId, [artifactId]));
+      }
+    } else if (failureClass === "revision") {
+      result.push(dq("DQ-12", "Artifact revision mismatch for " + artifactId, [artifactId]));
+    }
+  }
+  if (report.status === "fail" && classes.size === 0 && !preflightOwnsDq06) {
+    result.push(dq("DQ-06", "Artifact verification failed without a classified artifact diagnostic", []));
+  }
+  return result;
+}
+
+function semanticInputDqs(input: DQDetectorInput): Disqualification[] {
+  const issues = validateReliabilitySemantics(input);
+  if (
+    issues.length === 0 ||
+    input.preflightDisqualifications.some((item) => item.code === "DQ-01")
+  ) {
+    return [];
+  }
+  return issues.map((issue) =>
+    dq(
+      "DQ-01",
+      "[" + issue.ruleId + "] " + issue.message + " at " + issue.path,
+      issue.nodeId ? [issue.nodeId] : [],
+    ),
+  );
+}
+
 function evidenceIntegrityDqs(
   input: DQDetectorInput,
   evidence: ResilienceExecutionEvidenceNode
 ): Disqualification[] {
   const head = input.metadata.headRef;
+  const reportClasses = artifactFailureClasses(input);
   const mismatches: string[] = [];
   if (!head || evidence.targetRevision !== head) mismatches.push("targetRevision");
-  if (evidence.rawArtifactRef.revision !== head) mismatches.push("rawArtifactRef.revision");
+  if (
+    evidence.rawArtifactRef.revision !== head &&
+    !reportClasses.has(evidence.rawArtifactRef.id)
+  ) {
+    mismatches.push("rawArtifactRef.revision");
+  }
   for (const ref of evidence.evidenceRefs) {
-    if (ref.revision !== head) mismatches.push(`evidenceRef:${ref.id}`);
+    if (ref.revision !== head && !reportClasses.has(ref.id)) {
+      mismatches.push("evidenceRef:" + ref.id);
+    }
   }
   if (mismatches.length === 0) return [];
-  return [dq("DQ-12", `Resilience evidence revision mismatch (${mismatches.join(", ")})`, [evidence.id])];
+  return [
+    dq(
+      "DQ-12",
+      "Resilience evidence revision mismatch (" + mismatches.join(", ") + ")",
+      [evidence.id],
+    ),
+  ];
 }
 
 function policyIntegrityDqs(input: DQDetectorInput): Disqualification[] {
@@ -232,29 +304,34 @@ function metricMatchesSlo(metric: MetricSignalEntry, slo: ResilienceSlo): boolea
 function scenarioDqs(input: DQDetectorInput, test: ResilienceTestNode): Disqualification[] {
   const policy = input.policy.reliabilityPolicy;
   if (!policy) return [];
-  const scenario = test.resilienceScenario;
   const reasons: string[] = [];
-  const names = new Set<string>();
-  const tuples = new Set<string>();
-  if (!policy.safety.allowedEnvironments.includes(policy.requiredEnvironment)) reasons.push("requiredEnvironment is outside safety.allowedEnvironments");
-  for (const slo of scenario.steadyState.slos) {
-    if (names.has(slo.name)) reasons.push(`duplicate SLO name ${slo.name}`);
-    names.add(slo.name);
-    const tuple = [slo.metricName, slo.semanticRole, slo.aggregation, slo.unit].join("\u0000");
-    if (tuples.has(tuple)) reasons.push(`duplicate SLO tuple ${slo.name}`);
-    tuples.add(tuple);
-    if (!scenario.steadyState.requiredMetrics.includes(slo.metricName)) reasons.push(`requiredMetrics omits SLO metric ${slo.metricName}`);
-    if (policy.requireRecoveryObservation && !slo.evaluationPhases.includes("recovery")) reasons.push(`SLO ${slo.name} omits recovery phase`);
+  for (const slo of test.resilienceScenario.steadyState.slos) {
+    if (policy.requireRecoveryObservation && !slo.evaluationPhases.includes("recovery")) {
+      reasons.push("SLO " + slo.name + " omits recovery phase");
+    }
     const bounds = targetBounds(slo);
-    if (slo.target.targetType === "range" && bounds.min >= bounds.max) reasons.push(`SLO ${slo.name} has an invalid target range`);
     for (const phase of slo.evaluationPhases) {
       const policyLimit = policyBounds(input, slo.semanticRole, phase);
-      if (policyLimit && Math.max(bounds.min, policyLimit.min) > Math.min(bounds.max, policyLimit.max)) {
-        reasons.push(`SLO ${slo.name} conflicts with the effective policy threshold in ${phase}`);
+      if (
+        policyLimit &&
+        Math.max(bounds.min, policyLimit.min) > Math.min(bounds.max, policyLimit.max)
+      ) {
+        reasons.push(
+          "SLO " + slo.name + " conflicts with the effective policy threshold in " + phase,
+        );
       }
     }
   }
-  return reasons.length > 0 ? [dq("DQ-18", `Resilience scenario is incompatible with policy: ${[...new Set(reasons)].join("; ")}`, [test.id])] : [];
+  return reasons.length > 0
+    ? [
+        dq(
+          "DQ-18",
+          "Resilience scenario is incompatible with policy: " +
+            [...new Set(reasons)].join("; "),
+          [test.id],
+        ),
+      ]
+    : [];
 }
 
 function findAbortSignal(
@@ -545,16 +622,16 @@ export function evaluateReliability(input: DQDetectorInput): ReliabilityEvaluati
   const requiredRisks = (input.riskNodes ?? input.graph.nodes.filter((node) => node.kind === "risk"))
     .filter((risk) => policy.requiredForSeverities.includes(risk.severity));
   const excludedMockTests = resilienceTests.filter((test) => test.testExecutionMode === "mock").map((test) => ({ testId: test.id, reason: "mock_test" as const, sourceRefs: test.traceability.sourceRefs }));
-  const disqualifications: Disqualification[] = [...policyIntegrityDqs(input)];
+  const disqualifications: Disqualification[] = [
+    ...semanticInputDqs(input),
+    ...artifactVerificationDqs(input),
+    ...policyIntegrityDqs(input),
+  ];
   const blockers: GateBlocker[] = [];
   const drillDown: ReliabilityDrillDown[] = [];
   const selectedByTest = new Map<string, ResilienceExecutionEvidenceNode>();
   const qualifiedRiskIds = new Set<string>();
   const passingRiskIds = new Set<string>();
-
-  if (!input.evidenceVerification || (input.evidenceVerification.status === "fail" && !input.preflightDisqualifications.some((item) => item.code === "DQ-06"))) {
-    disqualifications.push(dq("DQ-06", "Reliability policy is enabled but artifact verification report is missing or failed", []));
-  }
 
   for (const risk of requiredRisks) {
     const tests = resilienceTests.filter((test) => !test.deleted && test.coveredRiskIds.includes(risk.id) && test.testExecutionMode === "real");
