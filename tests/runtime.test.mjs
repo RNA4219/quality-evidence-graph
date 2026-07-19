@@ -475,6 +475,35 @@ test("reliability fails closed on invalid clocks and invalid current timestamps"
   assert.equal(evidenceResult.reliability.qualifiedExecutionCount, 0);
 });
 
+test("reliability reports are stable across graph and signal enumeration order", () => {
+  const first = reliabilityInput();
+  const firstEvidence = first.graph.nodes.find(
+    (node) => node.id === "qeg:evidence-resilience",
+  );
+  firstEvidence.status = "fail";
+  firstEvidence.passed = false;
+  firstEvidence.observed.errorRate = 0.5;
+  firstEvidence.signalManifest.metrics.find(
+    (metric) => metric.semanticRole === "error_rate",
+  ).observedValue = 0.5;
+  firstEvidence.recovered = false;
+  firstEvidence.fault.actualTargetIds.push("dependency-b");
+
+  const reordered = structuredClone(first);
+  reordered.graph.nodes.reverse();
+  const reorderedEvidence = reordered.graph.nodes.find(
+    (node) => node.id === "qeg:evidence-resilience",
+  );
+  reorderedEvidence.evidenceRefs.reverse();
+  reorderedEvidence.signalManifest.metrics.reverse();
+
+  const left = evaluateGate(first);
+  const right = evaluateGate(reordered);
+  assert.deepEqual(right.disqualifications, left.disqualifications);
+  assert.deepEqual(right.blockers, left.blockers);
+  assert.deepEqual(right.reliability, left.reliability);
+});
+
 test("reliability semantic validator is shared by schema preflight and direct evaluation", async () => {
   const invalid = reliabilityInput();
   const evidence = invalid.graph.nodes.find((node) => node.id === "qeg:evidence-resilience");
