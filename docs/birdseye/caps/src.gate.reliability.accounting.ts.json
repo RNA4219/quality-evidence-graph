@@ -1,0 +1,16 @@
+{
+  "id": "src/gate/reliability/accounting.ts",
+  "role": "reliability-accounting-stage",
+  "generation": "00011",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:987f19c5d9aa0bf5f8bb43fdb0fa96395031c998b947c430e6bb822a0e89508f"
+}

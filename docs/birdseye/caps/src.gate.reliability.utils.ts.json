@@ -1,0 +1,16 @@
+{
+  "id": "src/gate/reliability/utils.ts",
+  "role": "reliability-deterministic-utils",
+  "generation": "00011",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:d8e5bf69c6a089e117ef36208430dbf98f615b1fdc47799705421c21fe487709"
+}

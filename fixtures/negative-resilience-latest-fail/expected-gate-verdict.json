@@ -1,0 +1,24 @@
+{
+  "fixture": "negative-resilience-latest-fail",
+  "description": "Reliability hardening fixture: negative-resilience-latest-fail",
+  "expectedVerdict": "no_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [
+    {
+      "id": "blocker:rel:03:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+      "message": "Resilience execution status is fail",
+      "ruleId": "BLK-REL-03",
+      "riskIds": [
+        "qeg:risk-reliability-fixture"
+      ],
+      "testId": "qeg:test-reliability-fixture",
+      "evidenceId": "qeg:evidence-reliability-fixture",
+      "effective": true
+    }
+  ],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

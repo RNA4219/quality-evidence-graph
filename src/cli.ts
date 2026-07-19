@@ -5,6 +5,7 @@ import {
   runCheckCommand,
   runDoctorCommand,
   runEnumCheckCommand,
+  runEvidenceNormalizeCommand,
   runEvidenceVerifyCommand,
   runExplainCommand,
   runGateCommand,
@@ -81,8 +82,12 @@ async function main(): Promise<void> {
       await runEnumCheckCommand(commandArgs);
       break;
     case "evidence":
+      if (commandArgs[0] === "normalize") {
+        await runEvidenceNormalizeCommand(commandArgs.slice(1));
+        break;
+      }
       if (commandArgs[0] !== "verify") {
-        console.error("Usage: qeg evidence verify <fixture-dir-or-parent> [...]");
+        console.error("Usage: qeg evidence verify <fixture-dir-or-parent> [...] | qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>");
         exit(1);
       }
       await runEvidenceVerifyCommand(commandArgs.slice(1));

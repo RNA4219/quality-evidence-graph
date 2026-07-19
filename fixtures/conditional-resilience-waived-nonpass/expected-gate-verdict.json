@@ -1,0 +1,25 @@
+{
+  "fixture": "conditional-resilience-waived-nonpass",
+  "description": "Reliability hardening fixture: conditional-resilience-waived-nonpass",
+  "expectedVerdict": "conditional_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [
+    {
+      "id": "blocker:rel:03:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+      "message": "Resilience execution status is fail",
+      "ruleId": "BLK-REL-03",
+      "riskIds": [
+        "qeg:risk-reliability-fixture"
+      ],
+      "testId": "qeg:test-reliability-fixture",
+      "evidenceId": "qeg:evidence-reliability-fixture",
+      "effective": false,
+      "waiverId": "qeg:waiver-nonpass"
+    }
+  ],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

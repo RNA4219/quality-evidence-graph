@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-resilience-signal-mismatch",
+  "description": "Reliability hardening fixture: negative-resilience-signal-mismatch",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-20"
+    }
+  ],
+  "expectedDisqualificationMode": "includes",
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

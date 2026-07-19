@@ -40,6 +40,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
+    "test:types": "node node_modules/typescript/bin/tsc -p tests/type-contract/tsconfig.json && npm run build && node tests/package-smoke.mjs",
     "qeg": "node dist/cli.js",
     "validate": "node dist/cli.js validate",
     "gate": "node dist/cli.js gate",
@@ -51,15 +52,17 @@
     "enum-check": "node dist/cli.js enum-check",
     "baseline": "node dist/cli.js baseline",
     "evidence": "node dist/cli.js evidence",
+    "test:runtime": "node --test tests/runtime.test.mjs tests/action-contract.test.mjs",
     "policy": "node dist/cli.js policy",
     "repro-bundle": "node dist/cli.js repro-bundle",
     "check": "node dist/cli.js check",
     "init": "node dist/cli.js init",
     "snapshot": "node dist/cli.js snapshot",
-    "test": "npm run build && node --test tests/runtime.test.mjs tests/action-contract.test.mjs && npm run test:fixtures && npm run test:package",
+    "test": "npm run test:types && npm run test:runtime && npm run test:fixtures && npm run test:package && npm run json-check",
     "test:fixtures": "node tests/fixture-regression.mjs",
     "test:package": "node tests/package-smoke.mjs",
-    "birdseye-check": "node tools/birdseye-check.mjs"
+    "birdseye-check": "node tools/birdseye-check.mjs",
+    "json-check": "node tools/json-check.mjs"
   },
   "keywords": [
     "quality-gate",

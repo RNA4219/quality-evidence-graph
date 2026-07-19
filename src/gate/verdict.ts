@@ -23,7 +23,7 @@ export function computeVerdict(
     return "disqualified";
   }
 
-  if (blockers.length > 0) {
+  if (blockers.some((blocker) => blocker.effective !== false)) {
     return "no_go";
   }
 

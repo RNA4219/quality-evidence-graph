@@ -1,0 +1,118 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-19",
+        "count": 1,
+        "remediation": "Eliminate the current-evidence ambiguity; QEG never falls back to an older pass."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-resilience-selection-ambiguous",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-19: Current resilience evidence reuses an execution identity with conflicting decision fingerprints"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-19",
+          "message": "Current resilience evidence reuses an execution identity with conflicting decision fingerprints",
+          "nodeIds": [
+            "qeg:evidence-reliability-fixture",
+            "qeg:evidence-reliability-fixture-conflict"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:reliability-extension",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "reliability": {
+        "enabled": true,
+        "requiredRiskCount": 1,
+        "qualifiedRiskCount": 0,
+        "passingRiskCount": 0,
+        "riskCoverageRate": 0,
+        "requiredExecutionCount": 1,
+        "qualifiedExecutionCount": 0,
+        "passingExecutionCount": 0,
+        "resiliencePassRate": null,
+        "recoverySecondsP50": null,
+        "recoverySecondsP95": null,
+        "recoverySampleCount": 0,
+        "duplicateSideEffectsCount": 0,
+        "dataInconsistenciesCount": 0,
+        "evidenceAgeHours": {},
+        "excludedMockTests": [],
+        "dqCountByRule": {
+          "DQ-12": 0,
+          "DQ-18": 0,
+          "DQ-19": 1,
+          "DQ-20": 0,
+          "DQ-21": 0
+        },
+        "drillDown": [
+          {
+            "riskId": "qeg:risk-reliability-fixture",
+            "testId": "qeg:test-reliability-fixture",
+            "selectionReason": "no_selectable_current_execution",
+            "exclusionReason": "ambiguous_execution_identity",
+            "disqualificationCodes": [
+              "DQ-19"
+            ],
+            "blockerIds": []
+          }
+        ]
+      },
+      "expected": {
+        "fixture": "negative-resilience-selection-ambiguous",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/reliability-hardening.md",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-19"
+        ],
+        "actualDqCodes": [
+          "DQ-19"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
+      }
+    }
+  ]
+}

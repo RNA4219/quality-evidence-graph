@@ -55,6 +55,8 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 | P-14 | QEG policy authority | Gate policy の正本は QEG のみとし、外部 artifact の policy 相当情報は proposal として扱う |
 | P-15 | namespaced identity | cross-repo join に使う ID は `<producer>:<local-id>` を標準とする |
 | P-16 | mock evidence exclusion | `testExecutionMode=mock` の test node は graph に監査記録として残すが、Gate 証跡の件数・強度・連続 green 回数・risk coverage には算入しない |
+| P-17 | resilience execution boundary | QEG は障害注入を実行せず、外部 producer が作成した resilience evidence を検証・会計・判定する |
+| P-18 | resilience evidence qualification | resilience Gate に使う evidence は real execution、current revision、freshness、signal、safety の条件を fail closed で満たす |
 
 ## 4. スコープ
 
@@ -301,6 +303,10 @@ Gate profile の既定は `standard` とする。`strict` は認証、決済、�
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない |
 | DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない |
+| DQ-18 | 必須 risk に matching real resilience evidence がない、mock-only、wrong scenario / environment、または selected status が error / timeout / skipped |
+| DQ-19 | resilience evidence が stale、envelope timestamp が未来・逆順、または latest evidence の選択が曖昧 |
+| DQ-20 | required observed / signal が存在しない、phase / metric / resolvable hash-backed EvidenceRef と結び付かない、または observed summary と一致しない |
+| DQ-21 | required な steady state、fault、abort、recovery、actual target / duration の field または時系列が欠落・矛盾する |
 
 DQ-13 は schema だけでは全 Gate 関連 node / edge / placement を完全に識別できないため、MVP では evaluator で判定する。ただし `gate-verdict.json` の `disqualifications[].sourceRefs` と `blockers[].sourceRefs` は schema 上も空配列を許さない。
 
@@ -352,6 +358,7 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-21 | `policy lint` | GatePolicy 正本の矛盾を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile 設定の不整合を検出できる |
 | C-22 | `check` | ローカル総合確認入口を提供する | schema-check、enum-check、doctor、snapshot、report を一括実行し、導入者が最初に見るコマンドにできる |
 | C-23 | Action outputs 拡充 | workflow 側の条件分岐を容易にする | `exit_code` に加え、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を出力できる |
+| C-24 | `evidence normalize --adapter <kind>` | 外部 resilience evidence を canonical node へ非破壊変換する | local raw JSON を読み、provenance と hash を保持した qeg-resilience-evidence-v1 を出力し、外部環境を操作しない |
 
 CLI の exit code は MVP では最小限にする。
 
@@ -478,3 +485,27 @@ MVP は次を満たしたら完了とする。
 - qeg-ci-report-v2はselectionとreport-level errorsを保持し、changed-onlyの差分検出失敗をexit 1とする。
 - 外部Actionはartifact upload後に既定でenforceし、自repoの集約CIだけdiagnostic-onlyとする。
 - fixtureの一覧と期待結果はfixtures/manifest.jsonを正本とする。
+
+## 22. Reliability / Resilience 拡張要件
+
+| ID | 要件 | 受入条件 |
+|---|---|---|
+| REL-01 | QEG は resilience experiment を実行しない | QEG CLI は外部 adapter が出力した local artifact の正規化、検証、会計、判定だけを行う |
+| REL-02 | resilience test を識別する | testType=resilience の test は scenario、coveredRiskIds、traceability を持つ |
+| REL-03 | resilience evidence を識別する | evidenceType=resilience の execution_evidence は adapter provenance、revision、actual fault、lifecycle、observed、hash 付き signal manifest を持つ |
+| REL-04 | real evidence を要求する | required risk の mock-only evidence は coverage に算入せず DQ-18 とする |
+| REL-05 | freshness と revision を検証する | targetRevision 不一致は DQ-12、stale または不正 timestamp は DQ-19 とする |
+| REL-06 | observability を証明する | latency、traffic、errors、saturation と副作用 / data integrity は hash 付き signal artifact と測定情報により検証できる |
+| REL-07 | 実測 safety を検証する | actual target、duration、environment が policy 上限を超えた場合は blocker とする |
+| REL-08 | report を再現可能にする | risk 別 coverage、pass rate の分母、recovery time、DQ、blocker、excluded mock を出力する |
+| REL-09 | 評価時計を固定する | freshness と waiver expiry は metadata.createdAt だけを使い、wall clock によって verdict を変えない |
+| REL-10 | evidence 選択を決定的にする | 最新 evidence を選び、同時刻競合は DQ-19、最新失敗時の旧 pass fallback は禁止する |
+| REL-11 | production 実験を Gate 対象外にする | MVP の forbidProduction は true 固定で、waiver による解除を許さない |
+| REL-12 | risk coverage と pass rate を分離する | riskCoverageRate は risk 単位、resiliencePassRate は selected execution 単位で計算する |
+| REL-13 | revision anchor を必須化する | reliabilityPolicy 有効時は metadata.headRef に完全な Git object ID を要求する |
+| REL-14 | selected evidence を一意にする | non-deleted required resilience test ごとに current revision の latest 1 件だけを選び、複数 test はすべて必須として評価する |
+| REL-15 | policy provenance を固定する | reliabilityPolicy 有効時は input policy、top-level metadata、graph.metadata の policyId / policyHash が一致する |
+| REL-16 | abort を実測 signal で裏付ける | abortRecord は構造化 condition と hash-backed signal entry の値・window・operator に一致する |
+| REL-17 | resilience branch を strict にする | discriminator 付き test / evidence は既知 field だけを受理し、legacy branch の互換性は維持する |
+
+詳細な field、判定優先順位、fixture、実装写像は docs/spec/reliability-extension.md を正本とする。

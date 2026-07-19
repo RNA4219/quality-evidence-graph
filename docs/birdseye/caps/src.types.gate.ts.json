@@ -1,7 +1,7 @@
 {
   "id": "src/types/gate.ts",
   "role": "gate-types",
-  "generation": "00009",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:8240bca1cd90fb87c986e517ea86a4a9a3e5db404b4cbbfdccb2d846a58033b5"
+  "contentHash": "sha256:0f487b38fc07b08095045176ddc981e332a1b7aaf4a5bb8b9d7c800b5add71e1"
 }

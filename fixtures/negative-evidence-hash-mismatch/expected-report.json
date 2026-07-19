@@ -43,12 +43,20 @@
           "nodeIds": [
             "qeg:artifact-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:evidence-verification",
+              "path": "src/validation/evidence.ts"
+            }
+          ]
         }
       ],
       "blockers": [],
       "residualRisks": [],
       "requiredHumanReview": [],
+      "reliability": {
+        "enabled": false
+      },
       "expected": {
         "fixture": "negative-evidence-hash-mismatch",
         "expectedVerdict": "disqualified",
@@ -65,7 +73,10 @@
           "DQ-06"
         ],
         "unexpectedDqCodes": [],
-        "missingDqCodes": []
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
       }
     }
   ]

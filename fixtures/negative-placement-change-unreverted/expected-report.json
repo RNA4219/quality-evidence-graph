@@ -57,6 +57,9 @@
       "blockers": [],
       "residualRisks": [],
       "requiredHumanReview": [],
+      "reliability": {
+        "enabled": false
+      },
       "expected": {
         "fixture": "negative-placement-change-unreverted",
         "expectedVerdict": "disqualified",
@@ -73,7 +76,10 @@
           "DQ-14"
         ],
         "unexpectedDqCodes": [],
-        "missingDqCodes": []
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
       }
     }
   ]

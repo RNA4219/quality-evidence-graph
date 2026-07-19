@@ -24,6 +24,6 @@
   "tests": [
     "npm run typecheck"
   ],
-  "generation": "00009",
+  "generation": "00011",
   "contentHash": "sha256:71128629c070d034acb6bcaecf462874ff564c6528beafbd5e4ac2880f5a4764"
 }

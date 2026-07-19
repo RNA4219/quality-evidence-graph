@@ -1,0 +1,126 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [],
+    "blockerCount": 1,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-resilience-threshold",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "no_go",
+      "reasons": [
+        "No-go blockers: 1",
+        "- Resilience SLO threshold exceeded"
+      ],
+      "disqualifications": [],
+      "blockers": [
+        {
+          "id": "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+          "message": "Resilience SLO threshold exceeded",
+          "riskIds": [
+            "qeg:risk-reliability-fixture"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:reliability-extension",
+              "path": "docs/spec/reliability-extension.md"
+            },
+            {
+              "id": "qeg:sr-reliability-fixture",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ],
+          "ruleId": "BLK-REL-01",
+          "testId": "qeg:test-reliability-fixture",
+          "evidenceId": "qeg:evidence-reliability-fixture",
+          "effective": true
+        }
+      ],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "reliability": {
+        "enabled": true,
+        "requiredRiskCount": 1,
+        "qualifiedRiskCount": 1,
+        "passingRiskCount": 0,
+        "riskCoverageRate": 1,
+        "requiredExecutionCount": 1,
+        "qualifiedExecutionCount": 1,
+        "passingExecutionCount": 0,
+        "resiliencePassRate": 0,
+        "recoverySecondsP50": 30,
+        "recoverySecondsP95": 30,
+        "recoverySampleCount": 1,
+        "duplicateSideEffectsCount": 0,
+        "dataInconsistenciesCount": 0,
+        "evidenceAgeHours": {
+          "qeg:evidence-reliability-fixture": 23.966666666666665
+        },
+        "excludedMockTests": [],
+        "dqCountByRule": {
+          "DQ-12": 0,
+          "DQ-18": 0,
+          "DQ-19": 0,
+          "DQ-20": 0,
+          "DQ-21": 0
+        },
+        "drillDown": [
+          {
+            "riskId": "qeg:risk-reliability-fixture",
+            "testId": "qeg:test-reliability-fixture",
+            "selectedEvidenceId": "qeg:evidence-reliability-fixture",
+            "adapter": "shell",
+            "experimentId": "qeg:experiment-reliability-fixture",
+            "attempt": 1,
+            "targetRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "ci:fixture",
+            "selectionReason": "latest_current_execution",
+            "disqualificationCodes": [],
+            "blockerIds": [
+              "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture"
+            ]
+          }
+        ]
+      },
+      "expected": {
+        "fixture": "negative-resilience-threshold",
+        "expectedVerdict": "no_go",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/reliability-hardening.md",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [],
+        "actualDqCodes": [],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [
+          "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture"
+        ],
+        "actualBlockerIds": [
+          "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture"
+        ]
+      }
+    }
+  ]
+}

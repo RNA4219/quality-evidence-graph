@@ -3,6 +3,7 @@ import { readdir, readFile } from "fs/promises";
 import { basename, join } from "path";
 import { fileURLToPath } from "url";
 import type { QegGateInput } from "../types.js";
+import { validateReliabilitySemantics } from "./reliability-semantics.js";
 
 export interface GateInputValidationIssue {
   readonly path: string;
@@ -71,7 +72,13 @@ export async function validateGateInput(raw: unknown): Promise<GateInputValidati
     return { reportVersion: "qeg-gate-input-validation-v2", valid: false, issues: [{ path: "/", keyword: "schema", message: "gate-input.schema.json is unavailable", scope: "envelope" }], warnings: [] };
   }
   validator(raw);
-  const allIssues = formatSchemaErrors(validator.errors);
+  const semanticIssues = validateReliabilitySemantics(raw).map((issue) => ({
+    path: issue.path,
+    keyword: issue.ruleId,
+    message: issue.message,
+    scope: issueScope(issue.path),
+  }));
+  const allIssues = [...formatSchemaErrors(validator.errors), ...semanticIssues];
   const warnings = allIssues.filter((issue) => issue.scope === "optionalEvidence");
   const issues = allIssues.filter((issue) => issue.scope !== "optionalEvidence");
   const valid = issues.length === 0;

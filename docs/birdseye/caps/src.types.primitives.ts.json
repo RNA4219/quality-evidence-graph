@@ -1,7 +1,7 @@
 {
   "id": "src/types/primitives.ts",
   "role": "primitive-types",
-  "generation": "00009",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:96a478ce8f8c034b50f3646083f0ae01870503de76645c36d57684492a0daa32"
+  "contentHash": "sha256:9d92e2e3f433920fb51d96a5ccd27abff66864b1188e1f682d717f89a04238b5"
 }

@@ -19,5 +19,37 @@
       "type": "object",
       "additionalProperties": true
     }
-  }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "policy": { "required": ["reliabilityPolicy"] }
+        },
+        "required": ["policy"]
+      },
+      "then": {
+        "properties": {
+          "metadata": {
+            "required": ["headRef", "policyId", "policyHash"],
+            "properties": {
+              "headRef": { "$ref": "reliability.schema.json#/$defs/gitObjectId" },
+              "policyHash": { "$ref": "reliability.schema.json#/$defs/sha256" }
+            }
+          },
+          "graph": {
+            "properties": {
+              "metadata": {
+                "required": ["headRef", "policyId", "policyHash"],
+                "properties": {
+                  "headRef": { "$ref": "reliability.schema.json#/$defs/gitObjectId" },
+                  "policyHash": { "$ref": "reliability.schema.json#/$defs/sha256" }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
 }

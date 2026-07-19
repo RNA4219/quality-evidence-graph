@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-resilience-revision-mismatch",
+  "description": "Reliability hardening fixture: negative-resilience-revision-mismatch",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-12"
+    }
+  ],
+  "expectedDisqualificationMode": "includes",
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

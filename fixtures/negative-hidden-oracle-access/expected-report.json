@@ -47,6 +47,9 @@
       "blockers": [],
       "residualRisks": [],
       "requiredHumanReview": [],
+      "reliability": {
+        "enabled": false
+      },
       "expected": {
         "fixture": "negative-hidden-oracle-access",
         "expectedVerdict": "disqualified",
@@ -63,7 +66,10 @@
           "DQ-10"
         ],
         "unexpectedDqCodes": [],
-        "missingDqCodes": []
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
       }
     }
   ]

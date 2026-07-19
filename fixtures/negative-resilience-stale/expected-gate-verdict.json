@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-resilience-stale",
+  "description": "Reliability hardening fixture: negative-resilience-stale",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-18"
+    }
+  ],
+  "expectedDisqualificationMode": "includes",
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

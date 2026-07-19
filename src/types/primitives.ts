@@ -36,6 +36,52 @@ export type GateRelevance = "informational" | "advisory" | "blocking";
 
 export type TestExecutionMode = "real" | "mock";
 
+export type TestType = "functional" | "security" | "performance" | "resilience";
+
+export type ResilienceAdapter =
+  | "lakda"
+  | "toxiproxy"
+  | "chaos-mesh"
+  | "litmus-chaos"
+  | "docker-compose"
+  | "shell"
+  | "ci"
+  | "custom";
+
+export type ResilienceFaultModel =
+  | "dependency_timeout"
+  | "dependency_http_error"
+  | "network_latency"
+  | "packet_loss"
+  | "process_crash"
+  | "container_restart"
+  | "pod_kill"
+  | "duplicate_event"
+  | "out_of_order_event"
+  | "resource_pressure"
+  | "custom";
+
+export type ResilienceEnvironment = "local" | "ci" | "staging" | "preprod" | "production";
+
+export type ResilienceEvidenceStatus = "pass" | "fail" | "aborted" | "error" | "timeout" | "skipped";
+
+export type SignalPhase = "steady_state" | "fault" | "recovery" | "experiment";
+
+export type SignalSemanticRole =
+  | "traffic_count"
+  | "error_rate"
+  | "latency_p95"
+  | "saturation"
+  | "duplicate_side_effects"
+  | "data_inconsistencies"
+  | "custom";
+
+export type SignalAggregation = "latest" | "min" | "max" | "avg" | "p50" | "p95" | "p99" | "rate" | "count";
+
+export type AbortSignalSource = "metric" | "trace_count" | "log_count";
+
+export type ThresholdOperator = "gt" | "gte" | "lt" | "lte" | "eq" | "ne";
+
 export type NodeKind =
   | "requirement"
   | "acceptance_criteria"
@@ -132,7 +178,11 @@ export type DisqualificationCode =
   | "DQ-14"
   | "DQ-15"
   | "DQ-16"
-  | "DQ-17";
+  | "DQ-17"
+  | "DQ-18"
+  | "DQ-19"
+  | "DQ-20"
+  | "DQ-21";
 
 export type PackagePhase =
   | "implementation_preparation"

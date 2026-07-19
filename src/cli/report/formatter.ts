@@ -71,6 +71,42 @@ function isFailureTarget(target: ReportTargetResult): boolean {
   return target.status === "gate_failed" || target.status === "cli_error";
 }
 
+function rateLabel(value: number | null): string {
+  return value === null ? "n/a" : `${(value * 100).toFixed(2)}%`;
+}
+
+function appendReliabilityTarget(lines: string[], target: ReportTargetResult): void {
+  const reliability = target.reliability;
+  lines.push(`- ${target.target}`);
+  lines.push(`  enabled: ${reliability.enabled}`);
+  if (!reliability.enabled) return;
+  lines.push(`  risk coverage: ${reliability.qualifiedRiskCount}/${reliability.requiredRiskCount} (${rateLabel(reliability.riskCoverageRate)})`);
+  lines.push(`  executions required/qualified/passing: ${reliability.requiredExecutionCount}/${reliability.qualifiedExecutionCount}/${reliability.passingExecutionCount}`);
+  lines.push(`  execution pass rate: ${reliability.passingExecutionCount}/${reliability.qualifiedExecutionCount} (${rateLabel(reliability.resiliencePassRate)})`);
+  lines.push(`  recovery seconds p50/p95/sample: ${reliability.recoverySecondsP50 ?? "n/a"}/${reliability.recoverySecondsP95 ?? "n/a"}/${reliability.recoverySampleCount}`);
+  lines.push(`  duplicate side effects/data inconsistencies: ${reliability.duplicateSideEffectsCount}/${reliability.dataInconsistenciesCount}`);
+  const ages = Object.entries(reliability.evidenceAgeHours).sort(([left], [right]) => left < right ? -1 : left > right ? 1 : 0);
+  lines.push(`  evidence age hours: ${ages.length === 0 ? "none" : ages.map(([id, age]) => `${id}=${age}`).join(", ")}`);
+  lines.push(`  excluded mock tests: ${reliability.excludedMockTests.length === 0 ? "none" : reliability.excludedMockTests.map((item) => item.testId).join(", ")}`);
+  lines.push(`  DQ counts: ${Object.entries(reliability.dqCountByRule).map(([code, count]) => `${code}=${count}`).join(", ")}`);
+  for (const item of reliability.drillDown) {
+    lines.push([
+      `  selection: risk=${item.riskId}`,
+      `test=${item.testId}`,
+      `evidence=${item.selectedEvidenceId ?? "none"}`,
+      `adapter=${item.adapter ?? "none"}`,
+      `experiment=${item.experimentId ?? "none"}`,
+      `attempt=${item.attempt ?? "none"}`,
+      `revision=${item.targetRevision ?? "none"}`,
+      `environment=${item.environmentId ?? "none"}`,
+      `reason=${item.selectionReason}`,
+      `exclusion=${item.exclusionReason ?? "none"}`,
+      `DQs=${item.disqualificationCodes.join(",") || "none"}`,
+      `blockers=${item.blockerIds.join(",") || "none"}`,
+    ].join(" "));
+  }
+}
+
 export function formatCiReportText(report: CiReport): string {
   const { summary } = report;
   const failingTargets = report.targets.filter(isFailureTarget);
@@ -90,6 +126,12 @@ export function formatCiReportText(report: CiReport): string {
     `- residual risks: ${summary.residualRiskCount}`,
     `- required human review: ${summary.humanReviewCount}`,
   ];
+
+  const reliabilityTargets = report.targets;
+  if (reliabilityTargets.length > 0) {
+    lines.push("", "Reliability");
+    for (const target of reliabilityTargets) appendReliabilityTarget(lines, target);
+  }
 
   if (summary.dqCounts.length > 0) {
     lines.push("", "Disqualification summary");
@@ -148,6 +190,13 @@ export function formatGithubSummary(report: CiReport): string {
     `- required human review: ${summary.humanReviewCount}`,
     "",
   ];
+
+  const reliabilityTargets = report.targets;
+  if (reliabilityTargets.length > 0) {
+    lines.push("### Reliability", "");
+    for (const target of reliabilityTargets) appendReliabilityTarget(lines, target);
+    lines.push("");
+  }
 
   if (summary.dqCounts.length > 0) {
     lines.push("### Disqualifications", "");

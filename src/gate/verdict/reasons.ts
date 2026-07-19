@@ -44,8 +44,11 @@ function appendDisqualifications(
 function appendBlockers(reasons: string[], blockers: readonly GateBlocker[]): void {
   if (blockers.length === 0) return;
 
-  reasons.push(`No-go blockers: ${blockers.length}`);
+  const effectiveCount = blockers.filter((blocker) => blocker.effective !== false).length;
+  reasons.push(effectiveCount === blockers.length
+    ? `No-go blockers: ${blockers.length}`
+    : `Blockers: ${blockers.length} (${effectiveCount} effective, ${blockers.length - effectiveCount} waived)`);
   for (const blocker of blockers) {
-    reasons.push(`- ${blocker.message}`);
+    reasons.push(`- ${blocker.message}${blocker.effective === false ? " (waived)" : ""}`);
   }
 }

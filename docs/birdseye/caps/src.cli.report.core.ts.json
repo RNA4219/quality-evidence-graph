@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report/core.ts",
   "role": "report-core",
-  "generation": "00009",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:98800602137d4d39eae4b5c9700bb15b2c06524247604dc892866be65774fce2"
+  "contentHash": "sha256:409c030fac31e48c262e4f20e93a5da61cc701b6662184ddcc689bb67f19ca74"
 }

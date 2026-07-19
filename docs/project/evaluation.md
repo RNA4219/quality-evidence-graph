@@ -21,6 +21,8 @@ next_review_due: 2026-08-04
 - `fixtures/README.md` が minimal / negative fixture の期待 verdict / DQ を固定していること。
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備の最小契約を固定していること。
 - `docs/spec/` が Gate policy、waiver、approval evidence、evidence package、retention、immutability、仕様書検収を章別に固定していること。
+- `docs/spec/reliability-extension.md` が resilience evidence の実行境界、DQ / blocker、report、fixture contract を固定していること。
+- `docs/spec/reliability-extension-review-2026-07-19.md` が解消済み finding、残リスク、仕様 / 実装 / release の Gate split を固定していること。
 - `docs/requirements.md`、`docs/control-mapping.md`、`docs/ipo-controlled-profile.md`、`docs/spec/*.md` の verdict 定義と DQ 優先順位が矛盾しないこと。
 - `docs/spec/review-2026-06-03.md` が仕様書見直し結果、修正方針、残リスク、Gate 判定を記録していること。
 - `docs/spec/gate-acceptance-2026-06-03.md` が manual-bb-test-harness の順序で実装前 Gate を厳格に判定していること。
@@ -32,6 +34,7 @@ next_review_due: 2026-08-04
 - `.github/workflows/ci.yml` が QEG report artifact を保存し、各診断 step を完走させてから最終判定で job を落とすこと。
 - `qeg-report-action` が report 生成、Step Summary、artifact upload、`exit_code` output を提供し、report step 自体で直接失敗しないこと。
 - `doctor`、`explain`、`schema-check`、`enum-check`、`snapshot`、`init` の contract が `docs/spec/operational-cli-extensions.md` に固定されていること。
+- `evidence normalize --adapter <kind>` が local-only / non-destructive な resilience normalization contract として固定されていること。
 - `report --baseline` と `report --changed-only` が移行期間と大規模 repo の差分 CI を支援できること。
 - `baseline audit`、`report --diff`、`repro-bundle`、`evidence verify`、`policy lint`、`check`、Action outputs 拡充が実装・検証されていること。
 
@@ -65,7 +68,7 @@ next_review_due: 2026-08-04
   - `workflow_dispatch` の `qeg_report_targets` で failing demo target を指定できる
   - `QEG cumulative report` step が QEG exit code を output に退避し、step 自体は成功終了する
 - IPO control specs:
-  - `git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/waiver-approval.md docs/spec/evidence-package.md docs/spec/retention-immutability.md docs/spec/acceptance.md docs/spec/review-2026-06-03.md docs/spec/gate-acceptance-2026-06-03.md`
+- `git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/reliability-extension.md docs/spec/reliability-extension-review-2026-07-19.md docs/spec/waiver-approval.md docs/spec/evidence-package.md docs/spec/retention-immutability.md docs/spec/acceptance.md docs/spec/review-2026-06-03.md docs/spec/gate-acceptance-2026-06-03.md`
 - code-to-gate:
   - `node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze . --emit all --out docs\spec\code-to-gate-2026-06-03`
   - `node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js readiness . --policy C:\Users\ryo-n\Codex_dev\code-to-gate\.github\ctg-policy.yaml --from docs\spec\code-to-gate-2026-06-03 --out docs\spec\code-to-gate-2026-06-03`

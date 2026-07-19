@@ -32,6 +32,7 @@ interface PolicyLike {
     readonly no_go?: number;
     readonly disqualified?: number;
   };
+  readonly reliabilityPolicy?: unknown;
 }
 
 interface GateInputLike {
@@ -48,7 +49,7 @@ interface GateInputLike {
 
 const ALL_DQ_CODES: DisqualificationCode[] = [
   "DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09",
-  "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17",
+  "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17", "DQ-18", "DQ-19", "DQ-20", "DQ-21",
 ];
 
 async function readJson<T>(path: string): Promise<T> {
@@ -90,6 +91,12 @@ function lintPolicy(items: PolicyLintItem[], target: string, policy: PolicyLike 
   const missing = ALL_DQ_CODES.filter((code) => !scope.includes(code));
   if (missing.length > 0) {
     add(items, target, "warn", `${label}.dqScope does not include ${missing.join(", ")}`);
+  }
+  if (policy.reliabilityPolicy) {
+    if (!/^sha256:[a-f0-9]{64}$/.test(policy.policyHash ?? "")) add(items, target, "fail", `${label}.policyHash must be SHA-256 when reliabilityPolicy is enabled`);
+    const reliabilityCodes: DisqualificationCode[] = ["DQ-18", "DQ-19", "DQ-20", "DQ-21"];
+    const missingReliability = reliabilityCodes.filter((code) => !scope.includes(code));
+    if (missingReliability.length > 0) add(items, target, "fail", `${label}.dqScope lacks reliability codes ${missingReliability.join(", ")}`);
   }
 }
 

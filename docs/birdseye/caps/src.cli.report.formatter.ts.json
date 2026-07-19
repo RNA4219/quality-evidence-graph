@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report/formatter.ts",
   "role": "report-formatter",
-  "generation": "00009",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:47e2a7a8b91a2801b668f8985d99e43fbde90489f807faa8cc4731071a87ee8c"
+  "contentHash": "sha256:3ec7a989eb2c796ba53e5768541ef5fcc88012e8dd83f10743e954ffe6fdd1e6"
 }

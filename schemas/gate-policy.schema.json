@@ -29,8 +29,28 @@
       "items": { "$ref": "shared-defs.schema.json#/$defs/disqualificationCode" }
     },
     "exitCodePolicy": { "$ref": "shared-defs.schema.json#/$defs/exitCodePolicy" },
-    "placementRetirementPolicy": { "$ref": "#/$defs/placementRetirementPolicy" }
+    "placementRetirementPolicy": { "$ref": "#/$defs/placementRetirementPolicy" },
+    "reliabilityPolicy": { "$ref": "reliability.schema.json#/$defs/reliabilityPolicy" }
   },
+  "allOf": [
+    {
+      "if": { "required": ["reliabilityPolicy"] },
+      "then": {
+        "properties": {
+          "profile": { "enum": ["standard", "strict", "ipo_controlled"] },
+          "policyHash": { "$ref": "reliability.schema.json#/$defs/sha256" },
+          "dqScope": {
+            "allOf": [
+              { "contains": { "const": "DQ-18" } },
+              { "contains": { "const": "DQ-19" } },
+              { "contains": { "const": "DQ-20" } },
+              { "contains": { "const": "DQ-21" } }
+            ]
+          }
+        }
+      }
+    }
+  ],
   "$defs": {
     "placementRetirementPolicy": {
       "type": "object",

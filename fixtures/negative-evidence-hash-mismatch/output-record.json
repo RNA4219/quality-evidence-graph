@@ -9,8 +9,8 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-evidence-hash-mismatch/input.json",
-        "contentHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
       }
     ]
   },
@@ -20,7 +20,15 @@
       "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
+        }
+      ]
     },
     "nodes": [],
     "edges": [],
@@ -37,7 +45,15 @@
       "runId": "qeg:run-negative-evidence-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
+        }
+      ]
     },
     "obligations": [],
     "placements": []
@@ -53,29 +69,41 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-evidence-hash-mismatch/input.json",
-          "contentHash": "sha256:0000000000000000000000000000000000000000000000000000000000000000"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
         }
       ]
     },
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-06: Evidence hash mismatch for artifact \"qeg:artifact-001\""
+      "- DQ-06: qeg:artifact-001: artifact hash mismatch: expected sha256:0000000000000000000000000000000000000000000000000000000000000000, got sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
     ],
     "disqualifications": [
       {
         "code": "DQ-06",
-        "message": "Evidence hash mismatch for artifact \"qeg:artifact-001\"",
+        "message": "qeg:artifact-001: artifact hash mismatch: expected sha256:0000000000000000000000000000000000000000000000000000000000000000, got sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e",
         "nodeIds": [
           "qeg:artifact-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:evidence-verification",
+            "path": "src/validation/evidence.ts"
+          }
+        ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {

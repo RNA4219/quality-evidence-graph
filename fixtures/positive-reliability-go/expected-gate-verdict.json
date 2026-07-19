@@ -1,0 +1,12 @@
+{
+  "fixture": "positive-reliability-go",
+  "description": "Hash-verified current real resilience execution satisfies the reliability policy",
+  "expectedVerdict": "go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 0,
+  "contractRef": "docs/spec/reliability-extension.md §11"
+}

@@ -22,6 +22,6 @@
     "npm run typecheck",
     "schema JSON parse"
   ],
-  "generation": "00009",
+  "generation": "00011",
   "contentHash": "sha256:55a16c9a01a712b698d6abd6f248377cd7ad9c33f7fe2b7afebf28cc23475f80"
 }

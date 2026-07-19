@@ -43,6 +43,6 @@
     "RanD KanoMode build_audit_artifacts",
     "fixture validate/gate/record"
   ],
-  "generation": "00009",
+  "generation": "00011",
   "contentHash": "sha256:c35845b8b2b73eae28434c5b5206344b7022a54dbeadf695de89b5f5fce485da"
 }

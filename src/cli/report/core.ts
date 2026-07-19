@@ -58,6 +58,9 @@ function toReportExpectedComparison(
     actualDqCodes: comparison.actualDqCodes,
     unexpectedDqCodes: comparison.unexpectedDqCodes,
     missingDqCodes: comparison.missingDqCodes,
+    blockerMatch: comparison.blockerMatch,
+    expectedBlockerIds: comparison.expectedBlockerIds,
+    actualBlockerIds: comparison.actualBlockerIds,
   };
 }
 
@@ -84,6 +87,7 @@ async function evaluateReportTarget(target: string): Promise<ReportTargetResult>
       blockers: [],
       residualRisks: [],
       requiredHumanReview: [],
+      reliability: { enabled: false },
       error: error instanceof Error ? error.message : String(error),
     };
   }
@@ -106,6 +110,7 @@ function gateTargetResult(
     blockers: gateResult.blockers,
     residualRisks: gateResult.residualRisks,
     requiredHumanReview: gateResult.requiredHumanReview,
+    reliability: gateResult.reliability,
     expected,
   };
 }

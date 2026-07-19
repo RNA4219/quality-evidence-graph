@@ -22,6 +22,6 @@
   "tests": [
     "docs/spec/acceptance.md TC-SPEC-02"
   ],
-  "generation": "00009",
-  "contentHash": "sha256:c058b96ee314d5c303d62ce0232460d5d6b8f58aa2ece33c74e4f393530e962c"
+  "generation": "00011",
+  "contentHash": "sha256:a007e9a10b57d9826ceb8fb8534135592ce05c871b340f3a7a7adc250d5f3259"
 }

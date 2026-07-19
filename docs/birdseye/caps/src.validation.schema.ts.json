@@ -1,7 +1,7 @@
 {
   "id": "src/validation/schema.ts",
   "role": "runtime-schema-validation",
-  "generation": "00009",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:5fd255488a5b57c343b291e2ec52b0a243c2b5508fef585e980cc88539fcf918"
+  "contentHash": "sha256:44d669908c0228c1354c018e876448e179196f12d434ce4dd3e98bb45c006914"
 }

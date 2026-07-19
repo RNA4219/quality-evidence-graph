@@ -8,11 +8,21 @@ import type {
   PlacementDisposition,
   PlacementLayer,
   Priority,
+  ResilienceAdapter,
+  ResilienceEnvironment,
+  ResilienceEvidenceStatus,
+  ResilienceFaultModel,
   Severity,
+  SignalAggregation,
+  SignalPhase,
+  SignalSemanticRole,
   StableId,
+  TestType,
   TestExecutionMode,
+  ThresholdOperator,
+  AbortSignalSource,
 } from "./primitives.js";
-import type { EvidenceRef, QegMetadata, SourceRef } from "./evidence.js";
+import type { EvidenceRef, QegMetadata, SignalEvidenceRef, SourceRef } from "./evidence.js";
 import type { Disqualification, GateBlocker } from "./gate.js";
 
 export interface Traceability {
@@ -74,7 +84,79 @@ export interface FindingNode extends QegNodeBase {
   readonly changedCodeIds: readonly StableId[];
 }
 
-export interface TestNode extends QegNodeBase {
+export interface ResilienceSloTargetMax {
+  readonly targetType: "max";
+  readonly value: number;
+}
+
+export interface ResilienceSloTargetMin {
+  readonly targetType: "min";
+  readonly value: number;
+}
+
+export interface ResilienceSloTargetRange {
+  readonly targetType: "range";
+  readonly min: number;
+  readonly max: number;
+}
+
+export type ResilienceSloTarget = ResilienceSloTargetMax | ResilienceSloTargetMin | ResilienceSloTargetRange;
+
+export interface ResilienceSlo {
+  readonly name: string;
+  readonly metricName: string;
+  readonly semanticRole: SignalSemanticRole;
+  readonly customSemanticRoleName?: string;
+  readonly aggregation: SignalAggregation;
+  readonly unit: string;
+  readonly evaluationPhases: readonly Extract<SignalPhase, "steady_state" | "fault" | "recovery">[];
+  readonly target: ResilienceSloTarget;
+}
+
+export interface ResilienceSteadyState {
+  readonly slos: readonly ResilienceSlo[];
+  readonly requiredMetrics: readonly string[];
+  readonly requiredTraces: boolean;
+  readonly requiredLogs: boolean;
+}
+
+export interface ResilienceBlastRadius {
+  readonly environment: ResilienceEnvironment;
+  readonly allowedTargets: readonly string[];
+  readonly maxTargets: number;
+  readonly maxDurationSeconds: number;
+}
+
+export interface ResilienceAbortConditionBase {
+  readonly id: StableId;
+  readonly signal: string;
+  readonly operator: ThresholdOperator;
+  readonly threshold: number;
+  readonly unit: string;
+}
+
+export interface ResilienceMetricAbortCondition extends ResilienceAbortConditionBase {
+  readonly source: "metric";
+  readonly aggregation: SignalAggregation;
+}
+
+export interface ResilienceCountAbortCondition extends ResilienceAbortConditionBase {
+  readonly source: Exclude<AbortSignalSource, "metric">;
+  readonly aggregation: "count";
+  readonly unit: "count";
+}
+
+export type ResilienceAbortCondition = ResilienceMetricAbortCondition | ResilienceCountAbortCondition;
+
+export interface ResilienceScenario {
+  readonly faultModel: ResilienceFaultModel;
+  readonly customFaultModelName?: string;
+  readonly steadyState: ResilienceSteadyState;
+  readonly blastRadius: ResilienceBlastRadius;
+  readonly abortConditions: readonly ResilienceAbortCondition[];
+}
+
+export interface TestNodeBase extends QegNodeBase {
   readonly kind: "test";
   readonly layer: PlacementLayer;
   /** Mock executions are auditable but never count as Gate evidence. */
@@ -87,6 +169,19 @@ export interface TestNode extends QegNodeBase {
   readonly deleted?: boolean;
 }
 
+export interface LegacyTestNode extends TestNodeBase {
+  readonly testType?: Exclude<TestType, "resilience">;
+  readonly resilienceScenario?: never;
+}
+
+export interface ResilienceTestNode extends TestNodeBase {
+  readonly testType: "resilience";
+  readonly resilienceScenario: ResilienceScenario;
+  readonly coveredRiskIds: readonly StableId[];
+}
+
+export type TestNode = LegacyTestNode | ResilienceTestNode;
+
 export interface TestPlacementNode extends QegNodeBase {
   readonly kind: "test_placement";
   readonly obligationId: StableId;
@@ -97,11 +192,108 @@ export interface TestPlacementNode extends QegNodeBase {
   readonly selectedTestIds: readonly StableId[];
 }
 
-export interface ExecutionEvidenceNode extends QegNodeBase {
+export interface ExecutionEvidenceNodeBase extends QegNodeBase {
   readonly kind: "execution_evidence";
   readonly evidenceRefs: readonly EvidenceRef[];
   readonly passed?: boolean;
 }
+
+export interface LegacyExecutionEvidenceNode extends ExecutionEvidenceNodeBase {
+  readonly evidenceType?: never;
+}
+
+export interface ResilienceRawArtifactRef {
+  readonly id: StableId;
+  readonly path: string;
+  readonly contentHash: string;
+  readonly revision: string;
+}
+
+export interface ResilienceFault {
+  readonly type: ResilienceFaultModel;
+  readonly parameters: Readonly<Record<string, unknown>>;
+  readonly faultStartedAt: string;
+  readonly faultEndedAt: string;
+  readonly actualTargetIds: readonly string[];
+  readonly appliedDurationMs: number;
+}
+
+export interface ResilienceAbortRecord {
+  readonly conditionId: StableId;
+  readonly signalEntryId: StableId;
+  readonly triggeredAt: string;
+  readonly observedValue: number;
+  readonly unit: string;
+}
+
+export interface ResilienceObserved {
+  readonly requestCount: number;
+  readonly errorRate: number;
+  readonly latencyP95Ms: number;
+  readonly saturationPct: number;
+  readonly duplicateSideEffects: number;
+  readonly dataInconsistencies: number;
+}
+
+export interface MetricSignalEntry {
+  readonly id: StableId;
+  readonly phase: SignalPhase;
+  readonly metricName: string;
+  readonly semanticRole: SignalSemanticRole;
+  readonly customSemanticRoleName?: string;
+  readonly aggregation: SignalAggregation;
+  readonly windowStart: string;
+  readonly windowEnd: string;
+  readonly observedValue: number;
+  readonly unit: string;
+  readonly evidenceRefId: StableId;
+}
+
+export interface TraceOrLogSignalEntry {
+  readonly id: StableId;
+  readonly signalName: string;
+  readonly phase: SignalPhase;
+  readonly querySummary: string;
+  readonly matchedCount: number;
+  readonly windowStart: string;
+  readonly windowEnd: string;
+  readonly evidenceRefId: StableId;
+}
+
+export interface SignalManifest {
+  readonly metrics: readonly MetricSignalEntry[];
+  readonly traces: readonly TraceOrLogSignalEntry[];
+  readonly logs: readonly TraceOrLogSignalEntry[];
+}
+
+export interface ResilienceExecutionEvidenceNode extends ExecutionEvidenceNodeBase {
+  readonly evidenceType: "resilience";
+  readonly testId: StableId;
+  readonly adapter: ResilienceAdapter;
+  readonly adapterVersion: string;
+  readonly customAdapterName?: string;
+  readonly normalizationVersion: "qeg-resilience-evidence-v1";
+  readonly experimentId: StableId;
+  readonly attempt: number;
+  readonly rawArtifactRef: ResilienceRawArtifactRef;
+  readonly targetRevision: string;
+  readonly environment: ResilienceEnvironment;
+  readonly environmentId: string;
+  readonly startedAt: string;
+  readonly endedAt: string;
+  readonly status: ResilienceEvidenceStatus;
+  readonly steadyStateConfirmed?: boolean;
+  readonly fault?: ResilienceFault;
+  readonly abortRecord?: ResilienceAbortRecord;
+  readonly recovered?: boolean;
+  readonly recoveryConfirmedAt?: string;
+  readonly recoveryDurationMs?: number;
+  readonly observed?: ResilienceObserved;
+  readonly signalManifest?: SignalManifest;
+  readonly evidenceRefs: readonly (EvidenceRef | SignalEvidenceRef)[];
+}
+
+export type ExecutionEvidenceNode = LegacyExecutionEvidenceNode | ResilienceExecutionEvidenceNode;
 
 export interface GateVerdictNode extends QegNodeBase {
   readonly kind: "gate_verdict";

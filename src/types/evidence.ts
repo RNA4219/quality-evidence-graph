@@ -22,16 +22,30 @@ export interface SourceRef {
 }
 
 export interface EvidenceRef extends SourceRef {
-  readonly evidenceKind:
-    | "code"
-    | "spec"
-    | "test_result"
-    | "coverage"
-    | "sarif"
-    | "human_review"
-    | "audit"
-    | "policy";
+  readonly evidenceKind: EvidenceKind;
+  readonly contentHash?: string;
   readonly capturedAt?: IsoDateTime;
+}
+
+export type EvidenceKind =
+  | "code"
+  | "spec"
+  | "test_result"
+  | "coverage"
+  | "sarif"
+  | "human_review"
+  | "audit"
+  | "policy"
+  | "observability_metric"
+  | "observability_trace"
+  | "observability_log";
+
+/** Hash-backed observability artifact referenced by resilience signal entries. */
+export interface SignalEvidenceRef extends EvidenceRef {
+  readonly evidenceKind: "observability_metric" | "observability_trace" | "observability_log";
+  readonly contentHash: string;
+  readonly capturedAt: IsoDateTime;
+  readonly revision: string;
 }
 
 export interface ArtifactRef {
@@ -85,6 +99,8 @@ export interface WorkflowCookbookRef {
 export interface Waiver {
   readonly id: StableId;
   readonly linkedRiskIds: readonly StableId[];
+  /** Required when waiving BLK-REL-01 through BLK-REL-03. */
+  readonly linkedTestIds?: readonly StableId[];
   readonly approver: string;
   readonly approvalAuthority: string;
   readonly reason: string;

@@ -18,6 +18,6 @@
   "tests": [
     "code-to-gate readiness . --policy C:\\Users\\ryo-n\\Codex_dev\\code-to-gate\\.github\\ctg-policy.yaml"
   ],
-  "generation": "00009",
+  "generation": "00011",
   "contentHash": "sha256:8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a"
 }

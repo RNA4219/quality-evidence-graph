@@ -1,0 +1,31 @@
+{
+  "id": "docs/spec/reliability-hardening.md",
+  "role": "reliability-resilience-hardening-spec",
+  "generation": "00011",
+  "public_api": [],
+  "summary": "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
+  "deps_out": [
+    "docs/spec/reliability-extension.md",
+    "docs/spec/reliability-hardening-checklist.md",
+    "src/types/graph.ts",
+    "src/gate/reliability.ts",
+    "src/validation/schema.ts",
+    "src/cli/evidence-normalize.ts",
+    "fixtures/manifest.json",
+    "tests/runtime.test.mjs"
+  ],
+  "deps_in": [
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "refactor による判定 drift、legacy 型互換性の破壊、runtime test だけでの negative path 見逃し"
+  ],
+  "tests": [
+    "npm run typecheck",
+    "npm run test:runtime",
+    "npm run test:fixtures",
+    "npm run test:package",
+    "npm run birdseye-check"
+  ],
+  "contentHash": "sha256:3272db2965a1d860c26341dd50c9e79acb629de72790413f691f9aa02a828b7d"
+}

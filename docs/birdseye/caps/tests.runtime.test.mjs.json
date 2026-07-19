@@ -1,7 +1,7 @@
 {
   "id": "tests/runtime.test.mjs",
   "role": "runtime-contract-tests",
-  "generation": "00009",
+  "generation": "00011",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:4e207a4c2126f587687023d7e1c2e05ebcbcab7da53bae396d099cdf88f85519"
+  "contentHash": "sha256:91b0f7a136c465f6888ffda830f0361731d9355bb3c86c288136f54f5a7e44f4"
 }

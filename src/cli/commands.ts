@@ -4,6 +4,7 @@ import { runBaselineCommand } from "./baseline.js";
 import { runCheckCommand } from "./check.js";
 import { runDoctorCommand } from "./doctor.js";
 import { runEnumCheckCommand } from "./enum-check.js";
+import { runEvidenceNormalizeCommand } from "./evidence-normalize.js";
 import { runEvidenceVerifyCommand } from "./evidence-verify.js";
 import { runExplainCommand } from "./dq-explain.js";
 import { CliError } from "./errors.js";
@@ -64,6 +65,7 @@ export {
   runCheckCommand,
   runDoctorCommand,
   runEnumCheckCommand,
+  runEvidenceNormalizeCommand,
   runEvidenceVerifyCommand,
   runExplainCommand,
   runInitCommand,

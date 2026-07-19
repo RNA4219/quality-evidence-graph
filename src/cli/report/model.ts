@@ -3,6 +3,7 @@ import type {
   DisqualificationCode,
   GateBlocker,
   GateVerdict,
+  ReliabilityAccounting,
   StableId,
 } from "../../types.js";
 import type { ReportSelection } from "./change-selection.js";
@@ -32,6 +33,9 @@ export interface ReportExpectedComparison {
   readonly actualDqCodes: readonly DisqualificationCode[];
   readonly unexpectedDqCodes: readonly DisqualificationCode[];
   readonly missingDqCodes: readonly DisqualificationCode[];
+  readonly blockerMatch: boolean;
+  readonly expectedBlockerIds: readonly string[];
+  readonly actualBlockerIds: readonly string[];
 }
 
 export interface ReportTargetResult {
@@ -44,6 +48,7 @@ export interface ReportTargetResult {
   readonly blockers: readonly GateBlocker[];
   readonly residualRisks: readonly StableId[];
   readonly requiredHumanReview: readonly StableId[];
+  readonly reliability: ReliabilityAccounting;
   readonly expected?: ReportExpectedComparison;
   readonly error?: string;
 }

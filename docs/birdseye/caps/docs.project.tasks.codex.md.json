@@ -20,6 +20,6 @@
     "npm run typecheck",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00009",
+  "generation": "00011",
   "contentHash": "sha256:fee3ad6a8d7cba74208fee32da73717fdba304f53381ad4e8b98c6d4cbe5dcc5"
 }

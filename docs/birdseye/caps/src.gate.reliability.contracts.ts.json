@@ -1,0 +1,16 @@
+{
+  "id": "src/gate/reliability/contracts.ts",
+  "role": "reliability-stage-contracts",
+  "generation": "00011",
+  "public_api": [],
+  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:996cf4dd8edcb32c008271e42b951c2d13c683ef2d22c26125eddd9a6f90d41b"
+}

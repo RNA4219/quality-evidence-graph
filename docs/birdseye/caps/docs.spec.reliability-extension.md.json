@@ -1,0 +1,34 @@
+{
+  "id": "docs/spec/reliability-extension.md",
+  "role": "reliability-resilience-spec",
+  "generation": "00011",
+  "public_api": [],
+  "summary": "外部 producer の resilience evidence を QEG が検証、会計、Gate 判定するための discriminator、policy、DQ / blocker、report、fixture contract。",
+  "deps_out": [
+    "schemas/qeg.bundle.schema.json",
+    "schemas/gate-policy.schema.json",
+    "schemas/shared-defs.schema.json",
+    "schemas/reliability.schema.json",
+    "schemas/resilience-normalize-context.schema.json",
+    "docs/spec/operational-cli-extensions.md",
+    "src/types/graph.ts",
+    "src/types/gate.ts",
+    "src/validation/evidence.ts",
+    "src/gate/evaluate.ts",
+    "src/gate/reliability.ts",
+    "src/cli/evidence-normalize.ts"
+  ],
+  "deps_in": [
+    "docs/requirements.md",
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "実験 runner 化、mock の誤計上、revision / signal / safety の検証漏れ"
+  ],
+  "tests": [
+    "npm run birdseye-check",
+    "npm run schema-check",
+    "npm run enum-check"
+  ],
+  "contentHash": "sha256:667727e1ab5ef03f53b55c6e6a716573512313c1f33c05d2a62e9aa61f5b7add"
+}
