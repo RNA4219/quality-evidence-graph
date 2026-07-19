@@ -8,6 +8,7 @@ import { verifyEvidenceArtifacts, type EvidenceVerificationReport } from "../val
 import type {
   Disqualification,
   EvidencePackage,
+  GateBlocker,
   GatePolicy,
   GateResult,
   OptionalEvidence,
@@ -24,7 +25,15 @@ export interface ExpectedGateVerdict {
   description: string;
   expectedVerdict: "go" | "conditional_go" | "no_go" | "disqualified";
   expectedDisqualifications: Partial<Disqualification>[];
-  expectedBlockers?: { id: string; message: string }[];
+  expectedBlockers?: (
+    Pick<GateBlocker, "id" | "message"> &
+    Partial<
+      Pick<
+        GateBlocker,
+        "ruleId" | "riskIds" | "testId" | "evidenceId" | "effective" | "waiverId"
+      >
+    >
+  )[];
   expectedBlockerMode?: "exact" | "includes";
   expectedResidualRisks: string[];
   expectedHumanReview: string[];

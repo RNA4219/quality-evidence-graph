@@ -1,0 +1,25 @@
+{
+  "fixture": "conditional-resilience-waived-threshold",
+  "description": "Reliability hardening fixture: conditional-resilience-waived-threshold",
+  "expectedVerdict": "conditional_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [
+    {
+      "id": "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+      "message": "Resilience SLO threshold exceeded",
+      "ruleId": "BLK-REL-01",
+      "riskIds": [
+        "qeg:risk-reliability-fixture"
+      ],
+      "testId": "qeg:test-reliability-fixture",
+      "evidenceId": "qeg:evidence-reliability-fixture",
+      "effective": false,
+      "waiverId": "qeg:waiver-threshold"
+    }
+  ],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

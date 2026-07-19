@@ -1,0 +1,406 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:fixture-reliability-go",
+    "createdAt": "2026-01-03T01:02:00.000Z",
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "profile": "strict",
+    "policyId": "qeg:policy-reliability-fixture",
+    "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "inputArtifacts": []
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:fixture-reliability-go",
+      "createdAt": "2026-01-02T00:00:00.000Z",
+      "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "profile": "strict",
+      "policyId": "qeg:policy-reliability-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "inputArtifacts": []
+    },
+    "nodes": [
+      {
+        "id": "qeg:risk-reliability-fixture",
+        "kind": "risk",
+        "title": "Dependency timeout",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-reliability-fixture",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-risk"
+        ],
+        "priority": "P1",
+        "severity": "high",
+        "likelihood": 0.5,
+        "businessImpact": 0.5,
+        "complianceCriticality": 0,
+        "evidenceGap": 0,
+        "novelty": 0
+      },
+      {
+        "id": "qeg:test-reliability-fixture",
+        "kind": "test",
+        "title": "Timeout recovery scenario",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-reliability-fixture",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-scenario"
+        ],
+        "layer": "integration",
+        "testExecutionMode": "real",
+        "existing": true,
+        "testType": "resilience",
+        "coveredRiskIds": [
+          "qeg:risk-reliability-fixture"
+        ],
+        "resilienceScenario": {
+          "faultModel": "dependency_timeout",
+          "steadyState": {
+            "slos": [
+              {
+                "name": "traffic",
+                "metricName": "requests",
+                "semanticRole": "traffic_count",
+                "aggregation": "count",
+                "unit": "count",
+                "evaluationPhases": [
+                  "steady_state",
+                  "fault",
+                  "recovery"
+                ],
+                "target": {
+                  "targetType": "min",
+                  "value": 1
+                }
+              }
+            ],
+            "requiredMetrics": [
+              "requests"
+            ],
+            "requiredTraces": false,
+            "requiredLogs": false
+          },
+          "blastRadius": {
+            "environment": "ci",
+            "allowedTargets": [
+              "dependency-a"
+            ],
+            "maxTargets": 1,
+            "maxDurationSeconds": 30
+          },
+          "abortConditions": [
+            {
+              "id": "qeg:abort-reliability-fixture",
+              "source": "metric",
+              "signal": "errors",
+              "aggregation": "rate",
+              "operator": "gt",
+              "threshold": 0.9,
+              "unit": "ratio"
+            }
+          ]
+        }
+      },
+      {
+        "id": "qeg:evidence-reliability-fixture",
+        "kind": "execution_evidence",
+        "title": "Current real resilience execution",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-reliability-fixture",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-raw"
+        ],
+        "evidenceRefs": [
+          {
+            "id": "qeg:signal-reliability-fixture",
+            "path": "artifacts/signal.json",
+            "contentHash": "sha256:8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+            "evidenceKind": "observability_metric",
+            "capturedAt": "2026-01-01T00:02:00.000Z",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "evidenceType": "resilience",
+        "testId": "qeg:test-reliability-fixture",
+        "adapter": "shell",
+        "adapterVersion": "v1",
+        "normalizationVersion": "qeg-resilience-evidence-v1",
+        "experimentId": "qeg:experiment-reliability-fixture",
+        "attempt": 1,
+        "rawArtifactRef": {
+          "id": "qeg:artifact-raw",
+          "path": "artifacts/raw.json",
+          "contentHash": "sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        "targetRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "environment": "ci",
+        "environmentId": "ci:fixture",
+        "startedAt": "2026-01-01T00:00:00.000Z",
+        "endedAt": "2026-01-01T00:02:00.000Z",
+        "status": "pass",
+        "passed": true,
+        "steadyStateConfirmed": true,
+        "fault": {
+          "type": "dependency_timeout",
+          "parameters": {},
+          "faultStartedAt": "2026-01-01T00:00:30.000Z",
+          "faultEndedAt": "2026-01-01T00:01:00.000Z",
+          "actualTargetIds": [
+            "dependency-a"
+          ],
+          "appliedDurationMs": 30000
+        },
+        "recovered": true,
+        "recoveryConfirmedAt": "2026-01-01T00:01:30.000Z",
+        "recoveryDurationMs": 30000,
+        "observed": {
+          "requestCount": 100,
+          "errorRate": 0.01,
+          "latencyP95Ms": 30,
+          "saturationPct": 10,
+          "duplicateSideEffects": 0,
+          "dataInconsistencies": 0
+        },
+        "signalManifest": {
+          "metrics": [
+            {
+              "id": "qeg:metric-steady-fixture",
+              "phase": "steady_state",
+              "metricName": "requests",
+              "semanticRole": "traffic_count",
+              "aggregation": "count",
+              "windowStart": "2026-01-01T00:00:00.000Z",
+              "windowEnd": "2026-01-01T00:00:30.000Z",
+              "observedValue": 100,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-fault-fixture",
+              "phase": "fault",
+              "metricName": "requests",
+              "semanticRole": "traffic_count",
+              "aggregation": "count",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 100,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-recovery-fixture",
+              "phase": "recovery",
+              "metricName": "requests",
+              "semanticRole": "traffic_count",
+              "aggregation": "count",
+              "windowStart": "2026-01-01T00:01:00.000Z",
+              "windowEnd": "2026-01-01T00:01:30.000Z",
+              "observedValue": 100,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-error-fixture",
+              "phase": "fault",
+              "metricName": "errors",
+              "semanticRole": "error_rate",
+              "aggregation": "rate",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 0.01,
+              "unit": "ratio",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-latency-fixture",
+              "phase": "fault",
+              "metricName": "latency",
+              "semanticRole": "latency_p95",
+              "aggregation": "p95",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 30,
+              "unit": "ms",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-saturation-fixture",
+              "phase": "fault",
+              "metricName": "saturation",
+              "semanticRole": "saturation",
+              "aggregation": "max",
+              "windowStart": "2026-01-01T00:00:30.000Z",
+              "windowEnd": "2026-01-01T00:01:00.000Z",
+              "observedValue": 10,
+              "unit": "percent",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-duplicates-fixture",
+              "phase": "experiment",
+              "metricName": "duplicates",
+              "semanticRole": "duplicate_side_effects",
+              "aggregation": "count",
+              "windowStart": "2026-01-01T00:00:00.000Z",
+              "windowEnd": "2026-01-01T00:02:00.000Z",
+              "observedValue": 0,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            },
+            {
+              "id": "qeg:metric-inconsistencies-fixture",
+              "phase": "experiment",
+              "metricName": "inconsistencies",
+              "semanticRole": "data_inconsistencies",
+              "aggregation": "count",
+              "windowStart": "2026-01-01T00:00:00.000Z",
+              "windowEnd": "2026-01-01T00:02:00.000Z",
+              "observedValue": 0,
+              "unit": "count",
+              "evidenceRefId": "qeg:signal-reliability-fixture"
+            }
+          ],
+          "traces": [],
+          "logs": []
+        }
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:fixture-reliability-go",
+      "createdAt": "2026-01-03T01:02:00.000Z",
+      "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "profile": "strict",
+      "policyId": "qeg:policy-reliability-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "inputArtifacts": []
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:fixture-reliability-go",
+      "createdAt": "2026-01-03T01:02:00.000Z",
+      "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "profile": "strict",
+      "policyId": "qeg:policy-reliability-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "inputArtifacts": []
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-18: Resilience lifecycle invalid: evidence exceeds maximum age"
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-18",
+        "message": "Resilience lifecycle invalid: evidence exceeds maximum age",
+        "nodeIds": [
+          "qeg:evidence-reliability-fixture",
+          "qeg:test-reliability-fixture"
+        ],
+        "sourceRefs": [
+          {
+            "id": "qeg:reliability-extension",
+            "path": "docs/spec/reliability-extension.md"
+          }
+        ]
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": true,
+      "requiredRiskCount": 1,
+      "qualifiedRiskCount": 0,
+      "passingRiskCount": 0,
+      "riskCoverageRate": 0,
+      "requiredExecutionCount": 1,
+      "qualifiedExecutionCount": 0,
+      "passingExecutionCount": 0,
+      "resiliencePassRate": null,
+      "recoverySecondsP50": null,
+      "recoverySecondsP95": null,
+      "recoverySampleCount": 0,
+      "duplicateSideEffectsCount": 0,
+      "dataInconsistenciesCount": 0,
+      "evidenceAgeHours": {
+        "qeg:evidence-reliability-fixture": 49
+      },
+      "excludedMockTests": [],
+      "dqCountByRule": {
+        "DQ-12": 0,
+        "DQ-18": 1,
+        "DQ-19": 0,
+        "DQ-20": 0,
+        "DQ-21": 0
+      },
+      "drillDown": [
+        {
+          "riskId": "qeg:risk-reliability-fixture",
+          "testId": "qeg:test-reliability-fixture",
+          "selectedEvidenceId": "qeg:evidence-reliability-fixture",
+          "adapter": "shell",
+          "experimentId": "qeg:experiment-reliability-fixture",
+          "attempt": 1,
+          "targetRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "ci:fixture",
+          "selectionReason": "latest_current_execution",
+          "disqualificationCodes": [
+            "DQ-18"
+          ],
+          "blockerIds": []
+        }
+      ]
+    }
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "output-record.json"
+    }
+  ]
+}

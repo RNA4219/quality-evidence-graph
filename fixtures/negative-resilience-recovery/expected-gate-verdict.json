@@ -1,0 +1,24 @@
+{
+  "fixture": "negative-resilience-recovery",
+  "description": "Reliability hardening fixture: negative-resilience-recovery",
+  "expectedVerdict": "no_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [
+    {
+      "id": "blocker:rel:02:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+      "message": "Recovery is absent or exceeds the resilience threshold",
+      "ruleId": "BLK-REL-02",
+      "riskIds": [
+        "qeg:risk-reliability-fixture"
+      ],
+      "testId": "qeg:test-reliability-fixture",
+      "evidenceId": "qeg:evidence-reliability-fixture",
+      "effective": true
+    }
+  ],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

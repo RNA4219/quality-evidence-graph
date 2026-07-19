@@ -56,17 +56,29 @@ Optional artifact がある場合は `optional/` に置く。
 - manual case の引退は `placement_changes[]` として記録する。`evidence_refs[]`、policy 参照、revert 条件を持たない引退、または棚卸しからの単純消失は DQ-14 として扱う。
 - test node は `testExecutionMode=real|mock` を必須とする。`mock` の replacement は強度・green 回数・risk coverage の値にかかわらず Gate 証跡へ算入せず、manual case 未復帰なら DQ-14 とする。
 
+## Reliability / Resilience hardening matrix
+
+`positive-reliability-go/` 0�W�n�0k0k!0n 21 fixture 0� on-disk E2E kcg,0h0Y0�0`positive-legacy-compatible/` 0o reliability disabled 0n legacy assignability 0�O݊<0Y0�0
+
+- positive: `positive-reliability-go`0`positive-legacy-compatible`
+- DQ-06 / DQ-12: `negative-resilience-artifact-tamper`0`negative-resilience-revision-mismatch`
+- DQ-180DQ-21: `negative-resilience-mock-only`0`negative-resilience-stale`0`negative-resilience-lifecycle`0`negative-resilience-selection-ambiguous`0`negative-resilience-signal-missing`0`negative-resilience-signal-mismatch`0`negative-resilience-policy-identity`
+- blocker: `negative-resilience-threshold`0`negative-resilience-recovery`0`negative-resilience-nonpass`0`negative-resilience-safety`
+- waiver: `conditional-resilience-waived-threshold`0`conditional-resilience-waived-recovery`0`conditional-resilience-waived-nonpass`0`negative-resilience-safety-waiver-attempt`
+- selection / safety history: `negative-resilience-latest-fail`0`negative-resilience-prior-safety-attempt`
+
+T reliability fixture 0o `validate`0`gate`0temp copy N
+0n `record`0JSON/text `report`0`evidence verify`0`policy lint`0`snapshot` 0�[��L0Y0�0expected blocker 0o ID / message 0kR�0H0f0c[�0U0�0_ `ruleId`0risk / test / evidence0`effective`0`waiverId` 0�kԏ0Y0�0
+
+fixture 0h mock 0nbR�0o[� cluster0[� fault injection0Lakda real acceptance 0�aTs0W0j0D0
+
 ## Acceptance Commands
 
 ```sh
 npm run typecheck
-node -e "const fs=require('fs'); for (const f of fs.readdirSync('schemas').filter(f=>f.endsWith('.json'))) JSON.parse(fs.readFileSync('schemas/'+f,'utf8')); console.log('schemas ok')"
+npm run build
+npm run test:runtime
+npm run test:fixtures
 ```
 
-MVP CLI 実装後は次を追加する。
-
-```sh
-npm run qeg -- validate fixtures/minimal-valid
-npm run qeg -- record fixtures/minimal-valid
-npm run qeg -- validate fixtures/negative-missing-required-artifact
-```
+`test:fixtures` 0oQhmanifest fixture0nexpected verdict0hsnapshot0�i�<0W0reliability matrix0g0oQhcommandR%exit code0report0record0accounting0sourceRefs0~0gkԏ0Y0�0

@@ -1,0 +1,149 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-positive-release-go",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+        "revision": "refs/heads/main"
+      }
+    ]
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "requirement",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ],
+        "title": "All critical risks mitigated",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-claim-001",
+              "path": "docs/claims/claim-001.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "acceptanceCriteriaIds": []
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "refs/heads/main"
+        }
+      ]
+    },
+    "verdict": "go",
+    "reasons": [
+      "All gate conditions satisfied"
+    ],
+    "disqualifications": [],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "output-record.json"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:release-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "qeg:approval-release-001",
+        "approver": "approver-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "qeg:policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-20",
+        "count": 1,
+        "remediation": "Supply hash-backed required signals whose phase and revision match the experiment."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-resilience-signal-missing",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 1 DQ code(s)",
+        "- DQ-20: Resilience signals invalid: required steady-state metric requests is missing; SLO traffic has no exact steady_state signal"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-20",
+          "message": "Resilience signals invalid: required steady-state metric requests is missing; SLO traffic has no exact steady_state signal",
+          "nodeIds": [
+            "qeg:evidence-reliability-fixture",
+            "qeg:test-reliability-fixture"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:reliability-extension",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "reliability": {
+        "enabled": true,
+        "requiredRiskCount": 1,
+        "qualifiedRiskCount": 0,
+        "passingRiskCount": 0,
+        "riskCoverageRate": 0,
+        "requiredExecutionCount": 1,
+        "qualifiedExecutionCount": 0,
+        "passingExecutionCount": 0,
+        "resiliencePassRate": null,
+        "recoverySecondsP50": null,
+        "recoverySecondsP95": null,
+        "recoverySampleCount": 0,
+        "duplicateSideEffectsCount": 0,
+        "dataInconsistenciesCount": 0,
+        "evidenceAgeHours": {
+          "qeg:evidence-reliability-fixture": 23.966666666666665
+        },
+        "excludedMockTests": [],
+        "dqCountByRule": {
+          "DQ-12": 0,
+          "DQ-18": 0,
+          "DQ-19": 0,
+          "DQ-20": 1,
+          "DQ-21": 0
+        },
+        "drillDown": [
+          {
+            "riskId": "qeg:risk-reliability-fixture",
+            "testId": "qeg:test-reliability-fixture",
+            "selectedEvidenceId": "qeg:evidence-reliability-fixture",
+            "adapter": "shell",
+            "experimentId": "qeg:experiment-reliability-fixture",
+            "attempt": 1,
+            "targetRevision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "ci:fixture",
+            "selectionReason": "latest_current_execution",
+            "disqualificationCodes": [
+              "DQ-20"
+            ],
+            "blockerIds": []
+          }
+        ]
+      },
+      "expected": {
+        "fixture": "negative-resilience-signal-missing",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/reliability-hardening.md",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-20"
+        ],
+        "actualDqCodes": [
+          "DQ-20"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
+      }
+    }
+  ]
+}

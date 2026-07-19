@@ -1,0 +1,24 @@
+{
+  "fixture": "negative-resilience-safety-waiver-attempt",
+  "description": "Reliability hardening fixture: negative-resilience-safety-waiver-attempt",
+  "expectedVerdict": "no_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [
+    {
+      "id": "blocker:rel:04:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+      "message": "Safety policy violated by a current real resilience attempt",
+      "ruleId": "BLK-REL-04",
+      "riskIds": [
+        "qeg:risk-reliability-fixture"
+      ],
+      "testId": "qeg:test-reliability-fixture",
+      "evidenceId": "qeg:evidence-reliability-fixture",
+      "effective": true
+    }
+  ],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

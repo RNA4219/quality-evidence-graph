@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-resilience-mock-only",
+  "description": "Reliability hardening fixture: negative-resilience-mock-only",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-18"
+    }
+  ],
+  "expectedDisqualificationMode": "includes",
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

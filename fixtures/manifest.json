@@ -2,6 +2,75 @@
   "manifestVersion": "qeg-fixtures-v2",
   "fixtures": [
     {
+      "name": "conditional-resilience-waived-nonpass",
+      "classification": "negative",
+      "expected": {
+        "verdict": "conditional_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:03:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-03"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "conditional-resilience-waived-recovery",
+      "classification": "negative",
+      "expected": {
+        "verdict": "conditional_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:02:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-02"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "conditional-resilience-waived-threshold",
+      "classification": "negative",
+      "expected": {
+        "verdict": "conditional_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-01"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
       "name": "negative-approval-hash-mismatch",
       "classification": "negative",
       "expected": {
@@ -202,6 +271,347 @@
       "snapshot": true
     },
     {
+      "name": "negative-resilience-artifact-tamper",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-06",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 1,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-latest-fail",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:03:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-03"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-lifecycle",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-18",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-mock-only",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-18",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-nonpass",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:03:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-03"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-policy-identity",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-21",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-prior-safety-attempt",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:04:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture-prior-unsafe",
+        "blockerRuleIds": [
+          "BLK-REL-04"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-recovery",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:02:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-02"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-revision-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-12",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 1,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-safety",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:04:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-04"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-safety-waiver-attempt",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:04:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-04"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-selection-ambiguous",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-19",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-signal-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-20",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-signal-missing",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-20",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-stale",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-18",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-resilience-threshold",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "blocker:rel:01:qeg:risk-reliability-fixture:qeg:test-reliability-fixture:qeg:evidence-reliability-fixture",
+        "blockerRuleIds": [
+          "BLK-REL-01"
+        ],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
       "name": "negative-revision-mismatch",
       "classification": "negative",
       "expected": {
@@ -278,6 +688,26 @@
         "verdict": "go",
         "exitCode": 0,
         "primaryDq": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "positive-legacy-compatible",
+      "classification": "positive",
+      "expected": {
+        "verdict": "go",
+        "exitCode": 0,
+        "primaryDq": null,
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 0,
+          "record": 0,
+          "report": 0,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
       },
       "snapshot": true
     },

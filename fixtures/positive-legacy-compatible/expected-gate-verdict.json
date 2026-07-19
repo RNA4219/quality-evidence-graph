@@ -1,0 +1,12 @@
+{
+  "fixture": "positive-legacy-compatible",
+  "description": "Reliability hardening fixture: positive-legacy-compatible",
+  "expectedVerdict": "go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 0,
+  "contractRef": "docs/spec/reliability-hardening.md"
+}

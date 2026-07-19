@@ -1,0 +1,147 @@
+{
+  "reportVersion": "qeg-ci-report-v2",
+  "generatedAt": "<snapshot>",
+  "selection": {
+    "mode": "all",
+    "status": "selected",
+    "strategy": "all",
+    "changedFileCount": 0,
+    "selectedTargetCount": 1
+  },
+  "errors": [],
+  "summary": {
+    "totalTargets": 1,
+    "passed": 0,
+    "baselineAccepted": 0,
+    "gateFailed": 1,
+    "cliErrors": 0,
+    "dqCounts": [
+      {
+        "code": "DQ-12",
+        "count": 3,
+        "remediation": "Regenerate artifacts and producer checks from the same headRef, then ensure producer conclusions reflect their readiness status."
+      }
+    ],
+    "blockerCount": 0,
+    "residualRiskCount": 0,
+    "humanReviewCount": 0
+  },
+  "targets": [
+    {
+      "target": "<repo>/fixtures/negative-resilience-revision-mismatch",
+      "status": "gate_failed",
+      "exitCode": 2,
+      "verdict": "disqualified",
+      "reasons": [
+        "Disqualified: 3 DQ code(s)",
+        "- DQ-12: Artifact revision mismatch for qeg:artifact-raw",
+        "- DQ-12: Resilience evidence revision mismatch (targetRevision)",
+        "- DQ-12: Artifact revision mismatch for qeg:signal-reliability-fixture"
+      ],
+      "disqualifications": [
+        {
+          "code": "DQ-12",
+          "message": "Artifact revision mismatch for qeg:artifact-raw",
+          "nodeIds": [
+            "qeg:artifact-raw"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:reliability-extension",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ]
+        },
+        {
+          "code": "DQ-12",
+          "message": "Resilience evidence revision mismatch (targetRevision)",
+          "nodeIds": [
+            "qeg:evidence-reliability-fixture"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:reliability-extension",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ]
+        },
+        {
+          "code": "DQ-12",
+          "message": "Artifact revision mismatch for qeg:signal-reliability-fixture",
+          "nodeIds": [
+            "qeg:signal-reliability-fixture"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:reliability-extension",
+              "path": "docs/spec/reliability-extension.md"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "residualRisks": [],
+      "requiredHumanReview": [],
+      "reliability": {
+        "enabled": true,
+        "requiredRiskCount": 1,
+        "qualifiedRiskCount": 0,
+        "passingRiskCount": 0,
+        "riskCoverageRate": 0,
+        "requiredExecutionCount": 1,
+        "qualifiedExecutionCount": 0,
+        "passingExecutionCount": 0,
+        "resiliencePassRate": null,
+        "recoverySecondsP50": null,
+        "recoverySecondsP95": null,
+        "recoverySampleCount": 0,
+        "duplicateSideEffectsCount": 0,
+        "dataInconsistenciesCount": 0,
+        "evidenceAgeHours": {},
+        "excludedMockTests": [],
+        "dqCountByRule": {
+          "DQ-12": 3,
+          "DQ-18": 0,
+          "DQ-19": 0,
+          "DQ-20": 0,
+          "DQ-21": 0
+        },
+        "drillDown": [
+          {
+            "riskId": "qeg:risk-reliability-fixture",
+            "testId": "qeg:test-reliability-fixture",
+            "selectionReason": "no_selectable_current_execution",
+            "exclusionReason": "no_current_real_evidence",
+            "disqualificationCodes": [
+              "DQ-12"
+            ],
+            "blockerIds": []
+          }
+        ]
+      },
+      "expected": {
+        "fixture": "negative-resilience-revision-mismatch",
+        "expectedVerdict": "disqualified",
+        "expectedExitCode": 2,
+        "contractRef": "docs/spec/reliability-hardening.md",
+        "validationPassed": true,
+        "verdictMatch": true,
+        "exitCodeMatch": true,
+        "dqMatch": true,
+        "expectedDqCodes": [
+          "DQ-12"
+        ],
+        "actualDqCodes": [
+          "DQ-12",
+          "DQ-12",
+          "DQ-12"
+        ],
+        "unexpectedDqCodes": [],
+        "missingDqCodes": [],
+        "blockerMatch": true,
+        "expectedBlockerIds": [],
+        "actualBlockerIds": []
+      }
+    }
+  ]
+}

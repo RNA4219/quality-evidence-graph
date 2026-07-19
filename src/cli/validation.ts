@@ -39,6 +39,29 @@ export interface FixtureValidationComparison {
   readonly passed: boolean;
 }
 
+function expectedBlockerMatches(
+  expected: NonNullable<ExpectedGateVerdict["expectedBlockers"]>[number],
+  actual: GateBlocker,
+): boolean {
+  if (actual.id !== expected.id || actual.message !== expected.message) return false;
+  const fields = [
+    "ruleId",
+    "riskIds",
+    "testId",
+    "evidenceId",
+    "effective",
+    "waiverId",
+  ] as const;
+  return fields.every((field) => {
+    const expectedValue = expected[field];
+    if (expectedValue === undefined) return true;
+    const actualValue = actual[field];
+    return Array.isArray(expectedValue)
+      ? JSON.stringify(actualValue) === JSON.stringify(expectedValue)
+      : actualValue === expectedValue;
+  });
+}
+
 export function compareEvaluatedFixture(
   expected: ExpectedGateVerdict,
   evaluated: EvaluatedFixture
@@ -61,7 +84,9 @@ export function compareEvaluatedFixture(
   const blockerMode = expected.expectedBlockerMode ?? (expectedBlockers.length > 0 ? "exact" : undefined);
   const blockerMatch = blockerMode === undefined || (
     (blockerMode === "includes" || (expectedBlockerIds.length === actualBlockerIds.length && expectedBlockerIds.every((id, index) => id === actualBlockerIds[index]))) &&
-    expectedBlockers.every((blocker) => gateResult.blockers.some((actual) => actual.id === blocker.id && actual.message === blocker.message))
+    expectedBlockers.every((blocker) =>
+      gateResult.blockers.some((actual) => expectedBlockerMatches(blocker, actual))
+    )
   );
 
   return {
