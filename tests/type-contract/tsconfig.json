@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@quality-harness/quality-evidence-graph": ["../../src/index.ts"]
+    },
+    "rootDir": "../..",
+    "noEmit": true
+  },
+  "include": ["contract.ts"]
+}

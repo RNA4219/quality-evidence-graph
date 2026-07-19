@@ -156,7 +156,7 @@ export interface ResilienceScenario {
   readonly abortConditions: readonly ResilienceAbortCondition[];
 }
 
-export interface TestNode extends QegNodeBase {
+export interface TestNodeBase extends QegNodeBase {
   readonly kind: "test";
   readonly layer: PlacementLayer;
   /** Mock executions are auditable but never count as Gate evidence. */
@@ -167,15 +167,20 @@ export interface TestNode extends QegNodeBase {
   readonly recentGreenRuns?: number;
   readonly coveredRiskIds?: readonly StableId[];
   readonly deleted?: boolean;
-  readonly testType?: TestType;
-  readonly resilienceScenario?: ResilienceScenario;
 }
 
-export interface ResilienceTestNode extends TestNode {
+export interface LegacyTestNode extends TestNodeBase {
+  readonly testType?: Exclude<TestType, "resilience">;
+  readonly resilienceScenario?: never;
+}
+
+export interface ResilienceTestNode extends TestNodeBase {
   readonly testType: "resilience";
   readonly resilienceScenario: ResilienceScenario;
   readonly coveredRiskIds: readonly StableId[];
 }
+
+export type TestNode = LegacyTestNode | ResilienceTestNode;
 
 export interface TestPlacementNode extends QegNodeBase {
   readonly kind: "test_placement";
@@ -187,11 +192,14 @@ export interface TestPlacementNode extends QegNodeBase {
   readonly selectedTestIds: readonly StableId[];
 }
 
-export interface ExecutionEvidenceNode extends QegNodeBase {
+export interface ExecutionEvidenceNodeBase extends QegNodeBase {
   readonly kind: "execution_evidence";
   readonly evidenceRefs: readonly EvidenceRef[];
   readonly passed?: boolean;
-  readonly evidenceType?: "resilience";
+}
+
+export interface LegacyExecutionEvidenceNode extends ExecutionEvidenceNodeBase {
+  readonly evidenceType?: never;
 }
 
 export interface ResilienceRawArtifactRef {
@@ -258,7 +266,7 @@ export interface SignalManifest {
   readonly logs: readonly TraceOrLogSignalEntry[];
 }
 
-export interface ResilienceExecutionEvidenceNode extends ExecutionEvidenceNode {
+export interface ResilienceExecutionEvidenceNode extends ExecutionEvidenceNodeBase {
   readonly evidenceType: "resilience";
   readonly testId: StableId;
   readonly adapter: ResilienceAdapter;
@@ -284,6 +292,8 @@ export interface ResilienceExecutionEvidenceNode extends ExecutionEvidenceNode {
   readonly signalManifest?: SignalManifest;
   readonly evidenceRefs: readonly (EvidenceRef | SignalEvidenceRef)[];
 }
+
+export type ExecutionEvidenceNode = LegacyExecutionEvidenceNode | ResilienceExecutionEvidenceNode;
 
 export interface GateVerdictNode extends QegNodeBase {
   readonly kind: "gate_verdict";

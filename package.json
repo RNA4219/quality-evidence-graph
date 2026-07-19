@@ -40,6 +40,7 @@
   "scripts": {
     "build": "tsc",
     "typecheck": "tsc --noEmit",
+    "test:types": "node node_modules/typescript/bin/tsc -p tests/type-contract/tsconfig.json && npm run build && node tests/package-smoke.mjs",
     "qeg": "node dist/cli.js",
     "validate": "node dist/cli.js validate",
     "gate": "node dist/cli.js gate",
@@ -57,7 +58,7 @@
     "check": "node dist/cli.js check",
     "init": "node dist/cli.js init",
     "snapshot": "node dist/cli.js snapshot",
-    "test": "npm run build && npm run test:runtime && npm run test:fixtures && npm run test:package",
+    "test": "npm run test:types && npm run test:runtime && npm run test:fixtures && npm run test:package",
     "test:fixtures": "node tests/fixture-regression.mjs",
     "test:package": "node tests/package-smoke.mjs",
     "birdseye-check": "node tools/birdseye-check.mjs"

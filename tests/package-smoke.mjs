@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -36,4 +36,39 @@ assert.equal(typeof imported.validateGateInput, "function");
 assert.equal(typeof imported.verifyEvidenceArtifacts, "function");
 assert.equal(typeof imported.getExitCode, "function");
 assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.2.0");
-console.log("Clean tarball install, qeg bin help/schema-check, and Library imports passed");
+
+await writeFile(
+  join(temp, "package.json"),
+  JSON.stringify({ private: true, type: "module" }, null, 2) + "\n",
+);
+await writeFile(
+  join(temp, "contract.ts"),
+  await readFile(resolve("tests", "type-contract", "contract.ts"), "utf-8"),
+);
+await writeFile(
+  join(temp, "tsconfig.json"),
+  JSON.stringify(
+    {
+      compilerOptions: {
+        target: "ES2022",
+        module: "NodeNext",
+        moduleResolution: "NodeNext",
+        strict: true,
+        exactOptionalPropertyTypes: true,
+        noEmit: true,
+        skipLibCheck: true,
+      },
+      include: ["contract.ts"],
+    },
+    null,
+    2,
+  ) + "\n",
+);
+const typeContract = spawnSync(
+  process.execPath,
+  [resolve("node_modules", "typescript", "bin", "tsc"), "-p", join(temp, "tsconfig.json")],
+  { encoding: "utf-8", cwd: temp },
+);
+assert.equal(typeContract.status, 0, typeContract.stderr || typeContract.stdout);
+
+console.log("Clean tarball install, CLI/library smoke, and packed public type contract passed");
