@@ -10,7 +10,7 @@ next_review_due: 2026-10-20
 
 ## Decision
 
-QEG本体はfeature completeであり、repository内のrelease candidateとして`go`候補とする。最終commitに対するNode 20 / 24 CIが成功した時点で`go`を確定する。
+QEG本体はfeature completeであり、repository内のrelease candidateとして`go`とする。code-bearing commitのNode 20 / 24 CIは成功済みであり、証跡追記後のdocs-only commitでも同じmatrixを再確認する。
 
 この判定は、実cluster、実fault injection、実サービスのresilience、Lakda real acceptance、tag、publish、release approvalを含まない。
 
@@ -25,7 +25,7 @@ QEG本体はfeature completeであり、repository内のrelease candidateとし�
 | Package smoke | go | clean tarball install、CLI / library、packed public type contract、dry-run 714 files |
 | Documentation consistency | go | requirements、blueprint、task ledger、evaluation、spec、fixture契約を現行状態へ同期 |
 | Isolated consumer acceptance | go | Node 24.15.0 / npm 11.12.1の一時git repoへpacked tarballをfresh install |
-| Node 20 / 24 CI | pending | code-bearing commitと最終docs-only commitのGitHub Actionsで確定する |
+| Node 20 / 24 CI | code-bearing go | run 29717279305で両job SUCCESS。最終docs-only commitの再確認はpending |
 | External real-environment acceptance | not_evaluated | 本作業の範囲外 |
 | Publish approval | separate_decision | tag / publish / releaseを実行しない |
 
@@ -72,10 +72,12 @@ Candidate tarball SHA-256: `7be2be3431280cf5ee1d7803baad0a09827f38e95e8a28954757
 
 | Evidence | Value | Status |
 |---|---|---|
-| Code-bearing commit | pending | pending |
-| Draft PR | pending | pending |
+| Code-bearing commit | `b54a64e12fb333f342dfb5289d00df2a11191e76` | success |
+| Draft PR | [#4](https://github.com/RNA4219/quality-evidence-graph/pull/4) | open / draft |
 | Local full gate | `npm ci`、35 runtime、53 fixture、22 reliability E2E、package / schema / enum / Birdseye / operational CLI / dry-run | success |
-| `quality (20)` | pending | pending |
-| `quality (24)` | pending | pending |
+| Code-bearing `quality (20)` | [run 29717279305 / job 88272902466](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717279305/job/88272902466) | SUCCESS |
+| Code-bearing `quality (24)` | [run 29717279305 / job 88272902498](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717279305/job/88272902498) | SUCCESS |
+| Latest docs-only `quality (20)` | pending | pending |
+| Latest docs-only `quality (24)` | pending | pending |
 
 最終証跡を記録するdocs-only commitでもNode 20 / 24 CIを再確認し、最新commitのcheckが両方SUCCESSであることをもって本記録を`verified`へ変更する。
