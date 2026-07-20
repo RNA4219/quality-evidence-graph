@@ -1,0 +1,275 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-20T11:58:07.600Z",
+  "run_id": "ctg-202607201158-local",
+  "repo": {
+    "root": ".",
+    "revision": "0b0d8443907a",
+    "branch": "agent/qeg-v0-3-1-github-only",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "test-seeds",
+  "schema": "test-seeds@v1",
+  "completeness": "complete",
+  "seeds": [
+    {
+      "id": "seed-000",
+      "title": "Test for TRY_CATCH_SWALLOW: Catch block returns null without logging",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-000"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-000-00",
+          "path": "src/cli/report/targets.ts",
+          "startLine": 4,
+          "endLine": 10,
+          "kind": "text",
+          "excerptHash": "2279a462"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult."
+    },
+    {
+      "id": "seed-001",
+      "title": "Test for TRY_CATCH_SWALLOW: Catch block returns null without logging",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-001"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-001-00",
+          "path": "src/cli/repro-bundle.ts",
+          "startLine": 20,
+          "endLine": 26,
+          "kind": "text",
+          "excerptHash": "33ee1d11"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult."
+    },
+    {
+      "id": "seed-002",
+      "title": "Test for TRY_CATCH_SWALLOW: Catch block returns null without logging",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-002"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-002-00",
+          "path": "src/cli/snapshot.ts",
+          "startLine": 59,
+          "endLine": 65,
+          "kind": "text",
+          "excerptHash": "6d20a5ba"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult."
+    },
+    {
+      "id": "seed-003",
+      "title": "Test for TRY_CATCH_SWALLOW: Empty catch block swallows exceptions",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-003"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-003-00",
+          "path": "tools/migrate-fixtures-v02.mjs",
+          "startLine": 137,
+          "endLine": 137,
+          "kind": "text",
+          "excerptHash": "7234ff2a"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "The catch block is empty, silently swallowing all exceptions. This hides errors and makes debugging difficult. Consider logging the error or handling it appropriately."
+    },
+    {
+      "id": "seed-004",
+      "title": "Test for ENV_DIRECT_ACCESS: Environment variable 'GITHUB_STEP_SUMMARY' accessed without validation",
+      "intent": "boundary",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-ENV_DIRECT_ACCESS-004"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-004-00",
+          "path": "src/cli/report/command.ts",
+          "startLine": 105,
+          "endLine": 109,
+          "kind": "text",
+          "excerptHash": "7fe573a7"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "The environment variable 'GITHUB_STEP_SUMMARY' is accessed directly without validation, default values, or type checking. This can cause runtime errors if the variable is missing or incorrectly formatted. Use a config validation layer or provide fallback values."
+    },
+    {
+      "id": "seed-005",
+      "title": "Test for LARGE_MODULE: Module has too many functions (39)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-006"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-005-00",
+          "path": "src/cli/evidence-normalize.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "20684f74"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This file has 39 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules."
+    },
+    {
+      "id": "seed-006",
+      "title": "Test for LARGE_MODULE: Module has too many functions (23)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-007"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-006-00",
+          "path": "src/cli/policy-lint.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "2cf281d8"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This file has 23 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules."
+    },
+    {
+      "id": "seed-007",
+      "title": "Test for LARGE_MODULE: Module has too many functions (44)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-008"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-007-00",
+          "path": "src/cli/report/formatter.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "7e85892f"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This file has 44 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules."
+    },
+    {
+      "id": "seed-008",
+      "title": "Test for LARGE_MODULE: Module has too many functions (26)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-009"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-008-00",
+          "path": "src/gate/reliability/qualification.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "298c59ac"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This file has 26 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules."
+    },
+    {
+      "id": "seed-009",
+      "title": "Test for LARGE_MODULE: Module has too many functions (29)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-010"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-009-00",
+          "path": "src/gate/reliability/utils.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "3fe6b3bb"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This file has 29 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules."
+    },
+    {
+      "id": "seed-010",
+      "title": "Test for LARGE_MODULE: Module has too many functions (24)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-011"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-010-00",
+          "path": "tools/migrate-fixtures-v02.mjs",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "61d0a8a1"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This file has 24 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules."
+    },
+    {
+      "id": "seed-011",
+      "title": "Test for SUPPRESSION_DEBT: Suppression may hide debt (UNSAFE_DELETE)",
+      "intent": "regression",
+      "sourceRiskIds": [],
+      "sourceFindingIds": [
+        "finding-SUPPRESSION_DEBT-012"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-seed-011-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 3,
+          "endLine": 3,
+          "kind": "text",
+          "excerptHash": "00007c2d"
+        }
+      ],
+      "suggestedLevel": "unit",
+      "notes": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item."
+    }
+  ],
+  "oracle_gaps": [],
+  "known_gaps": []
+}

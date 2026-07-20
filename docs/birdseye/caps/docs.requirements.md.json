@@ -55,6 +55,6 @@
     "npm run report -- fixtures/positive-release-go",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00013",
+  "generation": "00014",
   "contentHash": "sha256:809a0005177994bf4044c9d663bed4d61ad522529e08801ef7cc01ed61c1b00a"
 }

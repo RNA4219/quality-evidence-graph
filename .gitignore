@@ -5,3 +5,5 @@ coverage/
 .npm-cache/
 .DS_Store
 *.log
+!qeg-report-action/dist/
+!qeg-report-action/dist/cli.mjs

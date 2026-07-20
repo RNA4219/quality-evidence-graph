@@ -1,29 +1,18 @@
 {
   "id": "docs/release/acceptance-2026-07-20.md",
-  "role": "repository-completion-acceptance",
-  "generation": "00013",
+  "role": "superseded-v0.3.0-release-acceptance",
+  "generation": "00014",
   "public_api": [],
-  "summary": "QEG repository completion、evidenced_by provenance closure、隔離consumer smoke、CI証跡、外部実環境とpublishの境界を記録する現行Gate。",
+  "summary": "v0.3.0 repository completionとnpm公開を含む過去判定。npm公開は完了せず、現行配布契約はGitHub-only v0.3.1へ移管済み。",
   "deps_out": [
-    "docs/requirements.md",
-    "docs/project/evaluation.md",
-    "docs/spec/reliability-hardening.md",
-    "docs/spec/reliability-hardening-checklist.md",
-    "fixtures/manifest.json"
+    "docs/release/acceptance-2026-07-20-v0.3.1.md"
   ],
-  "deps_in": [
-    "README.md",
-    "docs/agent/HUB.codex.md",
-    "docs/project/blueprint.md"
-  ],
+  "deps_in": [],
   "risks": [
-    "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"
+    "supersededなnpm公開承認を現行判定と誤認する"
   ],
   "tests": [
-    "npm run test:fixtures",
-    "npm run test:package",
-    "npm run birdseye-check",
-    "git diff --check"
+    "npm run birdseye-check"
   ],
-  "contentHash": "sha256:76463faa453867342375e3127ff5bfe983166264c52e342ab2b61107d9db426b"
+  "contentHash": "sha256:4ec8b33222d5648207be9a9449783a4158872d4e1ca5cee72e7c2c2a7808b170"
 }

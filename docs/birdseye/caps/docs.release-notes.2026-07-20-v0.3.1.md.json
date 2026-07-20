@@ -1,0 +1,25 @@
+{
+  "id": "docs/release-notes/2026-07-20-v0.3.1.md",
+  "role": "v0.3.1-release-notes",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "QEG 0.3.1のGitHub-only Action bundle、release lifecycle evidence、互換境界を記録するrelease notes。",
+  "deps_out": [
+    "CHANGELOG.md",
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "qeg-report-action/action.yml"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/project/runbook.md"
+  ],
+  "risks": [
+    "package versionとqegVersionの混同、tag・GitHub Release・bundle sourceの不一致"
+  ],
+  "tests": [
+    "npm run test:package",
+    "npm run test:runtime",
+    "npm run birdseye-check"
+  ],
+  "contentHash": "sha256:13e3e9f4fb1ecbc831db7d368b1b9f4bcbac21c227543389fff8dbafef6c8142"
+}

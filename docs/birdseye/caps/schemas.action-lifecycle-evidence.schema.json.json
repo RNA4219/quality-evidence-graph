@@ -1,0 +1,19 @@
+{
+  "id": "schemas/action-lifecycle-evidence.schema.json",
+  "role": "action-release-lifecycle-evidence-schema",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "変更、リスク、テスト、隔離デプロイ、観測、障害、復旧、新しい証拠をstrictに検証するv0.3.1 release evidence schema。",
+  "deps_out": [
+    "tools/action-lifecycle-acceptance.mjs"
+  ],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm run schema-check",
+    "npm run test:release-lifecycle"
+  ],
+  "contentHash": "sha256:28afa0ea006486c7e3be7c4564a70b2dbdfb978fa81e307672210675384160b1"
+}

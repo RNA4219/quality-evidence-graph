@@ -1,0 +1,3784 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-20T11:58:07.607Z",
+  "run_id": "ctg-202607201158-local",
+  "repo": {
+    "root": ".",
+    "revision": "0b0d8443907a",
+    "branch": "agent/qeg-v0-3-1-github-only",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "config_hash": "53840941c91decd3cf00e831c22d1d94433d164ed84eb5e97bcd1c248683efd3",
+    "plugin_versions": []
+  },
+  "artifact": "audit",
+  "schema": "audit@v1",
+  "inputs": [
+    {
+      "path": ".ctg/suppressions.yaml",
+      "hash": "00644a5ae6b0cdf6bf56875eff72e55a7eb1f3f75b0eff51f85ae71e6c1c7b1a",
+      "kind": "config"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "hash": "071120eb60d3ed9b29cf43afcd2182ee4e00f3235c786b35cd91f89f24642304",
+      "kind": "config"
+    },
+    {
+      "path": ".npm-cache/qeg-ci-report.json",
+      "hash": "cb3e87497c89f5e29071c0d265d9f2ad4c4c16544c02b4b4e3af036a9516b9c3",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/all-fixtures-report.json",
+      "hash": "e5bd0c828df390eeb1aed32935ef74b2ea13d9f78faa94710c577f538178660e",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/baseline-audit-bad.json",
+      "hash": "12b475a6c3b55c3f707d9e24e7711483fcf8fd6065386802de943e54f867193a",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/baseline-audit-ok.json",
+      "hash": "0ed44465690378eecd164f0682a744eb2cf480a4d0beda8b990ee4e340fd35d6",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/baseline-dq15.json",
+      "hash": "0f6a8d1042c0e958376bdfd78d85df49ffdce1c98d5219289b75d425f8781531",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/baseline-report.json",
+      "hash": "6010a6f5db3d920f89019acf7a6fc3f32ea02b54f41f2f28886c703f2abc5fed",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/bundle-probe.json",
+      "hash": "cb33c768f3bdb6d6dc6c66226e7030580ffd0655d51a524ba490697763d4f717",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/changed-report.json",
+      "hash": "a36a0957fdfe5fe9d220ca2c56a95ec2023cde3ca55f622635bfeccb5a1689b9",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/closure-diff-report.json",
+      "hash": "b2b07828e6d376237f081800dff62057853f5efb0e933309ebffcbfc89e85033",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/closure-report.json",
+      "hash": "652fcc1ea3498c404b218b50ab0d1b03c3e92003ca3da263501c9e1309509cc0",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/debug-waived-nonpass.json",
+      "hash": "3e70f04bcfca06e428e9f6fcde02705795cfa2af41c062d48d5925c0c90faf2f",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/demo-fail-report.json",
+      "hash": "882b9c71cf11a5bc1c0d71d88b03f1aee5c654b9ba26afe24aeca39ffc2e25df",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/demo-pass-report.json",
+      "hash": "4dcb41328d07224be259537c0be5c1b1d9a1a98a3009c6b05771ee7d5aae06e9",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/diff-negative-report.json",
+      "hash": "0d7593c2bb9fa8c5fcdd23fc8b250c57e8de1e4d67beb44423ffc94b48939de2",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/dist-probe.json",
+      "hash": "b3e7a6f63f953ef146c8ae270018319a1718ba2994bf3c1e60b5b0088918728d",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/init-smoke/.github/workflows/qeg.yml",
+      "hash": "23a9bb99d85d91e68867bafe0f59563227649c072c582ba99f3fc909fa6b99cc",
+      "kind": "config"
+    },
+    {
+      "path": ".qeg/init-smoke/.qeg/gate-input.json",
+      "hash": "daed84551fb7451d58e506f43bb7f784fb7953b2631bec14c999ebf0f5bff4aa",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/init-smoke/.qeg/qeg-baseline.json",
+      "hash": "364b37738032a28a72829f4d2192b70bd9353c9ee8dddfc5b70c2785f995d6ac",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle/before-report.json",
+      "hash": "869ce66bb5161ed4cc6de33a11149b760f64465fff9d5a2bab2837b3b51782a0",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle/evidence.json",
+      "hash": "74c093f72095230ae76cacee3b2761eb13cfe345af22e689accd076592f40416",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle/fault-observation.json",
+      "hash": "76ee197110ac871a4616a37409c2b2fe5efde09f83c6753655120f63736d8a11",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle/recovered-report.json",
+      "hash": "1642e8dc65917c7bf0fe6b861da17ae0b84ac80298852f1a0ba16b39d5fdbba0",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle-2/before-report.json",
+      "hash": "7961e97d013f71b63419fbfe6cc50839fd6fd757af68da3545ca7f19fb8f0f23",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle-2/evidence.json",
+      "hash": "02ab8e9dcd4e30213ab91cb385310dc66fbe36737cd615bcbca8a000d4e09387",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle-2/fault-observation.json",
+      "hash": "e25ad3dc4413d18dc9dab4d1424b0b1b4e98ce0d6e8415a17a0681c5de6deb02",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/local-action-lifecycle-2/recovered-report.json",
+      "hash": "598f3c77c80d72837fddeaaf4819fd721fcc12316aa6180dbda53648430ba76c",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/positive-release-probe.json",
+      "hash": "989e4fbc3334f63ffc87ad4fb517000726fb5d5e96e7e8189038055171ae670c",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/pr-body-closure.md",
+      "hash": "f239f5dfb56ef0f6ed4d050c0bbed279e9a5003be928c8067337a8d70190acb2",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/previous-positive-report.json",
+      "hash": "edceca5ea3a046e663a422222267fd1a102da87ec84ac70fe2afc90ef6cdf91b",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/previous-report.json",
+      "hash": "2d32fd0bf9a24f3011098ac97ada5176cf390a891ff3e47b2e1e202b1a362218",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/qeg-ci-report.json",
+      "hash": "21092c129f4afd55a09e52c6b58ac9c95cc71b8543117ba733d27e495c09ba8b",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/qeg-producer-check-report.json",
+      "hash": "16b4baea0c719be54f78a2d3329f9a8072f28d5753e83a46928cbc8b0fb14a51",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-bundle/doctor.json",
+      "hash": "c710c366323c29d80210e051f2b9a8ebaf19d545be7e91134c00e9c4277b8342",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-bundle/manifest.json",
+      "hash": "5c93699a19545265d6d53b575aa7791936fb1cc1a540e9d40a8a2ea7e5ac0c33",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-bundle/schemas.json",
+      "hash": "3dbe4f3012913717c4deef2640daa3bf4d6464a626deb31799ecf14f0e728795",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-bundle/workflow.json",
+      "hash": "37fca4d5fac94d30378f08397c298fef90947b87b5149671355ce2569ee012cf",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-closure/doctor.json",
+      "hash": "e9e6f2976eab904159ad7d3c49df944bf71ddc60363dfcfd0cc85739d9c98bab",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-closure/gate-input-positive-release-go.json",
+      "hash": "7ac605ff008c523800e314be6fc303366c34427022a2584a8e519d352da5e1fc",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-closure/manifest.json",
+      "hash": "9f1ad7269ad1a7f59581f54978ce4e9f7e27427d3dc6431cafce6ec598780d4f",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-closure/qeg-ci-report.json",
+      "hash": "652fcc1ea3498c404b218b50ab0d1b03c3e92003ca3da263501c9e1309509cc0",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-closure/schemas.json",
+      "hash": "3dbe4f3012913717c4deef2640daa3bf4d6464a626deb31799ecf14f0e728795",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-closure/workflow.json",
+      "hash": "37fca4d5fac94d30378f08397c298fef90947b87b5149671355ce2569ee012cf",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-smoke/doctor.json",
+      "hash": "e72e914938a143738cbd575f90be871b550d05c59fdc7152f2f170299b807aa7",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-smoke/gate-input-negative-approval-missing.json",
+      "hash": "6a76c8ab9b24d8f65cbce30e454339afa6712448b5ae7318e56780c8a35e8d13",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-smoke/manifest.json",
+      "hash": "4d7b505c35324f029820029157f04fa760f44231665034bd2d34765e5e42d033",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-smoke/qeg-ci-report.json",
+      "hash": "0d7593c2bb9fa8c5fcdd23fc8b250c57e8de1e4d67beb44423ffc94b48939de2",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-smoke/schemas.json",
+      "hash": "a86a4e3c89d8ea5f8c24ff47be26dcc8712bb17682994ea1df104621541b5945",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/repro-smoke/workflow.json",
+      "hash": "9961cbda8f5fbea079628313c190c516e46331af0c74877c28c49f3cbc693f0c",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/step-summary-16256.md",
+      "hash": "b17c580b8ee1de364a0160c0f393378b82ca2036b7fc1ed7e4978b0db45fa0ad",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/summary-report.json",
+      "hash": "4a1a61745e72508af2db210583a9cef66482a6b8079d9310a4c715afe1ed9cae",
+      "kind": "source"
+    },
+    {
+      "path": ".qeg/verify-report.json",
+      "hash": "77990fae42999ae35c98c5ad3b8639024cf31c67a4532e5816b7cb15ac30dd60",
+      "kind": "source"
+    },
+    {
+      "path": "CHANGELOG.md",
+      "hash": "542d3af5c5022b0e487e5b808015b1ca30ed775897f07efd2279269194737748",
+      "kind": "source"
+    },
+    {
+      "path": "CODE_OF_CONDUCT.md",
+      "hash": "6161deac332316189780e522f4ca85994a4311e3a2294989e2d159e4736adc07",
+      "kind": "source"
+    },
+    {
+      "path": "CONTRIBUTING.md",
+      "hash": "337065b62c2836bb407252e6db4fd135837d7c47fabb7ded610ceec98b6066cd",
+      "kind": "source"
+    },
+    {
+      "path": "docs/agent/HUB.codex.md",
+      "hash": "b72d16a42263b39d28ded1bb8ef41a6c0921491992c1da7ebfc15af81ef99516",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/.github.workflows.ci.yml.json",
+      "hash": "66ab9369d52edd6943778ea0f5fc9328d8254ea1e03542ac4c78455535caecea",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
+      "hash": "1e3b3aba09b073d71d9ea90b5b01a93a7dfb67ad34f035ce35e7abf12c0a2e87",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.control-mapping.md.json",
+      "hash": "6802d1c9d3cf6b894b92d16780e728c14a81f0ab7a037fe082395b4e37f4f2f7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
+      "hash": "9e10f5d2d0c61737bf2b42e8654e3fa2529964c922c8c34c074183f891654200",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+      "hash": "b7307641e61d6f5be3e8ce9a34322451244b2a728d67263eeb5dee09f7af97d8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.project.blueprint.md.json",
+      "hash": "c6da59e164299b8daeb52274e8bdd796cf34ef41b1294c16cdd49d09ce85d5b9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.project.checklists.md.json",
+      "hash": "1d4910df3e309f703a65200c1fb01d39455c5fb0d1f1b760de2740f96cfe3214",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.project.evaluation.md.json",
+      "hash": "83c38cace70811c5b41b71bf2e590a3553738ac08900b80f873a1d3ae7f3947e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.project.guardrails.md.json",
+      "hash": "11bd17371d35cb59cdf0dbac2c317cc238549ad407e409b428d2b5b931ea9b07",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.project.runbook.md.json",
+      "hash": "e09afb25e0dff7363437ab4b4875914521a625cbec806d1b54c5feff17cdfea0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.project.tasks.codex.md.json",
+      "hash": "2223e09d0898b36a5f8775c2a9365fc9ecfdd5bc7f913b20b946fc35723590b0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.release-notes.2026-06-03-controlled-gate.md.json",
+      "hash": "d5bd2cb4225c6bf3d081cdc0ca015a2e635781da1c1c07c65c7fc21609aa0fd9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.release-notes.2026-07-20-v0.3.0.md.json",
+      "hash": "fd10ddf96a284a1d6bca51c17e88a9b235e6ff560740c443714157d0b6c22a88",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.release-notes.2026-07-20-v0.3.1.md.json",
+      "hash": "927f9b817830dca5eec16558b4b3e01d94cd282670a4d0a55c5d9f1f6c3415c4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.release.acceptance-2026-07-20-v0.3.1.md.json",
+      "hash": "29931f2e8b1fd7fc85fc7f8592c7fc84081d62c2c886e76932de666ec9d214ae",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.release.acceptance-2026-07-20.md.json",
+      "hash": "67f80c7b0d4a19fb9a761c08d008b6ef31941a49d49fb2a2c007818fb4956da2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.requirements.md.json",
+      "hash": "a339e1624941aba0ad452e956b24cbca0201185ea53a99a5e76f1e7a673d9828",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.research.quality-evidence-graph-requirements-report.md.json",
+      "hash": "1605c25f91416ad77c345dad47e4a355fac03019a0875fe537b176691c78fc92",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.acceptance.md.json",
+      "hash": "83ee6662625257d5851f60beb4f1213b3d0ed92d9eb631845f911cf86e5bb93d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
+      "hash": "14238bd79d0cc1709498672d2f6b0c550431af0b83966219bb7ce063176e181c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.release-readiness.json.json",
+      "hash": "5fe25f5a27e717d997ffc713cb7e719baea3baf3437bfc9424df7a9de1692cac",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.code-to-gate-v0.3.1-2026-07-20.analysis-report.md.json",
+      "hash": "62709c55b88a0539bd6ed25d73f9307f9facd33be7cda0d5e3d67efaec8228d4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.code-to-gate-v0.3.1-2026-07-20.release-readiness.json.json",
+      "hash": "f508dbd559d0292b07b9188834b7940d3513bc7fea10c74303b219dd3a5586a1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
+      "hash": "082d8d6b7106b745335c2db7014e4704de0a052ce3bc70b84973c4cb9cc4e108",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
+      "hash": "1bcf497830e343f8b7a626e421501910f0d6aba88e7e62888070d6e2ccc767e1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.gate-policy.md.json",
+      "hash": "fd8da8437e2761b4b19a08006b318e7ae748b1d7eed0dde1ad3bf9369a897c24",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
+      "hash": "14b6925ad92befaa3772f99cbefa109eea4616cb5213235f4ce652d5ce2b5ddf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.index.md.json",
+      "hash": "5978c83ffbae47a153e33c1822fffb9aab1d0a1cc3454c73a2faf613d244aa52",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.kano.json.json",
+      "hash": "a8a5b5c436951e5766a2970ef989f2b7dfc85e5e7b0e2307de5e002c25bf3363",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.requirements_audit_packet.json.json",
+      "hash": "db45cb459cadc881dce6cf4760469e2d3cdf095a50c407b8ae994b2c346cd34e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
+      "hash": "30634158db4f6313e9840be0dd12c867487f47cb785262db167005bf8306afcb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.reliability-extension-review-2026-07-19.md.json",
+      "hash": "b09ac59685ab0494ad4225d798bc004615c8cfe2f07e5c6a46bb73fcb478617a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.reliability-extension.md.json",
+      "hash": "917c6b0837b725311888d155557d55363d0af835abe5e5af3bc25c2df2241f87",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.reliability-hardening-checklist.md.json",
+      "hash": "0b81f245741da9017879cf636677d13966f480d900f3d8c72b23653a933f2ca2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.reliability-hardening.md.json",
+      "hash": "32c7fb94c8328e92fa506f2e509b155e44a2fe575d6a26dde0328fe79e4d9ed4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
+      "hash": "a88209a51843d2c4ab47b016dae0f5dd8e5d9da22b628f9dbfa93697dc722dec",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
+      "hash": "c1373bce18c14accc5f1bda68fccf3e5376402a314894b47fd6e2f3d66ddfed5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
+      "hash": "2610cbf51605b421a1ffb5b327b36cf59313d8c09d8fcfbb10a1edeb1c3e9414",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/fixtures.manifest.json.json",
+      "hash": "10c6ae2b874831cfa8ffe047a8effafef3b6d58b85df9b211c8bed238f2764d7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/fixtures.README.md.json",
+      "hash": "e5a7fe293e69a754b7d4de1d2afc1e8050bb2b2f628217ccf464d731f1d89cf8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/qeg-report-action.action.yml.json",
+      "hash": "9df1653fd9bcb5cc6cc46f10cdd2879a0d6c5a3e5af46250490fd692a717e2da",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/qeg-report-action.THIRD_PARTY_NOTICES.md.json",
+      "hash": "36fa28397af145c4951fc692f2742bf93b67ca67118ea7d7735e98f198595569",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/README.md.json",
+      "hash": "71bb9cc28766fac2778e989fc5dc338391f5047c068670a4cb09b97d5a9bb4e8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/README_EN.md.json",
+      "hash": "ff04dad81571f01ba68e015b00398a610c23b7e800c5889ecfa785aad21c24bf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/README_JA.md.json",
+      "hash": "b47f7480b02a26fc44ad568fc8b8a09ff9fea473a168e5106467ad2f2b66af9b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.action-lifecycle-evidence.schema.json.json",
+      "hash": "2ea87f98130eeaf1d58bf90ca11eb79f9a1d9244c274b6c78a5cbf600d1ae535",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.gate-input.schema.json.json",
+      "hash": "a95b3957ea6e4248490134c7ba38175fa37677fb762920aac27f6351b5fa2fb0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
+      "hash": "8f0461ffc38266c0494ee0624a1b429b8f4c10646d755ebe96d43673853714a2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
+      "hash": "d477f16e3fc91742d6fb635d4c60759047e9a6467a126b5cee2734eeb062419e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
+      "hash": "ca7c638567c8665ea5a8c748fb005497b2bf26ae8fd75070c77246dc28b9ae1b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.reliability.schema.json.json",
+      "hash": "e5866bf8c632673110d49e36f7e03d6d4497810f7e47df5121d1c3e91716ce15",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json",
+      "hash": "40f57f7bc81706b53978fe89ea6fca247acc2463ab630823bb4dde409f2973f2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
+      "hash": "c48504cf51df87fd9ccb1718f9d71d5656b3599da300731836cbf57f0a14027f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
+      "hash": "14a11f1a396d1e79bf22fde7a3a4f617e93736eb4eacd271d39d80e0f5f9e27a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.baseline.ts.json",
+      "hash": "f44630c19f13653157ee70211c2e2179cb33606ea11f48e8cc1b9f85d863669d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.check.ts.json",
+      "hash": "4d573012f737f320fd0581c76d4c18edd0abf0df4e6d0d583e4ce08af5665d5e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.doctor.ts.json",
+      "hash": "92866a57e810c7abda23594b92e333d2c65a46d60ae90a164a987cd7d7494cb6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
+      "hash": "40de44e00122719a2fad245a5570ff6a8434803032c9ba408fedfdf9b33822e7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.enum-check.ts.json",
+      "hash": "12a35cbf0e691a2d7b2d6584a4f0c4176b57c33b5f011be103c60f5d45704fcc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.evidence-normalize.ts.json",
+      "hash": "6fd62a5d156a2acd844fb09cc6a36675ee61be4721fa7253b71f21afd74c63c3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.evidence-verify.ts.json",
+      "hash": "d1d31a96e21aa8d01fbffcc1a01df721b3685511862ef701b3ba3bde261c1523",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.init.ts.json",
+      "hash": "0e7d7e78a1cca1f2d026e7e516744e6bab4070b67a08bb901a1e51ab0c92a867",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.policy-lint.ts.json",
+      "hash": "2c73e02cbf64e5d251dadbe70565f80c032da7c37413dcc36ba2d7c9195c8746",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.baseline-diff.ts.json",
+      "hash": "90c89746e4484ff09503a215477ff3b0c1b1c823b5661d168e094e5501ab20c7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.change-selection.ts.json",
+      "hash": "65b250a6f23154d2ffc4bfe81668ca7e7b4323fb4f44b50d07deaa119abeed14",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.command.ts.json",
+      "hash": "5a5ac972b177289de9a9a8a34f63ff71364ca6427c0f6393850af9934efafc30",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.core.ts.json",
+      "hash": "2372ca5c561fac832ea5ecaa3cb4cf78e6db76c6f5742570b0cdb109a3809097",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.formatter.ts.json",
+      "hash": "816c61af533633cbcb8efdfbea807399ea0b83bb3a439c14fa4fa3514fa82647",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.model.ts.json",
+      "hash": "db55cc6f1999b101a79839183885673b60de9faf5ac3fdc8aaef8f5bdf0500db",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.targets.ts.json",
+      "hash": "4888862afda330be2e391d4aa48680c527a278a465a220f53478c9c624bebbab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.report.ts.json",
+      "hash": "6e59f4885d2462fe8f86e0eaf1b9c8d118030773913e839ab593ff966db5f2fe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.repro-bundle.ts.json",
+      "hash": "6d09a6e07c0dcc6fe391c15866eb1701fb61f3467693fd7e909c034d899a99e8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.schema-check.ts.json",
+      "hash": "d3dc6683bd64979470e0ad22325de08969856aee4d91787aa78d05590306c0eb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.snapshot.ts.json",
+      "hash": "ed881fef5da93e5fc23f80d4ffa99f572eed7682aae72e0dfc18389fbafdc389",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.cli.ts.json",
+      "hash": "170b0950afb70aef34af6613a6672ad69e2c836c74cf73e8455060dbad20a2fe",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.dq.placement-change.ts.json",
+      "hash": "207fa42eed81531c6e3e3104ae56f13b7046731f1a7179b7c24f27064e8eb6f4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.evaluate.ts.json",
+      "hash": "ac92bb59dc0884b857b3a8dca4d0282411c28bde8d33e28a3a7a2bbaa14b68ab",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.accounting.ts.json",
+      "hash": "552b75f701af778bb7a351a0e5b58f46eeedfabe1c6f1ae023166c867cd955a4",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.blockers.ts.json",
+      "hash": "f01724f1c52ebf3f2cf6cd13fb8e7d76b42573bcee0fc4c909824f8acc89ffc8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.contracts.ts.json",
+      "hash": "113186cca73a0331f51dcf0d6d341bc37f8a0a1b9dfb85d7ff2a5eeccdef8f10",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.evaluator.ts.json",
+      "hash": "dacc4c8fa3ede9ea9d8de0e1cc5fba1df95887dced60786881a6a66e97d2ee18",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.indexing.ts.json",
+      "hash": "f4b5e028fd059536e661ca25ff68d105ee5e9745031947ea2841db3ebd76cfa8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.qualification.ts.json",
+      "hash": "60c4af6c1a34dd97fef890f37c545fc354526d9f8d856cd6f5bb0540b585a2f2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.selection.ts.json",
+      "hash": "68aab870f1f74ea065fadc8eb5e6778b836df9dda7c589a5aeca6779269277cf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.signals.ts.json",
+      "hash": "f695bbc2a994b033fe0763ffe480195834ccfa4f0411734ef4db9fea13d48b3b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.ts.json",
+      "hash": "7ddba6be03ad3fa405722fbc3fc2d4ad43eb4790615bdcf7aa59b4d577ef45a0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.reliability.utils.ts.json",
+      "hash": "487123cc1a319421c4d9ddb3ca8440b21f83af62f307aef3901785afbf982e92",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.gate.test-evidence.ts.json",
+      "hash": "53bfcf0d730172128958e939fbd63a04b2e3d70deb702332524a1d043bde5e0c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.types.evidence.ts.json",
+      "hash": "a2e42de6a3caf7b0ac35260e77fc094edcd7cc4e677eeaa92996674e46063e04",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.types.gate.ts.json",
+      "hash": "9c8ffae4089a1177197b37c115554e1406b65245ad93f5bf72e7dae396998218",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.types.graph.ts.json",
+      "hash": "4dacf947d5e85478a3d34409fd976b4e151acc56829c7e0de5c7b3cd8397d98f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.types.primitives.ts.json",
+      "hash": "325143c7a035022697fc6787947be9948daad57689de8988f69e729121838024",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.types.ts.json",
+      "hash": "386f4d84bdaadacdfafe724f78a991ca57e8b214060606c6582b6fa92dd5610a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.validation.evidence.ts.json",
+      "hash": "5a527bf0fd826834678f649f868e0746a243b5f84cf5a20a5ca4f2e453669a59",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.validation.reliability-semantics.ts.json",
+      "hash": "122c93e5662523b8a3e9fabb9cc5ad557aa419945b2e391f3a3e77b5303b6c45",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.validation.schema.ts.json",
+      "hash": "5271faa17c53d544a970058b6921411162b2516139647d9efd15519013f10ff9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/src.validation.ts.json",
+      "hash": "aff76c6f4c9345573121dd04db3fcc46040e6492348cc765c611ca5aa52c4edf",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/tests.fixture-regression.mjs.json",
+      "hash": "a298b935babae50914bbd8864dfbcb8ad76dcaef4f85051e7d7ed1a51d08bcfa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/tests.package-smoke.mjs.json",
+      "hash": "f000ec4ff30789d53ed064c0f428bf074964df79bd278e48a50103ef1cacee3a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/tests.runtime.test.mjs.json",
+      "hash": "ae1e20551b144e10c80e4f567db6e970ef7fc41cf62e59e8d56f13d9a9957dc7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/tests.type-contract.contract.ts.json",
+      "hash": "54d180182108316a52fcdcba023777b917a8b7df9b167f62781431fa442839de",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/tools.action-lifecycle-acceptance.mjs.json",
+      "hash": "b731166f98538f803eb08f18a89b707acfd88c461358248b7d8b577067198be5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/caps/tools.json-check.mjs.json",
+      "hash": "c3683a1bd764ae16cde9b81c666e9c67ffa675d18d04f879247ee03c44fd2c3b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/birdseye/index.json",
+      "hash": "daab3a818493f7aaf58adbf038787312018857babf817c76255d2295921bf0f7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/BIRDSEYE.md",
+      "hash": "2a435e2f3bea973678cbaa94c3796344ddb0c831a4aea9ad068c313bb8050ea7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/control-mapping.md",
+      "hash": "c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157",
+      "kind": "source"
+    },
+    {
+      "path": "docs/implementation-prep-gate-2026-06-02.md",
+      "hash": "fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda",
+      "kind": "source"
+    },
+    {
+      "path": "docs/ipo-controlled-profile.md",
+      "hash": "2e4a3ca5cc0ea7987e9b2321c6231943e09898e986b429d0c2f6dc4fee76dd3c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/project/blueprint.md",
+      "hash": "056a052e2e814c6c560385df849a64129f90b1aab9eb80436e279f25ce8f9fca",
+      "kind": "source"
+    },
+    {
+      "path": "docs/project/checklists.md",
+      "hash": "2718c34ee1b160b596ed695dbf53bbb72ba2d312e3df26a3771c2df2fe73ddde",
+      "kind": "source"
+    },
+    {
+      "path": "docs/project/evaluation.md",
+      "hash": "c8456068e68d06d79b29cae0c70de490f6e6321fb58ef81479ee0ca2bcfd2c1c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/project/guardrails.md",
+      "hash": "f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/project/runbook.md",
+      "hash": "e3a6e2b367108c51a5b81fc041eb1c6f2b92084bfa0236e4e5e4d4e1a3f428f8",
+      "kind": "source"
+    },
+    {
+      "path": "docs/project/tasks.codex.md",
+      "hash": "cb46a870223d5c451c4b4459cd80de402d999c7729cb67ab819645d06ba73020",
+      "kind": "source"
+    },
+    {
+      "path": "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "hash": "dc295def7b8431f75c4515b4a6d243ea68df360f77b51fe97cf9b5f5c489b616",
+      "kind": "source"
+    },
+    {
+      "path": "docs/release/acceptance-2026-07-20.md",
+      "hash": "f6ae86dcbe95fff375bb602fd730df93a3173a69fc8b45fc56eca03f8729b590",
+      "kind": "source"
+    },
+    {
+      "path": "docs/release-notes/2026-06-03-controlled-gate.md",
+      "hash": "9786b9d358e0f7d485dafe2f05adb782657822a43c74611a31d357af03e7c78e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/release-notes/2026-07-20-v0.3.0.md",
+      "hash": "0de0cbc58a29e52aba46afd1abf99ff3e1544d6e9291ef16c0994935c77040dc",
+      "kind": "source"
+    },
+    {
+      "path": "docs/release-notes/2026-07-20-v0.3.1.md",
+      "hash": "13e3e9f4fb1ecbc831db7d368b1b9f4bcbac21c227543389fff8dbafef6c8142",
+      "kind": "source"
+    },
+    {
+      "path": "docs/requirements-gate-acceptance-2026-06-02.md",
+      "hash": "b3cb428985eeca541cf6a2ae257405823a641a3635ac5e6ccbad4240133228c2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/requirements.md",
+      "hash": "2d9b334a61dd2dd3afca6b405bef3054cd2a020ac37aceb8426000e5f037da18",
+      "kind": "source"
+    },
+    {
+      "path": "docs/research/QEG Reliability Resilience 拡張要件定義.md",
+      "hash": "216ad65e784d9f0828ae03469e81b98a8e1d77478b06b0605cfb9c5d6b26dff6",
+      "kind": "source"
+    },
+    {
+      "path": "docs/research/quality-evidence-graph-requirements-report.md",
+      "hash": "548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/acceptance.md",
+      "hash": "03ee9a13cd1b417616b6cc35e2691f985fa29077f2cf53e302162c6d59d76e99",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/analysis-report.md",
+      "hash": "8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/audit.json",
+      "hash": "4c4f528aebaeb2a0fe4464e5240d20347e82b14db9903c17b14f3c44f22b8ac0",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/findings.json",
+      "hash": "9e88e5e5652e82b77c9aeae2df67115820610a8fc6b65bb7a75587b200bfa7f2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/invariants.json",
+      "hash": "7173d980c8eb007c250a1b20568874c2bb0c1a26a90820a2216c058b6e4697cb",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/manual-bb-export.json",
+      "hash": "4550836bf11d1b0df887d1f545a53077265a91178f006e617fcf202f5c45e59d",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/release-readiness.json",
+      "hash": "8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/repo-graph.json",
+      "hash": "c4c6b3f64ed80c2bb3039991d9f23204e8852d9ff69cc2796c5f4e4bb6a09c51",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/risk-register.yaml",
+      "hash": "b1433d0c25b48b89ff3b01cbbb8ad2ccaac5539a2e20f6c51583d2c64e11aba9",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/state-gate-export.json",
+      "hash": "cf5d3fc189494ce7e9646952c31e320099361b1bfdad0b5c09a34ec910205b2e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-2026-06-03/test-seeds.json",
+      "hash": "2bf18fdae4bc951e4b31066c4fa4349a3e2c5fdf84a831c2ee09a29ce2ac6408",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/analysis-report.md",
+      "hash": "9b299c9afbd950ec350047ee826e2d3ad768560d81d6a7743c1259583bf322d2",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/audit.json",
+      "hash": "237d45a3b20927ed4aa92c8d26fe0ad90da0076332c6f0cb412b989781f8668e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/findings.json",
+      "hash": "f63a936a4584b9ce7de01b051edf938652aacc084fc8ed6bd355947f02678eba",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/invariants.json",
+      "hash": "359168da05b0ea7e60657b547de2166c0fc5d699622f51d0f4bf69e9a74be4b1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/manual-bb-export.json",
+      "hash": "d94b084d94ac697e6b9ad2f56ba28fd2c468e2c48e985845ee5f517887ef095f",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/qeg-code-to-gate.json",
+      "hash": "d492d38c4f3e9127a6a08410266535882c0e23f6bb0eea909c5c86af690c892b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/raw-findings.json",
+      "hash": "e66d1fcc16dd27c66efa493344b043f7d5c58ddc95454180ceb3ed814291b19e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json",
+      "hash": "e349127a1cad2d454de00d95adef5cf205412b6bd5bd167fab8b7837fa47676e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/repo-graph.json",
+      "hash": "d3b43ab2b450eff4114db6ba40a788ae66ff0f0a0944b4c900a9ba2dfc730306",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/risk-register.yaml",
+      "hash": "0c060f363f88e45f4a8ac1dc7bca2a9cacaa9c685017ed07e61bf2ce0ecd218e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/self-analysis-debt.json",
+      "hash": "8e337e034ca63e4c24e7b0f824befcf9d3ddb6a2aaa443d4acf655528b7e866a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/code-to-gate-v0.3.1-2026-07-20/test-seeds.json",
+      "hash": "7b73650d4a8a26ced40a5b2de0ae490ee0e841b6b4c64d79fd9c0bcbf06f3daa",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/evidence-package.md",
+      "hash": "cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/gate-acceptance-2026-06-03.md",
+      "hash": "937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/gate-policy.md",
+      "hash": "9f4fcdf0a6e6be119f49982ec16ff5eaab4b4cf15df5b9f7ba62cf7272858383",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/implementation-gate-2026-06-03.md",
+      "hash": "cb50ac1d1c61f7cd046d9e7b463e2ac89b0c547e2ab5ad98fb3cddf3feb920f5",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/index.md",
+      "hash": "6b88a1a00f329753b2d09923ffb76c5884f34147025a61fb4d0f828fa2763122",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/kano-mode-2026-06-03/kano.json",
+      "hash": "cee0f90f7c07edfa2044bd01fd9894ec0f5319efe351104526e7de0d02b9a00c",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/kano-mode-2026-06-03/qeg-kano-audit-evidence.json",
+      "hash": "ccd19a9965f051056d620276ff4328ddc79485772e72fa19828ec137e85a0816",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json",
+      "hash": "33ef374195acdce943d4e2575fbda4f6a7fdba48f291fe3ac9ef90d6e8f9f110",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/node-identity-contract.md",
+      "hash": "758aea376f3148ff10da490b90d2d39c27acfcd775a9bd07f3a5c37529cf56a1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/operational-cli-extensions.md",
+      "hash": "cce6a8acbd5e4c5c6b6e2de3b4f13195c2257e51116e5782e34863f52a236f2a",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/reliability-extension-review-2026-07-19.md",
+      "hash": "b122794b985d4f4e6ec3b243cbdec75e52352b77fcbc38f39a497f3b2ea5e09e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/reliability-extension.md",
+      "hash": "28ebd1b84d30ed45e8aa175c6e032e86836572f0d3f91850976144a9ff3438c3",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/reliability-hardening-checklist.md",
+      "hash": "a20040c0264056921292dea7a8b4e458e503fdf54656c8a66bf88299ad660ce7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/reliability-hardening.md",
+      "hash": "c8d9673dd58752e7fc8bf94200d400a1652cf1c76363b5a0545a079d25781a83",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/retention-immutability.md",
+      "hash": "2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/review-2026-06-03.md",
+      "hash": "59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/schema-migration-2026-07-02.md",
+      "hash": "e0c996453f6ae3c4224cb183984ec4ed5a8992d263e1933db5f9873604e5d5c7",
+      "kind": "source"
+    },
+    {
+      "path": "docs/spec/waiver-approval.md",
+      "hash": "f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-nonpass/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-nonpass/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-nonpass/expected-gate-verdict.json",
+      "hash": "03064e2a85eb6a6339c2aa660ac36176a7ca0b4efcbb0d2e7c6907e07aada094",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-nonpass/expected-report.json",
+      "hash": "c5c12922a550e4ca589bf4a9292107b658bb0cd5a9d0ca562ec0c1f4ac9abc09",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-nonpass/gate-input.json",
+      "hash": "1dcdea9d67c7b678a10ae49736d483e6bfefed0c03f1b2f0adcfaef79d28a82b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-nonpass/output-record.json",
+      "hash": "649d70fb0ee38557d4c1c7e86aa5c7d70f325c1d65de96c457501d39731598b7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-recovery/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-recovery/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-recovery/expected-gate-verdict.json",
+      "hash": "50fea0296c25d28528738960b4b0e1ef3375cdadb76f5f3542ec22d7b9aaacad",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-recovery/expected-report.json",
+      "hash": "5150358ef87e27d21450cf02e12af307d28c8d5d770940bfab849907c95933af",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-recovery/gate-input.json",
+      "hash": "e93abd529bf0a6c0931be4b323cc09104d8ed83979f3c9215b0a7dfcf957e8f1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-recovery/output-record.json",
+      "hash": "fed2090c7a1a16b9226ffe73efeb7cbc93d745e3155711e76485439268ba21d9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-threshold/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-threshold/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-threshold/expected-gate-verdict.json",
+      "hash": "636c961ac50e4147b41bf5692a0916904847674c78fa58a20ee5b7261a6d4f55",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-threshold/expected-report.json",
+      "hash": "d48fb9fa71ce7b1e2c99f5102c522dfb32ad720820d82f2eb7849c86972b0026",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-threshold/gate-input.json",
+      "hash": "ec98a17d4b85a774a0e3f321af4230e251ddedb89f5c21e3ab9c91cdd80c5b86",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/conditional-resilience-waived-threshold/output-record.json",
+      "hash": "e83f63041531f9cd9b491812021ef9af01288aaf96c8b2177791405754fee650",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/manifest.json",
+      "hash": "a4fddedd237f44e31f67e249819f9ae1e363e99ec14fb77d3fcaa56f0f144bcf",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/artifacts/gate-verdict.json",
+      "hash": "30a9e949072e140a8fffbeff1295e17a932ff3425327d8da2e64f9421feef0b7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/artifacts/input.json",
+      "hash": "4ee08d080df82e3edf24c1f9cb2f5e2d1981091a340f1668954d413374f85136",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/artifacts/qeg-bundle.json",
+      "hash": "d450b6c228a8ecb561a7abdadaff5ea990cdeeb10572f568c71c39d9afe34db4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/artifacts/quality-evidence-record.json",
+      "hash": "f2a2ca9fcfe764b181d9e4cb5874868b0be09aa4587e4848d9f46e66fa0319f2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/artifacts/test-placement-plan.json",
+      "hash": "4f4fda8a5d26eb70383cd4d32336f8dc80755230d826254954dfbc4d9204a487",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/expected-gate-verdict.json",
+      "hash": "2b480c95cea945f00ed8b3eef2f77d3c728403f31a99a73082da3cc74624140c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/expected-report.json",
+      "hash": "9c9e9f28e0ed9c58264139b6f8c42a80cfd4ce29163ddd6f67108e1fe6068bc7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/gate-input.json",
+      "hash": "eff6df512a480468fdd0a0f55aefbacd976044f8a8db7f5f45db403ee5cfcff8",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-hash-mismatch/output-record.json",
+      "hash": "3f0bd1cb6605bdd1a19d18722112799b1a35a5322275a905519a081b2c54dd9d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/artifacts/gate-verdict.json",
+      "hash": "5354303c4d30949b2c49eb6b9d0283d1c776421968a431fe1e4001d21c338ac5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/artifacts/input.json",
+      "hash": "a6bf7353d03ef210776478a3f90820f4191c9357a5b843dff039a59435c25934",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/artifacts/qeg-bundle.json",
+      "hash": "6f7cf2f426321767922d90773a4231a376d49a1119658e613c7e915f1d430486",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/artifacts/quality-evidence-record.json",
+      "hash": "ed0307c91766b33dfa994fd193d42a1c1fe2171d90177a54fe387074a0c08811",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/artifacts/test-placement-plan.json",
+      "hash": "b1c496709ae39a9a5c115da59b55008b75c46bcfc1f39fe5b7488241a18fdea0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/expected-gate-verdict.json",
+      "hash": "561d8dc41414c4312ac9314f87372d0cc380d1de109407f947da54799c41f667",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/expected-report.json",
+      "hash": "0b6338f115b66cbf1de96efccaa86a2b687460084382f6025964fcf462e4e4a7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/gate-input.json",
+      "hash": "1ec224df80fd815821b85c47fd1bbaae9e479cdb268db52101f6b0b6062712aa",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-approval-missing/output-record.json",
+      "hash": "87fd58ded9a134eccc6fb82f29dd495dfbb5ce29b8949f442f5fd50a2c36ac7a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/artifacts/gate-verdict.json",
+      "hash": "e7d97896471d8eeab1466fa575c1c50d173befc1a27bcd13e72d6fb8a7ca3f6d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/artifacts/input.json",
+      "hash": "f53d9467b6f5ff0d4058e23f5199e89698cfccaedc39f1160d500a691a467c64",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/artifacts/qeg-bundle.json",
+      "hash": "3ec7b3f6073102c942a707313ae373b48a537d208dd1db8031efc3443cfb907c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/artifacts/quality-evidence-record.json",
+      "hash": "8de7f50f7d8ee929d8dd0f560165c42b11d1864d820f71a0179ba32ef674b5ce",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/artifacts/test-placement-plan.json",
+      "hash": "1f6817320b01d6ac5c914eef191235fc93b472a383143a266e0dc9f7aa14f019",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/expected-gate-verdict.json",
+      "hash": "dcd2f6694bf1b4d13208327082dfb8c3994fe5607b141233a66f835906a9e3e6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/expected-report.json",
+      "hash": "1f6a3d101257859024f6719db97a12df825b088c5c2c9494b96c265d7acebec6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/gate-input.json",
+      "hash": "0ca35a21842322ecdb8533277cd1437c7b84bfd15b9c193f7d8ca34e7eae7a41",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-changed-code-no-test-obligation/output-record.json",
+      "hash": "465d8f582a315cfe77363478e1d309686a4aa8759df37f5a98c72009e441dec5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/artifacts/gate-verdict.json",
+      "hash": "85a68041d67304463287057768ac51a3204124f91ec3cd566385db3df1a4fc6a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/artifacts/input.json",
+      "hash": "dc877743eea470fc8fcb9f28cc89c6f395e98aeb0e6bff9f16b0c718ffcece51",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/artifacts/qeg-bundle.json",
+      "hash": "dcbd69fd3c8e344842e4dade5bf82dde7ac553c7b0f5b1cb90224de494572f87",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/artifacts/quality-evidence-record.json",
+      "hash": "5210b95d40797d2d65ff8d67df6b837012a20e2d830af2e08907e89d18c698c9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/artifacts/test-placement-plan.json",
+      "hash": "b1bfbbfe94e5edd68bd64e626f4a6fa6c28d80a26904bd7817440362d2e290ce",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/expected-gate-verdict.json",
+      "hash": "c8625e5efec3c6e19adeef22126f4c0e100804043c1caf54fbbc109b5a861e7f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/expected-report.json",
+      "hash": "df996dfac2aa0e48013e52f8ff79a91c9661e61769baac4c6591d7272120ef7c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/gate-input.json",
+      "hash": "2d13666b583c8dfb56c71dd46c96e491f7d4e9ed1cc7c66a8696f32513d7f6d9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-control-roles-missing/output-record.json",
+      "hash": "dc02ab69c4280648082aede35bcfc451169bc1155b59fa7de3f2d3d95aade03d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/artifacts/gate-verdict.json",
+      "hash": "5475f2745e9ec3827c12fc4553b6ecc979d8c464d5579eae1b7c0e394d1c322a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/artifacts/input.json",
+      "hash": "d623bd653d20b328843ba37f6444cafbda13de3bea15ac9a63ecbf090ed3dc82",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/artifacts/qeg-bundle.json",
+      "hash": "d30d2205b8c3fe0710125e7ddaa635d56b22b585149ddda5275b254545732662",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/artifacts/quality-evidence-record.json",
+      "hash": "ee466147b7946eee89e4b4dba2c10eaf7bf263e404a485ed9136f88b43419d97",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/artifacts/test-placement-plan.json",
+      "hash": "2e2d39feecdae3a3900f99cd0491e819304f0e3dac51483e0c76d360f0263820",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/expected-gate-verdict.json",
+      "hash": "26773d476a555ca0b694dea42cb1085a856bd144b6f8f4e41de1644c8ecb7002",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/expected-report.json",
+      "hash": "b3bb8cbdea2d27140d12025c7cda53789e5b78b14cf41df16d452d042a7d1b43",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/gate-input.json",
+      "hash": "4d2a06740a12ef6b45cd4c1347aff1c76d7cf5808e70186bf3327480819c4c3b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-direct-gate-policy/output-record.json",
+      "hash": "c84a1f56ac60b94505f858d0fa5932fcb881b63f3185277f9bf46e1debc1585a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/artifacts/gate-verdict.json",
+      "hash": "18aff977216691f57d3cec076a6bb79c1f83639705583819b4d044284c3668ca",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/artifacts/input.json",
+      "hash": "005d4e2d8ae62305050986973eafa7870bd2e2cf9e90227b0212c0afe286ff74",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/artifacts/qeg-bundle.json",
+      "hash": "ecf5a4d42c57d1413599ba655968ad2ae023114ccd2abee2760d48fe1bac1fde",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/artifacts/quality-evidence-record.json",
+      "hash": "ec38f4ed90c86da7681c23b0cce9f7deaed5c08f17966c8a350a9661387f5394",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/artifacts/test-placement-plan.json",
+      "hash": "798f0a7245e322ca50bfad04021e19548ffcc63d5117f372eed20678ae68fde4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/expected-gate-verdict.json",
+      "hash": "847b3e2056621f6cc21616b4ec2b13d9e1277234cdb8bc930d653ae154902e81",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/expected-report.json",
+      "hash": "f68dc156c1885c0eabf4edb5d52903fce72f5c6844b111333f9ede5ec3242d58",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/gate-input.json",
+      "hash": "180326560fff0a746afb27bbe442621800e1e841d84177edd85e45d9ec380734",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-empty-gate-source-refs/output-record.json",
+      "hash": "569744c82f3070be13a0a594b677541e3b4b3fb9a24e1de6e0d6bcdfef10f89e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/artifacts/gate-verdict.json",
+      "hash": "c58a1ccc401f8f31f8abcd53c0d4cb1ffb070b3cff4339778f0c0fdc71da2368",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/artifacts/input.json",
+      "hash": "9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/artifacts/qeg-bundle.json",
+      "hash": "68a839ec316447824cff44630b698346ac8f90f0915cc0d8cca7304174e1e2bb",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/artifacts/quality-evidence-record.json",
+      "hash": "de7308395ee518fc28dba6dc448cfe8dbefb1318878eec3ca3873a16ba9a2465",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/artifacts/test-placement-plan.json",
+      "hash": "32492ab77420ba9f50406a66d4e22235eae2cb03bf0148b3138b416fcfa2f4e1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/expected-gate-verdict.json",
+      "hash": "65bf3ff0eff1e003e50730c6d015e8a9f53744ac72789d15e1d01b9bd51bcd80",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/expected-report.json",
+      "hash": "cb5064e3a759af5f27c5b8ff2b4e50d8894abfa573a7073a95799c083f96e65d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/gate-input.json",
+      "hash": "758fa12adc6bbab51774b235754e6c6c4f5449cb796f00ab878ad1e53882fdaa",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-evidence-hash-mismatch/output-record.json",
+      "hash": "1fc1f91669c97931cb2037894070839eec6c41537ca19140ebed70b5ae889dfc",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/artifacts/gate-verdict.json",
+      "hash": "d6677265d504e308d29a6073294a89f1c2dfb36a4d321f762a2c0fc59d3c8765",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/artifacts/input.json",
+      "hash": "69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/artifacts/qeg-bundle.json",
+      "hash": "23edfe257273f669ebabe8da79ff24f7a7ac04e4f402a918d44ee2cbdac75809",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/artifacts/quality-evidence-record.json",
+      "hash": "62260db96c13becd0a02d8a6ea4906d2933697b8622b9a81f30ff3f85e40d13d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/artifacts/test-placement-plan.json",
+      "hash": "026fa81fa8cc7a30b527bf98da3f53d598260e8650c8b673bc223de1e8f7f73b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/expected-gate-verdict.json",
+      "hash": "00aea3eb3d384105a1d8e85eed58b8e50e770720668caa2538ad89cde2f2f136",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/expected-report.json",
+      "hash": "7b10329527c394156f3fb587dfc5b09cbcce3450c14215023c548a131786a08e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/gate-input.json",
+      "hash": "85c9abecffd6531deeb4e69c667711d83d62ceb8a86ce3a4f66c5feb6e8ee34c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-final-reason-no-source/output-record.json",
+      "hash": "d11ee55df401d7d17a9438064188f6f9e0498a51a7dab2e8068322aefe784e5e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/artifacts/gate-verdict.json",
+      "hash": "383946e034f57ee7f44111e7d238b2b133cf745ec8d8670abcb477c47bf1ca0b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/artifacts/input.json",
+      "hash": "76094f4c19029085c26a6eb2b200e350bdf95002b9201b2a3f39baae020d8811",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/artifacts/qeg-bundle.json",
+      "hash": "359f352b0a3a9ed7eb837343c0b23d7592dfb1aba09d979e3fa70533c8b6eb7f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/artifacts/quality-evidence-record.json",
+      "hash": "6fa6fcb082cbf632a5d4c76caa7560a60e871b69d5134ab98ceb82ac4c1269d5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/artifacts/test-placement-plan.json",
+      "hash": "ec4c211b934391fc5c9a5b777c241d17c75e63293d9197a30a83f9ff50dfa7b6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/expected-gate-verdict.json",
+      "hash": "4800ab0d71e5215b8ab33e616478ae622535777b973e1443a8d7655fb392ef09",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/expected-report.json",
+      "hash": "71c5303f1051af08b3050d91b65275d570781657727984dfe8f90adc5367fc1a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/gate-input.json",
+      "hash": "2dd193874e1ee9595b49b3e642ae4112d1535da46f801fccc31fb2b87af16bf4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-hidden-oracle-access/output-record.json",
+      "hash": "a8d6459724cb1e1b47b2ea87d57657541b9d5ab598a231c3a3be77c85870ba8a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/artifacts/gate-verdict.json",
+      "hash": "39fd456bcde9124b9fefda7640dc1e5cc220e7661fc68e2a29e1ee56bbd3c13c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/artifacts/input.json",
+      "hash": "f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/artifacts/qeg-bundle.json",
+      "hash": "c61c9c50212a203dfe37f6e48387135decb5cdd6dabda89b5277cb131dc95859",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/artifacts/quality-evidence-record.json",
+      "hash": "ce604c75b205c4e58beee7bc4c798c9e7b1dbe07bb60ca152ebb703214b76676",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/artifacts/test-placement-plan.json",
+      "hash": "b4c8256d9616f476b05e3ddeffd0ef8acba7ceefecec94d3856d8efe397550f9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/expected-gate-verdict.json",
+      "hash": "e5b12c5703bfa0890535b4dfe2ff001a0357db82fdc6225532784d9a78fbf50b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/expected-report.json",
+      "hash": "de925bfccd3bd0899ff75119539c79028d6fbb3b8e3e4e7d3b2cecb55cf69926",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/gate-input.json",
+      "hash": "c60d7c17eff7374c9e5b3546f3c74c94fb142f696c87123829b1084ab0020234",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-case-disappeared/output-record.json",
+      "hash": "0b9e5c4dbc4fe762f3b634e713bd9535701f1c27595ed4ce53bec02814f6d71a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/artifacts/gate-verdict.json",
+      "hash": "c2663a577029961e68ec46aa1243402c803199dc8570155b42773dc4a0151ff4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/artifacts/input.json",
+      "hash": "d4cab77a725d1b194112c560ce284ac55845750932d30d89a293f4501a7e8c5c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/artifacts/qeg-bundle.json",
+      "hash": "a302bebc1f2495a1cd55f32cc2c87b5f4d4677023e4f96c89458f1d5daece0b4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/artifacts/quality-evidence-record.json",
+      "hash": "3cab7c272ecc7b8ba173d05a3dc01497cf41b84727573a617e500ee06477c272",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/artifacts/test-placement-plan.json",
+      "hash": "c4711673a9f902138f4d65174b1bfbfb549ccf5f7ae7c2470479a34dda23892d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/expected-gate-verdict.json",
+      "hash": "a61094c8c1f98dfd32228e469e4c70e5ba23c74ed931a67675c12547ffaa790e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/expected-report.json",
+      "hash": "8ad83776671b765738bd46404e7027514e816c6af4ef6e1ddfd61579fd6c4a2d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/gate-input.json",
+      "hash": "66b7aa9ee568b5c597a8273ba478775ae9e39407b336e62cbad8bfc9307b43d5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-evidence-incomplete/output-record.json",
+      "hash": "f1d883d39b9a5160a33288f7f59ae77e790eba07cd5adbf10e58dec49a4c13b2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/artifacts/gate-verdict.json",
+      "hash": "042e1880c2cc55163f9cf94ed3ebce991be8f2bafa57134d8b17338f041300c9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/artifacts/input.json",
+      "hash": "dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/artifacts/qeg-bundle.json",
+      "hash": "4f1b2acd90617728a1a9ad6ecd27472107103f0b80b9972db9772cb50379f69b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/artifacts/quality-evidence-record.json",
+      "hash": "61e2cf93bf7aa27815d4a77475c2d73595ff3140f2c8b10a852d369cb3d36ffc",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/artifacts/test-placement-plan.json",
+      "hash": "010331c5225ba1edb220bd09517448a990ba131cc0f9ec671afc9121b143fb6c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/expected-gate-verdict.json",
+      "hash": "5b663006877d481b79bd4f106f7f95dce6ad1d6652fe71f968eafcc565e9593c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/expected-report.json",
+      "hash": "5aa1ac42f4bff495f37109006538e963ebec62ad281eb6899dd0af1f655de2a1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/gate-input.json",
+      "hash": "b990479594b241613689d15641f4a133b83dd74443e5386bac39c68a628e18fd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-manual-scripted-no-oracle/output-record.json",
+      "hash": "789f266e22ffb247d769f51a95d851cc5c6d7353eb75cba7b1c0a78be564ad31",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/artifacts/gate-verdict.json",
+      "hash": "bc008c764f175e2e278c4e23670dae05f866e6376d78a8ed1465bff0c28cc62b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/artifacts/input.json",
+      "hash": "ea633f40e7612731df19c23534606e0becac0f0b6728c7345335de08638f62a0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/artifacts/qeg-bundle.json",
+      "hash": "c9fed88e74a03598be36c784166946d863e4fe268d0601fec7a9dec6db73e7e4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/artifacts/quality-evidence-record.json",
+      "hash": "d90369ba8d99119c205d1c2b7eaa1576beef15dcc673b74d903da5f2e8446a06",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/artifacts/test-placement-plan.json",
+      "hash": "3354204aaaabc73d6cb35a4f864dd302773d514d178e0c984ec3ba685859e626",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/expected-gate-verdict.json",
+      "hash": "3609a247d4294a76551a44a2a165897cec634165038ff62efc5eff466f12e30e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/expected-report.json",
+      "hash": "08726b53e7926ae34677012a804ff7e935a5cfc0abb4979ca158584267a1842d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/gate-input.json",
+      "hash": "7aa97310adb6603c5ed457de8d5d6dec7c936fdc70164efed8848d463910795c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-oracle-gap-fact/output-record.json",
+      "hash": "ea238da2bc42349d1a8f68bc8b70e7c6590d04bb91b5f129e8ead07082c15df1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/artifacts/gate-verdict.json",
+      "hash": "86142f39f4a0db9d99b1e3a4d0d9189ce62ca367356ec20b46e394283cda1f97",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/artifacts/input.json",
+      "hash": "6ccde012f695977c00d91ee4c1fb9c8bbd678487eba2acb15f147dabb53a1932",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/artifacts/qeg-bundle.json",
+      "hash": "945d582b657deb720d048a7b595457e91a34ec40827dc4a4367da373928df3f3",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/artifacts/quality-evidence-record.json",
+      "hash": "22c8ecf12a47d5a5c4e8e18864b487e069db30b33ce280c5a69b7315ec95770d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/artifacts/test-placement-plan.json",
+      "hash": "7fe56c17264e44d3185010626300229a240da6b8c5acc141a0c0c7a7d79387c1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/expected-gate-verdict.json",
+      "hash": "73585aef40ce508d70e9c176512ed64461bfaa443ec3ae0671975981f7b54245",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/expected-report.json",
+      "hash": "9974f81933bad741c2249f807755204dddbac99a620f03f64f2da3ad04c71bfa",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/gate-input.json",
+      "hash": "3f63dfc43c22d4f78ceb126a1d745333a3bb3c407388aebaf3b0b210c5a6865a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-partial-graph-no-completeness/output-record.json",
+      "hash": "fbef0e85ba9c64fb166443a2cd5e8513c9c1c7e023f3335c8c91df62e97bb0e5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/artifacts/gate-verdict.json",
+      "hash": "8dd683d35790f8ba99bfde739ca1ea78529b91daeeed6cfa6694e2b0b0bc52f1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/artifacts/input.json",
+      "hash": "9e5631a95a6fc479fa53242b12031ae50857f554dc8ed624ec8a1975cd9d67d7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/artifacts/qeg-bundle.json",
+      "hash": "7a76e8e34ec359ac9f0a06ca37285a24c2abadb73014aaf4c37b0c085701be55",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/artifacts/quality-evidence-record.json",
+      "hash": "e43d471466953e4bfee6f60630ae50c086197da8687458946d359d5455dacb37",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/artifacts/test-placement-plan.json",
+      "hash": "18cb27f658652b8b221ba5fb797c8eb239c1243c18b1986e40a5917655b6dd21",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/expected-gate-verdict.json",
+      "hash": "c77538306e4b1216c679194013f642f9d18d8b89e555a254530d9c69586af58e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/expected-report.json",
+      "hash": "d504274dc916875f31460f9ea99178f101944c00eaebad44742b0c98584e2f3e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/gate-input.json",
+      "hash": "35599da57bf83c92d937b77be0cf10d9d3e4dde4babaedc5fe847b09fefd7fa9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-no-evidence/output-record.json",
+      "hash": "f2dd111af9f844aac2619769f5a33e21ebf617e07c6688d435e3dc8db5bebd05",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/artifacts/gate-verdict.json",
+      "hash": "d5806eb56cdb1de0be40e7d820385a40cfffcbe09d349975b8b694be679d216f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/artifacts/input.json",
+      "hash": "9fa8e511107a0fb246464ed29e38903e0a08579566492cfc7d402c45830be937",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/artifacts/qeg-bundle.json",
+      "hash": "78cebb7e5fa2e500262ea9e71fb0f16d3b64e649fac5c74f8a82e22deb734d25",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/artifacts/quality-evidence-record.json",
+      "hash": "7f7a316143d8e0de961aad3d6d1856b5388fd2f9217b0743611d730f676cd67a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/artifacts/test-placement-plan.json",
+      "hash": "bafe4220f304fef18b812acfcc3f13dc8c1b8e4e5a0a6d60a53335e7c2d825ce",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/expected-gate-verdict.json",
+      "hash": "193777241f0a41c4984d6fb51ce960f4b597b814b83d77f793ac0d8c7c71766a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/expected-report.json",
+      "hash": "38930fe6044618bacb9805317600d51405932f6a87eec23a272f98e1aa0cc990",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/gate-input.json",
+      "hash": "5235d246f29e58e1a88c5a4a8d5d634de799cc50a5356828a865d68671c262f4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-placement-change-unreverted/output-record.json",
+      "hash": "45b04becdaa2e8fb337c473c50c1e6b841ff9ec887bb1a47c4a860ce60967c24",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/artifacts/gate-verdict.json",
+      "hash": "91ec6fdef9190a4dba984cbbcd380bb55613e5a4ec9ffe7d7516a92b782ab123",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/artifacts/input.json",
+      "hash": "9d716449ff43055382bb702a12b0ae59af530c95c7d7db51b98cbe9225abd78f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/artifacts/qeg-bundle.json",
+      "hash": "a7e708e2a9eed0985682482344b8c803ce3d1ced344942539f9d5ebca3e80802",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/artifacts/quality-evidence-record.json",
+      "hash": "791e071fa7c78aa471ff5412324d40b05e713eec2b600163b576d7a4553a7541",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/artifacts/test-placement-plan.json",
+      "hash": "1eba1347587f0fdba189f2f16001783e8ab7055fbb20533a257ab17c846096dd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/expected-gate-verdict.json",
+      "hash": "e51966fa107d302452abca7d41d2272e32e6a3ee8ba67a06b12d3fe22039b014",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/expected-report.json",
+      "hash": "98eb598a4635d221c8632a5921fdc11a9520cf6c229fd42a067d25341b7d6622",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/gate-input.json",
+      "hash": "7ee353488fb4cda7ea91b91985cef8d58a723dd806220e4141107b9830a98192",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-policy-hash-mismatch/output-record.json",
+      "hash": "afd3be9f3de56e6323b9cd7eb654e63d463703bce8d5606291bc67b085a05754",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/artifacts/gate-verdict.json",
+      "hash": "ceeb63eb0c3f011c264d8dc57d9f3488221369fb97071b8fe5ac6c84b5820673",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/artifacts/input.json",
+      "hash": "e9a158c2e049fc30a06b5586fcb2c1d88c0bdb1012a6aa82a940024c9f624d55",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/artifacts/qeg-bundle.json",
+      "hash": "c8670d84c41cc0f97cc7be81d80ba36ea3be62bd60dd6505a845c77f8c969bc9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/artifacts/quality-evidence-record.json",
+      "hash": "779730e92367e05afe26302503d2b1e4a4deb03a611089a090e4a27f5ec31c34",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/artifacts/test-placement-plan.json",
+      "hash": "629b8f76bcd7a46b30c6ffada699ee2a717aa3cf906e441d0548598aaec46e15",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/expected-gate-verdict.json",
+      "hash": "f52986af19fe511c34247bea84269de44fb3bef1dcd303cb3250c744ed47a5ec",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/expected-report.json",
+      "hash": "a4cfd62c45fd5a87532d675391ae98b0f419e41cf09b4cf2f8fe51e95eff0794",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-inconsistent/gate-input.json",
+      "hash": "c8295408d2ef49b194399e89f65f9b80c239511b939c36b2c8fb996c5b9fb28a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/artifacts/gate-verdict.json",
+      "hash": "c18baf47c02d84836e26fc4c7a5fb0dadadfc20393263ad0e85cd6357b3ea053",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/artifacts/input.json",
+      "hash": "00508386a96fdcf2e1a5ea4863de4b65129432e7d6b3f2a6baeb6b96530d1bd4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/artifacts/qeg-bundle.json",
+      "hash": "fef6ae11ebad1951a8378b6d3ed2de7849f86dbf668c5be24a5450dae06246c5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/artifacts/quality-evidence-record.json",
+      "hash": "05165d08e653f5ea6fa94267706cd2407d603e241c13cd1ba009e469033fd139",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/artifacts/test-placement-plan.json",
+      "hash": "82651fde1a4af9cef393309835859155bc0fe8976c2b28e69a2a0f206c5869c5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/expected-gate-verdict.json",
+      "hash": "f07f2e0116e82ec837189efc342a7308db9161cc6494e1461bba4826cd67993d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/expected-report.json",
+      "hash": "cbc7ea77209b0b68a523ce5db5588a63d6ee0c24e40f795e15950f072974afa0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-producer-check-stale-sha/gate-input.json",
+      "hash": "54c1ea27e3eb4dd4cae1da9159a19d2200590ebfa2ac22be472a442a45604732",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/artifacts/gate-verdict.json",
+      "hash": "f64f511f8b0456c4e25afd6d9c86262c8197fe00a4234dd753a19b1eec016c29",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/artifacts/input.json",
+      "hash": "6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/artifacts/qeg-bundle.json",
+      "hash": "d395b3ab9881c206b2ff33d44749cb39a280caef62862d0093d51642f757ae10",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/artifacts/quality-evidence-record.json",
+      "hash": "8608a6e00092990663fb3e58d271aa585a7d26e480f5a34b5e71b9c9b23ecae4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/artifacts/test-placement-plan.json",
+      "hash": "2635b97742f01ec89057abb5369d11f698a1a7a7ef31384fd32e075eaa311a6c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/expected-gate-verdict.json",
+      "hash": "05cda2c27d7f6bc0a9dd47d0811702b600adba24b8608eb5c9fb5d87ba870be8",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/expected-report.json",
+      "hash": "29176cde8ee0c36162cc7b8fd6b70e7b5b080724f035bf369ff9c0c5f71abf50",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/gate-input.json",
+      "hash": "49f85bf714f2d0adf0a8bc598aefb307c79cbb936c2e970a4e46f92ef7483bba",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-required-connector-contract/output-record.json",
+      "hash": "b8f471bf3e4238f8652252338e33d728e9ef2499214b2b813d399821ff285a64",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-artifact-tamper/artifacts/raw.json",
+      "hash": "14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-artifact-tamper/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-artifact-tamper/expected-gate-verdict.json",
+      "hash": "557f4eb2e54fd9fdaaa57abfad2257820930334c15cefedf4ffe4355deb61b96",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-artifact-tamper/expected-report.json",
+      "hash": "ec2a57414109b3fc8b5b99b5d13cca1a99c4b4e2ce533d60a1d24c8185d9f47e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-artifact-tamper/gate-input.json",
+      "hash": "d7be1b5d541d6d1f8120c0ac99731909dca81b78d7102a98aca3895ec6599a83",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-artifact-tamper/output-record.json",
+      "hash": "5db1b11a3dfa89ea7e573dbd1b8e3436b1518545a0f2049e8096ed7692637355",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-evidenced-by-conflict/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-evidenced-by-conflict/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-evidenced-by-conflict/expected-gate-verdict.json",
+      "hash": "3b5de95f3c12e9d9beccdcbb1665f8600dbbfefca4081dfe75ee21b085142c8f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-evidenced-by-conflict/expected-report.json",
+      "hash": "41a6af911ea805bcfdc300a4a23a9cca23681bfadc2ab9e97522134697ff1ae2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-evidenced-by-conflict/gate-input.json",
+      "hash": "7d0cee66fddf6fbdbf254e05015096aec630f8e230d3eedff76b8ab01ba2861b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-evidenced-by-conflict/output-record.json",
+      "hash": "d5751cb52982bec4d1a324b3d78844128b31321b6b4445bb16e51cfebdbd3682",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-latest-fail/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-latest-fail/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-latest-fail/expected-gate-verdict.json",
+      "hash": "6f225eeb8a1f6d22e310ccae50486fa7b84f831de74e4f6fc2c126a22b7bd0fd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-latest-fail/expected-report.json",
+      "hash": "b7baa08e9fd0f07dc62d6ac451128b9a3f74d1f026c3c22d81587d9585222f4f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-latest-fail/gate-input.json",
+      "hash": "18efb07e0b6387828a45075329573b60af25d825cc2968d9d753183e47c61541",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-latest-fail/output-record.json",
+      "hash": "a763638b906ae7ae5d84a6b715cd6e1b351a90d14b733831edf46331f0d2ca6d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-lifecycle/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-lifecycle/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-lifecycle/expected-gate-verdict.json",
+      "hash": "bb7e268cb16660ae54088b00e04ef489f6e2f7d11023b081a401b929222e7e34",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-lifecycle/expected-report.json",
+      "hash": "c25e6f06e78331e9f15a5e4aaffbcef0adcda10591898b50a7f11db2c761e9b5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-lifecycle/gate-input.json",
+      "hash": "a5068d64f8bd34e154fd5643939bdce7f5994ca10e1726875419bfc7e34a186d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-lifecycle/output-record.json",
+      "hash": "e5b806ed0bbef008d4b2cd184d4fcede4d329e42936e5bb3218723a7cfc7fa12",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-mock-only/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-mock-only/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-mock-only/expected-gate-verdict.json",
+      "hash": "8ea9c6ce608f4e932ff3ad666509d1506298a15084c818418e47afa3f29d5777",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-mock-only/expected-report.json",
+      "hash": "a8558be82a4cd202f56e73866f287390f335d6413a756e56968853dec29c7910",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-mock-only/gate-input.json",
+      "hash": "4bb889c8149306aa910d5a81471f764dc8da117887c9ecb017fa181f2a1e4230",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-mock-only/output-record.json",
+      "hash": "9a969e20bfe68a632842577ec9e44d73034e0b4b953a21fb61a8cf3bb299c793",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-nonpass/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-nonpass/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-nonpass/expected-gate-verdict.json",
+      "hash": "569e6b2a81115d37fce1f3d5e08f60e0fc51390f87cc129510360356db4035a8",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-nonpass/expected-report.json",
+      "hash": "bc3d214ae5604fd55b2f561202ce493e40c465da132e00562e9ecb203413eab3",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-nonpass/gate-input.json",
+      "hash": "adf564033d59afc397c8c4ca213bca84bf7a86018b12370e1837f190035adfb2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-nonpass/output-record.json",
+      "hash": "ddc009c5e5877a57c70825310a8a04e671a54e1f6de2c3a2ec35724b5ba5e923",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-policy-identity/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-policy-identity/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-policy-identity/expected-gate-verdict.json",
+      "hash": "e21264c6d0470d33269450125b00d313d4615880dd5c4630c336fa47edf51a9d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-policy-identity/expected-report.json",
+      "hash": "9013bdcc0f7a60c7bc02b3e2e09f6ebbde19af95e5483d1cd9c87007cd975203",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-policy-identity/gate-input.json",
+      "hash": "a42b349c17962d763b0d716bcae973a155abe085d9c767b43ba7d5b2f08ccf14",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-policy-identity/output-record.json",
+      "hash": "2128c257e72c6292a1aeb282ded37d2911fd09411becd150a66c9da6fb3deb34",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-prior-safety-attempt/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-prior-safety-attempt/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-prior-safety-attempt/expected-gate-verdict.json",
+      "hash": "5580536b9f2ddc80f1582ab58d263fc28f168dbdb916cd85bd79c17fc691285f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-prior-safety-attempt/expected-report.json",
+      "hash": "a9d9e791062260471848155fca80302b7e2ebb3e226a407acedadcbb1efba48e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-prior-safety-attempt/gate-input.json",
+      "hash": "c9e76cc96ce2a34875b5f1145c31260373d0132dd8f66b435ccb1611d644e53f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-prior-safety-attempt/output-record.json",
+      "hash": "d1d218cfaeea1032c0e9a3e47136511a7f38e710e7cb53c7888ad6f1adf4c1bc",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-recovery/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-recovery/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-recovery/expected-gate-verdict.json",
+      "hash": "88594e24e2128bc51fb742a78255870020d718ec7fa7117b7d8323ae002210f5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-recovery/expected-report.json",
+      "hash": "b39aab4cb4a52f6caa1d104cab48364077e64376c47de348f0c0b971b5a584a4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-recovery/gate-input.json",
+      "hash": "4746ac63ca7036a594cb452e3157d6a8a3fab63469df8c9e8859ed9c8dabdacd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-recovery/output-record.json",
+      "hash": "b188a033a1dcf464c93a17b1a15bce01ccba6526af47912a13e80f459168f61e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-revision-mismatch/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-revision-mismatch/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-revision-mismatch/expected-gate-verdict.json",
+      "hash": "a4e2488803f0587454059807ae988110f180c8c77a971df511fa349d7b886313",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-revision-mismatch/expected-report.json",
+      "hash": "d8d080eca742c925c048e79d967d0aefbf1c4981f62fe80e8f59f6a0c99befb9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-revision-mismatch/gate-input.json",
+      "hash": "3bf4e1827b1ffa4d75456170d51020b82e8d1c6c0f601f8f0b5c4321634cbcd6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-revision-mismatch/output-record.json",
+      "hash": "b4532141b1773cb71a83de8ad67aa37f548b83b1a6a180b072193bff1fadfec9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety/expected-gate-verdict.json",
+      "hash": "7cbf06e035239e34630178925a4a133a1bfe5e5542e729c8ba83f1cbf1696414",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety/expected-report.json",
+      "hash": "66632cfadc8eed956080a05b7329b43c3a3f98d54e8a020ae422526dd28aa8db",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety/gate-input.json",
+      "hash": "d40a0c717f09e2540c6228f2e3e7c7c92938d9b4b0ee4a7b9a87f71431bf93ec",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety/output-record.json",
+      "hash": "4ede87bc118e9f1c66a0f228ec412b1a646709022fa322b8bd7462ce8353e76a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety-waiver-attempt/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety-waiver-attempt/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety-waiver-attempt/expected-gate-verdict.json",
+      "hash": "a2eb5df5a237f36cf83678a715878762ff12c8a0da0df71079e7e136e3c27daf",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety-waiver-attempt/expected-report.json",
+      "hash": "7a4aba2ce8c788c2e28e3d16125174e041d8f840a72983e17463cc7a7ab36252",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety-waiver-attempt/gate-input.json",
+      "hash": "ef7eadf370a847d30e467cbb442c8d1d3a180a666cb549ba9fd31c2801575148",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-safety-waiver-attempt/output-record.json",
+      "hash": "d56e2e33949b3a988f91d177c0a224406be24e549be10711b7eef317724a93bc",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-selection-ambiguous/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-selection-ambiguous/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-selection-ambiguous/expected-gate-verdict.json",
+      "hash": "2f2381d177b779fc097ded2141738d09024273c9ffa9ae49a7db98b946a12217",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-selection-ambiguous/expected-report.json",
+      "hash": "0baddca1accb22d26a5456cd1c37562e8c1b61e615a4e3172a986cab1cbeaf65",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-selection-ambiguous/gate-input.json",
+      "hash": "af47ee00fcb4280f2bfef7f3df9765f0398eb3cab1e0a4d848e5a57e7c1500d8",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-selection-ambiguous/output-record.json",
+      "hash": "56ba34e88f1f194edf3eac53010099847736121d5434c8152eef4cac288aa4cd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-mismatch/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-mismatch/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-mismatch/expected-gate-verdict.json",
+      "hash": "d63be4474f100fe80a67b8ec97ad0e2aa1512d773a4da2c8145c2adda70baa36",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-mismatch/expected-report.json",
+      "hash": "cd6cef5ec3373e147e0bd2fd38448631c7522ed7e745d4de14d0df082cddec5f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-mismatch/gate-input.json",
+      "hash": "75aa2b29526576b8d77829076baf5978ea6ed2bc04d3f9e62d0fdf94f957cd82",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-mismatch/output-record.json",
+      "hash": "ac4d51dd495ed5c906c29dedfedc819a9c06a61ecbc2384990b36c5240fc35d1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-missing/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-missing/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-missing/expected-gate-verdict.json",
+      "hash": "c20359f8949bf602add1749d2348d1e1cc909079f8c1439273d7426aeb1cdef4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-missing/expected-report.json",
+      "hash": "27cc2141761e4bcf98e87b4de5a80d0a0c5d208d453c1107203d510de4eb3413",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-missing/gate-input.json",
+      "hash": "ade0fa5bb4276e4a725477f9b1f784c9c86c3ba5a684d1d654d5bbcb18dc7111",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-signal-missing/output-record.json",
+      "hash": "aa1615206967bf96e2e468b5fb51e43c521b132ed75795544eb465c82997e8ce",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-stale/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-stale/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-stale/expected-gate-verdict.json",
+      "hash": "05fe08f067503b9edd89bce146ea00dfa9699478e526a3e1df24787d320e1c55",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-stale/expected-report.json",
+      "hash": "5fd324946f1b6d1c78525dcfa74b894613e3c9d0cf2b2399fcd079e6dd00556a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-stale/gate-input.json",
+      "hash": "b5e7116547ea403151773bfb54e51fa096050b9cd8fd05b5d8d8dcb9420dec2a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-stale/output-record.json",
+      "hash": "097d081e8c2cc2ffa7e9438d38ef3945454aa83549786901b43dcbca949492fd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-threshold/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-threshold/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-threshold/expected-gate-verdict.json",
+      "hash": "43296492e333140d31b381c00fb37911cd9f3817cc15d65d411c91c157001f91",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-threshold/expected-report.json",
+      "hash": "c9f0668e43996e753daf73081f3955d66f90d506ec87fb1744cc3345ca917173",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-threshold/gate-input.json",
+      "hash": "3fe89d331b5108805312e51566c7987e838dfec69bc6be4b0a817667988d2b42",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-resilience-threshold/output-record.json",
+      "hash": "4bd87fac90efc0a26603f32e92b9edd01125e50fd65d9daa40ae140d41f7ab64",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/artifacts/gate-verdict.json",
+      "hash": "4871579141c50921be33c780dae4d97d6034d2dd8679f56085035cdf3447d99c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/artifacts/input.json",
+      "hash": "830230b168e1a436743fb657ecbcd0d2380cf4bb4f0ad2f164d5cffbf69efeb0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/artifacts/qeg-bundle.json",
+      "hash": "7eb4139c0bef03a2067c9edb4e57a23c0716a2e8b2739eef7a4f37ab8037b047",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/artifacts/quality-evidence-record.json",
+      "hash": "c21cdce39bc079b0f09929b69221ff2f04aca5b0cc03b8293a10ce958a77882c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/artifacts/test-placement-plan.json",
+      "hash": "9ada349f610a957b58766747a6cd6790d2d9088b16504dfa745b8fc74d8b5414",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/expected-gate-verdict.json",
+      "hash": "62279f8906a10a6ff649309cd89f5fff144d484cf134528711e40ae7fd809cb2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/expected-report.json",
+      "hash": "69eafef5a463ef4db0f849ef733b88651e61336d3f655a49aec34210ba4fbc52",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/gate-input.json",
+      "hash": "bf53902d4701b0805398d893bba8cf2a2bef9c6cf202bd6ca44abb6b352c8505",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-revision-mismatch/output-record.json",
+      "hash": "78dbd906a2bf57909b85959e59d7bebabc84c39baf28af07f616ce7afd0f53a1",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/artifacts/gate-verdict.json",
+      "hash": "5a83e0a7c0356c4cfe5dc58f05ed58f9e04f92c2b71483ab865f9e4faf6b0ca7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/artifacts/input.json",
+      "hash": "3ae9b1bb3064f11ffcb4fe1e513d0bf8f354d2564881904ecd21d377349c0312",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/artifacts/qeg-bundle.json",
+      "hash": "7cf03a19cfd0f62145ab89a34c99bdb9cb703543699015617594580e2813c1a7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/artifacts/quality-evidence-record.json",
+      "hash": "e8a49d9782cdca2be4d1cec27be46164db39de5d34205021c1dbdee3d7643830",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/artifacts/test-placement-plan.json",
+      "hash": "798f8c92d91d0333a3a0cfa54d7c3a81bfd2d8e5c065e1d0c579f9540f372c0f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/expected-gate-verdict.json",
+      "hash": "db2c33b9aea64ebc6248095ae7fa732f051ad0a2caac2c74142c4191b773c736",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/expected-report.json",
+      "hash": "d18a9ec7e5d5ee0abd0c64153d41bbaffcab334d967a4dc1b4c4f77eacf16923",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/gate-input.json",
+      "hash": "c654d74b4583f6e112918fc90d3dc279d16ea39d4bc28d8123f4261f639aa5f2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-silent-overwrite/output-record.json",
+      "hash": "a889c4674b2ed2c03543d47a7662cc967850906955ac95cca5fd99b1596af1e2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/artifacts/gate-verdict.json",
+      "hash": "986874dd597dddb0557510ad1e85d4e1ebc1848efd1dca3842de64ba72aa6eb4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/artifacts/input.json",
+      "hash": "30354d785a508457f8c48a46b58028c5b041bdef91c9ffed4280eac8182e6306",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/artifacts/qeg-bundle.json",
+      "hash": "9c05acc034f2f2e8c5c8c5a55db0a6631924a1beec2414aa5ab675f5642ca23b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/artifacts/quality-evidence-record.json",
+      "hash": "5ef7a120c309d5a213dbd6fc116e5cd7f42b820ead0c457318592019754892c5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/artifacts/test-placement-plan.json",
+      "hash": "e71ba724540a43f65e018ac2d513a3f708c0ab1a08fbe0b2e51b9696c06fc9c5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/expected-gate-verdict.json",
+      "hash": "f5e1c93e6cf2ffd53e8a4a39b997ccfe25c429ee19e22d9a83fa04a8693ae023",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/expected-report.json",
+      "hash": "68e20bd9b4c46b256ec6cbb24006adfaff20e18776d10577a99df932f3153270",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unknown-id-prefix/gate-input.json",
+      "hash": "210ca50d7656b0cf0c0e6f09aeb3d6233540c1a91ef6bff86c5a92c6908ab7cd",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/artifacts/gate-verdict.json",
+      "hash": "374ad5e34439ed4379d5eff2178885be8db7a255d97268f77d87459c1c178881",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/artifacts/input.json",
+      "hash": "9c4704fb0ef7c9ee59e1a02b61d8bd41e0aee9c4c050ebd2952dab52dc477250",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/artifacts/qeg-bundle.json",
+      "hash": "7924669b00e4ac3793141bbaad9791d02e6c3d5456d09a7c74b1e462eb189b17",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/artifacts/quality-evidence-record.json",
+      "hash": "05bfea53af7ce8e913e7411152f229d113122527e327ab19a3ecbd10d111f128",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/artifacts/test-placement-plan.json",
+      "hash": "1c188952569acbfa193c615039cc4c5d98fd1b73b3bc2512b165f3d6c2692533",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/expected-gate-verdict.json",
+      "hash": "edf2532e4a656f2ec8238ce5d4e342d2f6b95e13e6718f43ae43e531231559e4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/expected-report.json",
+      "hash": "225f413be88d6695b124561b4a04a5e613b2ff2b65bbf6b46cac22683df6d461",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/gate-input.json",
+      "hash": "f262cd0694754459f1297a78d734249f0e4556fe3d1b6d26e670fd06e8be6fd6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unredacted-secret/output-record.json",
+      "hash": "07608329ae3678d224ef2018f71e6830b46036aa444ee5bedd79b9185b3e0c76",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/artifacts/gate-verdict.json",
+      "hash": "b52835b5b258656ce139e1bebd60d6ce5ebaf3e6d5eee5a3b44fa686970e3c02",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/artifacts/input.json",
+      "hash": "c2ef0d42933ace8b920b49de0dab27921837117d19dd305855aebb65800bac58",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/artifacts/qeg-bundle.json",
+      "hash": "600fbe4451d80ace30e664ddabd2f4b6f7ba223be1026d7f4b2175b4dd653ab6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/artifacts/quality-evidence-record.json",
+      "hash": "9355683b8b15071d71cbb36fc9815bc47d5fc591c6bffde64cdb52ba16338d0c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/artifacts/test-placement-plan.json",
+      "hash": "1723367303edcb274fd8b5665a4c55785cf75c1df3d6e94e8c2bd9528e6454eb",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/expected-gate-verdict.json",
+      "hash": "4059195b7441a57b2f0c7dfeb6eacf9a2c94a6cf844bc806fe41f1472dc420d5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/expected-report.json",
+      "hash": "3da39877082a5f297c4b243c4d31a6a77bc0b1153ab4d1d78577912a5d73a060",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/gate-input.json",
+      "hash": "c3f340aedb4901914c2545d160ba20acb3508163ddd2129463056684856b4909",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-unsupported-claim/output-record.json",
+      "hash": "19cae039824b75e4086e8bc5e918a8a13718d78afd03c1323942a9d584c38a8e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/artifacts/gate-verdict.json",
+      "hash": "31a514bafc3a7b486b920eb1e87e54e6012ca63a9249b4a2a48e00ffacdd4122",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/artifacts/input.json",
+      "hash": "160c44f8c2be77f3ec335521ad67a8f4e54e260803eb1d31086be0daa614263c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/artifacts/qeg-bundle.json",
+      "hash": "6dec914e280a9b05baa8c1029677cdc070397990d9257417b71488f6a48053b9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/artifacts/quality-evidence-record.json",
+      "hash": "0c51fca82f56be9835c0af1e6a77224b9932869c640fb6404f9d318df1341de5",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/artifacts/test-placement-plan.json",
+      "hash": "e29e72ec8bebdca7a6974c0af6f95992b06fd306cb4a827cd688b1dc1335177f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/expected-gate-verdict.json",
+      "hash": "8ee1d46667a4e1bfed126523913227788d8324b0e5a84d8a59b524a56b9b41d0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/expected-report.json",
+      "hash": "23dba1787b6669a45b17cd812e55756fbe274487905edc09bbdfa56084e0ff92",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/gate-input.json",
+      "hash": "ed4a98cb175fe121f1bb53f76819558e6f5a5b9646f7f33d652f9b1da2bf25b7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-dq-attempt/output-record.json",
+      "hash": "212a64a2e396e59d025cf26892a0f6c795863d326bc97f913eff0c7d302a565a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/artifacts/gate-verdict.json",
+      "hash": "afa93fe43372b97e727e3a2f9e2f78ec2bc328aa37dbcc55dee4afe4395ad723",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/artifacts/input.json",
+      "hash": "7da12ea08732887e9a6dbd78b3b336a9741495316efb7671c194b59b8bdaf9f9",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/artifacts/qeg-bundle.json",
+      "hash": "611df7b5bbea7bd243fc1565e6ebb65f10c95a9bd23730e7244a067295df47f2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/artifacts/quality-evidence-record.json",
+      "hash": "77d9402e146c8571203f48f42061bdc699b490391720cfcc5d7f56484bad9d96",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/artifacts/test-placement-plan.json",
+      "hash": "65c204effce83ae877bf941d45adc9b1cebf9d889f1e9edacc8be50cafe442ca",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/expected-gate-verdict.json",
+      "hash": "3dd380cf79318f82da1d47709db91d274ecb3e006af3ba8a6ac04084520d20b6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/expected-report.json",
+      "hash": "1f120e876fb36d3ed5d5b695850561d6b635c77f1a0a17166362c350f885b462",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/gate-input.json",
+      "hash": "2986522af749f67570d7e8852ca902669da94094959c08cd2716b8f74b4732f0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/negative-waiver-no-source/output-record.json",
+      "hash": "02aea0a48c33dc86853fe5fd8204cc5d58486e2ee19e6906cce84d94ccd43f0e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/artifacts/gate-verdict.json",
+      "hash": "e07c158cb224aa4c823150f7475e0afe60eccbec4025ed6cb2e8c9b9cd136814",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/artifacts/input.json",
+      "hash": "8a84019ed0de8d26b53629ee8ba9b3464d902424544005f9feb89717b6e8303e",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/artifacts/qeg-bundle.json",
+      "hash": "07de058e6a8688396ebb4d200e1a3fc5e83cacdd31564c43e58f793681c3577f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/artifacts/quality-evidence-record.json",
+      "hash": "789ea2bb21c1a046a4e3b80dccf14e9664475e74c381727c00f62206a41c92ce",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/artifacts/test-placement-plan.json",
+      "hash": "51fb769aa0229ef582851aaf9e46e22f0d0304e5b037b5ab1d16d45c8ddcbe78",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/escaped-defect.json",
+      "hash": "531957abd9e3e8890c3cd674bbf6771fcd43fbfd376c58639e75dd3d60185957",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/expected-gate-verdict.json",
+      "hash": "c18f937e34f83a6088007b8577bbcf776cfd5d145c09e8a81cd9d2d12758a566",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/expected-report.json",
+      "hash": "46808f05f00913e285c59521505ae4bda17dcfec201796d302f38b862bb21569",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/gate-input.json",
+      "hash": "1156296065ac226f71a0354f804e0ff7801b33df621613b73ffacba562ef2be8",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-gate-efficacy-record/output-record.json",
+      "hash": "9e8021a0b230f430850017eaecc95abacb810ce083021f7a7bac010c0d9d7cd2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/artifacts/gate-verdict.json",
+      "hash": "6e90747eebb3ecfbe22fe87ef215ffcc61828f4692096279ff9f8d7ee1b4a789",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/artifacts/input.json",
+      "hash": "04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/artifacts/qeg-bundle.json",
+      "hash": "b03c7fed2886011757180d0e4d7667630036e2e522efbc3e349801010f5b6705",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/artifacts/quality-evidence-record.json",
+      "hash": "17866108be034f9634079c292bad1bd325cc0c6d7a1181c901df0337f4b5e7bf",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/artifacts/test-placement-plan.json",
+      "hash": "e028050924c4ee5cf44a69bf53a8839869b0e176b753d517f881729e65fcd42b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/expected-gate-verdict.json",
+      "hash": "491f429e46feea939525e617962957ec81b565a43e7fd9789057ca355a66e22c",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/expected-report.json",
+      "hash": "67e6638bdf80d853b3a44db1b708011b97f8bc652344410fcf1b7a9ce5b7f72d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/gate-input.json",
+      "hash": "7ac605ff008c523800e314be6fc303366c34427022a2584a8e519d352da5e1fc",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-legacy-compatible/output-record.json",
+      "hash": "432125142322f315e780df4d6a16de171855b2d531529c8569f01bdea69ac98a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/artifacts/gate-verdict.json",
+      "hash": "2bbcb10e34cc23909455692347fd4685805135640e62dc16fa1b6c26559b9ce6",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/artifacts/input.json",
+      "hash": "ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/artifacts/qeg-bundle.json",
+      "hash": "14e4dfeecfa433d920d6b83f065ea37586d0452b4908c8aa4341f0651393ef07",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/artifacts/quality-evidence-record.json",
+      "hash": "7d995bc08deb6b0e09ce3320332f5bb097b01a9fae5426ddda2a54946d72836d",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/artifacts/test-placement-plan.json",
+      "hash": "71655d0873c1cb7d87befe91795b5f6ce51949f0cabaf552464f68fafb08ee04",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/expected-gate-verdict.json",
+      "hash": "065f0245b9c273ab0e373028ba926fb83608b3528e5e0f2bc2bc905b53f89beb",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/expected-report.json",
+      "hash": "49d3f46c298c8dd8b85056f1258e0a5ab34c867f8dff59b31ae7eb7c4d44c1c2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/gate-input.json",
+      "hash": "7d35f90f4940d0cd9b3db961721662043b2458e497cb9596b52f5212739e12ed",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-placement-change-retirement/output-record.json",
+      "hash": "773b362449b55727817ae22ca5bd656e3c6f6fc7c386b2887663c03a9b5e5a47",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/artifacts/gate-verdict.json",
+      "hash": "f3254ae74baa01a02e2b80a14c7948a10d5f7e07d4c362cfc8848104d008e569",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/artifacts/input.json",
+      "hash": "a845f1cc0c28895c21dee734ad0969cfc9d2e60b495184556265ba6b080183f2",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/artifacts/qeg-bundle.json",
+      "hash": "b6ff28acac906c0489bd6e5a57c2302b001047342cd4534d22f9bb45af5fc761",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/artifacts/quality-evidence-record.json",
+      "hash": "e5f3bf91090d9529c088e43c2369136023a02566423765e48a253832b7cbac7f",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/artifacts/test-placement-plan.json",
+      "hash": "b72ddf4136609947d306f732361497ce898e72a47a11cfe85a00797fde12a799",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/expected-gate-verdict.json",
+      "hash": "ebcacee6a78ce137f52247177ea21d809746f3a72d28b359fdf3de55b2472c90",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/expected-report.json",
+      "hash": "c2949830f2943cec0f77a47e36518983bf06d6b9a08d64ea3f3fa4cdc1020e13",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/gate-input.json",
+      "hash": "0a070d36053bf58b0df78297bce1c8b63a6bb2118eed930f5e9dc239708ef2b7",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-prefixed-ids/output-record.json",
+      "hash": "a15906672cc3426038dd1938495a5083783678173754f496f67dbdee7ff08183",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/artifacts/gate-verdict.json",
+      "hash": "6e90747eebb3ecfbe22fe87ef215ffcc61828f4692096279ff9f8d7ee1b4a789",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/artifacts/input.json",
+      "hash": "04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/artifacts/qeg-bundle.json",
+      "hash": "b03c7fed2886011757180d0e4d7667630036e2e522efbc3e349801010f5b6705",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/artifacts/quality-evidence-record.json",
+      "hash": "17866108be034f9634079c292bad1bd325cc0c6d7a1181c901df0337f4b5e7bf",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/artifacts/test-placement-plan.json",
+      "hash": "e028050924c4ee5cf44a69bf53a8839869b0e176b753d517f881729e65fcd42b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/expected-gate-verdict.json",
+      "hash": "e534313f2d14ce0ddbf7fb343135467ddddf3d9c80d767a24423c24dee217b82",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/expected-report.json",
+      "hash": "08936f578700671955bdbe7e916800d182e3c3c038e15817ddb3a215aac4eb6a",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/gate-input.json",
+      "hash": "7ac605ff008c523800e314be6fc303366c34427022a2584a8e519d352da5e1fc",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-release-go/output-record.json",
+      "hash": "a15906672cc3426038dd1938495a5083783678173754f496f67dbdee7ff08183",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-reliability-go/artifacts/raw.json",
+      "hash": "ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-reliability-go/artifacts/signal.json",
+      "hash": "8d91d6c5cde25da505b766d29cdbcde20cdaf43a9fea165e97277ad5768ceb5b",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-reliability-go/expected-gate-verdict.json",
+      "hash": "bbef828130dce4479e8203013296671ae7dfe88cd46207cabed906d18896ebf8",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-reliability-go/expected-report.json",
+      "hash": "73f73ba4e56f9bcc59bfba29ec55bd66b10eb3a4d4c249073b217c11cbf0d530",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-reliability-go/gate-input.json",
+      "hash": "6ea794c47d0df00e452dfa589e0aa61657ea838e663e7886969266cc564fa9e4",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/positive-reliability-go/output-record.json",
+      "hash": "8d0423a8ad2f63eb0ea58d5e7c99c2a58b90229b8e140b55eaf145b8c105a693",
+      "kind": "source"
+    },
+    {
+      "path": "fixtures/README.md",
+      "hash": "793f19f7dd97ba8bd340ed3fc2b7df095d88fa0d11d45d84b12f6e357fbf7ab4",
+      "kind": "source"
+    },
+    {
+      "path": "package-lock.json",
+      "hash": "aea50aa7baec2bcb2308315e36d3cbb3aa8ff63ab5e1344855b4bcef600dc717",
+      "kind": "source"
+    },
+    {
+      "path": "package.json",
+      "hash": "392d3529ccf575f755ed9704952560a7d6e51ee1fc3f15f5ea8c09f5f28b69ea",
+      "kind": "config"
+    },
+    {
+      "path": "qeg-report-action/action.yml",
+      "hash": "d1656315104c429c8a37ca22e8f372c6a9ee306e0acb844f73257982a5f23e4d",
+      "kind": "config"
+    },
+    {
+      "path": "qeg-report-action/licenses/ajv.txt",
+      "hash": "9b6a90e9be78799534e4030d71b6817271fb99aa10e261f9f9f6dec1cff4177a",
+      "kind": "source"
+    },
+    {
+      "path": "qeg-report-action/licenses/fast-deep-equal.txt",
+      "hash": "7bf9b2de73a6b356761c948d0e9eeb4be6c1270bd04c79cd489c1e400ffdfc1a",
+      "kind": "source"
+    },
+    {
+      "path": "qeg-report-action/licenses/fast-uri.txt",
+      "hash": "b010b0dfdfdb23d7396e03b82cd4621fc9bb8f95d6b0aea70b9c24e12074c786",
+      "kind": "source"
+    },
+    {
+      "path": "qeg-report-action/licenses/json-schema-traverse.txt",
+      "hash": "7bf9b2de73a6b356761c948d0e9eeb4be6c1270bd04c79cd489c1e400ffdfc1a",
+      "kind": "source"
+    },
+    {
+      "path": "qeg-report-action/licenses/require-from-string.txt",
+      "hash": "6ee0feb1f6ef996ff5a68600f8cf98909cf412d39ef3cdceaefd87d636fa1b7f",
+      "kind": "source"
+    },
+    {
+      "path": "qeg-report-action/THIRD_PARTY_NOTICES.md",
+      "hash": "4c402a3ae11e182ff318b98bbb27c5312c26ab8c0e8a2e22a016f4e3f7929039",
+      "kind": "source"
+    },
+    {
+      "path": "README.md",
+      "hash": "596d4b30205a36c5d390960da49ee1d712ccb44e5d2289fc143712621902f29c",
+      "kind": "source"
+    },
+    {
+      "path": "README_EN.md",
+      "hash": "2120aab0e57c42a43d21d034cd9fee1afa70528b61a97d27f1c81da055493d4c",
+      "kind": "source"
+    },
+    {
+      "path": "README_JA.md",
+      "hash": "b457233c6ae490020d46006acc631ffbecdcd38d496a5d5651ba82c1bd093c4d",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/action-lifecycle-evidence.schema.json",
+      "hash": "14e2107bf59d7fcd8f224f5e77220afad502f2fd6bbb85aaf4490e35ebad70aa",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/approval-evidence.schema.json",
+      "hash": "5827fefe9fa54fee2beb8795a000b26ba055daa56944f5bad5483c4ff2d20ae4",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/evidence-package.schema.json",
+      "hash": "8239c88a1a36af60dde8d3057decf59db37c5c23b7cb96375cb038232af0ecba",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/gate-input.schema.json",
+      "hash": "6feec8a772e063ee30dc428169e093159d35d8ca83c8c5ea780239ba2817b0c7",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/gate-policy.schema.json",
+      "hash": "1b4a700cf05914cf3ba76dd42281217ddc8cac32089d0e8f39ba43f16beeae26",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/gate-verdict.schema.json",
+      "hash": "4fc808265ced2223cc9e68d5abc17c9675f576d018c3fa7270f0ccc5a375b80c",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/qeg.bundle.schema.json",
+      "hash": "0204cfaa642ceca9523de61cf8edacbb0d0035beaa5eee8a179f5190d15f250c",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/quality-evidence-record.schema.json",
+      "hash": "629439ddcf2ad1d950f033a397213e53c3bcfbb89020cf936ca55eaa20242a7f",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/README.md",
+      "hash": "eeca4e9ce31b8dd2e8f57150151f4e99fc8912de338e9a0fb626c5f4fc01912d",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/reliability.schema.json",
+      "hash": "45f9ad152c46f1c119511f70a04ae083a42da712bc61f3d87c89bf2a1199c9a2",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/resilience-normalize-context.schema.json",
+      "hash": "a079a279755b97f3a4a7f1d8b7df2a4e96ea6b7fefbf38c58f7ac251d1e492e9",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/retention.schema.json",
+      "hash": "cf5f0753ff6a605e2203e7bffee80759764ab4d040f83574d0a89fbbadc36595",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/shared-defs.schema.json",
+      "hash": "135053748956ea6826d607baa788e88f8f4586f1b3130a49206a882c1876e360",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/test-placement-plan.schema.json",
+      "hash": "1b35c797a79210a16665fe9819d7d0aee5d990425be81f109be88d8c85b2d624",
+      "kind": "source"
+    },
+    {
+      "path": "schemas/waiver.schema.json",
+      "hash": "b75abba25a957f7fcb58825414148f51474bdebfaafc2b4e3b3960c7a680781f",
+      "kind": "source"
+    },
+    {
+      "path": "SECURITY.md",
+      "hash": "f08f59fd347c4450dfbbc82a513b001787fb0c6402540ef1dcf6aff3f14779e9",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/baseline.ts",
+      "hash": "eca9ac95d9c668649444e5464e61d0aac67eb98e3d1889d655bb0c48766f45a5",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/check.ts",
+      "hash": "ee42782b0f7e1168ea29d36046645a532aa838a9538d323b1523b218cc39dcdc",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/commands.ts",
+      "hash": "112bfc559e04c1e7c840f1cb814d2ad6f55e801d45d37d4700497d535788a1b7",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/doctor.ts",
+      "hash": "3542e2fc839120da992253d0b218068146ba5da67db452d54580fe43af77d22e",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/dq-explain.ts",
+      "hash": "c998bea10ec4c2fd709daab1cae548ce0fe5a7916c608c2c551458c42ac23d29",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/enum-check.ts",
+      "hash": "d467a7839b53cd73ddbdc10eb5b9ae79cb0c4b17441e0ed71b910d76d3c74ff9",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/errors.ts",
+      "hash": "0494bbd3e21351132647ab0c592f177dd50c738b35db0545ebc9744e9e602b19",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/evidence-normalize.ts",
+      "hash": "d7814bda2e0915ba7cee55099368251d3edb4147f9de6e5aa15488dd4ff63bda",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/evidence-verify.ts",
+      "hash": "cc77a504d61725b19224cc9f679bec9328041d721603fd401add82d2242b5043",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/fixture-io.ts",
+      "hash": "46447f5867aa2632ba7884277e616e3a0054284c7b46a1a5743a3f84c710c29b",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/ingest-contract.ts",
+      "hash": "1644c4f553cec5244d4be2b60c2d141025283caa4968f1ed8b5704c9c3172399",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/init.ts",
+      "hash": "6a653869bd2d0b028c053e21ce1eec1280c2c6730a8eb27e1062a5b32cc1e05d",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/policy-lint.ts",
+      "hash": "8dffe4fda4c41c9bea78333d9a24a327f50d3cad60f1660ad5352e709a62ae77",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/record.ts",
+      "hash": "1688cf431da47932eff5c5fc7f611ac1793319404dabe4dc9aac434b958b0e84",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/baseline-diff.ts",
+      "hash": "99ea39e442f2cd3b7b7f9eb549bdea00164bad37fafcc1d052256c8a570cc02a",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/change-selection.ts",
+      "hash": "0a9ebc9c0ba659534a484570153766f3f15438d375894361334cae3c5449b823",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/command.ts",
+      "hash": "676909c9ba24a905d96089f0e36ee41c286218668896f57dacd50836991cae60",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/core.ts",
+      "hash": "93f013977a24262cc4cc8dd9af971f3881be0dac4b57f7f2d8bb86de1fd81f50",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/formatter.ts",
+      "hash": "c10b6bf042520fd04d0d0117d7097d07cd364b4bdb31074b5beb9629f7b56507",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/model.ts",
+      "hash": "8c1f152728e6b2e7b3040913a2fc5b5c9a196a3461c18334ab8924ff66f4dd86",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report/targets.ts",
+      "hash": "869bb7a283f98734d9e27c23b93e535ccf929aa12c44f0b0b4e0f66004a98471",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/report.ts",
+      "hash": "6ab680355e34bdb3d7f5f53f793f02660d1eef00d6df85dd4699e27dd1ec50f0",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/repro-bundle.ts",
+      "hash": "75544cf7f2c2b02a79b7f250407cab3733c13e6921123a5a18e92d70ee0ef4ca",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/schema-check.ts",
+      "hash": "7a6f4228f719f7c893be96ba7a8eccd4e2e3dd6ecb41922d9182408404121bd5",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/snapshot.ts",
+      "hash": "72eab08651ae604f42cde18905dc76ede7d1d6afb1feb301b62dde68d0824d9c",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli/validation.ts",
+      "hash": "779a850298d15852977ccd4c356f225c96ffd1ed6f233d31ea3ea7efccf04287",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli.ts",
+      "hash": "9274cf2c16867865c26fb383a5983debb7f18e6d78de919ca4f77e2308a0c64d",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/context.ts",
+      "hash": "605d1bac7c400ae02d4fbf0b2c889b31f7244cf1d5a56e673bbb965044ca6d1c",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq/basic.ts",
+      "hash": "5817f298a7bc095ed657aac0e900d7e4433c65eac2f1398b2e13027045dc4e64",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq/evidence.ts",
+      "hash": "cf332415cfe542dbff7c71c0741b404c72957b174dc122124c7a65f5d6b3055d",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq/helpers.ts",
+      "hash": "9222074d3cc9ff411edaa7bb3d02a53aaffd1a0a4902685d3d77cb3953a0d6be",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq/ipo.ts",
+      "hash": "de99d32b3a9d30e5a6997e0786792ab0524560dc405dc44ee48232b85ffb40d5",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq/placement-change.ts",
+      "hash": "607aa88ce8c523e08a57b1ee413cfa5e2f39b3368ef797e42fdb8f89a367cd0d",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq/source-refs.ts",
+      "hash": "600f22f1c6d938dbda08d4d0ed02a8de27e69c24da7758871930a86d20e05167",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/dq-detectors.ts",
+      "hash": "c55d526bd5b736fc73befa6319b4325a2c3a472dfed8baa8489c23fba3eb8b69",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/evaluate.ts",
+      "hash": "f5981baf43bfb462fd263e23fda0ed2cf4fd7d8120dced80b5d14713cc41efaf",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/accounting.ts",
+      "hash": "5fed73958758b49a37c83c24ff2d1c64ae46b72ff9d885ac48c6375937ff291e",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/blockers.ts",
+      "hash": "fb4d56a018d0403d10c513ba86d0ca9dd7bf4a5d72fbf0b422c0409dd278ac64",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/contracts.ts",
+      "hash": "743db89cad7c30cc37f66ee121ee4326a5e2b7d1e2e7272a55ae2b5c7ad7c774",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/evaluator.ts",
+      "hash": "8a37b06833019c48c8f8190545c2696250e5d1ea1ec69f6ec195d213b8c43b8a",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/indexing.ts",
+      "hash": "0a1714ab0d21f5735e3e1722a9880f21699d74dd9a7fad90a6785946ecf8e80f",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/qualification.ts",
+      "hash": "2bcbc08914a1eec4e998c738befcd79ec87d164af9d3f0f488bc602927c13c54",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/selection.ts",
+      "hash": "bcb03506e1ffae8e1dca8bbb02d70cae17aca9a4bc8c1a5bdb7f91aa78e80c22",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/signals.ts",
+      "hash": "81a4f3356d3d14ebc25fc3257be0bd0f04734a971b14d5b958aee62f03dc7210",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability/utils.ts",
+      "hash": "3b5b7cf6c92dc09474f318015a6714f6106314f7fd3a6d806e8242fac96fd932",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/reliability.ts",
+      "hash": "c81ef80e4af04e03f38853315429be4eff9b67f47885bbd3086953d3abe17147",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/test-evidence.ts",
+      "hash": "ef57735e524362beb512779ab28e4a49b8a9e9530fb582f10cd5280420780e24",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/verdict/blockers.ts",
+      "hash": "0d580514d6ce5669230f639b17da68960c1b8984d1ea27ca9ba396f9295cbf95",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/verdict/human-review.ts",
+      "hash": "0477985d5ae22de714e7c057d3ab57d7a42529de2a28db34e0723fee2237c0b6",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/verdict/reasons.ts",
+      "hash": "4a5e17ed6df1d704372eb6699256ce2e8e002a8af0178d66f37b77c22bb31219",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/verdict/residual-risks.ts",
+      "hash": "a0259e2c46ddc8b9fa64f9f638a70a31dd575251c1d6b37b9bfcf20a036f65e3",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/verdict.ts",
+      "hash": "e89f74f3af895745cb6a3b886ee3aa55e65841628daa11e7645ccde4b975c5f1",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate/waivers.ts",
+      "hash": "e725dd7337a4903529a5d0414e15c29103bb4fc90de0cbf6dcdfb2ab78424134",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate-efficacy.ts",
+      "hash": "527fe5eab7dbb08f505dca51ab1e88e7937a8dfc572880864ea0399bc40b9f24",
+      "kind": "source"
+    },
+    {
+      "path": "src/gate.ts",
+      "hash": "5eebf0eb5fb091752ef6723eb6a9de6593e6817962bc4ed9b378fd153ae2bcdd",
+      "kind": "source"
+    },
+    {
+      "path": "src/index.ts",
+      "hash": "e73b8f48f7c07717d3954d5c92fb3a7d9f1c0667f4a91d80e7d72feff3356cd3",
+      "kind": "source"
+    },
+    {
+      "path": "src/types/evidence.ts",
+      "hash": "40d26dede50de9d8cee2011ed3f629174c29573117ec3f977a7c0976c2f0b3fd",
+      "kind": "source"
+    },
+    {
+      "path": "src/types/gate.ts",
+      "hash": "052d9977dcd688b17e3a4bc2bac41b62a7905012b977690866e47332153820ee",
+      "kind": "source"
+    },
+    {
+      "path": "src/types/graph.ts",
+      "hash": "b841085ab0b4a62723f9b2ab247d34ae9caccf6d32ecb6d5d8f768b5a677d7cd",
+      "kind": "source"
+    },
+    {
+      "path": "src/types/input.ts",
+      "hash": "e40ad338898703512e077e6253661232259d096cc99126bd255630eb227c3088",
+      "kind": "source"
+    },
+    {
+      "path": "src/types/primitives.ts",
+      "hash": "2dd59b8ab202bebf5ac42a64e0556acdfda65603d53959cbcb17c481a40c76ed",
+      "kind": "source"
+    },
+    {
+      "path": "src/types/record.ts",
+      "hash": "d8c42c54faee00126d8e8074c3af26b308b9e5e7aa9c5e88584383452adb2930",
+      "kind": "source"
+    },
+    {
+      "path": "src/types.ts",
+      "hash": "232e678340fefe3881c7acdf126dc06bb41a161d6d1e0a2c871acdbc124c8163",
+      "kind": "source"
+    },
+    {
+      "path": "src/validation/evidence.ts",
+      "hash": "ccefab296a29d77f21e38a650660c0053c75a7f6b32ec5c2acebdd807a4ed208",
+      "kind": "source"
+    },
+    {
+      "path": "src/validation/reliability-semantics.ts",
+      "hash": "fd2771ea8d5f43b1b86d907fc8b74afa58f89784ebc325a3ddead307cf5acb0e",
+      "kind": "source"
+    },
+    {
+      "path": "src/validation/schema.ts",
+      "hash": "9946e9bbbd8e0a80748543a4193e3eee0a46258cd22b2587a5a3805139be7467",
+      "kind": "source"
+    },
+    {
+      "path": "src/validation.ts",
+      "hash": "591383002f1905e119a785c594b9c5b715d64c326557cab6089e9c35b8364654",
+      "kind": "source"
+    },
+    {
+      "path": "tests/action-contract.test.mjs",
+      "hash": "6e0b042bdb6ed9a60791bd7642ecc475bce8532985379fcd92cf40b00cc945f7",
+      "kind": "source"
+    },
+    {
+      "path": "tests/fixture-regression.mjs",
+      "hash": "e70be2b371c74d91836ee54bd611ce22c10effe1097def9e81f832ce5db29f33",
+      "kind": "source"
+    },
+    {
+      "path": "tests/package-smoke.mjs",
+      "hash": "4ebc1bfe0a2b64f4049a652c88fb859f469f6f9e449ed29a0864516679021008",
+      "kind": "source"
+    },
+    {
+      "path": "tests/runtime.test.mjs",
+      "hash": "a98625fad7aaae1f51e177ca09bd318aa176e115081a56ffa99cd7a765a40249",
+      "kind": "source"
+    },
+    {
+      "path": "tests/type-contract/contract.ts",
+      "hash": "431912e87ffdfd2b782d3458d988e66501f45662b362459a552819b719342b98",
+      "kind": "source"
+    },
+    {
+      "path": "tests/type-contract/tsconfig.json",
+      "hash": "90b33711c1d7398582a26c91133aa33378f6e428ae2f17466acae173cec38fd7",
+      "kind": "source"
+    },
+    {
+      "path": "tools/action-lifecycle-acceptance.mjs",
+      "hash": "766d868a393d8ea3363fb88385dcedf21348592a03c6d168f0f6fa3f2498993c",
+      "kind": "source"
+    },
+    {
+      "path": "tools/birdseye-check.mjs",
+      "hash": "45fe0bf634ab6ffa5f857538e880a38e19fd00ef14c26aaeb1df44e8baf2cef7",
+      "kind": "source"
+    },
+    {
+      "path": "tools/json-check.mjs",
+      "hash": "212bb39ebdb8973859315e825c20fca6862c0db74a2fc7abe8cb6aa83e8b1e28",
+      "kind": "source"
+    },
+    {
+      "path": "tools/migrate-fixtures-v02.mjs",
+      "hash": "1cd35606c440a67d6e59db0de9baa61e7df67def95a22c14fda107ff38745a25",
+      "kind": "source"
+    },
+    {
+      "path": "tools/update-birdseye.mjs",
+      "hash": "985e649a3a3b84a1e8b7615d6d4e931c45ce33ba59a167b329b1db39c6b16515",
+      "kind": "source"
+    },
+    {
+      "path": "tsconfig.json",
+      "hash": "a264764bf2eed11dd7136d227e9be64f9923e79739d85f1ea79e7d912b08675b",
+      "kind": "config"
+    }
+  ],
+  "policy": {
+    "id": "default",
+    "hash": "none"
+  },
+  "exit": {
+    "code": 0,
+    "status": "passed",
+    "reason": "Analysis complete"
+  },
+  "artifacts": [
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\raw-findings.json",
+      "hash": "sha256:47862cfbe4671785fbdbe2e15c3d3c4c428738d4be177f1e1c92f1479309514d",
+      "stable_hash": "sha256:e04bc3180512f06add1440e6e7ad59ef744253d73b3c4ec2ce69f90b44579b71",
+      "kind": "json"
+    },
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\findings.json",
+      "hash": "sha256:c4e61f9cab8bbc7078dbd0ceddecad88090af395e278ca7a1f759a46250f2bee",
+      "stable_hash": "sha256:2edc6b5a053062590331c1b7a1a2710314ef47109f5915c628098bfcc26afedc",
+      "kind": "json"
+    },
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\risk-register.yaml",
+      "hash": "sha256:08c2ec473de449044f1acbe2c6fbe952ddbd5b8f9db4837136187993fe4436d8",
+      "stable_hash": "sha256:9e5a597d642ed6310c9bc3d332ed473f67f96665ce0d583603b0884f9b2d04cc",
+      "kind": "yaml"
+    },
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\analysis-report.md",
+      "hash": "sha256:049fd6e6b9e222a18f98023f2e6bdcfd9bb0d083c15d62443e42756d37f5f90c",
+      "stable_hash": "sha256:5da1502e3eca4280cafefcfdc513219e11acc3b181718a7d490ea91da5730d59",
+      "kind": "markdown"
+    },
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\test-seeds.json",
+      "hash": "sha256:ddb2d7f8f9a93bd5cae7b38acb61819905f0dec5ba975bb904e0f6496486e9d4",
+      "stable_hash": "sha256:eb138137b4c069b643564e8a4714a70d53d4235c192a49644c7dc128543491fc",
+      "kind": "test-seeds"
+    },
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\invariants.json",
+      "hash": "sha256:d7872bfc46e236879e6c57ded2f7ec0373a9bff00833c212f28f97afaba0e70c",
+      "stable_hash": "sha256:cbabeb6f9f8a29c68ee7888de334151955fa13d0f298ade09dc8dfce1527e74e",
+      "kind": "invariants"
+    },
+    {
+      "path": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\repo-graph.json",
+      "hash": "sha256:68e30e457c0e759684c10b573b7e4d56852963fe4b8a9552f91d50662ddfe55d",
+      "stable_hash": "sha256:6d00d020ecee0f311b2e42cb8802c265a8fb28280e021e87d78052c33f363f77",
+      "kind": "graph"
+    }
+  ]
+}

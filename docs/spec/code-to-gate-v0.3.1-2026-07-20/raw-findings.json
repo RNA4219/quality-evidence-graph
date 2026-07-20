@@ -1,0 +1,408 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-20T11:58:07.312Z",
+  "run_id": "ctg-202607201158-local",
+  "repo": {
+    "root": ".",
+    "revision": "0b0d8443907a",
+    "branch": "agent/qeg-v0-3-1-github-only",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "raw-findings",
+  "schema": "raw-findings@v1",
+  "completeness": "complete",
+  "findings": [
+    {
+      "id": "finding-TRY_CATCH_SWALLOW-000",
+      "ruleId": "TRY_CATCH_SWALLOW",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Catch block returns null without logging",
+      "summary": "The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult.",
+      "evidence": [
+        {
+          "id": "evidence-finding-TRY_CATCH_SWALLOW-000-00",
+          "path": "src/cli/report/targets.ts",
+          "startLine": 4,
+          "endLine": 10,
+          "kind": "text",
+          "excerptHash": "2279a462"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "error-handling",
+        "maintainability"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "b81b1dcffb166ac0"
+    },
+    {
+      "id": "finding-TRY_CATCH_SWALLOW-001",
+      "ruleId": "TRY_CATCH_SWALLOW",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Catch block returns null without logging",
+      "summary": "The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult.",
+      "evidence": [
+        {
+          "id": "evidence-finding-TRY_CATCH_SWALLOW-001-00",
+          "path": "src/cli/repro-bundle.ts",
+          "startLine": 20,
+          "endLine": 26,
+          "kind": "text",
+          "excerptHash": "33ee1d11"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "error-handling",
+        "maintainability"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "b44fbafaf496174e"
+    },
+    {
+      "id": "finding-TRY_CATCH_SWALLOW-002",
+      "ruleId": "TRY_CATCH_SWALLOW",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Catch block returns null without logging",
+      "summary": "The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult.",
+      "evidence": [
+        {
+          "id": "evidence-finding-TRY_CATCH_SWALLOW-002-00",
+          "path": "src/cli/snapshot.ts",
+          "startLine": 59,
+          "endLine": 65,
+          "kind": "text",
+          "excerptHash": "6d20a5ba"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "error-handling",
+        "maintainability"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "2ff770b8d02432b8"
+    },
+    {
+      "id": "finding-TRY_CATCH_SWALLOW-003",
+      "ruleId": "TRY_CATCH_SWALLOW",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.95,
+      "title": "Empty catch block swallows exceptions",
+      "summary": "The catch block is empty, silently swallowing all exceptions. This hides errors and makes debugging difficult. Consider logging the error or handling it appropriately.",
+      "evidence": [
+        {
+          "id": "evidence-finding-TRY_CATCH_SWALLOW-003-00",
+          "path": "tools/migrate-fixtures-v02.mjs",
+          "startLine": 137,
+          "endLine": 137,
+          "kind": "text",
+          "excerptHash": "7234ff2a"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "error-handling",
+        "maintainability"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "dd1ecba01d77bcfd"
+    },
+    {
+      "id": "finding-ENV_DIRECT_ACCESS-004",
+      "ruleId": "ENV_DIRECT_ACCESS",
+      "category": "config",
+      "severity": "medium",
+      "confidence": 0.75,
+      "title": "Environment variable 'GITHUB_STEP_SUMMARY' accessed without validation",
+      "summary": "The environment variable 'GITHUB_STEP_SUMMARY' is accessed directly without validation, default values, or type checking. This can cause runtime errors if the variable is missing or incorrectly formatted. Use a config validation layer or provide fallback values.",
+      "evidence": [
+        {
+          "id": "evidence-finding-ENV_DIRECT_ACCESS-004-00",
+          "path": "src/cli/report/command.ts",
+          "startLine": 105,
+          "endLine": 109,
+          "kind": "text",
+          "excerptHash": "7fe573a7"
+        }
+      ],
+      "tags": [
+        "configuration",
+        "domain:runtime-config",
+        "robustness",
+        "runtime-error-risk"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "6b079c24bd9671db"
+    },
+    {
+      "id": "finding-UNSAFE_DELETE-005",
+      "ruleId": "UNSAFE_DELETE",
+      "category": "data",
+      "severity": "high",
+      "confidence": 0.8,
+      "title": "Unsafe delete operation detected",
+      "summary": "A delete operation is detected without proper safety checks. Add WHERE clauses, filters, soft-delete, or confirmation to prevent accidental data loss.",
+      "evidence": [
+        {
+          "id": "evidence-finding-UNSAFE_DELETE-005-00",
+          "path": "src/cli/evidence-normalize.ts",
+          "startLine": 415,
+          "endLine": 421,
+          "kind": "text",
+          "excerptHash": "55ba8953"
+        }
+      ],
+      "tags": [
+        "data-loss",
+        "delete",
+        "domain:data-access",
+        "safety"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "62189f184aca4a7e"
+    },
+    {
+      "id": "finding-LARGE_MODULE-006",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (39)",
+      "summary": "This file has 39 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-006-00",
+          "path": "src/cli/evidence-normalize.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "20684f74"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "41d3a28868c51964"
+    },
+    {
+      "id": "finding-LARGE_MODULE-007",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (23)",
+      "summary": "This file has 23 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-007-00",
+          "path": "src/cli/policy-lint.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "2cf281d8"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "3fe0b735d5cd6fdd"
+    },
+    {
+      "id": "finding-LARGE_MODULE-008",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (44)",
+      "summary": "This file has 44 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-008-00",
+          "path": "src/cli/report/formatter.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "7e85892f"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "9aaf672436021d56"
+    },
+    {
+      "id": "finding-LARGE_MODULE-009",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (26)",
+      "summary": "This file has 26 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-009-00",
+          "path": "src/gate/reliability/qualification.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "298c59ac"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "144461f8e73c0da9"
+    },
+    {
+      "id": "finding-LARGE_MODULE-010",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (29)",
+      "summary": "This file has 29 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-010-00",
+          "path": "src/gate/reliability/utils.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "3fe6b3bb"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "898a4379d2f96141"
+    },
+    {
+      "id": "finding-LARGE_MODULE-011",
+      "ruleId": "LARGE_MODULE",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.85,
+      "title": "Module has too many functions (24)",
+      "summary": "This file has 24 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "evidence": [
+        {
+          "id": "evidence-finding-LARGE_MODULE-011-00",
+          "path": "tools/migrate-fixtures-v02.mjs",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "61d0a8a1"
+        }
+      ],
+      "tags": [
+        "complexity",
+        "domain:code-health",
+        "maintainability",
+        "refactoring"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "ff49ab72eeba9be7"
+    },
+    {
+      "id": "finding-SUPPRESSION_DEBT-012",
+      "ruleId": "SUPPRESSION_DEBT",
+      "category": "maintainability",
+      "severity": "medium",
+      "confidence": 0.8,
+      "title": "Suppression may hide debt (UNSAFE_DELETE)",
+      "summary": "This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item.",
+      "evidence": [
+        {
+          "id": "evidence-finding-SUPPRESSION_DEBT-012-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 3,
+          "endLine": 3,
+          "kind": "text",
+          "excerptHash": "00007c2d"
+        }
+      ],
+      "tags": [
+        "domain:code-health",
+        "maintainability",
+        "suppression",
+        "technical-debt"
+      ],
+      "upstream": {
+        "tool": "native"
+      },
+      "fingerprint": "070fcdb57cd04386"
+    }
+  ],
+  "unsupported_claims": [],
+  "bySeverity": {
+    "critical": 0,
+    "high": 1,
+    "medium": 12,
+    "low": 0
+  },
+  "byRule": {
+    "TRY_CATCH_SWALLOW": 4,
+    "ENV_DIRECT_ACCESS": 1,
+    "UNSAFE_DELETE": 1,
+    "LARGE_MODULE": 6,
+    "SUPPRESSION_DEBT": 1
+  }
+}

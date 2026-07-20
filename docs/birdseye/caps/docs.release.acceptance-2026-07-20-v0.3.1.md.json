@@ -1,0 +1,29 @@
+{
+  "id": "docs/release/acceptance-2026-07-20-v0.3.1.md",
+  "role": "v0.3.1-github-only-release-acceptance",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "QEG v0.3.1のGitHub-only配布、Action bundle、release lifecycle、CI証跡、実cluster未評価境界を記録する現行Gate。",
+  "deps_out": [
+    "docs/requirements.md",
+    "docs/project/evaluation.md",
+    "docs/spec/reliability-hardening.md",
+    "docs/spec/reliability-hardening-checklist.md",
+    "fixtures/manifest.json"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md"
+  ],
+  "risks": [
+    "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"
+  ],
+  "tests": [
+    "npm run test:fixtures",
+    "npm run test:package",
+    "npm run birdseye-check",
+    "git diff --check"
+  ],
+  "contentHash": "sha256:158ab3743076d5bffbd80d4b9d216a6980351e15d2797662476154dee1790415"
+}

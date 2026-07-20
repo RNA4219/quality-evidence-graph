@@ -1,0 +1,57 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-20T11:58:20.291Z",
+  "run_id": "readiness-20260720115820",
+  "repo": {
+    "root": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph",
+    "revision": "0b0d8443907a",
+    "branch": "agent/qeg-v0-3-1-github-only",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "policy_id": "ci-release-readiness",
+    "plugin_versions": []
+  },
+  "artifact": "release-readiness",
+  "schema": "release-readiness@v1",
+  "status": "passed",
+  "completeness": "complete",
+  "summary": "All policy conditions met, release ready",
+  "counts": {
+    "findings": 12,
+    "critical": 0,
+    "high": 0,
+    "risks": 0,
+    "testSeeds": 0,
+    "unsupportedClaims": 0
+  },
+  "selfAnalysis": {
+    "rawCritical": 0,
+    "rawHigh": 1,
+    "rawMedium": 12,
+    "rawLow": 0,
+    "suppressedCritical": 0,
+    "suppressedHigh": 1,
+    "suppressedMedium": 0,
+    "suppressedLow": 0,
+    "broadSuppressions": 0,
+    "acceptedExceptionsByClass": {
+      "self-reference": 0,
+      "fixture-intentional": 0,
+      "generated-artifact": 0,
+      "accepted-design": 1,
+      "temporary-debt": 0
+    }
+  },
+  "failedConditions": [],
+  "recommendedActions": [
+    "Review findings and assess impact on release",
+    "Consider addressing medium/low severity findings"
+  ],
+  "artifactRefs": {
+    "findings": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\findings.json",
+    "riskRegister": "docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\risk-register.yaml"
+  }
+}

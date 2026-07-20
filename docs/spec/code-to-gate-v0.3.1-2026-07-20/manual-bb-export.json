@@ -1,0 +1,27 @@
+{
+  "version": "ctg.manual-bb/v1",
+  "producer": "code-to-gate",
+  "run_id": "ctg-202607201158-local",
+  "scope": {
+    "repo": ".",
+    "changed_files": [],
+    "affected_entrypoints": []
+  },
+  "risk_seeds": [],
+  "invariant_seeds": [],
+  "test_seed_refs": [],
+  "known_gaps": [],
+  "oracle_gaps": [
+    "Manual verification needed: TRY_CATCH_SWALLOW at src/cli/report/targets.ts",
+    "Manual verification needed: TRY_CATCH_SWALLOW at src/cli/repro-bundle.ts",
+    "Manual verification needed: TRY_CATCH_SWALLOW at src/cli/snapshot.ts",
+    "Manual verification needed: TRY_CATCH_SWALLOW at tools/migrate-fixtures-v02.mjs",
+    "Manual verification needed: LARGE_MODULE at src/cli/evidence-normalize.ts",
+    "Manual verification needed: LARGE_MODULE at src/cli/policy-lint.ts",
+    "Manual verification needed: LARGE_MODULE at src/cli/report/formatter.ts",
+    "Manual verification needed: LARGE_MODULE at src/gate/reliability/qualification.ts",
+    "Manual verification needed: LARGE_MODULE at src/gate/reliability/utils.ts",
+    "Manual verification needed: LARGE_MODULE at tools/migrate-fixtures-v02.mjs",
+    "Manual verification needed: SUPPRESSION_DEBT at .ctg/suppressions.yaml"
+  ]
+}

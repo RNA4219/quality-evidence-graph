@@ -1,0 +1,18 @@
+{
+  "id": "qeg-report-action/THIRD_PARTY_NOTICES.md",
+  "role": "action-bundle-third-party-notices",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "Action bundleへ含まれるruntime dependencyと同梱license原文の索引。",
+  "deps_out": [
+    "qeg-report-action/dist/cli.mjs"
+  ],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm run test:package"
+  ],
+  "contentHash": "sha256:4c402a3ae11e182ff318b98bbb27c5312c26ab8c0e8a2e22a016f4e3f7929039"
+}

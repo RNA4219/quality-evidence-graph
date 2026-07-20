@@ -1,12 +1,12 @@
 {
   "id": "docs/project/tasks.codex.md",
   "role": "superseded-implementation-task-ledger",
-  "generation": "00013",
+  "generation": "00014",
   "public_api": [],
   "summary": "完了済みTASK-01〜TASK-10の実装順、対象、受入条件を保持する履歴台帳。現行判定はrepository completion acceptanceへ移管済み。",
   "deps_out": [
     "docs/requirements.md",
-    "docs/release/acceptance-2026-07-20.md"
+    "docs/release/acceptance-2026-07-20-v0.3.1.md"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md"

@@ -51,6 +51,6 @@
     "npm run snapshot -- fixtures/positive-release-go",
     "node dist/cli.js check fixtures/positive-release-go"
   ],
-  "generation": "00013",
-  "contentHash": "sha256:d44ae2057b0163cddda837de7091717302af57a5809a44f28efd9f7477cb70cb"
+  "generation": "00014",
+  "contentHash": "sha256:742b56cde0c8b977a8f8f1bbf1a49b2abd34b4a7d7ae0ee27ad202d43930f761"
 }

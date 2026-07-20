@@ -15,9 +15,9 @@ inputs:
     required: false
     default: ""
   report-command:
-    description: Command used to invoke the QEG CLI before report arguments.
+    description: Optional command override. Leave empty to use the CLI bundled with this Action tag.
     required: false
-    default: "npx -y @quality-harness/quality-evidence-graph@0.3.0"
+    default: ""
   targets:
     description: Space-separated fixture directories or parent directories to report.
     required: false
@@ -103,6 +103,7 @@ runs:
       shell: bash
       env:
         QEG_REPORT_COMMAND: ${{ inputs.report-command }}
+        QEG_ACTION_CLI: ${{ github.action_path }}/dist/cli.mjs
         QEG_TARGETS: ${{ inputs.targets }}
         QEG_OUTPUT_PATH: ${{ inputs.output-path }}
         QEG_GITHUB_SUMMARY: ${{ inputs.github-summary }}
@@ -137,14 +138,25 @@ runs:
           target_args=(.qeg)
         fi
 
+        if [ -n "$QEG_REPORT_COMMAND" ]; then
+          # Preserve the simple whitespace-delimited override contract used by existing callers.
+          # shellcheck disable=SC2206
+          report_command=($QEG_REPORT_COMMAND)
+          effective_report_command="$QEG_REPORT_COMMAND"
+        else
+          report_command=(node "$QEG_ACTION_CLI")
+          effective_report_command="node $QEG_ACTION_CLI"
+        fi
+        export QEG_EFFECTIVE_REPORT_COMMAND="$effective_report_command"
+
         set +e
-        # shellcheck disable=SC2086
-        $QEG_REPORT_COMMAND "${report_args[@]}" "${target_args[@]}"
+        # Execute as an array so the bundled CLI path is not subject to word splitting.
+        "${report_command[@]}" "${report_args[@]}" "${target_args[@]}"
         report_exit=$?
         set -e
 
         if [ ! -f "$QEG_OUTPUT_PATH" ]; then
-          node -e "const fs=require('fs'); const message='QEG report command failed before producing a report artifact'; const report={reportVersion:'qeg-ci-report-v2',generatedAt:new Date().toISOString(),selection:{mode:'all',status:'detection_failed',strategy:'all',changedFileCount:0,selectedTargetCount:0,error:message},errors:[{code:'ACTION_REPORT_FAILED',message}],summary:{totalTargets:1,passed:0,baselineAccepted:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:process.env.QEG_REPORT_COMMAND,status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:message}]}; fs.writeFileSync(process.env.QEG_OUTPUT_PATH, JSON.stringify(report,null,2)+'\n');"
+          node -e "const fs=require('fs'); const message='QEG report command failed before producing a report artifact'; const report={reportVersion:'qeg-ci-report-v2',generatedAt:new Date().toISOString(),selection:{mode:'all',status:'detection_failed',strategy:'all',changedFileCount:0,selectedTargetCount:0,error:message},errors:[{code:'ACTION_REPORT_FAILED',message}],summary:{totalTargets:1,passed:0,baselineAccepted:0,gateFailed:0,cliErrors:1,dqCounts:[],blockerCount:0,residualRiskCount:0,humanReviewCount:0},targets:[{target:process.env.QEG_EFFECTIVE_REPORT_COMMAND,status:'cli_error',exitCode:1,reasons:[],disqualifications:[],blockers:[],residualRisks:[],requiredHumanReview:[],error:message}]}; fs.writeFileSync(process.env.QEG_OUTPUT_PATH, JSON.stringify(report,null,2)+'\n');"
           if [ "$QEG_GITHUB_SUMMARY" = "true" ] && [ -n "$GITHUB_STEP_SUMMARY" ]; then
             {
               echo "## QEG CI Report"
@@ -157,7 +169,7 @@ runs:
               echo ""
               echo "### Targets"
               echo ""
-              echo "- ${QEG_REPORT_COMMAND}: cli_error"
+              echo "- ${QEG_EFFECTIVE_REPORT_COMMAND}: cli_error"
               echo "  - QEG report command failed before producing a report artifact"
             } >> "$GITHUB_STEP_SUMMARY"
           fi

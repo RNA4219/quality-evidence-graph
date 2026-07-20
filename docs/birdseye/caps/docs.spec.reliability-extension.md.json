@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-extension.md",
   "role": "reliability-resilience-spec",
-  "generation": "00013",
+  "generation": "00014",
   "public_api": [],
   "summary": "外部 producer の resilience evidence を QEG が検証、会計、Gate 判定するための discriminator、policy、DQ / blocker、report、fixture contract。",
   "deps_out": [

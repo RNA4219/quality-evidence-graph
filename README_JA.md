@@ -102,7 +102,7 @@ Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_pat
 他 repo から使う最小例:
 
 ```yaml
-- uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.0
+- uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.1
   id: qeg_report
   with:
     targets: .qeg
@@ -143,25 +143,27 @@ Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_pat
 
 QEG は、品質を「説明」ではなく「証跡と判定契約」に落とすための基盤です。
 
-## 0.3.0 契約
+## 0.3.1 契約
+
+v0.3.1はGitHub Releaseと自己完結したGitHub Actionで配布し、既定Actionはnpm registryや`npx`を使わない。`npm run test:release-lifecycle`で「変更 → リスク → テスト → 隔離デプロイ → 観測 → 障害 → 復旧 → 新しい証拠」を一続きで検証する。詳細は`docs/release/acceptance-2026-07-20-v0.3.1.md`を正本とする。
 
 全CLIは共通runtime schema/evidence preflightを通る。壊れたJSONまたは判定envelope欠落はCLI error・exit 1、parse可能な必須component不適合はDQ-01・exit 2である。必須evidenceは実ファイル、SHA-256、revisionを検証し、optional evidenceだけの不適合はwarningとする。
 
 changed-onlyは差分取得成功かつ関連targetなしの場合だけno_relevant_changes・exit 0である。差分検出不能はdetection_failed・exit 1、QEG_CHANGED_FILES指定時はその値を正本にする。fixture一覧の正本はfixtures/manifest.jsonである。
 
-package version は0.3.0、graph wire contract は`qegVersion=0.2`である。0.3.0ではReliability / Resilience、DQ-18〜DQ-21、BLK-REL-01〜04、normalizer、fail-closedな`evidenced_by` provenance検証を追加する。
+package version は0.3.1、graph wire contract は`qegVersion=0.2`である。0.3.1ではReliability / Resilience、DQ-18〜DQ-21、BLK-REL-01〜04、normalizer、fail-closedな`evidenced_by` provenance検証を追加する。
 
-外部Actionはv0.3.0を使い既定でenforceする。診断だけを収集する場合に限りenforce: "false"を明示し、exit_code outputを呼び出し側で判定する。
+外部Actionはv0.3.1を使い既定でenforceする。診断だけを収集する場合に限りenforce: "false"を明示し、exit_code outputを呼び出し側で判定する。
 
 強制判定の例:
 
-    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.0
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.1
       with:
         targets: .qeg
 
 診断のみの例:
 
-    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.0
+    - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.1
       id: qeg_report
       with:
         targets: .qeg

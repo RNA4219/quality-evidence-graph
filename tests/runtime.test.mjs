@@ -196,7 +196,7 @@ test("invalid optionalEvidence is recorded as a warning and does not disqualify"
   assert.equal(JSON.parse(result.stdout).verdict, "go");
 });
 
-test("qeg init generates a schema-valid 0.2 wire contract with the 0.3.0 Action", async () => {
+test("qeg init generates a schema-valid 0.2 wire contract with the 0.3.1 Action", async () => {
   const root = await mkdtemp(join(tmpdir(), "qeg-init-v02-"));
   const initialized = run(["init", "--root", root]);
   assert.equal(initialized.status, 0, initialized.stderr || initialized.stdout);
@@ -206,7 +206,7 @@ test("qeg init generates a schema-valid 0.2 wire contract with the 0.3.0 Action"
   const schema = await validateGateInput(input);
   assert.equal(schema.valid, true, JSON.stringify(schema.issues));
   const workflow = await readFile(join(root, ".github", "workflows", "qeg.yml"), "utf-8");
-  assert.match(workflow, /qeg-report-action@v0\.3\.0/);
+  assert.match(workflow, /qeg-report-action@v0\.3\.1/);
   assert.doesNotMatch(workflow, /enforce: "false"/);
 });
 

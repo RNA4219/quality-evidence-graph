@@ -1,0 +1,195 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/action-lifecycle-evidence.schema.json",
+  "title": "QEG GitHub Action release lifecycle evidence",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "releaseVersion",
+    "sourceRevision",
+    "generatedAt",
+    "change",
+    "risks",
+    "tests",
+    "deployment",
+    "observations",
+    "fault",
+    "recovery",
+    "newEvidence",
+    "verdict"
+  ],
+  "properties": {
+    "schemaVersion": { "const": "qeg-action-lifecycle-evidence-v1" },
+    "releaseVersion": { "type": "string", "pattern": "^0\\.[0-9]+\\.[0-9]+$" },
+    "sourceRevision": {
+      "oneOf": [
+        { "const": "worktree" },
+        { "type": "string", "pattern": "^[0-9a-f]{40}$" }
+      ]
+    },
+    "generatedAt": { "type": "string", "format": "date-time" },
+    "change": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "summary", "sourceRefs"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "summary": { "type": "string", "minLength": 1 },
+        "sourceRefs": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "risks": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "priority", "scenario", "mitigation"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+          "scenario": { "type": "string", "minLength": 1 },
+          "mitigation": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "tests": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["profile", "checks", "target"],
+      "properties": {
+        "profile": { "const": "strict" },
+        "target": { "type": "string", "minLength": 1 },
+        "checks": {
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": { "type": "boolean" }
+        }
+      }
+    },
+    "deployment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "environment",
+        "environmentId",
+        "deployedAt",
+        "logicalRoot",
+        "artifactSha256",
+        "deployedArtifactSha256"
+      ],
+      "properties": {
+        "type": { "const": "isolated_copy" },
+        "environment": { "const": "ci" },
+        "environmentId": { "type": "string", "minLength": 1 },
+        "deployedAt": { "type": "string", "format": "date-time" },
+        "logicalRoot": { "type": "string", "minLength": 1 },
+        "artifactSha256": { "$ref": "#/$defs/sha256" },
+        "deployedArtifactSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "observations": {
+      "type": "array",
+      "minItems": 6,
+      "items": { "$ref": "#/$defs/observation" }
+    },
+    "fault": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "type",
+        "target",
+        "startedAt",
+        "endedAt",
+        "expectedExitCode",
+        "observedExitCode"
+      ],
+      "properties": {
+        "type": { "const": "schema_corruption" },
+        "target": { "type": "string", "minLength": 1 },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "endedAt": { "type": "string", "format": "date-time" },
+        "expectedExitCode": { "const": 1 },
+        "observedExitCode": { "type": "integer" }
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action",
+        "startedAt",
+        "endedAt",
+        "confirmed",
+        "restoredArtifactSha256"
+      ],
+      "properties": {
+        "action": { "type": "string", "minLength": 1 },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "endedAt": { "type": "string", "format": "date-time" },
+        "confirmed": { "type": "boolean" },
+        "restoredArtifactSha256": { "$ref": "#/$defs/sha256" }
+      }
+    },
+    "newEvidence": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "evidenceKind", "path", "sha256"],
+        "properties": {
+          "id": { "type": "string", "minLength": 1 },
+          "evidenceKind": { "enum": ["test_result", "observability_log"] },
+          "path": { "type": "string", "minLength": 1 },
+          "sha256": { "$ref": "#/$defs/sha256" }
+        }
+      }
+    },
+    "verdict": { "enum": ["go", "no_go"] }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "observation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stage",
+        "command",
+        "exitCode",
+        "startedAt",
+        "endedAt",
+        "stdoutSha256",
+        "stderrSha256"
+      ],
+      "properties": {
+        "stage": {
+          "enum": [
+            "initialized",
+            "deployed",
+            "steady_state",
+            "fault",
+            "recovery_schema",
+            "recovered"
+          ]
+        },
+        "command": { "type": "string", "minLength": 1 },
+        "exitCode": { "type": "integer" },
+        "startedAt": { "type": "string", "format": "date-time" },
+        "endedAt": { "type": "string", "format": "date-time" },
+        "stdoutSha256": { "$ref": "#/$defs/sha256" },
+        "stderrSha256": { "$ref": "#/$defs/sha256" }
+      }
+    }
+  }
+}
