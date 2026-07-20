@@ -1,5 +1,16 @@
 # Changelog
 
+## 0.3.1 - 2026-07-20
+
+GitHub-only distributionとrelease lifecycle evidenceを固めるpatch release。
+
+- ActionへCLI bundleを同梱し、既定実行からnpm registry / npx依存を除去。
+- packageをprivate化し、誤publishを防止。
+- 変更、リスク、テスト、隔離デプロイ、観測、障害、復旧、新しい証拠を検証するacceptance harnessを追加。
+- Linux Node 20/24とWindows Node 24でlifecycle evidence artifactを生成。
+- hash-backed fixtureのLFを固定し、OS間のSHA-256再現性を確保。
+- graph wire contractは`qegVersion=0.2`を維持。
+
 ## 0.3.0 - 2026-07-20
 
 Reliability / Resilience contract と公開型を追加する pre-1.0 minor release。

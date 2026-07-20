@@ -1,53 +1,53 @@
 {
-  "generated_at": "00013",
+  "generated_at": "00014",
   "nodes": {
     "README.md": {
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
-      "mtime": "00013",
-      "contentHash": "sha256:6a456acc4567a7783e4358dd62ab14907c91e1b7d2d2fc7a90c4deb9c50f0767"
+      "mtime": "00014",
+      "contentHash": "sha256:0d0a24e0ad0d8f008000c7220999bb84f6ede96fa2a69aa13b2cf3c9c2c0263c"
     },
     "README_JA.md": {
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
-      "mtime": "00013",
-      "contentHash": "sha256:a581a7520f74a8b246e9e4bd307f3ade881aaf91769495322e81fece9206c238"
+      "mtime": "00014",
+      "contentHash": "sha256:5bb11f7e99fa58feefd06b2028c11c5e212ed694238f0b999143a949979f9a66"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
-      "mtime": "00013",
-      "contentHash": "sha256:66ad97e4401ced9dab6ff1b1fde34aaed6a1ec9a0b886a8ff1e40d051c4a89b8"
+      "mtime": "00014",
+      "contentHash": "sha256:d7fb4579ab2d63e5b22b4df11072e99d70b0da3da3eff2cb4a0cdef232eb8544"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
       "caps": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
-      "mtime": "00013",
-      "contentHash": "sha256:34838861c5afa6964ff782e70e098524bd472d55bb3dc3fb6b0e5f1199b415f7"
+      "mtime": "00014",
+      "contentHash": "sha256:a82844599d2a427e9e43220d5109c1a4ba1bd1ba1df15190badaa9887180b2a9"
     },
     "docs/project/blueprint.md": {
       "role": "blueprint",
       "caps": "docs/birdseye/caps/docs.project.blueprint.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:005e356de76f972c8054d48904df56a8d1bf21b93dba8c35b0174ec7c0bd95a2"
     },
     "docs/research/quality-evidence-graph-requirements-report.md": {
       "role": "deep-research-report",
       "caps": "docs/birdseye/caps/docs.research.quality-evidence-graph-requirements-report.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0"
     },
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:809a0005177994bf4044c9d663bed4d61ad522529e08801ef7cc01ed61c1b00a"
     },
     "docs/project/runbook.md": {
       "role": "operations",
       "caps": "docs/birdseye/caps/docs.project.runbook.md.json",
-      "mtime": "00013",
-      "contentHash": "sha256:22508fe52a48cab6e383ef3185a9ff7f38ba420ff7acf3f77f82c35b88db9f38"
+      "mtime": "00014",
+      "contentHash": "sha256:fc925f62fad9357a0c0f1c9f5b21bcfc5f07467cf54756e927f7410646bf634d"
     },
     "docs/project/evaluation.md": {
       "role": "current-acceptance-criteria",
@@ -55,7 +55,7 @@
       "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Node 20 / 24 CIを含む現行受入条件。",
       "depsOut": [
         "docs/project/runbook.md",
-        "docs/release/acceptance-2026-07-20.md",
+        "docs/release/acceptance-2026-07-20-v0.3.1.md",
         "fixtures/manifest.json"
       ],
       "depsIn": [
@@ -69,13 +69,13 @@
         "npm run birdseye-check",
         "npm pack --dry-run --cache ./.npm-cache"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:dfff755895e9a9098bd3d1c3c61ff50d8b48ce2f5f5773480225feea2a1a9ede"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
       "caps": "docs/birdseye/caps/docs.project.guardrails.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1"
     },
     "docs/project/tasks.codex.md": {
@@ -84,7 +84,7 @@
       "summary": "完了済みTASK-01〜TASK-10の実装順、対象、受入条件を保持する履歴台帳。現行判定はrepository completion acceptanceへ移管済み。",
       "depsOut": [
         "docs/requirements.md",
-        "docs/release/acceptance-2026-07-20.md"
+        "docs/release/acceptance-2026-07-20-v0.3.1.md"
       ],
       "depsIn": [
         "docs/agent/HUB.codex.md"
@@ -96,25 +96,25 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:fd336595ebd844b649bcbcc2a8e66b66c2a74afe569122fe6c72b57f95524ac4"
     },
     "docs/project/checklists.md": {
       "role": "checklist",
       "caps": "docs/birdseye/caps/docs.project.checklists.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:2718c34ee1b160b596ed695dbf53bbb72ba2d312e3df26a3771c2df2fe73ddde"
     },
     "fixtures/README.md": {
       "role": "fixture-contract",
       "caps": "docs/birdseye/caps/fixtures.README.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:0b8c124f1e5d4b3ee166559cbb1b1662e6aaf18173c48343d7f200961008c3c8"
     },
     "docs/control-mapping.md": {
       "role": "control-mapping",
       "caps": "docs/birdseye/caps/docs.control-mapping.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157"
     },
     "docs/ipo-controlled-profile.md": {
@@ -124,7 +124,7 @@
       "depsOut": [
         "docs/requirements.md",
         "docs/spec/gate-policy.md",
-        "docs/release/acceptance-2026-07-20.md"
+        "docs/release/acceptance-2026-07-20-v0.3.1.md"
       ],
       "depsIn": [
         "docs/agent/HUB.codex.md",
@@ -138,20 +138,20 @@
         "npm run enum-check",
         "npm run birdseye-check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:981beff34126837272fc3a260e9ea3c87fd849e2829b5ea674aa342c0ebf35ae"
     },
     "docs/spec/index.md": {
       "role": "ipo-spec-index",
       "caps": "docs/birdseye/caps/docs.spec.index.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:ebeda076e15b9d47687433a3d9934625d7295b427639ca9df9e27f8df75f1f32"
     },
     "docs/spec/operational-cli-extensions.md": {
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
-      "mtime": "00013",
-      "contentHash": "sha256:d44ae2057b0163cddda837de7091717302af57a5809a44f28efd9f7477cb70cb"
+      "mtime": "00014",
+      "contentHash": "sha256:742b56cde0c8b977a8f8f1bbf1a49b2abd34b4a7d7ae0ee27ad202d43930f761"
     },
     "docs/spec/gate-policy.md": {
       "role": "ipo-gate-policy-spec",
@@ -174,25 +174,25 @@
         "npm run enum-check",
         "npm run test:fixtures"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:8babf394f38eb1f55a64a2acf603cde0e62971aa8568a3c6e39c2a71db521ff6"
     },
     "docs/spec/waiver-approval.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c"
     },
     "docs/spec/evidence-package.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97"
     },
     "docs/spec/retention-immutability.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1"
     },
     "docs/spec/acceptance.md": {
@@ -201,7 +201,7 @@
       "summary": "2026-06-03時点の仕様書検収履歴。現行のrepository completionはproject evaluationと2026-07-20 acceptanceへ移管済み。",
       "depsOut": [
         "docs/project/evaluation.md",
-        "docs/release/acceptance-2026-07-20.md"
+        "docs/release/acceptance-2026-07-20-v0.3.1.md"
       ],
       "depsIn": [
         "docs/spec/index.md"
@@ -213,302 +213,302 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:96ac579cfc4790a530b95eb4dbc25d49b5dcf9517d219b38654b0467814a017f"
     },
     "docs/spec/review-2026-06-03.md": {
       "role": "ipo-spec-review",
       "caps": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e"
     },
     "docs/spec/gate-acceptance-2026-06-03.md": {
       "role": "ipo-spec-gate-acceptance",
       "caps": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b"
     },
     "docs/spec/implementation-gate-2026-06-03.md": {
       "role": "ipo-implementation-gate",
       "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:cb50ac1d1c61f7cd046d9e7b463e2ac89b0c547e2ab5ad98fb3cddf3feb920f5"
     },
     "docs/release-notes/2026-06-03-controlled-gate.md": {
       "role": "release-notes",
       "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-controlled-gate.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:5cd627f4a110f5c55bc4130fec78db3437f4c76d34e831334cffcf4f0f92e4c3"
     },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
       "role": "code-to-gate-analysis",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d"
     },
     "docs/spec/code-to-gate-2026-06-03/release-readiness.json": {
       "role": "code-to-gate-readiness",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.release-readiness.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a"
     },
     "docs/spec/kano-mode-2026-06-03/kano.json": {
       "role": "kano-mode-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.kano.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:914385a71a9e2d917aae2a3267662d8213e55b20741ec63bd7d46655cfd71144"
     },
     "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json": {
       "role": "kano-mode-requirements-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.requirements_audit_packet.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:0c0c9d3dea624290dceeca699a2a5addc833a81f91493b4d207a75a0b8e74852"
     },
     "docs/implementation-prep-gate-2026-06-02.md": {
       "role": "gate-record",
       "caps": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda"
     },
     "src/types.ts": {
       "role": "types",
       "caps": "docs/birdseye/caps/src.types.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:71128629c070d034acb6bcaecf462874ff564c6528beafbd5e4ac2880f5a4764"
     },
     "src/cli/report.ts": {
       "role": "ci-report-cli",
       "caps": "docs/birdseye/caps/src.cli.report.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:d5eee76abfae4f1df02fcfc4011f78a38bd3f687b49de72d4db4afa62d2c9d19"
     },
     "src/cli.ts": {
       "role": "cli-entrypoint",
       "caps": "docs/birdseye/caps/src.cli.ts.json",
-      "mtime": "00013",
-      "contentHash": "sha256:6aca32d1d2e88dc8dcb31365c1c5ca7e026870b46ccadffb75995752208cd3ca"
+      "mtime": "00014",
+      "contentHash": "sha256:09ea9ead0e500ffdd53d4068dfaba01b06ef9046c69c91bfcef23d7f2eea5429"
     },
     "src/cli/dq-explain.ts": {
       "role": "dq-explain-cli",
       "caps": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3"
     },
     "src/cli/doctor.ts": {
       "role": "doctor-cli",
       "caps": "docs/birdseye/caps/src.cli.doctor.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:9f51aa6cd70bcacf6b0321cff2e6b50911da72ec24167f9f94f3263cf69cdced"
     },
     "src/cli/schema-check.ts": {
       "role": "schema-check-cli",
       "caps": "docs/birdseye/caps/src.cli.schema-check.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:6c111e962b4d63c1730add8d8ef28ed9eecd07c5f227c658cd1b87a8dea77ce1"
     },
     "src/cli/enum-check.ts": {
       "role": "enum-drift-cli",
       "caps": "docs/birdseye/caps/src.cli.enum-check.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:1a04578e936a9b3f61c04284234a01fba646f78a2726e886a7e982fa5f7b7dc0"
     },
     "src/cli/init.ts": {
       "role": "oss-init-cli",
       "caps": "docs/birdseye/caps/src.cli.init.ts.json",
-      "mtime": "00013",
-      "contentHash": "sha256:36a17abd7fc347a37f6bb6b59d364535022789fa95e41a34590da81d2fc23f38"
+      "mtime": "00014",
+      "contentHash": "sha256:4f97201165eb0c1b20ee4e7440febe475ceb6458dfde3994e559f2679c7a6c74"
     },
     "src/cli/snapshot.ts": {
       "role": "report-snapshot-cli",
       "caps": "docs/birdseye/caps/src.cli.snapshot.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:65a58ebdfa8839a4c836fda8f0ef783dd5e0da46ba4097c5ade68032c5b80c81"
     },
     "src/cli/baseline.ts": {
       "role": "baseline-audit-cli",
       "caps": "docs/birdseye/caps/src.cli.baseline.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:3e58e363fa931153f13da06aa55b4b82963fa9a4486cafb3c4bef367e38208ce"
     },
     "src/cli/evidence-verify.ts": {
       "role": "evidence-verify-cli",
       "caps": "docs/birdseye/caps/src.cli.evidence-verify.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:967677439972e82d731d6a8eca73e349b39ff695a13f35679742b2cd238bb79a"
     },
     "src/cli/policy-lint.ts": {
       "role": "policy-lint-cli",
       "caps": "docs/birdseye/caps/src.cli.policy-lint.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:a12e59444879c596eb31be6a307f198ea83c5e4c841b4905db9cee2e4e4e0bb2"
     },
     "src/cli/repro-bundle.ts": {
       "role": "repro-bundle-cli",
       "caps": "docs/birdseye/caps/src.cli.repro-bundle.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:25d0cfaafc17302e3b464c33f7b156c3eacf1e854d63ed2c7da7ce7f4f2e2abb"
     },
     "src/cli/check.ts": {
       "role": "local-check-cli",
       "caps": "docs/birdseye/caps/src.cli.check.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:64d86a6998b58b031b5cf8710bb308e53e393670630d41f72a0aefe77201d6bc"
     },
     ".github/workflows/ci.yml": {
       "role": "github-actions-ci",
       "caps": "docs/birdseye/caps/.github.workflows.ci.yml.json",
-      "mtime": "00013",
-      "contentHash": "sha256:6d84df78850e40408e233a2913d33c85da4753da8512bf8959374e5c91c4434f"
+      "mtime": "00014",
+      "contentHash": "sha256:712872b0a04d4c05ef0fd815d41df177bd7ff05e35ea3dde48984733357402a2"
     },
     "qeg-report-action/action.yml": {
       "role": "github-action",
       "caps": "docs/birdseye/caps/qeg-report-action.action.yml.json",
-      "mtime": "00013",
-      "contentHash": "sha256:a7522cb991a4d5a0f1cb3cf65116f0c588bf5fe34e6eb8e3bc8bdcfd96b7fac8"
+      "mtime": "00014",
+      "contentHash": "sha256:d1656315104c429c8a37ca22e8f372c6a9ee306e0acb844f73257982a5f23e4d"
     },
     "schemas/shared-defs.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:7d61104f46aed9d4febf2ad9604c3fa9b7cccf07e549b09a93ae6d4ec1980ad2"
     },
     "schemas/gate-verdict.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:440cf5522131cdca026eaa2a11173608b4fe609474257372e6f2a4f4650ba087"
     },
     "schemas/qeg.bundle.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:90b542653ff1afdbd70e0de421264ce1ad7bd96e4f116cbaa84508e30712237c"
     },
     "schemas/test-placement-plan.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:db7ff07b16f786f5272b1aeadb4e89079e3bdb37e7cb8d2c7bd9c9ccbe705ef1"
     },
     "schemas/quality-evidence-record.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:629439ddcf2ad1d950f033a397213e53c3bcfbb89020cf936ca55eaa20242a7f"
     },
     "schemas/gate-input.schema.json": {
       "role": "top-level-runtime-schema",
       "caps": "docs/birdseye/caps/schemas.gate-input.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:782d530d4832e34caeec5d97f9784cefc0490d6cc14e86f30e3accf6487fd72c"
     },
     "fixtures/manifest.json": {
       "role": "fixture-manifest",
       "caps": "docs/birdseye/caps/fixtures.manifest.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:a4fddedd237f44e31f67e249819f9ae1e363e99ec14fb77d3fcaa56f0f144bcf"
     },
     "src/validation.ts": {
       "role": "public-validation-api",
       "caps": "docs/birdseye/caps/src.validation.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:f1b5b665abe4a2ff884c20968853ccdddf053cbee2e35297c329f092d071cb90"
     },
     "src/cli/report/change-selection.ts": {
       "role": "changed-target-selection",
       "caps": "docs/birdseye/caps/src.cli.report.change-selection.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:e70d804b3fa1b0ad00cda48107d2b992a9371781da6532d3fc6c3b65046c9dfc"
     },
     "src/validation/schema.ts": {
       "role": "runtime-schema-validation",
       "caps": "docs/birdseye/caps/src.validation.schema.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:44d669908c0228c1354c018e876448e179196f12d434ce4dd3e98bb45c006914"
     },
     "src/validation/evidence.ts": {
       "role": "runtime-evidence-validation",
       "caps": "docs/birdseye/caps/src.validation.evidence.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:93a07598bd4e61b63c66efa0d9635f8881a07f672e9d1b2f338d321353e56529"
     },
     "src/cli/report/model.ts": {
       "role": "report-model",
       "caps": "docs/birdseye/caps/src.cli.report.model.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:f0d8d2eb751bb18a52ae9ccf39fc95a42cc58e2ad8314586a9b9b7f659e06c12"
     },
     "src/cli/report/targets.ts": {
       "role": "report-targets",
       "caps": "docs/birdseye/caps/src.cli.report.targets.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:9c6d1398bf73152832682ff44e97c2295aceb6761a865eb6a011eb725e3c4888"
     },
     "src/cli/report/baseline-diff.ts": {
       "role": "report-baseline-diff",
       "caps": "docs/birdseye/caps/src.cli.report.baseline-diff.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:9de5ba1b4e462c9b5e4e971ab8ce89acee3e2ce9d2999bead0da71e46c9f9905"
     },
     "src/cli/report/core.ts": {
       "role": "report-core",
       "caps": "docs/birdseye/caps/src.cli.report.core.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:409c030fac31e48c262e4f20e93a5da61cc701b6662184ddcc689bb67f19ca74"
     },
     "src/cli/report/formatter.ts": {
       "role": "report-formatter",
       "caps": "docs/birdseye/caps/src.cli.report.formatter.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:3ec7a989eb2c796ba53e5768541ef5fcc88012e8dd83f10743e954ffe6fdd1e6"
     },
     "src/cli/report/command.ts": {
       "role": "report-command",
       "caps": "docs/birdseye/caps/src.cli.report.command.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:4c6ddd1a7dbc97adc8f9eb6fab71ba9ad38a0b4732f59ea17f2855e6f0fc73f5"
     },
     "src/types/primitives.ts": {
       "role": "primitive-types",
       "caps": "docs/birdseye/caps/src.types.primitives.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:9d92e2e3f433920fb51d96a5ccd27abff66864b1188e1f682d717f89a04238b5"
     },
     "src/types/graph.ts": {
       "role": "graph-types",
       "caps": "docs/birdseye/caps/src.types.graph.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:00eb747e325e55ce65da42cecf4beb729e3f8ca3150938eedf76874598505bfa"
     },
     "src/types/gate.ts": {
       "role": "gate-types",
       "caps": "docs/birdseye/caps/src.types.gate.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:0f487b38fc07b08095045176ddc981e332a1b7aaf4a5bb8b9d7c800b5add71e1"
     },
     "src/gate/test-evidence.ts": {
       "role": "test-evidence-accounting",
       "caps": "docs/birdseye/caps/src.gate.test-evidence.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:90f5af6b6f76eda9168c826c483d4e7b09f7ec04703582b0e6a03e20fde90fee"
     },
     "src/gate/dq/placement-change.ts": {
       "role": "placement-change-dq",
       "caps": "docs/birdseye/caps/src.gate.dq.placement-change.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:8bed45be1c39d1add2473c57646a7bbeb5aea2d840f4f894945b6cd57d4ca6e9"
     },
     "src/gate/evaluate.ts": {
       "role": "gate-evaluator",
       "caps": "docs/birdseye/caps/src.gate.evaluate.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:85d1f05b67fcc65aed31b2206603b7975f380e7e2d8df477d75e9abf9136a6e8"
     },
     "tests/runtime.test.mjs": {
       "role": "runtime-contract-tests",
       "caps": "docs/birdseye/caps/tests.runtime.test.mjs.json",
-      "mtime": "00013",
-      "contentHash": "sha256:2b60473439202722896f39d83e2fc9901ace2f7c0cc02f947b8afcb7a343a5f3"
+      "mtime": "00014",
+      "contentHash": "sha256:0dfd5e5dabbe20d243067b3044192c5c1dbd8a669285359ef7bd734556c063a9"
     },
     "docs/spec/reliability-extension.md": {
       "role": "reliability-resilience-spec",
@@ -540,7 +540,7 @@
         "npm run schema-check",
         "npm run enum-check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:587cff6d7f16b0ffb2b22732d5e3ab2f13675e54edbabd14bf39939d8e9e27cc"
     },
     "docs/spec/reliability-extension-review-2026-07-19.md": {
@@ -561,37 +561,37 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:81112d3a7ae73874e4a56a09d01485f346228a271d26d74c9aed6c79deec2de7"
     },
     "src/types/evidence.ts": {
       "role": "evidence-types",
       "caps": "docs/birdseye/caps/src.types.evidence.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:22c866b90d093be81e21d44d34bcfa1f06ea6ae03dbeb7c9a5a6b562d788a04b"
     },
     "src/gate/reliability.ts": {
       "role": "reliability-evaluator",
       "caps": "docs/birdseye/caps/src.gate.reliability.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:0c855392e95cd921498b22cc959b34bfb6b637411aa422e05c574e3a6986ac73"
     },
     "src/cli/evidence-normalize.ts": {
       "role": "resilience-evidence-normalize",
       "caps": "docs/birdseye/caps/src.cli.evidence-normalize.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:5572d6c66ced8978b20876e3c1d73804ce049818045dd2d290108a63cd7765a5"
     },
     "schemas/reliability.schema.json": {
       "role": "reliability-schema",
       "caps": "docs/birdseye/caps/schemas.reliability.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:5adafd504e603703afb1e19d6995012d3e3f72c9de3997d3548cc85c43980ad0"
     },
     "schemas/resilience-normalize-context.schema.json": {
       "role": "resilience-normalize-context-schema",
       "caps": "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:f6777125b4ee250360185cd81a5a28439f6070cf24f4c3a3e6cb7571c38db4f1"
     },
     "docs/spec/reliability-hardening.md": {
@@ -621,7 +621,7 @@
         "npm run test:package",
         "npm run birdseye-check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:842e3fe2c37de7c70fbd5a0787a121acbaba59ff10e748eafb81f50b40aff3bb"
     },
     "docs/spec/reliability-hardening-checklist.md": {
@@ -645,97 +645,201 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:ea4ca2c78f1e7698e26b501f5d0f098c589c22e35386ad041671cddc7f66ba2f"
     },
     "src/gate/reliability/contracts.ts": {
       "role": "reliability-stage-contracts",
       "caps": "docs/birdseye/caps/src.gate.reliability.contracts.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:996cf4dd8edcb32c008271e42b951c2d13c683ef2d22c26125eddd9a6f90d41b"
     },
     "src/gate/reliability/utils.ts": {
       "role": "reliability-deterministic-utils",
       "caps": "docs/birdseye/caps/src.gate.reliability.utils.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:d8e5bf69c6a089e117ef36208430dbf98f615b1fdc47799705421c21fe487709"
     },
     "src/gate/reliability/indexing.ts": {
       "role": "reliability-indexing-stage",
       "caps": "docs/birdseye/caps/src.gate.reliability.indexing.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:97d47318e0fddcd20c580709a032d54d23626d098399668e4c194192f3164557"
     },
     "src/gate/reliability/selection.ts": {
       "role": "reliability-selection-stage",
       "caps": "docs/birdseye/caps/src.gate.reliability.selection.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:d895958aee39e642ca3cdcdf68e575d2726a34c1b21f7b62e46a0bb6c399ffba"
     },
     "src/gate/reliability/qualification.ts": {
       "role": "reliability-qualification-stage",
       "caps": "docs/birdseye/caps/src.gate.reliability.qualification.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:b0665c28a806f0df5633d68903fb9b753fe9510fed5e0ab19d2dbcab8506cc2f"
     },
     "src/gate/reliability/signals.ts": {
       "role": "reliability-signal-stage",
       "caps": "docs/birdseye/caps/src.gate.reliability.signals.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:e87b3fa7d7ed6643d15f2ed5b50a0a67e843d77a3f30c627c2a4cf9b7ac93361"
     },
     "src/gate/reliability/blockers.ts": {
       "role": "reliability-blocker-stage",
       "caps": "docs/birdseye/caps/src.gate.reliability.blockers.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:de061f3a9b6d5dc287c1bbcea53968b994be027ea97eab6316e8d9fe067465b6"
     },
     "src/gate/reliability/accounting.ts": {
       "role": "reliability-accounting-stage",
       "caps": "docs/birdseye/caps/src.gate.reliability.accounting.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:987f19c5d9aa0bf5f8bb43fdb0fa96395031c998b947c430e6bb822a0e89508f"
     },
     "src/gate/reliability/evaluator.ts": {
       "role": "reliability-stage-orchestrator",
       "caps": "docs/birdseye/caps/src.gate.reliability.evaluator.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:2ae6c16f5a11d70e63ef873cd84c3fe8a65e166dbd3cd401282b1efd7e9e590d"
     },
     "src/validation/reliability-semantics.ts": {
       "role": "reliability-semantic-validator",
       "caps": "docs/birdseye/caps/src.validation.reliability-semantics.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:e86a3e297793b92f600dcc5967748a72a7ce57a420735303f444f8e8a278864e"
     },
     "tests/fixture-regression.mjs": {
       "role": "fixture-e2e-harness",
       "caps": "docs/birdseye/caps/tests.fixture-regression.mjs.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:3fdbc4cc824a8f62ad99f6e113dc9f9cbeaa9e6d6d369daad632948a65c83c73"
     },
     "tests/package-smoke.mjs": {
       "role": "package-and-packed-types-smoke",
       "caps": "docs/birdseye/caps/tests.package-smoke.mjs.json",
-      "mtime": "00013",
-      "contentHash": "sha256:899a70b37d2415ede0f0ddef325931f3bdddba691526bd780f5bf455be2dc38c"
+      "mtime": "00014",
+      "contentHash": "sha256:55b370df663efd79ed40a2ce11716ed023b13ce5e8d94aeafc824e334cadf8bb"
     },
     "tests/type-contract/contract.ts": {
       "role": "public-type-contract",
       "caps": "docs/birdseye/caps/tests.type-contract.contract.ts.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:880edc2e6fa9be851f34c3e9306e66a07620125ba47f8435b24df556c57111f8"
     },
     "tools/json-check.mjs": {
       "role": "tracked-json-parser",
       "caps": "docs/birdseye/caps/tools.json-check.mjs.json",
-      "mtime": "00013",
+      "mtime": "00014",
       "contentHash": "sha256:53e5edcb47db306b567dc568a79c473be78d45b54f42f42ddfb74c629cda3f5d"
     },
     "docs/release/acceptance-2026-07-20.md": {
-      "role": "repository-completion-acceptance",
+      "role": "superseded-v0.3.0-release-acceptance",
       "caps": "docs/birdseye/caps/docs.release.acceptance-2026-07-20.md.json",
-      "summary": "QEG repository completion、evidenced_by provenance closure、隔離consumer smoke、CI証跡、外部実環境とpublishの境界を記録する現行Gate。",
+      "summary": "v0.3.0 repository completionとnpm公開を含む過去判定。npm公開は完了せず、現行配布契約はGitHub-only v0.3.1へ移管済み。",
+      "depsOut": [
+        "docs/release/acceptance-2026-07-20-v0.3.1.md"
+      ],
+      "risks": [
+        "supersededなnpm公開承認を現行判定と誤認する"
+      ],
+      "tests": [
+        "npm run birdseye-check"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:4ec8b33222d5648207be9a9449783a4158872d4e1ca5cee72e7c2c2a7808b170"
+    },
+    "docs/release-notes/2026-07-20-v0.3.0.md": {
+      "role": "superseded-v0.3.0-release-notes",
+      "caps": "docs/birdseye/caps/docs.release-notes.2026-07-20-v0.3.0.md.json",
+      "summary": "npm package未公開のv0.3.0履歴。GitHub-only Action配布はv0.3.1へ移管済み。",
+      "depsOut": [
+        "docs/release-notes/2026-07-20-v0.3.1.md"
+      ],
+      "risks": [
+        "v0.3.0のnpm利用例を現行手順として実行する"
+      ],
+      "tests": [
+        "npm run birdseye-check"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:f51e6d34df341a79ec1faf795e82de1ffeaf4f9876c295bbb6b410115413a0f9"
+    },
+    "schemas/action-lifecycle-evidence.schema.json": {
+      "role": "action-release-lifecycle-evidence-schema",
+      "caps": "docs/birdseye/caps/schemas.action-lifecycle-evidence.schema.json.json",
+      "summary": "変更、リスク、テスト、隔離デプロイ、観測、障害、復旧、新しい証拠をstrictに検証するv0.3.1 release evidence schema。",
+      "depsOut": [
+        "tools/action-lifecycle-acceptance.mjs"
+      ],
+      "tests": [
+        "npm run schema-check",
+        "npm run test:release-lifecycle"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:28afa0ea006486c7e3be7c4564a70b2dbdfb978fa81e307672210675384160b1"
+    },
+    "tools/action-lifecycle-acceptance.mjs": {
+      "role": "action-release-lifecycle-acceptance-harness",
+      "caps": "docs/birdseye/caps/tools.action-lifecycle-acceptance.mjs.json",
+      "summary": "tag同梱bundleを隔離配置し、steady state、schema破損、復旧、hash付き新規証拠生成までを実行するharness。",
+      "depsOut": [
+        "qeg-report-action/action.yml",
+        "schemas/action-lifecycle-evidence.schema.json"
+      ],
+      "risks": [
+        "fixture成功を実cluster resilienceへ昇格する、復旧後に古い証拠を再利用する"
+      ],
+      "tests": [
+        "npm run test:release-lifecycle"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:453402e7d2be0019058bad5c8800544eac4af59c3ca047af616a81b33ab9f25c"
+    },
+    "qeg-report-action/THIRD_PARTY_NOTICES.md": {
+      "role": "action-bundle-third-party-notices",
+      "caps": "docs/birdseye/caps/qeg-report-action.THIRD_PARTY_NOTICES.md.json",
+      "summary": "Action bundleへ含まれるruntime dependencyと同梱license原文の索引。",
+      "depsOut": [
+        "qeg-report-action/dist/cli.mjs"
+      ],
+      "tests": [
+        "npm run test:package"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:4c402a3ae11e182ff318b98bbb27c5312c26ab8c0e8a2e22a016f4e3f7929039"
+    },
+    "docs/spec/code-to-gate-v0.3.1-2026-07-20/analysis-report.md": {
+      "role": "v0.3.1-static-analysis-evidence",
+      "caps": "docs/birdseye/caps/docs.spec.code-to-gate-v0.3.1-2026-07-20.analysis-report.md.json",
+      "summary": "v0.3.1のraw静的候補12件、accepted-design 1件、effective high/critical 0を記録する。",
+      "depsOut": [
+        "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"
+      ],
+      "tests": [
+        "code-to-gate readiness",
+        "npm test"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:f2564d99453f2c6abc489d0faa0aed77cd97d22e47396c843a4bc6dd20fef38f"
+    },
+    "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json": {
+      "role": "v0.3.1-static-readiness-evidence",
+      "caps": "docs/birdseye/caps/docs.spec.code-to-gate-v0.3.1-2026-07-20.release-readiness.json.json",
+      "summary": "ci-release-readiness policyのfailed conditions 0とpassedを記録するmachine-readable証拠。",
+      "depsOut": [
+        "docs/release/acceptance-2026-07-20-v0.3.1.md"
+      ],
+      "tests": [
+        "code-to-gate schema validate",
+        "npm run json-check"
+      ],
+      "mtime": "00014",
+      "contentHash": "sha256:cb2d9deae3fca5011403866ed30a341502b3cacd3e619f318efae0629991f281"
+    },
+    "docs/release/acceptance-2026-07-20-v0.3.1.md": {
+      "role": "v0.3.1-github-only-release-acceptance",
+      "caps": "docs/birdseye/caps/docs.release.acceptance-2026-07-20-v0.3.1.md.json",
+      "summary": "QEG v0.3.1のGitHub-only配布、Action bundle、release lifecycle、CI証跡、実cluster未評価境界を記録する現行Gate。",
       "depsOut": [
         "docs/requirements.md",
         "docs/project/evaluation.md",
@@ -757,16 +861,16 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00013",
-      "contentHash": "sha256:76463faa453867342375e3127ff5bfe983166264c52e342ab2b61107d9db426b"
+      "mtime": "00014",
+      "contentHash": "sha256:7d6ac9823cfba555069df1cffc678f9d79aca8f707cb3fbc7792afed6579c984"
     },
-    "docs/release-notes/2026-07-20-v0.3.0.md": {
-      "role": "v0.3.0-release-notes",
-      "caps": "docs/birdseye/caps/docs.release-notes.2026-07-20-v0.3.0.md.json",
-      "summary": "QEG 0.3.0のReliability / Resilience、互換境界、install方法、公開後検証を記録するrelease notes。",
+    "docs/release-notes/2026-07-20-v0.3.1.md": {
+      "role": "v0.3.1-release-notes",
+      "caps": "docs/birdseye/caps/docs.release-notes.2026-07-20-v0.3.1.md.json",
+      "summary": "QEG 0.3.1のGitHub-only Action bundle、release lifecycle evidence、互換境界を記録するrelease notes。",
       "depsOut": [
         "CHANGELOG.md",
-        "docs/release/acceptance-2026-07-20.md",
+        "docs/release/acceptance-2026-07-20-v0.3.1.md",
         "qeg-report-action/action.yml"
       ],
       "depsIn": [
@@ -774,15 +878,15 @@
         "docs/project/runbook.md"
       ],
       "risks": [
-        "package versionとqegVersionの混同、tag・GitHub Release・npm sourceの不一致"
+        "package versionとqegVersionの混同、tag・GitHub Release・bundle sourceの不一致"
       ],
       "tests": [
         "npm run test:package",
         "npm run test:runtime",
         "npm run birdseye-check"
       ],
-      "mtime": "00013",
-      "contentHash": "sha256:d9440162810de54e6b35c401aed3a43fcb62962ce6fc22ecdd6daa871b05b999"
+      "mtime": "00014",
+      "contentHash": "sha256:13e3e9f4fb1ecbc831db7d368b1b9f4bcbac21c227543389fff8dbafef6c8142"
     }
   },
   "edges": [
@@ -1673,6 +1777,86 @@
     [
       "docs/release-notes/2026-07-20-v0.3.0.md",
       "qeg-report-action/action.yml"
+    ],
+    [
+      "README.md",
+      "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/agent/HUB.codex.md",
+      "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/project/blueprint.md",
+      "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/project/evaluation.md",
+      "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "docs/spec/reliability-hardening.md"
+    ],
+    [
+      "README.md",
+      "docs/release-notes/2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/project/runbook.md",
+      "docs/release-notes/2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/release-notes/2026-07-20-v0.3.1.md",
+      "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/release-notes/2026-07-20-v0.3.1.md",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "fixtures/manifest.json"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20.md",
+      "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/release-notes/2026-07-20-v0.3.0.md",
+      "docs/release-notes/2026-07-20-v0.3.1.md"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "tools/action-lifecycle-acceptance.mjs"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "schemas/action-lifecycle-evidence.schema.json"
+    ],
+    [
+      "docs/release/acceptance-2026-07-20-v0.3.1.md",
+      "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"
+    ],
+    [
+      "docs/release-notes/2026-07-20-v0.3.1.md",
+      "tools/action-lifecycle-acceptance.mjs"
+    ],
+    [
+      "tools/action-lifecycle-acceptance.mjs",
+      "schemas/action-lifecycle-evidence.schema.json"
+    ],
+    [
+      "tools/action-lifecycle-acceptance.mjs",
+      "qeg-report-action/action.yml"
+    ],
+    [
+      "tests/package-smoke.mjs",
+      "qeg-report-action/THIRD_PARTY_NOTICES.md"
     ]
   ]
 }

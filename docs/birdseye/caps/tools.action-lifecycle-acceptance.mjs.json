@@ -1,0 +1,19 @@
+{
+  "id": "tools/action-lifecycle-acceptance.mjs",
+  "role": "action-release-lifecycle-acceptance-harness",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "tag同梱bundleを隔離配置し、steady state、schema破損、復旧、hash付き新規証拠生成までを実行するharness。",
+  "deps_out": [
+    "qeg-report-action/action.yml",
+    "schemas/action-lifecycle-evidence.schema.json"
+  ],
+  "deps_in": [],
+  "risks": [
+    "fixture成功を実cluster resilienceへ昇格する、復旧後に古い証拠を再利用する"
+  ],
+  "tests": [
+    "npm run test:release-lifecycle"
+  ],
+  "contentHash": "sha256:453402e7d2be0019058bad5c8800544eac4af59c3ca047af616a81b33ab9f25c"
+}

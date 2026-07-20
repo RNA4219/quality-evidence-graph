@@ -44,6 +44,6 @@
     "npm run report -- --json fixtures/positive-release-go",
     "npm run snapshot -- fixtures/positive-release-go"
   ],
-  "generation": "00013",
+  "generation": "00014",
   "contentHash": "sha256:d5eee76abfae4f1df02fcfc4011f78a38bd3f687b49de72d4db4afa62d2c9d19"
 }

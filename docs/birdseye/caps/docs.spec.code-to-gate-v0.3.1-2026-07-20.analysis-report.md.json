@@ -1,0 +1,19 @@
+{
+  "id": "docs/spec/code-to-gate-v0.3.1-2026-07-20/analysis-report.md",
+  "role": "v0.3.1-static-analysis-evidence",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "v0.3.1のraw静的候補12件、accepted-design 1件、effective high/critical 0を記録する。",
+  "deps_out": [
+    "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"
+  ],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "code-to-gate readiness",
+    "npm test"
+  ],
+  "contentHash": "sha256:f2564d99453f2c6abc489d0faa0aed77cd97d22e47396c843a4bc6dd20fef38f"
+}

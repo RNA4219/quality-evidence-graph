@@ -1,0 +1,127 @@
+{
+  "version": "ctg.qeg-input/v1",
+  "producer": "code-to-gate",
+  "run_id": "ctg-202607201158-local",
+  "artifact_dir": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20",
+  "findings_summary": {
+    "total": 12,
+    "by_severity": {
+      "medium": 12
+    },
+    "by_category": {
+      "maintainability": 11,
+      "config": 1
+    },
+    "by_rule": {
+      "TRY_CATCH_SWALLOW": 4,
+      "ENV_DIRECT_ACCESS": 1,
+      "LARGE_MODULE": 6,
+      "SUPPRESSION_DEBT": 1
+    }
+  },
+  "readiness_status": "passed",
+  "schema_compliance": [
+    {
+      "artifact": "findings.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "release-readiness.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "repo-graph.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "audit.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "risk-register.yaml",
+      "status": "ok"
+    },
+    {
+      "artifact": "self-analysis-debt.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "test-seeds.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "invariants.json",
+      "status": "ok"
+    },
+    {
+      "artifact": "raw-findings.json",
+      "status": "ok"
+    }
+  ],
+  "quality_checks_actual": [
+    {
+      "name": "assurance_inspection",
+      "status": "skipped",
+      "details": "assurance-findings.json was not provided"
+    }
+  ],
+  "producer_checks": [
+    {
+      "id": "ctg:producer-check-release-readiness",
+      "producer": "code-to-gate",
+      "name": "release-readiness",
+      "conclusion": "success",
+      "readiness_status": "passed",
+      "run_id": "ctg:ctg-202607201158-local",
+      "source_refs": [
+        {
+          "id": "ctg:sr-release-readiness",
+          "path": "release-readiness.json",
+          "label": "code-to-gate release readiness verdict"
+        }
+      ]
+    }
+  ],
+  "artifact_hashes": [
+    {
+      "artifact": "findings.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\findings.json",
+      "hash": "sha256:c4e61f9cab8bbc7078dbd0ceddecad88090af395e278ca7a1f759a46250f2bee"
+    },
+    {
+      "artifact": "release-readiness.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\release-readiness.json",
+      "hash": "sha256:cb2d9deae3fca5011403866ed30a341502b3cacd3e619f318efae0629991f281"
+    },
+    {
+      "artifact": "repo-graph.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\repo-graph.json",
+      "hash": "sha256:68e30e457c0e759684c10b573b7e4d56852963fe4b8a9552f91d50662ddfe55d"
+    },
+    {
+      "artifact": "audit.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\audit.json",
+      "hash": "sha256:c429a7c74eada54ad14df10f5666548e3b5645baa6f336f1075bafb4aa6af9c3"
+    },
+    {
+      "artifact": "risk-register.yaml",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\risk-register.yaml",
+      "hash": "sha256:08c2ec473de449044f1acbe2c6fbe952ddbd5b8f9db4837136187993fe4436d8"
+    },
+    {
+      "artifact": "test-seeds.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\test-seeds.json",
+      "hash": "sha256:ddb2d7f8f9a93bd5cae7b38acb61819905f0dec5ba975bb904e0f6496486e9d4"
+    },
+    {
+      "artifact": "invariants.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\invariants.json",
+      "hash": "sha256:d7872bfc46e236879e6c57ded2f7ec0373a9bff00833c212f28f97afaba0e70c"
+    },
+    {
+      "artifact": "qeg-code-to-gate.json",
+      "path": "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\docs\\spec\\code-to-gate-v0.3.1-2026-07-20\\qeg-code-to-gate.json",
+      "hash": "sha256:d492d38c4f3e9127a6a08410266535882c0e23f6bb0eea909c5c86af690c892b"
+    }
+  ]
+}

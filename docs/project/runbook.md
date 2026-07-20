@@ -124,7 +124,7 @@ npm pack --dry-run --cache ./.npm-cache
 - `docs/spec/` が配布対象に含まれる
 - `qeg-report-action/` が配布対象に含まれる
 
-### 5.5. 0.3.0 publish
+### 5.5. 0.3.0 publish（履歴・v0.3.1では使用禁止）
 
 公開は、release branchとmainの全Gateが緑になった後に実行する。
 
@@ -205,7 +205,31 @@ node tools/json-check.mjs
 - 53 fixture（Reliability / Resilience 22件）のmanifest contractとsnapshotがPASS
 - public source型とpacked tarball consumer型がPASS
 - `negative-resilience-evidenced-by-conflict`がDQ-18 / exit 2
-- `docs/release/acceptance-2026-07-20.md`がrepository完成、外部実環境未評価、publish別判断を分離する
+- `docs/release/acceptance-2026-07-20-v0.3.1.md`がrepository完成、外部実環境未評価、publish別判断を分離する
+
+### 10. v0.3.1 GitHub-only release
+
+v0.3.1ではnpm registryへpublishしない。packageは`private: true`とし、GitHub Release tarballとtag固定Actionを正規配布物とする。
+
+```sh
+npm ci
+npm run build
+npm run test:release-lifecycle -- --out .qeg/action-lifecycle/evidence.json
+npm run test:package
+npm pack --json --pack-destination <release-artifact-dir>
+git tag -a v0.3.1 -m "Quality Evidence Graph v0.3.1"
+git push origin v0.3.1
+gh release create v0.3.1 <release-artifact-dir>/quality-harness-quality-evidence-graph-0.3.1.tgz .qeg/action-lifecycle/evidence.json .qeg/action-lifecycle/before-report.json .qeg/action-lifecycle/fault-observation.json .qeg/action-lifecycle/recovered-report.json --title "Quality Evidence Graph v0.3.1" --notes-file docs/release-notes/2026-07-20-v0.3.1.md
+```
+
+release条件:
+
+- tag target、GitHub Release target、tarball source revisionが同一commitである。
+- Action bundleを省略時の既定commandで実行でき、npm accessを要求しない。
+- Linux Node 20/24とWindows Node 24でrelease lifecycle acceptanceが成功する。
+- 障害時のexit 1、復旧時のexit 0、新しいhash付きevidenceが同一runに残る。
+- tag上のworkflow_dispatchをpositive targetで再実行し、release artifactを回収する。
+- npm publishは実行しない。
 
 ## Confirm
 
@@ -226,7 +250,7 @@ node tools/json-check.mjs
 - `docs/spec/code-to-gate-2026-06-03/` が code-to-gate による静的 Gate 証跡を保持している
 - `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による要求価値監査証跡を保持している
 - `docs/spec/implementation-gate-2026-06-03.md` が実装 Gate と release Gate を分離している
-- `docs/release/acceptance-2026-07-20.md` が現行の総合完成判定とrelease境界を記録している
+- `docs/release/acceptance-2026-07-20-v0.3.1.md` が現行の総合完成判定とrelease境界を記録している
 
 ## Rollback / Retry
 

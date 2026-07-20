@@ -16,10 +16,10 @@
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
 4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
-5. `docs/release/acceptance-2026-07-20.md` - 現在の総合完成判定
+5. `docs/release/acceptance-2026-07-20-v0.3.1.md` - 現在の総合完成判定
 6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
 
-Current release: [v0.3.0 release notes](docs/release-notes/2026-07-20-v0.3.0.md)
+Current release: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)
 
 フォーカス手順:
 
@@ -110,8 +110,10 @@ node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze C:\Users\ryo-n\Co
 - [README_JA.md](README_JA.md)
 - [README_EN.md](README_EN.md)
 
-## 0.3.0 release contract
+## 0.3.1 release contract
 
-QEG 0.3.0 keeps the `qegVersion=0.2` wire contract and adds Reliability / Resilience evidence, DQ-18 through DQ-21, BLK-REL-01 through BLK-REL-04, normalization adapters, and fail-closed `evidenced_by` provenance checks. Broken JSON or a missing decision envelope is exit 1; parseable required-component violations are DQ-01/exit 2. Required evidence is checked against real files, SHA-256, and revision. Optional-only failures remain warnings.
+v0.3.1 is distributed through GitHub Release and a self-contained GitHub Action. The default Action path executes the bundled CLI without npm registry or `npx` access. `npm run test:release-lifecycle` proves change → risk → test → isolated deployment → observation → fault → recovery → new evidence. See [the v0.3.1 acceptance record](docs/release/acceptance-2026-07-20-v0.3.1.md).
 
-changed-only returns no_relevant_changes/exit 0 only after successful detection; detection failure is exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth. The v0.3.0 external Action enforces after artifact upload by default; set enforce: "false" only for diagnostic-only use.
+QEG 0.3.1 keeps the `qegVersion=0.2` wire contract and adds Reliability / Resilience evidence, DQ-18 through DQ-21, BLK-REL-01 through BLK-REL-04, normalization adapters, and fail-closed `evidenced_by` provenance checks. Broken JSON or a missing decision envelope is exit 1; parseable required-component violations are DQ-01/exit 2. Required evidence is checked against real files, SHA-256, and revision. Optional-only failures remain warnings.
+
+changed-only returns no_relevant_changes/exit 0 only after successful detection; detection failure is exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth. The v0.3.1 external Action enforces after artifact upload by default; set enforce: "false" only for diagnostic-only use.

@@ -1,6 +1,6 @@
 {
   "name": "@quality-harness/quality-evidence-graph",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Local-first Quality Evidence Graph and Test Placement Engine contracts",
   "type": "module",
   "main": "./dist/index.js",
@@ -19,9 +19,6 @@
   "bugs": {
     "url": "https://github.com/RNA4219/quality-evidence-graph/issues"
   },
-  "publishConfig": {
-    "access": "public"
-  },
   "files": [
     "dist/",
     "schemas/",
@@ -38,7 +35,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && npm run build:action",
     "typecheck": "tsc --noEmit",
     "test:types": "node node_modules/typescript/bin/tsc -p tests/type-contract/tsconfig.json && npm run build && node tests/package-smoke.mjs",
     "qeg": "node dist/cli.js",
@@ -62,7 +59,9 @@
     "test:fixtures": "node tests/fixture-regression.mjs",
     "test:package": "node tests/package-smoke.mjs",
     "birdseye-check": "node tools/birdseye-check.mjs",
-    "json-check": "node tools/json-check.mjs"
+    "json-check": "node tools/json-check.mjs",
+    "build:action": "esbuild src/cli.ts --bundle --platform=node --format=esm --target=node20 --outfile=qeg-report-action/dist/cli.mjs --log-level=warning",
+    "test:release-lifecycle": "node tools/action-lifecycle-acceptance.mjs"
   },
   "keywords": [
     "quality-gate",
@@ -81,6 +80,8 @@
   },
   "devDependencies": {
     "@types/node": "^25.9.1",
+    "esbuild": "^0.28.1",
     "typescript": "^5.9.3"
-  }
+  },
+  "private": true
 }

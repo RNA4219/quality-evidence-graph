@@ -1,0 +1,309 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-07-20T11:58:07.601Z",
+  "run_id": "ctg-202607201158-local",
+  "repo": {
+    "root": ".",
+    "revision": "0b0d8443907a",
+    "branch": "agent/qeg-v0-3-1-github-only",
+    "dirty": true
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.0",
+    "plugin_versions": []
+  },
+  "artifact": "invariants",
+  "schema": "invariants@v1",
+  "completeness": "complete",
+  "invariants": [
+    {
+      "id": "inv-technical-000",
+      "statement": "Exceptions must not be silently swallowed without logging or handling",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-000"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-000-00",
+          "path": "src/cli/report/targets.ts",
+          "startLine": 4,
+          "endLine": 10,
+          "kind": "text",
+          "excerptHash": "2279a462"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (TRY_CATCH_SWALLOW): The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-001",
+      "statement": "Exceptions must not be silently swallowed without logging or handling",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-001"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-001-00",
+          "path": "src/cli/repro-bundle.ts",
+          "startLine": 20,
+          "endLine": 26,
+          "kind": "text",
+          "excerptHash": "33ee1d11"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (TRY_CATCH_SWALLOW): The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-002",
+      "statement": "Exceptions must not be silently swallowed without logging or handling",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-002"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-002-00",
+          "path": "src/cli/snapshot.ts",
+          "startLine": 59,
+          "endLine": 65,
+          "kind": "text",
+          "excerptHash": "6d20a5ba"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (TRY_CATCH_SWALLOW): The catch block returns null/undefined without logging the error. This silently hides exceptions, making debugging difficult.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-003",
+      "statement": "Exceptions must not be silently swallowed without logging or handling",
+      "kind": "technical",
+      "confidence": 0.95,
+      "sourceFindingIds": [
+        "finding-TRY_CATCH_SWALLOW-003"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-003-00",
+          "path": "tools/migrate-fixtures-v02.mjs",
+          "startLine": 137,
+          "endLine": 137,
+          "kind": "text",
+          "excerptHash": "7234ff2a"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (TRY_CATCH_SWALLOW): The catch block is empty, silently swallowing all exceptions. This hides errors and makes debugging difficult. Consider logging the error or handling it appropriately.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-004",
+      "statement": "Environment variables must be validated and sanitized before use",
+      "kind": "technical",
+      "confidence": 0.75,
+      "sourceFindingIds": [
+        "finding-ENV_DIRECT_ACCESS-004"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-004-00",
+          "path": "src/cli/report/command.ts",
+          "startLine": 105,
+          "endLine": 109,
+          "kind": "text",
+          "excerptHash": "7fe573a7"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (ENV_DIRECT_ACCESS): The environment variable 'GITHUB_STEP_SUMMARY' is accessed directly without validation, default values, or type checking. This can cause runtime errors if the variable is missing or incorrectly formatted. Use a config validation layer or provide fallback values.",
+      "tags": [
+        "config",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-005",
+      "statement": "Modules must maintain reasonable size for maintainability",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-006"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-005-00",
+          "path": "src/cli/evidence-normalize.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "20684f74"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (LARGE_MODULE): This file has 39 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-006",
+      "statement": "Modules must maintain reasonable size for maintainability",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-007"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-006-00",
+          "path": "src/cli/policy-lint.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "2cf281d8"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (LARGE_MODULE): This file has 23 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-007",
+      "statement": "Modules must maintain reasonable size for maintainability",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-008"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-007-00",
+          "path": "src/cli/report/formatter.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "7e85892f"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (LARGE_MODULE): This file has 44 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-008",
+      "statement": "Modules must maintain reasonable size for maintainability",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-009"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-008-00",
+          "path": "src/gate/reliability/qualification.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "298c59ac"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (LARGE_MODULE): This file has 26 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-009",
+      "statement": "Modules must maintain reasonable size for maintainability",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-010"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-009-00",
+          "path": "src/gate/reliability/utils.ts",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "3fe6b3bb"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (LARGE_MODULE): This file has 29 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-010",
+      "statement": "Modules must maintain reasonable size for maintainability",
+      "kind": "technical",
+      "confidence": 0.85,
+      "sourceFindingIds": [
+        "finding-LARGE_MODULE-011"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-010-00",
+          "path": "tools/migrate-fixtures-v02.mjs",
+          "startLine": 1,
+          "endLine": 30,
+          "kind": "text",
+          "excerptHash": "61d0a8a1"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (LARGE_MODULE): This file has 24 function definitions, exceeding the 20 threshold. Files with many functions are hard to understand and test. Consider grouping related functions into separate modules.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    },
+    {
+      "id": "inv-technical-011",
+      "statement": "Suppression may hide debt (UNSAFE_DELETE) must be addressed",
+      "kind": "technical",
+      "confidence": 0.8,
+      "sourceFindingIds": [
+        "finding-SUPPRESSION_DEBT-012"
+      ],
+      "evidence": [
+        {
+          "id": "evidence-inv-technical-011-00",
+          "path": ".ctg/suppressions.yaml",
+          "startLine": 3,
+          "endLine": 3,
+          "kind": "text",
+          "excerptHash": "00007c2d"
+        }
+      ],
+      "rationale": "Derived from medium severity finding (SUPPRESSION_DEBT): This suppression has expiry longer than 180 days. Narrow the path, add a near-term expiry, or replace the suppression with a tracked remediation item.",
+      "tags": [
+        "maintainability",
+        "medium"
+      ]
+    }
+  ]
+}

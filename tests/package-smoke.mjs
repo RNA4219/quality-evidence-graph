@@ -30,7 +30,7 @@ assert.equal(help.status, 0, help.stderr || help.stdout);
 assert.match(help.stdout, /Usage: qeg/);
 const version = runQeg(["--version"]);
 assert.equal(version.status, 0, version.stderr || version.stdout);
-assert.equal(version.stdout.trim(), "0.3.0");
+assert.equal(version.stdout.trim(), "0.3.1");
 const schemaCheck = runQeg(["schema-check"]);
 assert.equal(schemaCheck.status, 0, schemaCheck.stderr || schemaCheck.stdout);
 const imported = await import(new URL(`file:///${join(packageRoot, "dist", "index.js").replaceAll("\\", "/")}`));
@@ -38,7 +38,29 @@ assert.equal(typeof imported.evaluateGate, "function");
 assert.equal(typeof imported.validateGateInput, "function");
 assert.equal(typeof imported.verifyEvidenceArtifacts, "function");
 assert.equal(typeof imported.getExitCode, "function");
-assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.3.0");
+assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.3.1");
+const packedActionBundle = join(packageRoot, "qeg-report-action", "dist", "cli.mjs");
+const packedActionVersion = spawnSync(process.execPath, [packedActionBundle, "--version"], {
+  encoding: "utf-8",
+  cwd: temp,
+});
+assert.equal(packedActionVersion.status, 0, packedActionVersion.stderr || packedActionVersion.stdout);
+assert.equal(packedActionVersion.stdout.trim(), "0.3.1");
+const thirdPartyNotices = await readFile(
+  join(packageRoot, "qeg-report-action", "THIRD_PARTY_NOTICES.md"),
+  "utf-8",
+);
+assert.match(thirdPartyNotices, /fast-uri/);
+for (const license of [
+  "ajv.txt",
+  "fast-deep-equal.txt",
+  "fast-uri.txt",
+  "json-schema-traverse.txt",
+  "require-from-string.txt",
+]) {
+  const text = await readFile(join(packageRoot, "qeg-report-action", "licenses", license), "utf-8");
+  assert.ok(text.trim().length > 0, `packed Action license is empty: ${license}`);
+}
 
 await writeFile(
   join(temp, "package.json"),
@@ -74,4 +96,4 @@ const typeContract = spawnSync(
 );
 assert.equal(typeContract.status, 0, typeContract.stderr || typeContract.stdout);
 
-console.log("Clean tarball install, CLI/library smoke, and packed public type contract passed");
+console.log("Clean tarball install, CLI/library/Action bundle smoke, and packed public type contract passed");

@@ -1,0 +1,19 @@
+{
+  "id": "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json",
+  "role": "v0.3.1-static-readiness-evidence",
+  "generation": "00014",
+  "public_api": [],
+  "summary": "ci-release-readiness policyのfailed conditions 0とpassedを記録するmachine-readable証拠。",
+  "deps_out": [
+    "docs/release/acceptance-2026-07-20-v0.3.1.md"
+  ],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "code-to-gate schema validate",
+    "npm run json-check"
+  ],
+  "contentHash": "sha256:cb2d9deae3fca5011403866ed30a341502b3cacd3e619f318efae0629991f281"
+}

@@ -21,6 +21,6 @@
     "npm run build",
     "node dist/cli.js init --root .qeg/init-smoke"
   ],
-  "generation": "00013",
-  "contentHash": "sha256:36a17abd7fc347a37f6bb6b59d364535022789fa95e41a34590da81d2fc23f38"
+  "generation": "00014",
+  "contentHash": "sha256:4f97201165eb0c1b20ee4e7440febe475ceb6458dfde3994e559f2679c7a6c74"
 }

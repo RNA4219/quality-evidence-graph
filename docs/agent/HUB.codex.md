@@ -21,7 +21,7 @@ next_review_due: 2026-10-20
 7. `docs/requirements.md`
 8. `docs/project/runbook.md`
 9. `docs/project/evaluation.md`
-10. `docs/release/acceptance-2026-07-20.md`
+10. `docs/release/acceptance-2026-07-20-v0.3.1.md`
 11. `docs/project/guardrails.md`
 12. `docs/project/tasks.codex.md`（完了済み実装順序の履歴）
 13. `fixtures/README.md`
@@ -56,7 +56,7 @@ next_review_due: 2026-10-20
 | `docs/project/evaluation.md` | acceptance criteria / release checks | high |
 | `docs/project/guardrails.md` | repo operating constraints | high |
 | `docs/project/tasks.codex.md` | superseded implementation task ledger | medium |
-| `docs/release/acceptance-2026-07-20.md` | current repository completion decision | high |
+| `docs/release/acceptance-2026-07-20-v0.3.1.md` | current repository completion decision | high |
 | `fixtures/README.md` | fixture contract / expected verdict | high |
 | `docs/control-mapping.md` | IPO control mapping | high |
 | `docs/ipo-controlled-profile.md` | IPO profile contract | high |
@@ -86,7 +86,7 @@ next_review_due: 2026-10-20
 3. `docs/requirements.md` の該当要求 ID と `docs/project/evaluation.md` の検収条件へ紐づける。
 4. 実装タスクは `docs/project/tasks.codex.md` の形式で Objective / Scope / Requirements / Commands / Acceptance を記録する。
 5. 完了時は `docs/project/runbook.md` の確認手順と `docs/project/evaluation.md` の acceptance criteria に従って証跡を残す。
-6. 現在の完成判定は`docs/release/acceptance-2026-07-20.md`を起点にし、過去Gate文書は履歴として扱う。
+6. 現在の完成判定は`docs/release/acceptance-2026-07-20-v0.3.1.md`を起点にし、過去Gate文書は履歴として扱う。
 7. IPO 統制実装に入る場合は `docs/spec/index.md` から policy / waiver / approval / retention / evidence package の仕様を読む。
 
 ## 4. Birdseye 鮮度

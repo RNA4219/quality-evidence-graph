@@ -1,0 +1,9 @@
+version: ctg/v1
+suppressions:
+  -
+    rule_id: UNSAFE_DELETE
+    path: src/cli/evidence-normalize.ts
+    reason: Failure cleanup only unlinks the random wx-created temp file inside the realpath-validated output parent; runtime tests verify containment and atomic cleanup.
+    expiry: 2027-07-20
+    author: qeg-maintainers
+    class: accepted-design

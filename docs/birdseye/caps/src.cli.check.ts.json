@@ -27,6 +27,6 @@
     "npm run build",
     "node dist/cli.js check fixtures/positive-release-go"
   ],
-  "generation": "00013",
+  "generation": "00014",
   "contentHash": "sha256:64d86a6998b58b031b5cf8710bb308e53e393670630d41f72a0aefe77201d6bc"
 }
