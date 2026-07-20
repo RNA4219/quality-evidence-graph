@@ -1,12 +1,16 @@
 ---
 title: QEG v0.3.1 GitHub-only Release Acceptance
-status: release_approved
+status: released_verified
 date: 2026-07-20
 version: 0.3.1
 qegVersion: "0.2"
 latestCodeBearingCommit: cd056f02a8033dfc7b2559e084b343d7155eecbb
 latestCodeCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29750676199
 latestDocsCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29751221363
+mainMergeCommit: ba46ce20b629c49162a930f2173088f8bc5068da
+mainCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29752243853
+tagWorkflowCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29752772714
+releaseURL: https://github.com/RNA4219/quality-evidence-graph/releases/tag/v0.3.1
 decision: go
 ---
 
@@ -72,7 +76,7 @@ decision: go
 | code-to-gate | ran/passed | run `ctg-202607201158-local`。raw 12、accepted-design 1、effective high/critical 0、readiness failed conditions 0。中優先度12件は保守性候補として可視化 |
 | HATE | degraded | HATE producerは今回実行せず、lifecycle harnessの実行証跡を直接QEGへ渡す |
 | manual-bb | ran | 本書のrisk、case、oracle、Gateで検収 |
-| QEG | ran/passed | local全Gate、PR run 29750676199のLinux Node 20/24・Windows Node 24、lifecycle artifactsが成功。main/tag workflowはrelease時に再検証 |
+| QEG | ran/passed | local全Gate、PR run 29750676199、main run 29752243853、tag run 29752772714のLinux Node 20/24・Windows Node 24とlifecycle artifactsが成功 |
 
 HATEをdegradedとするため、実fault injectionの成功を主張しない。今回の障害は配布済みschema破損という制御されたrelease artifact faultである。
 
@@ -84,12 +88,26 @@ HATEをdegradedとするため、実fault injectionの成功を主張しない�
 - code-bearing commitのLinux Node 20/24、Windows Node 24とartifact: pass
 - docs-only証跡commitの最新CI: pass
 
-公開Gateは次を満たすまで閉じない。
+公開Gateも `pass` として閉じた。
 
-- mainへ統合後、tag `v0.3.1` とGitHub Release assetを同一commitへ結び付ける。
-- tag上のworkflow_dispatchでAction bundleとlifecycle evidenceを再検証する。
-- GitHub Releaseを公開後、assetとtag targetを再取得して検証する。
+- main merge、annotated tag `v0.3.1`、GitHub Release targetはすべて `ba46ce20b629c49162a930f2173088f8bc5068da` と一致した。
+- tag上のworkflow_dispatch run 29752772714でAction bundleとlifecycle evidenceを再検証し、3ジョブが成功した。
+- GitHub Release公開後、5 assetを再取得し、GitHub側SHA-256とローカル値の一致を確認した。
 
-## 8. Go/No-Go brief
+## 8. Post-release verification
 
-機能の追加量ではなく、配布物が壊れた場合に検知し、復元し、復旧後の新しい証拠を残せることをrelease条件とする。npm registryは条件から除外する。本書の `go` はtag検証を開始できることを意味し、GitHub Release公開は公開Gate成功後にのみ行う。
+| Evidence | Result |
+| --- | --- |
+| main CI | run [29752243853](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29752243853)、3ジョブSUCCESS |
+| tag CI | run [29752772714](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29752772714)、3ジョブSUCCESS |
+| lifecycle provenance | Linux 20/24・Windows 24の全evidenceがsourceRevision `ba46ce20b629c49162a930f2173088f8bc5068da`、fault exit 1、recovery exit 0、verdict `go` |
+| tag | annotated tag `v0.3.1` が同じmerge commitを参照 |
+| Release | [QEG v0.3.1](https://github.com/RNA4219/quality-evidence-graph/releases/tag/v0.3.1)、draft=false、prerelease=false |
+| package asset | `quality-harness-quality-evidence-graph-0.3.1.tgz` — SHA-256 `721c8b110bdea84699395ca6f48e85d46904bc098e1ddef9916e5ca4b62bcde8` |
+| Linux Node 20 evidence | SHA-256 `6ea45c4a2b0298879c577eec70918fd9e8ddd78ab11d9bc6bf1841acd810cbde` |
+| Linux Node 24 evidence | SHA-256 `0387a49bbd837998528dfac9b7758fbb9197df463e0b6609f9690956ff315c5a` |
+| Windows Node 24 evidence | SHA-256 `0bb8b9f92ec9ee3bd5f78bbf0b3e2bc3661d1aa6c729796148920de22af4f020` |
+
+## 9. Go/No-Go brief
+
+GitHub-only v0.3.1は `go`。配布物の変更、risk control、test、隔離deploy、観測、制御されたfault、復旧、復旧後の新証拠までをtag commitへ結び付けて確認した。npm registryは運用・完了条件から除外し、npm publishは行っていない。実clusterと実サービスのresilience acceptanceは別Gateである。
