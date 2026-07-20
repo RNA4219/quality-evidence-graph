@@ -1,9 +1,9 @@
 ---
 intent_id: INT-QEG-001
 owner: quality-evidence-graph
-status: draft
-last_reviewed_at: 2026-07-04
-next_review_due: 2026-08-04
+status: active
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Blueprint
@@ -90,12 +90,15 @@ flowchart LR
   F --> G[Emit Quality Evidence Record]
 ```
 
-## 7. Next Tasks
+## 7. Current State
 
-- adapter 入力型を実 artifact schema に合わせて細分化する
-- schema validation CLI を追加する
-- RanD / code-to-gate / manual-bb の minimal fixture を追加する
-- graph builder の pure function を追加する
-- Gate 失格条件 DQ-01 / DQ-02 / DQ-03 から実装する
-- `ipo_controlled` profile と control mapping を V1 hardening として設計する
-- `qeg-report-action`、`doctor`、`explain`、`schema-check`、`enum-check`、`snapshot` を CI / OSS 導入の標準運用として保守する
+- adapter、schema validation、graph builder、placement、Gate evaluator、record / report / snapshot は実装済みである。
+- controlled governance profile、DQ-01〜DQ-21、Reliability / Resilience blocker、waiver、artifact verification、evidence normalizer は実装済みである。
+- fixture、public TypeScript contract、package smoke、Node 20 / 24 CI を release candidate の自動受入境界とする。
+- 現在の総合判定と非対象範囲は `docs/release/acceptance-2026-07-20.md` を正本とする。
+
+## 8. Remaining Product Decisions
+
+- 外部consumerでの実導入結果を蓄積する。ただし隔離consumer smokeを実clusterのresilience承認へ昇格しない。
+- 実cluster、実fault injection、Lakda real acceptanceは別の受入Gateで扱う。
+- tag、publish、release、major/minor version更新は本体完成判定とは分離し、release ownerが別途決定する。

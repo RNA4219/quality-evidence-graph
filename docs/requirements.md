@@ -1,9 +1,9 @@
 ---
 intent_id: INT-QEG-REQ-001
 owner: quality-evidence-graph
-status: draft
-last_reviewed_at: 2026-07-04
-next_review_due: 2026-08-04
+status: active
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # 要件定義
@@ -303,10 +303,10 @@ Gate profile の既定は `standard` とする。`strict` は認証、決済、�
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない |
 | DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない |
-| DQ-18 | 必須 risk に matching real resilience evidence がない、mock-only、wrong scenario / environment、または selected status が error / timeout / skipped |
-| DQ-19 | resilience evidence が stale、envelope timestamp が未来・逆順、または latest evidence の選択が曖昧 |
+| DQ-18 | 必須 risk に matching real resilience evidence がない、mock-only、selected evidence の `testId` と incoming `evidenced_by` provenance が矛盾する、stale / future / invalid timestamp、wrong scenario / environment、またはsteady state / fault / abort / recovery lifecycleが不整合である |
+| DQ-19 | 同一execution identityまたはlatest instantのresilience evidenceが異なるdecision fingerprintを持ち、選択が曖昧である |
 | DQ-20 | required observed / signal が存在しない、phase / metric / resolvable hash-backed EvidenceRef と結び付かない、または observed summary と一致しない |
-| DQ-21 | required な steady state、fault、abort、recovery、actual target / duration の field または時系列が欠落・矛盾する |
+| DQ-21 | reliability有効時のfull revision、SHA-256 policy hash、policy ID、profileのcross-object identityが欠落・形式不正・不一致、またはpolicyのDQ scopeが不足している |
 
 DQ-13 は schema だけでは全 Gate 関連 node / edge / placement を完全に識別できないため、MVP では evaluator で判定する。ただし `gate-verdict.json` の `disqualifications[].sourceRefs` と `blockers[].sourceRefs` は schema 上も空配列を許さない。
 
@@ -507,5 +507,6 @@ MVP は次を満たしたら完了とする。
 | REL-15 | policy provenance を固定する | reliabilityPolicy 有効時は input policy、top-level metadata、graph.metadata の policyId / policyHash が一致する |
 | REL-16 | abort を実測 signal で裏付ける | abortRecord は構造化 condition と hash-backed signal entry の値・window・operator に一致する |
 | REL-17 | resilience branch を strict にする | discriminator 付き test / evidence は既知 field だけを受理し、legacy branch の互換性は維持する |
+| REL-18 | evidence provenance の矛盾を fail closed にする | `evidenced_by` edge 欠落は許可し、canonical `test --evidenced_by--> evidence` edge が存在する場合は source test ID の集合を `evidence.testId` と照合する。矛盾は DQ-18 とし旧 pass へ fallback しない |
 
 詳細な field、判定優先順位、fixture、実装写像は docs/spec/reliability-extension.md を正本とする。

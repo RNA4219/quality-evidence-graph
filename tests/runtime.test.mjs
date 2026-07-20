@@ -332,6 +332,20 @@ function reliabilityInput() {
   };
 }
 
+function reliabilityEvidenceEdge(id, from, to) {
+  return {
+    id,
+    kind: "evidenced_by",
+    from,
+    to,
+    traceability: {
+      sourceRefs: relSource,
+      assumptions: [],
+      confidence: "high",
+    },
+  };
+}
+
 test("reliability schema and evaluator select one current real execution", async () => {
   const input = reliabilityInput();
   const { evidenceVerification: _evidenceVerification, ...gateInput } = input;
@@ -342,6 +356,65 @@ test("reliability schema and evaluator select one current real execution", async
   assert.deepEqual(result.reliability.enabled, true);
   assert.equal(result.reliability.riskCoverageRate, 1);
   assert.equal(result.reliability.recoverySecondsP95, 30);
+});
+
+test("reliability accepts absent or matching evidenced_by provenance and rejects contradictions", () => {
+  const matching = reliabilityInput();
+  matching.graph.edges.push(
+    reliabilityEvidenceEdge(
+      "qeg:edge-resilience-matching",
+      "qeg:test-resilience",
+      "qeg:evidence-resilience",
+    ),
+    reliabilityEvidenceEdge(
+      "qeg:edge-resilience-matching-duplicate",
+      "qeg:test-resilience",
+      "qeg:evidence-resilience",
+    ),
+  );
+  assert.equal(evaluateGate(matching).verdict, "go");
+
+  const contradictory = reliabilityInput();
+  const expectedTest = contradictory.graph.nodes.find(
+    (node) => node.id === "qeg:test-resilience",
+  );
+  const wrongTest = structuredClone(expectedTest);
+  wrongTest.id = "qeg:test-resilience-other";
+  wrongTest.title = "other resilience test";
+  wrongTest.deleted = true;
+  contradictory.graph.nodes.push(wrongTest);
+
+  const prior = contradictory.graph.nodes.find(
+    (node) => node.id === "qeg:evidence-resilience",
+  );
+  const latest = structuredClone(prior);
+  latest.id = "qeg:evidence-resilience-latest-conflict";
+  latest.title = "latest evidence with contradictory provenance";
+  latest.attempt = 2;
+  latest.endedAt = "2026-01-01T00:03:00.000Z";
+  contradictory.graph.nodes.push(latest);
+  contradictory.graph.edges.push(
+    reliabilityEvidenceEdge(
+      "qeg:edge-resilience-latest-correct",
+      expectedTest.id,
+      latest.id,
+    ),
+    reliabilityEvidenceEdge(
+      "qeg:edge-resilience-latest-wrong",
+      wrongTest.id,
+      latest.id,
+    ),
+  );
+
+  const result = evaluateGate(contradictory);
+  assert.equal(result.verdict, "disqualified");
+  assert.deepEqual(
+    [...new Set(result.disqualifications.map((item) => item.code))],
+    ["DQ-18"],
+  );
+  assert.ok(result.disqualifications[0].nodeIds.includes(latest.id));
+  assert.equal(result.reliability.qualifiedExecutionCount, 0);
+  assert.equal(result.reliability.passingExecutionCount, 0);
 });
 
 test("reliability fails closed without artifact verification and never falls back from latest failure", () => {

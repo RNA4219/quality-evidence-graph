@@ -24,6 +24,6 @@
     "npm run build",
     "node dist/cli.js doctor fixtures/positive-release-go"
   ],
-  "generation": "00011",
+  "generation": "00012",
   "contentHash": "sha256:9f51aa6cd70bcacf6b0321cff2e6b50911da72ec24167f9f94f3263cf69cdced"
 }

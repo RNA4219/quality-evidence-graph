@@ -1,0 +1,15 @@
+{
+  "fixture": "negative-resilience-evidenced-by-conflict",
+  "description": "A contradictory evidenced_by source test disqualifies the latest resilience evidence",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    { "code": "DQ-18" }
+  ],
+  "expectedDisqualificationMode": "includes",
+  "expectedBlockers": [],
+  "expectedBlockerMode": "exact",
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/reliability-hardening.md §4.5"
+}

@@ -27,6 +27,6 @@
     "node dist/cli.js explain DQ-15",
     "node dist/cli.js report fixtures/negative-approval-missing"
   ],
-  "generation": "00011",
+  "generation": "00012",
   "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3"
 }

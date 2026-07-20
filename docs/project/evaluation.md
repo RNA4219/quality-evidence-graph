@@ -2,114 +2,55 @@
 intent_id: INT-QEG-EVAL-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-07-04
-next_review_due: 2026-08-04
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Evaluation
 
 ## Acceptance Criteria
 
-- `docs/requirements.md`、`docs/project/blueprint.md`、`README.md`、`docs/project/runbook.md`、`docs/project/guardrails.md`、`docs/agent/HUB.codex.md` が矛盾しないこと。
-- `src/types.ts` の `GateProfile` / `DisqualificationCode` と schema enum が一致すること。
-- test node の `testExecutionMode` が schema/type で必須となり、`mock` は Gate 証跡に算入されず `testEvidenceAccounting.excludedMockTests` へ記録されること。
-- `docs/requirements.md` が Git 管理対象かつ package 配布対象であること。
-- `docs/birdseye/index.json` と `docs/birdseye/caps/*.json` が主要ファイルを指すこと。
-- `ipo_controlled` profile、DQ-15〜DQ-17、waiver governance、evidence immutability が要件に明記されていること。
-- `conditional_go` の exit code policy が profile 依存として定義されていること。
-- `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定していること。
-- `fixtures/README.md` が minimal / negative fixture の期待 verdict / DQ を固定していること。
-- `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備の最小契約を固定していること。
-- `docs/spec/` が Gate policy、waiver、approval evidence、evidence package、retention、immutability、仕様書検収を章別に固定していること。
-- `docs/spec/reliability-extension.md` が resilience evidence の実行境界、DQ / blocker、report、fixture contract を固定していること。
-- `docs/spec/reliability-extension-review-2026-07-19.md` が解消済み finding、残リスク、仕様 / 実装 / release の Gate split を固定していること。
-- `docs/requirements.md`、`docs/control-mapping.md`、`docs/ipo-controlled-profile.md`、`docs/spec/*.md` の verdict 定義と DQ 優先順位が矛盾しないこと。
-- `docs/spec/review-2026-06-03.md` が仕様書見直し結果、修正方針、残リスク、Gate 判定を記録していること。
-- `docs/spec/gate-acceptance-2026-06-03.md` が manual-bb-test-harness の順序で実装前 Gate を厳格に判定していること。
-- `docs/spec/code-to-gate-2026-06-03/` が code-to-gate による repository static gate 証跡を保持し、release approval と混同されないこと。
-- `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による requirements audit 証跡を保持し、正式な狩野調査または release approval と混同されないこと。
-- `docs/spec/implementation-gate-2026-06-03.md` が実装完了範囲、未実装 DQ code、IPO controlled release Gate `no_go` 維持理由を記録していること。
-- `docs/implementation-prep-gate-2026-06-02.md` が implementation preparation Go と IPO controlled release No-Go を分離していること。
-- CI 用 `report` コマンドが複数 target を最後まで評価し、CLI error / DQ / blocker / residual risk / human review を累積表示できること。
-- `.github/workflows/ci.yml` が QEG report artifact を保存し、各診断 step を完走させてから最終判定で job を落とすこと。
-- `qeg-report-action` が report 生成、Step Summary、artifact upload、`exit_code` output を提供し、report step 自体で直接失敗しないこと。
-- `doctor`、`explain`、`schema-check`、`enum-check`、`snapshot`、`init` の contract が `docs/spec/operational-cli-extensions.md` に固定されていること。
-- `evidence normalize --adapter <kind>` が local-only / non-destructive な resilience normalization contract として固定されていること。
-- `report --baseline` と `report --changed-only` が移行期間と大規模 repo の差分 CI を支援できること。
-- `baseline audit`、`report --diff`、`repro-bundle`、`evidence verify`、`policy lint`、`check`、Action outputs 拡充が実装・検証されていること。
+- `docs/requirements.md` を要求正本とし、`README.md`、`docs/project/blueprint.md`、`docs/project/tasks.codex.md`、仕様書、fixture契約、完了記録が現在状態について矛盾しないこと。
+- schema、公開TypeScript型、runtime enum、CLI helpが同じdiscriminator、DQ-01〜DQ-21、BLK-REL-01〜04を表すこと。
+- legacy graphを受理しつつ、Reliability / Resilience有効時のpolicy identity、artifact、signal、selection、safetyをfail-closedで評価すること。
+- resilience evidenceの判定用joinは`testId`とし、`evidenced_by` edge欠落は許可する。edgeが存在して`testId`と矛盾または複数testを指す場合はDQ-18とし、旧passへフォールバックしないこと。
+- Gate reason、DQ、blocker、waiver、drill-down、record、report、snapshotがsource-backedかつdeterministicであること。
+- `fixtures/manifest.json`をfixture正本とし、legacy、positive、negative、waiver、最新証跡、安全履歴、provenance矛盾をon-disk E2Eで検証すること。
+- local全検証と最終commitのGitHub Actions `quality (20)` / `quality (24)`が成功すること。
+- cleanな隔離consumer repoでpacked packageをinstallし、init、go、disqualified、changed-only、baseline / diff、失敗時artifact契約を確認すること。
+- repository実装完了と、実cluster / 実fault injection / Lakda real acceptance / publish approvalを混同しないこと。
 
-## Test Outline
+## Required Local Gates
 
-- TypeScript:
-  - `npm run typecheck`
-- JSON:
-  - `schemas/*.json` の parse
-  - `package.json` の parse
-- Schema / enum drift:
-  - `npm run schema-check`
-  - `npm run enum-check`
-- Operational helpers:
-  - `npm run explain -- DQ-15`
-  - `npm run doctor -- fixtures/positive-release-go`
-  - `npm run check -- fixtures/positive-release-go`
-  - `npm run evidence -- verify fixtures/positive-release-go`
-  - `npm run policy -- lint fixtures/positive-release-go`
-  - `npm run baseline -- audit .qeg/qeg-baseline.json fixtures`
-  - `npm run snapshot -- fixtures/positive-release-go`
-- Release dry-run:
-  - `npm pack --dry-run --cache ./.npm-cache`
-- CI cumulative report:
-  - `npm run report -- fixtures/positive-release-go`
-  - `npm run report -- --json fixtures/positive-release-go`
-- GitHub Actions workflow:
-  - `.github/workflows/ci.yml` が `.qeg/qeg-ci-report.json` を upload artifact 対象にしている
-  - `.github/workflows/ci.yml` が `qeg-report-action` を使っている
-  - `Final CI verdict` が install / typecheck / build / JSON parse / package dry-run / QEG report の outcome を集約している
-  - `workflow_dispatch` の `qeg_report_targets` で failing demo target を指定できる
-  - `QEG cumulative report` step が QEG exit code を output に退避し、step 自体は成功終了する
-- IPO control specs:
-- `git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/reliability-extension.md docs/spec/reliability-extension-review-2026-07-19.md docs/spec/waiver-approval.md docs/spec/evidence-package.md docs/spec/retention-immutability.md docs/spec/acceptance.md docs/spec/review-2026-06-03.md docs/spec/gate-acceptance-2026-06-03.md`
-- code-to-gate:
-  - `node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze . --emit all --out docs\spec\code-to-gate-2026-06-03`
-  - `node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js readiness . --policy C:\Users\ryo-n\Codex_dev\code-to-gate\.github\ctg-policy.yaml --from docs\spec\code-to-gate-2026-06-03 --out docs\spec\code-to-gate-2026-06-03`
-- RanD KanoMode:
-  - `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json` の `gate_summary.overall_assessment` が `go`
-- Implementation Gate:
-  - `docs/spec/implementation-gate-2026-06-03.md` の implementation completion Gate と IPO controlled release Gate を確認する
-- Birdseye:
-  - `docs/birdseye/index.json` の parse
-  - index が主要 docs / schemas / src を参照していること
+```sh
+npm ci
+npm run typecheck
+npm run test:types
+npm run build
+npm run test:runtime
+npm run schema-check
+npm run enum-check
+npm run test:fixtures
+npm run test:package
+npm run birdseye-check
+node tools/json-check.mjs
+npm pack --dry-run --cache ./.npm-cache
+git diff --check
+```
+
+加えて、`explain`、`doctor`、`check`、`evidence verify`、`policy lint`、`report`のtext / JSON、`baseline audit`、`report --diff`、`snapshot`、`repro-bundle`をpositive fixtureで検証する。
 
 ## Verification Checklist
 
-- [x] `npm run typecheck` が成功した
-- [x] `npm run build` が成功した
-- [x] `npm run schema-check` が成功した
-- [x] `npm run enum-check` が成功した
-- [ ] `npm run explain -- DQ-15` が DQ-15 の必要証跡を説明した
-- [ ] `npm run doctor -- fixtures/positive-release-go` が hard failure なしで終了した
-- [x] `npm run check -- fixtures/positive-release-go` が hard failure なしで終了した
-- [x] `npm run evidence -- verify fixtures/positive-release-go` が証跡実体の状態を表示した
-- [x] `npm run policy -- lint fixtures/positive-release-go` が policy contract を検査した
-- [x] `npm run baseline -- audit .qeg/qeg-baseline.json fixtures` が baseline 寿命管理を検査した
-- [x] `npm run report -- --diff .qeg/qeg-ci-report.json fixtures/positive-release-go` が DQ diff を出力した
-- [x] `npm run repro-bundle -- --report .qeg/qeg-ci-report.json --out .qeg/repro fixtures/positive-release-go` が再現 bundle を生成した
-- [x] `npm run snapshot -- fixtures/positive-release-go` が成功した
-- [x] schema JSON parse が成功した
-- [x] `npm pack --dry-run --cache ./.npm-cache` が成功した
-- [ ] `npm run report -- fixtures/positive-release-go` が成功した
-- [ ] `npm run report -- --json fixtures/positive-release-go` が成功し、`summary.totalTargets` と `targets[]` を出力した
-- [ ] `.github/workflows/ci.yml` が `qeg-report-action` を通じて QEG report artifact を `if: always()` で upload する
-- [ ] `.github/workflows/ci.yml` が manual demo 用 `workflow_dispatch.inputs.qeg_report_targets` を持つ
-- [ ] `.github/workflows/ci.yml` が QEG report の非 0 exit を直接 shell failure にせず、`Final CI verdict` へ集約する
-- [x] `qeg-report-action/action.yml` が Node 24 action、artifact upload、`exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` output を持つ
-- [ ] tarball contents に `docs/requirements.md` が含まれる
-- [x] Birdseye index と capsule が主要ファイルを指す
-- [ ] IPO controlled profile の統制要件が requirements / README / BLUEPRINT に同期している
-- [ ] TASK 台帳、fixture 契約、control mapping、IPO profile、実装準備 Gate record が package に含まれる
-- [ ] `docs/spec/` が package に含まれ、TASK-09 / TASK-10 の実装判断が閉じている
-- [ ] `docs/spec/review-2026-06-03.md` が package に含まれ、仕様書 review Gate が Go である
-- [ ] `docs/spec/gate-acceptance-2026-06-03.md` が package に含まれ、実装前 Gate の No-Go / Go 理由が traceable である
-- [ ] code-to-gate の `release-readiness.json` が status `passed` を示し、その `passed` が IPO controlled release approval ではないと Gate 記録に明記されている
-- [ ] RanD KanoMode の `requirements_audit_packet.json` が overall `go` を示し、その `go` が正式な狩野調査または IPO controlled release approval ではないと Gate 記録に明記されている
-- [ ] 実装 Gate 記録が DQ-02/04/05/06/08/09/10/11/12/13/14 の未実装を release blocker として明記している
+- [x] public type contract、build、35 runtime / Action contractが成功した
+- [x] schema / enum drift、全tracked JSON parseが成功した
+- [x] 53 fixture（Reliability / Resilience 22件）のverdict、exit code、record、report、snapshot回帰が成功した
+- [x] package smokeとpackage dry-runが成功し、正本文書がtarballへ含まれた
+- [x] operational CLI群がpositive fixtureで成功した（doctor / policyの非blocking warningを含む）
+- [x] `negative-resilience-evidenced-by-conflict`がDQ-18 / exit 2を返した
+- [x] Birdseye generation `00012`が95 sourceを参照した
+- [x] 隔離consumer acceptanceが成功した
+- [ ] 最終commitのNode 20 / 24 CIがSUCCESSになった
+- [ ] `docs/release/acceptance-2026-07-20.md`に上記証跡と非評価範囲を記録した
+
+このチェックリストは実行証跡が揃った時点で更新する。過去の準備Gateや実装Gateは履歴として保持し、現行判定には総合完了記録を使用する。

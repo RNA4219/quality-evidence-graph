@@ -3,13 +3,58 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00011";
+const generation = "00012";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
 const index = JSON.parse(await readFile(indexPath, "utf-8"));
 
 const additions = {
+  "docs/project/tasks.codex.md": {
+    role: "superseded-implementation-task-ledger",
+    caps: "docs/birdseye/caps/docs.project.tasks.codex.md.json",
+    summary: "完了済みTASK-01〜TASK-10の実装順、対象、受入条件を保持する履歴台帳。現行判定はrepository completion acceptanceへ移管済み。",
+    depsOut: ["docs/requirements.md", "docs/release/acceptance-2026-07-20.md"],
+    depsIn: ["docs/agent/HUB.codex.md"],
+    risks: ["superseded台帳の過去no_goを現在状態と誤認する"],
+    tests: ["npm run birdseye-check", "git diff --check"],
+  },
+  "docs/project/evaluation.md": {
+    role: "current-acceptance-criteria",
+    caps: "docs/birdseye/caps/docs.project.evaluation.md.json",
+    summary: "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Node 20 / 24 CIを含む現行受入条件。",
+    depsOut: ["docs/project/runbook.md", "docs/release/acceptance-2026-07-20.md", "fixtures/manifest.json"],
+    depsIn: ["docs/agent/HUB.codex.md"],
+    risks: ["acceptanceが古いとrepository completionを誤判定する"],
+    tests: ["npm test", "npm run birdseye-check", "npm pack --dry-run --cache ./.npm-cache"],
+  },
+  "docs/ipo-controlled-profile.md": {
+    role: "ipo-profile",
+    caps: "docs/birdseye/caps/docs.ipo-controlled-profile.md.json",
+    summary: "ipo_controlledのDQ-01〜DQ-21、waiver、approval evidence、retention、exit codeと、repository実装完成・外部release approval分離の契約。",
+    depsOut: ["docs/requirements.md", "docs/spec/gate-policy.md", "docs/release/acceptance-2026-07-20.md"],
+    depsIn: ["docs/agent/HUB.codex.md", "docs/control-mapping.md"],
+    risks: ["repository completionを外部IPO統制承認へ自動昇格する"],
+    tests: ["npm run schema-check", "npm run enum-check", "npm run birdseye-check"],
+  },
+  "docs/spec/gate-policy.md": {
+    role: "ipo-gate-policy-spec",
+    caps: "docs/birdseye/caps/docs.spec.gate-policy.md.json",
+    summary: "ipo_controlledのGate policy、基本DQ-01〜DQ-17、reliability DQ-18〜DQ-21、exit code、verdict優先順位、waiver境界を固定する。",
+    depsOut: ["docs/spec/index.md", "docs/ipo-controlled-profile.md", "docs/spec/reliability-extension.md"],
+    depsIn: ["docs/spec/index.md", "docs/ipo-controlled-profile.md"],
+    risks: ["DQ ownership drift、conditional_goをCI successとして扱う、waiverでDQを消す"],
+    tests: ["npm run schema-check", "npm run enum-check", "npm run test:fixtures"],
+  },
+  "docs/spec/acceptance.md": {
+    role: "superseded-spec-acceptance",
+    caps: "docs/birdseye/caps/docs.spec.acceptance.md.json",
+    summary: "2026-06-03時点の仕様書検収履歴。現行のrepository completionはproject evaluationと2026-07-20 acceptanceへ移管済み。",
+    depsOut: ["docs/project/evaluation.md", "docs/release/acceptance-2026-07-20.md"],
+    depsIn: ["docs/spec/index.md"],
+    risks: ["過去no_goを現在状態と誤認する"],
+    tests: ["npm run birdseye-check", "git diff --check"],
+  },
   "schemas/gate-input.schema.json": { role: "top-level-runtime-schema", caps: "docs/birdseye/caps/schemas.gate-input.schema.json.json" },
   "fixtures/manifest.json": { role: "fixture-manifest", caps: "docs/birdseye/caps/fixtures.manifest.json.json" },
   "src/validation.ts": { role: "public-validation-api", caps: "docs/birdseye/caps/src.validation.ts.json" },
@@ -94,6 +139,21 @@ const additions = {
     risks: ["historical review の旧 DQ 分類や未実装記録を現在の正本と誤認しない"],
     tests: ["npm run birdseye-check", "git diff --check"],
   },
+  "docs/release/acceptance-2026-07-20.md": {
+    role: "repository-completion-acceptance",
+    caps: "docs/birdseye/caps/docs.release.acceptance-2026-07-20.md.json",
+    summary: "QEG repository completion、evidenced_by provenance closure、隔離consumer smoke、CI証跡、外部実環境とpublishの境界を記録する現行Gate。",
+    depsOut: [
+      "docs/requirements.md",
+      "docs/project/evaluation.md",
+      "docs/spec/reliability-hardening.md",
+      "docs/spec/reliability-hardening-checklist.md",
+      "fixtures/manifest.json",
+    ],
+    depsIn: ["README.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md"],
+    risks: ["未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、既存v0.2.0 tagを再利用する"],
+    tests: ["npm run test:fixtures", "npm run test:package", "npm run birdseye-check", "git diff --check"],
+  },
   "tests/runtime.test.mjs": { role: "runtime-contract-tests", caps: "docs/birdseye/caps/tests.runtime.test.mjs.json" },
   "tests/fixture-regression.mjs": { role: "fixture-e2e-harness", caps: "docs/birdseye/caps/tests.fixture-regression.mjs.json" },
   "tests/package-smoke.mjs": { role: "package-and-packed-types-smoke", caps: "docs/birdseye/caps/tests.package-smoke.mjs.json" },
@@ -152,6 +212,13 @@ const newEdges = [
   ["docs/spec/reliability-hardening-checklist.md", "fixtures/manifest.json"],
   ["docs/spec/reliability-extension-review-2026-07-19.md", "docs/spec/reliability-extension.md"],
   ["docs/spec/reliability-extension-review-2026-07-19.md", "docs/spec/reliability-hardening.md"],
+  ["README.md", "docs/release/acceptance-2026-07-20.md"],
+  ["docs/agent/HUB.codex.md", "docs/release/acceptance-2026-07-20.md"],
+  ["docs/project/blueprint.md", "docs/release/acceptance-2026-07-20.md"],
+  ["docs/project/evaluation.md", "docs/release/acceptance-2026-07-20.md"],
+  ["docs/release/acceptance-2026-07-20.md", "docs/requirements.md"],
+  ["docs/release/acceptance-2026-07-20.md", "docs/spec/reliability-hardening.md"],
+  ["docs/release/acceptance-2026-07-20.md", "fixtures/manifest.json"],
   ["docs/spec/reliability-extension.md", "schemas/qeg.bundle.schema.json"],
   ["docs/spec/reliability-extension.md", "schemas/gate-policy.schema.json"],
   ["docs/spec/reliability-extension.md", "schemas/shared-defs.schema.json"],

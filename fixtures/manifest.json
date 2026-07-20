@@ -291,6 +291,26 @@
       "snapshot": true
     },
     {
+      "name": "negative-resilience-evidenced-by-conflict",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-18",
+        "blockerRuleIds": [],
+        "commandExitCodes": {
+          "validate": 0,
+          "gate": 2,
+          "record": 2,
+          "report": 2,
+          "evidenceVerify": 0,
+          "policyLint": 0,
+          "snapshot": 0
+        }
+      },
+      "snapshot": true
+    },
+    {
       "name": "negative-resilience-latest-fail",
       "classification": "negative",
       "expected": {

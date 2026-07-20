@@ -2,8 +2,8 @@
 intent_id: INT-QEG-RUNBOOK-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-07-04
-next_review_due: 2026-08-04
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Runbook
@@ -11,7 +11,7 @@ next_review_due: 2026-08-04
 ## Environments
 
 - Local: Node.js 20 以上
-- CI: Node.js 24、`npm run typecheck`、JSON schema parse、schema/enum drift check、QEG cumulative report を必須確認にする
+- CI: Node.js 20 / 24、public type contract、runtime / fixture、package、Birdseye、JSON parse、QEG cumulative report を必須確認にする
 - Release dry-run: `npm pack --dry-run --cache ./.npm-cache`
 
 ## Execute
@@ -19,7 +19,7 @@ next_review_due: 2026-08-04
 ### 1. 準備
 
 ```sh
-npm install
+npm ci
 ```
 
 依存が既にある場合は省略できる。
@@ -165,21 +165,23 @@ uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0,
 - go=5、conditional_go=0、no_go=0
 - KanoMode の `go` は Kano-inspired requirements audit の証跡であり、正式な狩野調査または IPO controlled release approval ではない
 
-### 9. IPO controlled 実装 Gate 証跡
+### 9. Repository completion Gate
 
 ```sh
-npm run build
-node dist/cli.js validate fixtures/negative-approval-missing
-node dist/cli.js gate fixtures/negative-approval-missing
-node dist/cli.js record fixtures/negative-approval-missing
+npm run test:types
+npm run test:runtime
+npm run test:fixtures
+npm run test:package
+npm run birdseye-check
+node tools/json-check.mjs
 ```
 
 期待結果:
 
-- 6 negative fixture の `validate` が PASS
-- 6 negative fixture の `gate` が `disqualified` と exit code `2`
-- 6 negative fixture の `record` が own-output validation PASS
-- `docs/spec/implementation-gate-2026-06-03.md` が、未実装 DQ code と IPO controlled release Gate `no_go` 維持理由を記録している
+- 53 fixture（Reliability / Resilience 22件）のmanifest contractとsnapshotがPASS
+- public source型とpacked tarball consumer型がPASS
+- `negative-resilience-evidenced-by-conflict`がDQ-18 / exit 2
+- `docs/release/acceptance-2026-07-20.md`がrepository完成、外部実環境未評価、publish別判断を分離する
 
 ## Confirm
 
@@ -191,7 +193,7 @@ node dist/cli.js record fixtures/negative-approval-missing
 - mock test は placement retirement の `evidenceStrength`、連続 green 回数、risk coverage に算入されず DQ-14 になる
 - `qeg-report-action/action.yml` が Node.js 24 action を使い、`exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` output を持つ
 - `docs/spec/operational-cli-extensions.md` が report / baseline audit / doctor / explain / schema-check / enum-check / evidence verify / policy lint / repro-bundle / check / snapshot / init / Action の contract を固定している
-- `docs/project/tasks.codex.md` が TASK-01〜TASK-10 の実装順、対象、受入条件を固定している
+- `docs/project/tasks.codex.md` が完了済みTASK-01〜TASK-10の履歴としてsupersededになっている
 - `fixtures/README.md` が expected verdict / DQ を固定している
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備を固定している
 - `docs/spec/` が TASK-09 / TASK-10 の実装判断に必要な Gate policy、waiver、approval evidence、retention、immutability、evidence package を固定している
@@ -200,6 +202,7 @@ node dist/cli.js record fixtures/negative-approval-missing
 - `docs/spec/code-to-gate-2026-06-03/` が code-to-gate による静的 Gate 証跡を保持している
 - `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による要求価値監査証跡を保持している
 - `docs/spec/implementation-gate-2026-06-03.md` が実装 Gate と release Gate を分離している
+- `docs/release/acceptance-2026-07-20.md` が現行の総合完成判定とrelease境界を記録している
 
 ## Rollback / Retry
 

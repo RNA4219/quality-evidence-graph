@@ -16,7 +16,7 @@
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
 4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
-5. `docs/spec/implementation-gate-2026-06-03.md` - 現在の実装 Gate 証跡
+5. `docs/release/acceptance-2026-07-20.md` - 現在の総合完成判定
 6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
 
 フォーカス手順:
@@ -42,7 +42,8 @@
 ## Current Implementation
 
 - controlled governance profile 実装済み。
-- DQ-01 から DQ-17 まで実装済み。
+- DQ-01からDQ-21、Reliability / ResilienceのBLK-REL-01〜04、waiver、artifact / signal verificationを実装済み。
+- resilience evidenceは`testId`を判定用join keyとし、存在する`evidenced_by` provenanceが矛盾または曖昧ならDQ-18でfail-closedにする。
 - fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - test node は `testExecutionMode=real|mock` を持ち、mock test は graph に残しても Gate 証跡の件数・強度・green 回数・risk coverage には算入しない。
@@ -53,9 +54,15 @@
 
 ```sh
 npm run typecheck
+npm run test:types
 npm run build
+npm run test:runtime
 npm run schema-check
 npm run enum-check
+npm run test:fixtures
+npm run test:package
+npm run birdseye-check
+node tools/json-check.mjs
 npm pack --dry-run --cache ./.npm-cache
 ```
 

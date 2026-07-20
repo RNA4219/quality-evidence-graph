@@ -1,28 +1,22 @@
 {
   "id": "docs/spec/acceptance.md",
-  "role": "ipo-spec-acceptance",
+  "role": "superseded-spec-acceptance",
+  "generation": "00012",
   "public_api": [],
-  "summary": "docs/spec の検収観点、手動確認ケース、コマンド確認、仕様書作成 Gate / 実装着手 Gate / IPO release Gate、レビュー記録と Gate 検収記録確認を固定する。",
+  "summary": "2026-06-03時点の仕様書検収履歴。現行のrepository completionはproject evaluationと2026-07-20 acceptanceへ移管済み。",
   "deps_out": [
-    "docs/project/runbook.md",
     "docs/project/evaluation.md",
-    "docs/spec/index.md",
-    "docs/spec/review-2026-06-03.md",
-    "docs/spec/gate-acceptance-2026-06-03.md"
+    "docs/release/acceptance-2026-07-20.md"
   ],
   "deps_in": [
-    "docs/spec/index.md",
-    "docs/spec/review-2026-06-03.md",
-    "docs/spec/gate-acceptance-2026-06-03.md"
+    "docs/spec/index.md"
   ],
   "risks": [
-    "仕様書作成 Go と IPO controlled release Go を混同すると未実装のまま release Go と誤認する"
+    "過去no_goを現在状態と誤認する"
   ],
   "tests": [
-    "npm run typecheck",
-    "schema JSON parse",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm run birdseye-check",
+    "git diff --check"
   ],
-  "generation": "00011",
-  "contentHash": "sha256:62d2ebbf57d666c8bd2908d5f76f6878466689add6d4f59a0e0695152d2328ae"
+  "contentHash": "sha256:96ac579cfc4790a530b95eb4dbc25d49b5dcf9517d219b38654b0467814a017f"
 }

@@ -1,7 +1,7 @@
 {
   "id": "src/gate/reliability/blockers.ts",
   "role": "reliability-blocker-stage",
-  "generation": "00011",
+  "generation": "00012",
   "public_api": [],
   "summary": "QEG 0.2.0 fail-closed contract component.",
   "deps_out": [],

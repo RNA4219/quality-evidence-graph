@@ -9,6 +9,50 @@ import {
   lexicalCompare,
 } from "./utils.js";
 
+function evidencedByProvenanceDqs(
+  input: DQDetectorInput,
+  test: ResilienceTestNode,
+  evidenceNodes: readonly ResilienceExecutionEvidenceNode[],
+): EvidenceSelection["disqualifications"] {
+  const nodesById = new Map(input.graph.nodes.map((node) => [node.id, node]));
+  const contradictoryIds = new Set<string>();
+
+  for (const evidence of evidenceNodes) {
+    const incoming = input.graph.edges.filter(
+      (edge) => edge.kind === "evidenced_by" && edge.to === evidence.id,
+    );
+    if (incoming.length === 0) continue;
+
+    const sourceIds = [...new Set(incoming.map((edge) => edge.from))].sort(
+      lexicalCompare,
+    );
+    const source = sourceIds.length === 1
+      ? nodesById.get(sourceIds[0] ?? "")
+      : undefined;
+    if (
+      sourceIds.length === 1 &&
+      sourceIds[0] === test.id &&
+      source?.kind === "test"
+    ) {
+      continue;
+    }
+
+    contradictoryIds.add(evidence.id);
+    contradictoryIds.add(test.id);
+    for (const sourceId of sourceIds) contradictoryIds.add(sourceId);
+  }
+
+  return contradictoryIds.size === 0
+    ? []
+    : [
+      dq(
+        "DQ-18",
+        "Latest resilience evidence has evidenced_by provenance that contradicts testId",
+        [...contradictoryIds],
+      ),
+    ];
+}
+
 export function selectEvidence(
   input: DQDetectorInput,
   test: ResilienceTestNode,
@@ -93,6 +137,14 @@ export function selectEvidence(
         ),
       ],
       exclusionReason: "ambiguous_latest_evidence",
+    };
+  }
+  const provenanceDqs = evidencedByProvenanceDqs(input, test, newest);
+  if (provenanceDqs.length > 0) {
+    return {
+      evidence: newest[0],
+      disqualifications: provenanceDqs,
+      exclusionReason: "contradictory_evidenced_by_provenance",
     };
   }
   return { evidence: newest[0], disqualifications: [] };

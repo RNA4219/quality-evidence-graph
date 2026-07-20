@@ -1,15 +1,15 @@
 ---
 intent_id: INT-QEG-SPEC-ACCEPTANCE-001
 owner: quality-evidence-graph
-status: active
+status: superseded
 profile: ipo_controlled
-last_reviewed_at: 2026-06-03
-next_review_due: 2026-07-03
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # 仕様書検収
 
-この文書は `docs/spec/` の検収条件を固定する。
+この文書は2026-06-03時点の`docs/spec/`検収条件を記録した履歴資料である。現行の総合検収は`docs/project/evaluation.md`と`docs/release/acceptance-2026-07-20.md`へ移管した。
 
 ## 1. 検収観点
 
@@ -20,7 +20,7 @@ next_review_due: 2026-07-03
 | SPEC-03 | Waiver / approval | waiver、approval evidence、ControlRoles、human review の必須項目が固定されている。 |
 | SPEC-04 | Evidence package | 必須 input、QEG output、manual evidence、policy、waiver、approval evidence、hash が固定されている。 |
 | SPEC-05 | Retention / immutability | storage classification、tamper evidence、silent overwrite 判定が固定されている。 |
-| SPEC-06 | No-Go 分離 | 仕様書作成完了後も IPO controlled release は実装と fixture が揃うまで `no_go` である。 |
+| SPEC-06 | Gate分離 | repository実装完了と、外部のIPO controlled release approvalを分離する。 |
 | SPEC-07 | Review record | 仕様書見直し結果、修正方針、残リスクが `docs/spec/review-2026-06-03.md` に記録されている。 |
 | SPEC-08 | Gate acceptance | 実装前 Gate の Go/No-Go 判定が `docs/spec/gate-acceptance-2026-06-03.md` に記録されている。 |
 
@@ -56,10 +56,12 @@ git ls-files docs/spec/index.md docs/spec/gate-policy.md docs/spec/waiver-approv
 
 - 仕様書作成 Gate: `go`
 - 実装着手 Gate: `go`
-- IPO controlled release Gate: `no_go`
+- 2026-06-03時点のIPO controlled release Gate: `no_go`
+- 現行repository implementation Gate: `go`（`docs/release/acceptance-2026-07-20.md`参照）
+- External release / publish approval: `separate_decision`
 
 理由:
 
 - TASK-09 / TASK-10 の実装判断に必要な policy、waiver、approval evidence、retention、immutability、evidence package の contract が仕様書で固定された。
-- ただし、TypeScript 型、JSON Schema、CLI、fixture 実体、own-output validation は未実装である。
-- 実装と実証が揃うまで、IPO controlled release を `go` にしてはならない。
+- 当時未実装だったTypeScript型、JSON Schema、CLI、fixture、own-output validationは後続実装で完了した。
+- repository完成を、実組織の統制承認やpublish approvalへ自動昇格してはならない。
