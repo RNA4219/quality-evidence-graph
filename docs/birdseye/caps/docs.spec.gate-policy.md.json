@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/gate-policy.md",
   "role": "ipo-gate-policy-spec",
-  "generation": "00012",
+  "generation": "00013",
   "public_api": [],
   "summary": "ipo_controlledのGate policy、基本DQ-01〜DQ-17、reliability DQ-18〜DQ-21、exit code、verdict優先順位、waiver境界を固定する。",
   "deps_out": [

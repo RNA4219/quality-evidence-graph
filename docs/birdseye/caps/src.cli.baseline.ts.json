@@ -23,6 +23,6 @@
     "npm run build",
     "node dist/cli.js baseline audit .qeg/baseline-audit-ok.json fixtures/negative-approval-missing"
   ],
-  "generation": "00012",
+  "generation": "00013",
   "contentHash": "sha256:3e58e363fa931153f13da06aa55b4b82963fa9a4486cafb3c4bef367e38208ce"
 }

@@ -17,6 +17,6 @@
   "tests": [
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00012",
+  "generation": "00013",
   "contentHash": "sha256:c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157"
 }

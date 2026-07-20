@@ -1,7 +1,7 @@
 {
   "id": "docs/release/acceptance-2026-07-20.md",
   "role": "repository-completion-acceptance",
-  "generation": "00012",
+  "generation": "00013",
   "public_api": [],
   "summary": "QEG repository completion、evidenced_by provenance closure、隔離consumer smoke、CI証跡、外部実環境とpublishの境界を記録する現行Gate。",
   "deps_out": [
@@ -17,7 +17,7 @@
     "docs/project/blueprint.md"
   ],
   "risks": [
-    "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、既存v0.2.0 tagを再利用する"
+    "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"
   ],
   "tests": [
     "npm run test:fixtures",
@@ -25,5 +25,5 @@
     "npm run birdseye-check",
     "git diff --check"
   ],
-  "contentHash": "sha256:b356e144d5cb0dacdd9480cb631f1c498c586b8b72d41181198c0e21a4f616c7"
+  "contentHash": "sha256:76463faa453867342375e3127ff5bfe983166264c52e342ab2b61107d9db426b"
 }

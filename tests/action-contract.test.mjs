@@ -7,7 +7,7 @@ const ci = await readFile(".github/workflows/ci.yml", "utf-8");
 const initSource = await readFile("src/cli/init.ts", "utf-8");
 
 test("external Action is pinned and fail-closed by default", () => {
-  assert.match(action, /@quality-harness\/quality-evidence-graph@0\.2\.0/);
+  assert.match(action, /@quality-harness\/quality-evidence-graph@0\.3\.0/);
   assert.match(action, /enforce:[\s\S]*?default: "true"/);
 });
 
@@ -27,7 +27,7 @@ test("self CI is diagnostic-only and matrixed", () => {
   assert.match(ci, /node-version: \[20, 24\]/);
 });
 
-test("generated integration workflow uses the 0.2.0 enforced Action contract", () => {
-  assert.match(initSource, /qeg-report-action@v0\.2\.0/);
+test("generated integration workflow uses the 0.3.0 enforced Action contract", () => {
+  assert.match(initSource, /qeg-report-action@v0\.3\.0/);
   assert.doesNotMatch(initSource, /qeg-report-action@v1/);
 });

@@ -138,8 +138,8 @@ npm pack --dry-run --cache ./.npm-cache
 
 GitHub Actions では、manual demo target として `fixtures/negative-approval-missing` を指定し、job が最終的に赤でも `qeg-ci-report` artifact と Step Summary が残ることを検収する。
 
-## 0.2.0 report / Action contract
+## 0.3.0 report / Action contract
 
 report JSONはqeg-ci-report-v2とし、selectionとトップレベルerrorsを持つ。Git差分取得成功後の関連targetなしだけno_relevant_changes/exit 0とする。Git未初期化、shallow clone不足、全strategy失敗はdetection_failed/exit 1である。QEG_CHANGED_FILES指定時はGitを参照しない。
 
-checkはschema-check、enum-check、doctor、evidence verify、policy lint、snapshot、reportを集約する。外部Actionは0.2.0 CLIへ固定し、既定enforce trueとする。install/build/report失敗もreport errorとexit 1へ反映し、artifact upload後にfailureを返す。
+checkはschema-check、enum-check、doctor、evidence verify、policy lint、snapshot、reportを集約する。外部Actionは0.3.0 CLIへ固定し、既定enforce trueとする。install/build/report失敗もreport errorとexit 1へ反映し、artifact upload後にfailureを返す。

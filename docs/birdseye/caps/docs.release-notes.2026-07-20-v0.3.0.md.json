@@ -1,0 +1,25 @@
+{
+  "id": "docs/release-notes/2026-07-20-v0.3.0.md",
+  "role": "v0.3.0-release-notes",
+  "generation": "00013",
+  "public_api": [],
+  "summary": "QEG 0.3.0のReliability / Resilience、互換境界、install方法、公開後検証を記録するrelease notes。",
+  "deps_out": [
+    "CHANGELOG.md",
+    "docs/release/acceptance-2026-07-20.md",
+    "qeg-report-action/action.yml"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/project/runbook.md"
+  ],
+  "risks": [
+    "package versionとqegVersionの混同、tag・GitHub Release・npm sourceの不一致"
+  ],
+  "tests": [
+    "npm run test:package",
+    "npm run test:runtime",
+    "npm run birdseye-check"
+  ],
+  "contentHash": "sha256:d9440162810de54e6b35c401aed3a43fcb62962ce6fc22ecdd6daa871b05b999"
+}

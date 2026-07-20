@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/acceptance.md",
   "role": "superseded-spec-acceptance",
-  "generation": "00012",
+  "generation": "00013",
   "public_api": [],
   "summary": "2026-06-03時点の仕様書検収履歴。現行のrepository completionはproject evaluationと2026-07-20 acceptanceへ移管済み。",
   "deps_out": [

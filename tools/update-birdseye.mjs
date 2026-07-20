@@ -3,7 +3,7 @@ import { readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00012";
+const generation = "00013";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -151,8 +151,17 @@ const additions = {
       "fixtures/manifest.json",
     ],
     depsIn: ["README.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md"],
-    risks: ["未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、既存v0.2.0 tagを再利用する"],
+    risks: ["未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"],
     tests: ["npm run test:fixtures", "npm run test:package", "npm run birdseye-check", "git diff --check"],
+  },
+  "docs/release-notes/2026-07-20-v0.3.0.md": {
+    role: "v0.3.0-release-notes",
+    caps: "docs/birdseye/caps/docs.release-notes.2026-07-20-v0.3.0.md.json",
+    summary: "QEG 0.3.0のReliability / Resilience、互換境界、install方法、公開後検証を記録するrelease notes。",
+    depsOut: ["CHANGELOG.md", "docs/release/acceptance-2026-07-20.md", "qeg-report-action/action.yml"],
+    depsIn: ["README.md", "docs/project/runbook.md"],
+    risks: ["package versionとqegVersionの混同、tag・GitHub Release・npm sourceの不一致"],
+    tests: ["npm run test:package", "npm run test:runtime", "npm run birdseye-check"],
   },
   "tests/runtime.test.mjs": { role: "runtime-contract-tests", caps: "docs/birdseye/caps/tests.runtime.test.mjs.json" },
   "tests/fixture-regression.mjs": { role: "fixture-e2e-harness", caps: "docs/birdseye/caps/tests.fixture-regression.mjs.json" },
@@ -174,7 +183,7 @@ for (const [path, node] of Object.entries(additions)) {
     role: node.role,
     generation,
     public_api: [],
-    summary: node.summary ?? "QEG 0.2.0 fail-closed contract component.",
+    summary: node.summary ?? "QEG 0.3.0 fail-closed contract component.",
     deps_out: node.depsOut ?? [],
     deps_in: node.depsIn ?? [],
     risks: node.risks ?? ["型、schema、fixture、CLI契約を同時に更新する"],
@@ -218,6 +227,10 @@ const newEdges = [
   ["docs/project/evaluation.md", "docs/release/acceptance-2026-07-20.md"],
   ["docs/release/acceptance-2026-07-20.md", "docs/requirements.md"],
   ["docs/release/acceptance-2026-07-20.md", "docs/spec/reliability-hardening.md"],
+  ["README.md", "docs/release-notes/2026-07-20-v0.3.0.md"],
+  ["docs/project/runbook.md", "docs/release-notes/2026-07-20-v0.3.0.md"],
+  ["docs/release-notes/2026-07-20-v0.3.0.md", "docs/release/acceptance-2026-07-20.md"],
+  ["docs/release-notes/2026-07-20-v0.3.0.md", "qeg-report-action/action.yml"],
   ["docs/release/acceptance-2026-07-20.md", "fixtures/manifest.json"],
   ["docs/spec/reliability-extension.md", "schemas/qeg.bundle.schema.json"],
   ["docs/spec/reliability-extension.md", "schemas/gate-policy.schema.json"],

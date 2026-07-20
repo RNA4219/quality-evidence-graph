@@ -124,6 +124,30 @@ npm pack --dry-run --cache ./.npm-cache
 - `docs/spec/` が配布対象に含まれる
 - `qeg-report-action/` が配布対象に含まれる
 
+### 5.5. 0.3.0 publish
+
+公開は、release branchとmainの全Gateが緑になった後に実行する。
+
+```sh
+git switch main
+git pull --ff-only origin main
+npm ci
+npm run build
+npm pack --json --pack-destination <release-artifact-dir>
+git tag -a v0.3.0 -m "Quality Evidence Graph v0.3.0"
+git push origin v0.3.0
+npm publish <release-artifact-dir>/quality-harness-quality-evidence-graph-0.3.0.tgz --access public
+gh release create v0.3.0 <release-artifact-dir>/quality-harness-quality-evidence-graph-0.3.0.tgz --title "Quality Evidence Graph v0.3.0" --notes-file docs/release-notes/2026-07-20-v0.3.0.md
+```
+
+公開条件:
+
+- tag target、GitHub Release target、npm tarball sourceは同一main commitとする。
+- 既存tagを移動・再利用しない。
+- npm publish前にtarball install、`qeg --version`、library import、schema-checkを実行する。
+- npm publish後にregistry metadataとfresh installを再確認する。
+- tag、GitHub Release、npm packageのいずれかが失敗した場合、既に公開済みのimmutable artifactは変更せず、原因を直して同一versionの未完了操作だけを再試行する。
+
 ### 6. IPO 統制仕様書確認
 
 ```sh

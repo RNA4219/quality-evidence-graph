@@ -1,7 +1,7 @@
 {
   "id": "docs/project/evaluation.md",
   "role": "current-acceptance-criteria",
-  "generation": "00012",
+  "generation": "00013",
   "public_api": [],
   "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Node 20 / 24 CIを含む現行受入条件。",
   "deps_out": [

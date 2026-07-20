@@ -28,6 +28,6 @@
     "npm run build",
     "npm run report -- fixtures/positive-release-go"
   ],
-  "generation": "00012",
+  "generation": "00013",
   "contentHash": "sha256:6d84df78850e40408e233a2913d33c85da4753da8512bf8959374e5c91c4434f"
 }

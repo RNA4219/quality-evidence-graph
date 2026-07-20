@@ -111,7 +111,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.2.0
+      - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.0
         with:
           targets: .qeg
           output-path: .qeg/qeg-ci-report.json

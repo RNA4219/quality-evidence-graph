@@ -1,18 +1,18 @@
 ---
 intent_id: INT-QEG-RELEASE-ACCEPTANCE-20260720
 owner: quality-evidence-graph
-status: verified
+status: release_approved
 last_reviewed_at: 2026-07-20
 next_review_due: 2026-10-20
 ---
 
-# QEG repository completion acceptance — 2026-07-20
+# QEG repository completion and v0.3.0 release acceptance — 2026-07-20
 
 ## Decision
 
-QEG本体はfeature completeであり、repository内のrelease candidateとして`go`とする。code-bearing commitとevidence-record docs-only commitのNode 20 / 24 CIはすべて成功した。
+QEG本体はfeature completeであり、package / Action `0.3.0`の公開を`go`とする。公開対象commitは、PR #4の全ローカルGateとNode 20 / 24 CIを成功させ、mainへ反映されたcommitとする。
 
-この判定は、実cluster、実fault injection、実サービスのresilience、Lakda real acceptance、tag、publish、release approvalを含まない。
+この判定はrepository contract、GitHub Action、npm packageの公開を対象とする。実cluster、実fault injection、実サービスのresilience、Lakda real acceptance、consumer固有のproduction approvalは含まない。
 
 ## Gate Summary
 
@@ -27,7 +27,7 @@ QEG本体はfeature completeであり、repository内のrelease candidateとし�
 | Isolated consumer acceptance | go | Node 24.15.0 / npm 11.12.1の一時git repoへpacked tarballをfresh install |
 | Node 20 / 24 CI | go | code-bearing run 29717279305、evidence-record run 29717490349で両job SUCCESS |
 | External real-environment acceptance | not_evaluated | 本作業の範囲外 |
-| Publish approval | separate_decision | tag / publish / releaseを実行しない |
+| Publish approval | go | 新規annotated tag `v0.3.0`、GitHub Release、public npm packageを同一main commitから公開する |
 
 ## `evidenced_by` Contract Closure
 
@@ -65,8 +65,10 @@ Candidate tarball SHA-256: `7be2be3431280cf5ee1d7803baad0a09827f38e95e8a28954757
 
 - repositoryには既存のannotated tag `v0.2.0`があり、tagged commitは`876408a98ea6f5d6045bf024b261b87d38dfb9d4`である。現在sourceより前のcommitなので再利用・付け替えをしない。
 - GitHub Releaseは`v0.1.0`のみ、npm registryの`@quality-harness/quality-evidence-graph`は2026-07-20時点で未公開だった。
-- 本hardening作業は既定契約どおり`package.json=0.2.0` / `qegVersion=0.2`を変更しない。ただし現在HEADを既存`v0.2.0`として公開してはならない。
-- Reliability / Resilienceのpublic contractがtag後に追加されているため、次の公開版は`0.3.0`を推奨する。version bump、Action参照更新、CHANGELOG確定、tag、release、publishは別のrelease作業とする。
+- 公開版は`package.json=0.3.0`、graph wire contractは`qegVersion=0.2`とする。wire versionをpackage versionへ追随させない。
+- `src/cli.ts --version`、generated workflow、composite Actionの既定CLI、README利用例はすべて0.3.0へ固定する。
+- `v0.3.0`はmainの検証済みcommitへ新規annotated tagとして付与し、GitHub Releaseとnpm packageを同じsourceから公開する。
+- 公開後はregistry metadata、fresh install、CLI version、library import、GitHub tag / Release targetを独立再検証する。
 
 ## Final Evidence
 
@@ -81,4 +83,4 @@ Candidate tarball SHA-256: `7be2be3431280cf5ee1d7803baad0a09827f38e95e8a28954757
 | Evidence-record `quality (20)` | [run 29717490349 / job 88273508984](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717490349/job/88273508984) | SUCCESS |
 | Evidence-record `quality (24)` | [run 29717490349 / job 88273508988](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717490349/job/88273508988) | SUCCESS |
 
-この文書を`verified`へ変更する最終seal commitのCIは、自己参照を避けるためPRのlatest checkとして外部確認する。seal commitで本文へそのcommit自身のSHA / Run URLを追記しない。
+0.3.0 release commitのCI、main CI、tag target、GitHub Release、npm registryの最終値は自己参照を避け、GitHub / npmの外部状態として確認する。この文書へ自身の将来SHAやRun URLを事前記入しない。
