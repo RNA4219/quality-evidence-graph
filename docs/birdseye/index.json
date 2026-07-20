@@ -862,7 +862,7 @@
         "git diff --check"
       ],
       "mtime": "00014",
-      "contentHash": "sha256:158ab3743076d5bffbd80d4b9d216a6980351e15d2797662476154dee1790415"
+      "contentHash": "sha256:82216a2f6c6427b2bfa3b7872b5483f3271c0999e67cd69202c34b83a1a46d2b"
     },
     "docs/release-notes/2026-07-20-v0.3.1.md": {
       "role": "v0.3.1-release-notes",
