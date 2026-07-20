@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-RELEASE-ACCEPTANCE-20260720
 owner: quality-evidence-graph
-status: in_review
+status: verified
 last_reviewed_at: 2026-07-20
 next_review_due: 2026-10-20
 ---
@@ -10,7 +10,7 @@ next_review_due: 2026-10-20
 
 ## Decision
 
-QEG本体はfeature completeであり、repository内のrelease candidateとして`go`とする。code-bearing commitのNode 20 / 24 CIは成功済みであり、証跡追記後のdocs-only commitでも同じmatrixを再確認する。
+QEG本体はfeature completeであり、repository内のrelease candidateとして`go`とする。code-bearing commitとevidence-record docs-only commitのNode 20 / 24 CIはすべて成功した。
 
 この判定は、実cluster、実fault injection、実サービスのresilience、Lakda real acceptance、tag、publish、release approvalを含まない。
 
@@ -25,7 +25,7 @@ QEG本体はfeature completeであり、repository内のrelease candidateとし�
 | Package smoke | go | clean tarball install、CLI / library、packed public type contract、dry-run 714 files |
 | Documentation consistency | go | requirements、blueprint、task ledger、evaluation、spec、fixture契約を現行状態へ同期 |
 | Isolated consumer acceptance | go | Node 24.15.0 / npm 11.12.1の一時git repoへpacked tarballをfresh install |
-| Node 20 / 24 CI | code-bearing go | run 29717279305で両job SUCCESS。最終docs-only commitの再確認はpending |
+| Node 20 / 24 CI | go | code-bearing run 29717279305、evidence-record run 29717490349で両job SUCCESS |
 | External real-environment acceptance | not_evaluated | 本作業の範囲外 |
 | Publish approval | separate_decision | tag / publish / releaseを実行しない |
 
@@ -77,7 +77,8 @@ Candidate tarball SHA-256: `7be2be3431280cf5ee1d7803baad0a09827f38e95e8a28954757
 | Local full gate | `npm ci`、35 runtime、53 fixture、22 reliability E2E、package / schema / enum / Birdseye / operational CLI / dry-run | success |
 | Code-bearing `quality (20)` | [run 29717279305 / job 88272902466](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717279305/job/88272902466) | SUCCESS |
 | Code-bearing `quality (24)` | [run 29717279305 / job 88272902498](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717279305/job/88272902498) | SUCCESS |
-| Latest docs-only `quality (20)` | pending | pending |
-| Latest docs-only `quality (24)` | pending | pending |
+| Evidence-record commit | `e875855d8a38889aee7b8082dbf22d5cd2cb15ab` | success |
+| Evidence-record `quality (20)` | [run 29717490349 / job 88273508984](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717490349/job/88273508984) | SUCCESS |
+| Evidence-record `quality (24)` | [run 29717490349 / job 88273508988](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29717490349/job/88273508988) | SUCCESS |
 
-最終証跡を記録するdocs-only commitでもNode 20 / 24 CIを再確認し、最新commitのcheckが両方SUCCESSであることをもって本記録を`verified`へ変更する。
+この文書を`verified`へ変更する最終seal commitのCIは、自己参照を避けるためPRのlatest checkとして外部確認する。seal commitで本文へそのcommit自身のSHA / Run URLを追記しない。

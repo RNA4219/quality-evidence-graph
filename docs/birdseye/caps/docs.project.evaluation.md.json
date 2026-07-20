@@ -20,5 +20,5 @@
     "npm run birdseye-check",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "contentHash": "sha256:6e89e80b88859c0540ff8a797496e7ec242dfbce018d6d3e68136b6e82827257"
+  "contentHash": "sha256:dfff755895e9a9098bd3d1c3c61ff50d8b48ce2f5f5773480225feea2a1a9ede"
 }

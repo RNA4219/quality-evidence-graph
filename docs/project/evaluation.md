@@ -50,7 +50,7 @@ git diff --check
 - [x] `negative-resilience-evidenced-by-conflict`がDQ-18 / exit 2を返した
 - [x] Birdseye generation `00012`が95 sourceを参照した
 - [x] 隔離consumer acceptanceが成功した
-- [ ] 最終commitのNode 20 / 24 CIがSUCCESSになった
-- [ ] `docs/release/acceptance-2026-07-20.md`に上記証跡と非評価範囲を記録した
+- [x] code-bearing commitとevidence-record docs-only commitのNode 20 / 24 CIがSUCCESSになった
+- [x] `docs/release/acceptance-2026-07-20.md`に上記証跡と非評価範囲を記録した
 
-このチェックリストは実行証跡が揃った時点で更新する。過去の準備Gateや実装Gateは履歴として保持し、現行判定には総合完了記録を使用する。
+過去の準備Gateや実装Gateは履歴として保持し、現行判定には総合完了記録を使用する。最終seal commitのCIは総合完了記録の自己参照を避け、PR latest checkとして外部確認する。
