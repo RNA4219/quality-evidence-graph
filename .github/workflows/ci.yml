@@ -179,7 +179,7 @@ jobs:
               );
             }
 
-portability:
+  portability:
     name: portability (windows-24)
     runs-on: windows-latest
 

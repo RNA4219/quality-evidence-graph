@@ -38,6 +38,8 @@ test("optional preflight failures become report errors", () => {
 test("self CI exercises the bundled Action in the Node matrix", () => {
   assert.match(ci, /enforce: "false"/);
   assert.match(ci, /node-version: \[20, 24\]/);
+  assert.match(ci, /\n  portability:\r?\n    name: portability \(windows-24\)/);
+  assert.doesNotMatch(ci, /^portability:/m);
   assert.doesNotMatch(ci, /report-command: node dist\/cli\.js/);
   assert.match(ci, /Release lifecycle acceptance/);
 });
