@@ -1,13 +1,13 @@
 ---
 title: QEG v0.3.1 GitHub-only Release Acceptance
-status: release_candidate
+status: release_approved
 date: 2026-07-20
 version: 0.3.1
 qegVersion: "0.2"
 latestCodeBearingCommit: cd056f02a8033dfc7b2559e084b343d7155eecbb
 latestCodeCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29750676199
-latestDocsCI: pending
-decision: conditional_go
+latestDocsCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29751221363
+decision: go
 ---
 
 # QEG v0.3.1 GitHub-only Release Acceptance
@@ -78,14 +78,18 @@ HATEをdegradedとするため、実fault injectionの成功を主張しない�
 
 ## 7. Gate
 
-現時点は `conditional_go`。code-bearing commit `cd056f02a8033dfc7b2559e084b343d7155eecbb` はPR run [29750676199](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29750676199)で `quality (20)`、`quality (24)`、`portability (windows-24)` がすべて成功し、各jobのlifecycle evidence artifactも保存された。以下の残条件を満たした時点で `go`へ更新する。
+リリース実行Gateは `go`。code-bearing commit `cd056f02a8033dfc7b2559e084b343d7155eecbb` はPR run [29750676199](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29750676199)で `quality (20)`、`quality (24)`、`portability (windows-24)` がすべて成功し、各jobのlifecycle evidence artifactも保存された。証跡commitはrun [29751221363](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29751221363)で同じ3ジョブが成功した。
 
-- ローカル全Gateとlifecycle acceptanceが成功する。
-- code-bearing commitのLinux Node 20/24、Windows Node 24が成功しartifactを残す。
-- docs-only証跡commitの最新CIも成功する。
-- mainへ統合後、tag `v0.3.1` とGitHub Release assetが同一commitへ結び付く。
-- tag上のworkflow_dispatchでAction bundleとlifecycle evidenceが再検証される。
+- ローカル全Gateとlifecycle acceptance: pass
+- code-bearing commitのLinux Node 20/24、Windows Node 24とartifact: pass
+- docs-only証跡commitの最新CI: pass
+
+公開Gateは次を満たすまで閉じない。
+
+- mainへ統合後、tag `v0.3.1` とGitHub Release assetを同一commitへ結び付ける。
+- tag上のworkflow_dispatchでAction bundleとlifecycle evidenceを再検証する。
+- GitHub Releaseを公開後、assetとtag targetを再取得して検証する。
 
 ## 8. Go/No-Go brief
 
-機能の追加量ではなく、配布物が壊れた場合に検知し、復元し、復旧後の新しい証拠を残せることをrelease条件とする。npm registryは条件から除外する。上記Gate完了前はNo-Go、完了後はGitHub-only v0.3.1としてGoとする。
+機能の追加量ではなく、配布物が壊れた場合に検知し、復元し、復旧後の新しい証拠を残せることをrelease条件とする。npm registryは条件から除外する。本書の `go` はtag検証を開始できることを意味し、GitHub Release公開は公開Gate成功後にのみ行う。
