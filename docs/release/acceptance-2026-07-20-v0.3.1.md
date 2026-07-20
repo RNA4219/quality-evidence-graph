@@ -4,8 +4,8 @@ status: release_candidate
 date: 2026-07-20
 version: 0.3.1
 qegVersion: "0.2"
-latestCodeBearingCommit: pending
-latestCodeCI: pending
+latestCodeBearingCommit: cd056f02a8033dfc7b2559e084b343d7155eecbb
+latestCodeCI: https://github.com/RNA4219/quality-evidence-graph/actions/runs/29750676199
 latestDocsCI: pending
 decision: conditional_go
 ---
@@ -72,13 +72,13 @@ decision: conditional_go
 | code-to-gate | ran/passed | run `ctg-202607201158-local`。raw 12、accepted-design 1、effective high/critical 0、readiness failed conditions 0。中優先度12件は保守性候補として可視化 |
 | HATE | degraded | HATE producerは今回実行せず、lifecycle harnessの実行証跡を直接QEGへ渡す |
 | manual-bb | ran | 本書のrisk、case、oracle、Gateで検収 |
-| QEG | pending | local全Gate、PR CI、main/tag workflowで最終判断 |
+| QEG | ran/passed | local全Gate、PR run 29750676199のLinux Node 20/24・Windows Node 24、lifecycle artifactsが成功。main/tag workflowはrelease時に再検証 |
 
 HATEをdegradedとするため、実fault injectionの成功を主張しない。今回の障害は配布済みschema破損という制御されたrelease artifact faultである。
 
 ## 7. Gate
 
-現時点は `conditional_go`。以下を満たした時点で `go`へ更新する。
+現時点は `conditional_go`。code-bearing commit `cd056f02a8033dfc7b2559e084b343d7155eecbb` はPR run [29750676199](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29750676199)で `quality (20)`、`quality (24)`、`portability (windows-24)` がすべて成功し、各jobのlifecycle evidence artifactも保存された。以下の残条件を満たした時点で `go`へ更新する。
 
 - ローカル全Gateとlifecycle acceptanceが成功する。
 - code-bearing commitのLinux Node 20/24、Windows Node 24が成功しartifactを残す。
