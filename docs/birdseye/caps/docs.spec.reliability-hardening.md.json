@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-hardening.md",
   "role": "reliability-resilience-hardening-spec",
-  "generation": "00011",
+  "generation": "00013",
   "public_api": [],
   "summary": "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
   "deps_out": [
@@ -27,5 +27,5 @@
     "npm run test:package",
     "npm run birdseye-check"
   ],
-  "contentHash": "sha256:3272db2965a1d860c26341dd50c9e79acb629de72790413f691f9aa02a828b7d"
+  "contentHash": "sha256:842e3fe2c37de7c70fbd5a0787a121acbaba59ff10e748eafb81f50b40aff3bb"
 }

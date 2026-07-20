@@ -16,8 +16,10 @@
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
 4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
-5. `docs/spec/implementation-gate-2026-06-03.md` - 現在の実装 Gate 証跡
+5. `docs/release/acceptance-2026-07-20.md` - 現在の総合完成判定
 6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
+
+Current release: [v0.3.0 release notes](docs/release-notes/2026-07-20-v0.3.0.md)
 
 フォーカス手順:
 
@@ -42,7 +44,8 @@
 ## Current Implementation
 
 - controlled governance profile 実装済み。
-- DQ-01 から DQ-17 まで実装済み。
+- DQ-01からDQ-21、Reliability / ResilienceのBLK-REL-01〜04、waiver、artifact / signal verificationを実装済み。
+- resilience evidenceは`testId`を判定用join keyとし、存在する`evidenced_by` provenanceが矛盾または曖昧ならDQ-18でfail-closedにする。
 - fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - test node は `testExecutionMode=real|mock` を持ち、mock test は graph に残しても Gate 証跡の件数・強度・green 回数・risk coverage には算入しない。
@@ -53,9 +56,15 @@
 
 ```sh
 npm run typecheck
+npm run test:types
 npm run build
+npm run test:runtime
 npm run schema-check
 npm run enum-check
+npm run test:fixtures
+npm run test:package
+npm run birdseye-check
+node tools/json-check.mjs
 npm pack --dry-run --cache ./.npm-cache
 ```
 
@@ -101,8 +110,8 @@ node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze C:\Users\ryo-n\Co
 - [README_JA.md](README_JA.md)
 - [README_EN.md](README_EN.md)
 
-## 0.2.0 release contract
+## 0.3.0 release contract
 
-QEG 0.2.0 uses one runtime schema/evidence preflight. Broken JSON or a missing decision envelope is exit 1; parseable required-component violations are DQ-01/exit 2. Required evidence is checked against real files, SHA-256, and revision. Optional-only failures remain warnings.
+QEG 0.3.0 keeps the `qegVersion=0.2` wire contract and adds Reliability / Resilience evidence, DQ-18 through DQ-21, BLK-REL-01 through BLK-REL-04, normalization adapters, and fail-closed `evidenced_by` provenance checks. Broken JSON or a missing decision envelope is exit 1; parseable required-component violations are DQ-01/exit 2. Required evidence is checked against real files, SHA-256, and revision. Optional-only failures remain warnings.
 
-changed-only returns no_relevant_changes/exit 0 only after successful detection; detection failure is exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth. The v0.2.0 external Action enforces after artifact upload by default; set enforce: "false" only for diagnostic-only use.
+changed-only returns no_relevant_changes/exit 0 only after successful detection; detection failure is exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth. The v0.3.0 external Action enforces after artifact upload by default; set enforce: "false" only for diagnostic-only use.

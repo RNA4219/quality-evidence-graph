@@ -28,6 +28,9 @@ function runQeg(args) {
 const help = runQeg(["--help"]);
 assert.equal(help.status, 0, help.stderr || help.stdout);
 assert.match(help.stdout, /Usage: qeg/);
+const version = runQeg(["--version"]);
+assert.equal(version.status, 0, version.stderr || version.stdout);
+assert.equal(version.stdout.trim(), "0.3.0");
 const schemaCheck = runQeg(["schema-check"]);
 assert.equal(schemaCheck.status, 0, schemaCheck.stderr || schemaCheck.stdout);
 const imported = await import(new URL(`file:///${join(packageRoot, "dist", "index.js").replaceAll("\\", "/")}`));
@@ -35,7 +38,7 @@ assert.equal(typeof imported.evaluateGate, "function");
 assert.equal(typeof imported.validateGateInput, "function");
 assert.equal(typeof imported.verifyEvidenceArtifacts, "function");
 assert.equal(typeof imported.getExitCode, "function");
-assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.2.0");
+assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.3.0");
 
 await writeFile(
   join(temp, "package.json"),

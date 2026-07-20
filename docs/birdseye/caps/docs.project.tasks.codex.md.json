@@ -1,25 +1,22 @@
 {
   "id": "docs/project/tasks.codex.md",
-  "role": "implementation-task-ledger",
+  "role": "superseded-implementation-task-ledger",
+  "generation": "00013",
   "public_api": [],
-  "summary": "TASK-01〜TASK-10 の実装順、対象、完了条件、検証コマンドを固定する実装タスク台帳。",
+  "summary": "完了済みTASK-01〜TASK-10の実装順、対象、受入条件を保持する履歴台帳。現行判定はrepository completion acceptanceへ移管済み。",
   "deps_out": [
     "docs/requirements.md",
-    "fixtures/README.md",
-    "docs/control-mapping.md",
-    "docs/ipo-controlled-profile.md",
-    "docs/project/evaluation.md"
+    "docs/release/acceptance-2026-07-20.md"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md"
   ],
   "risks": [
-    "TASK 順序や受入条件が曖昧だと adapter / gate 実装時に判断が揺れる"
+    "superseded台帳の過去no_goを現在状態と誤認する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm run birdseye-check",
+    "git diff --check"
   ],
-  "generation": "00011",
-  "contentHash": "sha256:fee3ad6a8d7cba74208fee32da73717fdba304f53381ad4e8b98c6d4cbe5dcc5"
+  "contentHash": "sha256:fd336595ebd844b649bcbcc2a8e66b66c2a74afe569122fe6c72b57f95524ac4"
 }

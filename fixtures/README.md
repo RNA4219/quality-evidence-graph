@@ -2,8 +2,8 @@
 intent_id: INT-QEG-FIXTURES-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Fixture Contract
@@ -58,19 +58,18 @@ Optional artifact がある場合は `optional/` に置く。
 
 ## Reliability / Resilience hardening matrix
 
-`positive-reliability-go/` 0�W�n�0k0k!0n 21 fixture 0� on-disk E2E kcg,0h0Y0�0`positive-legacy-compatible/` 0o reliability disabled 0n legacy assignability 0�O݊<0Y0�0
+`positive-reliability-go/` を基準に 22 fixture を on-disk E2E で固定する。`positive-legacy-compatible/` は reliability disabled の legacy 互換性を確認する。
 
-- positive: `positive-reliability-go`0`positive-legacy-compatible`
-- DQ-06 / DQ-12: `negative-resilience-artifact-tamper`0`negative-resilience-revision-mismatch`
-- DQ-180DQ-21: `negative-resilience-mock-only`0`negative-resilience-stale`0`negative-resilience-lifecycle`0`negative-resilience-selection-ambiguous`0`negative-resilience-signal-missing`0`negative-resilience-signal-mismatch`0`negative-resilience-policy-identity`
-- blocker: `negative-resilience-threshold`0`negative-resilience-recovery`0`negative-resilience-nonpass`0`negative-resilience-safety`
-- waiver: `conditional-resilience-waived-threshold`0`conditional-resilience-waived-recovery`0`conditional-resilience-waived-nonpass`0`negative-resilience-safety-waiver-attempt`
-- selection / safety history: `negative-resilience-latest-fail`0`negative-resilience-prior-safety-attempt`
+- positive: `positive-reliability-go`、`positive-legacy-compatible`
+- DQ-06 / DQ-12: `negative-resilience-artifact-tamper`、`negative-resilience-revision-mismatch`
+- DQ-18〜DQ-21: `negative-resilience-mock-only`、`negative-resilience-stale`、`negative-resilience-lifecycle`、`negative-resilience-evidenced-by-conflict`、`negative-resilience-selection-ambiguous`、`negative-resilience-signal-missing`、`negative-resilience-signal-mismatch`、`negative-resilience-policy-identity`
+- blocker: `negative-resilience-threshold`、`negative-resilience-recovery`、`negative-resilience-nonpass`、`negative-resilience-safety`
+- waiver: `conditional-resilience-waived-threshold`、`conditional-resilience-waived-recovery`、`conditional-resilience-waived-nonpass`、`negative-resilience-safety-waiver-attempt`
+- selection / safety history: `negative-resilience-latest-fail`、`negative-resilience-prior-safety-attempt`
 
-T reliability fixture 0o `validate`0`gate`0temp copy N
-0n `record`0JSON/text `report`0`evidence verify`0`policy lint`0`snapshot` 0�[��L0Y0�0expected blocker 0o ID / message 0kR�0H0f0c[�0U0�0_ `ruleId`0risk / test / evidence0`effective`0`waiverId` 0�kԏ0Y0�0
+各 reliability fixture は `validate`、`gate`、一時copy上の `record`、JSON/text `report`、`evidence verify`、`policy lint`、`snapshot` を検証する。expected blocker は ID / message に加えて、指定された `ruleId`、risk / test / evidence、`effective`、`waiverId` を検証する。
 
-fixture 0h mock 0nbR�0o[� cluster0[� fault injection0Lakda real acceptance 0�aTs0W0j0D0
+fixture と mock の合格は、実cluster、実fault injection、Lakda real acceptance を意味しない。
 
 ## Acceptance Commands
 
@@ -81,4 +80,4 @@ npm run test:runtime
 npm run test:fixtures
 ```
 
-`test:fixtures` 0oQhmanifest fixture0nexpected verdict0hsnapshot0�i�<0W0reliability matrix0g0oQhcommandR%exit code0report0record0accounting0sourceRefs0~0gkԏ0Y0�0
+`test:fixtures` は全manifest fixtureのexpected verdictとsnapshotを比較し、reliability matrixでは各commandのexit code、report、record、accounting、sourceRefsまで検証する。

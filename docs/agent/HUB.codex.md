@@ -2,8 +2,8 @@
 intent_id: INT-QEG-HUB-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-07-19
-next_review_due: 2026-10-19
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # docs/agent/HUB.codex.md
@@ -21,25 +21,26 @@ next_review_due: 2026-10-19
 7. `docs/requirements.md`
 8. `docs/project/runbook.md`
 9. `docs/project/evaluation.md`
-10. `docs/project/guardrails.md`
-11. `docs/project/tasks.codex.md`
-12. `fixtures/README.md`
-13. `docs/control-mapping.md`
-14. `docs/ipo-controlled-profile.md`
-15. `docs/spec/index.md`
-16. `docs/spec/operational-cli-extensions.md`
-17. `docs/spec/reliability-extension.md`
-18. `docs/spec/reliability-hardening.md`
-19. `docs/spec/reliability-hardening-checklist.md`
-20. `docs/spec/reliability-extension-review-2026-07-19.md`
-21. `docs/spec/review-2026-06-03.md`
-22. `docs/spec/gate-acceptance-2026-06-03.md`
-23. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
-24. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
-25. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
-26. `docs/spec/kano-mode-2026-06-03/kano.json`
-27. `docs/spec/implementation-gate-2026-06-03.md`
-28. `docs/release-notes/2026-06-03-controlled-gate.md`
+10. `docs/release/acceptance-2026-07-20.md`
+11. `docs/project/guardrails.md`
+12. `docs/project/tasks.codex.md`（完了済み実装順序の履歴）
+13. `fixtures/README.md`
+14. `docs/control-mapping.md`
+15. `docs/ipo-controlled-profile.md`
+16. `docs/spec/index.md`
+17. `docs/spec/operational-cli-extensions.md`
+18. `docs/spec/reliability-extension.md`
+19. `docs/spec/reliability-hardening.md`
+20. `docs/spec/reliability-hardening-checklist.md`
+21. `docs/spec/reliability-extension-review-2026-07-19.md`
+22. `docs/spec/review-2026-06-03.md`
+23. `docs/spec/gate-acceptance-2026-06-03.md`
+24. `docs/spec/code-to-gate-2026-06-03/analysis-report.md`
+25. `docs/spec/code-to-gate-2026-06-03/release-readiness.json`
+26. `docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json`
+27. `docs/spec/kano-mode-2026-06-03/kano.json`
+28. `docs/spec/implementation-gate-2026-06-03.md`
+29. `docs/release-notes/2026-06-03-controlled-gate.md`
 
 ## 2. 入力ファイル分類
 
@@ -54,7 +55,8 @@ next_review_due: 2026-10-19
 | `docs/project/runbook.md` | execution / validation / release operation | high |
 | `docs/project/evaluation.md` | acceptance criteria / release checks | high |
 | `docs/project/guardrails.md` | repo operating constraints | high |
-| `docs/project/tasks.codex.md` | implementation task ledger | high |
+| `docs/project/tasks.codex.md` | superseded implementation task ledger | medium |
+| `docs/release/acceptance-2026-07-20.md` | current repository completion decision | high |
 | `fixtures/README.md` | fixture contract / expected verdict | high |
 | `docs/control-mapping.md` | IPO control mapping | high |
 | `docs/ipo-controlled-profile.md` | IPO profile contract | high |
@@ -84,7 +86,7 @@ next_review_due: 2026-10-19
 3. `docs/requirements.md` の該当要求 ID と `docs/project/evaluation.md` の検収条件へ紐づける。
 4. 実装タスクは `docs/project/tasks.codex.md` の形式で Objective / Scope / Requirements / Commands / Acceptance を記録する。
 5. 完了時は `docs/project/runbook.md` の確認手順と `docs/project/evaluation.md` の acceptance criteria に従って証跡を残す。
-6. 実装準備 Gate は `docs/implementation-prep-gate-2026-06-02.md` を起点に、release Gate と分離して判定する。
+6. 現在の完成判定は`docs/release/acceptance-2026-07-20.md`を起点にし、過去Gate文書は履歴として扱う。
 7. IPO 統制実装に入る場合は `docs/spec/index.md` から policy / waiver / approval / retention / evidence package の仕様を読む。
 
 ## 4. Birdseye 鮮度

@@ -1,9 +1,9 @@
 {
   "id": "src/gate/reliability/indexing.ts",
   "role": "reliability-indexing-stage",
-  "generation": "00011",
+  "generation": "00013",
   "public_api": [],
-  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "summary": "QEG 0.3.0 fail-closed contract component.",
   "deps_out": [],
   "deps_in": [],
   "risks": [

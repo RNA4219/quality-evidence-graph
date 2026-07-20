@@ -3,8 +3,8 @@ intent_id: INT-QEG-RELIABILITY-HARDENING-001
 owner: quality-evidence-graph
 status: active
 profile: standard,strict,ipo_controlled
-last_reviewed_at: 2026-07-19
-next_review_due: 2026-10-19
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Reliability / Resilience 実装 hardening 仕様
@@ -53,7 +53,7 @@ next_review_due: 2026-10-19
 |---|---|
 | REL-H01 | reliability evaluator は `src/gate/reliability/` 配下へ stage 単位で分割し、`src/gate/reliability.ts` は互換 facade とする。`src/evaluator` は新設しない。 |
 | REL-H02 | DQ-19 は選択一意性だけ、DQ-21 は reliability policy identity だけを扱う。timestamp、lifecycle、abort の不整合は DQ-18 とする。 |
-| REL-H03 | `testId` を evidence と test の判定用 join key とする。`evidenced_by` edge は provenance 監査に使うが、edge 不在だけで candidate を除外しない。 |
+| REL-H03 | `testId` を evidence と test の判定用 join key とする。canonical provenance edge は `test --evidenced_by--> execution_evidence` とする。edge 不在だけで candidate を除外しないが、edge が存在する場合は source test の集合が `testId` と一致しなければ DQ-18 とする。 |
 | REL-H04 | `status` を execution outcome の正本とする。`passed` は legacy-compatible な任意 summary であり、存在する場合だけ `status` と一致を要求する。 |
 | REL-H05 | non-completing status `error` / `timeout` / `skipped` には fault、observed、signal、recovery を要求しない。revision、timestamp、environment が有効なら decision-grade attempt として BLK-REL-03 にする。 |
 | REL-H06 | intra-node の構造・意味制約は schema validation、graph / policy / artifact をまたぐ制約は Gate evaluator が担当する。同一制約を双方で別実装しない。 |
@@ -73,7 +73,7 @@ next_review_due: 2026-10-19
 | DQ-01 | input の構造・intra-node semantic 不正 | strict schema 違反、SLO / signal / abort ID 重複、範囲逆転、`status` / `passed` 矛盾 |
 | DQ-06 | artifact verification 不成立 | report 不在、path / symlink escape、読込不能、SHA-256 不一致、signal EvidenceRef 未解決 |
 | DQ-12 | revision 不一致 | evidence、raw artifact、signal artifact の revision が `metadata.headRef` と不一致 |
-| DQ-18 | resilience candidate の資格不成立 | real candidate 不在、mock-only、stale / future / invalid time、environment、steady state、fault、abort、recovery lifecycle 不整合 |
+| DQ-18 | resilience candidate の資格不成立 | real candidate 不在、mock-only、矛盾した `evidenced_by` provenance、stale / future / invalid time、environment、steady state、fault、abort、recovery lifecycle 不整合 |
 | DQ-19 | evidence 選択の一意性不成立 | 同一 execution identity の競合、または latest instant に異なる decision fingerprint が複数存在 |
 | DQ-20 | observed / signal の証拠不成立 | required signal 不足、phase / metric / unit / aggregation 不一致、observed summary と measurement 不一致 |
 | DQ-21 | reliability policy identity 不成立 | schema-valid input で graph metadata を含む full revision、SHA-256 policy hash・policy ID・profile の cross-object 欠落・形式不正・3 者不一致、または policy の DQ scope 不足 |
@@ -150,7 +150,9 @@ message 文字列を分岐条件に使用してはならない。`rule` は test
 6. current candidate の `endedAt` を UTC instant に正規化し、最大 instant を latest とする。
 7. latest tie は canonical decision fingerprint が同一のときだけ重複として畳む。異なる場合は DQ-19 とし、ID や status の良否で選ばない。
 
-`evidenced_by` edge が存在する場合は provenance として report / sourceRefs に保持する。edge の欠落だけで `testId` が一致する evidence を除外しない。edge が別 test を指すなど明示的に矛盾する場合は schema / graph traceability の既存 DQ を適用し、silently ignore しない。
+`evidenced_by` edge は `from=test.id`、`to=evidence.id` を canonical 方向とする。対象 evidence への incoming `evidenced_by` edge が 0 件なら、`testId` を正本として candidate を許可する。1 件以上ある場合は、source node がすべて test であり、その source test ID の集合が `{evidence.testId}` と一致するときだけ許可する。同じ endpoint の重複 edge は意味が一意なので許可する。別 test、非 test node、または複数の異なる source test を含む場合は selection stage が DQ-18 を生成する。
+
+provenance 検証は `testId` による latest selection の後に行う。最新 candidate の edge が矛盾する場合、古い整合した pass へ fallback してはならない。同一 fingerprint として畳まれる latest duplicate のいずれかに矛盾 edge がある場合も DQ-18 とする。
 
 selected evidence が DQ または blocker になっても古い pass へ fallback してはならない。BLK-REL-04 は selected evidence だけでなく current revision の全 real attempt に適用する。
 
@@ -205,7 +207,7 @@ interface ReliabilityQualificationResult {
 
 各 issue / blocker は 1 stage だけが生成責任を持つ。
 
-- selection: evidence targetRevision の DQ-12、DQ-18 の candidate 不在、DQ-19
+- selection: evidence targetRevision の DQ-12、DQ-18 の candidate 不在 / `evidenced_by` provenance 矛盾、DQ-19
 - qualification: DQ-18 lifecycle、DQ-21
 - signals: DQ-20
 - artifact preflight: DQ-06、raw / signal artifact revision の DQ-12
@@ -293,6 +295,7 @@ interface から union type alias への変更で declaration merging を利用�
 | `negative-resilience-mock-only` | DQ-18 |
 | `negative-resilience-stale` | DQ-18 |
 | `negative-resilience-lifecycle` | DQ-18 |
+| `negative-resilience-evidenced-by-conflict` | DQ-18。最新 evidence の `testId` と incoming `evidenced_by` source test が矛盾し、旧 pass へ fallback しない |
 | `negative-resilience-selection-ambiguous` | DQ-19 |
 | `negative-resilience-signal-missing` | DQ-20 |
 | `negative-resilience-signal-mismatch` | DQ-20 |
@@ -396,6 +399,7 @@ normalizer、evaluator、report の内部 module 名や issue rule は wire cont
 - `passed` 未指定の valid pass を BLK-REL-03 にしない。
 - waiver は risk ID と test ID の双方が一致する BLK-REL-01〜03 だけを ineffective にでき、BLK-REL-04 は常に effective である。
 - latest fail と prior safety violation を後続 pass で隠せない。
+- `evidenced_by` 欠落と一致 edge は受理し、異なる source test を持つ最新 evidence は DQ-18 となり、旧 pass へ fallback しない。
 - reliability 無効時の既存 fixture verdict、exit code、report shape が不変である。
 
 ### 11.2 local verification

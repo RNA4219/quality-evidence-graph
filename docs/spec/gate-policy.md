@@ -3,8 +3,8 @@ intent_id: INT-QEG-SPEC-GATE-POLICY-001
 owner: quality-evidence-graph
 status: active
 profile: ipo_controlled
-last_reviewed_at: 2026-06-03
-next_review_due: 2026-07-03
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Gate Policy 仕様
@@ -84,10 +84,10 @@ Gate evaluator は次の順で判定する。
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない。 |
 | DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する。 |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない。 |
-| DQ-18 | 必須 risk に matching real resilience evidence がない、mock-only、wrong scenario / environment、または selected status が error / timeout / skipped。 |
-| DQ-19 | resilience evidence が stale、envelope timestamp が未来・逆順、または latest evidence の選択が曖昧。 |
+| DQ-18 | 必須 risk にmatching real resilience evidenceがない、mock-only、矛盾した`evidenced_by` provenance、stale / future / invalid time、environment、steady state、fault、abort、recovery lifecycleが不整合。 |
+| DQ-19 | 同一execution identityまたはlatest instantのevidenceが異なるdecision fingerprintを持ち、選択が曖昧。 |
 | DQ-20 | required observed / signal が存在しない、phase / metric / resolvable hash-backed EvidenceRef と結び付かない、または observed summary と一致しない。 |
-| DQ-21 | required な steady state、fault、abort、recovery、actual target / duration の field または時系列が欠落・矛盾する。 |
+| DQ-21 | reliability有効時のfull revision、SHA-256 policy hash、policy ID、profileのcross-object identityが欠落・形式不正・不一致、またはpolicyのDQ scopeが不足。 |
 
 ## 4. Waiver と DQ の関係
 

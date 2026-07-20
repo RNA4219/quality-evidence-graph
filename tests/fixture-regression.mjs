@@ -221,7 +221,7 @@ for (const fixture of manifest.fixtures) {
   );
 }
 
-assert.equal(reliabilityCount, 21, "the hardening matrix must contain 21 reliability fixtures");
+assert.equal(reliabilityCount, 22, "the hardening matrix must contain 22 reliability fixtures");
 const snapshots = run(["snapshot", "fixtures"]);
 assert.equal(snapshots.status, 0, snapshots.stdout + "\n" + snapshots.stderr);
 console.log(

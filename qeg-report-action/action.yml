@@ -17,7 +17,7 @@ inputs:
   report-command:
     description: Command used to invoke the QEG CLI before report arguments.
     required: false
-    default: "npx -y @quality-harness/quality-evidence-graph@0.2.0"
+    default: "npx -y @quality-harness/quality-evidence-graph@0.3.0"
   targets:
     description: Space-separated fixture directories or parent directories to report.
     required: false

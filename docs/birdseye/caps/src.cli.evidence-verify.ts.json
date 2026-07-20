@@ -23,6 +23,6 @@
     "npm run build",
     "node dist/cli.js evidence verify fixtures/positive-release-go"
   ],
-  "generation": "00011",
+  "generation": "00013",
   "contentHash": "sha256:967677439972e82d731d6a8eca73e349b39ff695a13f35679742b2cd238bb79a"
 }

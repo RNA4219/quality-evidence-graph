@@ -3,8 +3,8 @@ intent_id: INT-QEG-RELIABILITY-001
 owner: quality-evidence-graph
 status: active
 profile: standard,strict,ipo_controlled
-last_reviewed_at: 2026-07-19
-next_review_due: 2026-10-19
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Reliability / Resilience 拡張仕様
@@ -88,7 +88,7 @@ testType が resilience の test node は、既存の node 共通必須 field �
 
 risk coverage は test.coveredRiskIds の risk ID によって成立する。MVP は既存 graph との互換性を優先し、requires_test / evidenced_by edge を追加必須にはしない。required risk に対し coveredRiskIds を含む non-deleted、testType=resilience、testExecutionMode=real の test を required resilience test と呼ぶ。該当する test はすべて必須であり、いずれか 1 件を代替選択する OR 条件にはしない。required resilience test が 1 件もない、または mock-only の場合は DQ-18 とする。
 
-execution evidence は evidence.testId により test に結び付ける。edge は監査上の追加 provenance として受理するが、この MVP の selection 前提ではない。
+execution evidence は evidence.testId により test に結び付ける。canonical provenance edge は `test --evidenced_by--> execution_evidence` とする。edge は監査上の追加 provenance であり、欠落だけでは candidate を除外しない。edge が存在する場合は source node がすべて test で、その source test ID の集合が `{evidence.testId}` と一致しなければ DQ-18 とする。
 
 ### 3.2 resilienceScenario
 
@@ -286,7 +286,7 @@ evidenceAgeHours が 0 未満なら future evidence として DQ-18、maxEvidenc
 
 1. requiredForSeverities に該当する risk を required risk とする。
 2. 3.1 の定義に従い、non-deleted required resilience test を risk に join する。
-3. testId が一致する resilience evidence を linked candidate とする。evidenced_by edge は存在する場合に provenance として監査するが、edge 不在だけで candidate を除外しない。edge が別 test を指すなど明示的に矛盾する場合は既存の graph traceability DQ を適用する。
+3. testId が一致する resilience evidence を linked candidate とする。evidenced_by edge は存在する場合に provenance として監査するが、edge 不在だけで candidate を除外しない。latest candidate の incoming edge が別 test、非 test node、または複数の異なる source test を指す場合は DQ-18 とし、古い整合 evidence へ fallback しない。同じ source test / evidence endpoint の重複 edge は許可する。
 4. testExecutionMode=real に一致する evidence を base candidate とする。base candidate が 0 件なら DQ-18 とする。scenario、environment、lifecycle の妥当性は selected evidence を対象に DQ-18 で検証する。
 5. base candidate のうち targetRevision が metadata.headRef と一致するものを current candidate とする。base candidate はあるが current candidate が 0 件で revision mismatch が検出できる場合は DQ-12 とし、DQ-18 を重ねない。
 6. current candidate の endedAt を UTC instant に正規化し、最も新しい 1 件を selected evidence とする。environmentId または experimentId が異なっても別の selected evidence を作らない。
@@ -302,7 +302,7 @@ metadata.headRef と異なる evidence は base candidate として認識した�
 | Code | 条件 |
 |---|---|
 | DQ-12 | targetRevision と metadata.headRef が一致しない。既存 DQ を再利用する。 |
-| DQ-18 | 必須 risk に real candidate がない、mock-only、stale / future / invalid timestamp、required environment・steady state・fault・abort lifecycle が不整合である。 |
+| DQ-18 | 必須 risk に real candidate がない、mock-only、latest candidate の `evidenced_by` provenance が `testId` と矛盾する、stale / future / invalid timestamp、required environment・steady state・fault・abort lifecycle が不整合である。 |
 | DQ-19 | 同じ最新 endedAt の current evidence が異なる canonical decision fingerprint を持ち、選択が曖昧である。 |
 | DQ-20 | required observed summary / signal が存在しない、phase / metric / resolvable hash-backed EvidenceRef と結び付かない、または observed summary と signal measurement が一致しない。 |
 | DQ-21 | schema-valid な reliability input で、graph metadata を含む full revision、SHA-256 policyHash、policyId、profile の cross-object identity が欠落・形式不正・不一致である、または policy.dqScope が DQ-18〜DQ-21 をすべて含まない。top-level gate-input schema 違反は DQ-01 を優先する。 |
@@ -418,14 +418,15 @@ DQ code を追加する場合、schema、TypeScript union、policy lint の全 c
 | fixtures/positive-reliability-go | go。real、current revision、fresh、すべての必須 signal と recovery を持つ。 |
 | fixtures/negative-resilience-revision-mismatch | disqualified、primary DQ-12。 |
 | fixtures/negative-resilience-mock-only | disqualified、primary DQ-18。 |
-| fixtures/negative-resilience-stale-evidence | disqualified、primary DQ-18。 |
+| fixtures/negative-resilience-stale | disqualified、primary DQ-18。 |
 | fixtures/negative-resilience-signal-missing | disqualified、primary DQ-20。 |
-| fixtures/negative-resilience-signal-summary-mismatch | disqualified、primary DQ-20。 |
-| fixtures/negative-resilience-lifecycle-missing | disqualified、primary DQ-18。 |
+| fixtures/negative-resilience-signal-mismatch | disqualified、primary DQ-20。 |
+| fixtures/negative-resilience-lifecycle | disqualified、primary DQ-18。 |
+| fixtures/negative-resilience-evidenced-by-conflict | disqualified、primary DQ-18。latest evidence の `testId` と provenance edge が矛盾し、旧 pass へ fallback しない。 |
 | fixtures/negative-resilience-selection-ambiguous | disqualified、primary DQ-19。 |
-| fixtures/negative-resilience-threshold-blocker | no_go、primary BLK-REL-01。 |
-| fixtures/negative-resilience-safety-blocker | no_go、primary BLK-REL-04。 |
-| fixtures/positive-resilience-legacy-compatible | 既存 verdict を維持し、reliability section は disabled。 |
+| fixtures/negative-resilience-threshold | no_go、primary BLK-REL-01。 |
+| fixtures/negative-resilience-safety | no_go、primary BLK-REL-04。 |
+| fixtures/positive-legacy-compatible | 既存 verdict を維持し、reliability section は disabled。 |
 
 実装受入時は、次を満たさなければならない。
 

@@ -1,9 +1,9 @@
 {
   "id": "tests/fixture-regression.mjs",
   "role": "fixture-e2e-harness",
-  "generation": "00011",
+  "generation": "00013",
   "public_api": [],
-  "summary": "QEG 0.2.0 fail-closed contract component.",
+  "summary": "QEG 0.3.0 fail-closed contract component.",
   "deps_out": [],
   "deps_in": [],
   "risks": [
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:a61637aee2f2445721bceeff75953e38312d942239121242f05e7c14f4270277"
+  "contentHash": "sha256:3fdbc4cc824a8f62ad99f6e113dc9f9cbeaa9e6d6d369daad632948a65c83c73"
 }

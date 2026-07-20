@@ -1,27 +1,25 @@
 {
   "id": "docs/ipo-controlled-profile.md",
   "role": "ipo-profile",
-  "public_api": [
-    "GateProfile",
-    "DisqualificationCode"
-  ],
-  "summary": "ipo_controlled の Gate policy、waiver、approval evidence、retention、exit code policy の最小実装契約。",
+  "generation": "00013",
+  "public_api": [],
+  "summary": "ipo_controlledのDQ-01〜DQ-21、waiver、approval evidence、retention、exit codeと、repository実装完成・外部release approval分離の契約。",
   "deps_out": [
     "docs/requirements.md",
-    "schemas/gate-verdict.schema.json"
+    "docs/spec/gate-policy.md",
+    "docs/release/acceptance-2026-07-20.md"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
-    "docs/project/tasks.codex.md",
     "docs/control-mapping.md"
   ],
   "risks": [
-    "conditional_go を CI success と誤認すると IPO profile の統制が壊れる"
+    "repository completionを外部IPO統制承認へ自動昇格する"
   ],
   "tests": [
-    "npm run typecheck",
-    "schema JSON parse"
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run birdseye-check"
   ],
-  "generation": "00011",
-  "contentHash": "sha256:55a16c9a01a712b698d6abd6f248377cd7ad9c33f7fe2b7afebf28cc23475f80"
+  "contentHash": "sha256:981beff34126837272fc3a260e9ea3c87fd849e2829b5ea674aa342c0ebf35ae"
 }

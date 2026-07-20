@@ -1,10 +1,10 @@
 ---
 intent_id: INT-QEG-RELIABILITY-HARDENING-CHECKLIST-001
 owner: quality-evidence-graph
-status: active
+status: verified
 profile: standard,strict,ipo_controlled
-last_reviewed_at: 2026-07-19
-next_review_due: 2026-10-19
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Reliability / Resilience hardening 実装チェックリスト
@@ -21,6 +21,7 @@ next_review_due: 2026-10-19
 
 - [x] 元仕様の DQ-18 / DQ-19 / DQ-21 責務が hardening 仕様と一致している。
 - [x] evidence join は `testId` を判定用正本、`evidenced_by` edge を provenance としている。
+- [x] `evidenced_by` edge欠落は許可し、存在して`testId`と矛盾または複数testを指す場合はDQ-18としてfail-closedにする。
 - [x] `status` が outcome の正本で、`passed` 未指定を許容している。
 - [x] `error` / `timeout` / `skipped` の qualification が決定済みである。
 - [x] package version `0.2.0` と `qegVersion` `0.2` を維持している。
@@ -96,6 +97,7 @@ next_review_due: 2026-10-19
 - [x] `negative-resilience-mock-only` — DQ-18
 - [x] `negative-resilience-stale` — DQ-18
 - [x] `negative-resilience-lifecycle` — DQ-18
+- [x] `negative-resilience-evidenced-by-conflict` — DQ-18 / old pass fallback 禁止
 - [x] `negative-resilience-selection-ambiguous` — DQ-19
 - [x] `negative-resilience-signal-missing` — DQ-20
 - [x] `negative-resilience-signal-mismatch` — DQ-20
@@ -141,20 +143,23 @@ next_review_due: 2026-10-19
 - [x] 最新の code-bearing commit SHA を記録した。
 - [x] 当該 code-bearing commit の GitHub Actions `quality (20)` が SUCCESS。
 - [x] 当該 code-bearing commit の GitHub Actions `quality (24)` が SUCCESS。
-- [ ] 証跡を記録した docs-only commit を draft PR へ push した。
-- [ ] draft PR の最新 docs-only commit でも `quality (20)` / `quality (24)` が SUCCESS。
+- [x] 証跡を記録した docs-only commit を draft PR へ push した。
+- [x] draft PR の最新 docs-only commit でも `quality (20)` / `quality (24)` が SUCCESS。
 - [x] cancelled / skipped / 過去 commit の run を完了証跡に使っていない。
 - [x] release、tag、publish、merge を実行していない。
 
 | Evidence | Value | Verified at | Status |
 |---|---|---|---|
 | Latest code-bearing commit | `4f4090e94e46cb17e8eacbdc8062259fc19cc26b` | 2026-07-19 | success |
-| Draft PR | [#3](https://github.com/RNA4219/quality-evidence-graph/pull/3) | 2026-07-19 | draft |
+| Historical PR | [#3](https://github.com/RNA4219/quality-evidence-graph/pull/3) | 2026-07-20 | merged externally |
 | Code-bearing quality (20) | [run 29694500358 / job 88212782450](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29694500358/job/88212782450) | 2026-07-19 | SUCCESS |
 | Code-bearing quality (24) | [run 29694500358 / job 88212782412](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29694500358/job/88212782412) | 2026-07-19 | SUCCESS |
-| Latest docs-only quality (20) | PR latest check で外部確認 | - | pending |
-| Latest docs-only quality (24) | PR latest check で外部確認 | - | pending |
+| Latest docs-only commit | `166e3624c2aad429f9f08f57f6445e9a3fe581b8` | 2026-07-20 | success |
+| Latest docs-only quality (20) | [run 29699720993 / job 88226587628](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29699720993/job/88226587628) | 2026-07-20 | SUCCESS |
+| Latest docs-only quality (24) | [run 29699720993 / job 88226587609](https://github.com/RNA4219/quality-evidence-graph/actions/runs/29699720993/job/88226587609) | 2026-07-20 | SUCCESS |
 | Local verification log | `npm ci`、全12 gate、34 runtime、52 fixture（21 reliability E2E）、530 tracked JSON | 2026-07-19 | success |
+
+PR #3は上記hardening証跡の確定後、2026-07-20（JST）に外部でmergeされた。本チェックリストが記録する作業ではrelease、tag、publish、mergeを実行していない。`evidenced_by` provenance hardeningと総合完成判定は後続の`docs/release/acceptance-2026-07-20.md`へ引き継ぐ。
 
 ## 12. 停止条件
 

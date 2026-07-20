@@ -1,14 +1,14 @@
 ---
 intent_id: INT-QEG-TASK-001
 owner: quality-evidence-graph
-status: active
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+status: superseded
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # Implementation Task Ledger
 
-この台帳は `docs/requirements.md` の TASK-01〜TASK-10 を、実装者が追加判断なしで着手できる粒度に固定する。
+この台帳は `docs/requirements.md` の TASK-01〜TASK-10 を、実装者が追加判断なしで着手できる粒度に固定した履歴資料である。全項目は実装済みであり、現在の完成判定は `docs/release/acceptance-2026-07-20.md` に引き継いだ。
 
 ## Objective
 
@@ -30,7 +30,7 @@ Out:
 - Playwright / Jest / pytest などテスト実行フレームワーク本体
 - 外部 SaaS 本番設定
 - 組織固有承認フローの正本化
-- IPO controlled release Go 判定
+- release / tag / publish の実行
 
 ## Requirements Trace
 
@@ -72,12 +72,14 @@ git ls-files docs/requirements.md docs/project/tasks.codex.md fixtures/README.md
 - [x] TASK-01〜TASK-10 の順序、対象、完了条件が固定されている
 - [x] fixture の expected verdict / DQ は `fixtures/README.md` に固定されている
 - [x] IPO control hardening の最小 artifact は `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` に固定されている
-- [ ] TASK-01〜TASK-08 のコード実装が完了している
-- [ ] IPO controlled release Gate が Go になっている
+- [x] TASK-01〜TASK-08 のコード実装が完了している
+- [x] IPO controlled profile のrepository内実装Gateが Go になっている
 
 ## Current Gate Split
 
-- Implementation preparation: `go`
-- IPO controlled release: `no_go`
+- Implementation preparation: `go`（完了）
+- Repository implementation completion: `go`
+- External real-environment acceptance: `not_evaluated`
+- Publish approval: `separate_decision`
 
-実装準備 Go は、実装タスクと契約の判断余地が閉じていることを意味する。adapter / graph / placement / gate evaluator / record CLI の完成は、次の MVP release Gate で判定する。
+この台帳は実装順序の履歴として保持する。現行コード、fixture、CI、外部consumer smokeの証跡は総合完了記録を参照する。

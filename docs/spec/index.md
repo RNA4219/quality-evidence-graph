@@ -3,8 +3,8 @@ intent_id: INT-QEG-SPEC-INDEX-001
 owner: quality-evidence-graph
 status: active
 profile: ipo_controlled
-last_reviewed_at: 2026-07-19
-next_review_due: 2026-10-19
+last_reviewed_at: 2026-07-20
+next_review_due: 2026-10-20
 ---
 
 # IPO 統制仕様
@@ -47,7 +47,7 @@ next_review_due: 2026-10-19
 ### MVP 実装で扱う
 
 - `ipo_controlled` の Gate policy contract
-- DQ-01〜DQ-17 の有効範囲
+- DQ-01〜DQ-21 と BLK-REL-01〜04 の有効範囲
 - `conditional_go` / `no_go` / `disqualified` の exit code policy
 - waiver / approval evidence / retention / immutability / 職務分掌の最小 artifact contract
 - evidence package に含める最小要素
@@ -61,7 +61,6 @@ next_review_due: 2026-10-19
 - 外部 SaaS や immutable storage の本番設定
 - 監査法人、主幹事証券、取引所審査の代替
 - upstream tool の実行 orchestration
-- TypeScript 型、JSON Schema、CLI、fixture 実体の今回の仕様書作成タスク内での実装
 
 ## 4. 共通判定原則
 
@@ -83,4 +82,4 @@ next_review_due: 2026-10-19
 - `GatePolicy` は QEG 正本であり、`gatePolicyProposal` は verdict に直接影響させない。
 - すべての Gate 関連 reason、blocker、disqualification、waiver、approval evidence は `sourceRefs` を 1 件以上持つ。
 - `policyHash`、`contentHash`、`evidencePackageHash` は比較可能な文字列として扱い、アルゴリズムは原則として MVP では固定しない。ただし reliabilityPolicy 有効時の policyHash と resilience raw / signal artifact の contentHash は `docs/spec/reliability-extension.md` に従い SHA-256 に固定する。同一内容で再計算できることを実装 acceptance にする。
-- IPO controlled release Gate は、実装、fixture、own-output validation、evidence package が揃うまで `no_go` のままとする。
+- repository内の実装完成Gateと外部のrelease / publish approvalを分離する。現行判定は`docs/release/acceptance-2026-07-20.md`を参照する。

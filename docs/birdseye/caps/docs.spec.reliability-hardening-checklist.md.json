@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-hardening-checklist.md",
   "role": "reliability-resilience-hardening-checklist",
-  "generation": "00011",
+  "generation": "00013",
   "public_api": [],
   "summary": "Reliability / Resilience hardening の実装、fixture、local validation、Node 20 / 24 CI 証跡チェックリスト。",
   "deps_out": [
@@ -21,5 +21,5 @@
     "npm run birdseye-check",
     "git diff --check"
   ],
-  "contentHash": "sha256:9cdbcc7adc118c56f7a852bd2e267810ee7aef0520d26c34687e6981ea81bf51"
+  "contentHash": "sha256:ea4ca2c78f1e7698e26b501f5d0f098c589c22e35386ad041671cddc7f66ba2f"
 }

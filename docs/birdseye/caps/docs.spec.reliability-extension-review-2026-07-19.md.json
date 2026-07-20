@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-extension-review-2026-07-19.md",
   "role": "reliability-resilience-spec-review",
-  "generation": "00011",
+  "generation": "00013",
   "public_api": [],
   "summary": "Reliability / Resilience 拡張の初期仕様レビュー履歴。現在の修正 contract と残作業は hardening 仕様・チェックリストへ移管済み。",
   "deps_out": [

@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/reliability-extension.md",
   "role": "reliability-resilience-spec",
-  "generation": "00011",
+  "generation": "00013",
   "public_api": [],
   "summary": "外部 producer の resilience evidence を QEG が検証、会計、Gate 判定するための discriminator、policy、DQ / blocker、report、fixture contract。",
   "deps_out": [
@@ -30,5 +30,5 @@
     "npm run schema-check",
     "npm run enum-check"
   ],
-  "contentHash": "sha256:667727e1ab5ef03f53b55c6e6a716573512313c1f33c05d2a62e9aa61f5b7add"
+  "contentHash": "sha256:587cff6d7f16b0ffb2b22732d5e3ab2f13675e54edbabd14bf39939d8e9e27cc"
 }

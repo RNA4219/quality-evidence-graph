@@ -1,27 +1,25 @@
 {
   "id": "docs/spec/gate-policy.md",
-  "role": "ipo-spec",
-  "public_api": [
-    "GatePolicy",
-    "DisqualificationCode",
-    "GateVerdict"
-  ],
-  "summary": "ipo_controlled の Gate policy、DQ-01〜DQ-17、producer evidence identity mismatch、exit code、verdict 優先順位、waiver と DQ の関係を固定する。",
+  "role": "ipo-gate-policy-spec",
+  "generation": "00013",
+  "public_api": [],
+  "summary": "ipo_controlledのGate policy、基本DQ-01〜DQ-17、reliability DQ-18〜DQ-21、exit code、verdict優先順位、waiver境界を固定する。",
   "deps_out": [
     "docs/spec/index.md",
-    "docs/ipo-controlled-profile.md"
+    "docs/ipo-controlled-profile.md",
+    "docs/spec/reliability-extension.md"
   ],
   "deps_in": [
     "docs/spec/index.md",
     "docs/ipo-controlled-profile.md"
   ],
   "risks": [
-    "conditional_go を CI success と扱うと IPO 統制が壊れる",
-    "waiver で DQ を消すと判定資格の失格を隠す"
+    "DQ ownership drift、conditional_goをCI successとして扱う、waiverでDQを消す"
   ],
   "tests": [
-    "docs/spec/acceptance.md TC-SPEC-02"
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run test:fixtures"
   ],
-  "generation": "00011",
-  "contentHash": "sha256:a007e9a10b57d9826ceb8fb8534135592ce05c871b340f3a7a7adc250d5f3259"
+  "contentHash": "sha256:8babf394f38eb1f55a64a2acf603cde0e62971aa8568a3c6e39c2a71db521ff6"
 }
