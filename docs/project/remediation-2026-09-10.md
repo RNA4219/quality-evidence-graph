@@ -35,7 +35,8 @@ next_review_due: 2026-12-10
 - 実行ログとhash、対象source indexの指紋は [local-validation.json](../evidence/remediation-2026-09-10/local-validation.json) と同ディレクトリのログに保存。実行前後で既存の期待verdict/DQ/blockerは変更していない。
 - 3 producer E2Eはproducer schemaに従うfixtureを使用。実producer実行や実環境testの受入を主張しない。固定schemaのcommit/hash/licenseは `../spec/producer-schema-provenance.json` に記録。
 - Action lifecycleは隔離consumerへの配置→正常観測→schema破損→復旧→新規hash証拠までgo。実cluster・実fault injection・Lakda real acceptance・外部release approvalは未評価。
-- CI: 未実施。最終commitのLinux Node 20/24とWindows Node 24の結果を確認して確定する。
+- 実装commit: `5bd5ba8`。作業ブランチ: `agent/qeg-remediation-20260910`。ローカルのsource index指紋と保存ログで対象を特定できる。
+- CI: 未実施。リモートへのpush待ちであり、Linux Node 20/24とWindows Node 24の結果を確認するまで総合受入は確定しない。release/tag/publishも未実施。
 
 ## 過去の静的候補12件の対応
 
