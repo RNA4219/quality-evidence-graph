@@ -96,7 +96,7 @@ IPO レベルの利用では、本 repo は単なる開発支援ツールでは�
 
 受入条件:
 
-- 必須 artifact が 1 つでも欠ける run は DQ-01 として `disqualified` にする。
+- `upstream_artifacts` 入力では上記3接続先の必須 artifact が1つでも欠けるrunをDQ-01とする。組立済みgraphを受ける `native_graph` 入力は、QEG正本policyに入力mode、空でない必須artifact集合、評価範囲、sourceRefsを明記した場合に限り、その集合を必須とする。暗黙のnative例外は設けない。詳細は第22節。
 - adapter は upstream artifact のフィールドを canonical 型へ写像するだけにし、upstream の意味を上書きしない。
 - artifact ごとに `path`、`schemaId`、`contentHash`、`revision` を保持できる。
 - adapter が未知フィールドを見つけても、それだけで失格にしない。必須フィールド欠落、型不一致、判定に必要な根拠欠落だけを失格候補にする。
@@ -494,7 +494,7 @@ MVP は次を満たしたら完了とする。
 | REL-02 | resilience test を識別する | testType=resilience の test は scenario、coveredRiskIds、traceability を持つ |
 | REL-03 | resilience evidence を識別する | evidenceType=resilience の execution_evidence は adapter provenance、revision、actual fault、lifecycle、observed、hash 付き signal manifest を持つ |
 | REL-04 | real evidence を要求する | required risk の mock-only evidence は coverage に算入せず DQ-18 とする |
-| REL-05 | freshness と revision を検証する | targetRevision 不一致は DQ-12、stale または不正 timestamp は DQ-19 とする |
+| REL-05 | freshness と revision を検証する | targetRevision 不一致は DQ-12、stale または不正 timestamp は DQ-18、選択の曖昧さは DQ-19 とする |
 | REL-06 | observability を証明する | latency、traffic、errors、saturation と副作用 / data integrity は hash 付き signal artifact と測定情報により検証できる |
 | REL-07 | 実測 safety を検証する | actual target、duration、environment が policy 上限を超えた場合は blocker とする |
 | REL-08 | report を再現可能にする | risk 別 coverage、pass rate の分母、recovery time、DQ、blocker、excluded mock を出力する |
@@ -510,3 +510,32 @@ MVP は次を満たしたら完了とする。
 | REL-18 | evidence provenance の矛盾を fail closed にする | `evidenced_by` edge 欠落は許可し、canonical `test --evidenced_by--> evidence` edge が存在する場合は source test ID の集合を `evidence.testId` と照合する。矛盾は DQ-18 とし旧 pass へ fallback しない |
 
 詳細な field、判定優先順位、fixture、実装写像は docs/spec/reliability-extension.md を正本とする。
+
+## 22. 2026-09-10 改修要求（受入済みR01〜R06）
+
+本節は入力、生成処理、出力検証の不足を解消する追加要求である。仕様は `docs/spec/remediation-2026-09-10.md`、現在の実装・受入状態は `docs/project/remediation-2026-09-10.md` を参照する。過去の完成記録を、この改修の完了証拠として使わない。
+
+| ID | 要件 | 受入条件 |
+|---|---|---|
+| FIX-01 | 入力modeと必須集合をQEG policyに固定する | upstream_artifactsは必須3producerの14 artifact種を要求し、native_graphは明示された空でない集合を要求。未指定・欠落・重複を検出する |
+| FIX-02 | 不十分な初期入力をgoにしない | init直後、空graph、必須artifactを1種類ずつ省略、必要producer status欠落がDQ-01になる |
+| FIX-03 | 評価scopeを出力する | fixture / isolated_consumer / real_environment、対象、未評価範囲をGate/report/recordで読める |
+| FIX-04 | optionalと必須を区別する | 必須実体の不正はDQ、optionalだけの不正はwarning。modeを実データから暗黙推測しない |
+| FIX-05 | 変更ごとの配置充足を評価する | changed_code→obligation→placementをjoinし、別変更の配置や未解決IDでDQ-05を消さない |
+| FIX-06 | graph/planの参照を検証する | 重複ID、存在しないnode/obligation/testへの参照をDQ-03にする |
+| FIX-07 | 計画・実行・waiverを区別する | 検証済みかつ対象に関連するwaiverだけを使う。requireExecutedTests=trueで未実行・mock-onlyをgoにしない。実行failをno_goにする |
+| FIX-08 | 全出力JSONをschema検証する | positive/negativeのrecord・bundle・plan・gateがschema-valid。parse成功だけでPASSにしない |
+| FIX-09 | 失敗診断のsourceRefsを保証する | 空sourceRefsを報告するDQにも入力位置を付ける。不正入力を説明するrecordがschema-valid |
+| FIX-10 | 出力不正を独立検出する | schema-checkが生成済みoutputも検証。検証失敗時に成功成果物を置換せず診断を残す |
+| FIX-11 | 3producerのraw artifactを受ける | versionと必須fieldを検証し、producer schemaが許容する未写像fieldを原文に保持。未知version・schemaが禁止するfield等の契約違反はpartialとDQ |
+| FIX-12 | graph生成を公開する | buildGraph pure APIとbuild-graph CLIでsourceを保持した決定的node/edgeを生成。ID参照切れを隔離する |
+| FIX-13 | テスト配置生成を公開する | placeTests pure APIとplace-tests CLIでrisk/変更ごとのobligation、7候補のfit/cost/score/rationaleを出す |
+| FIX-14 | 必要な成果物一式を生成する | recordが4 JSONとMarkdown、互換output-recordを作る。自身を含まないhash連鎖と別manifestで再検証できる |
+| FIX-15 | 生成から判定までconsumerで検証する | raw→build-graph→place-tests→gate→recordを手書きcanonical inputなしに完走し、順序を変えてもsemantic結果が同一 |
+| FIX-16 | 要求と完成状態を結ぶ | 全改修IDに実装・試験・判定scopeの証拠があり、未完了を完成扱いしない |
+| FIX-17 | DQと件数の表記を同期する | freshness=DQ-18、ambiguity=DQ-19。静的解析raw/effective/抑制/severityと版情報が正本間で一致 |
+| FIX-18 | 診断原因を残す | optionalのENOENTを許容し、破損JSON・権限・読込失敗をpathと操作付きで報告 |
+| FIX-19 | 保守性候補を処理する | normalizer/formatter/policy/reliability/migrationを責務で分割し、公開API/CLIと判定契約を維持 |
+| FIX-20 | 抑制と受入を可視化する | 対象・根拠・owner・期限・再確認条件を記録し、保存済み12候補を対応済み/設計受理へ分類。警告非表示だけを成功にしない |
+
+packageは0.4.0へ更新する。qegVersion=0.2の公開型は追加fieldで拡張し、旧policyはコンパイル可能でもinputContract未設定の評価をDQ-01とする。旧fixture/consumerは明示modeと必要集合へ移行する。IPO approval、waiver、retention、resilience資格判定を緩和しない。

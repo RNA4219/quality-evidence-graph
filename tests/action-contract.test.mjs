@@ -21,7 +21,7 @@ test("tagged Action bundle exposes the release CLI version", () => {
     encoding: "utf8",
   });
   assert.equal(version.status, 0, version.stderr || version.stdout);
-  assert.equal(version.stdout.trim(), "0.3.1");
+  assert.equal(version.stdout.trim(), "0.4.0");
 });
 
 test("Action uploads diagnostics before enforcing the verdict", () => {
@@ -44,7 +44,7 @@ test("self CI exercises the bundled Action in the Node matrix", () => {
   assert.match(ci, /Release lifecycle acceptance/);
 });
 
-test("generated integration workflow uses the 0.3.1 enforced Action contract", () => {
-  assert.match(initSource, /qeg-report-action@v0\.3\.1/);
+test("generated integration workflow uses the installed local Action contract", () => {
+  assert.match(initSource, /\.\/\.qeg\/runtime\/qeg-report-action/);
   assert.doesNotMatch(initSource, /qeg-report-action@v1/);
 });

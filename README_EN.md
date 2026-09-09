@@ -1,5 +1,9 @@
 # Quality Evidence Graph
 
+The current development version is 0.4.0 (unreleased); the wire version remains 0.2. See the [current remediation ledger](docs/project/remediation-2026-09-10.md) and [raw producer example](examples/raw-producer-contract/README.md). The v0.3.1 Action examples below describe the previous distribution.
+
+Version 0.4.0 provides `build-graph` → `place-tests` → `gate` → `record`. A policy must declare `inputContract`, including `upstream_artifacts` or `native_graph`, required artifacts, evaluation scope, and whether executed tests are required. Empty initialization and a placement plan alone do not establish passing evidence. `init` copies the installed distribution's local Action and schemas into `.qeg/runtime`.
+
 Quality Evidence Graph, or QEG, is a local-first quality gate foundation that turns quality decisions into traceable evidence instead of informal confidence.
 
 It connects requirements, risks, code changes, test placement, execution evidence, waivers, approval evidence, and release decisions into a single graph-backed record.
@@ -143,15 +147,15 @@ Key sources of truth:
 
 QEG makes quality accountable by turning release judgment into evidence, policy, and executable gate contracts.
 
-## 0.3.1 contract
+## 0.3.1 contract (distribution history)
 
-v0.3.1 is distributed through GitHub Release and a self-contained GitHub Action. The default Action uses the bundled CLI without npm registry or `npx` access. `npm run test:release-lifecycle` proves change → risk → test → isolated deployment → observation → fault → recovery → new evidence. The source of truth is `docs/release/acceptance-2026-07-20-v0.3.1.md`.
+The following describes the previous distribution. Its GitHub Release, self-contained Action, and isolated schema corruption/recovery acceptance are recorded in `docs/release/acceptance-2026-07-20-v0.3.1.md`. Current 0.4.0 implementation and validation are tracked in `docs/project/remediation-2026-09-10.md`.
 
 All CLI commands share runtime schema/evidence preflight. Broken JSON or a missing decision envelope is a CLI error (exit 1); a parseable invalid required component is DQ-01 (exit 2). Required evidence is verified against real files, SHA-256, and revision; optional-only failures are warnings.
 
 changed-only returns no_relevant_changes/exit 0 only after successful detection. Detection failure is detection_failed/exit 1. QEG_CHANGED_FILES is authoritative. fixtures/manifest.json is the fixture source of truth.
 
-The package version is 0.3.1 while the graph wire contract remains `qegVersion=0.2`. Version 0.3.1 adds Reliability / Resilience, DQ-18 through DQ-21, BLK-REL-01 through BLK-REL-04, normalizers, and fail-closed `evidenced_by` provenance validation.
+The package version at that release was 0.3.1 and its graph wire contract was `qegVersion=0.2`. That release includes Reliability / Resilience, DQ-18 through DQ-21, BLK-REL-01 through BLK-REL-04, normalizers, and fail-closed `evidenced_by` provenance validation.
 
 The v0.3.1 external Action enforces after artifact upload by default. Set enforce: "false" only for diagnostic collection and consume its exit_code output.
 

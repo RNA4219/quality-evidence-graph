@@ -26,6 +26,8 @@ next_review_due: 2026-10-20
 
 ## 2. 読み順
 
+現行改修は `docs/spec/remediation-2026-09-10.md` を先に読む。要求第22節と `docs/project/remediation-2026-09-10.md` に契約変更・移行・受入状態を対応付ける。
+
 1. `docs/spec/index.md`
 2. `docs/spec/gate-policy.md`
 3. `docs/spec/node-identity-contract.md`
@@ -82,4 +84,4 @@ next_review_due: 2026-10-20
 - `GatePolicy` は QEG 正本であり、`gatePolicyProposal` は verdict に直接影響させない。
 - すべての Gate 関連 reason、blocker、disqualification、waiver、approval evidence は `sourceRefs` を 1 件以上持つ。
 - `policyHash`、`contentHash`、`evidencePackageHash` は比較可能な文字列として扱い、アルゴリズムは原則として MVP では固定しない。ただし reliabilityPolicy 有効時の policyHash と resilience raw / signal artifact の contentHash は `docs/spec/reliability-extension.md` に従い SHA-256 に固定する。同一内容で再計算できることを実装 acceptance にする。
-- repository内の実装完成Gateと外部のrelease / publish approvalを分離する。現行判定は`docs/release/acceptance-2026-07-20.md`を参照する。
+- repository内の実装受入と外部のrelease / publish approvalを分離する。現行改修の判定は`docs/project/remediation-2026-09-10.md`、過去の配布受入は`docs/release/acceptance-2026-07-20-v0.3.1.md`を参照する。

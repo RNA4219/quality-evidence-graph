@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-final-reason-no-source/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -19,7 +23,18 @@
       "runId": "qeg:run-negative-final-reason-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -57,12 +72,32 @@
       "runId": "qeg:run-negative-final-reason-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-final-reason-no-source",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-final-reason-no-source",
@@ -73,9 +108,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-final-reason-no-source/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:69f4b6573a6d453113bc6cb510787b2ba442faedb053b990aeee97b4906eb2c1"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -92,7 +131,13 @@
         "nodeIds": [
           "qeg:risk-critical-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+            "path": "gate-input.json",
+            "label": "/graph/nodes/0: Diagnostic subject qeg:risk-critical-001"
+          }
+        ]
       }
     ],
     "blockers": [
@@ -102,18 +147,47 @@
         "riskIds": [
           "qeg:risk-critical-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+            "path": "gate-input.json",
+            "label": "/graph/nodes/0: Diagnostic subject qeg:risk-critical-001"
+          }
+        ]
       }
     ],
     "residualRisks": [],
     "requiredHumanReview": [
       "qeg:risk-critical-001"
-    ]
+    ],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:5ff8a0259937c8821f1a8f3bb74c2349e6bff4378a8c8c24cc578d75b5305468"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:eb6582545c2e7978a85b09f0bf5b8369124f0849b3ff35c9d08d30a108029f7d"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:8ce52779a7642cfb404e60f1fb1835603a1383590adf96597930a0b6a8e5f062"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:e08f701804e20f70013ef59dc4965af2723c593797eda4921df74a755e399feb"
     }
   ],
   "auditTrail": {

@@ -1,22 +1,20 @@
 {
   "id": "schemas/quality-evidence-record.schema.json",
   "role": "schema",
-  "public_api": [
-    "QualityEvidenceRecord"
-  ],
-  "summary": "graph、placementPlan、gate、exports を束ねる final record schema。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
+    "schemas/gate-verdict.schema.json",
     "schemas/qeg.bundle.schema.json",
-    "schemas/test-placement-plan.schema.json",
-    "schemas/gate-verdict.schema.json"
+    "schemas/test-placement-plan.schema.json"
   ],
   "risks": [
-    "final record が schema drift を束ねて失敗する"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "node -e JSON parse schemas"
+    "npm test"
   ],
-  "generation": "00014",
   "contentHash": "sha256:629439ddcf2ad1d950f033a397213e53c3bcfbb89020cf936ca55eaa20242a7f"
 }

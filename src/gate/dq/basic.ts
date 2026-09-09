@@ -9,6 +9,8 @@ import type {
 } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { computeBlockers } from "../verdict.js";
+import { detectInputContract } from "./input-contract.js";
+import { detectPlacementCoverage } from "./placement-coverage.js";
 
 function riskNodes(input: DQDetectorInput): readonly RiskNode[] {
   return input.riskNodes ?? input.graph.nodes.filter((node: QegNode): node is RiskNode => node.kind === "risk");
@@ -26,12 +28,12 @@ function blockers(input: DQDetectorInput): readonly GateBlocker[] {
 
 export function detectDQ01(input: DQDetectorInput): Disqualification[] {
   const parserDqs = input.graph.completeness.parserFailures.map((failure) => ({
-    code: "DQ-01" as DisqualificationCode,
+    code: failure.code ?? "DQ-01" as DisqualificationCode,
     message: `Parser failure: ${failure.reason}`,
     nodeIds: [],
     sourceRefs: failure.sourceRefs,
   }));
-  return [...input.preflightDisqualifications.filter((dq) => dq.code === "DQ-01"), ...parserDqs];
+  return [...input.preflightDisqualifications.filter((dq) => dq.code === "DQ-01"), ...parserDqs, ...detectInputContract(input)];
 }
 
 export function detectDQ02(input: DQDetectorInput): Disqualification[] {
@@ -80,33 +82,7 @@ export function detectDQ04(input: DQDetectorInput): Disqualification[] {
 }
 
 export function detectDQ05(input: DQDetectorInput): Disqualification[] {
-  const disqualifications: Disqualification[] = [];
-
-  for (const changedCode of changedCodeNodes(input)) {
-    if (input.placementPlan) {
-      const hasTestPlacement = input.placementPlan.placements.some(
-        (placement) => placement.disposition !== "blocked"
-      );
-      const hasAcceptedWaiver = input.waivers.some((waiver) => waiver.valid);
-      if (!hasTestPlacement && !hasAcceptedWaiver) {
-        disqualifications.push({
-          code: "DQ-05" as DisqualificationCode,
-          message: `Changed code "${changedCode.path}" without test obligation or waiver`,
-          nodeIds: [changedCode.id],
-          sourceRefs: changedCode.traceability.sourceRefs,
-        });
-      }
-    } else {
-      disqualifications.push({
-        code: "DQ-05" as DisqualificationCode,
-        message: `Changed code "${changedCode.path}" without test obligation or waiver`,
-        nodeIds: [changedCode.id],
-        sourceRefs: changedCode.traceability.sourceRefs,
-      });
-    }
-  }
-
-  return disqualifications;
+  return detectPlacementCoverage(input, changedCodeNodes(input));
 }
 
 export function detectDQ06(input: DQDetectorInput): Disqualification[] {
@@ -114,7 +90,7 @@ export function detectDQ06(input: DQDetectorInput): Disqualification[] {
 }
 
 export function detectDQ07(input: DQDetectorInput): Disqualification | null {
-  if (input.graph.completeness.partial && !input.graph.completeness.score) {
+  if (input.graph.completeness.partial && input.graph.completeness.score === undefined) {
     return {
       code: "DQ-07" as DisqualificationCode,
       message: "Partial graph without explicit completeness score",

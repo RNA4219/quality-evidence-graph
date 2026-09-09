@@ -1,0 +1,25 @@
+{
+  "id": "docs/spec/remediation-2026-09-10.md",
+  "role": "remediation-2026-09-10",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "明示入力、参照整合、raw生成、7層配置、出力schema/hash、診断、互換性の0.4.0仕様。",
+  "deps_out": [
+    "src/cli/pipeline.ts",
+    "src/gate/dq/graph-integrity.ts",
+    "src/graph.ts",
+    "src/input-contract.ts",
+    "src/placement.ts",
+    "src/record.ts"
+  ],
+  "deps_in": [
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:02c94c18abb3f6063525099aabb04ca4c14e7aa621a4edeab85603dfee4e43f8"
+}

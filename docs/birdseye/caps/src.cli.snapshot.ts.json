@@ -1,26 +1,26 @@
 {
   "id": "src/cli/snapshot.ts",
   "role": "report-snapshot-cli",
-  "public_api": [
-    "runSnapshotCommand"
-  ],
-  "summary": "qeg report の golden snapshot 検証 CLI。fixture ごとに expected-report.json を生成 / 比較し、generatedAt と絶対 path を正規化する。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 report-snapshot-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "src/cli/report.ts",
-    "fixtures/*/expected-report.json"
+    "src/cli/errors.ts",
+    "src/cli/file-errors.ts",
+    "src/cli/report.ts"
   ],
   "deps_in": [
-    "src/cli.ts",
+    "docs/requirements.md",
     "docs/spec/operational-cli-extensions.md",
-    "docs/project/evaluation.md"
+    "src/cli.ts",
+    "src/cli/check.ts",
+    "src/cli/commands.ts"
   ],
   "risks": [
-    "report 出力の意図的変更時に snapshot update を忘れると regression が読みにくくなる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run build",
-    "node dist/cli.js snapshot fixtures/positive-release-go"
+    "npm test"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:65a58ebdfa8839a4c836fda8f0ef783dd5e0da46ba4097c5ade68032c5b80c81"
+  "contentHash": "sha256:4771a6fbf3f322fbcda30170cf1be8a8e874e6b41285528f60d9ee6a80044aa3"
 }

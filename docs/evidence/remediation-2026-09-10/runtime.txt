@@ -1,0 +1,61 @@
+
+> @quality-harness/quality-evidence-graph@0.4.0 test:runtime
+> node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs
+
+✔ external Action uses its tagged CLI bundle and is fail-closed by default (1.2473ms)
+✔ tagged Action bundle exposes the release CLI version (106.6303ms)
+✔ Action uploads diagnostics before enforcing the verdict (0.2659ms)
+✔ optional preflight failures become report errors (0.1792ms)
+✔ self CI exercises the bundled Action in the Node matrix (0.3261ms)
+✔ generated integration workflow uses the installed local Action contract (0.1536ms)
+✔ FIX-11/12/13: raw producers -> pure graph -> deterministic seven-layer placement (733.6612ms)
+✔ FIX-12: reuse, adapt, add and missing oracle produce distinct actionable plans (16.1457ms)
+✔ FIX-03: a valid descriptor does not hide stale revisions inside producer payloads (14.9588ms)
+✔ FIX-11/14: CLI raw -> graph -> placement -> gate -> validated complete record (3293.9882ms)
+✔ FIX-11: missing kind, malformed raw, unknown version and unresolved IDs retain partial graph (17.8988ms)
+✔ FIX-07/11: raw execution fail, skipped, mock and evidence tampering cannot become go (1672.4147ms)
+✔ FIX-01/02: explicit native input passes; missing mode, set, graph or status never does (11.0919ms)
+✔ FIX-01: each required upstream kind is independently checked, statuses do not replace artifacts (6.8539ms)
+✔ FIX-05/06: unrelated or dangling placement cannot cover a change (4.5837ms)
+✔ FIX-07: invalid, expired and unrelated waivers do not cover changes (2.3729ms)
+✔ FIX-07: planned, mock and failed executions remain distinguishable (2.4648ms)
+✔ FIX-08/09/10/14: negative record is schema valid, all outputs are hashed, tampering is detected (1537.0232ms)
+✔ FIX-02: init exposes a configuration requiring evidence rather than a passing demo (789.3078ms)
+✔ positive fixture passes runtime schema and evidence verification (342.5757ms)
+✔ hash mismatch becomes DQ-06 (622.7433ms)
+✔ changed-only distinguishes no changes from detection failure (521.0061ms)
+✔ packaged CLI help contract is available before package smoke (227.1602ms)
+✔ malformed JSON is a CLI error with exit 1 (245.4127ms)
+✔ parseable required-component schema failure is DQ-01 with exit 2 (497.2564ms)
+✔ required evidence failures fail but optional evidence failures only warn (11.1399ms)
+✔ required hash and revision mismatches fail evidence verification (5.4754ms)
+✔ changed-only fails closed with unavailable history and detects untracked worktree files (1213.9477ms)
+✔ CLI maps required missing evidence to DQ-06 and optional missing evidence to warning-only (968.8438ms)
+✔ check returns non-zero for DQ-level inconsistencies (494.8162ms)
+✔ invalid optionalEvidence is recorded as a warning and does not disqualify (474.1336ms)
+✔ qeg init generates a schema-valid 0.2 wire contract with the installed local Action (755.4154ms)
+✔ mock tests remain auditable but do not count as Gate evidence (435.4355ms)
+✔ reliability schema and evaluator select one current real execution (11.7806ms)
+✔ reliability accepts absent or matching evidenced_by provenance and rejects contradictions (1.8464ms)
+✔ reliability fails closed without artifact verification and never falls back from latest failure (1.3196ms)
+✔ reliability waives only linked risk/test threshold blockers and never safety blockers (1.5746ms)
+✔ reliability detects policy identity and latest-evidence ambiguity (1.7924ms)
+✔ reliability accounting excludes DQ evidence and does not emit blockers for it (0.4104ms)
+✔ non-completing resilience statuses remain qualified blockers without fabricated lifecycle DQs (0.4269ms)
+✔ reliability canonicalizes decision fingerprints and treats passed as optional (0.6795ms)
+✔ reliability propagates an unsafe attempt to every covered required risk (0.5756ms)
+✔ reliability fails closed on invalid clocks and invalid current timestamps (0.5282ms)
+✔ reliability reports are stable across graph and signal enumeration order (1.0738ms)
+✔ reliability semantic validator is shared by schema preflight and direct evaluation (0.9496ms)
+✔ artifact failures classify DQ-06 and DQ-12 by artifact with non-revision priority (0.6312ms)
+✔ reliability schema enforces strict discriminators and semantic invariants (2.2647ms)
+✔ evidence normalize supports four MVP adapters and fails safely on bad paths/conflicts (5452.0372ms)
+✔ text report exposes reliability accounting and drill-down (843.4337ms)
+ℹ tests 49
+ℹ suites 0
+ℹ pass 49
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 13389.4633

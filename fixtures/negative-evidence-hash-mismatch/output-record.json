@@ -12,7 +12,10 @@
         "path": "artifacts/input.json",
         "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -28,9 +31,35 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-evidence-hash-mismatch",
+        "kind": "requirement",
+        "title": "Fixture context: negative-evidence-hash-mismatch",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-evidence-hash-mismatch",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -53,12 +82,24 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-evidence-hash-mismatch",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-evidence-hash-mismatch",
@@ -72,7 +113,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:9b9dffb51b7d73220dab585a2cab4ae3b83d911f0a3958c4937d3fd14822bf1e"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -108,7 +152,23 @@
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:372956d785c4c41789617f2e17159337a7539391417cb142f76565579754d87b"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:9ce6cbeb711dba51970d34dcd94c80a0538acdf9a84387db78c618d492d95126"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:47f1b3f31a7d1f5e72dc597c611d75fed36ededa08bf196b193138e1b24871ea"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:036f8de9ebec47bc47b6d80b78088f478ed167d7e0b7fa2364053529affe9eb9"
     }
   ],
   "auditTrail": {

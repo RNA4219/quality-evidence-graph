@@ -1,7 +1,10 @@
 import { mkdir, stat, writeFile } from "fs/promises";
-import { join, resolve } from "path";
+import { dirname, join, resolve } from "path";
 import { exit } from "process";
 import { CliError } from "./errors.js";
+import { upstreamInputContract } from "../input-contract.js";
+import { optionalStat } from "./file-errors.js";
+import { starterRuntimeFiles } from "./init-runtime.js";
 
 export interface InitOptions {
   readonly root: string;
@@ -9,12 +12,7 @@ export interface InitOptions {
 }
 
 async function exists(path: string): Promise<boolean> {
-  try {
-    await stat(path);
-    return true;
-  } catch {
-    return false;
-  }
+  return (await optionalStat(path)) !== null;
 }
 
 function minimalGateInput(): string {
@@ -45,6 +43,7 @@ function minimalGateInput(): string {
       },
     },
     policy: {
+      inputContract: upstreamInputContract("local-init"),
       policyId: "qeg:policy-local-init",
       policyHash: "sha256:replace-me",
       profile: "standard",
@@ -111,7 +110,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.1
+      - uses: ./.qeg/runtime/qeg-report-action
         with:
           targets: .qeg
           output-path: .qeg/qeg-ci-report.json
@@ -172,7 +171,16 @@ export async function runInitCommand(args: readonly string[]): Promise<void> {
     },
   ];
 
+  const runtimeFiles = await starterRuntimeFiles();
+  let runtimeWritten = 0;
+  for (const [relativePath, content] of runtimeFiles) {
+    const path = join(qegDir, "runtime", relativePath);
+    await mkdir(dirname(path), { recursive: true });
+    const status = await writeNewFile(path, content, options.force);
+    if (status !== "skipped") runtimeWritten++;
+  }
   console.log("QEG init");
+  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join(qegDir, "runtime")}`);
   for (const result of results) {
     console.log(`- ${result.status}: ${result.path}`);
   }

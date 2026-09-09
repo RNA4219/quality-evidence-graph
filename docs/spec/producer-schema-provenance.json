@@ -1,0 +1,35 @@
+[
+  {
+    "producer": "code-to-gate",
+    "revision": "53897b912b390914dda145c98dd72d8147ab6b0e",
+    "source": "https://github.com/RNA4219/code-to-gate",
+    "modified": false,
+    "hashes": {
+      "schemas/shared-defs.schema.json": "sha256:7317c3fc83a0f84839a8f36b948238052f517bd8d4f456a3c20e3ef8cdf847ce",
+      "schemas/normalized-repo-graph.schema.json": "sha256:588ddd5392239a9db6135292b3ab8c317506f2df983055ec8e522997adbb5b73",
+      "schemas/diff-analysis.schema.json": "sha256:953f65441b7070c331e432e4c3920b9245dbbc9eca1bdddb8a024d7d7d63c522",
+      "schemas/findings.schema.json": "sha256:7eb0ba04451c0f3616a423160995d0ce0023caa0367dd5442b8764cf53cff23d",
+      "schemas/risk-register.schema.json": "sha256:ab97db4eaf58ae8285c4db10fcb047d5f036153cf028bff586d2ebcf091f4779",
+      "schemas/test-seeds.schema.json": "sha256:f32a83f4f97511f1f229603f9cd2b76b87483a4c455843a058c07a1abdce739b",
+      "schemas/release-readiness.schema.json": "sha256:ceefad387c5a95e0c49e990e1afdcbbcb68acb5f4fd8f5b0ed7a7c8f18e540ea",
+      "schemas/audit.schema.json": "sha256:29a239dbe577c29cb00482a64ebe478c9d1925d0eaa70ad1e747bd88e0a7e33c",
+      "LICENSE": "sha256:0321143415262f129d473a397f6594b171ac7ef4c9c7543e2080028fd6ae48ff"
+    }
+  },
+  {
+    "producer": "manual-bb-test-harness",
+    "revision": "76722574298985100b3a6efc730b2dd0f0cb4041",
+    "source": "https://github.com/RNA4219/manual-bb-test-harness",
+    "modified": false,
+    "hashes": {
+      "schemas/shared_defs.schema.json": "sha256:c70f96ce74b10c94db8a8f81d4b7ce08d4adfdbce1bed70c242282f33fcbc22c",
+      "schemas/feature_spec.schema.json": "sha256:269f9fc51a6e26597e610b11396524e246a6f4dc4751aa075d3d103319f8ae01",
+      "schemas/risk_register.schema.json": "sha256:5c21e9cc193f120d6c7d14bce5361769ca230fcbe8900b5bf561aafd15c626c3",
+      "schemas/manual_case_set.schema.json": "sha256:1bbbecaace871a1208626902b5e825119cd3106f2f63297a9ebc463b8c7ca8df",
+      "schemas/gate_decision.schema.json": "sha256:c1c9a22ced860cc84bd304a3df9359a2d41ad98bb32d7e57953be8e899f83d19",
+      "schemas/execution_evidence.schema.json": "sha256:eaf22333dd70b9ec579a680b82aed16c1acb2dd81cf8b4a8097e9ddd8340d9ec",
+      "LICENSE": "sha256:ea0c145f926a1e7c1d5255228f57615ff30b024ddc7eaaaee1875ac736886759",
+      "NOTICE": "sha256:5cfbc296258c83f99fd005763866d180b924d8fca43acaa9710714c5789ff913"
+    }
+  }
+]

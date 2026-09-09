@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.0",
+  "document_id": "rand:audit-1",
+  "summary": "One audited requirement",
+  "assumptions": [],
+  "source_refs": {
+    "audited_document": "spec.md",
+    "external_evidence": [],
+    "implementation_evidence": [
+      "src/order.ts"
+    ]
+  },
+  "gate_summary": {
+    "go": 1,
+    "conditional_go": 0,
+    "no_go": 0
+  },
+  "requirements": [
+    {
+      "requirement_id": "rand:REQ-001",
+      "original_text": "Pending orders can be cancelled",
+      "confidence": 0.9,
+      "testability": "high",
+      "implementation_alignment": "high",
+      "gate_verdict": "go",
+      "evidence": [],
+      "risks": [],
+      "issues": []
+    }
+  ]
+}

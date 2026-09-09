@@ -1,9 +1,9 @@
 import { createHash } from "node:crypto";
-import { readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+import { readFile, readdir, writeFile } from "node:fs/promises";
+import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00014";
+const generation = "00015";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -51,7 +51,7 @@ const additions = {
   "docs/spec/code-to-gate-v0.3.1-2026-07-20/analysis-report.md": {
     role: "v0.3.1-static-analysis-evidence",
     caps: "docs/birdseye/caps/docs.spec.code-to-gate-v0.3.1-2026-07-20.analysis-report.md.json",
-    summary: "v0.3.1のraw静的候補12件、accepted-design 1件、effective high/critical 0を記録する。",
+    summary: "v0.3.1のraw静的候補13件（high 1 / medium 12）、accepted-design 1件、effective medium 12件の履歴。",
     depsOut: ["docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"],
     tests: ["code-to-gate readiness", "npm test"],
   },
@@ -65,8 +65,8 @@ const additions = {
   "docs/project/tasks.codex.md": {
     role: "superseded-implementation-task-ledger",
     caps: "docs/birdseye/caps/docs.project.tasks.codex.md.json",
-    summary: "完了済みTASK-01〜TASK-10の実装順、対象、受入条件を保持する履歴台帳。現行判定はrepository completion acceptanceへ移管済み。",
-    depsOut: ["docs/requirements.md", "docs/release/acceptance-2026-07-20-v0.3.1.md"],
+    summary: "TASK-01〜TASK-10の過去台帳。生成機能が当時未充足だった完了表記を訂正し、現行状態は改修台帳へ移管。",
+    depsOut: ["docs/requirements.md", "docs/project/remediation-2026-09-10.md"],
     depsIn: ["docs/agent/HUB.codex.md"],
     risks: ["superseded台帳の過去no_goを現在状態と誤認する"],
     tests: ["npm run birdseye-check", "git diff --check"],
@@ -194,7 +194,7 @@ const additions = {
   "docs/release/acceptance-2026-07-20-v0.3.1.md": {
     role: "v0.3.1-github-only-release-acceptance",
     caps: "docs/birdseye/caps/docs.release.acceptance-2026-07-20-v0.3.1.md.json",
-    summary: "QEG v0.3.1のGitHub-only配布、Action bundle、release lifecycle、CI証跡、実cluster未評価境界を記録する現行Gate。",
+    summary: "QEG v0.3.1のGitHub-only配布、Action bundle、隔離schema障害・復旧、CI証跡の過去受入。現行改修の完了証拠には転用しない。",
     depsOut: [
       "docs/requirements.md",
       "docs/project/evaluation.md",
@@ -227,6 +227,57 @@ for (const name of ["model", "targets", "baseline-diff", "core", "formatter", "c
   additions[path] = { role: "report-" + name, caps: "docs/birdseye/caps/src.cli.report." + name + ".ts.json" };
 }
 
+// Runtime additions must not silently disappear from context coverage.
+async function sourceFiles(directory) {
+  const entries = await readdir(resolve(root, directory), { withFileTypes: true });
+  const files = [];
+  for (const entry of entries.sort((a, b) => a.name.localeCompare(b.name))) {
+    const path = `${directory}/${entry.name}`;
+    if (entry.isDirectory()) files.push(...await sourceFiles(path));
+    else if (entry.isFile() && /\.(ts|json|mjs)$/.test(path)) files.push(path);
+  }
+  return files;
+}
+const currentPaths = [
+  ...await sourceFiles("src"), ...await sourceFiles("schemas"),
+  "docs/project/remediation-2026-09-10.md", "docs/spec/remediation-2026-09-10.md",
+  "docs/spec/producer-adapters.md", "docs/spec/producer-schema-provenance.json",
+  "docs/evidence/remediation-2026-09-10/local-validation.json",
+  "examples/raw-producer-contract/README.md", "examples/raw-producer-contract/ingest-manifest.json",
+  "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs", "tests/helpers/raw-producer-fixture.mjs",
+  "tools/snapshot-producer-contracts.mjs", "tools/migrate-input-contracts.mjs", "tools/migrate-retired-case-fixtures.mjs",
+  "tools/migrate-fixtures-v02.mjs", "tools/fixture-migration/values.mjs", "tools/fixture-migration/artifacts.mjs",
+  "tools/update-birdseye.mjs", "tools/birdseye-check.mjs",
+];
+for (const path of currentPaths) {
+  const old = additions[path] ?? index.nodes[path];
+  additions[path] = { ...old, role: old?.role ?? posix.basename(path).replace(/\.(ts|mjs|json|md)$/, ""),
+    caps: old?.caps ?? `docs/birdseye/caps/${path.replaceAll("/", ".")}.json` };
+}
+Object.assign(additions["docs/project/remediation-2026-09-10.md"], {
+  summary: "R01〜R06 / FIX-01〜20の現行実装・受入台帳。fixture、隔離consumer、CI、実環境未評価を分離。",
+  depsOut: ["docs/requirements.md", "docs/spec/remediation-2026-09-10.md", "docs/spec/producer-adapters.md", "docs/evidence/remediation-2026-09-10/local-validation.json", "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs"],
+});
+Object.assign(additions["docs/spec/remediation-2026-09-10.md"], {
+  summary: "明示入力、参照整合、raw生成、7層配置、出力schema/hash、診断、互換性の0.4.0仕様。",
+  depsOut: ["src/input-contract.ts", "src/graph.ts", "src/placement.ts", "src/record.ts", "src/cli/pipeline.ts", "src/gate/dq/graph-integrity.ts"],
+});
+Object.assign(additions["docs/spec/producer-adapters.md"], {
+  summary: "3 producerの14 artifactについてraw形式、写像、固定schema、revision/hash/licenseの境界を定義。",
+  depsOut: ["src/adapters/producer-schemas.json", "docs/spec/producer-schema-provenance.json", "src/adapters/rand.ts", "src/adapters/code-to-gate.ts", "src/adapters/manual-bb.ts"],
+});
+const knownPaths = new Set([...Object.keys(index.nodes), ...Object.keys(additions)]);
+for (const path of currentPaths.filter(p => /\.(ts|mjs)$/.test(p))) {
+  const code = await readFile(resolve(root, path), "utf8");
+  const deps = [...code.matchAll(/(?:from\s+|import\s*)["'](\.[^"']+)["']/g)]
+    .map(m => posix.normalize(posix.join(posix.dirname(path), m[1])).replace(/\.js$/, ".ts"))
+    .filter(p => knownPaths.has(p));
+  additions[path].depsOut = [...new Set([...(additions[path].depsOut ?? []), ...deps])].sort();
+}
+for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/evaluation.md", "docs/project/blueprint.md"]) {
+  additions[path] = { ...(additions[path] ?? index.nodes[path]),
+    depsOut: [...new Set([...(additions[path]?.depsOut ?? []), "docs/project/remediation-2026-09-10.md"])] };
+}
 index.generated_at = generation;
 for (const [path, node] of Object.entries(additions)) {
   index.nodes[path] = { ...node, mtime: generation };
@@ -235,7 +286,7 @@ for (const [path, node] of Object.entries(additions)) {
     role: node.role,
     generation,
     public_api: [],
-    summary: node.summary ?? "QEG 0.3.1 fail-closed contract component.",
+    summary: node.summary ?? `QEG 0.4.0 ${node.role} の契約・実装。関連sourceと受入試験を参照。`,
     deps_out: node.depsOut ?? [],
     deps_in: node.depsIn ?? [],
     risks: node.risks ?? ["型、schema、fixture、CLI契約を同時に更新する"],
@@ -328,6 +379,16 @@ for (const edge of newEdges) {
   if (!index.edges.some((existing) => existing[0] === edge[0] && existing[1] === edge[1])) {
     index.edges.push(edge);
   }
+}
+for (const [path, node] of Object.entries(additions)) {
+  for (const target of node.depsOut ?? []) if (knownPaths.has(target) && !index.edges.some(e => e[0] === path && e[1] === target)) index.edges.push([path, target]);
+}
+for (const [path, node] of Object.entries(index.nodes)) {
+  const capsulePath = resolve(root, node.caps);
+  const capsule = JSON.parse(await readFile(capsulePath, "utf8"));
+  capsule.deps_out = [...new Set(index.edges.filter(e => e[0] === path).map(e => e[1]))].sort();
+  capsule.deps_in = [...new Set(index.edges.filter(e => e[1] === path).map(e => e[0]))].sort();
+  await writeFile(capsulePath, json(capsule));
 }
 await writeFile(indexPath, json(index));
 console.log("Birdseye regenerated at generation " + generation);

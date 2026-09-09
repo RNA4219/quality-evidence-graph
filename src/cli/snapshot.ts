@@ -1,8 +1,9 @@
-import { readFile, writeFile } from "fs/promises";
+import { writeFile } from "fs/promises";
 import { join, relative } from "path";
 import { exit } from "process";
 import { collectReportTargets, createCiReport, type CiReport } from "./report.js";
 import { CliError } from "./errors.js";
+import { optionalText } from "./file-errors.js";
 
 interface SnapshotOptions {
   readonly update: boolean;
@@ -58,11 +59,7 @@ function snapshotPath(target: string): string {
 }
 
 async function readSnapshot(path: string): Promise<string | undefined> {
-  try {
-    return await readFile(path, "utf-8");
-  } catch {
-    return undefined;
-  }
+  return optionalText(path);
 }
 
 async function checkTargetSnapshot(target: string, update: boolean): Promise<SnapshotResult> {

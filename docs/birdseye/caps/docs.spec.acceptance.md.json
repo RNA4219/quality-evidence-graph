@@ -1,15 +1,18 @@
 {
   "id": "docs/spec/acceptance.md",
   "role": "superseded-spec-acceptance",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
   "summary": "2026-06-03時点の仕様書検収履歴。現行のrepository completionはproject evaluationと2026-07-20 acceptanceへ移管済み。",
   "deps_out": [
     "docs/project/evaluation.md",
+    "docs/project/runbook.md",
     "docs/release/acceptance-2026-07-20-v0.3.1.md"
   ],
   "deps_in": [
-    "docs/spec/index.md"
+    "docs/spec/gate-acceptance-2026-06-03.md",
+    "docs/spec/index.md",
+    "docs/spec/review-2026-06-03.md"
   ],
   "risks": [
     "過去no_goを現在状態と誤認する"

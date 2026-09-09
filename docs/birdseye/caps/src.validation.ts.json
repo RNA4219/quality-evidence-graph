@@ -1,11 +1,17 @@
 {
   "id": "src/validation.ts",
   "role": "public-validation-api",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 public-validation-api の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/validation/evidence.ts",
+    "src/validation/reliability-semantics.ts",
+    "src/validation/schema.ts"
+  ],
+  "deps_in": [
+    "src/index.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],

@@ -5,8 +5,8 @@
   "summary": "2026-06-03 Controlled Gate リリースノート。DQ-01〜DQ-17、21 fixture、CLI、own-output validation、code-to-gate finding 0、README 導線整備を記録する。",
   "deps_out": [
     "README.md",
-    "README_JA.md",
     "README_EN.md",
+    "README_JA.md",
     "docs/spec/implementation-gate-2026-06-03.md"
   ],
   "deps_in": [
@@ -21,6 +21,6 @@
     "npm pack --dry-run --cache ./.npm-cache",
     "code-to-gate analyze --emit all"
   ],
-  "generation": "00014",
+  "generation": "00015",
   "contentHash": "sha256:5cd627f4a110f5c55bc4130fec78db3437f4c76d34e831334cffcf4f0f92e4c3"
 }

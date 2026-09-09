@@ -1,0 +1,111 @@
+{
+  "evidenceVersion": "qeg-remediation-local/v1",
+  "observedAt": "2026-09-09T19:52:21.466Z",
+  "packageVersion": "0.4.0",
+  "qegVersion": "0.2",
+  "source": {
+    "baseCommit": "99ed54bf3113d877fb177ec1be54a298f517a2f7",
+    "branch": "agent/qeg-remediation-20260910",
+    "indexEntriesSha256": "sha256:b419108ef5293579d77ff176ccfc7428eb9fc7a174e23a17df30dcb05d93a0b0",
+    "command": "git ls-files -s -- src schemas tests tools fixtures qeg-report-action package.json package-lock.json examples"
+  },
+  "scope": {
+    "kinds": [
+      "fixture",
+      "isolated_consumer"
+    ],
+    "notEvaluated": [
+      "実cluster",
+      "実fault injection",
+      "Lakda real acceptance",
+      "外部release approval",
+      "publish"
+    ]
+  },
+  "checks": {
+    "runtime": {
+      "passed": 49,
+      "failed": 0
+    },
+    "producerBoundaryTests": {
+      "passed": 6,
+      "failed": 0
+    },
+    "fixtures": {
+      "passed": 53,
+      "resilience": 22,
+      "schemaValidatedRecords": 52
+    },
+    "publicTypes": "passed",
+    "packedConsumer": "passed",
+    "actionLifecycle": "go",
+    "outputHashesAndSchemas": "passed",
+    "static": {
+      "tool": "code-to-gate",
+      "version": "1.6.0",
+      "runId": "ctg-202609091947-local",
+      "raw": 0,
+      "effective": 0,
+      "suppressed": 0,
+      "historicalComparability": "Different analyzer versions; per-finding disposition and regression tests provide the remediation evidence."
+    },
+    "packDryRun": {
+      "name": "@quality-harness/quality-evidence-graph",
+      "version": "0.4.0",
+      "filename": "quality-harness-quality-evidence-graph-0.4.0.tgz",
+      "fileCount": 986,
+      "unpackedSize": 4198050,
+      "requiredPaths": [
+        "examples/raw-producer-contract/README.md",
+        "examples/raw-producer-contract/ingest-manifest.json",
+        "dist/adapters/producer-schemas.json",
+        "qeg-report-action/licenses/manual-bb-test-harness-NOTICE.txt",
+        "docs/spec/remediation-2026-09-10.md"
+      ],
+      "status": "passed"
+    },
+    "birdseye": {
+      "generation": "00015",
+      "sourcesBeforeEvidenceAddition": 199,
+      "status": "passed"
+    }
+  },
+  "logs": [
+    {
+      "path": "runtime.txt",
+      "normalizedLfSha256": "sha256:2d66c7378c4d7a39af8e831237c6c962688c6d0a3b5da90de6b03a8ceac763be"
+    },
+    {
+      "path": "producer-boundaries.txt",
+      "normalizedLfSha256": "sha256:dc71793b71814d68f04e0651aae5dea60da4138c5883a303bc476e7e585a0763"
+    },
+    {
+      "path": "local-gates.txt",
+      "normalizedLfSha256": "sha256:7b534902b8afc09521850ff6e522ddbb9b5cb62fe07a545e98d94a4001f035da"
+    },
+    {
+      "path": "types-and-package.txt",
+      "normalizedLfSha256": "sha256:21ca7a2b7fceb69a14f04c262e735f2edec9cadd924e487a4c997bd3882f3805"
+    },
+    {
+      "path": "package.txt",
+      "normalizedLfSha256": "sha256:5e83a835b49fd871f35cb54ff5d24ccec799d12f3ad280723fc9f39590f7f4bb"
+    },
+    {
+      "path": "lifecycle.txt",
+      "normalizedLfSha256": "sha256:75ffbdddb036ee4bd755be3403fd94925366536e3792ee48b2292ba1713aa54d"
+    },
+    {
+      "path": "static-analysis.md",
+      "normalizedLfSha256": "sha256:ab87d80de7fb75a1fe80fdc660de5e6850962bc68d379904be3895152b746121"
+    }
+  ],
+  "ci": {
+    "status": "pending",
+    "required": [
+      "quality (20)",
+      "quality (24)",
+      "portability (windows-24)"
+    ]
+  }
+}

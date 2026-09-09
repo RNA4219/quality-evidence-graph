@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-changed-code-no-test-obligation",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-changed-code-no-test-obligation",
       "status": "gate_failed",
       "exitCode": 2,
@@ -43,7 +52,13 @@
           "nodeIds": [
             "qeg:changed-code-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2FplacementPlan",
+              "path": "gate-input.json",
+              "label": "/placementPlan: Coverage for qeg:changed-code-001"
+            }
+          ]
         }
       ],
       "blockers": [],

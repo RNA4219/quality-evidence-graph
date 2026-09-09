@@ -9,10 +9,14 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-approval-hash-mismatch/input.json",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:4ee08d080df82e3edf24c1f9cb2f5e2d1981091a340f1668954d413374f85136",
         "revision": "refs/heads/main"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -20,9 +24,44 @@
       "runId": "qeg:run-negative-approval-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:4ee08d080df82e3edf24c1f9cb2f5e2d1981091a340f1668954d413374f85136",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-approval-hash-mismatch",
+        "kind": "requirement",
+        "title": "Fixture context: negative-approval-hash-mismatch",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-approval-hash-mismatch",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -37,12 +76,33 @@
       "runId": "qeg:run-negative-approval-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:4ee08d080df82e3edf24c1f9cb2f5e2d1981091a340f1668954d413374f85136",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-approval-hash-mismatch",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-approval-hash-mismatch",
@@ -53,10 +113,14 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-approval-hash-mismatch/input.json",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:4ee08d080df82e3edf24c1f9cb2f5e2d1981091a340f1668954d413374f85136",
           "revision": "refs/heads/main"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -83,12 +147,35 @@
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:63c9a2d9409ff4d327ef77c075645d876261ceb07823e67c8fc911d9949c6737"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:b1c85c50fca95315a0312c356a168f1b4b25d03e1bec793810c366949b613741"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:d19ac21f1310eff49f797535508bb940777679934d8f083f63b4be362637f83c"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:34dd4cf72eb6bc9e20a1e4e05a87f4ba0781757b7d7a563e0efa9f056d909e2c"
     }
   ],
   "auditTrail": {
@@ -96,6 +183,7 @@
     "approvalEvidenceSummary": [
       {
         "id": "qeg:approval-001",
+        "approver": "approver-001",
         "approvedAt": "2026-06-03T04:00:00.000Z",
         "policyId": "qeg:policy-ipo-controlled-001",
         "policyHash": "sha256:abc123",

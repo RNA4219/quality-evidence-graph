@@ -4,3 +4,4 @@ export type * from "./types/gate.js";
 export type * from "./types/graph.js";
 export type * from "./types/record.js";
 export type * from "./types/input.js";
+export type * from "./types/ingest.js";

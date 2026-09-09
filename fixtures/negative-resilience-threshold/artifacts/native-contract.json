@@ -1,0 +1,10 @@
+{
+  "fixture": "negative-resilience-threshold",
+  "mode": "native_graph",
+  "purpose": "Explicit native graph model for contract regression",
+  "nodeIds": [
+    "qeg:risk-reliability-fixture",
+    "qeg:test-reliability-fixture",
+    "qeg:evidence-reliability-fixture"
+  ]
+}

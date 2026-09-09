@@ -1,9 +1,9 @@
 {
   "id": "schemas/gate-input.schema.json",
   "role": "top-level-runtime-schema",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
+  "summary": "QEG 0.4.0 top-level-runtime-schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [

@@ -1,0 +1,18 @@
+{
+  "id": "docs/evidence/remediation-2026-09-10/local-validation.json",
+  "role": "local-validation",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 local-validation の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:346b31c251bec5ff9ab8b4dbf3707aec3594552d9e3c115524feb4e5ab8e93f8"
+}

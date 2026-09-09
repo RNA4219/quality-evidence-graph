@@ -18,7 +18,7 @@
     "dqCounts": [
       {
         "code": "DQ-12",
-        "count": 3,
+        "count": 4,
         "remediation": "Regenerate artifacts and producer checks from the same headRef, then ensure producer conclusions reflect their readiness status."
       }
     ],
@@ -28,17 +28,41 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-resilience-revision-mismatch",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-resilience-revision-mismatch",
       "status": "gate_failed",
       "exitCode": 2,
       "verdict": "disqualified",
       "reasons": [
-        "Disqualified: 3 DQ code(s)",
+        "Disqualified: 4 DQ code(s)",
+        "- DQ-12: Artifact revision \"cccccccccccccccccccccccccccccccccccccccc\" mismatch with headRef \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
         "- DQ-12: Artifact revision mismatch for qeg:artifact-raw",
         "- DQ-12: Resilience evidence revision mismatch (targetRevision)",
         "- DQ-12: Artifact revision mismatch for qeg:signal-reliability-fixture"
       ],
       "disqualifications": [
+        {
+          "code": "DQ-12",
+          "message": "Artifact revision \"cccccccccccccccccccccccccccccccccccccccc\" mismatch with headRef \"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\"",
+          "nodeIds": [
+            "qeg:artifact-raw"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Diagnostic subject qeg:artifact-raw"
+            }
+          ]
+        },
         {
           "code": "DQ-12",
           "message": "Artifact revision mismatch for qeg:artifact-raw",
@@ -132,6 +156,7 @@
           "DQ-12"
         ],
         "actualDqCodes": [
+          "DQ-12",
           "DQ-12",
           "DQ-12",
           "DQ-12"

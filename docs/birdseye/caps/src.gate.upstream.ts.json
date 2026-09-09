@@ -1,0 +1,20 @@
+{
+  "id": "src/gate/upstream.ts",
+  "role": "upstream",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 upstream の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate/evaluate.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:afcbd4f9a7d20578b5d3879b401a430e5185ad09be8da3373b2fe153c5f4904c"
+}

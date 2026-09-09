@@ -28,18 +28,27 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-resilience-artifact-tamper",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-resilience-artifact-tamper",
       "status": "gate_failed",
       "exitCode": 2,
       "verdict": "disqualified",
       "reasons": [
         "Disqualified: 1 DQ code(s)",
-        "- DQ-06: qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77"
+        "- DQ-06: qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77; qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77"
       ],
       "disqualifications": [
         {
           "code": "DQ-06",
-          "message": "qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77",
+          "message": "qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77; qeg:artifact-raw: artifact hash mismatch: expected sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0, got sha256:14469a6749940905faa663cc02fe93e83ccc263be89d477b80d3bced0bc16a77",
           "nodeIds": [
             "qeg:artifact-raw"
           ],

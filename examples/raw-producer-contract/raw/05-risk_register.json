@@ -1,0 +1,45 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T00:00:00.000Z",
+  "run_id": "ctg:run-fixture",
+  "repo": {
+    "root": ".",
+    "base_ref": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "head_ref": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "risk-register",
+  "schema": "risk-register@v1",
+  "completeness": "complete",
+  "risks": [
+    {
+      "id": "ctg:risk-order",
+      "title": "Incorrect cancellation",
+      "severity": "high",
+      "likelihood": "medium",
+      "impact": [
+        "Order consistency"
+      ],
+      "confidence": 0.9,
+      "sourceFindingIds": [
+        "ctg:finding-order"
+      ],
+      "evidence": [
+        {
+          "id": "ctg:source-order",
+          "path": "src/order.ts",
+          "startLine": 1,
+          "endLine": 2,
+          "kind": "diff"
+        }
+      ],
+      "recommendedActions": [
+        "Run cancellation case"
+      ]
+    }
+  ]
+}

@@ -12,7 +12,10 @@
         "path": "artifacts/input.json",
         "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -28,7 +31,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -78,6 +84,31 @@
         "coveredRiskIds": [
           "qeg:risk-login-regression"
         ]
+      },
+      {
+        "id": "mbb:CASE-login-001",
+        "kind": "test",
+        "title": "Retired login manual case (historical reference)",
+        "layer": "manual-scripted",
+        "testExecutionMode": "real",
+        "existing": true,
+        "deleted": true,
+        "sourceArtifactIds": [
+          "qeg:artifact-positive-placement-change-retirement"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:retired-case-source",
+              "path": "gate-input.json",
+              "label": "/placementPlan/placement_changes/subject_id"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "Retired case remains addressable; deletion does not count as an execution or current coverage."
+          ]
+        }
       }
     ],
     "edges": [
@@ -150,6 +181,32 @@
         {
           "id": "qeg:sr-policy-retirement",
           "path": "docs/policy/manual-retirement.md"
+        }
+      ]
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "positive-placement-change-retirement",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-positive-placement-change-retirement",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
         }
       ]
     }
@@ -234,6 +291,32 @@
         "conditional_go": 2,
         "no_go": 2,
         "disqualified": 2
+      },
+      "inputContract": {
+        "mode": "native_graph",
+        "requiredArtifacts": [
+          {
+            "adapter": "qeg-native",
+            "kind": "test_model"
+          }
+        ],
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "positive-placement-change-retirement",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "requireExecutedTests": false,
+        "sourceRefs": [
+          {
+            "id": "qeg:fixture-contract-positive-placement-change-retirement",
+            "path": "gate-input.json",
+            "label": "/policy/inputContract"
+          }
+        ]
       }
     },
     "waivers": [],
@@ -285,7 +368,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [
       {

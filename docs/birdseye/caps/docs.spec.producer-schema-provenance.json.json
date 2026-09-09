@@ -1,0 +1,18 @@
+{
+  "id": "docs/spec/producer-schema-provenance.json",
+  "role": "producer-schema-provenance",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 producer-schema-provenance の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "docs/spec/producer-adapters.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:8949e830d46f2c2bb956a3009367e4cd3b182a946e9f7436629e634a011471f7"
+}

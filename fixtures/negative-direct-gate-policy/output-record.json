@@ -4,15 +4,7 @@
     "runId": "qeg:run-positive-release-go",
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
-    "inputArtifacts": [
-      {
-        "id": "qeg:artifact-001",
-        "adapter": "qeg-native",
-        "kind": "test_model",
-        "path": "fixtures/positive-release-go/input.json",
-        "revision": "refs/heads/main"
-      }
-    ]
+    "inputArtifacts": []
   },
   "graph": {
     "metadata": {
@@ -22,40 +14,12 @@
       "profile": "ipo_controlled",
       "inputArtifacts": []
     },
-    "nodes": [
-      {
-        "id": "qeg:claim-001",
-        "kind": "claim",
-        "label": "All critical risks mitigated",
-        "priority": "P0",
-        "severity": "critical",
-        "claimed": true,
-        "evidenceGap": 0,
-        "sourceRefs": [
-          {
-            "id": "qeg:sr-claim-001",
-            "path": "docs/claims/claim-001.md"
-          }
-        ]
-      }
-    ],
+    "nodes": [],
     "edges": [],
     "completeness": {
       "score": 1,
       "partial": false,
-      "parserFailures": [
-        {
-          "path": "gate-input.json.externalArtifacts.rand_requirements_packet.gate_policy",
-          "reason": "External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only",
-          "sourceRefs": [
-            {
-              "id": "qeg:source-ingest-contract",
-              "path": "docs/spec/node-identity-contract.md",
-              "label": "gate-input.json.externalArtifacts.rand_requirements_packet.gate_policy"
-            }
-          ]
-        }
-      ],
+      "parserFailures": [],
       "unsupportedClaims": []
     }
   },
@@ -76,57 +40,56 @@
       "runId": "qeg:run-positive-release-go",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": [
-        {
-          "id": "qeg:artifact-001",
-          "adapter": "qeg-native",
-          "kind": "test_model",
-          "path": "fixtures/positive-release-go/input.json",
-          "revision": "refs/heads/main"
-        }
-      ]
+      "inputArtifacts": []
     },
     "verdict": "disqualified",
     "reasons": [
-      "Disqualified: 1 DQ code(s)",
-      "- DQ-01: Parser failure: External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only"
+      "Gate input schema invalid: / must NOT have additional properties"
     ],
     "disqualifications": [
       {
         "code": "DQ-01",
-        "message": "Parser failure: External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only",
+        "message": "Gate input schema invalid: / must NOT have additional properties",
         "nodeIds": [],
         "sourceRefs": [
           {
-            "id": "qeg:source-ingest-contract",
-            "path": "docs/spec/node-identity-contract.md",
-            "label": "gate-input.json.externalArtifacts.rand_requirements_packet.gate_policy"
+            "id": "qeg:schema-validation",
+            "path": "schemas/gate-input.schema.json"
           }
         ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:addf57af71ef60e8476d7a89245d4a6b54601ba18a17890617876fa415cee63b"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:9efccfca702322e8c59b0e2c1798266c61b1607e112b48e4df346aa87d1ab6f1"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:3a80dd02c275f08cdc5b6db25e513f640f765105b225b6f34c72c4e6f7d7d123"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:1076aa6afcb292f58784d6a3f383ee5804e0185ec4af7e7d1064894c482784e4"
     }
-  ],
-  "auditTrail": {
-    "evidencePackageHash": "sha256:release-package-hash",
-    "approvalEvidenceSummary": [
-      {
-        "id": "qeg:approval-release-001",
-        "approvedAt": "2026-06-03T04:00:00.000Z",
-        "policyId": "qeg:policy-ipo-controlled-001",
-        "policyHash": "sha256:abc123",
-        "evidencePackageHash": "sha256:release-package-hash"
-      }
-    ],
-    "gatePolicyHash": "sha256:abc123",
-    "gatePolicyId": "qeg:policy-ipo-controlled-001"
-  }
+  ]
 }

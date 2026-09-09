@@ -1,13 +1,10 @@
 import { readdir, stat } from "fs/promises";
 import type { Dirent } from "fs";
 import { join, relative, resolve } from "path";
+import { optionalStat } from "../file-errors.js";
 
 export async function safeStat(path: string): Promise<Awaited<ReturnType<typeof stat>> | null> {
-  try {
-    return await stat(path);
-  } catch {
-    return null;
-  }
+  return optionalStat(path);
 }
 
 export function portable(path: string): string {

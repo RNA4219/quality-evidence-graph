@@ -1,0 +1,262 @@
+{
+  "manifestVersion": "qeg-ingest/v1",
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:raw-fixture",
+    "createdAt": "2026-09-10T00:00:00.000Z",
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "profile": "lean",
+    "policyId": "qeg:raw-fixture",
+    "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "inputArtifacts": []
+  },
+  "policy": {
+    "policyId": "qeg:raw-fixture",
+    "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "profile": "lean",
+    "effectiveDate": "2026-09-10T00:00:00.000Z",
+    "approver": "fixture-author",
+    "sourceRefs": [
+      {
+        "id": "qeg:raw-fixture-policy",
+        "path": "ingest-manifest.json",
+        "label": "/policy"
+      }
+    ],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17",
+      "DQ-18",
+      "DQ-19",
+      "DQ-20",
+      "DQ-21"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "upstream_artifacts",
+      "requiredArtifacts": [
+        {
+          "adapter": "RanD",
+          "kind": "requirements_packet"
+        },
+        {
+          "adapter": "RanD",
+          "kind": "requirements_audit_packet"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "normalized_repo_graph"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "diff_analysis"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "findings"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "risk_register"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "test_seeds"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "release_readiness"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "audit"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "feature_spec"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "risk_register"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "manual_case_set"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "gate_decision"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "raw producer interoperability",
+        "notEvaluated": [
+          "real deployment",
+          "release approval"
+        ]
+      },
+      "requireExecutedTests": true,
+      "sourceRefs": [
+        {
+          "id": "qeg:input-%2Fpolicy%2FinputContract",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract: 必要証跡と評価範囲を設定する"
+        }
+      ]
+    }
+  },
+  "artifacts": [
+    {
+      "id": "qeg:raw-0",
+      "adapter": "RanD",
+      "kind": "requirements_packet",
+      "path": "raw/00-requirements_packet.json",
+      "contractVersion": "rand-kano/1.0",
+      "contentHash": "sha256:bf384f93bf0c5fa6801fc5fd33cd1f58f1cb08cb3d9d6b3e51a1b4ae310cda27",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-1",
+      "adapter": "RanD",
+      "kind": "requirements_audit_packet",
+      "path": "raw/01-requirements_audit_packet.json",
+      "contractVersion": "rand-kano/1.0",
+      "contentHash": "sha256:6816af5d629dac34b3518a1fc6be9ccc7fbfbcea94553276c3e77a72b4dcf754",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-2",
+      "adapter": "code-to-gate",
+      "kind": "normalized_repo_graph",
+      "path": "raw/02-normalized_repo_graph.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:83fb832f2dd37d71175e456539946b2f66e76c4dd709860a8531434cf73fde9d",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-3",
+      "adapter": "code-to-gate",
+      "kind": "diff_analysis",
+      "path": "raw/03-diff_analysis.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:8af152f14fdd2751aa5ac413d08d11308b0bad3edb75286c0910582357e15d50",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-4",
+      "adapter": "code-to-gate",
+      "kind": "findings",
+      "path": "raw/04-findings.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:8446ea735aa9ef00691b868d60998e98da6d9b0aeef03bd3d6cb888171be1f11",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-5",
+      "adapter": "code-to-gate",
+      "kind": "risk_register",
+      "path": "raw/05-risk_register.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:a6b61e174de51511f8a32699e678520c7cfe09ec99809ea417d26b7b79696b3f",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-6",
+      "adapter": "code-to-gate",
+      "kind": "test_seeds",
+      "path": "raw/06-test_seeds.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:17d515706a74e6383d0e510526e350b5a69c421c0d575f15a0733e2bf729fb29",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-7",
+      "adapter": "code-to-gate",
+      "kind": "release_readiness",
+      "path": "raw/07-release_readiness.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:faec2fffee5fc659933f6cf7d81f732cdae4d9ba8f433d7f153b7d0aa4f3c149",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-8",
+      "adapter": "code-to-gate",
+      "kind": "audit",
+      "path": "raw/08-audit.json",
+      "contractVersion": "ctg-artifacts/v1",
+      "contentHash": "sha256:352273899d73f98d497301203352d24425e26bb4ce661df8dea12422da202d2c",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-9",
+      "adapter": "manual-bb-test-harness",
+      "kind": "feature_spec",
+      "path": "raw/09-feature_spec.json",
+      "contractVersion": "manual-bb/v1",
+      "contentHash": "sha256:1a2784e5d7b268a38ced8a91fbcd5105895474753809a0dcac973d1e3987297a",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-10",
+      "adapter": "manual-bb-test-harness",
+      "kind": "risk_register",
+      "path": "raw/10-risk_register.json",
+      "contractVersion": "manual-bb/v1",
+      "contentHash": "sha256:11108dbb9f6bd62390a6119484c9f632ef3205ef4784c7a58c5dccf01bd0eb8a",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-11",
+      "adapter": "manual-bb-test-harness",
+      "kind": "manual_case_set",
+      "path": "raw/11-manual_case_set.json",
+      "contractVersion": "manual-bb/v1",
+      "contentHash": "sha256:71e1cc62e6a2ad125a0fae35418017aaf0ab9de1117fe4226f14010b8aea1d71",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-12",
+      "adapter": "manual-bb-test-harness",
+      "kind": "execution_evidence",
+      "path": "raw/12-execution_evidence.json",
+      "contractVersion": "manual-bb/v1",
+      "contentHash": "sha256:fa84325c5eac6ecbb5ca52b75241a5158776c5052b826739cd0dd91e2fef2a7d",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    {
+      "id": "qeg:raw-13",
+      "adapter": "manual-bb-test-harness",
+      "kind": "gate_decision",
+      "path": "raw/13-gate_decision.json",
+      "contractVersion": "manual-bb/v1",
+      "contentHash": "sha256:f7180cc742917c5f342649ed57083b93c6fece399e6cdca596e36c450853d738",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "waivers": []
+}

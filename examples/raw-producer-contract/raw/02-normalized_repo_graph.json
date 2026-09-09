@@ -1,0 +1,34 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T00:00:00.000Z",
+  "run_id": "ctg:run-fixture",
+  "repo": {
+    "root": ".",
+    "base_ref": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "head_ref": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "normalized-repo-graph",
+  "schema": "normalized-repo-graph@v1",
+  "files": [],
+  "modules": [],
+  "symbols": [],
+  "relations": [],
+  "tests": [
+    {
+      "id": "test:tests/order.test.ts",
+      "path": "tests/order.test.ts",
+      "framework": "node:test"
+    }
+  ],
+  "configs": [],
+  "entrypoints": [],
+  "diagnostics": [],
+  "stats": {
+    "partial": false
+  }
+}

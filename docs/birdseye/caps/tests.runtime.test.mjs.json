@@ -1,16 +1,20 @@
 {
   "id": "tests/runtime.test.mjs",
   "role": "runtime-contract-tests",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 runtime-contract-tests の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/test-evidence.ts"
+  ],
+  "deps_in": [
+    "docs/spec/reliability-hardening.md"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:0dfd5e5dabbe20d243067b3044192c5c1dbd8a669285359ef7bd734556c063a9"
+  "contentHash": "sha256:4a56752c6bba8cd40e93aecf9bfd2ba256a0b7759aba6d00c78d6383a998c341"
 }

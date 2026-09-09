@@ -1,0 +1,42 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T00:00:00.000Z",
+  "run_id": "ctg:run-fixture",
+  "repo": {
+    "root": ".",
+    "base_ref": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "head_ref": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "test-seeds",
+  "schema": "test-seeds@v1",
+  "completeness": "complete",
+  "seeds": [
+    {
+      "id": "ctg:seed-order",
+      "title": "Cancel pending order",
+      "intent": "regression",
+      "sourceRiskIds": [
+        "ctg:risk-order"
+      ],
+      "sourceFindingIds": [
+        "ctg:finding-order"
+      ],
+      "evidence": [
+        {
+          "id": "ctg:source-order",
+          "path": "src/order.ts",
+          "startLine": 1,
+          "endLine": 2,
+          "kind": "diff"
+        }
+      ],
+      "suggestedLevel": "integration",
+      "notes": "Guard transition"
+    }
+  ]
+}

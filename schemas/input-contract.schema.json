@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/input-contract.schema.json",
+  "title": "QEG input contract",
+  "type": "object",
+  "required": ["mode", "requiredArtifacts", "evaluationScope", "requireExecutedTests", "sourceRefs"],
+  "additionalProperties": false,
+  "properties": {
+    "mode": { "enum": ["upstream_artifacts", "native_graph"] },
+    "requiredArtifacts": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "$ref": "#/$defs/requiredArtifact" } },
+    "evaluationScope": { "$ref": "#/$defs/evaluationScope" },
+    "requireExecutedTests": { "type": "boolean" },
+    "sourceRefs": { "type": "array", "minItems": 1, "items": { "$ref": "shared-defs.schema.json#/$defs/sourceRef" } }
+  },
+  "$defs": {
+    "requiredArtifact": {
+      "type": "object", "required": ["adapter", "kind"], "additionalProperties": false,
+      "properties": {
+        "adapter": { "$ref": "shared-defs.schema.json#/$defs/artifactRef/properties/adapter" },
+        "kind": { "$ref": "shared-defs.schema.json#/$defs/artifactRef/properties/kind" }
+      }
+    },
+    "evaluationScope": {
+      "type": "object", "required": ["kind", "target", "notEvaluated"], "additionalProperties": false,
+      "properties": {
+        "kind": { "enum": ["fixture", "isolated_consumer", "real_environment"] },
+        "target": { "type": "string", "minLength": 1 },
+        "notEvaluated": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+      }
+    }
+  }
+}

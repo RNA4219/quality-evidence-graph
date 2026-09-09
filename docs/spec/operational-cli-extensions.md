@@ -138,8 +138,8 @@ npm pack --dry-run --cache ./.npm-cache
 
 GitHub Actions では、manual demo target として `fixtures/negative-approval-missing` を指定し、job が最終的に赤でも `qeg-ci-report` artifact と Step Summary が残ることを検収する。
 
-## 0.3.1 report / Action contract
+## report / Action contract（0.4.0）
 
 report JSONはqeg-ci-report-v2とし、selectionとトップレベルerrorsを持つ。Git差分取得成功後の関連targetなしだけno_relevant_changes/exit 0とする。Git未初期化、shallow clone不足、全strategy失敗はdetection_failed/exit 1である。QEG_CHANGED_FILES指定時はGitを参照しない。
 
-checkはschema-check、enum-check、doctor、evidence verify、policy lint、snapshot、reportを集約する。外部Actionはv0.3.1 tagへ固定し、同梱CLI bundleを既定で使い、npm registryやnpxへ依存しない。既定enforceはtrueとする。install/build/report失敗もreport errorとexit 1へ反映し、artifact upload後にfailureを返す。report-command overrideは互換用に維持する。release lifecycle acceptanceは隔離配置、steady-state観測、schema破損、復旧、hash付き新規証拠生成までを検証する。
+checkはschema-check、enum-check、doctor、evidence verify、policy lint、snapshot、reportを集約する。initは同じ配布物のAction・CLI・schema・licenseを `.qeg/runtime` にコピーし、workflowでlocal Actionを参照する。npm registryや未公開tagへ依存しない。既定enforceはtrueとする。install/build/report失敗もreport errorとexit 1へ反映し、artifact upload後にfailureを返す。report-command overrideは互換用に維持する。release lifecycle acceptanceは空initの失格を確認後、明示したnative fixtureで隔離配置、schema破損、復旧、新しいhash付き証跡を検証する。実clusterの障害注入を示すものではない。

@@ -11,6 +11,10 @@ import {
   computeVerdict,
 } from "./verdict.js";
 import { buildTestEvidenceAccounting } from "./test-evidence.js";
+import { detectGraphIntegrity } from "./dq/graph-integrity.js";
+import { evaluateRequiredExecutions } from "./dq/placement-coverage.js";
+import { sourceDiagnostics } from "./diagnostics.js";
+import { upstreamDecisions } from "./upstream.js";
 
 export function evaluateGate(input: GateEvaluationInput): GateResult {
   // A Gate must be reproducible.  The evaluation clock is the recorded QEG
@@ -32,11 +36,13 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
   }, validWaivers);
 
   const reliability = evaluateReliability(context);
-  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers] };
-  const disqualifications = [...detectAllDQs(enrichedContext), ...reliability.disqualifications];
-  const blockers = enrichedContext.blockers;
+  const executions = evaluateRequiredExecutions(context);
+  const upstream = upstreamDecisions(input.graph);
+  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...upstream.blockers] };
+  const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
+  const blockers = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
-  const requiredHumanReview = computeRequiredHumanReview(input.graph, validWaivers, residualRisks);
+  const requiredHumanReview = [...new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks), ...upstream.humanReview])];
   const verdict = computeVerdict(
     disqualifications,
     blockers,
@@ -46,6 +52,7 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
   );
 
   return {
+    ...(input.policy.inputContract ? { evaluationScope: input.policy.inputContract.evaluationScope } : {}),
     metadata: input.metadata,
     verdict,
     reasons: buildReasons(

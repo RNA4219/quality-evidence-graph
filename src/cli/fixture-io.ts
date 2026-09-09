@@ -4,6 +4,7 @@ import { CliError } from "./errors.js";
 import { evaluateGate } from "../gate.js";
 import { validateIngestContract } from "./ingest-contract.js";
 import { validateGateInput, type GateInputValidationReport } from "../validation/schema.js";
+import { buildTestEvidenceAccounting } from "../gate/test-evidence.js";
 import { verifyEvidenceArtifacts, type EvidenceVerificationReport } from "../validation/evidence.js";
 import type {
   Disqualification,
@@ -144,7 +145,8 @@ function schemaInvalidEvaluation(fixtureDir: string, error: SchemaGateInputError
   const dq: Disqualification = { code: "DQ-01", message: `Gate input schema invalid: ${preview}`, nodeIds: [], sourceRefs: [{ id: "qeg:schema-validation", path: "schemas/gate-input.schema.json" }] };
   return {
     fixtureDir, metadata, graph, policy, waivers: [], evidencePackage: undefined, placementPlan: undefined, optionalEvidence: undefined,
-    gateResult: evaluateGate({ metadata, graph, policy, waivers: [], preflightDisqualifications: [dq] }),
+    gateResult: { metadata, verdict: "disqualified", reasons: [dq.message], disqualifications: [dq], blockers: [], residualRisks: [], requiredHumanReview: [],
+      testEvidenceAccounting: buildTestEvidenceAccounting(graph), reliability: { enabled: false } },
     schemaValidation: error.report,
   };
 }

@@ -16,6 +16,8 @@ decision: go
 
 # QEG v0.3.1 GitHub-only Release Acceptance
 
+2026-09-10注記: 本文はv0.3.1配布物の過去受入証跡であり、raw adapter / build-graph / place-testsの完成証拠ではない。現在の改修状態は `docs/project/remediation-2026-09-10.md` を参照。静的解析のraw件数は原本analysis-reportに合わせて13へ訂正した。
+
 ## 1. 判定対象と境界
 
 対象は、npm registryに依存しないGitHub Action bundle、GitHub Release tarball、およびその配布物を使うrelease lifecycle acceptanceである。QEGはdeploy orchestratorではないため、core graphへdeployment nodeは追加しない。deploymentは対象revisionとenvironmentを結び付けた外部control evidenceとして記録する。
@@ -73,7 +75,7 @@ decision: go
 | Stage | 状態 | Evidence boundary |
 | --- | --- | --- |
 | RanD | historical/ran | 既存Kano-inspired requirements audit。正式市場調査ではない |
-| code-to-gate | ran/passed | run `ctg-202607201158-local`。raw 12、accepted-design 1、effective high/critical 0、readiness failed conditions 0。中優先度12件は保守性候補として可視化 |
+| code-to-gate | ran/passed | run `ctg-202607201158-local`。raw 13（high 1 / medium 12）、accepted-designでhigh 1を抑制、effective 12（medium 12 / high・critical 0）、readiness failed conditions 0 |
 | HATE | degraded | HATE producerは今回実行せず、lifecycle harnessの実行証跡を直接QEGへ渡す |
 | manual-bb | ran | 本書のrisk、case、oracle、Gateで検収 |
 | QEG | ran/passed | local全Gate、PR run 29750676199、main run 29752243853、tag run 29752772714のLinux Node 20/24・Windows Node 24とlifecycle artifactsが成功 |

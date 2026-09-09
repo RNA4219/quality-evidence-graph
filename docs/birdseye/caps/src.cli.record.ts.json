@@ -1,0 +1,23 @@
+{
+  "id": "src/cli/record.ts",
+  "role": "record",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 record の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/fixture-io.ts",
+    "src/cli/output-files.ts",
+    "src/record.ts",
+    "src/validation/output.ts"
+  ],
+  "deps_in": [
+    "src/cli/commands.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:7e5985288a4cb8f00509be296641a9d7a12d2703c2d9b5fe43bcf3ed2f5e44ea"
+}

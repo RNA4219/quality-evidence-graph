@@ -1,0 +1,21 @@
+{
+  "id": "src/adapters/validate.ts",
+  "role": "validate",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 validate の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/adapters/producer-schemas.json",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/graph.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:6f03a573c02841d81219639a0b41a4612dc8d8df146bbcb64fe178f4330978b3"
+}

@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-final-reason-no-source",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-final-reason-no-source",
       "status": "gate_failed",
       "exitCode": 2,
@@ -46,7 +55,13 @@
           "nodeIds": [
             "qeg:risk-critical-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+              "path": "gate-input.json",
+              "label": "/graph/nodes/0: Diagnostic subject qeg:risk-critical-001"
+            }
+          ]
         }
       ],
       "blockers": [
@@ -56,7 +71,13 @@
           "riskIds": [
             "qeg:risk-critical-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+              "path": "gate-input.json",
+              "label": "/graph/nodes/0: Diagnostic subject qeg:risk-critical-001"
+            }
+          ]
         }
       ],
       "residualRisks": [],

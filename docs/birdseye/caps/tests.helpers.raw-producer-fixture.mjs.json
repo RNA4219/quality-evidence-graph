@@ -1,0 +1,18 @@
+{
+  "id": "tests/helpers/raw-producer-fixture.mjs",
+  "role": "raw-producer-fixture",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 raw-producer-fixture の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "tests/producer-pipeline.test.mjs"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:32605ccc1bde661a782582e6a918ee9e4b715e07451936b9bf069f2c44532ae0"
+}

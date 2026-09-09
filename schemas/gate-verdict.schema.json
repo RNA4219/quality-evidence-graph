@@ -16,6 +16,7 @@
   ],
   "additionalProperties": false,
   "properties": {
+    "evaluationScope": { "$ref": "input-contract.schema.json#/$defs/evaluationScope" },
     "metadata": { "$ref": "shared-defs.schema.json#/$defs/metadata" },
     "verdict": { "$ref": "shared-defs.schema.json#/$defs/gateVerdict" },
     "reasons": { "type": "array", "items": { "type": "string" } },

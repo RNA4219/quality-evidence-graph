@@ -17,6 +17,7 @@ import { writeOutputRecord } from "./record.js";
 import { runSchemaCheckCommand } from "./schema-check.js";
 import { runSnapshotCommand } from "./snapshot.js";
 import { validateEvaluatedFixture } from "./validation.js";
+import { assertValidOutput } from "../validation/output.js";
 
 export async function runValidateCommand(fixtureDir: string): Promise<void> {
   try {
@@ -35,6 +36,7 @@ export async function runValidateCommand(fixtureDir: string): Promise<void> {
 export async function runGateCommand(fixtureDir: string): Promise<void> {
   try {
     const evaluated = await evaluateFixture(fixtureDir);
+    await assertValidOutput(evaluated.gateResult, "gate-verdict.schema.json");
     console.log(JSON.stringify(evaluated.gateResult, null, 2));
     exit(getExitCode(evaluated.gateResult.verdict, evaluated.policy));
   } catch (error) {

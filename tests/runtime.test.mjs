@@ -196,7 +196,7 @@ test("invalid optionalEvidence is recorded as a warning and does not disqualify"
   assert.equal(JSON.parse(result.stdout).verdict, "go");
 });
 
-test("qeg init generates a schema-valid 0.2 wire contract with the 0.3.1 Action", async () => {
+test("qeg init generates a schema-valid 0.2 wire contract with the installed local Action", async () => {
   const root = await mkdtemp(join(tmpdir(), "qeg-init-v02-"));
   const initialized = run(["init", "--root", root]);
   assert.equal(initialized.status, 0, initialized.stderr || initialized.stdout);
@@ -206,7 +206,11 @@ test("qeg init generates a schema-valid 0.2 wire contract with the 0.3.1 Action"
   const schema = await validateGateInput(input);
   assert.equal(schema.valid, true, JSON.stringify(schema.issues));
   const workflow = await readFile(join(root, ".github", "workflows", "qeg.yml"), "utf-8");
-  assert.match(workflow, /qeg-report-action@v0\.3\.1/);
+  assert.match(workflow, /uses: \.\/\.qeg\/runtime\/qeg-report-action/);
+  const bundled = spawnSync(process.execPath, [join(root, ".qeg/runtime/qeg-report-action/dist/cli.mjs"), "--version"], { encoding: "utf8" });
+  assert.equal(bundled.status, 0, bundled.stderr);
+  assert.equal(bundled.stdout.trim(), "0.4.0");
+  assert.equal(run(["gate", join(root, ".qeg")]).status, 2);
   assert.doesNotMatch(workflow, /enforce: "false"/);
 });
 
@@ -248,7 +252,8 @@ function reliabilityInput() {
     profile: "strict",
     policyId: "qeg:policy-reliability",
     policyHash: REL_HASH,
-    inputArtifacts: [],
+    inputArtifacts: ["qeg:artifact-risk", "qeg:artifact-scenario", "qeg:artifact-raw"].map(id => ({ id, adapter: "qeg-native", kind: "test_model", path: "artifacts/native-contract.json", contentHash: REL_HASH, revision: REL_SHA })),
+    requiredConnectorStatus: { "qeg-native": "success" },
   };
   const test = {
     id: "qeg:test-resilience",
@@ -315,6 +320,8 @@ function reliabilityInput() {
   };
   const policy = {
     policyId: metadata.policyId, policyHash: metadata.policyHash, profile: "strict", effectiveDate: REL_CREATED, approver: "qa", sourceRefs: relSource,
+    inputContract: { mode: "native_graph", requiredArtifacts: [{ adapter: "qeg-native", kind: "test_model" }], requireExecutedTests: false,
+      evaluationScope: { kind: "fixture", target: "reliability evaluator unit contract", notEvaluated: ["Filesystem artifact verification", "Real environment"] }, sourceRefs: relSource },
     dqScope: ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17", "DQ-18", "DQ-19", "DQ-20", "DQ-21"],
     exitCodePolicy: { go: 0, conditional_go: 2, no_go: 2, disqualified: 2 },
     reliabilityPolicy: {

@@ -1,20 +1,29 @@
 {
   "id": "docs/release/acceptance-2026-07-20-v0.3.1.md",
   "role": "v0.3.1-github-only-release-acceptance",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG v0.3.1のGitHub-only配布、Action bundle、release lifecycle、CI証跡、実cluster未評価境界を記録する現行Gate。",
+  "summary": "QEG v0.3.1のGitHub-only配布、Action bundle、隔離schema障害・復旧、CI証跡の過去受入。現行改修の完了証拠には転用しない。",
   "deps_out": [
-    "docs/requirements.md",
     "docs/project/evaluation.md",
-    "docs/spec/reliability-hardening.md",
+    "docs/requirements.md",
+    "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json",
     "docs/spec/reliability-hardening-checklist.md",
-    "fixtures/manifest.json"
+    "docs/spec/reliability-hardening.md",
+    "fixtures/manifest.json",
+    "schemas/action-lifecycle-evidence.schema.json",
+    "tools/action-lifecycle-acceptance.mjs"
   ],
   "deps_in": [
     "README.md",
     "docs/agent/HUB.codex.md",
-    "docs/project/blueprint.md"
+    "docs/ipo-controlled-profile.md",
+    "docs/project/blueprint.md",
+    "docs/project/evaluation.md",
+    "docs/release-notes/2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md",
+    "docs/spec/acceptance.md",
+    "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"
   ],
   "risks": [
     "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"
@@ -25,5 +34,5 @@
     "npm run birdseye-check",
     "git diff --check"
   ],
-  "contentHash": "sha256:82216a2f6c6427b2bfa3b7872b5483f3271c0999e67cd69202c34b83a1a46d2b"
+  "contentHash": "sha256:2a9b3cd549825801c3198f5c40dbe0be05bf45a8af06a603f158a66b4a9f7800"
 }

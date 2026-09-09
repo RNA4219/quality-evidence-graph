@@ -1,11 +1,18 @@
 {
   "id": "src/types/primitives.ts",
   "role": "primitive-types",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
+  "summary": "QEG 0.4.0 primitive-types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
-  "deps_in": [],
+  "deps_in": [
+    "src/types.ts",
+    "src/types/evidence.ts",
+    "src/types/gate.ts",
+    "src/types/graph.ts",
+    "src/types/ingest.ts",
+    "src/types/record.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],

@@ -22,6 +22,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "positive-placement-change-retirement",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/positive-placement-change-retirement",
       "status": "passed",
       "exitCode": 0,

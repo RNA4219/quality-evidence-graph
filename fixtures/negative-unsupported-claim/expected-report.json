@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-unsupported-claim",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-unsupported-claim",
       "status": "gate_failed",
       "exitCode": 2,
@@ -43,7 +52,13 @@
           "nodeIds": [
             "qeg:claim-node-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+              "path": "gate-input.json",
+              "label": "/graph/nodes/0: Diagnostic subject qeg:claim-node-001"
+            }
+          ]
         }
       ],
       "blockers": [],

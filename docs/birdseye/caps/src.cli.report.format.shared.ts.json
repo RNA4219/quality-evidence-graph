@@ -1,0 +1,22 @@
+{
+  "id": "src/cli/report/format/shared.ts",
+  "role": "shared",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 shared の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/report/model.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/report/format/github.ts",
+    "src/cli/report/format/text.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:44e73d05465d342700fac3c0761bfaac8606256c298c5bfae528a7bc3e6d5520"
+}

@@ -12,7 +12,10 @@
         "path": "artifacts/input.json",
         "contentHash": "sha256:9fa8e511107a0fb246464ed29e38903e0a08579566492cfc7d402c45830be937"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -28,7 +31,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:9fa8e511107a0fb246464ed29e38903e0a08579566492cfc7d402c45830be937"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -77,6 +83,31 @@
         "coveredRiskIds": [
           "qeg:risk-login-regression"
         ]
+      },
+      {
+        "id": "mbb:CASE-login-001",
+        "kind": "test",
+        "title": "Retired login manual case (historical reference)",
+        "layer": "manual-scripted",
+        "testExecutionMode": "real",
+        "existing": true,
+        "deleted": true,
+        "sourceArtifactIds": [
+          "qeg:artifact-negative-placement-change-unreverted"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:retired-case-source",
+              "path": "gate-input.json",
+              "label": "/placementPlan/placement_changes/subject_id"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "Retired case remains addressable; deletion does not count as an execution or current coverage."
+          ]
+        }
       }
     ],
     "edges": [],
@@ -118,6 +149,32 @@
           "path": "docs/policy/manual-retirement.md"
         }
       ]
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-placement-change-unreverted",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-negative-placement-change-unreverted",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
     }
   },
   "waivers": [],
@@ -135,7 +192,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:9fa8e511107a0fb246464ed29e38903e0a08579566492cfc7d402c45830be937"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [
       {

@@ -1,15 +1,21 @@
 {
   "id": "docs/project/tasks.codex.md",
   "role": "superseded-implementation-task-ledger",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "完了済みTASK-01〜TASK-10の実装順、対象、受入条件を保持する履歴台帳。現行判定はrepository completion acceptanceへ移管済み。",
+  "summary": "TASK-01〜TASK-10の過去台帳。生成機能が当時未充足だった完了表記を訂正し、現行状態は改修台帳へ移管。",
   "deps_out": [
+    "docs/control-mapping.md",
+    "docs/ipo-controlled-profile.md",
+    "docs/project/remediation-2026-09-10.md",
     "docs/requirements.md",
-    "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    "docs/spec/index.md",
+    "fixtures/README.md"
   ],
   "deps_in": [
-    "docs/agent/HUB.codex.md"
+    "docs/agent/HUB.codex.md",
+    "docs/implementation-prep-gate-2026-06-02.md",
+    "docs/requirements.md"
   ],
   "risks": [
     "superseded台帳の過去no_goを現在状態と誤認する"
@@ -18,5 +24,5 @@
     "npm run birdseye-check",
     "git diff --check"
   ],
-  "contentHash": "sha256:fd336595ebd844b649bcbcc2a8e66b66c2a74afe569122fe6c72b57f95524ac4"
+  "contentHash": "sha256:9508270fef7b064d16a4a123b0b42703ba3bfad5d2c253ddbe67f2fcc79dd771"
 }

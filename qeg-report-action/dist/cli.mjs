@@ -1720,12 +1720,12 @@ var require_code2 = __commonJS({
       });
     }
     exports.checkReportMissingProp = checkReportMissingProp;
-    function checkMissingProp({ gen, data, it: { opts } }, properties, missing) {
-      return (0, codegen_1.or)(...properties.map((prop) => (0, codegen_1.and)(noPropertyInData(gen, data, prop, opts.ownProperties), (0, codegen_1._)`${missing} = ${prop}`)));
+    function checkMissingProp({ gen, data, it: { opts } }, properties, missing2) {
+      return (0, codegen_1.or)(...properties.map((prop) => (0, codegen_1.and)(noPropertyInData(gen, data, prop, opts.ownProperties), (0, codegen_1._)`${missing2} = ${prop}`)));
     }
     exports.checkMissingProp = checkMissingProp;
-    function reportMissingProp(cxt, missing) {
-      cxt.setParams({ missingProperty: missing }, true);
+    function reportMissingProp(cxt, missing2) {
+      cxt.setParams({ missingProperty: missing2 }, true);
       cxt.error();
     }
     exports.reportMissingProp = reportMissingProp;
@@ -2980,7 +2980,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve10.call(this, root, ref);
+      let _sch = resolve16.call(this, root, ref);
       if (_sch === void 0) {
         const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -3007,7 +3007,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve10(root, ref) {
+    function resolve16(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -3638,63 +3638,63 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve10(baseURI, relativeURI, options) {
+    function resolve16(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
       return serialize(resolved, schemelessOptions);
     }
-    function resolveComponent(base, relative7, options, skipNormalization) {
+    function resolveComponent(base2, relative9, options, skipNormalization) {
       const target = {};
       if (!skipNormalization) {
-        base = parse(serialize(base, options), options);
-        relative7 = parse(serialize(relative7, options), options);
+        base2 = parse(serialize(base2, options), options);
+        relative9 = parse(serialize(relative9, options), options);
       }
       options = options || {};
-      if (!options.tolerant && relative7.scheme) {
-        target.scheme = relative7.scheme;
-        target.userinfo = relative7.userinfo;
-        target.host = relative7.host;
-        target.port = relative7.port;
-        target.path = removeDotSegments(relative7.path || "");
-        target.query = relative7.query;
+      if (!options.tolerant && relative9.scheme) {
+        target.scheme = relative9.scheme;
+        target.userinfo = relative9.userinfo;
+        target.host = relative9.host;
+        target.port = relative9.port;
+        target.path = removeDotSegments(relative9.path || "");
+        target.query = relative9.query;
       } else {
-        if (relative7.userinfo !== void 0 || relative7.host !== void 0 || relative7.port !== void 0) {
-          target.userinfo = relative7.userinfo;
-          target.host = relative7.host;
-          target.port = relative7.port;
-          target.path = removeDotSegments(relative7.path || "");
-          target.query = relative7.query;
+        if (relative9.userinfo !== void 0 || relative9.host !== void 0 || relative9.port !== void 0) {
+          target.userinfo = relative9.userinfo;
+          target.host = relative9.host;
+          target.port = relative9.port;
+          target.path = removeDotSegments(relative9.path || "");
+          target.query = relative9.query;
         } else {
-          if (!relative7.path) {
-            target.path = base.path;
-            if (relative7.query !== void 0) {
-              target.query = relative7.query;
+          if (!relative9.path) {
+            target.path = base2.path;
+            if (relative9.query !== void 0) {
+              target.query = relative9.query;
             } else {
-              target.query = base.query;
+              target.query = base2.query;
             }
           } else {
-            if (relative7.path[0] === "/") {
-              target.path = removeDotSegments(relative7.path);
+            if (relative9.path[0] === "/") {
+              target.path = removeDotSegments(relative9.path);
             } else {
-              if ((base.userinfo !== void 0 || base.host !== void 0 || base.port !== void 0) && !base.path) {
-                target.path = "/" + relative7.path;
-              } else if (!base.path) {
-                target.path = relative7.path;
+              if ((base2.userinfo !== void 0 || base2.host !== void 0 || base2.port !== void 0) && !base2.path) {
+                target.path = "/" + relative9.path;
+              } else if (!base2.path) {
+                target.path = relative9.path;
               } else {
-                target.path = base.path.slice(0, base.path.lastIndexOf("/") + 1) + relative7.path;
+                target.path = base2.path.slice(0, base2.path.lastIndexOf("/") + 1) + relative9.path;
               }
               target.path = removeDotSegments(target.path);
             }
-            target.query = relative7.query;
+            target.query = relative9.query;
           }
-          target.userinfo = base.userinfo;
-          target.host = base.host;
-          target.port = base.port;
+          target.userinfo = base2.userinfo;
+          target.host = base2.host;
+          target.port = base2.port;
         }
-        target.scheme = base.scheme;
+        target.scheme = base2.scheme;
       }
-      target.fragment = relative7.fragment;
+      target.fragment = relative9.fragment;
       return target;
     }
     function equal(uriA, uriB, options) {
@@ -3896,7 +3896,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve10,
+      resolve: resolve16,
       resolveComponent,
       equal,
       serialize,
@@ -4311,7 +4311,7 @@ var require_core = __commonJS({
       errorsText(errors = this.errors, { separator = ", ", dataVar = "data" } = {}) {
         if (!errors || errors.length === 0)
           return "No errors";
-        return errors.map((e) => `${dataVar}${e.instancePath} ${e.message}`).reduce((text, msg) => text + separator + msg);
+        return errors.map((e) => `${dataVar}${e.instancePath} ${e.message}`).reduce((text2, msg) => text2 + separator + msg);
       }
       $dataMetaSchema(metaSchema, keywordsJsonPointers) {
         const rules = this.RULES.all;
@@ -4630,12 +4630,12 @@ var require_ref = __commonJS({
       function callSyncRef() {
         cxt.result((0, code_1.callValidateCode)(cxt, v, passCxt), () => addEvaluatedFrom(v), () => addErrorsFrom(v));
       }
-      function addErrorsFrom(source) {
-        const errs = (0, codegen_1._)`${source}.errors`;
+      function addErrorsFrom(source2) {
+        const errs = (0, codegen_1._)`${source2}.errors`;
         gen.assign(names_1.default.vErrors, (0, codegen_1._)`${names_1.default.vErrors} === null ? ${errs} : ${names_1.default.vErrors}.concat(${errs})`);
         gen.assign(names_1.default.errors, (0, codegen_1._)`${names_1.default.vErrors}.length`);
       }
-      function addEvaluatedFrom(source) {
+      function addEvaluatedFrom(source2) {
         var _a;
         if (!it.opts.unevaluated)
           return;
@@ -4646,7 +4646,7 @@ var require_ref = __commonJS({
               it.props = util_1.mergeEvaluated.props(gen, schEvaluated.props, it.props);
             }
           } else {
-            const props = gen.var("props", (0, codegen_1._)`${source}.evaluated.props`);
+            const props = gen.var("props", (0, codegen_1._)`${source2}.evaluated.props`);
             it.props = util_1.mergeEvaluated.props(gen, props, it.props, codegen_1.Name);
           }
         }
@@ -4656,7 +4656,7 @@ var require_ref = __commonJS({
               it.items = util_1.mergeEvaluated.items(gen, schEvaluated.items, it.items);
             }
           } else {
-            const items = gen.var("items", (0, codegen_1._)`${source}.evaluated.items`);
+            const items = gen.var("items", (0, codegen_1._)`${source2}.evaluated.items`);
             it.items = util_1.mergeEvaluated.items(gen, items, it.items, codegen_1.Name);
           }
         }
@@ -4921,14 +4921,14 @@ var require_required = __commonJS({
           }
         }
         function exitOnErrorMode() {
-          const missing = gen.let("missing");
+          const missing2 = gen.let("missing");
           if (useLoop || $data) {
             const valid = gen.let("valid", true);
-            cxt.block$data(valid, () => loopUntilMissing(missing, valid));
+            cxt.block$data(valid, () => loopUntilMissing(missing2, valid));
             cxt.ok(valid);
           } else {
-            gen.if((0, code_1.checkMissingProp)(cxt, schema, missing));
-            (0, code_1.reportMissingProp)(cxt, missing);
+            gen.if((0, code_1.checkMissingProp)(cxt, schema, missing2));
+            (0, code_1.reportMissingProp)(cxt, missing2);
             gen.else();
           }
         }
@@ -4938,10 +4938,10 @@ var require_required = __commonJS({
             gen.if((0, code_1.noPropertyInData)(gen, data, prop, opts.ownProperties), () => cxt.error());
           });
         }
-        function loopUntilMissing(missing, valid) {
-          cxt.setParams({ missingProperty: missing });
-          gen.forOf(missing, schemaCode, () => {
-            gen.assign(valid, (0, code_1.propertyInData)(gen, data, missing, opts.ownProperties));
+        function loopUntilMissing(missing2, valid) {
+          cxt.setParams({ missingProperty: missing2 });
+          gen.forOf(missing2, schemaCode, () => {
+            gen.assign(valid, (0, code_1.propertyInData)(gen, data, missing2, opts.ownProperties));
             gen.if((0, codegen_1.not)(valid), () => {
               cxt.error();
               gen.break();
@@ -5479,7 +5479,7 @@ var require_dependencies = __commonJS({
       const { gen, data, it } = cxt;
       if (Object.keys(propertyDeps).length === 0)
         return;
-      const missing = gen.let("missing");
+      const missing2 = gen.let("missing");
       for (const prop in propertyDeps) {
         const deps = propertyDeps[prop];
         if (deps.length === 0)
@@ -5497,8 +5497,8 @@ var require_dependencies = __commonJS({
             }
           });
         } else {
-          gen.if((0, codegen_1._)`${hasProperty} && (${(0, code_1.checkMissingProp)(cxt, deps, missing)})`);
-          (0, code_1.reportMissingProp)(cxt, missing);
+          gen.if((0, codegen_1._)`${hasProperty} && (${(0, code_1.checkMissingProp)(cxt, deps, missing2)})`);
+          (0, code_1.reportMissingProp)(cxt, missing2);
           gen.else();
         }
       }
@@ -6639,8 +6639,8 @@ var require_discriminator = __commonJS({
           if (!tagRequired)
             throw new Error(`discriminator: "${tagName}" must be required`);
           return oneOfMapping;
-          function hasRequired({ required }) {
-            return Array.isArray(required) && required.includes(tagName);
+          function hasRequired({ required: required2 }) {
+            return Array.isArray(required2) && required2.includes(tagName);
           }
           function addMappings(sch, i) {
             if (sch.const) {
@@ -7077,7 +7077,7 @@ var require__ = __commonJS({
     var discriminator_1 = require_discriminator();
     var json_schema_2020_12_1 = require_json_schema_2020_12();
     var META_SCHEMA_ID = "https://json-schema.org/draft/2020-12/schema";
-    var Ajv20202 = class extends core_1.default {
+    var Ajv20203 = class extends core_1.default {
       constructor(opts = {}) {
         super({
           ...opts,
@@ -7104,11 +7104,11 @@ var require__ = __commonJS({
         return this.opts.defaultMeta = super.defaultMeta() || (this.getSchema(META_SCHEMA_ID) ? META_SCHEMA_ID : void 0);
       }
     };
-    exports.Ajv2020 = Ajv20202;
-    module.exports = exports = Ajv20202;
-    module.exports.Ajv2020 = Ajv20202;
+    exports.Ajv2020 = Ajv20203;
+    module.exports = exports = Ajv20203;
+    module.exports.Ajv2020 = Ajv20203;
     Object.defineProperty(exports, "__esModule", { value: true });
-    exports.default = Ajv20202;
+    exports.default = Ajv20203;
     var validate_1 = require_validate();
     Object.defineProperty(exports, "KeywordCxt", { enumerable: true, get: function() {
       return validate_1.KeywordCxt;
@@ -7146,8 +7146,4441 @@ var require__ = __commonJS({
 // src/cli.ts
 import { exit as exit15 } from "process";
 
-// src/cli/commands.ts
-import { exit as exit14 } from "process";
+// src/adapters/common.ts
+function object(value, label) {
+  if (!value || typeof value !== "object" || Array.isArray(value)) throw new Error(`${label} must be an object`);
+  return value;
+}
+function text(value, label) {
+  if (typeof value !== "string" || value.trim().length === 0) throw new Error(`${label} must be a non-empty string`);
+  return value;
+}
+function list(value, label) {
+  if (!Array.isArray(value)) throw new Error(`${label} must be an array`);
+  return value;
+}
+function strings(value) {
+  return Array.isArray(value) ? value.filter((v) => typeof v === "string") : [];
+}
+function rows(value, label) {
+  return list(value, label).map((v, i) => object(v, `${label}[${i}]`));
+}
+function required(raw, fields) {
+  for (const key of fields) if (raw[key] === void 0 || raw[key] === null) throw new Error(`Required field ${key} is missing`);
+}
+function producerPrefix(adapter) {
+  return adapter === "RanD" ? "rand" : adapter === "code-to-gate" ? "ctg" : "mbb";
+}
+function stableId(producer, kind, local) {
+  const prefixed = /^(rand|ctg|mbb|hate|qeg):(.+)$/s.exec(local);
+  if (prefixed) return /\s/.test(local) ? `${prefixed[1]}:${encodeURIComponent(prefixed[2])}` : local;
+  return `${producer}:${kind}:${encodeURIComponent(local.replaceAll("\\", "/"))}`;
+}
+function source(ref, pointer, label) {
+  return {
+    id: stableId(producerPrefix(ref.adapter), "source", `${ref.path}/${pointer}`),
+    path: ref.path,
+    ...ref.revision ? { revision: ref.revision } : {},
+    label: `${pointer}${label ? `: ${label}` : ""}`
+  };
+}
+function confidence(value) {
+  if (value === "low" || value === "medium" || value === "high") return value;
+  if (typeof value === "number" && value >= 0 && value <= 1) return value >= 0.8 ? "high" : value >= 0.5 ? "medium" : "low";
+  return "medium";
+}
+function trace(ref, pointer, raw = {}) {
+  const evidence = [
+    ...Array.isArray(raw.evidence) ? raw.evidence : [],
+    ...Array.isArray(raw.source_refs) ? raw.source_refs : [],
+    ...strings(raw.evidence_refs),
+    ...strings(raw.source_ref && typeof raw.source_ref === "object" ? raw.source_ref.refs : void 0)
+  ];
+  const sourceRefs = [source(ref, pointer)];
+  for (const [index, value] of evidence.entries()) {
+    const entry = value && typeof value === "object" ? value : void 0;
+    const path = entry?.path ?? entry?.source_ref ?? entry?.url ?? (typeof value === "string" && /[/\\.]|^https?:/.test(value) ? value : void 0);
+    sourceRefs.push({
+      ...source(ref, `${pointer}/source/${index}`, typeof value === "string" ? value : typeof entry?.id === "string" ? entry.id : void 0),
+      ...typeof path === "string" ? { path } : {},
+      ...typeof entry?.startLine === "number" ? { startLine: entry.startLine } : {},
+      ...typeof entry?.endLine === "number" ? { endLine: entry.endLine } : {}
+    });
+  }
+  return { sourceRefs, confidence: confidence(raw.confidence), assumptions: [
+    ...strings(raw.assumptions),
+    ...raw.confidence === void 0 ? ["producer\u5951\u7D04\u306Bconfidence\u304C\u306A\u3044\u305F\u3081medium\u3068\u3057\u3066\u6271\u3046"] : []
+  ] };
+}
+function base(ref, kind, local, title, raw = {}) {
+  return { id: stableId(producerPrefix(ref.adapter), kind, local), kind, title, traceability: trace(ref, local, raw), sourceArtifactIds: [ref.id] };
+}
+function evidenceRef(ref, local, evidenceKind = "spec") {
+  return { ...source(ref, local), evidenceKind, contentHash: ref.contentHash };
+}
+function assertNoDirectPolicy(value, proposal = false) {
+  if (!value || typeof value !== "object") return;
+  if (Array.isArray(value)) {
+    value.forEach((v) => assertNoDirectPolicy(v, proposal));
+    return;
+  }
+  for (const [key, child] of Object.entries(value)) {
+    if (!proposal && (key === "gate_policy" || key === "gatePolicy")) throw new Error("External Gate policy must be an explicit proposal");
+    assertNoDirectPolicy(child, proposal || /proposal/i.test(key));
+  }
+}
+
+// src/adapters/decisions.ts
+var VERDICTS = {
+  go: "go",
+  pass: "go",
+  passed: "go",
+  conditional_go: "conditional_go",
+  passed_with_risk: "conditional_go",
+  needs_review: "conditional_go",
+  no_go: "no_go",
+  fail: "no_go",
+  failed: "no_go",
+  blocked: "no_go",
+  blocked_input: "disqualified",
+  disqualified: "disqualified"
+};
+function decision(ref, local, status, profile, raw) {
+  const verdict = typeof status === "string" ? VERDICTS[status] : void 0;
+  if (!verdict) throw new Error(`Unknown upstream decision: ${String(status)}`);
+  return {
+    ...base(ref, "gate_verdict", local, `${ref.adapter}: ${String(status)}`, raw),
+    kind: "gate_verdict",
+    profile,
+    verdict,
+    disqualifications: [],
+    blockers: [],
+    residualRisks: []
+  };
+}
+
+// src/adapters/contracts.ts
+function emptyResult() {
+  return { nodes: [], edges: [], parserFailures: [], unsupportedClaims: [] };
+}
+
+// src/adapters/rand.ts
+function priority(value) {
+  return value === "P0" || value === "P1" || value === "P2" || value === "P3" ? value : "P2";
+}
+function normalizeRand({ ref, raw, profile }) {
+  if (ref.contractVersion !== "rand-kano/1.0" || raw.schema_version !== "1.0") throw new Error("RanD requires rand-kano/1.0 and schema_version=1.0");
+  const packet = ref.kind === "requirements_packet";
+  if (!packet && ref.kind !== "requirements_audit_packet") throw new Error(`Unsupported RanD artifact ${ref.kind}`);
+  required(raw, ["schema_version", "requirements", "assumptions", packet ? "packet_id" : "document_id"]);
+  if (packet) required(raw, ["derived_from", "qeg_policy_hash_ref", "product_context", "release_readiness_prelude"]);
+  if (!packet) required(raw, ["gate_summary", "source_refs"]);
+  const result = emptyResult();
+  for (const requirement of rows(raw.requirements, "requirements")) {
+    const local = text(requirement.requirement_id, "requirement_id");
+    const title = text(requirement.title ?? requirement.statement ?? requirement.original_text, "requirement text");
+    required(requirement, packet ? ["confidence", "acceptance_criteria", "risks"] : ["confidence", "gate_verdict", "testability", "implementation_alignment"]);
+    const node = { ...base(ref, "requirement", local, title, requirement), kind: "requirement", priority: priority(requirement.priority), acceptanceCriteriaIds: [] };
+    const acceptanceIds = [];
+    if (packet) for (const value of list(requirement.acceptance_criteria, "acceptance_criteria")) {
+      const item = typeof value === "string" ? { text: value } : object(value, "acceptance criterion");
+      const title2 = text(item.text ?? item.description ?? item.criterion ?? item.title, "acceptance criterion text");
+      const ac = {
+        ...base(ref, "acceptance_criteria", `${local}/${String(item.id ?? title2)}`, title2, requirement),
+        kind: "acceptance_criteria",
+        requirementIds: [node.id],
+        oracleRefs: [evidenceRef(ref, `${local}/acceptance_criteria/${String(item.id ?? title2)}`)]
+      };
+      acceptanceIds.push(ac.id);
+      result.nodes.push(ac);
+      result.edges.push({ id: stableId("rand", "edge", `${node.id}/satisfies/${ac.id}`), kind: "satisfies", from: node.id, to: ac.id, traceability: ac.traceability });
+    }
+    result.nodes.push({
+      ...node,
+      acceptanceCriteriaIds: acceptanceIds,
+      traceability: { ...node.traceability, assumptions: [...node.traceability.assumptions, ...strings(raw.assumptions)] }
+    });
+    if (packet) for (const value of list(requirement.risks, "risks")) {
+      const item = typeof value === "string" ? { title: value } : object(value, "risk");
+      const title2 = text(item.title ?? item.description ?? item.risk, "risk text");
+      const risk = {
+        ...base(ref, "risk", `${local}/risk/${String(item.id ?? title2)}`, title2, requirement),
+        kind: "risk",
+        priority: node.priority ?? "P2",
+        severity: "medium",
+        likelihood: 0.5,
+        businessImpact: 0.5,
+        complianceCriticality: 0,
+        evidenceGap: 1,
+        novelty: 0.5
+      };
+      result.nodes.push(risk);
+      result.edges.push({ id: stableId("rand", "edge", `${node.id}/risks/${risk.id}`), kind: "risks", from: node.id, to: risk.id, traceability: risk.traceability });
+    }
+    if (!packet) {
+      result.nodes.push(decision(ref, `audit/${local}`, requirement.gate_verdict, profile, requirement));
+      if (requirement.testability === "blocked") result.unsupportedClaims.push({
+        id: stableId("rand", "oracle-gap", local),
+        claim: `${title}: audit testability is blocked`,
+        nodeIds: [node.id],
+        gateRelevant: true
+      });
+    }
+  }
+  if (result.nodes.length === 0) result.parserFailures.push({ path: ref.path, reason: "RanD requirements are empty", sourceRefs: trace(ref, "/requirements").sourceRefs });
+  return result;
+}
+
+// src/adapters/code-to-gate.ts
+var REQUIRED = {
+  normalized_repo_graph: ["files", "modules", "symbols", "relations", "tests", "configs", "entrypoints", "diagnostics", "stats"],
+  diff_analysis: ["changed_files", "blast_radius", "diff_findings"],
+  findings: ["completeness", "findings", "unsupported_claims"],
+  risk_register: ["completeness", "risks"],
+  test_seeds: ["completeness", "seeds"],
+  release_readiness: ["status", "completeness", "summary", "counts", "failedConditions", "recommendedActions", "artifactRefs"],
+  audit: ["inputs", "policy", "exit"]
+};
+var LEVELS = {
+  unit: "unit",
+  integration: "integration",
+  component: "integration",
+  contract: "integration",
+  api: "integration",
+  system: "system",
+  e2e: "e2e",
+  manual: "manual-scripted",
+  exploratory: "manual-exploratory",
+  security: "system",
+  performance: "system"
+};
+function severity(value) {
+  if (value === "critical" || value === "high" || value === "medium" || value === "low" || value === "info") return value;
+  throw new Error(`Unknown severity ${String(value)}`);
+}
+function changedIds(context, raw) {
+  return [...new Set(rows(raw.evidence ?? [], "evidence").flatMap((e) => {
+    const path = typeof e.path === "string" ? e.path.replaceAll("\\", "/").replace(/^\.\//, "") : "";
+    const id = context.knownChanges.get(path);
+    return id ? [id] : [];
+  }))];
+}
+function edge(result, context, from, to, kind) {
+  result.edges.push({ id: stableId("ctg", "edge", `${from}/${kind}/${to}`), from, to, kind, traceability: trace(context.ref, `${from}/${to}`) });
+}
+function normalizeDiff(context, result) {
+  for (const file of rows(context.raw.changed_files, "changed_files")) {
+    const path = text(file.path, "changed file path").replaceAll("\\", "/").replace(/^\.\//, "");
+    const node = {
+      ...base(context.ref, "changed_code", path, path, file),
+      kind: "changed_code",
+      path,
+      symbols: strings(file.symbols),
+      blastRadius: strings(object(context.raw.blast_radius, "blast_radius").affectedFiles).length,
+      hunks: rows(file.hunks ?? [], "hunks").map((h, index) => ({
+        id: stableId("ctg", "hunk", `${path}/${index}`),
+        path,
+        startLine: Number(h.startLine),
+        endLine: Number(h.endLine),
+        revision: context.ref.revision
+      }))
+    };
+    result.nodes.push(node);
+  }
+}
+function normalizeFindings(context, result) {
+  for (const item of rows(context.raw.findings, "findings")) {
+    required(item, ["id", "title", "ruleId", "severity", "confidence", "evidence"]);
+    const node = {
+      ...base(context.ref, "finding", text(item.id, "finding id"), text(item.title, "finding title"), item),
+      kind: "finding",
+      ruleId: text(item.ruleId, "ruleId"),
+      severity: severity(item.severity),
+      changedCodeIds: changedIds(context, item)
+    };
+    result.nodes.push(node);
+    for (const changed of node.changedCodeIds) edge(result, context, node.id, changed, "touches");
+  }
+  for (const claim of rows(context.raw.unsupported_claims, "unsupported_claims")) result.unsupportedClaims.push({
+    id: stableId("ctg", "claim", text(claim.id, "claim id")),
+    claim: text(claim.claim, "claim"),
+    nodeIds: [],
+    gateRelevant: true
+  });
+}
+function normalizeRisks(context, result) {
+  for (const item of rows(context.raw.risks, "risks")) {
+    required(item, ["id", "title", "severity", "likelihood", "evidence", "sourceFindingIds"]);
+    const level = severity(item.severity);
+    const chance = typeof item.likelihood === "number" ? item.likelihood : item.likelihood === "high" ? 0.8 : item.likelihood === "low" ? 0.2 : 0.5;
+    const node = {
+      ...base(context.ref, "risk", text(item.id, "risk id"), text(item.title, "risk title"), item),
+      kind: "risk",
+      priority: level === "critical" ? "P0" : level === "high" ? "P1" : level === "medium" ? "P2" : "P3",
+      severity: level,
+      likelihood: chance,
+      businessImpact: level === "critical" ? 1 : level === "high" ? 0.8 : 0.5,
+      complianceCriticality: 0,
+      evidenceGap: 1,
+      novelty: 0.5
+    };
+    result.nodes.push(node);
+    for (const finding of strings(item.sourceFindingIds)) edge(result, context, node.id, stableId("ctg", "finding", finding), "derives_from");
+    for (const change of changedIds(context, item)) edge(result, context, node.id, change, "touches");
+  }
+}
+function normalizeSeeds(context, result) {
+  for (const item of rows(context.raw.seeds, "seeds")) {
+    required(item, ["id", "title", "sourceRiskIds", "sourceFindingIds", "suggestedLevel", "evidence"]);
+    const layer = LEVELS[String(item.suggestedLevel)];
+    if (!layer) throw new Error(`Unknown suggestedLevel: ${String(item.suggestedLevel)}`);
+    const node = {
+      ...base(context.ref, "test", text(item.id, "seed id"), text(item.title, "seed title"), item),
+      kind: "test",
+      layer,
+      existing: false,
+      testExecutionMode: "real",
+      oracleType: "missing",
+      expectedResults: [],
+      oracleRefs: [],
+      coveredRiskIds: strings(item.sourceRiskIds).map((id) => stableId("ctg", "risk", id)),
+      coveredChangedCodeIds: changedIds(context, item)
+    };
+    result.nodes.push(node);
+    for (const risk of node.coveredRiskIds ?? []) edge(result, context, risk, node.id, "requires_test");
+    for (const finding of strings(item.sourceFindingIds)) edge(result, context, node.id, stableId("ctg", "finding", finding), "derives_from");
+  }
+}
+function normalizeRepo(context, result) {
+  const files = rows(context.raw.files, "files");
+  for (const item of rows(context.raw.tests, "tests")) {
+    const id = text(item.id, "existing test id");
+    const file = files.find((f) => f.id === item.fileId);
+    const path = item.path ?? file?.path;
+    const layer = LEVELS[String(item.level ?? item.layer ?? item.kind)] ?? "unit";
+    result.nodes.push({
+      ...base(context.ref, "test", id, String(item.name ?? item.title ?? path ?? id), item),
+      kind: "test",
+      layer,
+      existing: true,
+      testExecutionMode: "real",
+      oracleType: "missing",
+      coveredRiskIds: [],
+      coveredChangedCodeIds: [],
+      ...typeof item.command === "string" ? { command: item.command } : {}
+    });
+  }
+  for (const diagnostic of rows(context.raw.diagnostics, "diagnostics")) if (diagnostic.severity === "error") result.parserFailures.push({
+    path: context.ref.path,
+    reason: String(diagnostic.message),
+    sourceRefs: trace(context.ref, "/diagnostics").sourceRefs
+  });
+}
+function normalizeCodeToGate(context) {
+  const { ref, raw } = context;
+  const name = ref.kind.replaceAll("_", "-");
+  if (ref.contractVersion !== "ctg-artifacts/v1" || raw.artifact !== name || raw.schema !== `${name}@v1`) throw new Error(`Expected ${name}@v1 producer contract`);
+  const fields = REQUIRED[ref.kind];
+  if (!fields) throw new Error(`Unsupported CTG artifact ${ref.kind}`);
+  required(raw, fields);
+  const result = emptyResult();
+  if (ref.kind === "diff_analysis") normalizeDiff(context, result);
+  if (ref.kind === "findings") normalizeFindings(context, result);
+  if (ref.kind === "risk_register") normalizeRisks(context, result);
+  if (ref.kind === "test_seeds") normalizeSeeds(context, result);
+  if (ref.kind === "normalized_repo_graph") normalizeRepo(context, result);
+  if (ref.kind === "release_readiness") result.nodes.push(decision(ref, "release-readiness", raw.status, context.profile, raw));
+  if (ref.kind === "audit") {
+    rows(raw.inputs, "audit.inputs");
+    object(raw.policy, "audit.policy");
+    object(raw.exit, "audit.exit");
+  }
+  if (raw.completeness === "partial" || ref.kind === "normalized_repo_graph" && object(raw.stats, "stats").partial === true) result.parserFailures.push({
+    path: ref.path,
+    reason: "CTG completeness is partial",
+    sourceRefs: trace(ref, "/completeness").sourceRefs
+  });
+  return result;
+}
+
+// src/adapters/manual-bb.ts
+function manualId(kind, local) {
+  return stableId("mbb", kind, local);
+}
+function priority2(value) {
+  if (value === "P0" || value === "P1" || value === "P2" || value === "P3") return value;
+  throw new Error(`Invalid manual priority ${String(value)}`);
+}
+function scale(value, label) {
+  if (typeof value !== "number" || !Number.isFinite(value) || value < 1 || value > 5) throw new Error(`${label} must be in 1..5`);
+  return value / 5;
+}
+function relation(result, context, from, to, kind) {
+  result.edges.push({ id: manualId("edge", `${from}/${kind}/${to}`), from, to, kind, traceability: trace(context.ref, `${from}/${to}`) });
+}
+function normalizeFeature(context, result) {
+  const { raw, ref } = context;
+  required(raw, ["feature_id", "title", "acceptance_criteria", "source_refs"]);
+  const local = text(raw.feature_id, "feature_id");
+  const node = { ...base(ref, "requirement", local, text(raw.title, "feature title"), raw), kind: "requirement", acceptanceCriteriaIds: [] };
+  const acceptanceIds = [];
+  for (const [index, value] of list(raw.acceptance_criteria, "acceptance_criteria").entries()) {
+    const item = typeof value === "string" ? { text: value } : object(value, "acceptance criterion");
+    const title = text(item.text ?? item.description ?? item.title, "acceptance criterion text");
+    const localAc = `${local}/${String(item.id ?? `AC-${index + 1}`)}`;
+    const ac = {
+      ...base(ref, "acceptance_criteria", localAc, title, raw),
+      kind: "acceptance_criteria",
+      requirementIds: [node.id],
+      oracleRefs: [evidenceRef(ref, `/acceptance_criteria/${index}`)]
+    };
+    result.nodes.push(ac);
+    acceptanceIds.push(ac.id);
+    relation(result, context, node.id, ac.id, "satisfies");
+  }
+  result.nodes.push({ ...node, acceptanceCriteriaIds: acceptanceIds });
+  for (const path of strings(raw.changed_areas)) {
+    const changed = context.knownChanges.get(path.replaceAll("\\", "/").replace(/^\.\//, ""));
+    if (changed) relation(result, context, node.id, changed, "touches");
+  }
+}
+function normalizeRisks2(context, result) {
+  for (const item of rows(context.raw.risks, "risks")) {
+    required(item, ["id", "scenario", "impact", "likelihood", "priority"]);
+    const rank = priority2(item.priority);
+    const node = {
+      ...base(context.ref, "risk", text(item.id, "risk id"), text(item.scenario, "risk scenario"), item),
+      kind: "risk",
+      priority: rank,
+      severity: rank === "P0" ? "critical" : rank === "P1" ? "high" : rank === "P2" ? "medium" : "low",
+      likelihood: scale(item.likelihood, "likelihood"),
+      businessImpact: scale(item.impact, "impact"),
+      complianceCriticality: 0,
+      evidenceGap: 1,
+      novelty: 0.5
+    };
+    result.nodes.push(node);
+    relation(result, context, manualId("requirement", text(context.raw.feature_id, "feature_id")), node.id, "risks");
+    for (const id of strings(item.trace_to)) if (/^(TC|CHARTER|mbb:test)/.test(id)) relation(result, context, node.id, manualId("test", id), "requires_test");
+  }
+}
+function oracleType(value) {
+  return value === "specified" || value === "derived" || value === "implicit" || value === "human" ? value : "missing";
+}
+function riskReferences(values) {
+  return values.filter((id) => /^(RISK|R-\d|ctg:|rand:risk|mbb:risk)/.test(id)).map((id) => manualId("risk", id));
+}
+function normalizeCases(context, result) {
+  const { raw, ref } = context;
+  required(raw, ["manual_cases"]);
+  const cases = rows(raw.manual_cases, "manual_cases").map((item) => ({ item, exploratory: false }));
+  cases.push(...rows(raw.exploratory_charters ?? [], "exploratory_charters").map((item) => ({ item, exploratory: true })));
+  for (const { item, exploratory } of cases) {
+    required(item, exploratory ? ["id", "title", "scope", "questions", "trace_to"] : ["tc_id", "title", "expected_results", "oracle", "trace_to"]);
+    const local = text(exploratory ? item.id : item.tc_id, "case id");
+    const oracle = object(item.oracle ?? {}, "oracle");
+    const expected = strings(item.expected_results);
+    const node = {
+      ...base(ref, "test", local, text(item.title ?? item.mission, "case title"), item),
+      kind: "test",
+      layer: exploratory ? "manual-exploratory" : "manual-scripted",
+      existing: true,
+      testExecutionMode: "real",
+      oracleType: oracleType(oracle.type),
+      oracleRefs: strings(oracle.refs).map((id) => evidenceRef(ref, `${local}/oracle/${id}`)),
+      expectedResults: expected,
+      coverageDimensions: strings(item.techniques),
+      coveredRiskIds: riskReferences(strings(item.trace_to)),
+      coveredRequirementIds: [manualId("requirement", text(raw.feature_id, "feature_id"))]
+    };
+    result.nodes.push(node);
+    relation(result, context, node.coveredRequirementIds[0], node.id, "requires_test");
+    for (const riskId of node.coveredRiskIds ?? []) relation(result, context, riskId, node.id, "requires_test");
+    if (!exploratory && (expected.length === 0 || node.oracleRefs?.length === 0)) result.unsupportedClaims.push({
+      id: manualId("oracle-gap", local),
+      claim: `Scripted case ${local} has no expected result or oracle`,
+      nodeIds: [node.id],
+      gateRelevant: true
+    });
+  }
+}
+function normalizeExecution(context, result) {
+  const { raw, ref } = context;
+  required(raw, ["run_id", "build_id", "timestamp", "result"]);
+  if (Boolean(raw.tc_id) === Boolean(raw.charter_id)) throw new Error("Execution requires exactly one of tc_id or charter_id");
+  const caseId = text(raw.tc_id ?? raw.charter_id, "executed case id");
+  const local = `${text(raw.run_id, "run_id")}/${caseId}`;
+  const timestamp = text(raw.timestamp, "execution timestamp");
+  if (!Number.isFinite(Date.parse(timestamp))) throw new Error("Execution timestamp is invalid");
+  if (!["pass", "fail", "skip", "blocked", "unknown"].includes(String(raw.result))) throw new Error("Execution result is invalid");
+  const node = {
+    ...base(ref, "execution_evidence", local, `${caseId}: ${String(raw.result)}`, raw),
+    kind: "execution_evidence",
+    ...raw.result === "pass" || raw.result === "fail" ? { passed: raw.result === "pass" } : {},
+    evidenceRefs: [{ ...evidenceRef(ref, "/", "test_result"), capturedAt: timestamp }]
+  };
+  result.nodes.push(node);
+  relation(result, context, manualId("test", caseId), node.id, "evidenced_by");
+}
+function normalizeManualBb(context) {
+  const { raw, ref } = context;
+  if (ref.contractVersion !== "manual-bb/v1") throw new Error("manual-bb requires manual-bb/v1 manifest contract");
+  text(raw.feature_id, "feature_id");
+  const result = emptyResult();
+  switch (ref.kind) {
+    case "feature_spec":
+      normalizeFeature(context, result);
+      break;
+    case "risk_register":
+      normalizeRisks2(context, result);
+      break;
+    case "manual_case_set":
+      normalizeCases(context, result);
+      break;
+    case "execution_evidence":
+      normalizeExecution(context, result);
+      break;
+    case "gate_decision":
+      required(raw, ["build_id", "status", "profile", "reasons", "evidence_summary"]);
+      result.nodes.push(decision(ref, `${String(raw.feature_id)}/gate`, raw.status, context.profile, raw));
+      break;
+    default:
+      throw new Error(`Unsupported manual-bb artifact ${ref.kind}`);
+  }
+  return result;
+}
+
+// src/input-contract.ts
+var UPSTREAM_REQUIRED_ARTIFACTS = [
+  ...["requirements_packet", "requirements_audit_packet"].map((kind) => ({ adapter: "RanD", kind })),
+  ...["normalized_repo_graph", "diff_analysis", "findings", "risk_register", "test_seeds", "release_readiness", "audit"].map((kind) => ({ adapter: "code-to-gate", kind })),
+  ...["feature_spec", "risk_register", "manual_case_set", "gate_decision", "execution_evidence"].map((kind) => ({ adapter: "manual-bb-test-harness", kind }))
+];
+function artifactKey(artifact) {
+  return `${artifact.adapter}/${artifact.kind}`;
+}
+function inputSource(pointer, label) {
+  return { id: `qeg:input-${encodeURIComponent(pointer)}`, path: "gate-input.json", label: `${pointer}: ${label}` };
+}
+function upstreamInputContract(target) {
+  return {
+    mode: "upstream_artifacts",
+    requiredArtifacts: UPSTREAM_REQUIRED_ARTIFACTS,
+    evaluationScope: { kind: "isolated_consumer", target, notEvaluated: ["\u5B9F\u74B0\u5883\u306E\u53D7\u5165", "\u4EBA\u9593\u306Erelease approval"] },
+    requireExecutedTests: true,
+    sourceRefs: [inputSource("/policy/inputContract", "\u5FC5\u8981\u8A3C\u8DE1\u3068\u8A55\u4FA1\u7BC4\u56F2\u3092\u8A2D\u5B9A\u3059\u308B")]
+  };
+}
+
+// src/graph/requirements.ts
+function requirementEdges(nodes, loaded) {
+  const requirements = new Set(nodes.filter((n) => n.kind === "requirement").map((n) => n.id));
+  const edges = [];
+  for (const { ref, payload, failure } of loaded) {
+    if (failure || ref.adapter !== "manual-bb-test-harness" || ref.kind !== "feature_spec" || !payload || typeof payload !== "object") continue;
+    const raw = payload;
+    if (typeof raw.feature_id !== "string" || !Array.isArray(raw.source_refs)) continue;
+    const from = stableId("mbb", "requirement", raw.feature_id);
+    if (!requirements.has(from)) continue;
+    for (const source2 of raw.source_refs) {
+      const to = source2?.id;
+      if (typeof to !== "string" || to === from || !requirements.has(to)) continue;
+      edges.push({ id: `qeg:requirement-link:${encodeURIComponent(from + "/" + to)}`, from, to, kind: "derives_from", traceability: trace(ref, "/source_refs") });
+    }
+  }
+  return [...new Map(edges.map((e) => [e.id, e])).values()];
+}
+function requirementAncestors(ids, nodes, edges) {
+  const valid = new Set(nodes.filter((n) => n.kind === "requirement").map((n) => n.id));
+  const found = new Set(ids);
+  const queue = [...ids];
+  while (queue.length) {
+    const id = queue.shift();
+    for (const edge2 of edges) if (edge2.kind === "derives_from" && edge2.from === id && valid.has(edge2.to) && !found.has(edge2.to)) {
+      found.add(edge2.to);
+      queue.push(edge2.to);
+    }
+  }
+  return [...found].sort();
+}
+
+// src/graph/coverage.ts
+function enrichTestCoverage(nodes, edges) {
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const changedFor = (id) => {
+    const related = edges.flatMap((e) => e.from === id && (e.kind === "touches" || e.kind === "derives_from") ? [e.to] : e.to === id && e.kind === "touches" ? [e.from] : []);
+    return related.flatMap((ref) => {
+      const n = byId.get(ref);
+      return n?.kind === "changed_code" ? [n.id] : n?.kind === "finding" ? [...n.changedCodeIds] : [];
+    });
+  };
+  const enriched = nodes.map((node) => {
+    if (node.kind !== "test" || node.testType === "resilience") return node;
+    const explicit = edges.filter((e) => e.to === node.id && e.kind === "requires_test").map((e) => byId.get(e.from));
+    const risks = [.../* @__PURE__ */ new Set([...node.coveredRiskIds ?? [], ...explicit.filter((n) => n?.kind === "risk").map((n) => n.id)])].sort();
+    const requirements = requirementAncestors([...node.coveredRequirementIds ?? [], ...explicit.filter((n) => n?.kind === "requirement").map((n) => n.id)], nodes, edges);
+    const changes = [.../* @__PURE__ */ new Set([...node.coveredChangedCodeIds ?? [], ...risks.flatMap(changedFor), ...requirements.flatMap(changedFor)])].sort();
+    return { ...node, coveredRiskIds: risks, coveredRequirementIds: requirements, coveredChangedCodeIds: changes };
+  });
+  return enriched.map((node) => {
+    if (node.kind !== "risk") return node;
+    const observed = enriched.some((test) => {
+      if (test.kind !== "test" || test.testType === "resilience" || test.deleted || test.testExecutionMode !== "real" || !test.coveredRiskIds?.includes(node.id)) return false;
+      if (!test.oracleRefs?.length || !test.expectedResults?.length || !test.oracleType || test.oracleType === "missing") return false;
+      const refs = new Set(edges.filter((e) => e.kind === "evidenced_by" && e.from === test.id).map((e) => e.to));
+      const executions = enriched.filter((e) => e.kind === "execution_evidence" && refs.has(e.id));
+      return executions.length > 0 && executions.every((e) => e.kind === "execution_evidence" && e.passed !== void 0 && e.evidenceRefs.length > 0);
+    });
+    return observed ? { ...node, evidenceGap: 0 } : node;
+  });
+}
+
+// src/adapters/validate.ts
+var import__ = __toESM(require__(), 1);
+
+// src/adapters/producer-schemas.json
+var producer_schemas_default = {
+  "code-to-gate": {
+    "shared-defs.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/shared-defs.schema.json",
+      title: "code-to-gate shared definitions",
+      $defs: {
+        version: {
+          const: "ctg/v1"
+        },
+        versionV1Alpha1: {
+          const: "ctg/v1alpha1"
+        },
+        isoDateTime: {
+          type: "string",
+          format: "date-time"
+        },
+        repoRef: {
+          type: "object",
+          required: [
+            "root"
+          ],
+          additionalProperties: false,
+          properties: {
+            root: {
+              type: "string",
+              minLength: 1
+            },
+            revision: {
+              type: "string"
+            },
+            branch: {
+              type: "string"
+            },
+            base_ref: {
+              type: "string"
+            },
+            head_ref: {
+              type: "string"
+            },
+            dirty: {
+              type: "boolean"
+            }
+          }
+        },
+        toolRef: {
+          type: "object",
+          required: [
+            "name",
+            "version",
+            "plugin_versions"
+          ],
+          additionalProperties: false,
+          properties: {
+            name: {
+              const: "code-to-gate"
+            },
+            version: {
+              type: "string",
+              minLength: 1
+            },
+            config_hash: {
+              type: "string"
+            },
+            policy_id: {
+              type: "string"
+            },
+            plugin_versions: {
+              type: "array",
+              items: {
+                type: "object",
+                required: [
+                  "name",
+                  "version",
+                  "visibility"
+                ],
+                additionalProperties: false,
+                properties: {
+                  name: {
+                    type: "string",
+                    minLength: 1
+                  },
+                  version: {
+                    type: "string",
+                    minLength: 1
+                  },
+                  visibility: {
+                    enum: [
+                      "public",
+                      "private"
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        artifactHeader: {
+          type: "object",
+          required: [
+            "version",
+            "generated_at",
+            "run_id",
+            "repo",
+            "tool"
+          ],
+          properties: {
+            version: {
+              $ref: "#/$defs/version"
+            },
+            generated_at: {
+              $ref: "#/$defs/isoDateTime"
+            },
+            run_id: {
+              type: "string",
+              minLength: 1
+            },
+            repo: {
+              $ref: "#/$defs/repoRef"
+            },
+            tool: {
+              $ref: "#/$defs/toolRef"
+            }
+          }
+        },
+        artifactHeaderV1Alpha1: {
+          type: "object",
+          required: [
+            "version",
+            "generated_at",
+            "run_id",
+            "repo",
+            "tool"
+          ],
+          properties: {
+            version: {
+              $ref: "#/$defs/versionV1Alpha1"
+            },
+            generated_at: {
+              $ref: "#/$defs/isoDateTime"
+            },
+            run_id: {
+              type: "string",
+              minLength: 1
+            },
+            repo: {
+              $ref: "#/$defs/repoRef"
+            },
+            tool: {
+              $ref: "#/$defs/toolRef"
+            }
+          }
+        },
+        evidenceRef: {
+          type: "object",
+          required: [
+            "id",
+            "path",
+            "kind"
+          ],
+          additionalProperties: false,
+          properties: {
+            id: {
+              type: "string",
+              minLength: 1
+            },
+            path: {
+              type: "string",
+              minLength: 1
+            },
+            startLine: {
+              type: "integer",
+              minimum: 1
+            },
+            endLine: {
+              type: "integer",
+              minimum: 1
+            },
+            kind: {
+              enum: [
+                "ast",
+                "text",
+                "import",
+                "external",
+                "test",
+                "coverage",
+                "diff"
+              ]
+            },
+            excerptHash: {
+              type: "string"
+            },
+            nodeId: {
+              type: "string"
+            },
+            symbolId: {
+              type: "string"
+            },
+            externalRef: {
+              type: "object",
+              required: [
+                "tool"
+              ],
+              additionalProperties: false,
+              properties: {
+                tool: {
+                  type: "string",
+                  minLength: 1
+                },
+                ruleId: {
+                  type: "string"
+                },
+                url: {
+                  type: "string"
+                }
+              }
+            }
+          },
+          allOf: [
+            {
+              if: {
+                properties: {
+                  kind: {
+                    const: "text"
+                  }
+                },
+                required: [
+                  "kind"
+                ]
+              },
+              then: {
+                required: [
+                  "excerptHash"
+                ]
+              }
+            },
+            {
+              if: {
+                properties: {
+                  kind: {
+                    const: "external"
+                  }
+                },
+                required: [
+                  "kind"
+                ]
+              },
+              then: {
+                required: [
+                  "externalRef"
+                ]
+              }
+            }
+          ]
+        },
+        completeness: {
+          enum: [
+            "complete",
+            "partial"
+          ]
+        },
+        severity: {
+          enum: [
+            "low",
+            "medium",
+            "high",
+            "critical"
+          ]
+        },
+        confidence: {
+          type: "number",
+          minimum: 0,
+          maximum: 1
+        },
+        redactionProfile: {
+          type: "object",
+          required: [
+            "name",
+            "allowsPath",
+            "allowsHash",
+            "allowsCount",
+            "allowsExcerpt",
+            "allowsDetail",
+            "requiresSigner",
+            "requiresRetention",
+            "requiresApprovalBinding"
+          ],
+          additionalProperties: false,
+          properties: {
+            name: {
+              enum: [
+                "public",
+                "private",
+                "regulated"
+              ]
+            },
+            allowsPath: {
+              type: "boolean"
+            },
+            allowsHash: {
+              type: "boolean"
+            },
+            allowsCount: {
+              type: "boolean"
+            },
+            allowsExcerpt: {
+              type: "boolean"
+            },
+            allowsDetail: {
+              type: "boolean"
+            },
+            requiresSigner: {
+              type: "boolean"
+            },
+            requiresRetention: {
+              type: "boolean"
+            },
+            requiresApprovalBinding: {
+              type: "boolean"
+            },
+            binding: {
+              type: "object",
+              additionalProperties: false,
+              properties: {
+                signer: {
+                  type: "string",
+                  minLength: 1
+                },
+                retention: {
+                  type: "string",
+                  minLength: 1
+                },
+                approvalBinding: {
+                  type: "string",
+                  minLength: 1
+                }
+              }
+            }
+          }
+        },
+        redactionSummary: {
+          type: "object",
+          required: [
+            "profile",
+            "visibleFields",
+            "redactedFields",
+            "warnings"
+          ],
+          additionalProperties: false,
+          properties: {
+            profile: {
+              enum: [
+                "public",
+                "private",
+                "regulated"
+              ]
+            },
+            visibleFields: {
+              type: "array",
+              items: {
+                type: "string",
+                minLength: 1
+              }
+            },
+            redactedFields: {
+              type: "array",
+              items: {
+                type: "string",
+                minLength: 1
+              }
+            },
+            warnings: {
+              type: "array",
+              items: {
+                type: "string",
+                minLength: 1
+              }
+            }
+          }
+        }
+      }
+    },
+    "normalized-repo-graph.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/normalized-repo-graph.schema.json",
+      title: "NormalizedRepoGraph",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "files",
+        "modules",
+        "symbols",
+        "relations",
+        "tests",
+        "configs",
+        "entrypoints",
+        "diagnostics",
+        "stats"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          $ref: "./shared-defs.schema.json#/$defs/repoRef"
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "normalized-repo-graph"
+        },
+        schema: {
+          const: "normalized-repo-graph@v1"
+        },
+        files: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "path",
+              "language",
+              "role",
+              "hash",
+              "sizeBytes",
+              "lineCount",
+              "parser"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              path: {
+                type: "string"
+              },
+              language: {
+                enum: [
+                  "ts",
+                  "tsx",
+                  "js",
+                  "jsx",
+                  "py",
+                  "rb",
+                  "go",
+                  "rs",
+                  "java",
+                  "php",
+                  "cs",
+                  "cpp",
+                  "unknown"
+                ]
+              },
+              role: {
+                enum: [
+                  "source",
+                  "test",
+                  "config",
+                  "fixture",
+                  "docs",
+                  "generated",
+                  "unknown"
+                ]
+              },
+              hash: {
+                type: "string"
+              },
+              sizeBytes: {
+                type: "integer",
+                minimum: 0
+              },
+              lineCount: {
+                type: "integer",
+                minimum: 0
+              },
+              moduleId: {
+                type: "string"
+              },
+              parser: {
+                type: "object",
+                required: [
+                  "status"
+                ],
+                additionalProperties: false,
+                properties: {
+                  status: {
+                    enum: [
+                      "parsed",
+                      "text_fallback",
+                      "skipped",
+                      "failed"
+                    ]
+                  },
+                  adapter: {
+                    type: "string"
+                  },
+                  errorCode: {
+                    type: "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        modules: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "path"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string",
+                pattern: "^module:"
+              },
+              path: {
+                type: "string"
+              },
+              name: {
+                type: "string"
+              },
+              version: {
+                type: "string"
+              },
+              packageManager: {
+                enum: [
+                  "npm",
+                  "pnpm",
+                  "yarn",
+                  "unknown"
+                ]
+              },
+              workspace: {
+                type: "boolean"
+              },
+              dependencies: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              }
+            }
+          }
+        },
+        symbols: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "fileId",
+              "name",
+              "kind",
+              "exported",
+              "evidence"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              fileId: {
+                type: "string"
+              },
+              name: {
+                type: "string"
+              },
+              kind: {
+                enum: [
+                  "function",
+                  "class",
+                  "method",
+                  "variable",
+                  "type",
+                  "interface",
+                  "route",
+                  "test",
+                  "unknown"
+                ]
+              },
+              exported: {
+                type: "boolean"
+              },
+              async: {
+                type: "boolean"
+              },
+              location: {
+                type: "object",
+                required: [
+                  "startLine",
+                  "endLine"
+                ],
+                additionalProperties: false,
+                properties: {
+                  startLine: {
+                    type: "integer",
+                    minimum: 1
+                  },
+                  endLine: {
+                    type: "integer",
+                    minimum: 1
+                  }
+                }
+              },
+              evidence: {
+                type: "array",
+                items: {
+                  $ref: "./shared-defs.schema.json#/$defs/evidenceRef"
+                }
+              },
+              typeInfo: {
+                type: "object",
+                additionalProperties: true,
+                properties: {
+                  returnType: {
+                    type: "string"
+                  },
+                  parameterTypes: {
+                    type: "array",
+                    items: {
+                      type: "object",
+                      properties: {
+                        name: {
+                          type: "string"
+                        },
+                        type: {
+                          type: "string"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        relations: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "from",
+              "to",
+              "kind",
+              "confidence",
+              "evidence"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              from: {
+                type: "string"
+              },
+              to: {
+                type: "string"
+              },
+              kind: {
+                enum: [
+                  "imports",
+                  "exports",
+                  "calls",
+                  "references",
+                  "tests",
+                  "configures",
+                  "depends_on"
+                ]
+              },
+              confidence: {
+                $ref: "./shared-defs.schema.json#/$defs/confidence"
+              },
+              evidence: {
+                type: "array",
+                items: {
+                  $ref: "./shared-defs.schema.json#/$defs/evidenceRef"
+                }
+              }
+            }
+          }
+        },
+        tests: {
+          type: "array",
+          items: {
+            type: "object"
+          }
+        },
+        configs: {
+          type: "array",
+          items: {
+            type: "object"
+          }
+        },
+        entrypoints: {
+          type: "array",
+          items: {
+            type: "object"
+          }
+        },
+        diagnostics: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "severity",
+              "code",
+              "message"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              severity: {
+                enum: [
+                  "info",
+                  "warning",
+                  "error"
+                ]
+              },
+              code: {
+                enum: [
+                  "PARSER_FAILED",
+                  "UNSUPPORTED_LANGUAGE",
+                  "MISSING_FILE",
+                  "PARTIAL_GRAPH",
+                  "EXTERNAL_IMPORT_FAILED",
+                  "TREE_SITTER_INIT_FAILED",
+                  "UNBALANCED_BRACKETS"
+                ]
+              },
+              message: {
+                type: "string"
+              },
+              evidence: {
+                type: "array",
+                items: {
+                  $ref: "./shared-defs.schema.json#/$defs/evidenceRef"
+                }
+              }
+            }
+          }
+        },
+        stats: {
+          type: "object",
+          required: [
+            "partial"
+          ],
+          additionalProperties: true,
+          properties: {
+            partial: {
+              type: "boolean"
+            },
+            scan: {
+              type: "object",
+              required: [
+                "visitedFiles",
+                "acceptedFiles",
+                "acceptedBytes",
+                "skippedFiles",
+                "limits",
+                "reasons"
+              ],
+              additionalProperties: false,
+              properties: {
+                visitedFiles: {
+                  type: "integer",
+                  minimum: 0
+                },
+                acceptedFiles: {
+                  type: "integer",
+                  minimum: 0
+                },
+                acceptedBytes: {
+                  type: "integer",
+                  minimum: 0
+                },
+                skippedFiles: {
+                  type: "integer",
+                  minimum: 0
+                },
+                limits: {
+                  type: "object",
+                  required: [
+                    "maxFiles",
+                    "maxDepth",
+                    "maxFileSizeBytes",
+                    "maxTotalBytes",
+                    "deadlineMs"
+                  ],
+                  additionalProperties: false,
+                  properties: {
+                    maxFiles: {
+                      type: "integer",
+                      minimum: 0
+                    },
+                    maxDepth: {
+                      type: "integer",
+                      minimum: 0
+                    },
+                    maxFileSizeBytes: {
+                      type: "integer",
+                      minimum: 0
+                    },
+                    maxTotalBytes: {
+                      type: "integer",
+                      minimum: 0
+                    },
+                    deadlineMs: {
+                      type: "integer",
+                      minimum: 0
+                    }
+                  }
+                },
+                reasons: {
+                  type: "array",
+                  maxItems: 100,
+                  items: {
+                    type: "string",
+                    minLength: 1
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "diff-analysis.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/diff-analysis.schema.json",
+      title: "DiffAnalysisArtifact",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "changed_files",
+        "blast_radius",
+        "diff_findings"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          type: "object",
+          required: [
+            "root",
+            "base_ref",
+            "head_ref"
+          ],
+          additionalProperties: false,
+          properties: {
+            root: {
+              type: "string",
+              minLength: 1
+            },
+            base_ref: {
+              type: "string"
+            },
+            head_ref: {
+              type: "string"
+            }
+          }
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "diff-analysis"
+        },
+        schema: {
+          const: "diff-analysis@v1"
+        },
+        changed_files: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "path",
+              "status",
+              "additions",
+              "deletions"
+            ],
+            additionalProperties: false,
+            properties: {
+              path: {
+                type: "string"
+              },
+              status: {
+                enum: [
+                  "added",
+                  "modified",
+                  "deleted",
+                  "renamed"
+                ]
+              },
+              additions: {
+                type: "integer",
+                minimum: 0
+              },
+              deletions: {
+                type: "integer",
+                minimum: 0
+              },
+              hunks: {
+                type: "array",
+                items: {
+                  type: "object",
+                  required: [
+                    "startLine",
+                    "endLine"
+                  ],
+                  properties: {
+                    startLine: {
+                      type: "integer",
+                      minimum: 1
+                    },
+                    endLine: {
+                      type: "integer",
+                      minimum: 1
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        added_files: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        deleted_files: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        modified_files: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        blast_radius: {
+          type: "object",
+          required: [
+            "affectedFiles",
+            "affectedSymbols",
+            "affectedTests",
+            "affectedEntrypoints"
+          ],
+          additionalProperties: false,
+          properties: {
+            affectedFiles: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            affectedSymbols: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            affectedTests: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            affectedEntrypoints: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            maxDepth: {
+              type: "integer",
+              minimum: 1,
+              maximum: 10
+            }
+          }
+        },
+        diff_findings: {
+          type: "object",
+          required: [
+            "new_findings",
+            "potentially_affected_findings",
+            "resolved_findings"
+          ],
+          additionalProperties: false,
+          properties: {
+            new_findings: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            potentially_affected_findings: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            resolved_findings: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "findings.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/findings.schema.json",
+      title: "FindingsArtifact",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "completeness",
+        "findings",
+        "unsupported_claims"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          $ref: "./shared-defs.schema.json#/$defs/repoRef"
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "findings"
+        },
+        schema: {
+          const: "findings@v1"
+        },
+        completeness: {
+          $ref: "./shared-defs.schema.json#/$defs/completeness"
+        },
+        findings: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "ruleId",
+              "category",
+              "severity",
+              "confidence",
+              "title",
+              "summary",
+              "evidence"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              ruleId: {
+                type: "string"
+              },
+              category: {
+                enum: [
+                  "auth",
+                  "payment",
+                  "validation",
+                  "data",
+                  "config",
+                  "maintainability",
+                  "testing",
+                  "compatibility",
+                  "release-risk",
+                  "security"
+                ]
+              },
+              severity: {
+                $ref: "./shared-defs.schema.json#/$defs/severity"
+              },
+              confidence: {
+                $ref: "./shared-defs.schema.json#/$defs/confidence"
+              },
+              title: {
+                type: "string"
+              },
+              summary: {
+                type: "string"
+              },
+              evidence: {
+                type: "array",
+                minItems: 1,
+                items: {
+                  $ref: "./shared-defs.schema.json#/$defs/evidenceRef"
+                }
+              },
+              affectedSymbols: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              affectedEntrypoints: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              tags: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              fingerprint: {
+                type: "string",
+                minLength: 16,
+                maxLength: 16,
+                description: "Stable hash for historical matching across code changes"
+              },
+              upstream: {
+                type: "object",
+                required: [
+                  "tool"
+                ],
+                additionalProperties: false,
+                properties: {
+                  tool: {
+                    enum: [
+                      "native",
+                      "semgrep",
+                      "eslint",
+                      "sarif",
+                      "codeql",
+                      "npm-audit",
+                      "sonarqube",
+                      "tsc",
+                      "coverage",
+                      "test"
+                    ]
+                  },
+                  ruleId: {
+                    type: "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        unsupported_claims: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "claim",
+              "reason",
+              "sourceSection"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              claim: {
+                type: "string"
+              },
+              reason: {
+                enum: [
+                  "missing_evidence",
+                  "unknown_symbol",
+                  "policy_conflict",
+                  "schema_invalid"
+                ]
+              },
+              sourceSection: {
+                type: "string"
+              }
+            }
+          }
+        }
+      }
+    },
+    "risk-register.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/risk-register.schema.json",
+      title: "RiskRegisterArtifact",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "completeness",
+        "risks"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          $ref: "./shared-defs.schema.json#/$defs/repoRef"
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "risk-register"
+        },
+        schema: {
+          const: "risk-register@v1"
+        },
+        completeness: {
+          $ref: "./shared-defs.schema.json#/$defs/completeness"
+        },
+        risks: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "title",
+              "severity",
+              "likelihood",
+              "impact",
+              "confidence",
+              "sourceFindingIds",
+              "evidence",
+              "recommendedActions"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              title: {
+                type: "string"
+              },
+              severity: {
+                $ref: "./shared-defs.schema.json#/$defs/severity"
+              },
+              likelihood: {
+                enum: [
+                  "low",
+                  "medium",
+                  "high",
+                  "unknown"
+                ]
+              },
+              impact: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              confidence: {
+                $ref: "./shared-defs.schema.json#/$defs/confidence"
+              },
+              sourceFindingIds: {
+                type: "array",
+                minItems: 1,
+                items: {
+                  type: "string"
+                }
+              },
+              evidence: {
+                type: "array",
+                minItems: 1,
+                items: {
+                  $ref: "./shared-defs.schema.json#/$defs/evidenceRef"
+                }
+              },
+              narrative: {
+                type: "string"
+              },
+              recommendedActions: {
+                type: "array",
+                minItems: 1,
+                items: {
+                  type: "string"
+                }
+              }
+            }
+          }
+        },
+        packageSummary: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "packagePath",
+              "findingCount",
+              "critical",
+              "high",
+              "medium",
+              "low",
+              "riskIds"
+            ],
+            additionalProperties: false,
+            properties: {
+              packagePath: {
+                type: "string"
+              },
+              findingCount: {
+                type: "integer",
+                minimum: 0
+              },
+              critical: {
+                type: "integer",
+                minimum: 0
+              },
+              high: {
+                type: "integer",
+                minimum: 0
+              },
+              medium: {
+                type: "integer",
+                minimum: 0
+              },
+              low: {
+                type: "integer",
+                minimum: 0
+              },
+              riskIds: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "test-seeds.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/test-seeds.schema.json",
+      title: "TestSeedsArtifact",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "completeness",
+        "seeds"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          $ref: "./shared-defs.schema.json#/$defs/repoRef"
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "test-seeds"
+        },
+        schema: {
+          const: "test-seeds@v1"
+        },
+        completeness: {
+          $ref: "./shared-defs.schema.json#/$defs/completeness"
+        },
+        seeds: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "title",
+              "intent",
+              "sourceRiskIds",
+              "sourceFindingIds",
+              "evidence",
+              "suggestedLevel"
+            ],
+            additionalProperties: false,
+            anyOf: [
+              {
+                properties: {
+                  sourceRiskIds: {
+                    minItems: 1
+                  }
+                }
+              },
+              {
+                properties: {
+                  sourceFindingIds: {
+                    minItems: 1
+                  }
+                }
+              }
+            ],
+            properties: {
+              id: {
+                type: "string"
+              },
+              title: {
+                type: "string"
+              },
+              intent: {
+                enum: [
+                  "regression",
+                  "boundary",
+                  "negative",
+                  "abuse",
+                  "smoke",
+                  "compatibility"
+                ]
+              },
+              sourceRiskIds: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              sourceFindingIds: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              evidence: {
+                type: "array",
+                items: {
+                  $ref: "./shared-defs.schema.json#/$defs/evidenceRef"
+                }
+              },
+              suggestedLevel: {
+                enum: [
+                  "unit",
+                  "integration",
+                  "e2e",
+                  "manual",
+                  "exploratory"
+                ]
+              },
+              notes: {
+                type: "string"
+              }
+            }
+          }
+        },
+        oracle_gaps: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        known_gaps: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        }
+      }
+    },
+    "release-readiness.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/release-readiness.schema.json",
+      title: "ReleaseReadinessArtifact",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "status",
+        "completeness",
+        "summary",
+        "counts",
+        "failedConditions",
+        "recommendedActions",
+        "artifactRefs"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          $ref: "./shared-defs.schema.json#/$defs/repoRef"
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "release-readiness"
+        },
+        schema: {
+          const: "release-readiness@v1"
+        },
+        status: {
+          enum: [
+            "passed",
+            "passed_with_risk",
+            "needs_review",
+            "blocked_input",
+            "failed"
+          ]
+        },
+        completeness: {
+          $ref: "./shared-defs.schema.json#/$defs/completeness"
+        },
+        summary: {
+          type: "string"
+        },
+        counts: {
+          type: "object",
+          required: [
+            "findings",
+            "critical",
+            "high",
+            "risks",
+            "testSeeds",
+            "unsupportedClaims"
+          ],
+          additionalProperties: false,
+          properties: {
+            findings: {
+              type: "integer",
+              minimum: 0
+            },
+            critical: {
+              type: "integer",
+              minimum: 0
+            },
+            high: {
+              type: "integer",
+              minimum: 0
+            },
+            risks: {
+              type: "integer",
+              minimum: 0
+            },
+            testSeeds: {
+              type: "integer",
+              minimum: 0
+            },
+            unsupportedClaims: {
+              type: "integer",
+              minimum: 0
+            }
+          }
+        },
+        failedConditions: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "reason"
+            ],
+            additionalProperties: false,
+            properties: {
+              id: {
+                type: "string"
+              },
+              reason: {
+                type: "string"
+              },
+              matchedFindingIds: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              matchedRiskIds: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              },
+              matchedInputIds: {
+                type: "array",
+                items: {
+                  type: "string"
+                }
+              }
+            }
+          }
+        },
+        recommendedActions: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        baseline: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "mode",
+            "source",
+            "baselineFindings",
+            "currentFindings",
+            "newFindings",
+            "worsenedFindings",
+            "unchangedFindings",
+            "resolvedFindings",
+            "gatedFindingIds",
+            "resolvedFindingIds"
+          ],
+          properties: {
+            mode: {
+              const: "ratchet"
+            },
+            source: {
+              type: "string"
+            },
+            baselineRunId: {
+              type: "string"
+            },
+            baselineFindings: {
+              type: "integer",
+              minimum: 0
+            },
+            currentFindings: {
+              type: "integer",
+              minimum: 0
+            },
+            newFindings: {
+              type: "integer",
+              minimum: 0
+            },
+            worsenedFindings: {
+              type: "integer",
+              minimum: 0
+            },
+            unchangedFindings: {
+              type: "integer",
+              minimum: 0
+            },
+            resolvedFindings: {
+              type: "integer",
+              minimum: 0
+            },
+            gatedFindingIds: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            resolvedFindingIds: {
+              type: "array",
+              items: {
+                type: "string"
+              }
+            },
+            owner: {
+              type: "string",
+              minLength: 1
+            },
+            expiresAt: {
+              $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+            },
+            expired: {
+              type: "boolean"
+            }
+          }
+        },
+        selfAnalysis: {
+          type: "object",
+          additionalProperties: false,
+          required: [
+            "rawCritical",
+            "rawHigh",
+            "rawMedium",
+            "rawLow",
+            "suppressedCritical",
+            "suppressedHigh",
+            "suppressedMedium",
+            "suppressedLow",
+            "broadSuppressions",
+            "acceptedExceptionsByClass"
+          ],
+          properties: {
+            rawCritical: {
+              type: "integer",
+              minimum: 0
+            },
+            rawHigh: {
+              type: "integer",
+              minimum: 0
+            },
+            rawMedium: {
+              type: "integer",
+              minimum: 0
+            },
+            rawLow: {
+              type: "integer",
+              minimum: 0
+            },
+            suppressedCritical: {
+              type: "integer",
+              minimum: 0
+            },
+            suppressedHigh: {
+              type: "integer",
+              minimum: 0
+            },
+            suppressedMedium: {
+              type: "integer",
+              minimum: 0
+            },
+            suppressedLow: {
+              type: "integer",
+              minimum: 0
+            },
+            broadSuppressions: {
+              type: "integer",
+              minimum: 0
+            },
+            acceptedExceptionsByClass: {
+              type: "object",
+              additionalProperties: false,
+              required: [
+                "self-reference",
+                "fixture-intentional",
+                "generated-artifact",
+                "accepted-design",
+                "temporary-debt"
+              ],
+              properties: {
+                "self-reference": {
+                  type: "integer",
+                  minimum: 0
+                },
+                "fixture-intentional": {
+                  type: "integer",
+                  minimum: 0
+                },
+                "generated-artifact": {
+                  type: "integer",
+                  minimum: 0
+                },
+                "accepted-design": {
+                  type: "integer",
+                  minimum: 0
+                },
+                "temporary-debt": {
+                  type: "integer",
+                  minimum: 0
+                }
+              }
+            }
+          }
+        },
+        artifactRefs: {
+          type: "object",
+          additionalProperties: false,
+          properties: {
+            graph: {
+              type: "string"
+            },
+            findings: {
+              type: "string"
+            },
+            riskRegister: {
+              type: "string"
+            },
+            invariants: {
+              type: "string"
+            },
+            testSeeds: {
+              type: "string"
+            },
+            audit: {
+              type: "string"
+            },
+            intake: {
+              type: "string"
+            },
+            baseline: {
+              type: "string"
+            },
+            manualEvidence: {
+              type: "string"
+            }
+          }
+        }
+      }
+    },
+    "audit.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://code-to-gate.local/schemas/audit.schema.json",
+      title: "AuditArtifact",
+      allOf: [
+        {
+          $ref: "./shared-defs.schema.json#/$defs/artifactHeader"
+        }
+      ],
+      required: [
+        "artifact",
+        "schema",
+        "inputs",
+        "policy",
+        "exit"
+      ],
+      additionalProperties: false,
+      properties: {
+        version: {
+          $ref: "./shared-defs.schema.json#/$defs/version"
+        },
+        generated_at: {
+          $ref: "./shared-defs.schema.json#/$defs/isoDateTime"
+        },
+        run_id: {
+          type: "string"
+        },
+        repo: {
+          $ref: "./shared-defs.schema.json#/$defs/repoRef"
+        },
+        tool: {
+          $ref: "./shared-defs.schema.json#/$defs/toolRef"
+        },
+        artifact: {
+          const: "audit"
+        },
+        schema: {
+          const: "audit@v1"
+        },
+        inputs: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "path",
+              "hash",
+              "kind"
+            ],
+            additionalProperties: false,
+            properties: {
+              path: {
+                type: "string"
+              },
+              hash: {
+                type: "string"
+              },
+              kind: {
+                enum: [
+                  "source",
+                  "config",
+                  "policy",
+                  "external-result"
+                ]
+              }
+            }
+          }
+        },
+        artifacts: {
+          description: "Generated output artifacts except audit.json itself, which cannot carry a stable self-hash.",
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "path",
+              "hash",
+              "kind"
+            ],
+            additionalProperties: false,
+            properties: {
+              path: {
+                type: "string"
+              },
+              hash: {
+                type: "string",
+                pattern: "^sha256:[a-f0-9]{64}$"
+              },
+              stable_hash: {
+                type: "string",
+                pattern: "^sha256:[a-f0-9]{64}$",
+                description: "SHA-256 over canonicalized artifact content with volatile generated_at/run_id fields removed for deterministic reproducibility checks."
+              },
+              kind: {
+                enum: [
+                  "json",
+                  "yaml",
+                  "markdown",
+                  "graph",
+                  "test-seeds",
+                  "invariants",
+                  "self-analysis",
+                  "database"
+                ]
+              }
+            }
+          }
+        },
+        llm: {
+          type: "object",
+          required: [
+            "provider",
+            "model",
+            "prompt_version",
+            "request_hash",
+            "response_hash",
+            "redaction_enabled"
+          ],
+          additionalProperties: false,
+          properties: {
+            provider: {
+              type: "string"
+            },
+            model: {
+              type: "string"
+            },
+            prompt_version: {
+              type: "string"
+            },
+            request_hash: {
+              type: "string"
+            },
+            response_hash: {
+              type: "string"
+            },
+            redaction_enabled: {
+              type: "boolean"
+            }
+          }
+        },
+        policy: {
+          type: "object",
+          required: [
+            "id",
+            "hash"
+          ],
+          additionalProperties: false,
+          properties: {
+            id: {
+              type: "string"
+            },
+            name: {
+              type: "string"
+            },
+            hash: {
+              type: "string"
+            }
+          }
+        },
+        exit: {
+          type: "object",
+          required: [
+            "code",
+            "status",
+            "reason"
+          ],
+          additionalProperties: false,
+          properties: {
+            code: {
+              type: "integer",
+              minimum: 0
+            },
+            status: {
+              type: "string"
+            },
+            reason: {
+              type: "string"
+            }
+          }
+        }
+      }
+    }
+  },
+  "manual-bb-test-harness": {
+    "shared_defs.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://github.com/RNA4219/manual-bb-test-harness/schemas/shared_defs.schema.json",
+      title: "SharedDefinitions",
+      description: "Shared type definitions used across multiple artifact schemas. Note: $id URLs are identifiers, not resolvable endpoints.",
+      $defs: {
+        SourceRef: {
+          type: "object",
+          required: [
+            "id",
+            "kind"
+          ],
+          description: "Reference to a source document that provides basis for artifact content.",
+          properties: {
+            id: {
+              type: "string",
+              minLength: 1,
+              description: "Identifier of the source item, e.g., 'AC-1', 'BR-2', 'BUG-123'."
+            },
+            kind: {
+              enum: [
+                "spec",
+                "ac",
+                "rule",
+                "bug",
+                "auto_test",
+                "code_review",
+                "ops",
+                "confluence",
+                "jira",
+                "mock",
+                "memo",
+                "interview",
+                "metric"
+              ],
+              description: "Kind of source: spec (specification), ac (acceptance criteria), rule (business rule), bug (defect), auto_test (automated test), code_review (review comment), ops (operational data), confluence (Confluence page), jira (Jira issue), mock (mockup), memo (planning note), interview (user or stakeholder interview), metric (measurement or KPI)."
+            },
+            excerpt: {
+              type: "string",
+              description: "Optional excerpt of the source content for reference."
+            },
+            url: {
+              type: "string",
+              format: "uri",
+              description: "Optional URL to the source document."
+            }
+          },
+          additionalProperties: false
+        },
+        Assumption: {
+          type: "object",
+          required: [
+            "id",
+            "text",
+            "severity"
+          ],
+          description: "Assumption made when information is incomplete. Must be tracked for risk assessment.",
+          properties: {
+            id: {
+              type: "string",
+              minLength: 1,
+              description: "Unique assumption identifier, e.g., 'ASM-1'."
+            },
+            text: {
+              type: "string",
+              minLength: 1,
+              description: "Description of the assumption made."
+            },
+            severity: {
+              enum: [
+                "low",
+                "medium",
+                "high",
+                "critical"
+              ],
+              description: "Severity level: low (minor impact), medium (some impact), high (significant impact), critical (blocking if wrong)."
+            },
+            impact_on_coverage: {
+              type: "string",
+              description: "How this assumption affects test coverage or approach."
+            },
+            resolution_status: {
+              enum: [
+                "open",
+                "resolved",
+                "accepted"
+              ],
+              default: "open",
+              description: "Current status of the assumption."
+            }
+          },
+          additionalProperties: false
+        },
+        Oracle: {
+          type: "object",
+          required: [
+            "type",
+            "refs"
+          ],
+          description: "Oracle definition: how expected results are determined.",
+          properties: {
+            type: {
+              enum: [
+                "specified",
+                "derived",
+                "implicit",
+                "human"
+              ],
+              description: "Oracle type: specified (in spec/AC), derived (from rules/old system), implicit (standard expectations), human (judgment needed)."
+            },
+            refs: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              minItems: 1,
+              description: "References to source for oracle, e.g., ['AC-1', 'BR-2']."
+            },
+            notes: {
+              type: "string",
+              description: "Additional notes on oracle derivation or limitations."
+            }
+          },
+          additionalProperties: false
+        },
+        ConfidenceLevel: {
+          type: "string",
+          enum: [
+            "high",
+            "medium",
+            "low"
+          ],
+          description: "Confidence in correctness: high (well-established), medium (reasonable basis), low (uncertain)."
+        },
+        Priority: {
+          type: "string",
+          enum: [
+            "P0",
+            "P1",
+            "P2",
+            "P3"
+          ],
+          description: "Risk-based priority: P0 (critical), P1 (high), P2 (medium), P3 (low)."
+        },
+        TestView: {
+          type: "string",
+          enum: [
+            "black",
+            "gray",
+            "white"
+          ],
+          description: "Testing view: black (external UI), gray (limited diagnostic signals), white (implementation-level)."
+        },
+        GateStatus: {
+          type: "string",
+          enum: [
+            "go",
+            "conditional_go",
+            "no_go"
+          ],
+          description: "Gate decision: go (release ready), conditional_go (with conditions), no_go (blocked)."
+        }
+      }
+    },
+    "feature_spec.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://github.com/RNA4219/manual-bb-test-harness/schemas/feature_spec.schema.json",
+      title: "FeatureSpec",
+      description: "Normalized specification artifact for a feature under test. Produced by normalize_intake workflow step.",
+      type: "object",
+      required: [
+        "feature_id",
+        "title",
+        "acceptance_criteria",
+        "source_refs"
+      ],
+      properties: {
+        feature_id: {
+          type: "string",
+          minLength: 1,
+          description: "Unique identifier for the feature, e.g., 'ORD-CANCEL-01'. Should be uppercase alphanumeric with hyphens."
+        },
+        title: {
+          type: "string",
+          minLength: 1,
+          description: "Human-readable feature title in Japanese or English."
+        },
+        summary: {
+          type: "string",
+          description: "Brief description of the feature's purpose and behavior. Optional but recommended."
+        },
+        actors: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          description: "List of user roles or system actors involved in the feature, e.g., ['buyer', 'admin', 'system']."
+        },
+        acceptance_criteria: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          minItems: 1,
+          description: "Acceptance criteria (AC) statements. Each should be testable and atomic. Required field."
+        },
+        business_rules: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          description: "Business rules (BR) that constrain the feature behavior. Optional but important for coverage."
+        },
+        changed_areas: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          description: "Code areas, services, or components affected by the change. Used for regression analysis."
+        },
+        devices: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          description: "Target platforms or devices, e.g., ['Web', 'iOS', 'Android', 'API']."
+        },
+        mobile_contexts: {
+          type: "array",
+          items: {
+            type: "string"
+          },
+          description: "Mobile-specific execution contexts, e.g., ['foreground', 'background_resume', 'offline', 'push_notification_entry']."
+        },
+        source_refs: {
+          type: "array",
+          items: {
+            $ref: "shared_defs.schema.json#/$defs/SourceRef"
+          },
+          minItems: 1,
+          description: "References to source documents (spec, AC, rules). Required for traceability."
+        },
+        assumptions: {
+          type: "array",
+          items: {
+            $ref: "shared_defs.schema.json#/$defs/Assumption"
+          },
+          description: "Assumptions made when information is missing. Each must have severity level."
+        }
+      },
+      additionalProperties: false
+    },
+    "risk_register.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://github.com/RNA4219/manual-bb-test-harness/schemas/risk_register.schema.json",
+      title: "RiskRegister",
+      description: "Risk assessment artifact with impact, likelihood, and priority ratings. Produced by assess_risk workflow step.",
+      type: "object",
+      required: [
+        "feature_id",
+        "risks"
+      ],
+      properties: {
+        feature_id: {
+          type: "string",
+          minLength: 1,
+          description: "Reference to the feature_spec feature_id being assessed."
+        },
+        risks: {
+          type: "array",
+          items: {
+            $ref: "#/$defs/Risk"
+          },
+          minItems: 1,
+          description: "List of identified risks with scoring and priority."
+        }
+      },
+      additionalProperties: false,
+      $defs: {
+        Risk: {
+          type: "object",
+          required: [
+            "id",
+            "scenario",
+            "impact",
+            "likelihood",
+            "priority"
+          ],
+          description: "Single risk entry with scoring.",
+          properties: {
+            id: {
+              type: "string",
+              minLength: 1,
+              description: "Unique risk identifier, e.g., 'RISK-01'."
+            },
+            scenario: {
+              type: "string",
+              minLength: 1,
+              description: "Risk scenario description."
+            },
+            impact: {
+              type: "integer",
+              minimum: 1,
+              maximum: 5,
+              description: "Impact score (1=low, 5=high)."
+            },
+            likelihood: {
+              type: "integer",
+              minimum: 1,
+              maximum: 5,
+              description: "Likelihood score (1=low, 5=high)."
+            },
+            modifiers: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              description: "Risk modifiers, e.g., 'detectability_difficulty=2'."
+            },
+            score: {
+              type: "number",
+              minimum: 0,
+              maximum: 100,
+              description: "Calculated risk score (0-100)."
+            },
+            priority: {
+              enum: [
+                "P0",
+                "P1",
+                "P2",
+                "P3"
+              ],
+              description: "Risk priority: P0 (critical), P1 (high), P2 (medium), P3 (low)."
+            },
+            rationale: {
+              type: "string",
+              description: "Reasoning for the risk assessment."
+            },
+            trace_to: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              description: "References to test cases or charters that cover this risk."
+            }
+          },
+          additionalProperties: false
+        }
+      }
+    },
+    "manual_case_set.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://github.com/RNA4219/manual-bb-test-harness/schemas/manual_case_set.schema.json",
+      title: "ManualCaseSet",
+      description: "Executable manual test cases and exploratory charters artifact. Produced by synthesize_manual_cases workflow step.",
+      type: "object",
+      required: [
+        "feature_id",
+        "manual_cases"
+      ],
+      properties: {
+        feature_id: {
+          type: "string",
+          minLength: 1,
+          description: "Reference to the feature_spec feature_id these cases cover."
+        },
+        manual_cases: {
+          type: "array",
+          items: {
+            $ref: "#/$defs/ManualTestCase"
+          },
+          description: "Scripted manual test cases with steps, expected results, and oracle references."
+        },
+        exploratory_charters: {
+          type: "array",
+          items: {
+            $ref: "#/$defs/ExploratoryCharter"
+          },
+          description: "Exploratory testing charters for areas with weak oracles or high uncertainty."
+        },
+        platform_matrix: {
+          type: "array",
+          items: {
+            $ref: "#/$defs/PlatformMatrixEntry"
+          },
+          description: "Platform coverage matrix for mobile testing: OS x lifecycle x network combinations."
+        },
+        role_matrix: {
+          type: "array",
+          items: {
+            $ref: "#/$defs/RoleMatrixEntry"
+          },
+          description: "Role-based access matrix: actor_role x target_role x action combinations."
+        }
+      },
+      additionalProperties: false,
+      $defs: {
+        ManualTestCase: {
+          type: "object",
+          required: [
+            "tc_id",
+            "title",
+            "priority",
+            "primary_view",
+            "steps",
+            "expected_results",
+            "oracle",
+            "trace_to"
+          ],
+          description: "Single scripted manual test case with complete execution instructions.",
+          properties: {
+            tc_id: {
+              type: "string",
+              minLength: 1,
+              description: "Unique test case identifier, e.g., 'TC-001'. Should be sequential within feature."
+            },
+            title: {
+              type: "string",
+              minLength: 1,
+              description: "Short descriptive title for the test case."
+            },
+            priority: {
+              enum: [
+                "P0",
+                "P1",
+                "P2",
+                "P3"
+              ],
+              description: "Risk-based priority: P0 (critical), P1 (high), P2 (medium), P3 (low)."
+            },
+            primary_view: {
+              enum: [
+                "black",
+                "gray",
+                "white"
+              ],
+              description: "Testing view: black (external UI), gray (limited diagnostic signals), white (implementation-level)."
+            },
+            techniques: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              description: "Test techniques used, e.g., 'state_transition', 'boundary_value', 'decision_table'."
+            },
+            preconditions: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              description: "Setup conditions required before execution, e.g., '\u6CE8\u6587\u72B6\u614B=pending'."
+            },
+            steps: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              minItems: 1,
+              description: "Sequential execution steps. Each should be actionable and specific."
+            },
+            expected_results: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              minItems: 1,
+              description: "Observable expected outcomes after each step or at end."
+            },
+            oracle: {
+              type: "object",
+              required: [
+                "type",
+                "refs"
+              ],
+              description: "Oracle definition: how expected results are determined.",
+              properties: {
+                type: {
+                  enum: [
+                    "specified",
+                    "derived",
+                    "implicit",
+                    "human"
+                  ],
+                  description: "Oracle type: specified (in spec), derived (from rules), implicit (standard), human (judgment)."
+                },
+                refs: {
+                  type: "array",
+                  items: {
+                    type: "string"
+                  },
+                  minItems: 1,
+                  description: "References to source for oracle, e.g., ['AC-1', 'BR-2']."
+                }
+              },
+              additionalProperties: false
+            },
+            source_ref: {
+              type: "object",
+              required: [
+                "type",
+                "refs"
+              ],
+              description: "Source reference: where the test case requirement comes from.",
+              properties: {
+                type: {
+                  enum: [
+                    "spec",
+                    "requirement",
+                    "acceptance",
+                    "risk",
+                    "user_request"
+                  ],
+                  description: "Source type: spec, requirement, acceptance criteria, risk, or user request."
+                },
+                refs: {
+                  type: "array",
+                  items: {
+                    type: "string"
+                  },
+                  minItems: 1,
+                  description: "References to source documents, e.g., ['SPEC-ORD-CANCEL-01', 'AC-1']."
+                }
+              },
+              additionalProperties: false
+            },
+            estimate_minutes: {
+              type: "number",
+              minimum: 0,
+              description: "Estimated execution time in minutes. Used for effort planning."
+            },
+            trace_to: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              minItems: 1,
+              description: "Traceability to observations and risks, e.g., ['OBS-STATE-01', 'RISK-01']."
+            }
+          },
+          additionalProperties: false
+        },
+        ExploratoryCharter: {
+          type: "object",
+          required: [
+            "id",
+            "title",
+            "scope",
+            "questions",
+            "trace_to"
+          ],
+          description: "Exploratory testing charter for areas requiring investigation rather than scripted steps.",
+          properties: {
+            id: {
+              type: "string",
+              minLength: 1,
+              description: "Unique charter identifier, e.g., 'CHARTER-001'."
+            },
+            title: {
+              type: "string",
+              minLength: 1,
+              description: "Short descriptive title for the charter's focus area."
+            },
+            priority: {
+              enum: [
+                "P0",
+                "P1",
+                "P2",
+                "P3"
+              ],
+              description: "Risk-based priority for charter allocation."
+            },
+            scope: {
+              type: "string",
+              minLength: 1,
+              description: "Scope or domain to explore, e.g., 'network loss and retry during cancellation'."
+            },
+            questions: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              minItems: 1,
+              description: "Specific questions to answer during exploration."
+            },
+            estimate_minutes: {
+              type: "number",
+              minimum: 0,
+              description: "Timebox for charter exploration in minutes."
+            },
+            trace_to: {
+              type: "array",
+              items: {
+                type: "string"
+              },
+              minItems: 1,
+              description: "Traceability to observations, e.g., ['OBS-RECOVERY-01']."
+            }
+          },
+          additionalProperties: false
+        },
+        PlatformMatrixEntry: {
+          type: "object",
+          required: [
+            "platform",
+            "lifecycle",
+            "network"
+          ],
+          description: "Platform coverage entry for mobile testing: OS, lifecycle state, and network condition.",
+          properties: {
+            platform: {
+              type: "string",
+              enum: [
+                "iOS",
+                "Android"
+              ],
+              description: "Mobile platform: iOS or Android."
+            },
+            lifecycle: {
+              type: "string",
+              enum: [
+                "foreground",
+                "background",
+                "background_resume",
+                "terminated"
+              ],
+              description: "App lifecycle state: foreground, background, background_resume, or terminated."
+            },
+            network: {
+              type: "string",
+              enum: [
+                "online",
+                "offline",
+                "slow"
+              ],
+              description: "Network condition: online, offline, or slow."
+            },
+            permission: {
+              type: "string",
+              enum: [
+                "granted",
+                "denied",
+                "not_requested"
+              ],
+              description: "Optional permission state for permission-related tests."
+            }
+          },
+          additionalProperties: false
+        },
+        RoleMatrixEntry: {
+          type: "object",
+          required: [
+            "actor_role",
+            "target_role",
+            "action"
+          ],
+          description: "Role-based access matrix entry: what action an actor can perform on a target.",
+          properties: {
+            actor_role: {
+              type: "string",
+              enum: [
+                "owner",
+                "admin",
+                "editor",
+                "viewer",
+                "member",
+                "invited"
+              ],
+              description: "Role of the user performing the action."
+            },
+            target_role: {
+              type: "string",
+              enum: [
+                "owner",
+                "admin",
+                "editor",
+                "viewer",
+                "member",
+                "invited"
+              ],
+              description: "Role of the target user being acted upon."
+            },
+            action: {
+              type: "string",
+              enum: [
+                "can_change",
+                "cannot_change",
+                "cannot_change_last",
+                "invite_only"
+              ],
+              description: "Permitted action: can_change, cannot_change, cannot_change_last (boundary), or invite_only."
+            },
+            ownership_context: {
+              type: "string",
+              enum: [
+                "own_workspace",
+                "other_workspace"
+              ],
+              description: "Optional ownership context for multi-workspace scenarios."
+            }
+          },
+          additionalProperties: false
+        }
+      }
+    },
+    "gate_decision.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://github.com/RNA4219/manual-bb-test-harness/schemas/gate_decision.schema.json",
+      title: "GateDecision",
+      type: "object",
+      required: [
+        "feature_id",
+        "build_id",
+        "status",
+        "profile",
+        "reasons",
+        "evidence_summary"
+      ],
+      properties: {
+        feature_id: {
+          type: "string",
+          minLength: 1
+        },
+        build_id: {
+          type: "string",
+          minLength: 1
+        },
+        status: {
+          enum: [
+            "go",
+            "conditional_go",
+            "no_go"
+          ]
+        },
+        profile: {
+          enum: [
+            "strict",
+            "standard",
+            "lean"
+          ]
+        },
+        reasons: {
+          type: "array",
+          minItems: 1,
+          items: {
+            type: "string"
+          }
+        },
+        evidence_summary: {
+          type: "object",
+          required: [
+            "manual_by_priority",
+            "mandatory_observation_rate"
+          ],
+          properties: {
+            manual_by_priority: {
+              type: "object"
+            },
+            mandatory_observation_rate: {
+              type: "number",
+              minimum: 0,
+              maximum: 100
+            }
+          },
+          additionalProperties: false
+        },
+        blocking_risks: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        waivers: {
+          type: "array",
+          items: {
+            type: "object",
+            required: [
+              "id",
+              "risk_ids",
+              "reason",
+              "owner",
+              "expires_at",
+              "containment",
+              "rollback"
+            ]
+          }
+        },
+        residual_risks: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        unmet_conditions: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        required_follow_up: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        }
+      },
+      additionalProperties: false
+    },
+    "execution_evidence.schema.json": {
+      $schema: "https://json-schema.org/draft/2020-12/schema",
+      $id: "https://github.com/RNA4219/manual-bb-test-harness/schemas/execution_evidence.schema.json",
+      title: "ExecutionEvidence",
+      type: "object",
+      required: [
+        "run_id",
+        "feature_id",
+        "build_id",
+        "timestamp",
+        "result"
+      ],
+      oneOf: [
+        {
+          required: [
+            "tc_id"
+          ],
+          not: {
+            required: [
+              "charter_id"
+            ]
+          }
+        },
+        {
+          required: [
+            "charter_id"
+          ],
+          not: {
+            required: [
+              "tc_id"
+            ]
+          }
+        }
+      ],
+      properties: {
+        run_id: {
+          type: "string",
+          minLength: 1
+        },
+        tc_id: {
+          type: "string",
+          minLength: 1
+        },
+        charter_id: {
+          type: "string",
+          minLength: 1
+        },
+        feature_id: {
+          type: "string",
+          minLength: 1
+        },
+        build_id: {
+          type: "string",
+          minLength: 1
+        },
+        timestamp: {
+          type: "string",
+          format: "date-time"
+        },
+        env: {
+          type: "string"
+        },
+        device: {
+          type: "string"
+        },
+        network_profile: {
+          type: "string"
+        },
+        tester: {
+          type: "string"
+        },
+        oracle_type: {
+          enum: [
+            "specified",
+            "derived",
+            "implicit",
+            "human"
+          ]
+        },
+        oracle_refs: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        expected: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        actual: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        result: {
+          enum: [
+            "pass",
+            "fail",
+            "skip",
+            "blocked",
+            "unknown"
+          ]
+        },
+        attachments: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        anomaly_notes: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        defect_stub: {
+          type: "object",
+          required: [
+            "title",
+            "severity",
+            "status"
+          ],
+          properties: {
+            title: {
+              type: "string",
+              minLength: 1
+            },
+            severity: {
+              enum: [
+                "blocker",
+                "critical",
+                "high",
+                "medium",
+                "low"
+              ]
+            },
+            status: {
+              enum: [
+                "open",
+                "resolved",
+                "accepted"
+              ]
+            }
+          },
+          additionalProperties: false
+        },
+        findings: {
+          type: "array",
+          items: {
+            type: "string"
+          }
+        },
+        time_spent_minutes: {
+          type: "number",
+          minimum: 0
+        }
+      },
+      additionalProperties: false
+    }
+  }
+};
+
+// src/adapters/validate.ts
+var validators = /* @__PURE__ */ new Map();
+function validator(producer, filename) {
+  const key = `${producer}/${filename}`;
+  let validate = validators.get(key);
+  if (!validate) {
+    const ajv = new import__.Ajv2020({ allErrors: true, strict: false, validateFormats: false });
+    const entries = producer_schemas_default[producer];
+    for (const schema2 of Object.values(entries)) ajv.addSchema(schema2);
+    const schema = entries[filename];
+    if (!schema) throw new Error(`Unsupported producer schema ${key}`);
+    validate = ajv.getSchema(schema.$id);
+    validators.set(key, validate);
+  }
+  return validate;
+}
+function validateProducerPayload(ref, payload) {
+  if (ref.adapter !== "code-to-gate" && ref.adapter !== "manual-bb-test-harness") return;
+  const filename = `${ref.adapter === "code-to-gate" ? ref.kind.replaceAll("_", "-") : ref.kind}.schema.json`;
+  const validate = validator(ref.adapter, filename);
+  if (!validate(payload)) throw new Error(`Producer schema ${filename}: ${(validate.errors ?? []).slice(0, 6).map((e) => `${e.instancePath || "/"} ${e.message}`).join("; ")}`);
+}
+
+// src/graph.ts
+var sortIds = (items) => [...items].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+function mergeRequirement(a, b) {
+  if (a.kind !== "requirement" || b.kind !== "requirement") return void 0;
+  const primary = a.acceptanceCriteriaIds.length > 0 ? a : b;
+  return {
+    ...primary,
+    acceptanceCriteriaIds: [.../* @__PURE__ */ new Set([...a.acceptanceCriteriaIds, ...b.acceptanceCriteriaIds])].sort(),
+    sourceArtifactIds: [.../* @__PURE__ */ new Set([...a.sourceArtifactIds, ...b.sourceArtifactIds])].sort(),
+    traceability: {
+      ...primary.traceability,
+      sourceRefs: sortIds([...new Map([...a.traceability.sourceRefs, ...b.traceability.sourceRefs].map((r) => [r.id, r])).values()]),
+      assumptions: [.../* @__PURE__ */ new Set([...a.traceability.assumptions, ...b.traceability.assumptions])].sort()
+    }
+  };
+}
+function buildGraph(manifest, loaded) {
+  const nodes = /* @__PURE__ */ new Map();
+  const edges = /* @__PURE__ */ new Map();
+  const parserFailures = [];
+  const unsupportedClaims = [];
+  const artifacts = [...manifest.artifacts].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : a.id < b.id ? -1 : 1);
+  const statuses = {};
+  const knownChanges = /* @__PURE__ */ new Map();
+  for (const item of loaded) {
+    if (item.failure || item.ref.adapter !== "code-to-gate" || item.ref.kind !== "diff_analysis") continue;
+    const raw = item.payload;
+    if (Array.isArray(raw?.changed_files)) {
+      for (const file of raw.changed_files) if (typeof file?.path === "string") {
+        const path = file.path.replaceAll("\\", "/").replace(/^\.\//, "");
+        knownChanges.set(path, stableId("ctg", "changed_code", path));
+      }
+    }
+  }
+  const seenArtifactIds = /* @__PURE__ */ new Set();
+  for (const ref of artifacts) {
+    statuses[ref.adapter] ??= "success";
+    try {
+      if (seenArtifactIds.has(ref.id)) throw new Error(`Duplicate artifact ID ${ref.id}`);
+      seenArtifactIds.add(ref.id);
+      const matches = loaded.filter((item2) => item2.ref.id === ref.id && item2.ref.path === ref.path);
+      if (matches.length !== 1) throw new Error(`Expected one loaded payload for ${ref.id}`);
+      const item = matches[0];
+      if (item.failure) {
+        parserFailures.push({ code: item.failure.code, path: ref.path, reason: item.failure.message, sourceRefs: [source(ref, "/")] });
+        statuses[ref.adapter] = "contract_violation";
+        continue;
+      }
+      const raw = object(item.payload, ref.path);
+      assertNoDirectPolicy(raw);
+      validateProducerPayload(ref, raw);
+      if (ref.adapter === "code-to-gate") {
+        const repo = object(raw.repo, "repo");
+        if (repo.head_ref && repo.head_ref !== manifest.metadata.headRef || repo.base_ref && manifest.metadata.baseRef && repo.base_ref !== manifest.metadata.baseRef) {
+          parserFailures.push({ code: "DQ-12", path: ref.path, reason: "CTG raw repo revision differs from manifest metadata", sourceRefs: [source(ref, "/repo")] });
+          statuses[ref.adapter] = "contract_violation";
+          continue;
+        }
+      }
+      const context = { ref, raw, profile: manifest.metadata.profile, knownChanges };
+      const result = ref.adapter === "RanD" ? normalizeRand(context) : ref.adapter === "code-to-gate" ? normalizeCodeToGate(context) : ref.adapter === "manual-bb-test-harness" ? normalizeManualBb(context) : void 0;
+      if (!result) throw new Error(`Raw adapter unavailable: ${ref.adapter}/${ref.kind}`);
+      parserFailures.push(...result.parserFailures);
+      unsupportedClaims.push(...result.unsupportedClaims);
+      if (result.parserFailures.length) statuses[ref.adapter] = "contract_violation";
+      for (const node of result.nodes) {
+        const previous = nodes.get(node.id);
+        if (!previous) nodes.set(node.id, node);
+        else {
+          const oppositeKind = ref.kind === "requirements_packet" ? "requirements_audit_packet" : ref.kind === "requirements_audit_packet" ? "requirements_packet" : void 0;
+          const pair = oppositeKind && previous.sourceArtifactIds.length === 1 && artifacts.find((a) => a.id === previous.sourceArtifactIds[0])?.kind === oppositeKind;
+          const merged = ref.adapter === "RanD" && pair ? mergeRequirement(previous, node) : void 0;
+          if (merged) nodes.set(node.id, merged);
+          else unsupportedClaims.push({ id: `qeg:duplicate-node:${encodeURIComponent(node.id)}`, claim: `Duplicate node ID ${node.id}`, nodeIds: [node.id], gateRelevant: true });
+        }
+      }
+      for (const edge2 of result.edges) {
+        const previous = edges.get(edge2.id);
+        if (!previous) edges.set(edge2.id, edge2);
+        else if (previous.from !== edge2.from || previous.to !== edge2.to || previous.kind !== edge2.kind) throw new Error(`Conflicting edge ${edge2.id}`);
+        else edges.set(edge2.id, { ...previous, traceability: { ...previous.traceability, sourceRefs: sortIds([...new Map([...previous.traceability.sourceRefs, ...edge2.traceability.sourceRefs].map((s) => [s.id, s])).values()]) } });
+      }
+    } catch (error) {
+      statuses[ref.adapter] = "contract_violation";
+      parserFailures.push({ code: "DQ-01", path: ref.path, reason: error instanceof Error ? error.message : String(error), sourceRefs: [source(ref, "/")] });
+    }
+  }
+  const required2 = manifest.policy.inputContract?.mode === "upstream_artifacts" ? UPSTREAM_REQUIRED_ARTIFACTS : manifest.policy.inputContract?.requiredArtifacts ?? [];
+  const keys = new Set(artifacts.map(artifactKey));
+  for (const ref of required2) if (!keys.has(artifactKey(ref))) {
+    statuses[ref.adapter] = "contract_violation";
+    parserFailures.push({
+      code: "DQ-01",
+      path: "ingest-manifest.json",
+      reason: `Missing required artifact ${artifactKey(ref)}`,
+      sourceRefs: [{ id: `qeg:missing:${artifactKey(ref)}`, path: "ingest-manifest.json", label: "/artifacts" }]
+    });
+  }
+  const validEdges = [];
+  for (const edge2 of requirementEdges([...nodes.values()], loaded)) edges.set(edge2.id, edge2);
+  for (const edge2 of edges.values()) {
+    if (nodes.has(edge2.from) && nodes.has(edge2.to)) validEdges.push(edge2);
+    else unsupportedClaims.push({
+      id: `qeg:unresolved:${encodeURIComponent(edge2.id)}`,
+      claim: `Unresolved edge ${edge2.from} -> ${edge2.to}`,
+      nodeIds: [edge2.from, edge2.to],
+      gateRelevant: true
+    });
+  }
+  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, ...ref }) => ref), requiredConnectorStatus: statuses };
+  const partial = parserFailures.length > 0 || unsupportedClaims.some((c) => c.gateRelevant);
+  return {
+    metadata,
+    nodes: enrichTestCoverage(sortIds([...nodes.values()]), sortIds(validEdges)),
+    edges: sortIds(validEdges),
+    completeness: { score: partial ? 0 : 1, partial, parserFailures, unsupportedClaims: sortIds(unsupportedClaims) }
+  };
+}
+
+// src/placement.ts
+var PLACEMENT_LAYERS = ["unit", "integration", "system", "e2e", "manual-scripted", "manual-exploratory", "spec-clarification"];
+var COSTS = [0.1, 0.25, 0.45, 0.7, 0.6, 0.65, 0.15];
+var ordered = (ids) => [...new Set(ids)].sort();
+function linked(graph, id, kind) {
+  const ids = graph.edges.flatMap((e) => e.from === id ? [e.to] : e.to === id ? [e.from] : []);
+  return ordered(ids.filter((ref) => graph.nodes.some((n) => n.id === ref && n.kind === kind)));
+}
+function obligation(graph, node) {
+  const risks = node.kind === "risk" ? [node.id] : linked(graph, node.id, "risk");
+  const changes = node.kind === "changed_code" ? [node.id] : linked(graph, node.id, "changed_code");
+  for (const finding of linked(graph, node.id, "finding")) changes.push(...linked(graph, finding, "changed_code"));
+  const risk = node.kind === "risk" ? node : void 0;
+  return {
+    id: `qeg:obligation:${encodeURIComponent(node.id)}`,
+    requirementIds: requirementAncestors(linked(graph, node.id, "requirement"), graph.nodes, graph.edges),
+    riskIds: ordered(risks),
+    failureModeIds: linked(graph, node.id, "failure_mode"),
+    changedCodeIds: ordered(changes),
+    priority: risk?.priority ?? "P1",
+    riskPriorityIndex: risk ? Math.round(100 * (risk.likelihood + risk.businessImpact + risk.complianceCriticality + risk.evidenceGap + risk.novelty) / 5) : 50,
+    gateRelevance: "blocking",
+    traceability: node.traceability
+  };
+}
+function covers(test, obligation2) {
+  if (test.deleted || test.testExecutionMode !== "real") return false;
+  if (obligation2.riskIds.length) return obligation2.riskIds.every((id) => test.coveredRiskIds?.includes(id));
+  return test.testType !== "resilience" && obligation2.changedCodeIds.length > 0 && obligation2.changedCodeIds.every((id) => test.coveredChangedCodeIds?.includes(id));
+}
+function hasOracle(test) {
+  if (test.testType === "resilience") return true;
+  return test.oracleType !== void 0 && test.oracleType !== "missing" && (test.oracleRefs?.length ?? 0) > 0 && (test.expectedResults?.length ?? 0) > 0;
+}
+function score(layer, index, tests, subject) {
+  const matching = tests.filter((t) => t.layer === layer && hasOracle(t));
+  const clarification = layer === "spec-clarification" && tests.every((t) => !hasOracle(t));
+  const eligible = matching.length > 0 || clarification;
+  const fit = {
+    oracleFit: matching.length ? 1 : 0,
+    changeProximity: matching.length && subject.changedCodeIds.length ? 1 : 0,
+    interactionFit: matching.length ? 1 : 0,
+    businessFidelity: matching.length ? index >= 2 ? 1 : 0.6 : 0,
+    observability: matching.length ? 1 : 0,
+    stability: matching.length ? 1 - COSTS[index] / 2 : 0,
+    reuseGain: matching.some((t) => t.existing) ? 1 : 0
+  };
+  const costPenalty = { setupCost: COSTS[index], runtimeCost: index === 6 ? 0 : COSTS[index], flakeRisk: index === 3 ? 0.4 : index === 5 ? 0.2 : 0.1 };
+  return {
+    layer,
+    eligible,
+    fit,
+    costPenalty,
+    finalScore: Math.round(1e3 * (Object.values(fit).reduce((a, b) => a + b, 0) - Object.values(costPenalty).reduce((a, b) => a + b, 0))) / 1e3,
+    rationale: [
+      matching.length ? `${matching.length} explicitly linked test(s) with expected results and oracle references` : clarification ? "Oracle contract is missing; clarification is required" : "No eligible test explicitly covers this obligation",
+      "Tie-break: fixed layer order; producer suggestion does not establish execution"
+    ],
+    sourceRefs: matching.flatMap((t) => t.testType === "resilience" ? [...t.traceability.sourceRefs] : [...t.oracleRefs ?? []]).concat([...subject.traceability.sourceRefs])
+  };
+}
+function placeTests(graph, _policy) {
+  const obligations = graph.nodes.filter((n) => n.kind === "risk").map((n) => obligation(graph, n));
+  const coveredChanges = new Set(obligations.flatMap((o) => [...o.changedCodeIds]));
+  obligations.push(...graph.nodes.filter((n) => n.kind === "changed_code" && !coveredChanges.has(n.id)).map((n) => obligation(graph, n)));
+  obligations.sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  const placements = obligations.map((subject) => {
+    const tests = graph.nodes.filter((n) => n.kind === "test" && covers(n, subject)).sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+    const candidateScores = PLACEMENT_LAYERS.map((layer2, index) => score(layer2, index, tests, subject));
+    const selected = [...candidateScores].filter((c) => c.eligible).sort((a, b) => b.finalScore - a.finalScore || PLACEMENT_LAYERS.indexOf(a.layer) - PLACEMENT_LAYERS.indexOf(b.layer))[0];
+    const layer = selected?.layer ?? "spec-clarification";
+    const selectedTests = tests.filter((t) => t.layer === layer && hasOracle(t));
+    const blocked = selectedTests.length === 0;
+    const disposition = blocked ? "blocked" : layer.startsWith("manual-") ? "manual-only" : selectedTests.every((t) => t.existing) ? "reuse" : selectedTests.some((t) => t.existing) ? "adapt" : "add";
+    return {
+      id: `qeg:placement:${encodeURIComponent(subject.id)}`,
+      kind: "test_placement",
+      title: `${subject.id}: ${layer}`,
+      obligationId: subject.id,
+      primaryLayer: layer,
+      disposition,
+      gateRelevance: subject.gateRelevance,
+      candidateScores,
+      selectedTestIds: selectedTests.map((t) => t.id),
+      traceability: subject.traceability,
+      sourceArtifactIds: ordered(graph.nodes.filter((n) => subject.riskIds.includes(n.id) || subject.changedCodeIds.includes(n.id)).flatMap((n) => [...n.sourceArtifactIds]))
+    };
+  });
+  return { metadata: graph.metadata, obligations, placements };
+}
+
+// src/record.ts
+import { createHash } from "crypto";
+
+// src/gate-efficacy.ts
+var DEFAULT_TRACEABILITY = {
+  sourceRefs: [],
+  assumptions: [],
+  confidence: "medium"
+};
+function unique(values) {
+  return [...new Set(values.filter(Boolean))];
+}
+function collectEvidenceUsed(evaluated, defect) {
+  if (defect.evidenceRefs && defect.evidenceRefs.length > 0) {
+    return unique(defect.evidenceRefs);
+  }
+  const evidencePackage = evaluated.evidencePackage;
+  if (!evidencePackage) return [];
+  return unique([
+    ...evidencePackage.inputArtifactHashes.map((artifact) => artifact.id),
+    ...evidencePackage.approvalEvidence.map((approval) => approval.id),
+    ...evidencePackage.manualEvidence.flatMap((item) => item.evidenceRefs.map((ref) => ref.id)),
+    ...evidencePackage.sourceRefs.map((ref) => ref.id)
+  ]);
+}
+function resolveVerdictRef(evaluated, defect) {
+  return defect.verdictRef ?? evaluated.evidencePackage?.qegOutputs.gateVerdict.id ?? `${evaluated.metadata.runId}:gate-verdict`;
+}
+function resolvePlacementPlanRef(evaluated, defect) {
+  return defect.placementPlanRef ?? evaluated.evidencePackage?.qegOutputs.testPlacementPlan.id ?? `${evaluated.metadata.runId}:placement-plan`;
+}
+function buildBacklink(evaluated, defect) {
+  return {
+    id: defect.id,
+    title: defect.title,
+    severity: defect.severity,
+    discoveredAt: defect.discoveredAt,
+    linkedVerdictRef: resolveVerdictRef(evaluated, defect),
+    linkedPlacementPlanRef: resolvePlacementPlanRef(evaluated, defect),
+    linkedEvidenceRefs: collectEvidenceUsed(evaluated, defect),
+    sourceRefs: defect.sourceRefs
+  };
+}
+function buildAnalysisNotes(evaluated, defect) {
+  return defect.analysisNotes ?? `Escaped defect ${defect.id} was reported after verdict ${resolveVerdictRef(evaluated, defect)}.`;
+}
+function proposalId(scope, targetRef) {
+  return `qeg:recalibration-proposal:${scope}:${targetRef.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+}
+function buildRecalibrationProposals(defects) {
+  const proposals = [];
+  const sourceRefsByTarget = /* @__PURE__ */ new Map();
+  const defectRefsByTarget = /* @__PURE__ */ new Map();
+  for (const defect of defects) {
+    for (const targetRef of defect.affectedPolicyRefs ?? []) {
+      const key = `policy:${targetRef}`;
+      sourceRefsByTarget.set(key, [...sourceRefsByTarget.get(key) ?? [], ...defect.sourceRefs]);
+      defectRefsByTarget.set(key, [...defectRefsByTarget.get(key) ?? [], defect.id]);
+    }
+    for (const targetRef of defect.affectedPlacementRefs ?? []) {
+      const key = `placement:${targetRef}`;
+      sourceRefsByTarget.set(key, [...sourceRefsByTarget.get(key) ?? [], ...defect.sourceRefs]);
+      defectRefsByTarget.set(key, [...defectRefsByTarget.get(key) ?? [], defect.id]);
+    }
+  }
+  for (const [key, escapedDefectRefs] of defectRefsByTarget.entries()) {
+    const [scope, ...targetParts] = key.split(":");
+    const targetRef = targetParts.join(":");
+    const proposalScope = scope;
+    proposals.push({
+      id: proposalId(proposalScope, targetRef),
+      scope: proposalScope,
+      targetRef,
+      reason: `Escaped defects indicate degraded ${proposalScope} efficacy. Human approval is required before mutation.`,
+      escapedDefectRefs: unique(escapedDefectRefs),
+      status: "proposed",
+      sourceRefs: sourceRefsByTarget.get(key) ?? []
+    });
+  }
+  return proposals.sort((a, b) => a.id.localeCompare(b.id));
+}
+function buildGateEfficacyRecords(evaluated) {
+  const escapedDefects = evaluated.optionalEvidence?.escapedDefects ?? [];
+  return escapedDefects.map((defect) => ({
+    verdict_ref: resolveVerdictRef(evaluated, defect),
+    escaped_defects: [buildBacklink(evaluated, defect)],
+    evidence_used: collectEvidenceUsed(evaluated, defect),
+    policy_hash_at_verdict: evaluated.policy.policyHash,
+    analysis_notes: buildAnalysisNotes(evaluated, defect)
+  }));
+}
+function buildRecalibrationProposalsForFixture(evaluated) {
+  return buildRecalibrationProposals(evaluated.optionalEvidence?.escapedDefects ?? []);
+}
+function appendEscapedDefectNodes(graph, evaluated, placementPlan) {
+  const escapedDefects = evaluated.optionalEvidence?.escapedDefects ?? [];
+  if (escapedDefects.length === 0) return graph;
+  const nodes = [...graph.nodes];
+  const edges = [...graph.edges];
+  for (const defect of escapedDefects) {
+    const backlink = buildBacklink(evaluated, defect);
+    nodes.push({
+      id: defect.id,
+      kind: "escaped_defect",
+      title: defect.title,
+      severity: defect.severity,
+      discoveredAt: defect.discoveredAt,
+      linkedVerdictRef: backlink.linkedVerdictRef,
+      linkedPlacementPlanRef: backlink.linkedPlacementPlanRef,
+      linkedEvidenceRefs: backlink.linkedEvidenceRefs,
+      traceability: {
+        ...DEFAULT_TRACEABILITY,
+        sourceRefs: defect.sourceRefs,
+        assumptions: ["Escaped defect is optional evidence and does not mutate historical verdicts."]
+      },
+      sourceArtifactIds: defect.sourceRefs.map((ref) => ref.id)
+    });
+    edges.push({
+      id: `${defect.id}:contradicts-verdict`,
+      kind: "contradicts",
+      from: defect.id,
+      to: backlink.linkedVerdictRef,
+      traceability: {
+        ...DEFAULT_TRACEABILITY,
+        sourceRefs: defect.sourceRefs
+      }
+    });
+    edges.push({
+      id: `${defect.id}:contradicts-placement`,
+      kind: "contradicts",
+      from: defect.id,
+      to: backlink.linkedPlacementPlanRef || placementPlan.metadata.runId,
+      traceability: {
+        ...DEFAULT_TRACEABILITY,
+        sourceRefs: defect.sourceRefs
+      }
+    });
+    for (const evidenceRef2 of backlink.linkedEvidenceRefs) {
+      edges.push({
+        id: `${defect.id}:evidenced-by:${evidenceRef2.replace(/[^a-zA-Z0-9_-]/g, "-")}`,
+        kind: "evidenced_by",
+        from: defect.id,
+        to: evidenceRef2,
+        traceability: {
+          ...DEFAULT_TRACEABILITY,
+          sourceRefs: defect.sourceRefs
+        }
+      });
+    }
+  }
+  return {
+    ...graph,
+    nodes,
+    edges
+  };
+}
+
+// src/record.ts
+function jsonDocument(value) {
+  return JSON.stringify(value, null, 2) + "\n";
+}
+function contentHash(content) {
+  return "sha256:" + createHash("sha256").update(content).digest("hex");
+}
+function auditTrail(evidencePackage, policy) {
+  if (!evidencePackage) return void 0;
+  return {
+    evidencePackageHash: evidencePackage.evidencePackageHash,
+    approvalEvidenceSummary: evidencePackage.approvalEvidence.map((a) => ({
+      id: a.id,
+      approver: a.approver,
+      approvedAt: a.approvedAt,
+      policyId: a.policyId,
+      policyHash: a.policyHash,
+      evidencePackageHash: a.evidencePackageHash
+    })),
+    gatePolicyHash: policy.policyHash,
+    gatePolicyId: policy.policyId
+  };
+}
+function markdownSummary(evaluated) {
+  const gate = evaluated.gateResult;
+  const scope = gate.evaluationScope;
+  const lines = [
+    "# Quality Evidence Record",
+    "",
+    `Gate: **${gate.verdict}**`,
+    "",
+    ...scope ? [`\u8A55\u4FA1\u7BC4\u56F2: ${scope.kind} / ${scope.target}`, `\u672A\u8A55\u4FA1: ${scope.notEvaluated.join(", ") || "\u660E\u8A18\u306A\u3057"}`, ""] : [],
+    "## \u5224\u5B9A\u7406\u7531",
+    "",
+    ...gate.reasons.map((reason) => `- ${reason}`),
+    "",
+    "## \u30C6\u30B9\u30C8\u914D\u7F6E",
+    ""
+  ];
+  for (const placement of evaluated.placementPlan?.placements ?? []) lines.push(`- ${placement.obligationId}: ${placement.primaryLayer} / ${placement.disposition}; tests: ${placement.selectedTestIds.join(", ") || "\u672A\u914D\u7F6E"}`);
+  lines.push(
+    "",
+    "## \u6B8B\u5B58\u30EA\u30B9\u30AF\u30FB\u4EBA\u9593\u306E\u78BA\u8A8D",
+    "",
+    ...gate.residualRisks.map((id) => `- risk: ${id}`),
+    ...gate.requiredHumanReview.map((id) => `- review: ${id}`),
+    "",
+    "## \u8A3C\u8DE1",
+    "",
+    ...evaluated.metadata.inputArtifacts.map((a) => `- ${a.adapter}/${a.kind}: ${a.path} (${a.contentHash ?? "hash\u672A\u6307\u5B9A"})`)
+  );
+  return lines.join("\n") + "\n";
+}
+function createRecordArtifacts(evaluated) {
+  const placementPlan = evaluated.placementPlan ?? { metadata: evaluated.metadata, obligations: [], placements: [] };
+  const graph = appendEscapedDefectNodes(evaluated.graph, evaluated, placementPlan);
+  const files = /* @__PURE__ */ new Map([
+    ["qeg.bundle.json", jsonDocument(graph)],
+    ["test-placement-plan.json", jsonDocument(placementPlan)],
+    ["gate-verdict.json", jsonDocument(evaluated.gateResult)],
+    ["quality-evidence-record.md", markdownSummary(evaluated)]
+  ]);
+  const efficacy = buildGateEfficacyRecords(evaluated);
+  const proposals = buildRecalibrationProposalsForFixture(evaluated);
+  const record = {
+    metadata: evaluated.metadata,
+    graph,
+    placementPlan,
+    gate: evaluated.gateResult,
+    exports: [...files].map(([path, content]) => ({ kind: path.endsWith(".md") ? "markdown" : "json", path, contentHash: contentHash(content) })),
+    auditTrail: auditTrail(evaluated.evidencePackage, evaluated.policy),
+    ...efficacy.length > 0 ? { gateEfficacyRecords: efficacy } : {},
+    ...proposals.length > 0 ? { recalibrationProposals: proposals } : {}
+  };
+  files.set("quality-evidence-record.json", jsonDocument(record));
+  files.set("output-record.json", jsonDocument(record));
+  files.set("output-manifest.json", jsonDocument({
+    manifestVersion: "qeg-output/v1",
+    runId: evaluated.metadata.runId,
+    files: [...files].map(([path, content]) => ({ path, contentHash: contentHash(content) }))
+  }));
+  return { record, files };
+}
+
+// src/validation/schema.ts
+var import__2 = __toESM(require__(), 1);
+import { readdir, readFile } from "fs/promises";
+import { basename, join } from "path";
+import { fileURLToPath } from "url";
+
+// src/validation/reliability-semantics.ts
+function isObject(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+function compareText(left, right) {
+  return left < right ? -1 : left > right ? 1 : 0;
+}
+function validateReliabilitySemantics(raw) {
+  if (!isObject(raw)) return [];
+  const issues = [];
+  const add2 = (ruleId, path, message, nodeId) => {
+    issues.push({ ruleId, path, message, ...nodeId ? { nodeId } : {} });
+  };
+  if (isObject(raw.graph) && Array.isArray(raw.graph.nodes)) {
+    raw.graph.nodes.forEach((node, nodeIndex) => {
+      if (!isObject(node)) return;
+      const nodeId = typeof node.id === "string" ? node.id : void 0;
+      if (node.kind === "test" && node.testType === "resilience" && isObject(node.resilienceScenario)) {
+        const scenarioPath = "/graph/nodes/" + nodeIndex + "/resilienceScenario";
+        const steadyState = isObject(node.resilienceScenario.steadyState) ? node.resilienceScenario.steadyState : void 0;
+        const slos = Array.isArray(steadyState?.slos) ? steadyState.slos : [];
+        const requiredMetrics = Array.isArray(steadyState?.requiredMetrics) ? steadyState.requiredMetrics.filter((value) => typeof value === "string") : [];
+        const names = /* @__PURE__ */ new Set();
+        const tuples = /* @__PURE__ */ new Set();
+        slos.forEach((slo, sloIndex) => {
+          if (!isObject(slo)) return;
+          const base2 = scenarioPath + "/steadyState/slos/" + sloIndex;
+          if (typeof slo.name === "string") {
+            if (names.has(slo.name)) {
+              add2("REL-SEM-001", base2 + "/name", "SLO names must be unique", nodeId);
+            }
+            names.add(slo.name);
+          }
+          const tuple = [slo.metricName, slo.semanticRole, slo.aggregation, slo.unit].map(String).join(String.fromCharCode(0));
+          if (tuples.has(tuple)) {
+            add2(
+              "REL-SEM-002",
+              base2,
+              "metricName/semanticRole/aggregation/unit SLO tuples must be unique",
+              nodeId
+            );
+          }
+          tuples.add(tuple);
+          if (typeof slo.metricName === "string" && !requiredMetrics.includes(slo.metricName)) {
+            add2(
+              "REL-SEM-003",
+              base2 + "/metricName",
+              "every SLO metric must be present in requiredMetrics",
+              nodeId
+            );
+          }
+          if (isObject(slo.target) && slo.target.targetType === "range" && typeof slo.target.min === "number" && typeof slo.target.max === "number" && slo.target.min >= slo.target.max) {
+            add2("REL-SEM-004", base2 + "/target", "SLO range min must be less than max", nodeId);
+          }
+        });
+        const abortConditions = Array.isArray(node.resilienceScenario.abortConditions) ? node.resilienceScenario.abortConditions : [];
+        const abortIds = abortConditions.map((condition) => isObject(condition) ? condition.id : void 0).filter((id) => typeof id === "string");
+        if (new Set(abortIds).size !== abortIds.length) {
+          add2(
+            "REL-SEM-005",
+            scenarioPath + "/abortConditions",
+            "abort condition IDs must be unique",
+            nodeId
+          );
+        }
+      }
+      if (node.kind === "execution_evidence" && node.evidenceType === "resilience") {
+        if (typeof node.passed === "boolean" && typeof node.status === "string" && node.passed !== (node.status === "pass")) {
+          add2(
+            "REL-SEM-007",
+            "/graph/nodes/" + nodeIndex + "/passed",
+            "passed must agree with the canonical status when present",
+            nodeId
+          );
+        }
+        if (isObject(node.signalManifest)) {
+          const entries = [
+            node.signalManifest.metrics,
+            node.signalManifest.traces,
+            node.signalManifest.logs
+          ].flatMap((value) => Array.isArray(value) ? value : []).filter(isObject);
+          const entryIds = entries.map((entry) => entry.id).filter((id) => typeof id === "string");
+          if (new Set(entryIds).size !== entryIds.length) {
+            add2(
+              "REL-SEM-006",
+              "/graph/nodes/" + nodeIndex + "/signalManifest",
+              "signal entry IDs must be unique across metrics, traces, and logs",
+              nodeId
+            );
+          }
+        }
+      }
+    });
+  }
+  if (isObject(raw.policy) && isObject(raw.policy.reliabilityPolicy)) {
+    const reliability = raw.policy.reliabilityPolicy;
+    const safety = isObject(reliability.safety) ? reliability.safety : void 0;
+    const allowed = Array.isArray(safety?.allowedEnvironments) ? safety.allowedEnvironments : [];
+    if (typeof reliability.requiredEnvironment === "string" && !allowed.includes(reliability.requiredEnvironment)) {
+      add2(
+        "REL-SEM-008",
+        "/policy/reliabilityPolicy/requiredEnvironment",
+        "requiredEnvironment must be included in safety.allowedEnvironments"
+      );
+    }
+  }
+  return issues.sort(
+    (left, right) => compareText(left.path, right.path) || compareText(left.ruleId, right.ruleId) || compareText(left.nodeId ?? "", right.nodeId ?? "")
+  );
+}
+
+// src/validation/schema.ts
+var DEFAULT_SCHEMA_DIR = fileURLToPath(new URL("../../schemas/", import.meta.url));
+var defaultRegistry;
+function issueScope(path) {
+  const segment = path.split("/").filter(Boolean)[0];
+  if (segment === "metadata" || segment === "graph" || segment === "policy" || segment === "evidencePackage" || segment === "placementPlan" || segment === "optionalEvidence") return segment;
+  if (segment === "waivers") return "waiver";
+  return "envelope";
+}
+function formatSchemaErrors(errors) {
+  return (errors ?? []).map((error) => ({
+    path: error.instancePath || "/",
+    keyword: error.keyword,
+    message: error.message ?? "schema validation failed",
+    scope: issueScope(error.instancePath || "/")
+  }));
+}
+async function schemaFiles(schemaDir) {
+  return (await readdir(schemaDir)).filter((file) => file.endsWith(".schema.json")).sort().map((file) => join(schemaDir, file));
+}
+async function loadSchemaRegistry(schemaDir = DEFAULT_SCHEMA_DIR) {
+  if (schemaDir === DEFAULT_SCHEMA_DIR && defaultRegistry) return defaultRegistry;
+  const load = (async () => {
+    const ajv = new import__2.Ajv2020({ allErrors: true, strict: false, validateFormats: false });
+    const schemas = /* @__PURE__ */ new Map();
+    for (const file of await schemaFiles(schemaDir)) {
+      const schema = JSON.parse(await readFile(file, "utf-8"));
+      schemas.set(basename(file), schema);
+      ajv.addSchema(schema);
+    }
+    const validators2 = /* @__PURE__ */ new Map();
+    for (const [name, schema] of schemas) {
+      const id = typeof schema === "object" && schema !== null && "$id" in schema ? String(schema.$id) : name;
+      validators2.set(name, ajv.getSchema(id) ?? ajv.compile(schema));
+    }
+    return { ajv, validators: validators2, schemaDir };
+  })();
+  if (schemaDir === DEFAULT_SCHEMA_DIR) defaultRegistry = load;
+  return load;
+}
+async function validateGateInput(raw) {
+  const { validators: validators2 } = await loadSchemaRegistry();
+  const validator2 = validators2.get("gate-input.schema.json");
+  if (!validator2) {
+    return { reportVersion: "qeg-gate-input-validation-v2", valid: false, issues: [{ path: "/", keyword: "schema", message: "gate-input.schema.json is unavailable", scope: "envelope" }], warnings: [] };
+  }
+  validator2(raw);
+  const semanticIssues = validateReliabilitySemantics(raw).map((issue) => ({
+    path: issue.path,
+    keyword: issue.ruleId,
+    message: issue.message,
+    scope: issueScope(issue.path)
+  }));
+  const allIssues = [...formatSchemaErrors(validator2.errors), ...semanticIssues];
+  const warnings = allIssues.filter((issue) => issue.scope === "optionalEvidence");
+  const issues = allIssues.filter((issue) => issue.scope !== "optionalEvidence");
+  const valid = issues.length === 0;
+  let input;
+  if (valid && raw && typeof raw === "object" && !Array.isArray(raw)) {
+    const sanitized = { ...raw };
+    if (warnings.length > 0) delete sanitized.optionalEvidence;
+    input = sanitized;
+  }
+  return { reportVersion: "qeg-gate-input-validation-v2", valid, issues, warnings, ...input ? { input } : {} };
+}
+
+// src/validation/output.ts
+var OUTPUT_SCHEMAS = {
+  "qeg.bundle.json": "qeg.bundle.schema.json",
+  "test-placement-plan.json": "test-placement-plan.schema.json",
+  "gate-verdict.json": "gate-verdict.schema.json",
+  "quality-evidence-record.json": "quality-evidence-record.schema.json",
+  "output-record.json": "quality-evidence-record.schema.json",
+  "output-manifest.json": "output-manifest.schema.json"
+};
+async function validateOutput(value, schema) {
+  const registry = await loadSchemaRegistry();
+  const validator2 = registry.validators.get(schema);
+  if (!validator2) throw new Error(`Output schema unavailable: ${schema}`);
+  const valid = Boolean(validator2(value));
+  return { valid, schema, issues: formatSchemaErrors(validator2.errors) };
+}
+async function assertValidOutput(value, schema) {
+  const result = await validateOutput(value, schema);
+  if (!result.valid) throw new Error(`Own-output validation failed (${schema}): ${result.issues.map((i) => `${i.path} ${i.message}`).join("; ")}`);
+}
+
+// src/cli/raw-ingest.ts
+import { readFile as readFile3, realpath, stat as stat2 } from "fs/promises";
+import { isAbsolute, relative, resolve } from "path";
+
+// src/cli/errors.ts
+var CliError = class extends Error {
+  constructor(message, cause) {
+    super(message);
+    this.cause = cause;
+    this.name = "CliError";
+  }
+  cause;
+};
+
+// src/cli/file-errors.ts
+import { readFile as readFile2, stat } from "fs/promises";
+function isMissingFile(error) {
+  return error?.code === "ENOENT";
+}
+async function optionalText(path) {
+  try {
+    return await readFile2(path, "utf8");
+  } catch (error) {
+    if (isMissingFile(error)) return void 0;
+    throw new CliError(`Cannot read ${path}: ${String(error)}`);
+  }
+}
+async function optionalStat(path) {
+  try {
+    return await stat(path);
+  } catch (error) {
+    if (isMissingFile(error)) return null;
+    throw new CliError(`Cannot stat ${path}: ${String(error)}`);
+  }
+}
+
+// src/cli/raw-ingest.ts
+function outside(base2, target) {
+  const path = relative(base2, target);
+  return !path || path === ".." || path.startsWith("../") || path.startsWith("..\\") || isAbsolute(path);
+}
+async function loadRawArtifacts(directory) {
+  const base2 = await realpath(resolve(directory));
+  const path = resolve(base2, "ingest-manifest.json");
+  let raw;
+  try {
+    raw = JSON.parse(await readFile3(path, "utf8"));
+  } catch (error) {
+    throw new CliError(`Read/parse ingest manifest ${path}: ${String(error)}`);
+  }
+  const validation = await validateOutput(raw, "ingest-manifest.schema.json");
+  if (!validation.valid) throw new CliError(`Invalid ingest manifest ${path}: ${validation.issues.map((i) => `${i.path} ${i.message}`).join("; ")}`);
+  const manifest = raw;
+  const loaded = [];
+  for (const ref of manifest.artifacts) {
+    const fail = (code, message) => {
+      loaded.push({ ref, payload: void 0, failure: { code, message } });
+    };
+    const target = resolve(base2, ref.path);
+    if (isAbsolute(ref.path) || /^[A-Za-z]:|^[/\\]/.test(ref.path) || outside(base2, target)) {
+      fail("DQ-06", `Artifact must be inside the ingest target: ${ref.path}`);
+      continue;
+    }
+    let bytes;
+    try {
+      if (outside(base2, await realpath(target))) {
+        fail("DQ-06", `Artifact symlink escapes target: ${ref.path}`);
+        continue;
+      }
+      if (!(await stat2(target)).isFile()) {
+        fail("DQ-06", `Artifact is not a regular file: ${ref.path}`);
+        continue;
+      }
+      bytes = await readFile3(target);
+    } catch (error) {
+      if (isMissingFile(error)) {
+        fail("DQ-06", `Artifact missing: ${ref.path}`);
+        continue;
+      }
+      throw new CliError(`Read artifact ${target}: ${String(error)}`);
+    }
+    if (!ref.contentHash || ref.contentHash !== contentHash(bytes)) {
+      fail("DQ-06", `Artifact contentHash missing or mismatched: ${ref.path}`);
+      continue;
+    }
+    if (!ref.revision || ref.revision !== manifest.metadata.headRef) {
+      fail("DQ-12", `Artifact revision missing or mismatched: ${ref.path}`);
+      continue;
+    }
+    try {
+      loaded.push({ ref, payload: JSON.parse(bytes.toString("utf8")) });
+    } catch (error) {
+      fail("DQ-01", `Parse artifact ${ref.path}: ${String(error)}`);
+    }
+  }
+  return { manifest, loaded };
+}
+
+// src/cli/output-files.ts
+import { lstat, mkdir, mkdtemp, rename, rmdir, unlink, writeFile } from "fs/promises";
+import { basename as basename2, join as join2, resolve as resolve2 } from "path";
+function missing(error) {
+  return error?.code === "ENOENT";
+}
+async function publishFiles(directory, files) {
+  const root = resolve2(directory);
+  for (const name of files.keys()) if (basename2(name) !== name || name === "." || name === "..") throw new CliError(`Invalid output filename: ${name}`);
+  await mkdir(root, { recursive: true });
+  const stage = await mkdtemp(join2(root, ".qeg-output-"));
+  const transactions = [];
+  try {
+    for (const [name, content] of files) await writeFile(join2(stage, name), content, "utf8");
+    for (const name of files.keys()) {
+      try {
+        if (!(await lstat(join2(root, name))).isFile()) throw new CliError(`Output is not a regular file: ${join2(root, name)}`);
+      } catch (error) {
+        if (!missing(error)) throw error;
+      }
+    }
+    for (const name of files.keys()) {
+      const tx = { name, backedUp: false, published: false };
+      transactions.push(tx);
+      try {
+        await rename(join2(root, name), join2(stage, `${name}.previous`));
+        tx.backedUp = true;
+      } catch (error) {
+        if (!missing(error)) throw error;
+      }
+      await rename(join2(stage, name), join2(root, name));
+      tx.published = true;
+    }
+  } catch (error) {
+    const rollbackErrors = [];
+    for (const tx of [...transactions].reverse()) {
+      try {
+        if (tx.published) await unlink(join2(root, tx.name));
+        if (tx.backedUp) await rename(join2(stage, `${tx.name}.previous`), join2(root, tx.name));
+      } catch (rollback) {
+        rollbackErrors.push(String(rollback));
+      }
+    }
+    throw new CliError(`Publishing outputs in ${root} failed: ${String(error)}; recovery files: ${stage}${rollbackErrors.length ? `; rollback: ${rollbackErrors.join("; ")}` : ""}`);
+  }
+  for (const tx of transactions) if (tx.backedUp) await unlink(join2(stage, `${tx.name}.previous`));
+  await rmdir(stage);
+}
+
+// src/cli/fixture-io.ts
+import { readFile as readFile5 } from "fs/promises";
+import { join as join3, resolve as resolve4 } from "path";
 
 // src/gate/context.ts
 function isRiskNode(node) {
@@ -7212,19 +11645,19 @@ function computeBlockers(graph, validWaivers) {
 
 // src/gate/verdict/human-review.ts
 function computeRequiredHumanReview(graph, validWaivers, residualRisks) {
-  const required = [];
+  const required2 = [];
   for (const waiver of validWaivers) {
-    required.push(waiver.id);
+    required2.push(waiver.id);
   }
   for (const riskId of residualRisks) {
-    required.push(riskId);
+    required2.push(riskId);
   }
   for (const node of graph.nodes) {
     if (isLowConfidenceRisk(node)) {
-      required.push(node.id);
+      required2.push(node.id);
     }
   }
-  return required;
+  return required2;
 }
 function isLowConfidenceRisk(node) {
   return node.kind === "risk" && node.traceability.confidence === "low";
@@ -7297,6 +11730,119 @@ function getExitCode(verdict, policy) {
   return policy.exitCodePolicy[verdict];
 }
 
+// src/gate/dq/input-contract.ts
+function detectInputContract(input) {
+  const contract = input.policy.inputContract;
+  const dq2 = (message, pointer) => ({
+    code: "DQ-01",
+    message,
+    nodeIds: [],
+    sourceRefs: [inputSource(pointer, message)]
+  });
+  if (!contract) return [dq2("Gate policy inputContract is required; choose an explicit input mode and scope", "/policy/inputContract")];
+  const scope = contract.evaluationScope;
+  if (!["native_graph", "upstream_artifacts"].includes(contract.mode) || !Array.isArray(contract.requiredArtifacts) || contract.requiredArtifacts.some((ref) => !ref || typeof ref.adapter !== "string" || !ref.adapter || typeof ref.kind !== "string" || !ref.kind) || typeof contract.requireExecutedTests !== "boolean" || !scope || !["fixture", "isolated_consumer", "real_environment"].includes(scope.kind) || typeof scope.target !== "string" || !scope.target.trim() || !Array.isArray(scope.notEvaluated) || scope.notEvaluated.some((item) => typeof item !== "string") || !Array.isArray(contract.sourceRefs) || !contract.sourceRefs.length || contract.sourceRefs.some((ref) => !ref || !ref.id || !ref.path)) {
+    return [dq2("Gate inputContract has invalid mode, requirements, scope or source references", "/policy/inputContract")];
+  }
+  const result = [];
+  const declared = new Set(contract.requiredArtifacts.map(artifactKey));
+  if (declared.size === 0 || declared.size !== contract.requiredArtifacts.length) {
+    result.push(dq2("Required artifact set must be non-empty and unique", "/policy/inputContract/requiredArtifacts"));
+  }
+  const expected = contract.mode === "upstream_artifacts" ? [...new Map([...UPSTREAM_REQUIRED_ARTIFACTS, ...contract.requiredArtifacts].map((ref) => [artifactKey(ref), ref])).values()] : contract.requiredArtifacts;
+  if (contract.mode === "upstream_artifacts" && UPSTREAM_REQUIRED_ARTIFACTS.some((ref) => !declared.has(artifactKey(ref)))) {
+    result.push(dq2("Upstream input contract cannot omit any of the fourteen required artifact kinds", "/policy/inputContract/requiredArtifacts"));
+  }
+  const available = new Set(input.metadata.inputArtifacts.map(artifactKey));
+  const missing2 = expected.filter((ref) => !available.has(artifactKey(ref))).map(artifactKey).sort();
+  if (missing2.length > 0) result.push(dq2(`Missing required artifacts: ${missing2.join(", ")}`, "/metadata/inputArtifacts"));
+  const producers = [...new Set(expected.map((ref) => ref.adapter))].sort();
+  const absentStatuses = producers.filter((producer) => input.metadata.requiredConnectorStatus?.[producer] === void 0);
+  if (absentStatuses.length > 0) result.push(dq2(`Required producer status missing: ${absentStatuses.join(", ")}`, "/metadata/requiredConnectorStatus"));
+  if (input.graph.nodes.length === 0) result.push(dq2("Empty graph is not sufficient for a Gate decision", "/graph/nodes"));
+  return result;
+}
+
+// src/gate/dq/placement-coverage.ts
+function relatedRiskIds(input, changeId) {
+  const ids = new Set(input.placementPlan?.obligations.filter((o) => o.changedCodeIds.includes(changeId)).flatMap((o) => [...o.riskIds]) ?? []);
+  const riskIds = new Set(input.graph.nodes.filter((n) => n.kind === "risk").map((n) => n.id));
+  for (const edge2 of input.graph.edges) {
+    if (edge2.from === changeId && riskIds.has(edge2.to)) ids.add(edge2.to);
+    if (edge2.to === changeId && riskIds.has(edge2.from)) ids.add(edge2.from);
+  }
+  return ids;
+}
+function isWaived(input, riskIds) {
+  return riskIds.size > 0 && [...riskIds].every((id) => input.validWaivers.some((w) => w.linkedRiskIds.includes(id)));
+}
+function placementsFor(input, obligation2) {
+  return input.placementPlan?.placements.filter((p) => p.obligationId === obligation2.id && p.disposition !== "blocked") ?? [];
+}
+function detectPlacementCoverage(input, changes) {
+  const result = [];
+  for (const change of changes) {
+    const obligations = input.placementPlan?.obligations.filter((o) => o.changedCodeIds.includes(change.id)) ?? [];
+    const covered = obligations.length > 0 && obligations.every((o) => placementsFor(input, o).length > 0);
+    if (!covered && !isWaived(input, relatedRiskIds(input, change.id))) result.push({
+      code: "DQ-05",
+      message: `Changed code "${change.path}" without test obligation or waiver`,
+      nodeIds: [change.id],
+      sourceRefs: change.traceability.sourceRefs.length > 0 ? change.traceability.sourceRefs : [inputSource("/placementPlan", `Coverage for ${change.id}`)]
+    });
+  }
+  return result;
+}
+function matchingExecutions(input, testId) {
+  const linked2 = new Set(input.graph.edges.filter((e) => e.kind === "evidenced_by" && e.from === testId).map((e) => e.to));
+  return input.graph.nodes.filter((n) => n.kind === "execution_evidence" && (n.evidenceType === "resilience" && n.testId === testId || n.evidenceType !== "resilience" && linked2.has(n.id)));
+}
+function evaluateRequiredExecutions(input) {
+  const disqualifications = [];
+  const blockers2 = [];
+  if (!input.policy.inputContract?.requireExecutedTests) return { disqualifications, blockers: blockers2 };
+  for (const risk of input.graph.nodes.filter((n) => n.kind === "risk")) {
+    if (!isWaived(input, /* @__PURE__ */ new Set([risk.id])) && !input.placementPlan?.obligations.some((o) => o.riskIds.includes(risk.id) && o.gateRelevance === "blocking")) {
+      disqualifications.push({
+        code: "DQ-05",
+        message: `Risk "${risk.id}" has no blocking test obligation`,
+        nodeIds: [risk.id],
+        sourceRefs: risk.traceability.sourceRefs.length ? risk.traceability.sourceRefs : [inputSource("/placementPlan", risk.id)]
+      });
+    }
+  }
+  for (const obligation2 of input.placementPlan?.obligations ?? []) {
+    if (obligation2.gateRelevance !== "blocking" || isWaived(input, new Set(obligation2.riskIds))) continue;
+    const selectedIds = [...new Set(placementsFor(input, obligation2).flatMap((p) => [...p.selectedTestIds]))];
+    const tests = selectedIds.map((id) => input.graph.nodes.find((n) => n.id === id && n.kind === "test"));
+    let missing2 = selectedIds.length === 0;
+    for (const test of tests) {
+      if (!test || test.kind !== "test" || test.deleted || test.testExecutionMode !== "real") {
+        missing2 = true;
+        continue;
+      }
+      if (test.testType === "resilience") continue;
+      const evidence = matchingExecutions(input, test.id);
+      if (evidence.length === 0 || evidence.some((e) => e.passed === void 0 || e.evidenceRefs.length === 0)) missing2 = true;
+      for (const failed of evidence.filter((e) => e.passed === false)) blockers2.push({
+        id: `qeg:failed-${obligation2.id}-${test.id}-${failed.id}`,
+        message: `Required test "${test.title}" failed`,
+        riskIds: obligation2.riskIds,
+        testId: test.id,
+        evidenceId: failed.id,
+        sourceRefs: failed.traceability.sourceRefs.length > 0 ? failed.traceability.sourceRefs : [inputSource("/graph/nodes", failed.id)]
+      });
+    }
+    if (missing2) disqualifications.push({
+      code: "DQ-05",
+      message: `Obligation "${obligation2.id}" lacks required real execution evidence`,
+      nodeIds: [obligation2.id, ...selectedIds],
+      sourceRefs: [inputSource("/placementPlan", obligation2.id)]
+    });
+  }
+  return { disqualifications, blockers: blockers2 };
+}
+
 // src/gate/dq/basic.ts
 function riskNodes(input) {
   return input.riskNodes ?? input.graph.nodes.filter((node) => node.kind === "risk");
@@ -7311,12 +11857,12 @@ function blockers(input) {
 }
 function detectDQ01(input) {
   const parserDqs = input.graph.completeness.parserFailures.map((failure) => ({
-    code: "DQ-01",
+    code: failure.code ?? "DQ-01",
     message: `Parser failure: ${failure.reason}`,
     nodeIds: [],
     sourceRefs: failure.sourceRefs
   }));
-  return [...input.preflightDisqualifications.filter((dq2) => dq2.code === "DQ-01"), ...parserDqs];
+  return [...input.preflightDisqualifications.filter((dq2) => dq2.code === "DQ-01"), ...parserDqs, ...detectInputContract(input)];
 }
 function detectDQ02(input) {
   return blockers(input).filter((blocker) => blocker.sourceRefs.length === 0).map((blocker) => ({
@@ -7355,37 +11901,13 @@ function detectDQ04(input) {
   return disqualifications;
 }
 function detectDQ05(input) {
-  const disqualifications = [];
-  for (const changedCode of changedCodeNodes(input)) {
-    if (input.placementPlan) {
-      const hasTestPlacement = input.placementPlan.placements.some(
-        (placement) => placement.disposition !== "blocked"
-      );
-      const hasAcceptedWaiver = input.waivers.some((waiver) => waiver.valid);
-      if (!hasTestPlacement && !hasAcceptedWaiver) {
-        disqualifications.push({
-          code: "DQ-05",
-          message: `Changed code "${changedCode.path}" without test obligation or waiver`,
-          nodeIds: [changedCode.id],
-          sourceRefs: changedCode.traceability.sourceRefs
-        });
-      }
-    } else {
-      disqualifications.push({
-        code: "DQ-05",
-        message: `Changed code "${changedCode.path}" without test obligation or waiver`,
-        nodeIds: [changedCode.id],
-        sourceRefs: changedCode.traceability.sourceRefs
-      });
-    }
-  }
-  return disqualifications;
+  return detectPlacementCoverage(input, changedCodeNodes(input));
 }
 function detectDQ06(input) {
   return input.preflightDisqualifications.filter((dq2) => dq2.code === "DQ-06");
 }
 function detectDQ07(input) {
-  if (input.graph.completeness.partial && !input.graph.completeness.score) {
+  if (input.graph.completeness.partial && input.graph.completeness.score === void 0) {
     return {
       code: "DQ-07",
       message: "Partial graph without explicit completeness score",
@@ -7743,10 +12265,10 @@ function obligationsForSubject(obligations, placements, subjectId) {
   const obligationIds = new Set(
     placements.filter((placement) => placement.id === subjectId || placement.selectedTestIds.includes(subjectId)).map((placement) => placement.obligationId)
   );
-  return obligations.filter((obligation) => obligationIds.has(obligation.id));
+  return obligations.filter((obligation2) => obligationIds.has(obligation2.id));
 }
 function riskIdsForSubject(obligations, placements, subjectId) {
-  return [...new Set(obligationsForSubject(obligations, placements, subjectId).flatMap((obligation) => obligation.riskIds))];
+  return [...new Set(obligationsForSubject(obligations, placements, subjectId).flatMap((obligation2) => obligation2.riskIds))];
 }
 function isManualLayer(layer) {
   return layer === "manual-scripted" || layer === "manual-exploratory";
@@ -7758,11 +12280,13 @@ function detectManualScriptedOracleGaps(input) {
   const disqualifications = [];
   for (const placement of testPlacementNodes(input)) {
     if (placement.primaryLayer !== "manual-scripted") continue;
-    const hasAcceptableOracle = input.evidencePackage?.manualEvidence.some(
+    const selected = placement.selectedTestIds.map((id) => input.graph.nodes.find((n) => n.id === id));
+    const selectedOracles = selected.length > 0 && selected.every((n) => n?.kind === "test" && n.testType !== "resilience" && n.oracleType && n.oracleType !== "missing" && (n.oracleRefs?.length ?? 0) > 0 && (n.expectedResults?.length ?? 0) > 0);
+    const hasAcceptableOracle = selectedOracles || input.policy.inputContract?.mode !== "upstream_artifacts" && (input.evidencePackage?.manualEvidence.some(
       (manual) => manual.oracleRefs.some((oracle) => oracle.evidenceKind === "human_review")
     ) || placement.candidateScores.some(
-      (score) => score.sourceRefs.some((sourceRef) => sourceRef.label?.includes("oracle"))
-    );
+      (score2) => score2.sourceRefs.some((sourceRef) => sourceRef.label?.includes("oracle"))
+    ));
     if (!hasAcceptableOracle) {
       disqualifications.push({
         code: "DQ-14",
@@ -7889,37 +12413,9 @@ function detectAllDQs(input) {
   return results;
 }
 
-// src/gate/reliability/utils.ts
-import { createHash } from "crypto";
-var RELIABILITY_REF = {
-  id: "qeg:reliability-extension",
-  path: "docs/spec/reliability-extension.md"
-};
+// src/gate/reliability/collections.ts
 function lexicalCompare(left, right) {
   return left < right ? -1 : left > right ? 1 : 0;
-}
-function isResilienceTest(node) {
-  return node.testType === "resilience";
-}
-function isResilienceEvidence(node) {
-  return Boolean(node) && typeof node === "object" && node.kind === "execution_evidence" && node.evidenceType === "resilience";
-}
-function dq(code, message, nodeIds) {
-  return {
-    code,
-    message,
-    nodeIds: [...nodeIds].sort(lexicalCompare),
-    sourceRefs: [RELIABILITY_REF]
-  };
-}
-function isFullGitObjectId(value) {
-  return Boolean(value && /^[a-f0-9]{40}(?:[a-f0-9]{24})?$/.test(value));
-}
-function isSha256(value) {
-  return Boolean(value && /^sha256:[a-f0-9]{64}$/.test(value));
-}
-function sameNumber(left, right) {
-  return left !== void 0 && right !== void 0 && left === right;
 }
 function nearestRank(values, percentile) {
   if (values.length === 0) return null;
@@ -7928,31 +12424,6 @@ function nearestRank(values, percentile) {
 }
 function uniqueNodeIds(disqualifications) {
   return [...new Set(disqualifications.flatMap((item) => item.nodeIds))].sort(lexicalCompare);
-}
-function canonicalJson(value) {
-  if (value === void 0) return "null";
-  if (Array.isArray(value)) return "[" + value.map(canonicalJson).join(",") + "]";
-  if (value && typeof value === "object") {
-    const entries = Object.entries(value).filter(([, child]) => child !== void 0).sort(([left], [right]) => lexicalCompare(left, right));
-    return "{" + entries.map(([key, child]) => JSON.stringify(key) + ":" + canonicalJson(child)).join(",") + "}";
-  }
-  return JSON.stringify(value);
-}
-function decisionFingerprint(evidence) {
-  const {
-    id: _id,
-    title: _title,
-    traceability: _traceability,
-    sourceArtifactIds: _sourceArtifactIds,
-    ...decisionFields
-  } = evidence;
-  return createHash("sha256").update(canonicalJson(decisionFields)).digest("hex");
-}
-function isPassing(evidence) {
-  return evidence.status === "pass" && evidence.passed !== false;
-}
-function requiresQualificationEvidence(evidence) {
-  return evidence.status === "pass" || evidence.status === "fail" || evidence.status === "aborted";
 }
 function uniqueSourceRefs(...groups) {
   const byKey = /* @__PURE__ */ new Map();
@@ -7963,6 +12434,18 @@ function uniqueSourceRefs(...groups) {
     (left, right) => lexicalCompare(left.id, right.id) || lexicalCompare(left.path, right.path)
   );
 }
+function sortDisqualifications(values) {
+  return [...values].sort(
+    (left, right) => lexicalCompare(left.code, right.code) || lexicalCompare(left.nodeIds.join(String.fromCharCode(0)), right.nodeIds.join(String.fromCharCode(0))) || lexicalCompare(left.message, right.message)
+  );
+}
+function sortBlockers(values) {
+  return [...values].sort(
+    (left, right) => lexicalCompare(left.ruleId ?? "", right.ruleId ?? "") || lexicalCompare(left.riskIds.join(String.fromCharCode(0)), right.riskIds.join(String.fromCharCode(0))) || lexicalCompare(left.testId ?? "", right.testId ?? "") || lexicalCompare(left.evidenceId ?? "", right.evidenceId ?? "") || lexicalCompare(left.id, right.id)
+  );
+}
+
+// src/gate/reliability/bounds.ts
 function targetBounds(slo) {
   if (slo.target.targetType === "min") {
     return { min: slo.target.value, max: Number.POSITIVE_INFINITY };
@@ -8002,15 +12485,62 @@ function targetSatisfied(value, slo) {
 function metricMatchesSlo(metric, slo) {
   return metric.metricName === slo.metricName && metric.semanticRole === slo.semanticRole && metric.aggregation === slo.aggregation && metric.unit === slo.unit && (slo.semanticRole !== "custom" || metric.customSemanticRoleName === slo.customSemanticRoleName);
 }
-function sortDisqualifications(values) {
-  return [...values].sort(
-    (left, right) => lexicalCompare(left.code, right.code) || lexicalCompare(left.nodeIds.join(String.fromCharCode(0)), right.nodeIds.join(String.fromCharCode(0))) || lexicalCompare(left.message, right.message)
-  );
+
+// src/gate/reliability/fingerprint.ts
+import { createHash as createHash2 } from "crypto";
+function canonicalJson(value) {
+  if (value === void 0) return "null";
+  if (Array.isArray(value)) return "[" + value.map(canonicalJson).join(",") + "]";
+  if (value && typeof value === "object") {
+    const entries = Object.entries(value).filter(([, child]) => child !== void 0).sort(([left], [right]) => lexicalCompare(left, right));
+    return "{" + entries.map(([key, child]) => JSON.stringify(key) + ":" + canonicalJson(child)).join(",") + "}";
+  }
+  return JSON.stringify(value);
 }
-function sortBlockers(values) {
-  return [...values].sort(
-    (left, right) => lexicalCompare(left.ruleId ?? "", right.ruleId ?? "") || lexicalCompare(left.riskIds.join(String.fromCharCode(0)), right.riskIds.join(String.fromCharCode(0))) || lexicalCompare(left.testId ?? "", right.testId ?? "") || lexicalCompare(left.evidenceId ?? "", right.evidenceId ?? "") || lexicalCompare(left.id, right.id)
-  );
+function decisionFingerprint(evidence) {
+  const {
+    id: _id,
+    title: _title,
+    traceability: _traceability,
+    sourceArtifactIds: _sourceArtifactIds,
+    ...decisionFields
+  } = evidence;
+  return createHash2("sha256").update(canonicalJson(decisionFields)).digest("hex");
+}
+
+// src/gate/reliability/utils.ts
+var RELIABILITY_REF = {
+  id: "qeg:reliability-extension",
+  path: "docs/spec/reliability-extension.md"
+};
+function isResilienceTest(node) {
+  return node.testType === "resilience";
+}
+function isResilienceEvidence(node) {
+  return Boolean(node) && typeof node === "object" && node.kind === "execution_evidence" && node.evidenceType === "resilience";
+}
+function dq(code, message, nodeIds) {
+  return {
+    code,
+    message,
+    nodeIds: [...nodeIds].sort(lexicalCompare),
+    sourceRefs: [RELIABILITY_REF]
+  };
+}
+function isFullGitObjectId(value) {
+  return Boolean(value && /^[a-f0-9]{40}(?:[a-f0-9]{24})?$/.test(value));
+}
+function isSha256(value) {
+  return Boolean(value && /^sha256:[a-f0-9]{64}$/.test(value));
+}
+function sameNumber(left, right) {
+  return left !== void 0 && right !== void 0 && left === right;
+}
+function isPassing(evidence) {
+  return evidence.status === "pass" && evidence.passed !== false;
+}
+function requiresQualificationEvidence(evidence) {
+  return evidence.status === "pass" || evidence.status === "fail" || evidence.status === "aborted";
 }
 
 // src/gate/reliability/accounting.ts
@@ -8284,125 +12814,14 @@ function buildReliabilityIndex(input) {
   };
 }
 
-// src/validation/reliability-semantics.ts
-function isObject(value) {
-  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-function compareText(left, right) {
-  return left < right ? -1 : left > right ? 1 : 0;
-}
-function validateReliabilitySemantics(raw) {
-  if (!isObject(raw)) return [];
-  const issues = [];
-  const add2 = (ruleId, path, message, nodeId) => {
-    issues.push({ ruleId, path, message, ...nodeId ? { nodeId } : {} });
-  };
-  if (isObject(raw.graph) && Array.isArray(raw.graph.nodes)) {
-    raw.graph.nodes.forEach((node, nodeIndex) => {
-      if (!isObject(node)) return;
-      const nodeId = typeof node.id === "string" ? node.id : void 0;
-      if (node.kind === "test" && node.testType === "resilience" && isObject(node.resilienceScenario)) {
-        const scenarioPath = "/graph/nodes/" + nodeIndex + "/resilienceScenario";
-        const steadyState = isObject(node.resilienceScenario.steadyState) ? node.resilienceScenario.steadyState : void 0;
-        const slos = Array.isArray(steadyState?.slos) ? steadyState.slos : [];
-        const requiredMetrics = Array.isArray(steadyState?.requiredMetrics) ? steadyState.requiredMetrics.filter((value) => typeof value === "string") : [];
-        const names = /* @__PURE__ */ new Set();
-        const tuples = /* @__PURE__ */ new Set();
-        slos.forEach((slo, sloIndex) => {
-          if (!isObject(slo)) return;
-          const base = scenarioPath + "/steadyState/slos/" + sloIndex;
-          if (typeof slo.name === "string") {
-            if (names.has(slo.name)) {
-              add2("REL-SEM-001", base + "/name", "SLO names must be unique", nodeId);
-            }
-            names.add(slo.name);
-          }
-          const tuple = [slo.metricName, slo.semanticRole, slo.aggregation, slo.unit].map(String).join(String.fromCharCode(0));
-          if (tuples.has(tuple)) {
-            add2(
-              "REL-SEM-002",
-              base,
-              "metricName/semanticRole/aggregation/unit SLO tuples must be unique",
-              nodeId
-            );
-          }
-          tuples.add(tuple);
-          if (typeof slo.metricName === "string" && !requiredMetrics.includes(slo.metricName)) {
-            add2(
-              "REL-SEM-003",
-              base + "/metricName",
-              "every SLO metric must be present in requiredMetrics",
-              nodeId
-            );
-          }
-          if (isObject(slo.target) && slo.target.targetType === "range" && typeof slo.target.min === "number" && typeof slo.target.max === "number" && slo.target.min >= slo.target.max) {
-            add2("REL-SEM-004", base + "/target", "SLO range min must be less than max", nodeId);
-          }
-        });
-        const abortConditions = Array.isArray(node.resilienceScenario.abortConditions) ? node.resilienceScenario.abortConditions : [];
-        const abortIds = abortConditions.map((condition) => isObject(condition) ? condition.id : void 0).filter((id) => typeof id === "string");
-        if (new Set(abortIds).size !== abortIds.length) {
-          add2(
-            "REL-SEM-005",
-            scenarioPath + "/abortConditions",
-            "abort condition IDs must be unique",
-            nodeId
-          );
-        }
-      }
-      if (node.kind === "execution_evidence" && node.evidenceType === "resilience") {
-        if (typeof node.passed === "boolean" && typeof node.status === "string" && node.passed !== (node.status === "pass")) {
-          add2(
-            "REL-SEM-007",
-            "/graph/nodes/" + nodeIndex + "/passed",
-            "passed must agree with the canonical status when present",
-            nodeId
-          );
-        }
-        if (isObject(node.signalManifest)) {
-          const entries = [
-            node.signalManifest.metrics,
-            node.signalManifest.traces,
-            node.signalManifest.logs
-          ].flatMap((value) => Array.isArray(value) ? value : []).filter(isObject);
-          const entryIds = entries.map((entry) => entry.id).filter((id) => typeof id === "string");
-          if (new Set(entryIds).size !== entryIds.length) {
-            add2(
-              "REL-SEM-006",
-              "/graph/nodes/" + nodeIndex + "/signalManifest",
-              "signal entry IDs must be unique across metrics, traces, and logs",
-              nodeId
-            );
-          }
-        }
-      }
-    });
-  }
-  if (isObject(raw.policy) && isObject(raw.policy.reliabilityPolicy)) {
-    const reliability = raw.policy.reliabilityPolicy;
-    const safety = isObject(reliability.safety) ? reliability.safety : void 0;
-    const allowed = Array.isArray(safety?.allowedEnvironments) ? safety.allowedEnvironments : [];
-    if (typeof reliability.requiredEnvironment === "string" && !allowed.includes(reliability.requiredEnvironment)) {
-      add2(
-        "REL-SEM-008",
-        "/policy/reliabilityPolicy/requiredEnvironment",
-        "requiredEnvironment must be included in safety.allowedEnvironments"
-      );
-    }
-  }
-  return issues.sort(
-    (left, right) => compareText(left.path, right.path) || compareText(left.ruleId, right.ruleId) || compareText(left.nodeId ?? "", right.nodeId ?? "")
-  );
-}
-
 // src/gate/reliability/signals.ts
 function findAbortSignal(evidence, entryId) {
   const manifest = evidence.signalManifest;
   if (!manifest) return void 0;
   const metric = manifest.metrics.find((entry) => entry.id === entryId);
   if (metric) return { source: "metric", entry: metric };
-  const trace = manifest.traces.find((entry) => entry.id === entryId);
-  if (trace) return { source: "trace_count", entry: trace };
+  const trace2 = manifest.traces.find((entry) => entry.id === entryId);
+  if (trace2) return { source: "trace_count", entry: trace2 };
   const log = manifest.logs.find((entry) => entry.id === entryId);
   return log ? { source: "log_count", entry: log } : void 0;
 }
@@ -8619,149 +13038,7 @@ function steadyStateSloDqs(test, evidence) {
   ] : [];
 }
 
-// src/gate/reliability/qualification.ts
-function artifactFailureClasses(input) {
-  const byArtifact = /* @__PURE__ */ new Map();
-  for (const item of input.evidenceVerification?.items ?? []) {
-    if (item.severity !== "fail" || item.code === "VERIFIED") continue;
-    const current = byArtifact.get(item.artifactId);
-    if (item.code !== "REVISION_MISMATCH" || current === "non_revision") {
-      byArtifact.set(item.artifactId, "non_revision");
-    } else {
-      byArtifact.set(item.artifactId, "revision");
-    }
-  }
-  return byArtifact;
-}
-function artifactVerificationDqs(input) {
-  const report = input.evidenceVerification;
-  if (!report) {
-    return [
-      dq(
-        "DQ-06",
-        "Reliability policy is enabled but artifact verification report is missing",
-        []
-      )
-    ];
-  }
-  const classes = artifactFailureClasses(input);
-  const result = [];
-  const preflightOwnsDq06 = input.preflightDisqualifications.some(
-    (item) => item.code === "DQ-06"
-  );
-  for (const artifactId of [...classes.keys()].sort()) {
-    const failureClass = classes.get(artifactId);
-    if (failureClass === "non_revision") {
-      if (!preflightOwnsDq06) {
-        result.push(
-          dq("DQ-06", "Artifact verification failed for " + artifactId, [artifactId])
-        );
-      }
-    } else if (failureClass === "revision") {
-      result.push(
-        dq("DQ-12", "Artifact revision mismatch for " + artifactId, [artifactId])
-      );
-    }
-  }
-  if (report.status === "fail" && classes.size === 0 && !preflightOwnsDq06) {
-    result.push(
-      dq(
-        "DQ-06",
-        "Artifact verification failed without a classified artifact diagnostic",
-        []
-      )
-    );
-  }
-  return result;
-}
-function semanticInputDqs(input) {
-  const issues = validateReliabilitySemantics(input);
-  if (issues.length === 0 || input.preflightDisqualifications.some((item) => item.code === "DQ-01")) {
-    return [];
-  }
-  return issues.map(
-    (issue) => dq(
-      "DQ-01",
-      "[" + issue.ruleId + "] " + issue.message + " at " + issue.path,
-      issue.nodeId ? [issue.nodeId] : []
-    )
-  );
-}
-function policyIntegrityDqs(input) {
-  const { metadata, graph, policy } = input;
-  const allowedProfiles = /* @__PURE__ */ new Set(["standard", "strict", "ipo_controlled"]);
-  const requiredDqScope = [
-    "DQ-18",
-    "DQ-19",
-    "DQ-20",
-    "DQ-21"
-  ];
-  const valuesMatch = metadata.profile === policy.profile && graph.metadata.profile === policy.profile && metadata.policyId === policy.policyId && graph.metadata.policyId === policy.policyId && metadata.policyHash === policy.policyHash && graph.metadata.policyHash === policy.policyHash && metadata.headRef === graph.metadata.headRef;
-  if (!isFullGitObjectId(metadata.headRef) || !isFullGitObjectId(graph.metadata.headRef) || !isSha256(policy.policyHash) || !isSha256(metadata.policyHash) || !isSha256(graph.metadata.policyHash) || !allowedProfiles.has(policy.profile) || !requiredDqScope.every((code) => policy.dqScope.includes(code)) || !valuesMatch) {
-    return [
-      dq(
-        "DQ-21",
-        "Reliability policy identity, SHA-256 hash, profile, DQ scope, or full revision is invalid or does not match across Gate, graph, and policy",
-        []
-      )
-    ];
-  }
-  return [];
-}
-function globalQualificationDqs(input) {
-  return [
-    ...semanticInputDqs(input),
-    ...artifactVerificationDqs(input),
-    ...policyIntegrityDqs(input)
-  ];
-}
-function evidenceRevisionDqs(input, evidence) {
-  const head = input.metadata.headRef;
-  const reportClasses = artifactFailureClasses(input);
-  const mismatches = [];
-  if (!head || evidence.targetRevision !== head) mismatches.push("targetRevision");
-  if (evidence.rawArtifactRef.revision !== head && !reportClasses.has(evidence.rawArtifactRef.id)) {
-    mismatches.push("rawArtifactRef.revision");
-  }
-  for (const ref of evidence.evidenceRefs) {
-    if (ref.revision !== head && !reportClasses.has(ref.id)) {
-      mismatches.push("evidenceRef:" + ref.id);
-    }
-  }
-  return mismatches.length > 0 ? [
-    dq(
-      "DQ-12",
-      "Resilience evidence revision mismatch (" + mismatches.join(", ") + ")",
-      [evidence.id]
-    )
-  ] : [];
-}
-function scenarioDqs(input, test) {
-  const policy = input.policy.reliabilityPolicy;
-  if (!policy) return [];
-  const reasons = [];
-  for (const slo of test.resilienceScenario.steadyState.slos) {
-    if (policy.requireRecoveryObservation && !slo.evaluationPhases.includes("recovery")) {
-      reasons.push("SLO " + slo.name + " omits recovery phase");
-    }
-    const bounds = targetBounds(slo);
-    for (const phase of slo.evaluationPhases) {
-      const policyLimit = policyBounds(input, slo.semanticRole, phase);
-      if (policyLimit && Math.max(bounds.min, policyLimit.min) > Math.min(bounds.max, policyLimit.max)) {
-        reasons.push(
-          "SLO " + slo.name + " conflicts with the effective policy threshold in " + phase
-        );
-      }
-    }
-  }
-  return reasons.length > 0 ? [
-    dq(
-      "DQ-18",
-      "Resilience scenario is incompatible with policy: " + [...new Set(reasons)].join("; "),
-      [test.id]
-    )
-  ] : [];
-}
+// src/gate/reliability/lifecycle.ts
 function abortTriggered(condition, observed) {
   switch (condition.operator) {
     case "gt":
@@ -8862,6 +13139,152 @@ function lifecycleDqs(input, test, evidence) {
     )
   ] : [];
 }
+
+// src/gate/reliability/preflight.ts
+function artifactFailureClasses(input) {
+  const byArtifact = /* @__PURE__ */ new Map();
+  for (const item of input.evidenceVerification?.items ?? []) {
+    if (item.severity !== "fail" || item.code === "VERIFIED") continue;
+    const current = byArtifact.get(item.artifactId);
+    if (item.code !== "REVISION_MISMATCH" || current === "non_revision") {
+      byArtifact.set(item.artifactId, "non_revision");
+    } else {
+      byArtifact.set(item.artifactId, "revision");
+    }
+  }
+  return byArtifact;
+}
+function artifactVerificationDqs(input) {
+  const report = input.evidenceVerification;
+  if (!report) {
+    return [
+      dq(
+        "DQ-06",
+        "Reliability policy is enabled but artifact verification report is missing",
+        []
+      )
+    ];
+  }
+  const classes = artifactFailureClasses(input);
+  const result = [];
+  const preflightOwnsDq06 = input.preflightDisqualifications.some(
+    (item) => item.code === "DQ-06"
+  );
+  for (const artifactId of [...classes.keys()].sort()) {
+    const failureClass = classes.get(artifactId);
+    if (failureClass === "non_revision") {
+      if (!preflightOwnsDq06) {
+        result.push(
+          dq("DQ-06", "Artifact verification failed for " + artifactId, [artifactId])
+        );
+      }
+    } else if (failureClass === "revision") {
+      result.push(
+        dq("DQ-12", "Artifact revision mismatch for " + artifactId, [artifactId])
+      );
+    }
+  }
+  if (report.status === "fail" && classes.size === 0 && !preflightOwnsDq06) {
+    result.push(
+      dq(
+        "DQ-06",
+        "Artifact verification failed without a classified artifact diagnostic",
+        []
+      )
+    );
+  }
+  return result;
+}
+function semanticInputDqs(input) {
+  const issues = validateReliabilitySemantics(input);
+  if (issues.length === 0 || input.preflightDisqualifications.some((item) => item.code === "DQ-01")) {
+    return [];
+  }
+  return issues.map(
+    (issue) => dq(
+      "DQ-01",
+      "[" + issue.ruleId + "] " + issue.message + " at " + issue.path,
+      issue.nodeId ? [issue.nodeId] : []
+    )
+  );
+}
+function policyIntegrityDqs(input) {
+  const { metadata, graph, policy } = input;
+  const allowedProfiles = /* @__PURE__ */ new Set(["standard", "strict", "ipo_controlled"]);
+  const requiredDqScope = [
+    "DQ-18",
+    "DQ-19",
+    "DQ-20",
+    "DQ-21"
+  ];
+  const valuesMatch = metadata.profile === policy.profile && graph.metadata.profile === policy.profile && metadata.policyId === policy.policyId && graph.metadata.policyId === policy.policyId && metadata.policyHash === policy.policyHash && graph.metadata.policyHash === policy.policyHash && metadata.headRef === graph.metadata.headRef;
+  if (!isFullGitObjectId(metadata.headRef) || !isFullGitObjectId(graph.metadata.headRef) || !isSha256(policy.policyHash) || !isSha256(metadata.policyHash) || !isSha256(graph.metadata.policyHash) || !allowedProfiles.has(policy.profile) || !requiredDqScope.every((code) => policy.dqScope.includes(code)) || !valuesMatch) {
+    return [
+      dq(
+        "DQ-21",
+        "Reliability policy identity, SHA-256 hash, profile, DQ scope, or full revision is invalid or does not match across Gate, graph, and policy",
+        []
+      )
+    ];
+  }
+  return [];
+}
+function globalQualificationDqs(input) {
+  return [
+    ...semanticInputDqs(input),
+    ...artifactVerificationDqs(input),
+    ...policyIntegrityDqs(input)
+  ];
+}
+
+// src/gate/reliability/qualification.ts
+function evidenceRevisionDqs(input, evidence) {
+  const head = input.metadata.headRef;
+  const reportClasses = artifactFailureClasses(input);
+  const mismatches = [];
+  if (!head || evidence.targetRevision !== head) mismatches.push("targetRevision");
+  if (evidence.rawArtifactRef.revision !== head && !reportClasses.has(evidence.rawArtifactRef.id)) {
+    mismatches.push("rawArtifactRef.revision");
+  }
+  for (const ref of evidence.evidenceRefs) {
+    if (ref.revision !== head && !reportClasses.has(ref.id)) {
+      mismatches.push("evidenceRef:" + ref.id);
+    }
+  }
+  return mismatches.length > 0 ? [
+    dq(
+      "DQ-12",
+      "Resilience evidence revision mismatch (" + mismatches.join(", ") + ")",
+      [evidence.id]
+    )
+  ] : [];
+}
+function scenarioDqs(input, test) {
+  const policy = input.policy.reliabilityPolicy;
+  if (!policy) return [];
+  const reasons = [];
+  for (const slo of test.resilienceScenario.steadyState.slos) {
+    if (policy.requireRecoveryObservation && !slo.evaluationPhases.includes("recovery")) {
+      reasons.push("SLO " + slo.name + " omits recovery phase");
+    }
+    const bounds = targetBounds(slo);
+    for (const phase of slo.evaluationPhases) {
+      const policyLimit = policyBounds(input, slo.semanticRole, phase);
+      if (policyLimit && Math.max(bounds.min, policyLimit.min) > Math.min(bounds.max, policyLimit.max)) {
+        reasons.push(
+          "SLO " + slo.name + " conflicts with the effective policy threshold in " + phase
+        );
+      }
+    }
+  }
+  return reasons.length > 0 ? [
+    dq(
+      "DQ-18",
+      "Resilience scenario is incompatible with policy: " + [...new Set(reasons)].join("; "),
+      [test.id]
+    )
+  ] : [];
+}
 function qualifyEvidence(input, test, evidence) {
   const revision = evidenceRevisionDqs(input, evidence);
   if (revision.length > 0) return revision;
@@ -8880,14 +13303,14 @@ function evidencedByProvenanceDqs(input, test, evidenceNodes) {
   const contradictoryIds = /* @__PURE__ */ new Set();
   for (const evidence of evidenceNodes) {
     const incoming = input.graph.edges.filter(
-      (edge) => edge.kind === "evidenced_by" && edge.to === evidence.id
+      (edge2) => edge2.kind === "evidenced_by" && edge2.to === evidence.id
     );
     if (incoming.length === 0) continue;
-    const sourceIds = [...new Set(incoming.map((edge) => edge.from))].sort(
+    const sourceIds = [...new Set(incoming.map((edge2) => edge2.from))].sort(
       lexicalCompare
     );
-    const source = sourceIds.length === 1 ? nodesById.get(sourceIds[0] ?? "") : void 0;
-    if (sourceIds.length === 1 && sourceIds[0] === test.id && source?.kind === "test") {
+    const source2 = sourceIds.length === 1 ? nodesById.get(sourceIds[0] ?? "") : void 0;
+    if (sourceIds.length === 1 && sourceIds[0] === test.id && source2?.kind === "test") {
       continue;
     }
     contradictoryIds.add(evidence.id);
@@ -9102,7 +13525,7 @@ function validateWaiver(waiver, graph, executionTime) {
   if (!waiver.sourceRefs || waiver.sourceRefs.length === 0) {
     reasons.push("sourceRefs is empty (minimum 1 required)");
   }
-  if (new Date(waiver.expiry) < executionTime) {
+  if (!Number.isFinite(Date.parse(waiver.expiry)) || new Date(waiver.expiry) <= executionTime) {
     reasons.push(`expiry "${waiver.expiry}" is past execution time`);
   }
   if (!waiver.impactScope || waiver.impactScope.trim() === "") {
@@ -9123,6 +13546,116 @@ function validateWaiver(waiver, graph, executionTime) {
   return reasons.length > 0 ? { valid: false, invalidReason: reasons.join("; ") } : { valid: true };
 }
 
+// src/gate/dq/graph-integrity.ts
+function detectGraphIntegrity(input) {
+  const result = [];
+  const issue = (pointer, message, ids) => {
+    result.push({ code: "DQ-03", message, nodeIds: ids, sourceRefs: [inputSource(pointer, message)] });
+  };
+  const unique2 = (values, pointer) => {
+    const seen = /* @__PURE__ */ new Set();
+    for (const value of values) {
+      if (seen.has(value.id)) issue(pointer, `Duplicate ID "${value.id}"`, [value.id]);
+      seen.add(value.id);
+    }
+  };
+  unique2(input.graph.nodes, "/graph/nodes");
+  unique2(input.graph.edges, "/graph/edges");
+  unique2(input.metadata.inputArtifacts, "/metadata/inputArtifacts");
+  const nodes = new Map(input.graph.nodes.map((n) => [n.id, n]));
+  const resolve16 = (ids, kind, pointer) => {
+    for (const id of ids) if (!nodes.has(id) || kind && nodes.get(id)?.kind !== kind) {
+      issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
+    }
+  };
+  for (const edge2 of input.graph.edges) resolve16([edge2.from, edge2.to], void 0, `/graph/edges/${edge2.id}`);
+  const artifacts = new Set(input.metadata.inputArtifacts.map((a) => a.id));
+  for (const node of input.graph.nodes) {
+    const pointer = `/graph/nodes/${node.id}`;
+    for (const id of node.sourceArtifactIds) if (!artifacts.has(id)) issue(pointer, `Unresolved artifact reference "${id}"`, [node.id, id]);
+    if (node.kind === "requirement") resolve16(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
+    if (node.kind === "acceptance_criteria") resolve16(node.requirementIds, "requirement", pointer);
+    if (node.kind === "finding") resolve16(node.changedCodeIds, "changed_code", pointer);
+    if (node.kind === "failure_mode") resolve16(node.riskIds, "risk", pointer);
+    if (node.kind === "test") {
+      resolve16(node.coveredRiskIds ?? [], "risk", pointer);
+      if (node.testType !== "resilience") {
+        resolve16(node.coveredRequirementIds ?? [], "requirement", pointer);
+        resolve16(node.coveredChangedCodeIds ?? [], "changed_code", pointer);
+      }
+    }
+    if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve16([node.testId], "test", pointer);
+  }
+  for (const node of input.graph.nodes) if (node.kind === "test_placement") {
+    const pointer = `/graph/nodes/${node.id}`;
+    resolve16(node.selectedTestIds, "test", pointer);
+    if (!input.placementPlan?.obligations.some((o) => o.id === node.obligationId)) {
+      issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
+    }
+    const planned = input.placementPlan?.placements.find((p) => p.id === node.id);
+    if (planned && (planned.obligationId !== node.obligationId || planned.primaryLayer !== node.primaryLayer || planned.disposition !== node.disposition || [...planned.selectedTestIds].sort().join("\n") !== [...node.selectedTestIds].sort().join("\n"))) {
+      issue(pointer, `Graph and plan disagree for placement "${node.id}"`, [node.id]);
+    }
+  }
+  if (!input.placementPlan) return result;
+  const plan = input.placementPlan;
+  unique2(plan.obligations, "/placementPlan/obligations");
+  unique2(plan.placements, "/placementPlan/placements");
+  const obligations = new Set(plan.obligations.map((o) => o.id));
+  for (const obligation2 of plan.obligations) {
+    const pointer = `/placementPlan/obligations/${obligation2.id}`;
+    resolve16(obligation2.changedCodeIds, "changed_code", pointer);
+    resolve16(obligation2.riskIds, "risk", pointer);
+    resolve16(obligation2.requirementIds, "requirement", pointer);
+    resolve16(obligation2.failureModeIds, "failure_mode", pointer);
+  }
+  for (const placement of plan.placements) {
+    const pointer = `/placementPlan/placements/${placement.id}`;
+    if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
+    resolve16(placement.selectedTestIds, "test", pointer);
+  }
+  return result;
+}
+
+// src/gate/diagnostics.ts
+function sourceDiagnostics(items, graph) {
+  return items.map((item) => {
+    if (item.sourceRefs.length > 0) return item;
+    const ids = "nodeIds" in item ? item.nodeIds : item.riskIds;
+    const sourceRefs = [];
+    for (const id of ids) {
+      const index = graph.nodes.findIndex((n) => n.id === id);
+      sourceRefs.push(inputSource(index >= 0 ? `/graph/nodes/${index}` : "/", `Diagnostic subject ${id}`));
+    }
+    if (sourceRefs.length === 0) sourceRefs.push(inputSource("/", item.message));
+    return { ...item, sourceRefs };
+  });
+}
+
+// src/gate/upstream.ts
+function upstreamDecisions(graph) {
+  const disqualifications = [];
+  const blockers2 = [];
+  const humanReview = [];
+  for (const node of graph.nodes) {
+    if (node.kind !== "gate_verdict") continue;
+    if (node.verdict === "disqualified") disqualifications.push({
+      code: "DQ-11",
+      message: `Upstream decision is disqualified: ${node.title}`,
+      nodeIds: [node.id],
+      sourceRefs: node.traceability.sourceRefs
+    });
+    if (node.verdict === "no_go") blockers2.push({
+      id: `qeg:upstream-${node.id}`,
+      message: `Upstream decision is no_go: ${node.title}`,
+      riskIds: [],
+      sourceRefs: node.traceability.sourceRefs
+    });
+    if (node.verdict === "conditional_go") humanReview.push(node.id);
+  }
+  return { disqualifications, blockers: blockers2, humanReview };
+}
+
 // src/gate/evaluate.ts
 function evaluateGate(input) {
   const executionMs = Date.parse(input.metadata.createdAt);
@@ -9141,11 +13674,13 @@ function evaluateGate(input) {
     preflightDisqualifications: [...input.preflightDisqualifications ?? [], ...clockDqs]
   }, validWaivers);
   const reliability = evaluateReliability(context);
-  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers] };
-  const disqualifications = [...detectAllDQs(enrichedContext), ...reliability.disqualifications];
-  const blockers2 = enrichedContext.blockers;
+  const executions = evaluateRequiredExecutions(context);
+  const upstream = upstreamDecisions(input.graph);
+  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...upstream.blockers] };
+  const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
+  const blockers2 = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
-  const requiredHumanReview = computeRequiredHumanReview(input.graph, validWaivers, residualRisks);
+  const requiredHumanReview = [.../* @__PURE__ */ new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks), ...upstream.humanReview])];
   const verdict = computeVerdict(
     disqualifications,
     blockers2,
@@ -9154,6 +13689,7 @@ function evaluateGate(input) {
     validWaivers
   );
   return {
+    ...input.policy.inputContract ? { evaluationScope: input.policy.inputContract.evaluationScope } : {},
     metadata: input.metadata,
     verdict,
     reasons: buildReasons(
@@ -9173,47 +13709,455 @@ function evaluateGate(input) {
   };
 }
 
+// src/cli/ingest-contract.ts
+var RESERVED_PRODUCERS = /* @__PURE__ */ new Set(["rand", "ctg", "mbb", "hate", "qeg"]);
+var ID_FIELD_NAMES = /* @__PURE__ */ new Set([
+  "id",
+  "runId",
+  "nodeId",
+  "obligationId",
+  "acceptanceId",
+  "taskId",
+  "policyId",
+  "policy_ref",
+  "executedCaseId",
+  "subject_id"
+]);
+var ID_ARRAY_FIELD_NAMES = /* @__PURE__ */ new Set([
+  "nodeIds",
+  "riskIds",
+  "requirementIds",
+  "acceptanceCriteriaIds",
+  "failureModeIds",
+  "changedCodeIds",
+  "sourceArtifactIds",
+  "selectedTestIds",
+  "replacement_ids",
+  "linkedRiskIds",
+  "traceTo",
+  "previous_subject_ids",
+  "current_subject_ids"
+]);
+var DIRECT_POLICY_KEYS = /* @__PURE__ */ new Set(["gate_policy", "gatePolicy"]);
+var PROPOSAL_KEYS = /* @__PURE__ */ new Set([
+  "gate_policy_proposal",
+  "gatePolicyProposal",
+  "policy_proposal",
+  "policyProposal",
+  "policyProposals"
+]);
+function sourceRefFor(path) {
+  return {
+    id: "qeg:source-ingest-contract",
+    path: "docs/spec/node-identity-contract.md",
+    label: path
+  };
+}
+function isObject2(value) {
+  return typeof value === "object" && value !== null && !Array.isArray(value);
+}
+function pathString(path) {
+  return path.join(".");
+}
+function isProposalPath(path) {
+  return path.some((part) => PROPOSAL_KEYS.has(part));
+}
+function isQegOwnedGatePolicy(path, key) {
+  return key === "gatePolicy" && pathString(path) === "gate-input.json.evidencePackage";
+}
+function validateNamespacedId(value, path, warnings) {
+  const colonIndex = value.indexOf(":");
+  if (colonIndex === -1) {
+    warnings.push(`Deprecated prefixless ID at ${path}: "${value}"`);
+    return;
+  }
+  const producer = value.slice(0, colonIndex);
+  const localId = value.slice(colonIndex + 1);
+  if (!RESERVED_PRODUCERS.has(producer)) {
+    throw new CliError(
+      `Unknown ID producer prefix "${producer}" at ${path}; reserved prefixes are rand, ctg, mbb, hate, qeg`
+    );
+  }
+  if (localId.length === 0) {
+    throw new CliError(`Namespaced ID at ${path} must use <producer>:<local-id> with a non-empty local-id`);
+  }
+}
+function inspectIdField(key, value, path, warnings) {
+  const pathLabel = pathString(path);
+  if (ID_FIELD_NAMES.has(key) && typeof value === "string") {
+    validateNamespacedId(value, pathLabel, warnings);
+  }
+  if (ID_ARRAY_FIELD_NAMES.has(key) && Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      if (typeof value[index] === "string") {
+        validateNamespacedId(value[index], `${pathLabel}[${index}]`, warnings);
+      }
+    }
+  }
+}
+function inspectRawValue(value, path, parserFailures, warnings) {
+  if (Array.isArray(value)) {
+    for (let index = 0; index < value.length; index += 1) {
+      inspectRawValue(value[index], [...path, String(index)], parserFailures, warnings);
+    }
+    return;
+  }
+  if (!isObject2(value)) return;
+  for (const [key, child] of Object.entries(value)) {
+    const childPath = [...path, key];
+    inspectIdField(key, child, childPath, warnings);
+    if (DIRECT_POLICY_KEYS.has(key) && !isProposalPath(path) && !isQegOwnedGatePolicy(path, key)) {
+      const location = pathString(childPath);
+      parserFailures.push({
+        path: location,
+        reason: "External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only",
+        sourceRefs: [sourceRefFor(location)]
+      });
+    }
+    inspectRawValue(child, childPath, parserFailures, warnings);
+  }
+}
+function validateIngestContract(rawInput) {
+  const parserFailures = [];
+  const warnings = [];
+  inspectRawValue(rawInput, ["gate-input.json"], parserFailures, warnings);
+  return { parserFailures, warnings };
+}
+
+// src/validation/evidence.ts
+import { createHash as createHash3 } from "crypto";
+import { readFile as readFile4, realpath as realpath2, stat as stat3 } from "fs/promises";
+import { isAbsolute as isAbsolute2, relative as relative2, resolve as resolve3 } from "path";
+var OPTIONAL_ADAPTERS = /* @__PURE__ */ new Set(["junit", "coverage", "sarif", "git-diff"]);
+async function isFile(path) {
+  try {
+    return (await stat3(path)).isFile();
+  } catch {
+    return false;
+  }
+}
+function hash(bytes) {
+  return "sha256:" + createHash3("sha256").update(bytes).digest("hex");
+}
+function severity2(strict, required2) {
+  return strict && required2 ? "fail" : "warn";
+}
+function isOutsideBase(offset) {
+  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute2(offset);
+}
+function isResilienceEvidence2(node) {
+  return Boolean(node) && typeof node === "object" && node.kind === "execution_evidence" && node.evidenceType === "resilience";
+}
+function allArtifacts(input) {
+  const candidates = input.metadata.inputArtifacts.map((artifact) => ({
+    artifact,
+    required: !OPTIONAL_ADAPTERS.has(artifact.adapter)
+  }));
+  if (input.evidencePackage) {
+    candidates.push(...input.evidencePackage.inputArtifactHashes.map((artifact) => ({
+      artifact,
+      required: !OPTIONAL_ADAPTERS.has(artifact.adapter)
+    })));
+    for (const [name, artifact] of Object.entries(input.evidencePackage.qegOutputs)) {
+      if (artifact) candidates.push({ artifact, required: name !== "markdownSummary" });
+    }
+  }
+  for (const evidence of input.graph.nodes.filter(isResilienceEvidence2)) {
+    candidates.push({ artifact: evidence.rawArtifactRef, required: true, requireContainedRelativePath: true });
+    for (const signalRef of evidence.evidenceRefs) {
+      candidates.push({ artifact: signalRef, required: true, requireContainedRelativePath: true });
+    }
+  }
+  return candidates;
+}
+function uniqueArtifacts(input) {
+  const byKey = /* @__PURE__ */ new Map();
+  for (const candidate of allArtifacts(input)) {
+    const artifact = candidate.artifact;
+    const key = [artifact.id, artifact.path, artifact.contentHash ?? "", artifact.revision ?? "", candidate.requireContainedRelativePath ? "contained" : "legacy"].join(String.fromCharCode(0));
+    const previous = byKey.get(key);
+    byKey.set(key, previous ? {
+      artifact,
+      required: previous.required || candidate.required,
+      requireContainedRelativePath: previous.requireContainedRelativePath || candidate.requireContainedRelativePath
+    } : candidate);
+  }
+  return [...byKey.values()];
+}
+async function verifyEvidenceArtifacts(input, options) {
+  const strict = options.strict ?? (input.metadata.profile === "strict" || input.metadata.profile === "ipo_controlled");
+  const baseDir = resolve3(options.baseDir);
+  let realBaseDir = baseDir;
+  try {
+    realBaseDir = await realpath2(baseDir);
+  } catch {
+  }
+  const items = [];
+  for (const { artifact, required: required2, requireContainedRelativePath } of uniqueArtifacts(input)) {
+    const failureSeverity = severity2(strict || Boolean(requireContainedRelativePath), required2);
+    if (!artifact.path) {
+      items.push({ artifactId: artifact.id, severity: failureSeverity, code: "PATH_MISSING", message: "artifact path is missing" });
+      continue;
+    }
+    if (requireContainedRelativePath && isAbsolute2(artifact.path)) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path must be relative to the Gate target directory" });
+      continue;
+    }
+    const path = isAbsolute2(artifact.path) ? artifact.path : resolve3(baseDir, artifact.path);
+    const lexicalRelative = relative2(baseDir, path);
+    if (requireContainedRelativePath && isOutsideBase(lexicalRelative)) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path escapes the Gate target directory" });
+      continue;
+    }
+    if (!await isFile(path)) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "FILE_MISSING", message: "artifact file does not exist: " + artifact.path });
+      continue;
+    }
+    if (requireContainedRelativePath) {
+      const realArtifactPath = await realpath2(path);
+      const actualRelative = relative2(realBaseDir, realArtifactPath);
+      if (isOutsideBase(actualRelative)) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact symlink escapes the Gate target directory" });
+        continue;
+      }
+    }
+    if (!artifact.contentHash) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISSING", message: "artifact contentHash is missing" });
+    } else {
+      const actual = hash(await readFile4(path));
+      items.push(actual === artifact.contentHash ? { artifactId: artifact.id, path: artifact.path, severity: "pass", code: "VERIFIED", message: "artifact path and hash verified" } : { artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISMATCH", message: "artifact hash mismatch: expected " + artifact.contentHash + ", got " + actual });
+    }
+    if (input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "REVISION_MISMATCH", message: "artifact revision " + artifact.revision + " does not match " + input.metadata.headRef });
+    }
+  }
+  const status = items.some((item) => item.severity === "fail") ? "fail" : items.some((item) => item.severity === "warn") ? "warn" : "pass";
+  return { reportVersion: "qeg-evidence-verification-v2", status, items };
+}
+
+// src/cli/fixture-io.ts
+var SchemaGateInputError = class extends Error {
+  constructor(raw, report) {
+    super("gate-input.json failed runtime schema validation");
+    this.raw = raw;
+    this.report = report;
+  }
+  raw;
+  report;
+};
+async function readJsonFile(path) {
+  return JSON.parse(await readFile5(path, "utf-8"));
+}
+function isObject3(value) {
+  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
+}
+function withParserFailures(input, parserFailures) {
+  if (parserFailures.length === 0) return input;
+  return { ...input, graph: { ...input.graph, completeness: { ...input.graph.completeness, parserFailures: [...input.graph.completeness.parserFailures, ...parserFailures] } } };
+}
+function emitDeprecationWarnings(warnings) {
+  for (const warning of warnings.slice(0, 5)) console.warn(`Warning: ${warning}`);
+  if (warnings.length > 5) console.warn(`Warning: ${warnings.length - 5} additional prefixless IDs accepted during deprecation period`);
+}
+async function readExpectedVerdict(fixtureDir) {
+  try {
+    return await readJsonFile(join3(fixtureDir, "expected-gate-verdict.json"));
+  } catch (error) {
+    throw new CliError(`Error reading expected verdict: ${error}`, error instanceof Error ? error : void 0);
+  }
+}
+async function loadFixtureInput(fixtureDir, options = {}) {
+  const inputPath = join3(fixtureDir, "gate-input.json");
+  let raw;
+  try {
+    raw = await readJsonFile(inputPath);
+  } catch (error) {
+    throw new CliError(`gate-input.json not found or invalid
+Input file: ${inputPath}
+Error: ${error}`, error instanceof Error ? error : void 0);
+  }
+  if (!isObject3(raw) || !isObject3(raw.metadata) || !isObject3(raw.graph) || !isObject3(raw.policy)) {
+    throw new CliError(`gate-input.json envelope is invalid
+Input file: ${inputPath}`);
+  }
+  const schema = await validateGateInput(raw);
+  if (!schema.valid || !schema.input) throw new SchemaGateInputError(raw, schema);
+  if (!options.quiet) {
+    for (const warning of schema.warnings) console.warn("Warning: optional artifact " + warning.path + " " + warning.message);
+  }
+  const ingest = validateIngestContract(raw);
+  if (!options.quiet) emitDeprecationWarnings(ingest.warnings);
+  return { input: withParserFailures(schema.input, ingest.parserFailures), schema };
+}
+async function readFixtureInput(fixtureDir, options = {}) {
+  return (await loadFixtureInput(fixtureDir, options)).input;
+}
+function fallbackMetadata(raw) {
+  const source2 = isObject3(raw.metadata) ? raw.metadata : {};
+  return {
+    qegVersion: "0.2",
+    runId: typeof source2.runId === "string" ? source2.runId : "qeg:invalid-input",
+    createdAt: typeof source2.createdAt === "string" ? source2.createdAt : "1970-01-01T00:00:00.000Z",
+    profile: source2.profile === "lean" || source2.profile === "standard" || source2.profile === "strict" || source2.profile === "ipo_controlled" ? source2.profile : "strict",
+    inputArtifacts: []
+  };
+}
+function fallbackPolicy(raw, metadata) {
+  const source2 = isObject3(raw.policy) ? raw.policy : {};
+  return {
+    policyId: typeof source2.policyId === "string" ? source2.policyId : "qeg:invalid-policy",
+    policyHash: typeof source2.policyHash === "string" ? source2.policyHash : "sha256:invalid",
+    profile: metadata.profile,
+    effectiveDate: typeof source2.effectiveDate === "string" ? source2.effectiveDate : "1970-01-01T00:00:00.000Z",
+    approver: typeof source2.approver === "string" ? source2.approver : "qeg-runtime-validator",
+    sourceRefs: [{ id: "qeg:schema-validation", path: "schemas/gate-input.schema.json" }],
+    dqScope: ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17", "DQ-18", "DQ-19", "DQ-20", "DQ-21"],
+    exitCodePolicy: { go: 0, conditional_go: 2, no_go: 2, disqualified: 2 }
+  };
+}
+function schemaInvalidEvaluation(fixtureDir, error) {
+  const metadata = fallbackMetadata(error.raw);
+  const policy = fallbackPolicy(error.raw, metadata);
+  const graph = { metadata, nodes: [], edges: [], completeness: { score: 1, partial: false, parserFailures: [], unsupportedClaims: [] } };
+  const preview = error.report.issues.slice(0, 5).map((issue) => `${issue.path} ${issue.message}`).join("; ");
+  const dq2 = { code: "DQ-01", message: `Gate input schema invalid: ${preview}`, nodeIds: [], sourceRefs: [{ id: "qeg:schema-validation", path: "schemas/gate-input.schema.json" }] };
+  return {
+    fixtureDir,
+    metadata,
+    graph,
+    policy,
+    waivers: [],
+    evidencePackage: void 0,
+    placementPlan: void 0,
+    optionalEvidence: void 0,
+    gateResult: {
+      metadata,
+      verdict: "disqualified",
+      reasons: [dq2.message],
+      disqualifications: [dq2],
+      blockers: [],
+      residualRisks: [],
+      requiredHumanReview: [],
+      testEvidenceAccounting: buildTestEvidenceAccounting(graph),
+      reliability: { enabled: false }
+    },
+    schemaValidation: error.report
+  };
+}
+function evidenceDq(report) {
+  const failures = report.items.filter((item) => item.severity === "fail" && item.code !== "REVISION_MISMATCH");
+  if (failures.length === 0) return [];
+  return [{
+    code: "DQ-06",
+    message: failures.map((item) => `${item.artifactId}: ${item.message}`).join("; "),
+    nodeIds: [...new Set(failures.map((item) => item.artifactId))],
+    sourceRefs: [{ id: "qeg:evidence-verification", path: "src/validation/evidence.ts" }]
+  }];
+}
+async function evaluateFixture(rawFixtureDir, options = {}) {
+  const fixtureDir = resolve4(rawFixtureDir);
+  let input;
+  let schemaValidation;
+  try {
+    const loaded = await loadFixtureInput(fixtureDir, options);
+    input = loaded.input;
+    schemaValidation = loaded.schema;
+  } catch (error) {
+    if (error instanceof SchemaGateInputError) return schemaInvalidEvaluation(fixtureDir, error);
+    throw error;
+  }
+  const waivers = [...input.waivers ?? []];
+  const evidenceVerification = await verifyEvidenceArtifacts(input, { baseDir: fixtureDir });
+  if (!options.quiet) console.error("Using gate-input.json (runtime schema and evidence preflight complete)");
+  return {
+    fixtureDir,
+    metadata: input.metadata,
+    graph: input.graph,
+    policy: input.policy,
+    waivers,
+    evidencePackage: input.evidencePackage,
+    placementPlan: input.placementPlan,
+    optionalEvidence: input.optionalEvidence,
+    gateResult: evaluateGate({
+      metadata: input.metadata,
+      graph: input.graph,
+      policy: input.policy,
+      waivers,
+      evidencePackage: input.evidencePackage,
+      placementPlan: input.placementPlan,
+      evidenceVerification,
+      preflightDisqualifications: evidenceDq(evidenceVerification)
+    }),
+    schemaValidation,
+    evidenceVerification
+  };
+}
+
+// src/cli/pipeline.ts
+async function validateInput(input) {
+  const validation = await validateGateInput(input);
+  if (!validation.valid) throw new CliError(`Generated gate input invalid: ${validation.issues.map((i) => `${i.path} ${i.message}`).join("; ")}`);
+}
+async function runBuildGraphCommand(directory) {
+  const { manifest, loaded } = await loadRawArtifacts(directory);
+  const graph = buildGraph(manifest, loaded);
+  const input = {
+    metadata: graph.metadata,
+    graph,
+    policy: manifest.policy,
+    waivers: manifest.waivers ?? [],
+    ...manifest.evidencePackage ? { evidencePackage: manifest.evidencePackage } : {}
+  };
+  await assertValidOutput(graph, "qeg.bundle.schema.json");
+  await validateInput(input);
+  await publishFiles(directory, /* @__PURE__ */ new Map([["qeg.bundle.json", jsonDocument(graph)], ["gate-input.json", jsonDocument(input)]]));
+  console.log(`Graph: ${graph.nodes.length} nodes, ${graph.edges.length} edges; partial=${graph.completeness.partial}. Test placement and Gate evaluation remain required.`);
+  process.exitCode = graph.completeness.partial ? 2 : 0;
+}
+async function runPlaceTestsCommand(directory) {
+  const input = await readFixtureInput(directory);
+  const placementPlan = placeTests(input.graph, input.policy);
+  const updated = { ...input, placementPlan };
+  await assertValidOutput(placementPlan, "test-placement-plan.schema.json");
+  await validateInput(updated);
+  await publishFiles(directory, /* @__PURE__ */ new Map([["test-placement-plan.json", jsonDocument(placementPlan)], ["gate-input.json", jsonDocument(updated)]]));
+  console.log(`Plan: ${placementPlan.obligations.length} obligations, ${placementPlan.placements.filter((p) => p.disposition === "blocked").length} blocked. This is a plan, not execution evidence.`);
+  process.exitCode = input.graph.completeness.partial || placementPlan.placements.some((p) => p.disposition === "blocked") ? 2 : 0;
+}
+
+// src/version.ts
+var QEG_VERSION = "0.4.0";
+
+// src/cli/commands.ts
+import { exit as exit14 } from "process";
+
 // src/cli/baseline.ts
-import { readFile as readFile6, stat as stat3 } from "fs/promises";
-import { relative as relative4, resolve as resolve5 } from "path";
+import { readFile as readFile8, stat as stat5 } from "fs/promises";
+import { relative as relative5, resolve as resolve8 } from "path";
 import { exit as exit3 } from "process";
 
-// src/cli/errors.ts
-var CliError = class extends Error {
-  constructor(message, cause) {
-    super(message);
-    this.cause = cause;
-    this.name = "CliError";
-  }
-  cause;
-};
-
 // src/cli/report/targets.ts
-import { readdir, stat } from "fs/promises";
-import { join, relative, resolve } from "path";
+import { readdir as readdir2 } from "fs/promises";
+import { join as join4, relative as relative3, resolve as resolve5 } from "path";
 async function safeStat(path) {
-  try {
-    return await stat(path);
-  } catch {
-    return null;
-  }
+  return optionalStat(path);
 }
 function portable(path) {
   return path.split(String.fromCharCode(92)).join("/");
 }
 function relativeTarget(target) {
-  return portable(relative(process.cwd(), target));
+  return portable(relative3(process.cwd(), target));
 }
 async function isFixtureLikeDirectory(path) {
-  const input = await safeStat(join(path, "gate-input.json"));
-  const expected = await safeStat(join(path, "expected-gate-verdict.json"));
+  const input = await safeStat(join4(path, "gate-input.json"));
+  const expected = await safeStat(join4(path, "expected-gate-verdict.json"));
   return Boolean(input?.isFile() || expected?.isFile());
 }
 async function collectChildFixtures(path, children) {
   const fixtures = [];
   for (const child of children) {
     if (!child.isDirectory()) continue;
-    const childPath = join(path, child.name);
+    const childPath = join4(path, child.name);
     if (await isFixtureLikeDirectory(childPath)) {
       fixtures.push(childPath);
     }
@@ -9223,7 +14167,7 @@ async function collectChildFixtures(path, children) {
 async function collectReportTargets(rawTargets) {
   const targets = [];
   for (const rawTarget of rawTargets) {
-    const target = resolve(rawTarget);
+    const target = resolve5(rawTarget);
     const targetStat = await safeStat(target);
     if (!targetStat?.isDirectory()) {
       targets.push(target);
@@ -9233,14 +14177,14 @@ async function collectReportTargets(rawTargets) {
       targets.push(target);
       continue;
     }
-    const childFixtures = await collectChildFixtures(target, await readdir(target, { withFileTypes: true }));
+    const childFixtures = await collectChildFixtures(target, await readdir2(target, { withFileTypes: true }));
     targets.push(...childFixtures.length > 0 ? childFixtures : [target]);
   }
   return [...new Set(targets)];
 }
 
 // src/cli/report/core.ts
-import { join as join5 } from "path";
+import { join as join6 } from "path";
 
 // src/cli/dq-explain.ts
 import { exit } from "process";
@@ -9511,451 +14455,6 @@ async function runExplainCommand(args) {
   exit(0);
 }
 
-// src/cli/fixture-io.ts
-import { readFile as readFile3 } from "fs/promises";
-import { join as join3, resolve as resolve3 } from "path";
-
-// src/cli/ingest-contract.ts
-var RESERVED_PRODUCERS = /* @__PURE__ */ new Set(["rand", "ctg", "mbb", "hate", "qeg"]);
-var ID_FIELD_NAMES = /* @__PURE__ */ new Set([
-  "id",
-  "runId",
-  "nodeId",
-  "obligationId",
-  "acceptanceId",
-  "taskId",
-  "policyId",
-  "policy_ref",
-  "executedCaseId",
-  "subject_id"
-]);
-var ID_ARRAY_FIELD_NAMES = /* @__PURE__ */ new Set([
-  "nodeIds",
-  "riskIds",
-  "requirementIds",
-  "acceptanceCriteriaIds",
-  "failureModeIds",
-  "changedCodeIds",
-  "sourceArtifactIds",
-  "selectedTestIds",
-  "replacement_ids",
-  "linkedRiskIds",
-  "traceTo",
-  "previous_subject_ids",
-  "current_subject_ids"
-]);
-var DIRECT_POLICY_KEYS = /* @__PURE__ */ new Set(["gate_policy", "gatePolicy"]);
-var PROPOSAL_KEYS = /* @__PURE__ */ new Set([
-  "gate_policy_proposal",
-  "gatePolicyProposal",
-  "policy_proposal",
-  "policyProposal",
-  "policyProposals"
-]);
-function sourceRefFor(path) {
-  return {
-    id: "qeg:source-ingest-contract",
-    path: "docs/spec/node-identity-contract.md",
-    label: path
-  };
-}
-function isObject2(value) {
-  return typeof value === "object" && value !== null && !Array.isArray(value);
-}
-function pathString(path) {
-  return path.join(".");
-}
-function isProposalPath(path) {
-  return path.some((part) => PROPOSAL_KEYS.has(part));
-}
-function isQegOwnedGatePolicy(path, key) {
-  return key === "gatePolicy" && pathString(path) === "gate-input.json.evidencePackage";
-}
-function validateNamespacedId(value, path, warnings) {
-  const colonIndex = value.indexOf(":");
-  if (colonIndex === -1) {
-    warnings.push(`Deprecated prefixless ID at ${path}: "${value}"`);
-    return;
-  }
-  const producer = value.slice(0, colonIndex);
-  const localId = value.slice(colonIndex + 1);
-  if (!RESERVED_PRODUCERS.has(producer)) {
-    throw new CliError(
-      `Unknown ID producer prefix "${producer}" at ${path}; reserved prefixes are rand, ctg, mbb, hate, qeg`
-    );
-  }
-  if (localId.length === 0) {
-    throw new CliError(`Namespaced ID at ${path} must use <producer>:<local-id> with a non-empty local-id`);
-  }
-}
-function inspectIdField(key, value, path, warnings) {
-  const pathLabel = pathString(path);
-  if (ID_FIELD_NAMES.has(key) && typeof value === "string") {
-    validateNamespacedId(value, pathLabel, warnings);
-  }
-  if (ID_ARRAY_FIELD_NAMES.has(key) && Array.isArray(value)) {
-    for (let index = 0; index < value.length; index += 1) {
-      if (typeof value[index] === "string") {
-        validateNamespacedId(value[index], `${pathLabel}[${index}]`, warnings);
-      }
-    }
-  }
-}
-function inspectRawValue(value, path, parserFailures, warnings) {
-  if (Array.isArray(value)) {
-    for (let index = 0; index < value.length; index += 1) {
-      inspectRawValue(value[index], [...path, String(index)], parserFailures, warnings);
-    }
-    return;
-  }
-  if (!isObject2(value)) return;
-  for (const [key, child] of Object.entries(value)) {
-    const childPath = [...path, key];
-    inspectIdField(key, child, childPath, warnings);
-    if (DIRECT_POLICY_KEYS.has(key) && !isProposalPath(path) && !isQegOwnedGatePolicy(path, key)) {
-      const location = pathString(childPath);
-      parserFailures.push({
-        path: location,
-        reason: "External artifact carried gate_policy directly; QEG is the sole Gate policy source of truth and external policy must be explicit proposal-only",
-        sourceRefs: [sourceRefFor(location)]
-      });
-    }
-    inspectRawValue(child, childPath, parserFailures, warnings);
-  }
-}
-function validateIngestContract(rawInput) {
-  const parserFailures = [];
-  const warnings = [];
-  inspectRawValue(rawInput, ["gate-input.json"], parserFailures, warnings);
-  return { parserFailures, warnings };
-}
-
-// src/validation/schema.ts
-var import__ = __toESM(require__(), 1);
-import { readdir as readdir2, readFile } from "fs/promises";
-import { basename, join as join2 } from "path";
-import { fileURLToPath } from "url";
-var DEFAULT_SCHEMA_DIR = fileURLToPath(new URL("../../schemas/", import.meta.url));
-var defaultRegistry;
-function issueScope(path) {
-  const segment = path.split("/").filter(Boolean)[0];
-  if (segment === "metadata" || segment === "graph" || segment === "policy" || segment === "evidencePackage" || segment === "placementPlan" || segment === "optionalEvidence") return segment;
-  if (segment === "waivers") return "waiver";
-  return "envelope";
-}
-function formatSchemaErrors(errors) {
-  return (errors ?? []).map((error) => ({
-    path: error.instancePath || "/",
-    keyword: error.keyword,
-    message: error.message ?? "schema validation failed",
-    scope: issueScope(error.instancePath || "/")
-  }));
-}
-async function schemaFiles(schemaDir) {
-  return (await readdir2(schemaDir)).filter((file) => file.endsWith(".schema.json")).sort().map((file) => join2(schemaDir, file));
-}
-async function loadSchemaRegistry(schemaDir = DEFAULT_SCHEMA_DIR) {
-  if (schemaDir === DEFAULT_SCHEMA_DIR && defaultRegistry) return defaultRegistry;
-  const load = (async () => {
-    const ajv = new import__.Ajv2020({ allErrors: true, strict: false, validateFormats: false });
-    const schemas = /* @__PURE__ */ new Map();
-    for (const file of await schemaFiles(schemaDir)) {
-      const schema = JSON.parse(await readFile(file, "utf-8"));
-      schemas.set(basename(file), schema);
-      ajv.addSchema(schema);
-    }
-    const validators = /* @__PURE__ */ new Map();
-    for (const [name, schema] of schemas) {
-      const id = typeof schema === "object" && schema !== null && "$id" in schema ? String(schema.$id) : name;
-      validators.set(name, ajv.getSchema(id) ?? ajv.compile(schema));
-    }
-    return { ajv, validators, schemaDir };
-  })();
-  if (schemaDir === DEFAULT_SCHEMA_DIR) defaultRegistry = load;
-  return load;
-}
-async function validateGateInput(raw) {
-  const { validators } = await loadSchemaRegistry();
-  const validator = validators.get("gate-input.schema.json");
-  if (!validator) {
-    return { reportVersion: "qeg-gate-input-validation-v2", valid: false, issues: [{ path: "/", keyword: "schema", message: "gate-input.schema.json is unavailable", scope: "envelope" }], warnings: [] };
-  }
-  validator(raw);
-  const semanticIssues = validateReliabilitySemantics(raw).map((issue) => ({
-    path: issue.path,
-    keyword: issue.ruleId,
-    message: issue.message,
-    scope: issueScope(issue.path)
-  }));
-  const allIssues = [...formatSchemaErrors(validator.errors), ...semanticIssues];
-  const warnings = allIssues.filter((issue) => issue.scope === "optionalEvidence");
-  const issues = allIssues.filter((issue) => issue.scope !== "optionalEvidence");
-  const valid = issues.length === 0;
-  let input;
-  if (valid && raw && typeof raw === "object" && !Array.isArray(raw)) {
-    const sanitized = { ...raw };
-    if (warnings.length > 0) delete sanitized.optionalEvidence;
-    input = sanitized;
-  }
-  return { reportVersion: "qeg-gate-input-validation-v2", valid, issues, warnings, ...input ? { input } : {} };
-}
-
-// src/validation/evidence.ts
-import { createHash as createHash2 } from "crypto";
-import { readFile as readFile2, realpath, stat as stat2 } from "fs/promises";
-import { isAbsolute, relative as relative2, resolve as resolve2 } from "path";
-var OPTIONAL_ADAPTERS = /* @__PURE__ */ new Set(["junit", "coverage", "sarif", "git-diff"]);
-async function isFile(path) {
-  try {
-    return (await stat2(path)).isFile();
-  } catch {
-    return false;
-  }
-}
-function hash(bytes) {
-  return "sha256:" + createHash2("sha256").update(bytes).digest("hex");
-}
-function severity(strict, required) {
-  return strict && required ? "fail" : "warn";
-}
-function isOutsideBase(offset) {
-  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute(offset);
-}
-function isResilienceEvidence2(node) {
-  return Boolean(node) && typeof node === "object" && node.kind === "execution_evidence" && node.evidenceType === "resilience";
-}
-function allArtifacts(input) {
-  const candidates = input.metadata.inputArtifacts.map((artifact) => ({
-    artifact,
-    required: !OPTIONAL_ADAPTERS.has(artifact.adapter)
-  }));
-  if (input.evidencePackage) {
-    candidates.push(...input.evidencePackage.inputArtifactHashes.map((artifact) => ({
-      artifact,
-      required: !OPTIONAL_ADAPTERS.has(artifact.adapter)
-    })));
-    for (const [name, artifact] of Object.entries(input.evidencePackage.qegOutputs)) {
-      if (artifact) candidates.push({ artifact, required: name !== "markdownSummary" });
-    }
-  }
-  for (const evidence of input.graph.nodes.filter(isResilienceEvidence2)) {
-    candidates.push({ artifact: evidence.rawArtifactRef, required: true, requireContainedRelativePath: true });
-    for (const signalRef of evidence.evidenceRefs) {
-      candidates.push({ artifact: signalRef, required: true, requireContainedRelativePath: true });
-    }
-  }
-  return candidates;
-}
-function uniqueArtifacts(input) {
-  const byKey = /* @__PURE__ */ new Map();
-  for (const candidate of allArtifacts(input)) {
-    const artifact = candidate.artifact;
-    const key = [artifact.id, artifact.path, artifact.contentHash ?? "", artifact.revision ?? "", candidate.requireContainedRelativePath ? "contained" : "legacy"].join(String.fromCharCode(0));
-    const previous = byKey.get(key);
-    byKey.set(key, previous ? {
-      artifact,
-      required: previous.required || candidate.required,
-      requireContainedRelativePath: previous.requireContainedRelativePath || candidate.requireContainedRelativePath
-    } : candidate);
-  }
-  return [...byKey.values()];
-}
-async function verifyEvidenceArtifacts(input, options) {
-  const strict = options.strict ?? (input.metadata.profile === "strict" || input.metadata.profile === "ipo_controlled");
-  const baseDir = resolve2(options.baseDir);
-  let realBaseDir = baseDir;
-  try {
-    realBaseDir = await realpath(baseDir);
-  } catch {
-  }
-  const items = [];
-  for (const { artifact, required, requireContainedRelativePath } of uniqueArtifacts(input)) {
-    const failureSeverity = severity(strict || Boolean(requireContainedRelativePath), required);
-    if (!artifact.path) {
-      items.push({ artifactId: artifact.id, severity: failureSeverity, code: "PATH_MISSING", message: "artifact path is missing" });
-      continue;
-    }
-    if (requireContainedRelativePath && isAbsolute(artifact.path)) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path must be relative to the Gate target directory" });
-      continue;
-    }
-    const path = isAbsolute(artifact.path) ? artifact.path : resolve2(baseDir, artifact.path);
-    const lexicalRelative = relative2(baseDir, path);
-    if (requireContainedRelativePath && isOutsideBase(lexicalRelative)) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path escapes the Gate target directory" });
-      continue;
-    }
-    if (!await isFile(path)) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "FILE_MISSING", message: "artifact file does not exist: " + artifact.path });
-      continue;
-    }
-    if (requireContainedRelativePath) {
-      const realArtifactPath = await realpath(path);
-      const actualRelative = relative2(realBaseDir, realArtifactPath);
-      if (isOutsideBase(actualRelative)) {
-        items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact symlink escapes the Gate target directory" });
-        continue;
-      }
-    }
-    if (!artifact.contentHash) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISSING", message: "artifact contentHash is missing" });
-    } else {
-      const actual = hash(await readFile2(path));
-      items.push(actual === artifact.contentHash ? { artifactId: artifact.id, path: artifact.path, severity: "pass", code: "VERIFIED", message: "artifact path and hash verified" } : { artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISMATCH", message: "artifact hash mismatch: expected " + artifact.contentHash + ", got " + actual });
-    }
-    if (input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "REVISION_MISMATCH", message: "artifact revision " + artifact.revision + " does not match " + input.metadata.headRef });
-    }
-  }
-  const status = items.some((item) => item.severity === "fail") ? "fail" : items.some((item) => item.severity === "warn") ? "warn" : "pass";
-  return { reportVersion: "qeg-evidence-verification-v2", status, items };
-}
-
-// src/cli/fixture-io.ts
-var SchemaGateInputError = class extends Error {
-  constructor(raw, report) {
-    super("gate-input.json failed runtime schema validation");
-    this.raw = raw;
-    this.report = report;
-  }
-  raw;
-  report;
-};
-async function readJsonFile(path) {
-  return JSON.parse(await readFile3(path, "utf-8"));
-}
-function isObject3(value) {
-  return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-function withParserFailures(input, parserFailures) {
-  if (parserFailures.length === 0) return input;
-  return { ...input, graph: { ...input.graph, completeness: { ...input.graph.completeness, parserFailures: [...input.graph.completeness.parserFailures, ...parserFailures] } } };
-}
-function emitDeprecationWarnings(warnings) {
-  for (const warning of warnings.slice(0, 5)) console.warn(`Warning: ${warning}`);
-  if (warnings.length > 5) console.warn(`Warning: ${warnings.length - 5} additional prefixless IDs accepted during deprecation period`);
-}
-async function readExpectedVerdict(fixtureDir) {
-  try {
-    return await readJsonFile(join3(fixtureDir, "expected-gate-verdict.json"));
-  } catch (error) {
-    throw new CliError(`Error reading expected verdict: ${error}`, error instanceof Error ? error : void 0);
-  }
-}
-async function loadFixtureInput(fixtureDir, options = {}) {
-  const inputPath = join3(fixtureDir, "gate-input.json");
-  let raw;
-  try {
-    raw = await readJsonFile(inputPath);
-  } catch (error) {
-    throw new CliError(`gate-input.json not found or invalid
-Input file: ${inputPath}
-Error: ${error}`, error instanceof Error ? error : void 0);
-  }
-  if (!isObject3(raw) || !isObject3(raw.metadata) || !isObject3(raw.graph) || !isObject3(raw.policy)) {
-    throw new CliError(`gate-input.json envelope is invalid
-Input file: ${inputPath}`);
-  }
-  const schema = await validateGateInput(raw);
-  if (!schema.valid || !schema.input) throw new SchemaGateInputError(raw, schema);
-  if (!options.quiet) {
-    for (const warning of schema.warnings) console.warn("Warning: optional artifact " + warning.path + " " + warning.message);
-  }
-  const ingest = validateIngestContract(raw);
-  if (!options.quiet) emitDeprecationWarnings(ingest.warnings);
-  return { input: withParserFailures(schema.input, ingest.parserFailures), schema };
-}
-function fallbackMetadata(raw) {
-  const source = isObject3(raw.metadata) ? raw.metadata : {};
-  return {
-    qegVersion: "0.2",
-    runId: typeof source.runId === "string" ? source.runId : "qeg:invalid-input",
-    createdAt: typeof source.createdAt === "string" ? source.createdAt : "1970-01-01T00:00:00.000Z",
-    profile: source.profile === "lean" || source.profile === "standard" || source.profile === "strict" || source.profile === "ipo_controlled" ? source.profile : "strict",
-    inputArtifacts: []
-  };
-}
-function fallbackPolicy(raw, metadata) {
-  const source = isObject3(raw.policy) ? raw.policy : {};
-  return {
-    policyId: typeof source.policyId === "string" ? source.policyId : "qeg:invalid-policy",
-    policyHash: typeof source.policyHash === "string" ? source.policyHash : "sha256:invalid",
-    profile: metadata.profile,
-    effectiveDate: typeof source.effectiveDate === "string" ? source.effectiveDate : "1970-01-01T00:00:00.000Z",
-    approver: typeof source.approver === "string" ? source.approver : "qeg-runtime-validator",
-    sourceRefs: [{ id: "qeg:schema-validation", path: "schemas/gate-input.schema.json" }],
-    dqScope: ["DQ-01", "DQ-02", "DQ-03", "DQ-04", "DQ-05", "DQ-06", "DQ-07", "DQ-08", "DQ-09", "DQ-10", "DQ-11", "DQ-12", "DQ-13", "DQ-14", "DQ-15", "DQ-16", "DQ-17", "DQ-18", "DQ-19", "DQ-20", "DQ-21"],
-    exitCodePolicy: { go: 0, conditional_go: 2, no_go: 2, disqualified: 2 }
-  };
-}
-function schemaInvalidEvaluation(fixtureDir, error) {
-  const metadata = fallbackMetadata(error.raw);
-  const policy = fallbackPolicy(error.raw, metadata);
-  const graph = { metadata, nodes: [], edges: [], completeness: { score: 1, partial: false, parserFailures: [], unsupportedClaims: [] } };
-  const preview = error.report.issues.slice(0, 5).map((issue) => `${issue.path} ${issue.message}`).join("; ");
-  const dq2 = { code: "DQ-01", message: `Gate input schema invalid: ${preview}`, nodeIds: [], sourceRefs: [{ id: "qeg:schema-validation", path: "schemas/gate-input.schema.json" }] };
-  return {
-    fixtureDir,
-    metadata,
-    graph,
-    policy,
-    waivers: [],
-    evidencePackage: void 0,
-    placementPlan: void 0,
-    optionalEvidence: void 0,
-    gateResult: evaluateGate({ metadata, graph, policy, waivers: [], preflightDisqualifications: [dq2] }),
-    schemaValidation: error.report
-  };
-}
-function evidenceDq(report) {
-  const failures = report.items.filter((item) => item.severity === "fail" && item.code !== "REVISION_MISMATCH");
-  if (failures.length === 0) return [];
-  return [{
-    code: "DQ-06",
-    message: failures.map((item) => `${item.artifactId}: ${item.message}`).join("; "),
-    nodeIds: [...new Set(failures.map((item) => item.artifactId))],
-    sourceRefs: [{ id: "qeg:evidence-verification", path: "src/validation/evidence.ts" }]
-  }];
-}
-async function evaluateFixture(rawFixtureDir, options = {}) {
-  const fixtureDir = resolve3(rawFixtureDir);
-  let input;
-  let schemaValidation;
-  try {
-    const loaded = await loadFixtureInput(fixtureDir, options);
-    input = loaded.input;
-    schemaValidation = loaded.schema;
-  } catch (error) {
-    if (error instanceof SchemaGateInputError) return schemaInvalidEvaluation(fixtureDir, error);
-    throw error;
-  }
-  const waivers = [...input.waivers ?? []];
-  const evidenceVerification = await verifyEvidenceArtifacts(input, { baseDir: fixtureDir });
-  if (!options.quiet) console.error("Using gate-input.json (runtime schema and evidence preflight complete)");
-  return {
-    fixtureDir,
-    metadata: input.metadata,
-    graph: input.graph,
-    policy: input.policy,
-    waivers,
-    evidencePackage: input.evidencePackage,
-    placementPlan: input.placementPlan,
-    optionalEvidence: input.optionalEvidence,
-    gateResult: evaluateGate({
-      metadata: input.metadata,
-      graph: input.graph,
-      policy: input.policy,
-      waivers,
-      evidencePackage: input.evidencePackage,
-      placementPlan: input.placementPlan,
-      evidenceVerification,
-      preflightDisqualifications: evidenceDq(evidenceVerification)
-    }),
-    schemaValidation,
-    evidenceVerification
-  };
-}
-
 // src/cli/validation.ts
 function sortedDqCodes(disqualifications) {
   return disqualifications.map((disqualification) => disqualification.code).filter((code) => code !== void 0).sort();
@@ -10052,15 +14551,15 @@ function validateEvaluatedFixture(expected, evaluated) {
 
 // src/cli/report/change-selection.ts
 import { execFile } from "child_process";
-import { readFile as readFile4 } from "fs/promises";
-import { join as join4, relative as relative3 } from "path";
+import { readFile as readFile6 } from "fs/promises";
+import { join as join5, relative as relative4 } from "path";
 import { promisify } from "util";
 var execFileAsync = promisify(execFile);
 function portable2(path) {
   return path.split(String.fromCharCode(92)).join("/");
 }
 function relativeTarget2(target) {
-  return portable2(relative3(process.cwd(), target));
+  return portable2(relative4(process.cwd(), target));
 }
 async function changedFiles() {
   if (process.env.QEG_CHANGED_FILES !== void 0) {
@@ -10099,7 +14598,7 @@ async function targetMentionsChangedFile(target, files) {
   const relTarget = relativeTarget2(target);
   if (files.some((file) => file === relTarget || file.startsWith(relTarget + "/"))) return true;
   try {
-    const input = JSON.parse(await readFile4(join4(target, "gate-input.json"), "utf-8"));
+    const input = JSON.parse(await readFile6(join5(target, "gate-input.json"), "utf-8"));
     const artifacts = (input.metadata?.inputArtifacts ?? []).map((artifact) => artifact.path).filter((path) => Boolean(path)).map(portable2);
     const changedCode = (input.graph?.nodes ?? []).filter((node) => node.kind === "changed_code" && node.path).map((node) => portable2(node.path));
     return [...artifacts, ...changedCode].some((path) => files.includes(path));
@@ -10126,9 +14625,9 @@ async function selectChangedTargets(targets, changedOnly = false) {
 }
 
 // src/cli/report/baseline-diff.ts
-import { readFile as readFile5 } from "fs/promises";
+import { readFile as readFile7 } from "fs/promises";
 async function readJsonFile2(path) {
-  return JSON.parse(await readFile5(path, "utf-8"));
+  return JSON.parse(await readFile7(path, "utf-8"));
 }
 async function readBaseline(path) {
   if (!path) return void 0;
@@ -10212,7 +14711,7 @@ function applyBaseline(target, baseline) {
 
 // src/cli/report/core.ts
 async function readExpectedIfPresent(target) {
-  const expectedPath = join5(target, "expected-gate-verdict.json");
+  const expectedPath = join6(target, "expected-gate-verdict.json");
   if (!(await safeStat(expectedPath))?.isFile()) {
     return void 0;
   }
@@ -10263,6 +14762,7 @@ async function evaluateReportTarget(target) {
 function gateTargetResult(evaluated, status, exitCode, expected) {
   const { gateResult } = evaluated;
   return {
+    ...gateResult.evaluationScope ? { evaluationScope: gateResult.evaluationScope } : {},
     target: evaluated.fixtureDir,
     status,
     exitCode,
@@ -10323,7 +14823,7 @@ async function createCiReport(rawTargets, options = {}) {
   return diff2 ? { ...report, diff: diff2 } : report;
 }
 
-// src/cli/report/formatter.ts
+// src/cli/report/format/shared.ts
 function sourceRefLabel(sourceRef) {
   const parts = [sourceRef.id, sourceRef.path];
   if (sourceRef.label) {
@@ -10418,68 +14918,8 @@ function appendReliabilityTarget(lines, target) {
     ].join(" "));
   }
 }
-function formatCiReportText(report) {
-  const { summary } = report;
-  const failingTargets = report.targets.filter(isFailureTarget);
-  const baselineTargets = report.targets.filter((target) => target.status === "baseline_accepted");
-  const lines = [
-    "Quality Evidence Graph CI Report",
-    `Generated at: ${report.generatedAt}`,
-    `Overall: ${failingTargets.length === 0 ? "PASS" : "FAIL"}`,
-    "",
-    "Summary",
-    `- targets: ${summary.totalTargets}`,
-    `- passed: ${summary.passed}`,
-    `- baseline accepted: ${summary.baselineAccepted}`,
-    `- gate failed: ${summary.gateFailed}`,
-    `- cli errors: ${summary.cliErrors}`,
-    `- blockers: ${summary.blockerCount}`,
-    `- residual risks: ${summary.residualRiskCount}`,
-    `- required human review: ${summary.humanReviewCount}`
-  ];
-  const reliabilityTargets = report.targets;
-  if (reliabilityTargets.length > 0) {
-    lines.push("", "Reliability");
-    for (const target of reliabilityTargets) appendReliabilityTarget(lines, target);
-  }
-  if (summary.dqCounts.length > 0) {
-    lines.push("", "Disqualification summary");
-    for (const item of summary.dqCounts) {
-      lines.push(`- ${item.code}: ${item.count}`);
-      lines.push(`  remediation: ${item.remediation}`);
-    }
-  }
-  if (report.diff) {
-    lines.push(
-      "",
-      "Diff summary",
-      `- previous report: ${report.diff.previousReport}`,
-      `- new DQs: ${report.diff.new.length}`,
-      `- resolved DQs: ${report.diff.resolved.length}`,
-      `- unchanged DQs: ${report.diff.unchanged.length}`
-    );
-    for (const item of report.diff.new) {
-      lines.push(`  new ${item.code}: ${item.target} - ${item.message}`);
-    }
-    for (const item of report.diff.resolved) {
-      lines.push(`  resolved ${item.code}: ${item.target} - ${item.message}`);
-    }
-  }
-  if (failingTargets.length > 0) {
-    lines.push("", "Target details");
-    for (const target of failingTargets) {
-      appendGateFailure(lines, target);
-    }
-  }
-  if (baselineTargets.length > 0) {
-    lines.push("", "Baseline accepted targets");
-    for (const target of baselineTargets) {
-      appendGateFailure(lines, target);
-    }
-  }
-  return `${lines.join("\n")}
-`;
-}
+
+// src/cli/report/format/github.ts
 function formatGithubSummary(report) {
   const { summary } = report;
   const lines = [
@@ -10496,6 +14936,10 @@ function formatGithubSummary(report) {
     ""
   ];
   const reliabilityTargets = report.targets;
+  for (const target of report.targets) if (target.evaluationScope) {
+    const scope = target.evaluationScope;
+    lines.push(`- scope: ${scope.kind} / ${scope.target}`, `- not evaluated: ${scope.notEvaluated.join(", ") || "none declared"}`, "");
+  }
   if (reliabilityTargets.length > 0) {
     lines.push("### Reliability", "");
     for (const target of reliabilityTargets) appendReliabilityTarget(lines, target);
@@ -10552,10 +14996,95 @@ function formatGithubSummary(report) {
 `;
 }
 
+// src/cli/report/format/text.ts
+function formatCiReportText(report) {
+  const { summary } = report;
+  const failingTargets = report.targets.filter(isFailureTarget);
+  const baselineTargets = report.targets.filter((target) => target.status === "baseline_accepted");
+  const lines = [
+    "Quality Evidence Graph CI Report",
+    `Generated at: ${report.generatedAt}`,
+    `Overall: ${failingTargets.length === 0 ? "PASS" : "FAIL"}`,
+    "",
+    "Summary",
+    `- targets: ${summary.totalTargets}`,
+    `- passed: ${summary.passed}`,
+    `- baseline accepted: ${summary.baselineAccepted}`,
+    `- gate failed: ${summary.gateFailed}`,
+    `- cli errors: ${summary.cliErrors}`,
+    `- blockers: ${summary.blockerCount}`,
+    `- residual risks: ${summary.residualRiskCount}`,
+    `- required human review: ${summary.humanReviewCount}`
+  ];
+  const reliabilityTargets = report.targets;
+  for (const target of report.targets) if (target.evaluationScope) {
+    const scope = target.evaluationScope;
+    lines.push(`Scope: ${scope.kind} / ${scope.target}`, `Not evaluated: ${scope.notEvaluated.join(", ") || "none declared"}`);
+  }
+  if (reliabilityTargets.length > 0) {
+    lines.push("", "Reliability");
+    for (const target of reliabilityTargets) appendReliabilityTarget(lines, target);
+  }
+  if (summary.dqCounts.length > 0) {
+    lines.push("", "Disqualification summary");
+    for (const item of summary.dqCounts) {
+      lines.push(`- ${item.code}: ${item.count}`);
+      lines.push(`  remediation: ${item.remediation}`);
+    }
+  }
+  if (report.diff) {
+    lines.push(
+      "",
+      "Diff summary",
+      `- previous report: ${report.diff.previousReport}`,
+      `- new DQs: ${report.diff.new.length}`,
+      `- resolved DQs: ${report.diff.resolved.length}`,
+      `- unchanged DQs: ${report.diff.unchanged.length}`
+    );
+    for (const item of report.diff.new) {
+      lines.push(`  new ${item.code}: ${item.target} - ${item.message}`);
+    }
+    for (const item of report.diff.resolved) {
+      lines.push(`  resolved ${item.code}: ${item.target} - ${item.message}`);
+    }
+  }
+  if (failingTargets.length > 0) {
+    lines.push("", "Target details");
+    for (const target of failingTargets) {
+      appendGateFailure(lines, target);
+    }
+  }
+  if (baselineTargets.length > 0) {
+    lines.push("", "Baseline accepted targets");
+    for (const target of baselineTargets) {
+      appendGateFailure(lines, target);
+    }
+  }
+  return `${lines.join("\n")}
+`;
+}
+
 // src/cli/report/command.ts
-import { appendFile, mkdir, writeFile } from "fs/promises";
-import { dirname, resolve as resolve4 } from "path";
+import { appendFile, mkdir as mkdir2, writeFile as writeFile2 } from "fs/promises";
+import { dirname, resolve as resolve7 } from "path";
 import { exit as exit2 } from "process";
+
+// src/cli/report/environment.ts
+import { lstat as lstat2 } from "fs/promises";
+import { isAbsolute as isAbsolute3, resolve as resolve6 } from "path";
+async function githubSummaryPath(environment) {
+  const value = environment.GITHUB_STEP_SUMMARY;
+  if (!value || !value.trim() || value.includes("\0") || !isAbsolute3(value)) throw new CliError("--github-summary requires an absolute GITHUB_STEP_SUMMARY file path");
+  const path = resolve6(value);
+  try {
+    if (!(await lstat2(path)).isFile()) throw new Error("not a regular file");
+  } catch (error) {
+    throw new CliError(`Inspect GITHUB_STEP_SUMMARY ${path}: ${String(error)}`);
+  }
+  return path;
+}
+
+// src/cli/report/command.ts
 function parseReportArgs(args) {
   const targets = [];
   let format = "text";
@@ -10641,15 +15170,12 @@ async function runReportCommand(args) {
   });
   const output = formatReport(report, options.format);
   if (options.outPath) {
-    const outputPath = resolve4(options.outPath);
-    await mkdir(dirname(outputPath), { recursive: true });
-    await writeFile(outputPath, output, "utf-8");
+    const outputPath = resolve7(options.outPath);
+    await mkdir2(dirname(outputPath), { recursive: true });
+    await writeFile2(outputPath, output, "utf-8");
   }
   if (options.githubSummary) {
-    const summaryPath = process.env.GITHUB_STEP_SUMMARY;
-    if (!summaryPath) {
-      throw new CliError("--github-summary requires GITHUB_STEP_SUMMARY to be set");
-    }
+    const summaryPath = await githubSummaryPath(process.env);
     await appendFile(summaryPath, formatGithubSummary(report), "utf-8");
   }
   console.log(output.trimEnd());
@@ -10659,13 +15185,13 @@ async function runReportCommand(args) {
 // src/cli/baseline.ts
 async function exists(path) {
   try {
-    return (await stat3(path)).isDirectory() || (await stat3(path)).isFile();
+    return (await stat5(path)).isDirectory() || (await stat5(path)).isFile();
   } catch {
     return false;
   }
 }
 async function readJson(path) {
-  return JSON.parse(await readFile6(path, "utf-8"));
+  return JSON.parse(await readFile8(path, "utf-8"));
 }
 function portable3(path) {
   return path.replace(/\\/g, "/");
@@ -10675,7 +15201,7 @@ function entryLabel(entry) {
 }
 function targetMatches(entry, target) {
   if (!entry.target) return true;
-  const rel = portable3(relative4(process.cwd(), target));
+  const rel = portable3(relative5(process.cwd(), target));
   const entryTarget = portable3(entry.target);
   return rel === entryTarget || rel.endsWith(entryTarget);
 }
@@ -10720,7 +15246,7 @@ async function createBaselineAuditReport(baselinePath, rawTargets) {
     } else if (Date.parse(entry.expiresAt) < now) {
       items.push({ severity: "fail", entry, message: "baseline entry is expired" });
     }
-    if (entry.target && !await exists(resolve5(entry.target))) {
+    if (entry.target && !await exists(resolve8(entry.target))) {
       items.push({ severity: "fail", entry, message: "baseline target does not exist" });
     }
     if (targets.length > 0 && !await baselineEntryStillApplies(entry, targets)) {
@@ -10770,16 +15296,40 @@ async function runBaselineCommand(args) {
 import { exit as exit10 } from "process";
 
 // src/cli/doctor.ts
-import { readFile as readFile8, stat as stat4 } from "fs/promises";
-import { join as join8, resolve as resolve6 } from "path";
+import { readFile as readFile11, stat as stat6 } from "fs/promises";
+import { join as join10, resolve as resolve9 } from "path";
 import { exit as exit5 } from "process";
 
 // src/cli/schema-check.ts
-import { readFile as readFile7 } from "fs/promises";
-import { join as join7 } from "path";
+import { readFile as readFile10 } from "fs/promises";
+import { join as join9 } from "path";
 import { exit as exit4 } from "process";
+
+// src/cli/output-integrity.ts
+import { readFile as readFile9 } from "fs/promises";
+import { join as join8 } from "path";
+async function verifyOutputManifest(directory) {
+  const content = await optionalText(join8(directory, "output-manifest.json"));
+  if (content === void 0) return void 0;
+  const raw = JSON.parse(content);
+  const schema = await validateOutput(raw, "output-manifest.schema.json");
+  if (!schema.valid) return schema.issues.map((i) => `${i.path} ${i.message}`);
+  const files = raw.files;
+  const errors = [];
+  if (new Set(files.map((f) => f.path)).size !== files.length) errors.push("Duplicate output manifest path");
+  for (const file of files) {
+    try {
+      if (contentHash(await readFile9(join8(directory, file.path))) !== file.contentHash) errors.push(`Hash mismatch: ${file.path}`);
+    } catch (error) {
+      errors.push(`Read output ${join8(directory, file.path)}: ${String(error)}`);
+    }
+  }
+  return errors;
+}
+
+// src/cli/schema-check.ts
 async function readJson2(path) {
-  return JSON.parse(await readFile7(path, "utf-8"));
+  return JSON.parse(await readFile10(path, "utf-8"));
 }
 async function createSchemaCheckReport(rawTargets = []) {
   const registry = await loadSchemaRegistry();
@@ -10792,7 +15342,28 @@ async function createSchemaCheckReport(rawTargets = []) {
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   for (const target of targets) {
     try {
-      const report = await validateGateInput(await readJson2(join7(target, "gate-input.json")));
+      const errors = await verifyOutputManifest(target);
+      if (errors) items.push({ name: `${target}:output-hashes`, status: errors.length ? "fail" : "pass", message: errors.length ? "Output hash verification failed" : "All output hashes verified", errors });
+    } catch (error) {
+      items.push({ name: `${target}:output-hashes`, status: "fail", message: String(error), errors: [] });
+    }
+    for (const [filename, schema] of Object.entries(OUTPUT_SCHEMAS)) {
+      try {
+        const content = await optionalText(join9(target, filename));
+        if (content === void 0) continue;
+        const output = await validateOutput(JSON.parse(content), schema);
+        items.push({
+          name: `${target}:${filename}`,
+          status: output.valid ? "pass" : "fail",
+          message: output.valid ? "valid output" : "output schema validation failed",
+          errors: output.issues.map((i) => `${i.path} ${i.message}`)
+        });
+      } catch (error) {
+        items.push({ name: `${target}:${filename}`, status: "fail", message: String(error), errors: [] });
+      }
+    }
+    try {
+      const report = await validateGateInput(await readJson2(join9(target, "gate-input.json")));
       items.push({
         name: `${target}:gate-input`,
         status: report.valid ? "pass" : "fail",
@@ -10836,13 +15407,13 @@ async function runSchemaCheckCommand(args) {
 // src/cli/doctor.ts
 async function exists2(path) {
   try {
-    return (await stat4(path)).isFile() || (await stat4(path)).isDirectory();
+    return (await stat6(path)).isFile() || (await stat6(path)).isDirectory();
   } catch {
     return false;
   }
 }
 async function readJson3(path) {
-  return JSON.parse(await readFile8(path, "utf-8"));
+  return JSON.parse(await readFile11(path, "utf-8"));
 }
 function nodeMajor(version = process.versions.node) {
   return Number(version.split(".")[0]);
@@ -10908,7 +15479,7 @@ async function checkWorkflow() {
       remediation: "Use qeg init or qeg-report-action to add a workflow that uploads qeg-ci-report."
     }];
   }
-  const content = await readFile8(path, "utf-8");
+  const content = await readFile11(path, "utf-8");
   const usesQegAction = content.includes("qeg-report-action");
   const uploadsReportArtifact = usesQegAction || content.includes("actions/upload-artifact") && content.includes("qeg-ci-report");
   const writesSummary = usesQegAction || content.includes("GITHUB_STEP_SUMMARY") || content.includes("--github-summary") || content.includes("github-summary");
@@ -10928,8 +15499,8 @@ async function checkWorkflow() {
   ];
 }
 async function checkTarget(rawTarget) {
-  const target = resolve6(rawTarget);
-  const inputPath = join8(target, "gate-input.json");
+  const target = resolve9(rawTarget);
+  const inputPath = join10(target, "gate-input.json");
   if (!await exists2(inputPath)) {
     return [{
       name: `target:${rawTarget}:gate-input`,
@@ -10950,7 +15521,7 @@ async function checkTarget(rawTarget) {
       ...(input.evidencePackage?.inputArtifactHashes ?? []).map((artifact) => artifact.path)
     ].filter((path) => Boolean(path));
     for (const artifactPath of artifactPaths) {
-      const resolved = resolve6(artifactPath);
+      const resolved = resolve9(artifactPath);
       checks.push({
         name: `target:${rawTarget}:artifact:${artifactPath}`,
         severity: await exists2(resolved) ? "pass" : "warn",
@@ -11011,7 +15582,7 @@ async function runDoctorCommand(args) {
 }
 
 // src/cli/enum-check.ts
-import { readFile as readFile9 } from "fs/promises";
+import { readFile as readFile12 } from "fs/promises";
 import { exit as exit6 } from "process";
 var CHECKS = [
   { typeName: "GateProfile", schemaDef: "gateProfile", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
@@ -11026,10 +15597,10 @@ var CHECKS = [
   { typeName: "SignalAggregation", schemaDef: "signalAggregation", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" }
 ];
 async function readJson4(path) {
-  return JSON.parse(await readFile9(path, "utf-8"));
+  return JSON.parse(await readFile12(path, "utf-8"));
 }
-function extractStringUnion(source, typeName) {
-  const match = source.match(new RegExp(`export type ${typeName} =([\\s\\S]*?);`));
+function extractStringUnion(source2, typeName) {
+  const match = source2.match(new RegExp(`export type ${typeName} =([\\s\\S]*?);`));
   if (!match) return [];
   return [...match[1].matchAll(/"([^"]+)"/g)].map((value) => value[1]).sort();
 }
@@ -11043,7 +15614,7 @@ async function createEnumCheckReport() {
   for (const check of CHECKS) {
     let typeSource = sourceCache.get(check.typeFile);
     if (!typeSource) {
-      typeSource = await readFile9(check.typeFile, "utf-8");
+      typeSource = await readFile12(check.typeFile, "utf-8");
       sourceCache.set(check.typeFile, typeSource);
     }
     let schema = schemaCache.get(check.schemaFile);
@@ -11099,8 +15670,8 @@ async function runEnumCheckCommand(args) {
 }
 
 // src/cli/snapshot.ts
-import { readFile as readFile10, writeFile as writeFile2 } from "fs/promises";
-import { join as join9, relative as relative5 } from "path";
+import { writeFile as writeFile3 } from "fs/promises";
+import { join as join11, relative as relative6 } from "path";
 import { exit as exit7 } from "process";
 function parseSnapshotArgs(args) {
   const targets = [];
@@ -11137,14 +15708,10 @@ function normalizeReport(report) {
   return normalizeValue(report);
 }
 function snapshotPath(target) {
-  return join9(target, "expected-report.json");
+  return join11(target, "expected-report.json");
 }
 async function readSnapshot(path) {
-  try {
-    return await readFile10(path, "utf-8");
-  } catch {
-    return void 0;
-  }
+  return optionalText(path);
 }
 async function checkTargetSnapshot(target, update) {
   const report = normalizeReport(await createCiReport([target]));
@@ -11152,7 +15719,7 @@ async function checkTargetSnapshot(target, update) {
 `;
   const path = snapshotPath(target);
   if (update) {
-    await writeFile2(path, content, "utf-8");
+    await writeFile3(path, content, "utf-8");
     return { target, status: "updated", path };
   }
   const expected = await readSnapshot(path);
@@ -11178,15 +15745,15 @@ async function runSnapshotCommand(args) {
   const results = await createSnapshotResults(options.targets, options.update);
   console.log("QEG Report Snapshots");
   for (const result of results) {
-    console.log(`- ${result.status.toUpperCase()} ${relative5(process.cwd(), result.target)} -> ${relative5(process.cwd(), result.path)}`);
+    console.log(`- ${result.status.toUpperCase()} ${relative6(process.cwd(), result.target)} -> ${relative6(process.cwd(), result.path)}`);
   }
   const failed = results.some((result) => result.status === "missing" || result.status === "mismatch");
   exit7(failed ? 2 : 0);
 }
 
 // src/cli/evidence-verify.ts
-import { readFile as readFile11 } from "fs/promises";
-import { join as join10 } from "path";
+import { readFile as readFile13 } from "fs/promises";
+import { join as join12 } from "path";
 import { exit as exit8 } from "process";
 function worst2(items) {
   if (items.some((item) => item.severity === "fail")) return "fail";
@@ -11198,7 +15765,7 @@ async function createEvidenceVerifyReport(rawTargets) {
   const items = [];
   for (const target of targets) {
     try {
-      const validation = await validateGateInput(JSON.parse(await readFile11(join10(target, "gate-input.json"), "utf-8")));
+      const validation = await validateGateInput(JSON.parse(await readFile13(join12(target, "gate-input.json"), "utf-8")));
       if (!validation.valid || !validation.input) {
         items.push({ target, artifactId: "gate-input", severity: "fail", code: "PATH_MISSING", message: `schema invalid: ${validation.issues.map((issue) => `${issue.path} ${issue.message}`).join("; ")}` });
         continue;
@@ -11227,9 +15794,26 @@ async function runEvidenceVerifyCommand(args) {
 }
 
 // src/cli/policy-lint.ts
-import { readFile as readFile12 } from "fs/promises";
-import { join as join11 } from "path";
+import { readFile as readFile14 } from "fs/promises";
+import { join as join13 } from "path";
 import { exit as exit9 } from "process";
+
+// src/cli/policy-lint/format.ts
+function formatPolicyLintText(report) {
+  const lines = [
+    "QEG Policy Lint",
+    `Generated at: ${report.generatedAt}`,
+    `Overall: ${report.status.toUpperCase()}`,
+    ""
+  ];
+  for (const item of report.items) {
+    lines.push(`- ${item.severity.toUpperCase()} ${item.target}: ${item.message}`);
+  }
+  return `${lines.join("\n")}
+`;
+}
+
+// src/cli/policy-lint/rules.ts
 var ALL_DQ_CODES = [
   "DQ-01",
   "DQ-02",
@@ -11253,11 +15837,8 @@ var ALL_DQ_CODES = [
   "DQ-20",
   "DQ-21"
 ];
-async function readJson5(path) {
-  return JSON.parse(await readFile12(path, "utf-8"));
-}
-function add(items, target, severity2, message) {
-  items.push({ target, severity: severity2, message });
+function add(items, target, severity3, message) {
+  items.push({ target, severity: severity3, message });
 }
 function lintPolicy(items, target, policy, label) {
   if (!policy) {
@@ -11287,9 +15868,9 @@ function lintPolicy(items, target, policy, label) {
   for (const duplicate of [...new Set(duplicates)]) {
     add(items, target, "fail", `${label}.dqScope duplicates ${duplicate}`);
   }
-  const missing = ALL_DQ_CODES.filter((code) => !scope.includes(code));
-  if (missing.length > 0) {
-    add(items, target, "warn", `${label}.dqScope does not include ${missing.join(", ")}`);
+  const missing2 = ALL_DQ_CODES.filter((code) => !scope.includes(code));
+  if (missing2.length > 0) {
+    add(items, target, "warn", `${label}.dqScope does not include ${missing2.join(", ")}`);
   }
   if (policy.reliabilityPolicy) {
     if (!/^sha256:[a-f0-9]{64}$/.test(policy.policyHash ?? "")) add(items, target, "fail", `${label}.policyHash must be SHA-256 when reliabilityPolicy is enabled`);
@@ -11303,12 +15884,17 @@ function worst3(items) {
   if (items.some((item) => item.severity === "warn")) return "warn";
   return "pass";
 }
+
+// src/cli/policy-lint.ts
+async function readJson5(path) {
+  return JSON.parse(await readFile14(path, "utf-8"));
+}
 async function createPolicyLintReport(rawTargets) {
   const targets = await collectReportTargets(rawTargets);
   const items = [];
   for (const target of targets) {
     try {
-      const input = await readJson5(join11(target, "gate-input.json"));
+      const input = await readJson5(join13(target, "gate-input.json"));
       lintPolicy(items, target, input.policy, "policy");
       if (input.evidencePackage?.gatePolicy) {
         lintPolicy(items, target, input.evidencePackage.gatePolicy, "evidencePackage.gatePolicy");
@@ -11338,19 +15924,6 @@ async function createPolicyLintReport(rawTargets) {
     status: worst3(items),
     items
   };
-}
-function formatPolicyLintText(report) {
-  const lines = [
-    "QEG Policy Lint",
-    `Generated at: ${report.generatedAt}`,
-    `Overall: ${report.status.toUpperCase()}`,
-    ""
-  ];
-  for (const item of report.items) {
-    lines.push(`- ${item.severity.toUpperCase()} ${item.target}: ${item.message}`);
-  }
-  return `${lines.join("\n")}
-`;
 }
 async function runPolicyLintCommand(args) {
   const json = args.includes("--json");
@@ -11407,11 +15980,11 @@ async function runCheckCommand(args) {
 }
 
 // src/cli/evidence-normalize.ts
-import { createHash as createHash3, randomUUID } from "crypto";
-import { readFile as readFile13, realpath as realpath2, rename, stat as stat5, unlink, writeFile as writeFile3 } from "fs/promises";
-import { basename as basename2, dirname as dirname2, isAbsolute as isAbsolute2, relative as relative6, resolve as resolve7 } from "path";
+import { realpath as realpath4 } from "fs/promises";
+import { basename as basename4, relative as relative8, resolve as resolve13 } from "path";
 import { exit as exit11 } from "process";
-var SUPPORTED_ADAPTERS = /* @__PURE__ */ new Set(["lakda", "toxiproxy", "shell", "ci"]);
+
+// src/cli/evidence-normalize/values.ts
 function isObject4(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
@@ -11434,10 +16007,10 @@ function conflict(label, raw, context) {
   void context;
   throw new CliError(`Raw input conflicts with context for ${label}`);
 }
-function choose(label, raw, context, required = true) {
+function choose(label, raw, context, required2 = true) {
   if (raw !== void 0 && context !== void 0 && !jsonEqual(raw, context)) conflict(label, raw, context);
   const value = raw ?? context;
-  if (required && value === void 0) throw new CliError(`Normalization requires ${label} in raw input or context`);
+  if (required2 && value === void 0) throw new CliError(`Normalization requires ${label} in raw input or context`);
   return value;
 }
 function rawValue(raw, ...keys) {
@@ -11467,42 +16040,6 @@ function asObject(value, label) {
   if (!isObject4(value)) throw new CliError(`${label} must be a JSON object`);
   return value;
 }
-function containedPath(baseDir, rawPath, label) {
-  const resolved = resolve7(baseDir, rawPath);
-  const offset = relative6(baseDir, resolved);
-  if (isAbsolute2(rawPath) || isOutsideBase2(offset)) {
-    throw new CliError(`${label} must be contained within --base-dir`);
-  }
-  return resolved;
-}
-function isOutsideBase2(offset) {
-  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute2(offset);
-}
-async function assertRealContained(realBaseDir, path, label) {
-  let actual;
-  try {
-    actual = await realpath2(path);
-  } catch (error) {
-    throw new CliError(`Cannot resolve ${label}: ${error instanceof Error ? error.message : String(error)}`);
-  }
-  const offset = relative6(realBaseDir, actual);
-  if (offset !== "" && isOutsideBase2(offset)) throw new CliError(`${label} resolves outside --base-dir`);
-  return actual;
-}
-async function assertOutputParentContained(realBaseDir, outPath) {
-  let actualParent;
-  try {
-    actualParent = await realpath2(dirname2(outPath));
-  } catch (error) {
-    throw new CliError(`Cannot resolve --out parent directory: ${error instanceof Error ? error.message : String(error)}`);
-  }
-  const offset = relative6(realBaseDir, actualParent);
-  if (offset !== "" && isOutsideBase2(offset)) throw new CliError("--out parent resolves outside --base-dir");
-  return actualParent;
-}
-function sameFilesystemPath(left, right) {
-  return process.platform === "win32" ? left.toLowerCase() === right.toLowerCase() : left === right;
-}
 function parseJson(bytes, label) {
   let parsed;
   try {
@@ -11512,47 +16049,8 @@ function parseJson(bytes, label) {
   }
   return asObject(parsed, label);
 }
-async function readBytes(path, label) {
-  try {
-    return await readFile13(path);
-  } catch (error) {
-    throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
-  }
-}
-function sha256(bytes) {
-  return `sha256:${createHash3("sha256").update(bytes).digest("hex")}`;
-}
-function parseArgs(args) {
-  let adapter;
-  let input;
-  let context;
-  let out;
-  let baseDir = process.cwd();
-  let force = false;
-  for (let index = 0; index < args.length; index += 1) {
-    const arg = args[index];
-    if (arg === "--force") {
-      force = true;
-      continue;
-    }
-    if (arg === "--adapter" || arg === "--input" || arg === "--context" || arg === "--out" || arg === "--base-dir") {
-      const value = args[index + 1];
-      if (!value) throw new CliError(`Expected value after ${arg}`);
-      if (arg === "--adapter") adapter = value;
-      if (arg === "--input") input = value;
-      if (arg === "--context") context = value;
-      if (arg === "--out") out = value;
-      if (arg === "--base-dir") baseDir = value;
-      index += 1;
-      continue;
-    }
-    throw new CliError(`Unknown normalize argument: ${arg}`);
-  }
-  if (!adapter || !input || !context || !out) {
-    throw new CliError("Usage: qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json> [--base-dir <dir>] [--force]");
-  }
-  return { adapter, input, context, out, baseDir: resolve7(baseDir), force };
-}
+
+// src/cli/evidence-normalize/adapters.ts
 function adapterFields(adapter, raw) {
   if (adapter === "lakda") {
     const contract = rawValue(raw, "contractVersion", "schema", "version");
@@ -11630,19 +16128,147 @@ function adapterFields(adapter, raw) {
     lifecycle: isObject4(raw.lifecycle) ? raw.lifecycle : void 0
   };
 }
+
+// src/cli/evidence-normalize/files.ts
+import { createHash as createHash4 } from "crypto";
+import { readFile as readFile15, realpath as realpath3 } from "fs/promises";
+import { dirname as dirname2, isAbsolute as isAbsolute4, relative as relative7, resolve as resolve10 } from "path";
+function containedPath(baseDir, rawPath, label) {
+  const resolved = resolve10(baseDir, rawPath);
+  const offset = relative7(baseDir, resolved);
+  if (isAbsolute4(rawPath) || isOutsideBase2(offset)) {
+    throw new CliError(`${label} must be contained within --base-dir`);
+  }
+  return resolved;
+}
+function isOutsideBase2(offset) {
+  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute4(offset);
+}
+async function assertRealContained(realBaseDir, path, label) {
+  let actual;
+  try {
+    actual = await realpath3(path);
+  } catch (error) {
+    throw new CliError(`Cannot resolve ${label}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+  const offset = relative7(realBaseDir, actual);
+  if (offset !== "" && isOutsideBase2(offset)) throw new CliError(`${label} resolves outside --base-dir`);
+  return actual;
+}
+async function assertOutputParentContained(realBaseDir, outPath) {
+  let actualParent;
+  try {
+    actualParent = await realpath3(dirname2(outPath));
+  } catch (error) {
+    throw new CliError(`Cannot resolve --out parent directory: ${error instanceof Error ? error.message : String(error)}`);
+  }
+  const offset = relative7(realBaseDir, actualParent);
+  if (offset !== "" && isOutsideBase2(offset)) throw new CliError("--out parent resolves outside --base-dir");
+  return actualParent;
+}
+function sameFilesystemPath(left, right) {
+  return process.platform === "win32" ? left.toLowerCase() === right.toLowerCase() : left === right;
+}
+async function readBytes(path, label) {
+  try {
+    return await readFile15(path);
+  } catch (error) {
+    throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
+  }
+}
+function sha256(bytes) {
+  return `sha256:${createHash4("sha256").update(bytes).digest("hex")}`;
+}
+
+// src/cli/evidence-normalize/model.ts
+var SUPPORTED_ADAPTERS = /* @__PURE__ */ new Set(["lakda", "toxiproxy", "shell", "ci"]);
+
+// src/cli/evidence-normalize/options.ts
+import { resolve as resolve11 } from "path";
+function parseArgs(args) {
+  let adapter;
+  let input;
+  let context;
+  let out;
+  let baseDir = process.cwd();
+  let force = false;
+  for (let index = 0; index < args.length; index += 1) {
+    const arg = args[index];
+    if (arg === "--force") {
+      force = true;
+      continue;
+    }
+    if (arg === "--adapter" || arg === "--input" || arg === "--context" || arg === "--out" || arg === "--base-dir") {
+      const value = args[index + 1];
+      if (!value) throw new CliError(`Expected value after ${arg}`);
+      if (arg === "--adapter") adapter = value;
+      if (arg === "--input") input = value;
+      if (arg === "--context") context = value;
+      if (arg === "--out") out = value;
+      if (arg === "--base-dir") baseDir = value;
+      index += 1;
+      continue;
+    }
+    throw new CliError(`Unknown normalize argument: ${arg}`);
+  }
+  if (!adapter || !input || !context || !out) {
+    throw new CliError("Usage: qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json> [--base-dir <dir>] [--force]");
+  }
+  return { adapter, input, context, out, baseDir: resolve11(baseDir), force };
+}
+
+// src/cli/evidence-normalize/publish.ts
+import { randomUUID } from "crypto";
+import { lstat as lstat3, open, rename as rename2, unlink as unlink2 } from "fs/promises";
+import { basename as basename3, dirname as dirname3, resolve as resolve12 } from "path";
+async function publishNormalizedEvidence(outPath, content, force) {
+  try {
+    const destination = await lstat3(outPath);
+    if (!destination.isFile()) throw new CliError(`Output is not a regular file: ${outPath}`);
+    if (!force) throw new CliError(`Output already exists: ${outPath} (use --force to replace it)`);
+  } catch (error) {
+    if (!isMissingFile(error)) throw new CliError(`Inspect normalization output ${outPath}: ${String(error)}`);
+  }
+  const tempPath = resolve12(dirname3(outPath), `.${basename3(outPath)}.${process.pid}.${randomUUID()}.tmp`);
+  let owned = false;
+  try {
+    const handle = await open(tempPath, "wx");
+    owned = true;
+    try {
+      await handle.writeFile(content, "utf8");
+    } finally {
+      await handle.close();
+    }
+    await rename2(tempPath, outPath);
+    owned = false;
+  } catch (error) {
+    if (owned) {
+      try {
+        await unlink2(tempPath);
+      } catch (cleanup) {
+        if (!isMissingFile(cleanup)) throw new CliError(`Publish ${outPath}: ${String(error)}; cleanup ${tempPath}: ${String(cleanup)}`);
+      }
+    }
+    throw new CliError(`Publish normalized evidence ${outPath}: ${String(error)}`);
+  }
+}
+
+// src/cli/evidence-normalize/validation.ts
 async function validateContext(raw) {
   const registry = await loadSchemaRegistry();
-  const validator = registry.validators.get("resilience-normalize-context.schema.json");
-  if (!validator) throw new CliError("resilience normalization context schema is unavailable");
-  if (!validator(raw)) throw new CliError(`Normalization context schema invalid: ${(validator.errors ?? []).map((error) => `${error.instancePath} ${error.message}`).join("; ")}`);
+  const validator2 = registry.validators.get("resilience-normalize-context.schema.json");
+  if (!validator2) throw new CliError("resilience normalization context schema is unavailable");
+  if (!validator2(raw)) throw new CliError(`Normalization context schema invalid: ${(validator2.errors ?? []).map((error) => `${error.instancePath} ${error.message}`).join("; ")}`);
   return raw;
 }
 async function validateEvidence(evidence) {
   const registry = await loadSchemaRegistry();
-  const validator = registry.ajv.getSchema("https://quality-harness.dev/schemas/qeg/reliability.schema.json#/$defs/resilienceExecutionEvidenceNode");
-  if (!validator) throw new CliError("resilience evidence schema is unavailable");
-  if (!validator(evidence)) throw new CliError(`Normalized evidence schema invalid: ${(validator.errors ?? []).map((error) => `${error.instancePath} ${error.message}`).join("; ")}`);
+  const validator2 = registry.ajv.getSchema("https://quality-harness.dev/schemas/qeg/reliability.schema.json#/$defs/resilienceExecutionEvidenceNode");
+  if (!validator2) throw new CliError("resilience evidence schema is unavailable");
+  if (!validator2(evidence)) throw new CliError(`Normalized evidence schema invalid: ${(validator2.errors ?? []).map((error) => `${error.instancePath} ${error.message}`).join("; ")}`);
 }
+
+// src/cli/evidence-normalize.ts
 async function normalizeResilienceEvidence(options) {
   if (!SUPPORTED_ADAPTERS.has(options.adapter)) {
     throw new CliError(`Adapter ${options.adapter} is unsupported for MVP normalization; provide canonical resilience evidence directly`);
@@ -11652,7 +16278,7 @@ async function normalizeResilienceEvidence(options) {
   const outPath = containedPath(options.baseDir, options.out, "--out");
   let realBaseDir;
   try {
-    realBaseDir = await realpath2(options.baseDir);
+    realBaseDir = await realpath4(options.baseDir);
   } catch (error) {
     throw new CliError(`Cannot resolve --base-dir: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -11661,7 +16287,7 @@ async function normalizeResilienceEvidence(options) {
     assertRealContained(realBaseDir, contextPath, "--context"),
     assertOutputParentContained(realBaseDir, outPath)
   ]);
-  const realOutputPath = resolve7(realOutputParent, basename2(outPath));
+  const realOutputPath = resolve13(realOutputParent, basename4(outPath));
   if (sameFilesystemPath(realOutputPath, realInputPath) || sameFilesystemPath(realOutputPath, realContextPath)) {
     throw new CliError("--out must not overwrite --input or --context");
   }
@@ -11713,7 +16339,7 @@ async function normalizeResilienceEvidence(options) {
     attempt,
     rawArtifactRef: {
       id: `${node.id}:raw`,
-      path: relative6(options.baseDir, inputPath).replaceAll("\\", "/"),
+      path: relative8(options.baseDir, inputPath).replaceAll("\\", "/"),
       contentHash: sha256(rawBytes),
       revision: targetRevision
     },
@@ -11734,35 +16360,8 @@ async function normalizeResilienceEvidence(options) {
     signalManifest
   };
   await validateEvidence(evidence);
-  let outputExists = false;
-  try {
-    await stat5(outPath);
-    outputExists = true;
-  } catch (error) {
-    if (error.code !== "ENOENT") {
-      throw new CliError("Cannot inspect --out destination");
-    }
-  }
-  if (outputExists && !options.force) {
-    throw new CliError(
-      `Output already exists: ${options.out} (use --force to replace it)`
-    );
-  }
-  const tempPath = resolve7(
-    dirname2(outPath),
-    `.${basename2(outPath)}.${process.pid}.${randomUUID()}.tmp`
-  );
-  try {
-    await writeFile3(tempPath, `${JSON.stringify(evidence, null, 2)}
-`, { encoding: "utf-8", flag: "wx" });
-    await rename(tempPath, outPath);
-  } catch (error) {
-    try {
-      await unlink(tempPath);
-    } catch {
-    }
-    throw error;
-  }
+  await publishNormalizedEvidence(outPath, `${JSON.stringify(evidence, null, 2)}
+`, options.force);
   return evidence;
 }
 async function runEvidenceNormalizeCommand(args) {
@@ -11772,16 +16371,38 @@ async function runEvidenceNormalizeCommand(args) {
 }
 
 // src/cli/init.ts
-import { mkdir as mkdir2, stat as stat6, writeFile as writeFile4 } from "fs/promises";
-import { join as join12, resolve as resolve8 } from "path";
+import { mkdir as mkdir3, writeFile as writeFile4 } from "fs/promises";
+import { dirname as dirname4, join as join15, resolve as resolve14 } from "path";
 import { exit as exit12 } from "process";
-async function exists3(path) {
+
+// src/cli/init-runtime.ts
+import { readFile as readFile16, readdir as readdir3 } from "fs/promises";
+import { join as join14 } from "path";
+import { fileURLToPath as fileURLToPath2 } from "url";
+async function starterRuntimeFiles() {
+  const root = fileURLToPath2(new URL("../../", import.meta.url));
+  const files = /* @__PURE__ */ new Map();
+  const visit = async (relativePath) => {
+    for (const entry of (await readdir3(join14(root, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      const path = join14(relativePath, entry.name);
+      if (entry.isDirectory()) await visit(path);
+      else if (entry.isFile()) files.set(path, await readFile16(join14(root, path), "utf8"));
+      else throw new CliError(`Unsupported packaged runtime entry ${path}`);
+    }
+  };
   try {
-    await stat6(path);
-    return true;
-  } catch {
-    return false;
+    await visit("qeg-report-action");
+    await visit("schemas");
+    files.set("LICENSE", await readFile16(join14(root, "LICENSE"), "utf8"));
+  } catch (error) {
+    throw new CliError(`Read starter runtime in ${root}: ${String(error)}`);
   }
+  return files;
+}
+
+// src/cli/init.ts
+async function exists3(path) {
+  return await optionalStat(path) !== null;
 }
 function minimalGateInput() {
   const now = (/* @__PURE__ */ new Date()).toISOString();
@@ -11811,6 +16432,7 @@ function minimalGateInput() {
       }
     },
     policy: {
+      inputContract: upstreamInputContract("local-init"),
       policyId: "qeg:policy-local-init",
       policyHash: "sha256:replace-me",
       profile: "standard",
@@ -11877,7 +16499,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
-      - uses: RNA4219/quality-evidence-graph/qeg-report-action@v0.3.1
+      - uses: ./.qeg/runtime/qeg-report-action
         with:
           targets: .qeg
           output-path: .qeg/qeg-ci-report.json
@@ -11914,26 +16536,35 @@ async function writeNewFile(path, content, force) {
 }
 async function runInitCommand(args) {
   const options = parseInitArgs(args);
-  const root = resolve8(options.root);
-  const qegDir = join12(root, ".qeg");
-  const workflowDir = join12(root, ".github", "workflows");
-  await mkdir2(qegDir, { recursive: true });
-  await mkdir2(workflowDir, { recursive: true });
+  const root = resolve14(options.root);
+  const qegDir = join15(root, ".qeg");
+  const workflowDir = join15(root, ".github", "workflows");
+  await mkdir3(qegDir, { recursive: true });
+  await mkdir3(workflowDir, { recursive: true });
   const results = [
     {
-      path: join12(qegDir, "gate-input.json"),
-      status: await writeNewFile(join12(qegDir, "gate-input.json"), minimalGateInput(), options.force)
+      path: join15(qegDir, "gate-input.json"),
+      status: await writeNewFile(join15(qegDir, "gate-input.json"), minimalGateInput(), options.force)
     },
     {
-      path: join12(qegDir, "qeg-baseline.json"),
-      status: await writeNewFile(join12(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
+      path: join15(qegDir, "qeg-baseline.json"),
+      status: await writeNewFile(join15(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
     },
     {
-      path: join12(workflowDir, "qeg.yml"),
-      status: await writeNewFile(join12(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
+      path: join15(workflowDir, "qeg.yml"),
+      status: await writeNewFile(join15(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
     }
   ];
+  const runtimeFiles = await starterRuntimeFiles();
+  let runtimeWritten = 0;
+  for (const [relativePath, content] of runtimeFiles) {
+    const path = join15(qegDir, "runtime", relativePath);
+    await mkdir3(dirname4(path), { recursive: true });
+    const status = await writeNewFile(path, content, options.force);
+    if (status !== "skipped") runtimeWritten++;
+  }
   console.log("QEG init");
+  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join15(qegDir, "runtime")}`);
   for (const result of results) {
     console.log(`- ${result.status}: ${result.path}`);
   }
@@ -11944,22 +16575,18 @@ async function runInitCommand(args) {
 }
 
 // src/cli/repro-bundle.ts
-import { createHash as createHash4 } from "crypto";
-import { mkdir as mkdir3, readFile as readFile14, readdir as readdir3, stat as stat7, writeFile as writeFile5 } from "fs/promises";
-import { basename as basename3, join as join13, resolve as resolve9 } from "path";
+import { createHash as createHash5 } from "crypto";
+import { mkdir as mkdir4, readFile as readFile17, readdir as readdir4, stat as stat8, writeFile as writeFile5 } from "fs/promises";
+import { basename as basename5, join as join16, resolve as resolve15 } from "path";
 import { exit as exit13 } from "process";
 async function readJson6(path) {
-  return JSON.parse(await readFile14(path, "utf-8"));
+  return JSON.parse(await readFile17(path, "utf-8"));
 }
 async function safeRead(path) {
-  try {
-    return await readFile14(path, "utf-8");
-  } catch {
-    return void 0;
-  }
+  return optionalText(path);
 }
 function sha2562(content) {
-  return createHash4("sha256").update(content).digest("hex");
+  return createHash5("sha256").update(content).digest("hex");
 }
 function redact(value) {
   if (typeof value === "string") {
@@ -11977,21 +16604,21 @@ function redact(value) {
   return value;
 }
 async function writeJson(outDir, name, data) {
-  const path = join13(outDir, name);
+  const path = join16(outDir, name);
   const content = `${JSON.stringify(redact(data), null, 2)}
 `;
   await writeFile5(path, content, "utf-8");
   return { path, sha256: sha2562(content) };
 }
 async function schemaInventory() {
-  const schemas = await readdir3("schemas");
-  const rows = [];
+  const schemas = await readdir4("schemas");
+  const rows2 = [];
   for (const file of schemas.filter((name) => name.endsWith(".schema.json")).sort()) {
-    const path = join13("schemas", file);
-    const content = await readFile14(path, "utf-8");
-    rows.push({ file, sha256: sha2562(content), bytes: content.length });
+    const path = join16("schemas", file);
+    const content = await readFile17(path, "utf-8");
+    rows2.push({ file, sha256: sha2562(content), bytes: content.length });
   }
-  return rows;
+  return rows2;
 }
 function parseArgs2(args) {
   const targets = [];
@@ -12016,8 +16643,8 @@ function parseArgs2(args) {
 }
 async function runReproBundleCommand(args) {
   const options = parseArgs2(args);
-  const outDir = resolve9(options.outDir);
-  await mkdir3(outDir, { recursive: true });
+  const outDir = resolve15(options.outDir);
+  await mkdir4(outDir, { recursive: true });
   const pkg = await readJson6("package.json");
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
   const files = [];
@@ -12032,10 +16659,10 @@ async function runReproBundleCommand(args) {
     files.push(await writeJson(outDir, "workflow.json", { path: ".github/workflows/ci.yml", content: workflow }));
   }
   for (const target of targets) {
-    const inputPath = join13(target, "gate-input.json");
+    const inputPath = join16(target, "gate-input.json");
     try {
-      if ((await stat7(inputPath)).isFile()) {
-        files.push(await writeJson(outDir, `gate-input-${basename3(target)}.json`, await readJson6(inputPath)));
+      if ((await stat8(inputPath)).isFile()) {
+        files.push(await writeJson(outDir, `gate-input-${basename5(target)}.json`, await readJson6(inputPath)));
       }
     } catch {
     }
@@ -12047,7 +16674,7 @@ async function runReproBundleCommand(args) {
     reportPath: options.reportPath,
     files
   };
-  const manifestPath = join13(outDir, "manifest.json");
+  const manifestPath = join16(outDir, "manifest.json");
   await writeFile5(manifestPath, `${JSON.stringify(manifest, null, 2)}
 `, "utf-8");
   console.log(`QEG repro bundle written to: ${outDir}`);
@@ -12056,215 +16683,15 @@ async function runReproBundleCommand(args) {
 }
 
 // src/cli/record.ts
-import { writeFile as writeFile6 } from "fs/promises";
-import { join as join14 } from "path";
-
-// src/gate-efficacy.ts
-var DEFAULT_TRACEABILITY = {
-  sourceRefs: [],
-  assumptions: [],
-  confidence: "medium"
-};
-function unique(values) {
-  return [...new Set(values.filter(Boolean))];
-}
-function collectEvidenceUsed(evaluated, defect) {
-  if (defect.evidenceRefs && defect.evidenceRefs.length > 0) {
-    return unique(defect.evidenceRefs);
-  }
-  const evidencePackage = evaluated.evidencePackage;
-  if (!evidencePackage) return [];
-  return unique([
-    ...evidencePackage.inputArtifactHashes.map((artifact) => artifact.id),
-    ...evidencePackage.approvalEvidence.map((approval) => approval.id),
-    ...evidencePackage.manualEvidence.flatMap((item) => item.evidenceRefs.map((ref) => ref.id)),
-    ...evidencePackage.sourceRefs.map((ref) => ref.id)
-  ]);
-}
-function resolveVerdictRef(evaluated, defect) {
-  return defect.verdictRef ?? evaluated.evidencePackage?.qegOutputs.gateVerdict.id ?? `${evaluated.metadata.runId}:gate-verdict`;
-}
-function resolvePlacementPlanRef(evaluated, defect) {
-  return defect.placementPlanRef ?? evaluated.evidencePackage?.qegOutputs.testPlacementPlan.id ?? `${evaluated.metadata.runId}:placement-plan`;
-}
-function buildBacklink(evaluated, defect) {
-  return {
-    id: defect.id,
-    title: defect.title,
-    severity: defect.severity,
-    discoveredAt: defect.discoveredAt,
-    linkedVerdictRef: resolveVerdictRef(evaluated, defect),
-    linkedPlacementPlanRef: resolvePlacementPlanRef(evaluated, defect),
-    linkedEvidenceRefs: collectEvidenceUsed(evaluated, defect),
-    sourceRefs: defect.sourceRefs
-  };
-}
-function buildAnalysisNotes(evaluated, defect) {
-  return defect.analysisNotes ?? `Escaped defect ${defect.id} was reported after verdict ${resolveVerdictRef(evaluated, defect)}.`;
-}
-function proposalId(scope, targetRef) {
-  return `qeg:recalibration-proposal:${scope}:${targetRef.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
-}
-function buildRecalibrationProposals(defects) {
-  const proposals = [];
-  const sourceRefsByTarget = /* @__PURE__ */ new Map();
-  const defectRefsByTarget = /* @__PURE__ */ new Map();
-  for (const defect of defects) {
-    for (const targetRef of defect.affectedPolicyRefs ?? []) {
-      const key = `policy:${targetRef}`;
-      sourceRefsByTarget.set(key, [...sourceRefsByTarget.get(key) ?? [], ...defect.sourceRefs]);
-      defectRefsByTarget.set(key, [...defectRefsByTarget.get(key) ?? [], defect.id]);
-    }
-    for (const targetRef of defect.affectedPlacementRefs ?? []) {
-      const key = `placement:${targetRef}`;
-      sourceRefsByTarget.set(key, [...sourceRefsByTarget.get(key) ?? [], ...defect.sourceRefs]);
-      defectRefsByTarget.set(key, [...defectRefsByTarget.get(key) ?? [], defect.id]);
-    }
-  }
-  for (const [key, escapedDefectRefs] of defectRefsByTarget.entries()) {
-    const [scope, ...targetParts] = key.split(":");
-    const targetRef = targetParts.join(":");
-    const proposalScope = scope;
-    proposals.push({
-      id: proposalId(proposalScope, targetRef),
-      scope: proposalScope,
-      targetRef,
-      reason: `Escaped defects indicate degraded ${proposalScope} efficacy. Human approval is required before mutation.`,
-      escapedDefectRefs: unique(escapedDefectRefs),
-      status: "proposed",
-      sourceRefs: sourceRefsByTarget.get(key) ?? []
-    });
-  }
-  return proposals.sort((a, b) => a.id.localeCompare(b.id));
-}
-function buildGateEfficacyRecords(evaluated) {
-  const escapedDefects = evaluated.optionalEvidence?.escapedDefects ?? [];
-  return escapedDefects.map((defect) => ({
-    verdict_ref: resolveVerdictRef(evaluated, defect),
-    escaped_defects: [buildBacklink(evaluated, defect)],
-    evidence_used: collectEvidenceUsed(evaluated, defect),
-    policy_hash_at_verdict: evaluated.policy.policyHash,
-    analysis_notes: buildAnalysisNotes(evaluated, defect)
-  }));
-}
-function buildRecalibrationProposalsForFixture(evaluated) {
-  return buildRecalibrationProposals(evaluated.optionalEvidence?.escapedDefects ?? []);
-}
-function appendEscapedDefectNodes(graph, evaluated, placementPlan) {
-  const escapedDefects = evaluated.optionalEvidence?.escapedDefects ?? [];
-  if (escapedDefects.length === 0) return graph;
-  const nodes = [...graph.nodes];
-  const edges = [...graph.edges];
-  for (const defect of escapedDefects) {
-    const backlink = buildBacklink(evaluated, defect);
-    nodes.push({
-      id: defect.id,
-      kind: "escaped_defect",
-      title: defect.title,
-      severity: defect.severity,
-      discoveredAt: defect.discoveredAt,
-      linkedVerdictRef: backlink.linkedVerdictRef,
-      linkedPlacementPlanRef: backlink.linkedPlacementPlanRef,
-      linkedEvidenceRefs: backlink.linkedEvidenceRefs,
-      traceability: {
-        ...DEFAULT_TRACEABILITY,
-        sourceRefs: defect.sourceRefs,
-        assumptions: ["Escaped defect is optional evidence and does not mutate historical verdicts."]
-      },
-      sourceArtifactIds: defect.sourceRefs.map((ref) => ref.id)
-    });
-    edges.push({
-      id: `${defect.id}:contradicts-verdict`,
-      kind: "contradicts",
-      from: defect.id,
-      to: backlink.linkedVerdictRef,
-      traceability: {
-        ...DEFAULT_TRACEABILITY,
-        sourceRefs: defect.sourceRefs
-      }
-    });
-    edges.push({
-      id: `${defect.id}:contradicts-placement`,
-      kind: "contradicts",
-      from: defect.id,
-      to: backlink.linkedPlacementPlanRef || placementPlan.metadata.runId,
-      traceability: {
-        ...DEFAULT_TRACEABILITY,
-        sourceRefs: defect.sourceRefs
-      }
-    });
-    for (const evidenceRef of backlink.linkedEvidenceRefs) {
-      edges.push({
-        id: `${defect.id}:evidenced-by:${evidenceRef.replace(/[^a-zA-Z0-9_-]/g, "-")}`,
-        kind: "evidenced_by",
-        from: defect.id,
-        to: evidenceRef,
-        traceability: {
-          ...DEFAULT_TRACEABILITY,
-          sourceRefs: defect.sourceRefs
-        }
-      });
-    }
-  }
-  return {
-    ...graph,
-    nodes,
-    edges
-  };
-}
-
-// src/cli/record.ts
-function buildAuditTrail(evidencePackage, policy) {
-  if (!evidencePackage) {
-    return void 0;
-  }
-  return {
-    evidencePackageHash: evidencePackage.evidencePackageHash,
-    approvalEvidenceSummary: evidencePackage.approvalEvidence.map((approval) => ({
-      id: approval.id,
-      approver: approval.approver,
-      approvedAt: approval.approvedAt,
-      policyId: approval.policyId,
-      policyHash: approval.policyHash,
-      evidencePackageHash: approval.evidencePackageHash
-    })),
-    gatePolicyHash: policy.policyHash,
-    gatePolicyId: policy.policyId
-  };
-}
 async function writeOutputRecord(evaluated) {
-  const placementPlan = evaluated.placementPlan ?? {
-    metadata: evaluated.metadata,
-    obligations: [],
-    placements: []
-  };
-  const gateEfficacyRecords = buildGateEfficacyRecords(evaluated);
-  const recalibrationProposals = buildRecalibrationProposalsForFixture(evaluated);
-  const record = {
-    metadata: evaluated.metadata,
-    graph: appendEscapedDefectNodes(evaluated.graph, evaluated, placementPlan),
-    placementPlan,
-    gate: evaluated.gateResult,
-    exports: [
-      { kind: "json", path: "output-record.json" }
-    ],
-    auditTrail: buildAuditTrail(evaluated.evidencePackage, evaluated.policy),
-    ...gateEfficacyRecords.length > 0 ? { gateEfficacyRecords } : {},
-    ...recalibrationProposals.length > 0 ? { recalibrationProposals } : {}
-  };
-  const recordJson = JSON.stringify(record, null, 2);
-  try {
-    JSON.parse(recordJson);
-    console.log("Own-output validation: PASS (record can be serialized and parsed)");
-  } catch (error) {
-    throw new CliError(
-      `Own-output validation: FAIL - ${error}`,
-      error instanceof Error ? error : void 0
-    );
+  const { files } = createRecordArtifacts(evaluated);
+  for (const [path, content] of files) {
+    const schema = OUTPUT_SCHEMAS[path];
+    if (schema) await assertValidOutput(JSON.parse(content), schema);
   }
-  const outputPath = join14(evaluated.fixtureDir, "output-record.json");
-  await writeFile6(outputPath, recordJson, "utf-8");
-  console.log(`Record written to: ${outputPath}`);
+  await publishFiles(evaluated.fixtureDir, files);
+  console.log("Own-output validation: PASS (all generated JSON artifacts passed their schemas)");
+  console.log(`Record written to: ${evaluated.fixtureDir}/quality-evidence-record.json`);
 }
 
 // src/cli/commands.ts
@@ -12284,6 +16711,7 @@ async function runValidateCommand(fixtureDir) {
 async function runGateCommand(fixtureDir) {
   try {
     const evaluated = await evaluateFixture(fixtureDir);
+    await assertValidOutput(evaluated.gateResult, "gate-verdict.schema.json");
     console.log(JSON.stringify(evaluated.gateResult, null, 2));
     exit14(getExitCode(evaluated.gateResult.verdict, evaluated.policy));
   } catch (error) {
@@ -12313,21 +16741,27 @@ async function main() {
   const args = process.argv.slice(2);
   if (args[0] === "--help" || args[0] === "-h") {
     console.log("Usage: qeg <command> [options] <fixture-dir-or-parent>");
-    console.log("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    console.log("Commands: build-graph, place-tests, validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit15(0);
   }
   if (args[0] === "--version" || args[0] === "-v") {
-    console.log("0.3.1");
+    console.log(QEG_VERSION);
     exit15(0);
   }
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
-    console.error("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    console.error("Commands: build-graph, place-tests, validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit15(1);
   }
   const [command, ...commandArgs] = args;
   const fixtureDir = commandArgs[0];
   switch (command) {
+    case "build-graph":
+    case "place-tests":
+      if (!fixtureDir || commandArgs.length !== 1) throw new Error(`Usage: qeg ${command} <target-dir>`);
+      if (command === "build-graph") await runBuildGraphCommand(fixtureDir);
+      else await runPlaceTestsCommand(fixtureDir);
+      break;
     case "validate":
       if (!fixtureDir) {
         console.error("Usage: qeg validate <fixture-dir>");

@@ -1,0 +1,20 @@
+{
+  "id": "src/cli/init-runtime.ts",
+  "role": "init-runtime",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 init-runtime の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts"
+  ],
+  "deps_in": [
+    "src/cli/init.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:efcd20c64118b545d895c1c4361b8716401764d82b28abe2133aab79ae136c62"
+}

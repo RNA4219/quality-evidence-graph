@@ -1,0 +1,29 @@
+{
+  "id": "docs/project/remediation-2026-09-10.md",
+  "role": "remediation-2026-09-10",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "R01〜R06 / FIX-01〜20の現行実装・受入台帳。fixture、隔離consumer、CI、実環境未評価を分離。",
+  "deps_out": [
+    "docs/evidence/remediation-2026-09-10/local-validation.json",
+    "docs/requirements.md",
+    "docs/spec/producer-adapters.md",
+    "docs/spec/remediation-2026-09-10.md",
+    "tests/producer-pipeline.test.mjs",
+    "tests/remediation-gate.test.mjs"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/evaluation.md",
+    "docs/project/tasks.codex.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:81e39ca40c1775b7703ee6246404290b3f05535871650986884d3954ac33d10f"
+}

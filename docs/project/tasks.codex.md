@@ -8,7 +8,7 @@ next_review_due: 2026-10-20
 
 # Implementation Task Ledger
 
-この台帳は `docs/requirements.md` の TASK-01〜TASK-10 を、実装者が追加判断なしで着手できる粒度に固定した履歴資料である。全項目は実装済みであり、現在の完成判定は `docs/release/acceptance-2026-07-20.md` に引き継いだ。
+この台帳は `docs/requirements.md` の TASK-01〜TASK-10 を固定した過去の履歴資料である。「全項目実装済み」という旧記載は2026-09-10調査で訂正した。当時はTASK-04/05の生成機能およびTASK-07の成果物一式等が未充足だった。現在の実装・受入状態は `docs/project/remediation-2026-09-10.md` を正本とし、下記の旧チェック印だけを完了証拠にしない。
 
 ## Objective
 

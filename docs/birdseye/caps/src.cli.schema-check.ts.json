@@ -1,29 +1,30 @@
 {
   "id": "src/cli/schema-check.ts",
   "role": "schema-check-cli",
-  "public_api": [
-    "createAjv",
-    "createSchemaCheckReport",
-    "runSchemaCheckCommand",
-    "assertSchemasCompile"
-  ],
-  "summary": "Ajv 2020 で schemas/*.schema.json を compile し、指定 target の gate-input 内 graph / policy / evidencePackage / placementPlan / waivers を schema validation する。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 schema-check-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "schemas/*.schema.json",
-    "src/cli/report.ts"
+    "src/cli/errors.ts",
+    "src/cli/file-errors.ts",
+    "src/cli/output-integrity.ts",
+    "src/cli/report.ts",
+    "src/validation/output.ts",
+    "src/validation/schema.ts"
   ],
   "deps_in": [
-    "src/cli/doctor.ts",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
     "src/cli.ts",
-    "docs/spec/operational-cli-extensions.md"
+    "src/cli/check.ts",
+    "src/cli/commands.ts",
+    "src/cli/doctor.ts"
   ],
   "risks": [
-    "fixture/schema drift を検出する command なので、全 fixture を標準 CI に入れる場合は既存 fixture 更新計画が必要"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run build",
-    "node dist/cli.js schema-check"
+    "npm test"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:6c111e962b4d63c1730add8d8ef28ed9eecd07c5f227c658cd1b87a8dea77ce1"
+  "contentHash": "sha256:0402e3fb69a621b55623c689d814a8d631986a78f31505dee58606689419f706"
 }

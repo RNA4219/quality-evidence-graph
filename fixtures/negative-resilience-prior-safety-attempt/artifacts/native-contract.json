@@ -1,0 +1,11 @@
+{
+  "fixture": "negative-resilience-prior-safety-attempt",
+  "mode": "native_graph",
+  "purpose": "Explicit native graph model for contract regression",
+  "nodeIds": [
+    "qeg:risk-reliability-fixture",
+    "qeg:test-reliability-fixture",
+    "qeg:evidence-reliability-fixture",
+    "qeg:evidence-reliability-fixture-prior-unsafe"
+  ]
+}

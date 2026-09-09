@@ -86,8 +86,8 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const packageManifest = JSON.parse(await readFile(join(repoRoot, "package.json"), "utf8"));
   const releaseVersion = packageManifest.version;
-  if (releaseVersion !== "0.3.1") {
-    throw new Error(`release lifecycle acceptance requires package version 0.3.1, got ${releaseVersion}`);
+  if (releaseVersion !== "0.4.0") {
+    throw new Error(`release lifecycle acceptance requires package version 0.4.0, got ${releaseVersion}`);
   }
 
   const sourceRevision = process.env.GITHUB_SHA ?? process.env.QEG_SOURCE_REVISION ?? "worktree";
@@ -108,7 +108,8 @@ async function main() {
 
   try {
     await mkdir(dirname(deployedCli), { recursive: true });
-    await copyFile(sourceCli, deployedCli);
+    await cp(join(repoRoot, "qeg-report-action"), join(deploymentRoot, "qeg-report-action"), { recursive: true });
+    await copyFile(join(repoRoot, "LICENSE"), join(deploymentRoot, "LICENSE"));
     await cp(sourceSchemas, deployedSchemas, { recursive: true });
 
     const bundleHash = await sha256File(sourceCli);
@@ -117,6 +118,10 @@ async function main() {
     const consumerRoot = join(deploymentRoot, "consumer");
     const initObservation = observe(deployedCli, ["init", "--root", consumerRoot], deploymentRoot);
     const target = join(consumerRoot, ".qeg");
+    // init has no evidence. Check that boundary before loading the reviewed native lifecycle fixture.
+    const emptyObservation = observe(deployedCli, ["gate", target], deploymentRoot);
+    if (emptyObservation.exitCode !== 2) throw new Error("Empty initialized target must be disqualified");
+    await cp(join(repoRoot, "fixtures/positive-release-go"), target, { recursive: true });
 
 
     const versionObservation = observe(deployedCli, ["--version"], deploymentRoot);

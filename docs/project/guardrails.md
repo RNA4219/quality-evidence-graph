@@ -2,15 +2,15 @@
 intent_id: INT-QEG-GUARDRAILS-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-06-02
-next_review_due: 2026-07-02
+last_reviewed_at: 2026-09-10
+next_review_due: 2026-12-10
 ---
 
 # Guardrails
 
 ## Scope
 
-- QEG は必須 3 接続先を adapter で正規化する。
+- QEGのupstream_artifacts modeは必須3接続先・14種のartifactをadapterで正規化する。native_graphはpolicyで必須集合と評価scopeを明示し、入力modeを暗黙に推測しない。
 - upstream artifact の意味、名称、schema を QEG 側で勝手に再定義しない。
 - workflow-cookbook は adapter ではなく、Birdseye / Capsule / Task Seed / acceptance 運用の補助として扱う。
 

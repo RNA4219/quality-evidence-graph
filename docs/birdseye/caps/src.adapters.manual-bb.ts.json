@@ -1,0 +1,24 @@
+{
+  "id": "src/adapters/manual-bb.ts",
+  "role": "manual-bb",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 manual-bb の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/adapters/common.ts",
+    "src/adapters/contracts.ts",
+    "src/adapters/decisions.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/spec/producer-adapters.md",
+    "src/graph.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:d1c09b3290e813735af7c63df28df3095da57df83d6719dbe8d26ea4ac8dbb69"
+}

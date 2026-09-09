@@ -1,0 +1,26 @@
+{
+  "id": "src/gate/dq-detectors.ts",
+  "role": "dq-detectors",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 dq-detectors の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/context.ts",
+    "src/gate/dq/basic.ts",
+    "src/gate/dq/evidence.ts",
+    "src/gate/dq/ipo.ts",
+    "src/gate/dq/placement-change.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate.ts",
+    "src/gate/evaluate.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:c55d526bd5b736fc73befa6319b4325a2c3a472dfed8baa8489c23fba3eb8b69"
+}

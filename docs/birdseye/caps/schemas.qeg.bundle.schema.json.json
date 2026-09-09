@@ -1,22 +1,22 @@
 {
   "id": "schemas/qeg.bundle.schema.json",
   "role": "schema",
-  "public_api": [
-    "QualityEvidenceGraph"
-  ],
-  "summary": "canonical graph bundle の schema。nodes、edges、completeness を定義する。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "schemas/quality-evidence-record.schema.json"
   ],
   "deps_in": [
-    "schemas/shared-defs.schema.json"
+    "docs/spec/reliability-extension.md",
+    "schemas/shared-defs.schema.json",
+    "src/types/graph.ts"
   ],
   "risks": [
-    "additionalProperties の緩さは IPO strict schema で hardening 対象"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "node -e JSON parse schemas"
+    "npm test"
   ],
-  "generation": "00014",
   "contentHash": "sha256:90b542653ff1afdbd70e0de421264ce1ad7bd96e4f116cbaa84508e30712237c"
 }

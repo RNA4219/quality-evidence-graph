@@ -8,7 +8,18 @@ import type {
   ResilienceTestNode,
   TestNode,
   TestNodeBase,
+  IngestManifest,
+  LoadedArtifact,
+  QualityEvidenceGraph,
+  TestPlacementPlan,
 } from "@quality-harness/quality-evidence-graph";
+import { buildGraph, placeTests } from "@quality-harness/quality-evidence-graph";
+
+declare const ingestManifest: IngestManifest;
+declare const rawArtifacts: readonly LoadedArtifact[];
+const generatedGraph: QualityEvidenceGraph = buildGraph(ingestManifest, rawArtifacts);
+const generatedPlan: TestPlacementPlan = placeTests(generatedGraph, ingestManifest.policy);
+void generatedPlan;
 
 declare const testBase: TestNodeBase;
 declare const scenario: ResilienceScenario;

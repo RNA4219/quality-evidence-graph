@@ -4,7 +4,18 @@
     "runId": "qeg:run-negative-manual-case-disappeared",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "profile": "standard",
-    "inputArtifacts": []
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-negative-manual-case-disappeared",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -12,9 +23,43 @@
       "runId": "qeg:run-negative-manual-case-disappeared",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-negative-manual-case-disappeared",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-manual-case-disappeared",
+        "kind": "requirement",
+        "title": "Fixture context: negative-manual-case-disappeared",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-negative-manual-case-disappeared"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-manual-case-disappeared",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -29,7 +74,18 @@
       "runId": "qeg:run-negative-manual-case-disappeared",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-negative-manual-case-disappeared",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": [],
@@ -48,12 +104,32 @@
     }
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-manual-case-disappeared",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-manual-case-disappeared",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "standard",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-negative-manual-case-disappeared",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -77,12 +153,35 @@
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:8d817f786f6762805b671a33ca3f5e13a62df24134e889114bd1d99e9f1e06cf"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:79b54e3579ff57e4577c3f92d30fb4601064a95ab50b770f8184de760d8c3961"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:948106f5fe6f912a9e3f81f7255a05bf01c2768b6de6d68ff29b046d155bb2cc"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:8c34e7cc4e25445c3b3cc28b2dd605acaeff1ffcebb03eab3dad70764a7979b7"
     }
   ]
 }

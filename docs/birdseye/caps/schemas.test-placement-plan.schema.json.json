@@ -1,23 +1,20 @@
 {
   "id": "schemas/test-placement-plan.schema.json",
   "role": "schema",
-  "public_api": [
-    "TestPlacementPlan"
-  ],
-  "summary": "test obligation と placement node の schema。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "schemas/quality-evidence-record.schema.json"
   ],
   "deps_in": [
-    "schemas/shared-defs.schema.json",
-    "docs/requirements.md"
+    "schemas/shared-defs.schema.json"
   ],
   "risks": [
-    "candidateScores が緩いため V1 strict schema の対象"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "node -e JSON parse schemas"
+    "npm test"
   ],
-  "generation": "00014",
   "contentHash": "sha256:db7ff07b16f786f5272b1aeadb4e89079e3bdb37e7cb8d2c7bd9c9ccbe705ef1"
 }

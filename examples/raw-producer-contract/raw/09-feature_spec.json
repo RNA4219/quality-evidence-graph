@@ -1,0 +1,16 @@
+{
+  "feature_id": "SPEC-ORDER-01",
+  "title": "Order cancellation",
+  "acceptance_criteria": [
+    "Cancel pending order successfully"
+  ],
+  "source_refs": [
+    {
+      "id": "rand:REQ-001",
+      "kind": "spec"
+    }
+  ],
+  "changed_areas": [
+    "src/order.ts"
+  ]
+}
