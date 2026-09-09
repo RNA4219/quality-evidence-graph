@@ -3,7 +3,7 @@
   "role": "current-acceptance-criteria",
   "generation": "00015",
   "public_api": [],
-  "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Node 20 / 24 CIを含む現行受入条件。",
+  "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Linux Node 20 / 24とWindows Node 24 CIを含む現行受入条件。",
   "deps_out": [
     ".github/workflows/ci.yml",
     "docs/project/remediation-2026-09-10.md",
@@ -37,5 +37,5 @@
     "npm run birdseye-check",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "contentHash": "sha256:ae21baa133ec91de91cb1dd985289b005d22bde2419ad01fbd49b2243702e803"
+  "contentHash": "sha256:e9d7281ca21a47a27a50fd84e63f02ce522f6fb34bc467bdd55523bd1820055f"
 }

@@ -6,6 +6,7 @@
   "summary": "QEG 0.4.0 audit-validation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
+    "docs/evidence/remediation-2026-09-10/ci-validation.json",
     "docs/project/acceptance-audit-2026-09-10.md"
   ],
   "risks": [

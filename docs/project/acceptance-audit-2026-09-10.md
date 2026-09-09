@@ -8,7 +8,7 @@ next_review_due: 2026-12-10
 
 # 改修20項目の受入照合
 
-要求正本第22節を、実装・試験対象・評価範囲ごとに照合する。実行結果は [追加検証証跡](../evidence/remediation-2026-09-10/audit-validation.json)、全体の状態は [改修台帳](remediation-2026-09-10.md) を正本とする。GitHub CIの成功が得られるまで総合受入は確定しない。
+要求正本第22節を、実装・試験対象・評価範囲ごとに照合する。ローカル実行結果は [追加検証証跡](../evidence/remediation-2026-09-10/audit-validation.json)、GitHub CI結果は [CI検証証跡](../evidence/remediation-2026-09-10/ci-validation.json)、全体の状態は [改修台帳](remediation-2026-09-10.md) を正本とする。実装commit `216cd2f9b18c6b8922ea027ba4aa7aac2e323e16` の3 CI job成功を確認し、以下の範囲で実装受入を完了した。
 
 | 要求 | 実装による充足 | 直接の検証証拠 |
 |---|---|---|
@@ -27,7 +27,7 @@ next_review_due: 2026-12-10
 | FIX-13 | pure placeTestsとCLIがrisk/変更obligation、7層のfit/cost/score/rationaleを生成 | producer-pipelineの7候補と選択、reuse/adapt/add/manual-only/blockedの境界 |
 | FIX-14 | 4 JSON、Markdown、record alias、別hash manifestを生成 | producer-pipelineとremediation-gateの全hash再計算・alias一致、fixture record全schema検証 |
 | FIX-15 | 配布物だけでraw→graph→plan→gate→recordが動く | package-smokeの隔離install、packed APIでraw fixture生成、packed CLIで全工程と出力検証 |
-| FIX-16 | 各FIXと実装・試験・scopeを本表と台帳で対応付ける | 本表、source指紋付き実行ログ、CI未実施の明記。過去の一括完了表記を現在の証拠に使わない |
+| FIX-16 | 各FIXと実装・試験・scopeを本表と台帳で対応付ける | 本表、source指紋付き実行ログ、実装commitと3 jobのCI結果。過去の一括完了表記を現在の証拠に使わない |
 | FIX-17 | freshness DQ-18、ambiguity DQ-19、版とraw/effectiveの記載を同期 | schema/enum check、既存resilience回帰、v0.3.1原本raw 13・抑制1・effective 12と台帳の照合 |
 | FIX-18 | ENOENTだけをabsenceとし、stat/read/realpathの原因とpathを残す | main入力の壊れたJSON診断、optionalText/Stat、追加I/O試験。EACCESをFILE_MISSINGに置換しない |
 | FIX-19 | normalizer、formatter、policy、reliability、migrationを分割 | 公開型、runtime/Action、53 fixture、packed consumer。facadeと既存期待verdict/DQ/blockerを維持 |
@@ -41,4 +41,4 @@ next_review_due: 2026-12-10
 
 ## 完了判断の範囲
 
-ローカルのfixture、隔離tarball consumer、隔離Actionのschema障害・復旧が対象。producer実運用、実cluster、実fault injection、Lakda real acceptance、外部release approvalは含めない。リモートへのpushが未実施のため、Linux Node 20/24およびWindows Node 24のGitHub CIは未確認。
+ローカルおよびCIのfixture、隔離tarball consumer、隔離Actionのschema障害・復旧が対象。producer実運用、実cluster、実fault injection、Lakda real acceptance、外部release approvalは含めない。Linux Node 20/24およびWindows Node 24のGitHub CIは実装commitで成功した。証跡を記録する後続commitについても、PRのlatest checksで同じ3 jobの成功を確認してからマージする。

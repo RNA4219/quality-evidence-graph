@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-REMEDIATION-STATUS-20260910
 owner: quality-evidence-graph
-status: in_progress
+status: completed
 last_reviewed_at: 2026-09-10
 next_review_due: 2026-12-10
 ---
@@ -12,14 +12,14 @@ next_review_due: 2026-12-10
 
 | 改修 | 要求 | 仕様 | 状態 | 実装・受入証拠 |
 |---|---|---|---|---|
-| R01 必須証跡 | FIX-01〜04 | remediation-2026-09-10.md 入力契約 | local_pass / CI待ち | input-contract型/schema、gate/dq/input-contract、raw-ingest、空init・必須14種個別欠落試験 |
-| R02 参照整合 | FIX-05〜07 | 同 テスト配置とGate | local_pass / CI待ち | graph-integrity、placement-coverage、waivers、別変更配置・参照矛盾・未実行/mock/fail試験 |
-| R03 出力検証 | FIX-08〜10 | 同 出力・検証 | local_pass / CI待ち | record、validation/output、output-files/integrity、全negative recordとhash改ざん試験 |
-| R04 生成機能 | FIX-11〜15 | 同 raw artifactからの生成 | local_pass / CI待ち | adapters、graph、placement、pipeline、14 raw artifactのAPI/CLI/packed consumer E2E |
-| R05 正本同期 | FIX-16〜17 | 同 受入・互換性 | local_pass / CI待ち | 要求・仕様・README・台帳・履歴の境界を訂正、Birdseye同期済み |
-| R06 保守性 | FIX-18〜20 | 同 保守性・互換性 | local_pass / CI待ち | 以下の12件対応表。診断保持と責務分割、既存CLI/fixture/Action回帰 |
+| R01 必須証跡 | FIX-01〜04 | remediation-2026-09-10.md 入力契約 | passed | input-contract型/schema、gate/dq/input-contract、raw-ingest、空init・必須14種個別欠落試験 |
+| R02 参照整合 | FIX-05〜07 | 同 テスト配置とGate | passed | graph-integrity、placement-coverage、waivers、別変更配置・参照矛盾・未実行/mock/fail試験 |
+| R03 出力検証 | FIX-08〜10 | 同 出力・検証 | passed | record、validation/output、output-files/integrity、全negative recordとhash改ざん試験 |
+| R04 生成機能 | FIX-11〜15 | 同 raw artifactからの生成 | passed | adapters、graph、placement、pipeline、14 raw artifactのAPI/CLI/packed consumer E2E |
+| R05 正本同期 | FIX-16〜17 | 同 受入・互換性 | passed | 要求・仕様・README・台帳・履歴の境界を訂正、Birdseye同期済み |
+| R06 保守性 | FIX-18〜20 | 同 保守性・互換性 | passed | 以下の12件対応表。診断保持と責務分割、既存CLI/fixture/Action回帰 |
 
-実装順は入力契約とDQ→出力検証→producer adapter→graph→placement→record統合→診断/分割→全体受入。完了時は同一revisionの証拠を記載する。fixture・隔離consumer・実環境を別scopeとして扱う。
+実装順は入力契約とDQ→出力検証→producer adapter→graph→placement→record統合→診断/分割→全体受入。追加修正を含む実装commit `216cd2f9b18c6b8922ea027ba4aa7aac2e323e16` のCI成功により、以下の評価範囲で実装受入を完了した。fixture・隔離consumer・実環境を別scopeとして扱う。
 
 ## 読み取りと前提
 
@@ -31,12 +31,13 @@ next_review_due: 2026-12-10
 
 ## 検証範囲と結果
 
-- ローカルNode 24: build/typecheck、52 runtime/Action試験、既存53 fixture（Reliability / Resilience 22件）、全52診断recordの出力schema、packed tarballの隔離install・公開型・raw pipelineが成功。remediation境界10試験とproducer境界6試験を含む。schema/enum、700 tracked JSON、Birdseye 202 source、pack dry-run、git diff --checkも成功。
-- 最新の追加修正と対象source indexの指紋は [audit-validation.json](../evidence/remediation-2026-09-10/audit-validation.json) と同ディレクトリのauditログに保存。最初の改修commitの証跡は [local-validation.json](../evidence/remediation-2026-09-10/local-validation.json) に保持。実行前後で既存の期待verdict/DQ/blockerは変更していない。
+- 追加修正時点のローカルNode 24: build/typecheck、52 runtime/Action試験、既存53 fixture（Reliability / Resilience 22件）、全52診断recordの出力schema、packed tarballの隔離install・公開型・raw pipelineが成功。remediation境界10試験とproducer境界6試験を含む。schema/enum、700 tracked JSON、Birdseye 202 source、pack dry-run、git diff --checkも成功。
+- CI記録追加後の文書・索引検証: 702 tracked JSON、Birdseye 203 source、generator構文、git diff --checkが成功。
+- 最新の追加修正と対象source indexの指紋は [audit-validation.json](../evidence/remediation-2026-09-10/audit-validation.json) と同ディレクトリのauditログに保存。最初の改修commitの証跡は [local-validation.json](../evidence/remediation-2026-09-10/local-validation.json) に保持。これらはローカル採取時点の記録であり、当時のCI未実施状態も保持する。後続のCI結果は [ci-validation.json](../evidence/remediation-2026-09-10/ci-validation.json) を参照。実行前後で既存の期待verdict/DQ/blockerは変更していない。
 - 3 producer E2Eはproducer schemaに従うfixtureを使用。実producer実行や実環境testの受入を主張しない。固定schemaのcommit/hash/licenseは `../spec/producer-schema-provenance.json` に記録。
 - Action lifecycleは隔離consumerへの配置→正常観測→schema破損→復旧→新規hash証拠までgo。実cluster・実fault injection・Lakda real acceptance・外部release approvalは未評価。
-- 実装commit: `5bd5ba8`。作業ブランチ: `agent/qeg-remediation-20260910`。ローカルのsource index指紋と保存ログで対象を特定できる。
-- CI: 未実施。リモートへのpush待ちであり、Linux Node 20/24とWindows Node 24の結果を確認するまで総合受入は確定しない。release/tag/publishも未実施。
+- 初期実装commit: `5bd5ba8`、追加修正を含む実装commit: `216cd2f9b18c6b8922ea027ba4aa7aac2e323e16`。作業ブランチ: `agent/qeg-remediation-20260910`。ローカルのsource index指紋と保存ログで対象を特定できる。
+- CI: 上記実装commitの [run 34414497596](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34414497596) で `quality (20)`、`quality (24)`、`portability (windows-24)` がすべて成功（2026-09-10 JST）。記録更新後の最終commitも同じ3 jobの成功をマージ条件とし、自己参照を避けて [PR #7のlatest checks](https://github.com/RNA4219/quality-evidence-graph/pull/7/checks) で外部確認する。release/tag/publishは未実施。
 
 追加の受入照合で、実行必須なのにresilience testが専用evaluatorの対象外である場合、変更のobligationがadvisoryである場合、lean/standardで明示必須artifactが不正である場合の見落としを修正した。通常optionalのwarningは維持する。I/Oのstat/read/realpath失敗はIO_ERRORで原因を残し、不正outputのschema検証失敗時には既存7成果物が変わらないことを追加試験で確認した。
 

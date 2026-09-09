@@ -18,7 +18,7 @@ next_review_due: 2026-12-10
 - resilience evidenceの判定用joinは`testId`とし、`evidenced_by` edge欠落は許可する。edgeが存在して`testId`と矛盾または複数testを指す場合はDQ-18とし、旧passへフォールバックしないこと。
 - Gate reason、DQ、blocker、waiver、drill-down、record、report、snapshotがsource-backedかつdeterministicであること。
 - `fixtures/manifest.json`をfixture正本とし、legacy、positive、negative、waiver、最新証跡、安全履歴、provenance矛盾をon-disk E2Eで検証すること。
-- local全検証と最終commitのGitHub Actions `quality (20)` / `quality (24)`が成功すること。
+- local全検証と最終commitのGitHub Actions `quality (20)` / `quality (24)` / `portability (windows-24)`が成功すること。
 - cleanな隔離consumer repoでpacked packageをinstallし、init、go、disqualified、changed-only、baseline / diff、失敗時artifact契約を確認すること。
 - repository実装完了と、実cluster / 実fault injection / Lakda real acceptance / publish approvalを混同しないこと。
 

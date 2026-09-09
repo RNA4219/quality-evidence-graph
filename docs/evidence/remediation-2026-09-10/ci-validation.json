@@ -1,0 +1,57 @@
+{
+  "evidenceVersion": "qeg-remediation-ci/v1",
+  "observedOn": "2026-09-10",
+  "timeZone": "Asia/Tokyo",
+  "repository": "RNA4219/quality-evidence-graph",
+  "pullRequest": "https://github.com/RNA4219/quality-evidence-graph/pull/7",
+  "source": {
+    "headCommit": "216cd2f9b18c6b8922ea027ba4aa7aac2e323e16",
+    "baseCommitAtObservation": "f3b35d1de74b4e977595a4730af70718fd5c43da",
+    "branch": "agent/qeg-remediation-20260910"
+  },
+  "run": {
+    "id": 34414497596,
+    "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34414497596",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "jobs": [
+    {
+      "name": "quality (20)",
+      "id": 102676216255,
+      "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34414497596/job/102676216255",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-09-09T22:54:48Z",
+      "completedAt": "2026-09-09T22:57:02Z"
+    },
+    {
+      "name": "quality (24)",
+      "id": 102676216572,
+      "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34414497596/job/102676216572",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-09-09T22:54:48Z",
+      "completedAt": "2026-09-09T22:56:54Z"
+    },
+    {
+      "name": "portability (windows-24)",
+      "id": 102676216443,
+      "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34414497596/job/102676216443",
+      "status": "completed",
+      "conclusion": "success",
+      "startedAt": "2026-09-09T22:54:49Z",
+      "completedAt": "2026-09-09T22:55:41Z"
+    }
+  ],
+  "scope": {
+    "kinds": ["fixture", "isolated_consumer"],
+    "notEvaluated": ["producer実運用", "実cluster", "実fault injection", "Lakda real acceptance", "外部release approval", "publish"]
+  },
+  "localEvidence": "audit-validation.json",
+  "mergeRequirement": {
+    "requiredChecks": ["quality (20)", "quality (24)", "portability (windows-24)"],
+    "finalCommitEvidence": "https://github.com/RNA4219/quality-evidence-graph/pull/7/checks",
+    "note": "本ファイルは実装commitのCI観測記録。記録更新後の最終commitはPR latest checksで外部確認し、3 jobすべて成功したcommitだけをマージする。"
+  }
+}
