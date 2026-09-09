@@ -11797,7 +11797,7 @@ function matchingExecutions(input, testId) {
   const linked2 = new Set(input.graph.edges.filter((e) => e.kind === "evidenced_by" && e.from === testId).map((e) => e.to));
   return input.graph.nodes.filter((n) => n.kind === "execution_evidence" && (n.evidenceType === "resilience" && n.testId === testId || n.evidenceType !== "resilience" && linked2.has(n.id)));
 }
-function evaluateRequiredExecutions(input) {
+function evaluateRequiredExecutions(input, reliability) {
   const disqualifications = [];
   const blockers2 = [];
   if (!input.policy.inputContract?.requireExecutedTests) return { disqualifications, blockers: blockers2 };
@@ -11812,7 +11812,7 @@ function evaluateRequiredExecutions(input) {
     }
   }
   for (const obligation2 of input.placementPlan?.obligations ?? []) {
-    if (obligation2.gateRelevance !== "blocking" || isWaived(input, new Set(obligation2.riskIds))) continue;
+    if (obligation2.gateRelevance !== "blocking" && obligation2.changedCodeIds.length === 0 || isWaived(input, new Set(obligation2.riskIds))) continue;
     const selectedIds = [...new Set(placementsFor(input, obligation2).flatMap((p) => [...p.selectedTestIds]))];
     const tests = selectedIds.map((id) => input.graph.nodes.find((n) => n.id === id && n.kind === "test"));
     let missing2 = selectedIds.length === 0;
@@ -11821,7 +11821,10 @@ function evaluateRequiredExecutions(input) {
         missing2 = true;
         continue;
       }
-      if (test.testType === "resilience") continue;
+      if (test.testType === "resilience") {
+        if (!reliability.enabled || !reliability.drillDown.some((item) => item.testId === test.id)) missing2 = true;
+        continue;
+      }
       const evidence = matchingExecutions(input, test.id);
       if (evidence.length === 0 || evidence.some((e) => e.passed === void 0 || e.evidenceRefs.length === 0)) missing2 = true;
       for (const failed of evidence.filter((e) => e.passed === false)) blockers2.push({
@@ -13568,10 +13571,10 @@ function detectGraphIntegrity(input) {
       issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
     }
   };
-  for (const edge2 of input.graph.edges) resolve16([edge2.from, edge2.to], void 0, `/graph/edges/${edge2.id}`);
+  for (const [index, edge2] of input.graph.edges.entries()) resolve16([edge2.from, edge2.to], void 0, `/graph/edges/${index}`);
   const artifacts = new Set(input.metadata.inputArtifacts.map((a) => a.id));
-  for (const node of input.graph.nodes) {
-    const pointer = `/graph/nodes/${node.id}`;
+  for (const [index, node] of input.graph.nodes.entries()) {
+    const pointer = `/graph/nodes/${index}`;
     for (const id of node.sourceArtifactIds) if (!artifacts.has(id)) issue(pointer, `Unresolved artifact reference "${id}"`, [node.id, id]);
     if (node.kind === "requirement") resolve16(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
     if (node.kind === "acceptance_criteria") resolve16(node.requirementIds, "requirement", pointer);
@@ -13586,8 +13589,8 @@ function detectGraphIntegrity(input) {
     }
     if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve16([node.testId], "test", pointer);
   }
-  for (const node of input.graph.nodes) if (node.kind === "test_placement") {
-    const pointer = `/graph/nodes/${node.id}`;
+  for (const [index, node] of input.graph.nodes.entries()) if (node.kind === "test_placement") {
+    const pointer = `/graph/nodes/${index}`;
     resolve16(node.selectedTestIds, "test", pointer);
     if (!input.placementPlan?.obligations.some((o) => o.id === node.obligationId)) {
       issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
@@ -13602,15 +13605,15 @@ function detectGraphIntegrity(input) {
   unique2(plan.obligations, "/placementPlan/obligations");
   unique2(plan.placements, "/placementPlan/placements");
   const obligations = new Set(plan.obligations.map((o) => o.id));
-  for (const obligation2 of plan.obligations) {
-    const pointer = `/placementPlan/obligations/${obligation2.id}`;
+  for (const [index, obligation2] of plan.obligations.entries()) {
+    const pointer = `/placementPlan/obligations/${index}`;
     resolve16(obligation2.changedCodeIds, "changed_code", pointer);
     resolve16(obligation2.riskIds, "risk", pointer);
     resolve16(obligation2.requirementIds, "requirement", pointer);
     resolve16(obligation2.failureModeIds, "failure_mode", pointer);
   }
-  for (const placement of plan.placements) {
-    const pointer = `/placementPlan/placements/${placement.id}`;
+  for (const [index, placement] of plan.placements.entries()) {
+    const pointer = `/placementPlan/placements/${index}`;
     if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
     resolve16(placement.selectedTestIds, "test", pointer);
   }
@@ -13674,7 +13677,7 @@ function evaluateGate(input) {
     preflightDisqualifications: [...input.preflightDisqualifications ?? [], ...clockDqs]
   }, validWaivers);
   const reliability = evaluateReliability(context);
-  const executions = evaluateRequiredExecutions(context);
+  const executions = evaluateRequiredExecutions(context, reliability.accounting);
   const upstream = upstreamDecisions(input.graph);
   const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...upstream.blockers] };
   const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
@@ -13829,13 +13832,6 @@ import { createHash as createHash3 } from "crypto";
 import { readFile as readFile4, realpath as realpath2, stat as stat3 } from "fs/promises";
 import { isAbsolute as isAbsolute2, relative as relative2, resolve as resolve3 } from "path";
 var OPTIONAL_ADAPTERS = /* @__PURE__ */ new Set(["junit", "coverage", "sarif", "git-diff"]);
-async function isFile(path) {
-  try {
-    return (await stat3(path)).isFile();
-  } catch {
-    return false;
-  }
-}
 function hash(bytes) {
   return "sha256:" + createHash3("sha256").update(bytes).digest("hex");
 }
@@ -13849,15 +13845,13 @@ function isResilienceEvidence2(node) {
   return Boolean(node) && typeof node === "object" && node.kind === "execution_evidence" && node.evidenceType === "resilience";
 }
 function allArtifacts(input) {
-  const candidates = input.metadata.inputArtifacts.map((artifact) => ({
-    artifact,
-    required: !OPTIONAL_ADAPTERS.has(artifact.adapter)
-  }));
+  const candidate = (artifact) => {
+    const declared = input.policy.inputContract?.requiredArtifacts.some((ref) => ref.adapter === artifact.adapter && ref.kind === artifact.kind) ?? false;
+    return { artifact, required: declared || !OPTIONAL_ADAPTERS.has(artifact.adapter), enforceRequired: declared };
+  };
+  const candidates = input.metadata.inputArtifacts.map(candidate);
   if (input.evidencePackage) {
-    candidates.push(...input.evidencePackage.inputArtifactHashes.map((artifact) => ({
-      artifact,
-      required: !OPTIONAL_ADAPTERS.has(artifact.adapter)
-    })));
+    candidates.push(...input.evidencePackage.inputArtifactHashes.map(candidate));
     for (const [name, artifact] of Object.entries(input.evidencePackage.qegOutputs)) {
       if (artifact) candidates.push({ artifact, required: name !== "markdownSummary" });
     }
@@ -13879,6 +13873,7 @@ function uniqueArtifacts(input) {
     byKey.set(key, previous ? {
       artifact,
       required: previous.required || candidate.required,
+      enforceRequired: previous.enforceRequired || candidate.enforceRequired,
       requireContainedRelativePath: previous.requireContainedRelativePath || candidate.requireContainedRelativePath
     } : candidate);
   }
@@ -13888,13 +13883,15 @@ async function verifyEvidenceArtifacts(input, options) {
   const strict = options.strict ?? (input.metadata.profile === "strict" || input.metadata.profile === "ipo_controlled");
   const baseDir = resolve3(options.baseDir);
   let realBaseDir = baseDir;
+  let baseResolutionError;
   try {
     realBaseDir = await realpath2(baseDir);
-  } catch {
+  } catch (error) {
+    baseResolutionError = `Cannot realpath ${baseDir}: ${String(error)}`;
   }
   const items = [];
-  for (const { artifact, required: required2, requireContainedRelativePath } of uniqueArtifacts(input)) {
-    const failureSeverity = severity2(strict || Boolean(requireContainedRelativePath), required2);
+  for (const { artifact, required: required2, enforceRequired, requireContainedRelativePath } of uniqueArtifacts(input)) {
+    const failureSeverity = severity2(strict || Boolean(enforceRequired) || Boolean(requireContainedRelativePath), required2);
     if (!artifact.path) {
       items.push({ artifactId: artifact.id, severity: failureSeverity, code: "PATH_MISSING", message: "artifact path is missing" });
       continue;
@@ -13909,12 +13906,36 @@ async function verifyEvidenceArtifacts(input, options) {
       items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path escapes the Gate target directory" });
       continue;
     }
-    if (!await isFile(path)) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "FILE_MISSING", message: "artifact file does not exist: " + artifact.path });
+    let fileStat;
+    try {
+      fileStat = await stat3(path);
+    } catch (error) {
+      const absent = error?.code === "ENOENT";
+      items.push({
+        artifactId: artifact.id,
+        path: artifact.path,
+        severity: failureSeverity,
+        code: absent ? "FILE_MISSING" : "IO_ERROR",
+        message: absent ? "artifact file does not exist: " + artifact.path : `Cannot stat ${path}: ${String(error)}`
+      });
+      continue;
+    }
+    if (!fileStat.isFile()) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot read ${path}: artifact is not a regular file` });
       continue;
     }
     if (requireContainedRelativePath) {
-      const realArtifactPath = await realpath2(path);
+      if (baseResolutionError) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: baseResolutionError });
+        continue;
+      }
+      let realArtifactPath;
+      try {
+        realArtifactPath = await realpath2(path);
+      } catch (error) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot realpath ${path}: ${String(error)}` });
+        continue;
+      }
       const actualRelative = relative2(realBaseDir, realArtifactPath);
       if (isOutsideBase(actualRelative)) {
         items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact symlink escapes the Gate target directory" });
@@ -13924,7 +13945,14 @@ async function verifyEvidenceArtifacts(input, options) {
     if (!artifact.contentHash) {
       items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISSING", message: "artifact contentHash is missing" });
     } else {
-      const actual = hash(await readFile4(path));
+      let bytes;
+      try {
+        bytes = await readFile4(path);
+      } catch (error) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot read ${path}: ${String(error)}` });
+        continue;
+      }
+      const actual = hash(bytes);
       items.push(actual === artifact.contentHash ? { artifactId: artifact.id, path: artifact.path, severity: "pass", code: "VERIFIED", message: "artifact path and hash verified" } : { artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISMATCH", message: "artifact hash mismatch: expected " + artifact.contentHash + ", got " + actual });
     }
     if (input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {

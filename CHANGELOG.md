@@ -2,6 +2,8 @@
 
 ## 0.4.0 - Unreleased
 
+- 実行必須時のresilience評価対象漏れとadvisory配置による未実行の見落としを修正。evidence I/Oの原因保持、診断位置、出力検証失敗時の既存成果物保護を追加検証。
+
 - 明示的な入力mode・必須artifact・評価範囲を追加。旧native入力にもinputContractを要求し、空入力のgoを廃止。
 - changed_code→obligation→placementの対応、ID重複、参照切れ、有効waiver、real/mock/未実行/失敗証跡を検証。
 - RanD・code-to-gate・manual-bbのraw adapter、pure buildGraph/placeTests、対応CLIを実装。

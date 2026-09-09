@@ -36,7 +36,7 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
   }, validWaivers);
 
   const reliability = evaluateReliability(context);
-  const executions = evaluateRequiredExecutions(context);
+  const executions = evaluateRequiredExecutions(context, reliability.accounting);
   const upstream = upstreamDecisions(input.graph);
   const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...upstream.blockers] };
   const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);

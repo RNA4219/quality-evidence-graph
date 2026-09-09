@@ -10,6 +10,7 @@
     "src/types.ts"
   ],
   "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
     "docs/spec/remediation-2026-09-10.md",
     "src/gate/evaluate.ts"
   ],
@@ -19,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:2753e1aa6fd8bb09ad0f80ec34abbdc0f7cc825791f3ce536e037d033eca1629"
+  "contentHash": "sha256:042b0c72890a02ed98513aaed00e0e0f94ce1472b5c43b2e6f26c6d6d7a01a41"
 }

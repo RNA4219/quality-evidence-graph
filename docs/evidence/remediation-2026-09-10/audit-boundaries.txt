@@ -1,0 +1,20 @@
+✔ FIX-01/02: explicit native input passes; missing mode, set, graph or status never does (14.145ms)
+✔ FIX-01: each required upstream kind is independently checked, statuses do not replace artifacts (9.9757ms)
+✔ FIX-05/06: unrelated or dangling placement cannot cover a change (4.1152ms)
+✔ FIX-07: invalid, expired and unrelated waivers do not cover changes (2.9757ms)
+✔ FIX-07: planned, mock and failed executions remain distinguishable (4.1218ms)
+✔ FIX-07: selected resilience execution must be covered by its dedicated evaluator (437.0292ms)
+✔ FIX-04/18: evidence I/O failures retain operation, path and optional severity (14.3042ms)
+Own-output validation: PASS (all generated JSON artifacts passed their schemas)
+Record written to: C:\Users\ryo-n\AppData\Local\Temp\qeg-preserve-output-oel3L1/quality-evidence-record.json
+✔ FIX-10: own-output schema failure preserves every previously published artifact (67.0267ms)
+✔ FIX-08/09/10/14: negative record is schema valid, all outputs are hashed, tampering is detected (1120.0499ms)
+✔ FIX-02: init exposes a configuration requiring evidence rather than a passing demo (630.0311ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2728.1592

@@ -243,6 +243,7 @@ const currentPaths = [
   "docs/project/remediation-2026-09-10.md", "docs/spec/remediation-2026-09-10.md",
   "docs/spec/producer-adapters.md", "docs/spec/producer-schema-provenance.json",
   "docs/evidence/remediation-2026-09-10/local-validation.json",
+  "docs/evidence/remediation-2026-09-10/audit-validation.json", "docs/project/acceptance-audit-2026-09-10.md",
   "examples/raw-producer-contract/README.md", "examples/raw-producer-contract/ingest-manifest.json",
   "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs", "tests/helpers/raw-producer-fixture.mjs",
   "tools/snapshot-producer-contracts.mjs", "tools/migrate-input-contracts.mjs", "tools/migrate-retired-case-fixtures.mjs",
@@ -256,11 +257,15 @@ for (const path of currentPaths) {
 }
 Object.assign(additions["docs/project/remediation-2026-09-10.md"], {
   summary: "R01〜R06 / FIX-01〜20の現行実装・受入台帳。fixture、隔離consumer、CI、実環境未評価を分離。",
-  depsOut: ["docs/requirements.md", "docs/spec/remediation-2026-09-10.md", "docs/spec/producer-adapters.md", "docs/evidence/remediation-2026-09-10/local-validation.json", "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs"],
+  depsOut: ["docs/requirements.md", "docs/spec/remediation-2026-09-10.md", "docs/spec/producer-adapters.md", "docs/evidence/remediation-2026-09-10/local-validation.json", "docs/project/acceptance-audit-2026-09-10.md", "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs"],
 });
 Object.assign(additions["docs/spec/remediation-2026-09-10.md"], {
   summary: "明示入力、参照整合、raw生成、7層配置、出力schema/hash、診断、互換性の0.4.0仕様。",
   depsOut: ["src/input-contract.ts", "src/graph.ts", "src/placement.ts", "src/record.ts", "src/cli/pipeline.ts", "src/gate/dq/graph-integrity.ts"],
+});
+Object.assign(additions["docs/project/acceptance-audit-2026-09-10.md"], {
+  summary: "FIX-01〜20の実装・直接検証・scopeの照合。実行必須、I/O診断、出力保護の追加修正とCI未確認を記録。",
+  depsOut: ["docs/requirements.md", "docs/evidence/remediation-2026-09-10/audit-validation.json", "src/gate/dq/placement-coverage.ts", "src/gate/dq/graph-integrity.ts", "src/validation/evidence.ts", "tests/remediation-gate.test.mjs"],
 });
 Object.assign(additions["docs/spec/producer-adapters.md"], {
   summary: "3 producerの14 artifactについてraw形式、写像、固定schema、revision/hash/licenseの境界を定義。",

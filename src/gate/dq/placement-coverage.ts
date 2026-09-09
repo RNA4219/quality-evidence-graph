@@ -1,4 +1,4 @@
-import type { ChangedCodeNode, Disqualification, ExecutionEvidenceNode, GateBlocker, TestObligation, TestPlacementNode } from "../../types.js";
+import type { ChangedCodeNode, Disqualification, ExecutionEvidenceNode, GateBlocker, ReliabilityAccounting, TestObligation, TestPlacementNode } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { inputSource } from "../../input-contract.js";
 
@@ -39,7 +39,7 @@ function matchingExecutions(input: DQDetectorInput, testId: string): readonly Ex
     ((n.evidenceType === "resilience" && n.testId === testId) || (n.evidenceType !== "resilience" && linked.has(n.id))));
 }
 
-export function evaluateRequiredExecutions(input: DQDetectorInput): { disqualifications: Disqualification[]; blockers: GateBlocker[] } {
+export function evaluateRequiredExecutions(input: DQDetectorInput, reliability: ReliabilityAccounting): { disqualifications: Disqualification[]; blockers: GateBlocker[] } {
   const disqualifications: Disqualification[] = [];
   const blockers: GateBlocker[] = [];
   if (!input.policy.inputContract?.requireExecutedTests) return { disqualifications, blockers };
@@ -50,14 +50,17 @@ export function evaluateRequiredExecutions(input: DQDetectorInput): { disqualifi
     }
   }
   for (const obligation of input.placementPlan?.obligations ?? []) {
-    if (obligation.gateRelevance !== "blocking" || isWaived(input, new Set(obligation.riskIds))) continue;
+    if ((obligation.gateRelevance !== "blocking" && obligation.changedCodeIds.length === 0) || isWaived(input, new Set(obligation.riskIds))) continue;
     const selectedIds = [...new Set(placementsFor(input, obligation).flatMap(p => [...p.selectedTestIds]))];
     const tests = selectedIds.map(id => input.graph.nodes.find(n => n.id === id && n.kind === "test"));
     let missing = selectedIds.length === 0;
     for (const test of tests) {
       if (!test || test.kind !== "test" || test.deleted || test.testExecutionMode !== "real") { missing = true; continue; }
-      // Resilienceのlatest/qualificationは専用evaluatorが担当し、legacy成功へfallbackしない。
-      if (test.testType === "resilience") continue;
+      // 専用evaluatorが実際に評価したtestだけを委譲する。policy欠落・対象外を成功とみなさない。
+      if (test.testType === "resilience") {
+        if (!reliability.enabled || !reliability.drillDown.some(item => item.testId === test.id)) missing = true;
+        continue;
+      }
       const evidence = matchingExecutions(input, test.id);
       if (evidence.length === 0 || evidence.some(e => e.passed === undefined || e.evidenceRefs.length === 0)) missing = true;
       for (const failed of evidence.filter(e => e.passed === false)) blockers.push({

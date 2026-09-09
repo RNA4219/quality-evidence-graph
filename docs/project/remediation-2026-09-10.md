@@ -8,7 +8,7 @@ next_review_due: 2026-12-10
 
 # QEG改修台帳
 
-現行改修の状態は本台帳を正本とする。v0.3.1のrelease acceptanceは配布物の過去受入証跡として保持する。以前のTASK-01〜10完了表記は、build-graph/place-testsと出力契約まで完成していたことを意味しない。今回の要求→仕様→実装→受入で、機能ごとに完成を証明する。
+現行改修の状態は本台帳を正本とする。20要求の実装・試験・scopeの対応は [受入照合表](acceptance-audit-2026-09-10.md) を参照する。v0.3.1のrelease acceptanceは配布物の過去受入証跡として保持する。以前のTASK-01〜10完了表記は、build-graph/place-testsと出力契約まで完成していたことを意味しない。今回の要求→仕様→実装→受入で、機能ごとに完成を証明する。
 
 | 改修 | 要求 | 仕様 | 状態 | 実装・受入証拠 |
 |---|---|---|---|---|
@@ -31,12 +31,14 @@ next_review_due: 2026-12-10
 
 ## 検証範囲と結果
 
-- ローカルNode 24: build/typecheck、49 runtime/Action試験、既存53 fixture（Reliability / Resilience 22件）、全52診断recordの出力schema、packed tarballの隔離install・公開型・raw pipelineが成功。追加producer境界6試験も再確認済み。schema/enum、全tracked JSON、Birdseye、pack dry-run、git diff --checkが成功。
-- 実行ログとhash、対象source indexの指紋は [local-validation.json](../evidence/remediation-2026-09-10/local-validation.json) と同ディレクトリのログに保存。実行前後で既存の期待verdict/DQ/blockerは変更していない。
+- ローカルNode 24: build/typecheck、52 runtime/Action試験、既存53 fixture（Reliability / Resilience 22件）、全52診断recordの出力schema、packed tarballの隔離install・公開型・raw pipelineが成功。remediation境界10試験とproducer境界6試験を含む。schema/enum、700 tracked JSON、Birdseye 202 source、pack dry-run、git diff --checkも成功。
+- 最新の追加修正と対象source indexの指紋は [audit-validation.json](../evidence/remediation-2026-09-10/audit-validation.json) と同ディレクトリのauditログに保存。最初の改修commitの証跡は [local-validation.json](../evidence/remediation-2026-09-10/local-validation.json) に保持。実行前後で既存の期待verdict/DQ/blockerは変更していない。
 - 3 producer E2Eはproducer schemaに従うfixtureを使用。実producer実行や実環境testの受入を主張しない。固定schemaのcommit/hash/licenseは `../spec/producer-schema-provenance.json` に記録。
 - Action lifecycleは隔離consumerへの配置→正常観測→schema破損→復旧→新規hash証拠までgo。実cluster・実fault injection・Lakda real acceptance・外部release approvalは未評価。
 - 実装commit: `5bd5ba8`。作業ブランチ: `agent/qeg-remediation-20260910`。ローカルのsource index指紋と保存ログで対象を特定できる。
 - CI: 未実施。リモートへのpush待ちであり、Linux Node 20/24とWindows Node 24の結果を確認するまで総合受入は確定しない。release/tag/publishも未実施。
+
+追加の受入照合で、実行必須なのにresilience testが専用evaluatorの対象外である場合、変更のobligationがadvisoryである場合、lean/standardで明示必須artifactが不正である場合の見落としを修正した。通常optionalのwarningは維持する。I/Oのstat/read/realpath失敗はIO_ERRORで原因を残し、不正outputのschema検証失敗時には既存7成果物が変わらないことを追加試験で確認した。
 
 ## 過去の静的候補12件の対応
 
@@ -59,7 +61,7 @@ v0.3.1の原本はraw 13件（high 1 / medium 12）、accepted-design抑制1件�
 
 別途highの005 UNSAFE_DELETEはtemp fileの失敗時cleanupというaccepted-design。publish.tsに限定し、exclusive open成功後だけ所有を認め、cleanup失敗も診断する。新しい広域抑制は追加していない。
 
-2026-09-10のcode-to-gate 1.6.0再走査はraw/effective/suppressedすべて0件（run `ctg-202609091947-local`）。当時と解析器versionが異なるため、件数差だけを解消証拠にせず、上表の変更と回帰試験を対応根拠とする。
+2026-09-10のcode-to-gate 1.6.0再走査はraw/effective/suppressedすべて0件（最新run `ctg-202609092013-local`）。当時と解析器versionが異なるため、件数差だけを解消証拠にせず、上表の変更と回帰試験を対応根拠とする。
 
 ## 互換性・運用
 

@@ -1,11 +1,15 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import fs, { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
-import { evaluateGate, validateGateInput, validateOutput, upstreamInputContract, UPSTREAM_REQUIRED_ARTIFACTS } from '../dist/index.js';
+import { evaluateGate, placeTests, validateGateInput, validateOutput, verifyEvidenceArtifacts, upstreamInputContract, UPSTREAM_REQUIRED_ARTIFACTS } from '../dist/index.js';
+import { evaluateFixture } from '../dist/cli/fixture-io.js';
+import { writeOutputRecord } from '../dist/cli/record.js';
+import { createRecordArtifacts } from '../dist/record.js';
 
 const cli = resolve('dist/cli.js');
 const positive = resolve('fixtures/positive-release-go');
@@ -59,6 +63,7 @@ test('FIX-05/06: unrelated or dangling placement cannot cover a change', async (
   const second = evaluateGate(input);
   assert.ok(second.disqualifications.some(d => d.code === 'DQ-05' && d.nodeIds.includes('qeg:change-b')));
   assert.ok(second.disqualifications.some(d => d.code === 'DQ-03'));
+  assert.ok(second.disqualifications.some(d => d.code === 'DQ-03' && d.sourceRefs[0].label.startsWith('/placementPlan/placements/1:')));
   input.placementPlan.placements.pop();
   input.placementPlan.obligations.push(obligation('qeg:obligation-b', ['qeg:change-b']));
   input.placementPlan.placements.push(placement('qeg:placement-b', 'qeg:obligation-b'));
@@ -92,6 +97,9 @@ test('FIX-07: planned, mock and failed executions remain distinguishable', async
   input.placementPlan.obligations = [obligation('qeg:obligation', ['qeg:change'])];
   input.placementPlan.placements = [placement('qeg:placement', 'qeg:obligation')];
   assert.ok(evaluateGate(input).disqualifications.some(d => d.code === 'DQ-05'));
+  input.placementPlan.obligations[0].gateRelevance = 'advisory';
+  assert.ok(evaluateGate(input).disqualifications.some(d => d.code === 'DQ-05'));
+  input.placementPlan.obligations[0].gateRelevance = 'blocking';
   input.placementPlan.placements[0].selectedTestIds = ['qeg:test'];
   const selected = { id: 'qeg:test', kind: 'test', title: 'test', layer: 'unit', existing: true, testExecutionMode: 'mock', sourceArtifactIds: [], traceability };
   const evidence = { id: 'qeg:execution', kind: 'execution_evidence', title: 'execution', passed: true,
@@ -103,6 +111,69 @@ test('FIX-07: planned, mock and failed executions remain distinguishable', async
   assert.equal(evaluateGate(input).verdict, 'go');
   evidence.passed = false;
   assert.equal(evaluateGate(input).verdict, 'no_go');
+});
+
+test('FIX-07: selected resilience execution must be covered by its dedicated evaluator', async () => {
+  const target = resolve('fixtures/positive-reliability-go');
+  const input = JSON.parse(await readFile(join(target, 'gate-input.json'), 'utf8'));
+  input.policy.inputContract.requireExecutedTests = true;
+  input.placementPlan = placeTests(input.graph, input.policy);
+  const evidenceVerification = await verifyEvidenceArtifacts(input, { baseDir: target });
+  assert.equal(evidenceVerification.status, 'pass');
+  assert.equal(evaluateGate({ ...input, evidenceVerification }).verdict, 'go');
+  const policy = input.policy.reliabilityPolicy;
+  for (const nextPolicy of [undefined, { ...policy, requiredForSeverities: ['critical'] }]) {
+    input.policy.reliabilityPolicy = nextPolicy;
+    assert.equal((await validateGateInput(input)).valid, true);
+    assert.ok(evaluateGate({ ...input, evidenceVerification }).disqualifications.some(d => d.code === 'DQ-05'));
+  }
+  input.graph.nodes = input.graph.nodes.filter(n => n.kind !== 'execution_evidence');
+  input.graph.edges = input.graph.edges.filter(e => input.graph.nodes.some(n => n.id === e.from) && input.graph.nodes.some(n => n.id === e.to));
+  delete input.policy.reliabilityPolicy;
+  assert.equal((await validateGateInput(input)).valid, true);
+  assert.equal(evaluateGate({ ...input, evidenceVerification }).verdict, 'disqualified');
+});
+
+test('FIX-04/18: evidence I/O failures retain operation, path and optional severity', async t => {
+  const input = await nativeInput();
+  const artifact = input.metadata.inputArtifacts[0];
+  const path = resolve(positive, artifact.path);
+  for (const operation of ['stat', 'readFile']) {
+    const original = fs[operation];
+    const mocked = t.mock.method(fs, operation, async (...args) => {
+      if (String(args[0]) === path) throw Object.assign(new Error('permission denied (fixture)'), { code: 'EACCES' });
+      return original(...args);
+    });
+    syncBuiltinESMExports();
+    try {
+      for (const profile of ['lean', 'standard', 'strict', 'ipo_controlled']) for (const optional of [false, true]) {
+        const copy = structuredClone(input);
+        copy.metadata.profile = profile;
+        copy.metadata.inputArtifacts = [{ ...artifact, adapter: optional ? 'junit' : artifact.adapter }];
+        delete copy.evidencePackage;
+        const report = await verifyEvidenceArtifacts(copy, { baseDir: positive, strict: false });
+        assert.equal(report.status, optional ? 'warn' : 'fail');
+        assert.ok(report.items.some(i => i.code === 'IO_ERROR' && i.message.includes(path) && i.message.includes(operation === 'stat' ? 'stat' : 'read')));
+        assert.equal(report.items.some(i => i.code === 'FILE_MISSING'), false);
+        if (optional) {
+          copy.policy.inputContract.requiredArtifacts = [{ adapter: 'junit', kind: artifact.kind }];
+          assert.equal((await verifyEvidenceArtifacts(copy, { baseDir: positive, strict: false })).status, 'fail');
+        }
+      }
+    } finally { mocked.mock.restore(); syncBuiltinESMExports(); }
+  }
+});
+
+test('FIX-10: own-output schema failure preserves every previously published artifact', async () => {
+  const dir = await mkdtemp(join(tmpdir(), 'qeg-preserve-output-'));
+  await cp(positive, dir, { recursive: true });
+  const evaluated = await evaluateFixture(dir, { quiet: true });
+  await writeOutputRecord(evaluated);
+  const paths = [...createRecordArtifacts(evaluated).files.keys()];
+  const before = await Promise.all(paths.map(path => readFile(join(dir, path), 'utf8')));
+  evaluated.gateResult.verdict = 'invalid-output-verdict';
+  await assert.rejects(() => writeOutputRecord(evaluated), /Own-output validation failed/);
+  assert.deepEqual(await Promise.all(paths.map(path => readFile(join(dir, path), 'utf8'))), before);
 });
 
 test('FIX-08/09/10/14: negative record is schema valid, all outputs are hashed, tampering is detected', async () => {

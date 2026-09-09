@@ -23,10 +23,10 @@ export function detectGraphIntegrity(input: DQDetectorInput): Disqualification[]
       issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
     }
   };
-  for (const edge of input.graph.edges) resolve([edge.from, edge.to], undefined, `/graph/edges/${edge.id}`);
+  for (const [index, edge] of input.graph.edges.entries()) resolve([edge.from, edge.to], undefined, `/graph/edges/${index}`);
   const artifacts = new Set(input.metadata.inputArtifacts.map(a => a.id));
-  for (const node of input.graph.nodes) {
-    const pointer = `/graph/nodes/${node.id}`;
+  for (const [index, node] of input.graph.nodes.entries()) {
+    const pointer = `/graph/nodes/${index}`;
     for (const id of node.sourceArtifactIds) if (!artifacts.has(id)) issue(pointer, `Unresolved artifact reference "${id}"`, [node.id, id]);
     if (node.kind === "requirement") resolve(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
     if (node.kind === "acceptance_criteria") resolve(node.requirementIds, "requirement", pointer);
@@ -41,8 +41,8 @@ export function detectGraphIntegrity(input: DQDetectorInput): Disqualification[]
     }
     if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve([node.testId], "test", pointer);
   }
-  for (const node of input.graph.nodes) if (node.kind === "test_placement") {
-    const pointer = `/graph/nodes/${node.id}`;
+  for (const [index, node] of input.graph.nodes.entries()) if (node.kind === "test_placement") {
+    const pointer = `/graph/nodes/${index}`;
     resolve(node.selectedTestIds, "test", pointer);
     if (!input.placementPlan?.obligations.some(o => o.id === node.obligationId)) {
       issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
@@ -58,15 +58,15 @@ export function detectGraphIntegrity(input: DQDetectorInput): Disqualification[]
   unique(plan.obligations, "/placementPlan/obligations");
   unique(plan.placements, "/placementPlan/placements");
   const obligations = new Set(plan.obligations.map(o => o.id));
-  for (const obligation of plan.obligations) {
-    const pointer = `/placementPlan/obligations/${obligation.id}`;
+  for (const [index, obligation] of plan.obligations.entries()) {
+    const pointer = `/placementPlan/obligations/${index}`;
     resolve(obligation.changedCodeIds, "changed_code", pointer);
     resolve(obligation.riskIds, "risk", pointer);
     resolve(obligation.requirementIds, "requirement", pointer);
     resolve(obligation.failureModeIds, "failure_mode", pointer);
   }
-  for (const placement of plan.placements) {
-    const pointer = `/placementPlan/placements/${placement.id}`;
+  for (const [index, placement] of plan.placements.entries()) {
+    const pointer = `/placementPlan/placements/${index}`;
     if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
     resolve(placement.selectedTestIds, "test", pointer);
   }

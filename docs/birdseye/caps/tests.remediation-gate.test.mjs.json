@@ -6,6 +6,7 @@
   "summary": "QEG 0.4.0 remediation-gate.test の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
     "docs/project/remediation-2026-09-10.md"
   ],
   "risks": [
@@ -14,5 +15,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:13285aae5f40c78fc177f04e06a5ccdb9ed5262a1828f287334f428bd23e5f3c"
+  "contentHash": "sha256:ca451ee95483ca78de4b4bbc2845212a38f27ee36985562ac8e444f23c171caa"
 }

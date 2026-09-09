@@ -8,7 +8,7 @@ export interface EvidenceVerificationItem {
   readonly artifactId: string;
   readonly path?: string;
   readonly severity: EvidenceVerificationSeverity;
-  readonly code: "PATH_MISSING" | "PATH_OUTSIDE_BASE" | "FILE_MISSING" | "HASH_MISSING" | "HASH_MISMATCH" | "REVISION_MISMATCH" | "VERIFIED";
+  readonly code: "PATH_MISSING" | "PATH_OUTSIDE_BASE" | "FILE_MISSING" | "IO_ERROR" | "HASH_MISSING" | "HASH_MISMATCH" | "REVISION_MISMATCH" | "VERIFIED";
   readonly message: string;
 }
 export interface EvidenceVerificationOptions { readonly baseDir: string; readonly strict?: boolean; }
@@ -21,15 +21,14 @@ export interface EvidenceVerificationReport {
 interface ArtifactCandidate {
   readonly artifact: Pick<ArtifactRef, "id" | "path" | "contentHash" | "revision">;
   readonly required: boolean;
+  /** Explicit input requirements cannot be weakened by profile or diagnostic strictness. */
+  readonly enforceRequired?: boolean;
   /** Resilience raw/signal artifacts must never escape the Gate target directory. */
   readonly requireContainedRelativePath?: boolean;
 }
 
 const OPTIONAL_ADAPTERS = new Set(["junit", "coverage", "sarif", "git-diff"]);
 
-async function isFile(path: string): Promise<boolean> {
-  try { return (await stat(path)).isFile(); } catch { return false; }
-}
 function hash(bytes: Buffer): string { return "sha256:" + createHash("sha256").update(bytes).digest("hex"); }
 function severity(strict: boolean, required: boolean): "warn" | "fail" {
   return strict && required ? "fail" : "warn";
@@ -44,15 +43,13 @@ function isResilienceEvidence(node: unknown): node is ResilienceExecutionEvidenc
     (node as { evidenceType?: string }).evidenceType === "resilience";
 }
 function allArtifacts(input: QegGateInput): ArtifactCandidate[] {
-  const candidates: ArtifactCandidate[] = input.metadata.inputArtifacts.map((artifact) => ({
-    artifact,
-    required: !OPTIONAL_ADAPTERS.has(artifact.adapter),
-  }));
+  const candidate = (artifact: ArtifactRef): ArtifactCandidate => {
+    const declared = input.policy.inputContract?.requiredArtifacts.some(ref => ref.adapter === artifact.adapter && ref.kind === artifact.kind) ?? false;
+    return { artifact, required: declared || !OPTIONAL_ADAPTERS.has(artifact.adapter), enforceRequired: declared };
+  };
+  const candidates: ArtifactCandidate[] = input.metadata.inputArtifacts.map(candidate);
   if (input.evidencePackage) {
-    candidates.push(...input.evidencePackage.inputArtifactHashes.map((artifact) => ({
-      artifact,
-      required: !OPTIONAL_ADAPTERS.has(artifact.adapter),
-    })));
+    candidates.push(...input.evidencePackage.inputArtifactHashes.map(candidate));
     for (const [name, artifact] of Object.entries(input.evidencePackage.qegOutputs)) {
       if (artifact) candidates.push({ artifact, required: name !== "markdownSummary" });
     }
@@ -74,6 +71,7 @@ function uniqueArtifacts(input: QegGateInput): ArtifactCandidate[] {
     byKey.set(key, previous ? {
       artifact,
       required: previous.required || candidate.required,
+      enforceRequired: previous.enforceRequired || candidate.enforceRequired,
       requireContainedRelativePath: previous.requireContainedRelativePath || candidate.requireContainedRelativePath,
     } : candidate);
   }
@@ -84,10 +82,12 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
   const strict = options.strict ?? (input.metadata.profile === "strict" || input.metadata.profile === "ipo_controlled");
   const baseDir = resolve(options.baseDir);
   let realBaseDir = baseDir;
-  try { realBaseDir = await realpath(baseDir); } catch { /* a later file diagnostic is clearer */ }
+  let baseResolutionError: string | undefined;
+  try { realBaseDir = await realpath(baseDir); }
+  catch (error) { baseResolutionError = `Cannot realpath ${baseDir}: ${String(error)}`; }
   const items: EvidenceVerificationItem[] = [];
-  for (const { artifact, required, requireContainedRelativePath } of uniqueArtifacts(input)) {
-    const failureSeverity = severity(strict || Boolean(requireContainedRelativePath), required);
+  for (const { artifact, required, enforceRequired, requireContainedRelativePath } of uniqueArtifacts(input)) {
+    const failureSeverity = severity(strict || Boolean(enforceRequired) || Boolean(requireContainedRelativePath), required);
     if (!artifact.path) {
       items.push({ artifactId: artifact.id, severity: failureSeverity, code: "PATH_MISSING", message: "artifact path is missing" });
       continue;
@@ -102,12 +102,29 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
       items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact path escapes the Gate target directory" });
       continue;
     }
-    if (!(await isFile(path))) {
-      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "FILE_MISSING", message: "artifact file does not exist: " + artifact.path });
+    let fileStat;
+    try { fileStat = await stat(path); }
+    catch (error) {
+      const absent = (error as NodeJS.ErrnoException)?.code === "ENOENT";
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: absent ? "FILE_MISSING" : "IO_ERROR",
+        message: absent ? "artifact file does not exist: " + artifact.path : `Cannot stat ${path}: ${String(error)}` });
+      continue;
+    }
+    if (!fileStat.isFile()) {
+      items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot read ${path}: artifact is not a regular file` });
       continue;
     }
     if (requireContainedRelativePath) {
-      const realArtifactPath = await realpath(path);
+      if (baseResolutionError) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: baseResolutionError });
+        continue;
+      }
+      let realArtifactPath;
+      try { realArtifactPath = await realpath(path); }
+      catch (error) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot realpath ${path}: ${String(error)}` });
+        continue;
+      }
       const actualRelative = relative(realBaseDir, realArtifactPath);
       if (isOutsideBase(actualRelative)) {
         items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PATH_OUTSIDE_BASE", message: "resilience artifact symlink escapes the Gate target directory" });
@@ -117,7 +134,13 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
     if (!artifact.contentHash) {
       items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISSING", message: "artifact contentHash is missing" });
     } else {
-      const actual = hash(await readFile(path));
+      let bytes;
+      try { bytes = await readFile(path); }
+      catch (error) {
+        items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot read ${path}: ${String(error)}` });
+        continue;
+      }
+      const actual = hash(bytes);
       items.push(actual === artifact.contentHash
         ? { artifactId: artifact.id, path: artifact.path, severity: "pass", code: "VERIFIED", message: "artifact path and hash verified" }
         : { artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISMATCH", message: "artifact hash mismatch: expected " + artifact.contentHash + ", got " + actual });

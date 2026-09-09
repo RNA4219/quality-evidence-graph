@@ -56,6 +56,7 @@ producer固有の対応fieldと確認した契約versionは実装と同時に `d
 - graph node/edgeおよびplanのID重複・未解決参照はDQ-03。testIdだけで判定する既存resilience joinは変更せず、存在するevidenced_byの矛盾検出を維持する。
 - waiverはvalidateWaiverの結果とlinkedRiskIdsを使い、対象changed_codeにつながるriskを持つことを要求する。valid入力フラグや別対象のwaiverで不足を解消しない。
 - requireExecutedTests=trueでは、選択されたreal testに対応する成功execution_evidenceが必要。未実行はDQ、実行失敗はno_go要因とし、mockを成功数に含めない。計画作成だけで実行済みと主張しない。
+- 変更に紐づくobligationはadvisory/informationalでも実行必須設定を満たす。resilience testの実行資格は専用evaluatorへ委譲するが、policy欠落・対象severity外などで実際に評価されなかったtestはDQ-05。最新証跡・signal・安全性の既存DQ/blockerは維持する。
 
 ## 出力・検証
 
@@ -69,6 +70,8 @@ producer固有の対応fieldと確認した契約versionは実装と同時に `d
 ## 保守性・互換性
 
 - 任意ファイルのENOENTはabsenceとして扱い、EACCES・不正JSON・その他I/O failureは対象pathと操作を報告する。
+- evidence verifierのstat/read/realpath失敗はIO_ERRORとして原因を保持し、必須artifactはDQ-06、optional artifactはwarningへ渡す。権限エラーをFILE_MISSINGへ置換しない。
+- inputContractに明示した必須artifactはlean/standardを含む全profileでfailとし、診断のstrict=falseでもwarningへ弱めない。通常optionalのadapterを明示的な必須集合へ追加した場合も同じ扱いとする。
 - evidence-normalize、report formatter、policy lint、reliability helpers、migration scriptは責務に応じて分割する。CLI/API facadeと出力契約を維持する。
 - 静的解析はraw/effective/severity/抑制を分ける。accepted-designの抑制は対象・理由・owner・短期expiry・再確認条件を持つ。migration専用とruntimeのリスクを分離する。
 - 旧fixtureは明示したnative policyへ移行する。期待値の更新は受入条件の変更理由と一緒に記録し、任意の新結果を自動承認する更新コマンドを作らない。

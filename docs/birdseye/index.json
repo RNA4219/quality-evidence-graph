@@ -535,7 +535,7 @@
         "src/types.ts"
       ],
       "mtime": "00015",
-      "contentHash": "sha256:93a07598bd4e61b63c66efa0d9635f8881a07f672e9d1b2f338d321353e56529"
+      "contentHash": "sha256:c4055a8c6f0edca1f44b121cc3ed6c3c79f5922a6ad5aad689136f4b838d6318"
     },
     "src/cli/report/model.ts": {
       "role": "report-model",
@@ -674,7 +674,7 @@
         "src/types.ts"
       ],
       "mtime": "00015",
-      "contentHash": "sha256:ae69501ef1d9afbbe28fe8ef5e69225c4a46cd96a8e3b5e5944bcbf4c5c22d29"
+      "contentHash": "sha256:13af55396507dbea75aeb382c68c07e7bdf92f3cc0fc45bb3e5b051d2c194239"
     },
     "tests/runtime.test.mjs": {
       "role": "runtime-contract-tests",
@@ -1565,7 +1565,7 @@
         "src/types.ts"
       ],
       "mtime": "00015",
-      "contentHash": "sha256:2753e1aa6fd8bb09ad0f80ec34abbdc0f7cc825791f3ce536e037d033eca1629"
+      "contentHash": "sha256:042b0c72890a02ed98513aaed00e0e0f94ce1472b5c43b2e6f26c6d6d7a01a41"
     },
     "src/gate/dq/helpers.ts": {
       "role": "helpers",
@@ -1610,7 +1610,7 @@
         "src/types.ts"
       ],
       "mtime": "00015",
-      "contentHash": "sha256:f9c9d8bf558637e707ebadddeff421bec32b12ae57ec8f64f3aa651110777b35"
+      "contentHash": "sha256:42f8c8ac4e071bb47d9a33ef03e965150aa43588b29e1f45283aae115edf17bb"
     },
     "src/gate/dq/source-refs.ts": {
       "role": "source-refs",
@@ -1972,11 +1972,12 @@
         "docs/spec/remediation-2026-09-10.md",
         "docs/spec/producer-adapters.md",
         "docs/evidence/remediation-2026-09-10/local-validation.json",
+        "docs/project/acceptance-audit-2026-09-10.md",
         "tests/remediation-gate.test.mjs",
         "tests/producer-pipeline.test.mjs"
       ],
       "mtime": "00015",
-      "contentHash": "sha256:fff91d54c439d44830d544f0fee826f361a7f8a7b4d93c7bbcbf1ed00dc2e81c"
+      "contentHash": "sha256:d28205385c846a808d6d3f8c7d79a9cb29ac238eb2b0d4b898b2a940526d04f0"
     },
     "docs/spec/remediation-2026-09-10.md": {
       "role": "remediation-2026-09-10",
@@ -1991,7 +1992,7 @@
         "src/gate/dq/graph-integrity.ts"
       ],
       "mtime": "00015",
-      "contentHash": "sha256:02c94c18abb3f6063525099aabb04ca4c14e7aa621a4edeab85603dfee4e43f8"
+      "contentHash": "sha256:032aa0e39fc609bd910d76c2152c8027fc8fca429c8b7fdd53a58d726f4d954a"
     },
     "docs/spec/producer-adapters.md": {
       "role": "producer-adapters",
@@ -2030,7 +2031,7 @@
       "caps": "docs/birdseye/caps/tests.remediation-gate.test.mjs.json",
       "depsOut": [],
       "mtime": "00015",
-      "contentHash": "sha256:13285aae5f40c78fc177f04e06a5ccdb9ed5262a1828f287334f428bd23e5f3c"
+      "contentHash": "sha256:ca451ee95483ca78de4b4bbc2845212a38f27ee36985562ac8e444f23c171caa"
     },
     "tests/producer-pipeline.test.mjs": {
       "role": "producer-pipeline.test",
@@ -2100,7 +2101,7 @@
       "caps": "docs/birdseye/caps/tools.update-birdseye.mjs.json",
       "depsOut": [],
       "mtime": "00015",
-      "contentHash": "sha256:1877871d3453a39b91d0009ad68aee3b3d2b2c1b04d77cbeab85ec4fa2a7cc01"
+      "contentHash": "sha256:553e517a1702aa9a203511debcbdf4a6363adfc5963e1b6bf8682a8657c547f8"
     },
     "tools/birdseye-check.mjs": {
       "role": "birdseye-check",
@@ -2114,6 +2115,27 @@
       "caps": "docs/birdseye/caps/docs.evidence.remediation-2026-09-10.local-validation.json.json",
       "mtime": "00015",
       "contentHash": "sha256:346b31c251bec5ff9ab8b4dbf3707aec3594552d9e3c115524feb4e5ab8e93f8"
+    },
+    "docs/evidence/remediation-2026-09-10/audit-validation.json": {
+      "role": "audit-validation",
+      "caps": "docs/birdseye/caps/docs.evidence.remediation-2026-09-10.audit-validation.json.json",
+      "mtime": "00015",
+      "contentHash": "sha256:5694ee923b93b8f3dbfc36dc5871d21a6febd06cb115db8e2d9e69b6c1e96cd3"
+    },
+    "docs/project/acceptance-audit-2026-09-10.md": {
+      "role": "acceptance-audit-2026-09-10",
+      "caps": "docs/birdseye/caps/docs.project.acceptance-audit-2026-09-10.md.json",
+      "summary": "FIX-01〜20の実装・直接検証・scopeの照合。実行必須、I/O診断、出力保護の追加修正とCI未確認を記録。",
+      "depsOut": [
+        "docs/requirements.md",
+        "docs/evidence/remediation-2026-09-10/audit-validation.json",
+        "src/gate/dq/placement-coverage.ts",
+        "src/gate/dq/graph-integrity.ts",
+        "src/validation/evidence.ts",
+        "tests/remediation-gate.test.mjs"
+      ],
+      "mtime": "00015",
+      "contentHash": "sha256:65d864daa01b082a9c15408231f91466c9eb5d7e50f3a26ba16c65988e45ecc0"
     }
   },
   "edges": [
@@ -4644,6 +4666,34 @@
     [
       "docs/project/remediation-2026-09-10.md",
       "docs/evidence/remediation-2026-09-10/local-validation.json"
+    ],
+    [
+      "docs/project/remediation-2026-09-10.md",
+      "docs/project/acceptance-audit-2026-09-10.md"
+    ],
+    [
+      "docs/project/acceptance-audit-2026-09-10.md",
+      "docs/requirements.md"
+    ],
+    [
+      "docs/project/acceptance-audit-2026-09-10.md",
+      "docs/evidence/remediation-2026-09-10/audit-validation.json"
+    ],
+    [
+      "docs/project/acceptance-audit-2026-09-10.md",
+      "src/gate/dq/placement-coverage.ts"
+    ],
+    [
+      "docs/project/acceptance-audit-2026-09-10.md",
+      "src/gate/dq/graph-integrity.ts"
+    ],
+    [
+      "docs/project/acceptance-audit-2026-09-10.md",
+      "src/validation/evidence.ts"
+    ],
+    [
+      "docs/project/acceptance-audit-2026-09-10.md",
+      "tests/remediation-gate.test.mjs"
     ]
   ]
 }
