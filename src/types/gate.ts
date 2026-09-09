@@ -8,6 +8,7 @@ import type {
   StableId,
 } from "./primitives.js";
 import type { QegMetadata, SourceRef } from "./evidence.js";
+import type { EvaluationScope, InputContract } from "./ingest.js";
 
 export interface ExitCodePolicy {
   readonly go: 0;
@@ -62,6 +63,8 @@ export interface ReliabilityPolicy {
 }
 
 export interface GatePolicy {
+  /** 旧型の読込互換のためoptional。未指定の評価はDQ-01。 */
+  readonly inputContract?: InputContract;
   readonly policyId: string;
   readonly policyHash: string;
   readonly profile: GateProfile;
@@ -164,6 +167,7 @@ export interface ReliabilityAccountingDisabled {
 export type ReliabilityAccounting = ReliabilityAccountingEnabled | ReliabilityAccountingDisabled;
 
 export interface GateResult {
+  readonly evaluationScope?: EvaluationScope;
   readonly metadata: QegMetadata;
   readonly verdict: GateVerdict;
   readonly reasons: readonly string[];

@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-required-connector-contract",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-required-connector-contract",
       "status": "gate_failed",
       "exitCode": 2,

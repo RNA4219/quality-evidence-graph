@@ -3,6 +3,7 @@ import { cp, mkdtemp, readFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import { validateOutput } from "../dist/index.js";
 
 const cli = resolve("dist/cli.js");
 const manifest = JSON.parse(await readFile("fixtures/manifest.json", "utf-8"));
@@ -43,6 +44,28 @@ function assertSourceRefs(items, fixtureName, kind) {
       fixtureName + " " + kind + " " + (item.code ?? item.id) + " lacks sourceRefs",
     );
   }
+}
+
+async function assertRecordOutputs(fixture, target, gate) {
+  const tempRoot = await mkdtemp(join(tmpdir(), "qeg-fixture-record-"));
+  const copiedTarget = join(tempRoot, fixture.name);
+  await cp(target, copiedTarget, { recursive: true });
+  const record = run(["record", copiedTarget]);
+  assert.equal(record.status, commandExit(fixture, "record", fixture.expected.exitCode), `${fixture.name} record\n${record.stdout}\n${record.stderr}`);
+  const schemas = { "qeg.bundle.json": "qeg.bundle.schema.json", "test-placement-plan.json": "test-placement-plan.schema.json", "gate-verdict.json": "gate-verdict.schema.json",
+    "quality-evidence-record.json": "quality-evidence-record.schema.json", "output-record.json": "quality-evidence-record.schema.json", "output-manifest.json": "output-manifest.schema.json" };
+  for (const [file, schema] of Object.entries(schemas)) {
+    const output = parseJson(`${fixture.name} ${file}`, await readFile(join(copiedTarget, file), "utf8"));
+    const validation = await validateOutput(output, schema);
+    assert.equal(validation.valid, true, JSON.stringify({ fixture: fixture.name, file, issues: validation.issues }));
+  }
+  const actualRecord = parseJson(fixture.name + " output", await readFile(join(copiedTarget, "output-record.json"), "utf8"));
+  const expectedRecord = parseJson(fixture.name + " expected output", await readFile(join(target, "output-record.json"), "utf8"));
+  assert.deepEqual(actualRecord, expectedRecord, fixture.name + " output record");
+  assert.deepEqual(actualRecord.gate, gate);
+  assertSourceRefs(actualRecord.gate.disqualifications, fixture.name, "DQ");
+  assertSourceRefs(actualRecord.gate.blockers, fixture.name, "blocker");
+  return actualRecord;
 }
 
 assert.ok(manifest.fixtures.length > 0, "fixture manifest must not be empty");
@@ -93,6 +116,7 @@ for (const fixture of manifest.fixtures) {
   );
   const gateJson = parseJson(fixture.name + " gate", gate.stdout);
   assert.equal(gateJson.verdict, fixture.expected.verdict);
+  const actualRecord = await assertRecordOutputs(fixture, target, gateJson);
 
   if (!isReliabilityFixture(fixture.name)) continue;
   reliabilityCount += 1;
@@ -176,24 +200,6 @@ for (const fixture of manifest.fixtures) {
     fixture.name + " snapshot\n" + snapshot.stdout + "\n" + snapshot.stderr,
   );
 
-  const tempRoot = await mkdtemp(join(tmpdir(), "qeg-fixture-record-"));
-  const copiedTarget = join(tempRoot, fixture.name);
-  await cp(target, copiedTarget, { recursive: true });
-  const record = run(["record", copiedTarget]);
-  assert.equal(
-    record.status,
-    commandExit(fixture, "record", fixture.expected.exitCode),
-    fixture.name + " record\n" + record.stdout + "\n" + record.stderr,
-  );
-  const actualRecord = parseJson(
-    fixture.name + " generated output-record",
-    await readFile(join(copiedTarget, "output-record.json"), "utf-8"),
-  );
-  const expectedRecord = parseJson(
-    fixture.name + " expected output-record",
-    await readFile(join(target, "output-record.json"), "utf-8"),
-  );
-  assert.deepEqual(actualRecord, expectedRecord, fixture.name + " output record");
   assert.deepEqual(actualRecord.gate.reliability, gateJson.reliability);
   assert.deepEqual(actualRecord.gate.disqualifications, gateJson.disqualifications);
   assert.deepEqual(actualRecord.gate.blockers, gateJson.blockers);

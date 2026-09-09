@@ -1,51 +1,32 @@
 {
   "id": "src/cli.ts",
   "role": "cli-entrypoint",
-  "public_api": [
-    "qeg validate",
-    "qeg gate",
-    "qeg record",
-    "qeg report",
-    "qeg doctor",
-    "qeg explain",
-    "qeg schema-check",
-    "qeg enum-check",
-    "qeg init",
-    "qeg snapshot",
-    "qeg baseline",
-    "qeg evidence",
-    "qeg policy",
-    "qeg repro-bundle",
-    "qeg check"
-  ],
-  "summary": "QEG CLI entrypoint。コマンド名を各 CLI module へ dispatch し、unknown command と missing fixture usage を処理する。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 cli-entrypoint の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "src/cli/report.ts",
+    "src/cli/baseline.ts",
+    "src/cli/check.ts",
+    "src/cli/commands.ts",
     "src/cli/doctor.ts",
     "src/cli/dq-explain.ts",
-    "src/cli/schema-check.ts",
     "src/cli/enum-check.ts",
-    "src/cli/init.ts",
-    "src/cli/snapshot.ts",
-    "src/cli/baseline.ts",
     "src/cli/evidence-verify.ts",
+    "src/cli/init.ts",
+    "src/cli/pipeline.ts",
     "src/cli/policy-lint.ts",
+    "src/cli/report.ts",
     "src/cli/repro-bundle.ts",
-    "src/cli/check.ts"
+    "src/cli/schema-check.ts",
+    "src/cli/snapshot.ts",
+    "src/version.ts"
   ],
-  "deps_in": [
-    "package.json",
-    "README.md"
-  ],
+  "deps_in": [],
   "risks": [
-    "command wiring が commands.ts とずれると npm scripts や GitHub Action の entrypoint が動かない"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run build",
-    "node dist/cli.js explain DQ-15",
-    "node dist/cli.js schema-check",
-    "node dist/cli.js check fixtures/positive-release-go"
+    "npm test"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:09ea9ead0e500ffdd53d4068dfaba01b06ef9046c69c91bfcef23d7f2eea5429"
+  "contentHash": "sha256:2bd951a26c550626b116301a3d3238dc6b4f9735abfe959f5b30dbc30f83975b"
 }

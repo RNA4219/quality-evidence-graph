@@ -1,0 +1,30 @@
+{
+  "id": "src/cli/pipeline.ts",
+  "role": "pipeline",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 pipeline の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts",
+    "src/cli/fixture-io.ts",
+    "src/cli/output-files.ts",
+    "src/cli/raw-ingest.ts",
+    "src/graph.ts",
+    "src/placement.ts",
+    "src/record.ts",
+    "src/types.ts",
+    "src/validation/output.ts",
+    "src/validation/schema.ts"
+  ],
+  "deps_in": [
+    "docs/spec/remediation-2026-09-10.md",
+    "src/cli.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:dd03de74017ea0027779dd8563aa1f3a294d27b583561cf01b631ae03683db09"
+}

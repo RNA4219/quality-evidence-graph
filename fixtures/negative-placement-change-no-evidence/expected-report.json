@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-placement-change-no-evidence",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-placement-change-no-evidence",
       "status": "gate_failed",
       "exitCode": 2,

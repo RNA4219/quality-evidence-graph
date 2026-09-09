@@ -16,10 +16,10 @@
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
 4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
-5. `docs/release/acceptance-2026-07-20-v0.3.1.md` - 現在の総合完成判定
+5. `docs/project/remediation-2026-09-10.md` - 現行改修の状態と受入証拠
 6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
 
-Current release: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)
+開発版: 0.4.0（未公開）。過去の配布版: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)。現行の受入状態は[改修台帳](docs/project/remediation-2026-09-10.md)を参照。
 
 フォーカス手順:
 
@@ -34,9 +34,9 @@ Current release: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)
 - 要求正本は `docs/requirements.md`。
 - controlled governance の実装仕様正本は `docs/spec/`。
 - public TypeScript contract は `src/types.ts` facade から辿る。
-- CLI contract は `validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`、`baseline audit`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`evidence verify`、`evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>`、`policy lint`、`repro-bundle`、`check`、`snapshot`、`init`。
+- CLI contract は `build-graph <target-dir>`、`place-tests <target-dir>`、`validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`、`baseline audit`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`evidence verify`、`evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>`、`policy lint`、`repro-bundle`、`check`、`snapshot`、`init`。
 - `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
-- `gate-input.json` 欠落・invalid は CLI failure として exit code `1`。
+- `gate-input.json` 欠落・不正JSON・envelope欠落は exit `1`。解釈可能な必須componentのschema違反は DQ-01 / exit `2`。
 - `report` は複数 target を最後まで評価し、CLI failure / DQ / blocker / human review を累積レポートとして出す。
 - DQ は最優先で、waiver では DQ を消せない。
 - `output-record.json` は own-output validation の証跡として扱う。
@@ -49,8 +49,12 @@ Current release: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)
 - fixture regression は fixtures/manifest.json を正本として保持。
 - Test Placement Plan は `placement_changes[]` により manual→automated の引退、replacement 証跡、policy、revert 条件を監査可能に記録できる。
 - test node は `testExecutionMode=real|mock` を持ち、mock test は graph に残しても Gate 証跡の件数・強度・green 回数・risk coverage には算入しない。
-- `code-to-gate` findings は 0 を維持する方針。
+- `code-to-gate` はraw/effective/抑制を区別し、effective high/criticalを0にする。MEDIUM候補は処理結果を台帳へ記録する。
 - Gate evaluator、CLI、types は facade + internal modules に分割済み。
+
+0.4.0では明示したinputContract、3 producerのraw adapter、pure `buildGraph` / `placeTests`、全JSONの出力schema検証を追加した。`record`は4 JSONとMarkdown、互換alias、hash manifestを生成する。`init`は証拠未投入ならDQ-01になり、workflowはインストール済み配布物のCLI・schema・licenseを含むlocal Actionを使う。要求第22節、[改修仕様](docs/spec/remediation-2026-09-10.md)、[改修台帳](docs/project/remediation-2026-09-10.md)を参照。
+
+raw入力の例は[examples/raw-producer-contract](examples/raw-producer-contract/README.md)。評価範囲はfixtureとして明示してあり、producerを本番実行した証拠ではない。新しいinputContractを持たない旧native入力は実行時DQ-01になる。
 
 ## Validation Commands
 
@@ -111,6 +115,8 @@ node C:\Users\ryo-n\Codex_dev\code-to-gate\dist\cli.js analyze C:\Users\ryo-n\Co
 - [README_EN.md](README_EN.md)
 
 ## 0.3.1 release contract
+
+この節は過去の配布契約。0.4.0の実装・受入状態は改修台帳を正本とし、tag / release / publishはまだ実行していない。
 
 v0.3.1 is distributed through GitHub Release and a self-contained GitHub Action. The default Action path executes the bundled CLI without npm registry or `npx` access. `npm run test:release-lifecycle` proves change → risk → test → isolated deployment → observation → fault → recovery → new evidence. See [the v0.3.1 acceptance record](docs/release/acceptance-2026-07-20-v0.3.1.md).
 

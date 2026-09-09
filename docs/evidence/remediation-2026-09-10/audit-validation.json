@@ -1,0 +1,108 @@
+{
+  "evidenceVersion": "qeg-remediation-audit/v1",
+  "observedAt": "2026-09-09T20:16:25.044Z",
+  "packageVersion": "0.4.0",
+  "qegVersion": "0.2",
+  "nodeVersion": "v24.11.0",
+  "source": {
+    "baseCommit": "60c675d",
+    "branch": "agent/qeg-remediation-20260910",
+    "indexEntriesSha256": "sha256:36560ee76729b032b5f553728e9f9d8c23cde0bc806d3114d852131c52dfde35",
+    "command": "git ls-files -s -- src schemas tests tools fixtures qeg-report-action package.json package-lock.json examples"
+  },
+  "requirementAudit": "../../project/acceptance-audit-2026-09-10.md",
+  "scope": {
+    "kinds": [
+      "fixture",
+      "isolated_consumer"
+    ],
+    "notEvaluated": [
+      "実cluster",
+      "実fault injection",
+      "Lakda real acceptance",
+      "外部release approval",
+      "publish"
+    ]
+  },
+  "checks": {
+    "runtime": {
+      "passed": 52,
+      "failed": 0
+    },
+    "remediationBoundaries": {
+      "passed": 10,
+      "failed": 0
+    },
+    "fixtures": {
+      "passed": 53,
+      "resilience": 22,
+      "schemaValidatedRecords": 52
+    },
+    "publicTypes": "passed",
+    "packedConsumer": "passed",
+    "actionLifecycle": "go",
+    "outputPreservationOnSchemaFailure": "passed",
+    "static": {
+      "tool": "code-to-gate",
+      "version": "1.6.0",
+      "runId": "ctg-202609092013-local",
+      "raw": 0,
+      "effective": 0,
+      "suppressed": 0
+    },
+    "localGates": {
+      "birdseye": {
+        "generation": "00015",
+        "sources": 202
+      },
+      "trackedJson": 700,
+      "packDryRun": {
+        "files": 1007,
+        "requiredFilesPresent": true
+      },
+      "diffCheck": "passed"
+    }
+  },
+  "logs": [
+    {
+      "path": "audit-runtime.txt",
+      "normalizedLfSha256": "sha256:3af71ff5dd9f7b276a4e02ef0f6e791eb6fe10c891ce5571bf18e585cb7f259a"
+    },
+    {
+      "path": "audit-boundaries.txt",
+      "normalizedLfSha256": "sha256:7d3e15d8a752fe191e807e8281ebde6415e19c16c21e1f3b819dc1e6121e62d7"
+    },
+    {
+      "path": "audit-fixtures.txt",
+      "normalizedLfSha256": "sha256:7c0d4ce063b619efc24cfbd5f18645900a6772fc88363b7f66a75dbd53109085"
+    },
+    {
+      "path": "audit-package.txt",
+      "normalizedLfSha256": "sha256:5e83a835b49fd871f35cb54ff5d24ccec799d12f3ad280723fc9f39590f7f4bb"
+    },
+    {
+      "path": "audit-build.txt",
+      "normalizedLfSha256": "sha256:2301eb311404e1b866ab4074cc9b3e5cc23c52dd5eee6f41eabefe60fc1f94bc"
+    },
+    {
+      "path": "audit-schema-enum.txt",
+      "normalizedLfSha256": "sha256:4a94669a4e02152061d643065cbc477c3b62756479223f7a63447beb7d88eb81"
+    },
+    {
+      "path": "audit-lifecycle.txt",
+      "normalizedLfSha256": "sha256:94190cb4b462a1ee16436ff63cac3d2e4bb3ce4db850aa05423b46c918bfe8b4"
+    },
+    {
+      "path": "audit-static.md",
+      "normalizedLfSha256": "sha256:49b41b813ee8900fd53e80ab3f6d1a6ca9fc865fa1524d48a317c78563e06ec2"
+    }
+  ],
+  "ci": {
+    "status": "pending_external_upload_approval",
+    "required": [
+      "quality (20)",
+      "quality (24)",
+      "portability (windows-24)"
+    ]
+  }
+}

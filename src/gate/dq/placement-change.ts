@@ -66,11 +66,14 @@ function detectManualScriptedOracleGaps(input: DQDetectorInput): Disqualificatio
   for (const placement of testPlacementNodes(input)) {
     if (placement.primaryLayer !== "manual-scripted") continue;
 
-    const hasAcceptableOracle = input.evidencePackage?.manualEvidence.some(
+    const selected = placement.selectedTestIds.map(id => input.graph.nodes.find(n => n.id === id));
+    const selectedOracles = selected.length > 0 && selected.every(n => n?.kind === "test" && n.testType !== "resilience" &&
+      n.oracleType && n.oracleType !== "missing" && (n.oracleRefs?.length ?? 0) > 0 && (n.expectedResults?.length ?? 0) > 0);
+    const hasAcceptableOracle = selectedOracles || (input.policy.inputContract?.mode !== "upstream_artifacts" && (input.evidencePackage?.manualEvidence.some(
       (manual) => manual.oracleRefs.some((oracle) => oracle.evidenceKind === "human_review")
     ) || placement.candidateScores.some(
       (score) => score.sourceRefs.some((sourceRef) => sourceRef.label?.includes("oracle"))
-    );
+    )));
     if (!hasAcceptableOracle) {
       disqualifications.push({
         code: "DQ-14" as DisqualificationCode,

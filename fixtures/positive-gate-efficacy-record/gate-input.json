@@ -13,7 +13,10 @@
         "contentHash": "sha256:8a84019ed0de8d26b53629ee8ba9b3464d902424544005f9feb89717b6e8303e",
         "revision": "refs/heads/main"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -30,7 +33,10 @@
           "contentHash": "sha256:8a84019ed0de8d26b53629ee8ba9b3464d902424544005f9feb89717b6e8303e",
           "revision": "refs/heads/main"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -108,6 +114,32 @@
       "conditional_go": 2,
       "no_go": 2,
       "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "positive-gate-efficacy-record",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-positive-gate-efficacy-record",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
     }
   },
   "waivers": [],
@@ -190,6 +222,32 @@
         "conditional_go": 2,
         "no_go": 2,
         "disqualified": 2
+      },
+      "inputContract": {
+        "mode": "native_graph",
+        "requiredArtifacts": [
+          {
+            "adapter": "qeg-native",
+            "kind": "test_model"
+          }
+        ],
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "positive-gate-efficacy-record",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "requireExecutedTests": false,
+        "sourceRefs": [
+          {
+            "id": "qeg:fixture-contract-positive-gate-efficacy-record",
+            "path": "gate-input.json",
+            "label": "/policy/inputContract"
+          }
+        ]
       }
     },
     "waivers": [],
@@ -263,7 +321,10 @@
           "contentHash": "sha256:8a84019ed0de8d26b53629ee8ba9b3464d902424544005f9feb89717b6e8303e",
           "revision": "refs/heads/main"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []

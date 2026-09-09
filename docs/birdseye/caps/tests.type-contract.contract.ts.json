@@ -1,10 +1,12 @@
 {
   "id": "tests/type-contract/contract.ts",
   "role": "public-type-contract",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
+  "summary": "QEG 0.4.0 public-type-contract の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types/graph.ts"
+  ],
   "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
@@ -12,5 +14,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:880edc2e6fa9be851f34c3e9306e66a07620125ba47f8435b24df556c57111f8"
+  "contentHash": "sha256:1c5a6071806ba09d2c4f9f68ed81fb5dbc83f7fb54dd9e56b70efe69a8f103b6"
 }

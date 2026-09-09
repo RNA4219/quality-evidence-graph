@@ -4,6 +4,7 @@ import type {
   GateBlocker,
   GateVerdict,
   ReliabilityAccounting,
+  EvaluationScope,
   StableId,
 } from "../../types.js";
 import type { ReportSelection } from "./change-selection.js";
@@ -39,6 +40,7 @@ export interface ReportExpectedComparison {
 }
 
 export interface ReportTargetResult {
+  readonly evaluationScope?: EvaluationScope;
   readonly target: string;
   readonly status: ReportTargetStatus;
   readonly exitCode: number;

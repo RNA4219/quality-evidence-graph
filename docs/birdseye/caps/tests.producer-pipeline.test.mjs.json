@@ -1,0 +1,20 @@
+{
+  "id": "tests/producer-pipeline.test.mjs",
+  "role": "producer-pipeline.test",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 producer-pipeline.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/raw-producer-fixture.mjs"
+  ],
+  "deps_in": [
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:d3e4497f5076c00e24e8b4a300f9d314cba49b1347d243c020c58648c2878506"
+}

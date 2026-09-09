@@ -1,0 +1,20 @@
+{
+  "id": "src/gate/verdict/reasons.ts",
+  "role": "reasons",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 reasons の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate/verdict.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:cbf880d41d8af608bba2085d8edea3aa386ed6daf90637027eb810497033cef3"
+}

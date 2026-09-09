@@ -4,18 +4,17 @@
   "public_api": [],
   "summary": "manual-bb-test-harness、code-to-gate v1.4.1、RanD KanoMode の証跡で IPO 水準の仕様書実装前 Gate を記録し、仕様内容 / 正式実装前 / 実装着手 Gate を Go、IPO release Gate を No-Go と判定する。",
   "deps_out": [
-    "docs/spec/acceptance.md",
-    "docs/project/runbook.md",
     "docs/project/evaluation.md",
+    "docs/project/runbook.md",
+    "docs/spec/acceptance.md",
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md",
     "docs/spec/code-to-gate-2026-06-03/release-readiness.json",
+    "docs/spec/implementation-gate-2026-06-03.md",
     "docs/spec/kano-mode-2026-06-03/kano.json",
     "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json"
   ],
   "deps_in": [
-    "docs/spec/index.md",
-    "docs/spec/review-2026-06-03.md",
-    "docs/agent/HUB.codex.md"
+    "docs/spec/index.md"
   ],
   "risks": [
     "未追跡の仕様書を controlled source of truth と誤認すると IPO 統制が壊れる",
@@ -30,6 +29,6 @@
     "code-to-gate analyze/readiness/export",
     "RanD KanoMode build_audit_artifacts"
   ],
-  "generation": "00014",
+  "generation": "00015",
   "contentHash": "sha256:937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b"
 }

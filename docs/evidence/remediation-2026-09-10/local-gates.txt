@@ -1,0 +1,48 @@
+
+> @quality-harness/quality-evidence-graph@0.4.0 schema-check
+> node dist/cli.js schema-check
+
+QEG Schema Check
+Generated at: 2026-09-09T19:47:26.454Z
+Overall: PASS
+
+- PASS schema:action-lifecycle-evidence.schema.json: compiled
+- PASS schema:approval-evidence.schema.json: compiled
+- PASS schema:evidence-package.schema.json: compiled
+- PASS schema:gate-input.schema.json: compiled
+- PASS schema:gate-policy.schema.json: compiled
+- PASS schema:gate-verdict.schema.json: compiled
+- PASS schema:ingest-manifest.schema.json: compiled
+- PASS schema:input-contract.schema.json: compiled
+- PASS schema:output-manifest.schema.json: compiled
+- PASS schema:qeg.bundle.schema.json: compiled
+- PASS schema:quality-evidence-record.schema.json: compiled
+- PASS schema:reliability.schema.json: compiled
+- PASS schema:resilience-normalize-context.schema.json: compiled
+- PASS schema:retention.schema.json: compiled
+- PASS schema:shared-defs.schema.json: compiled
+- PASS schema:test-placement-plan.schema.json: compiled
+- PASS schema:waiver.schema.json: compiled
+
+> @quality-harness/quality-evidence-graph@0.4.0 enum-check
+> node dist/cli.js enum-check
+
+QEG Type/Schema Enum Check
+Generated at: 2026-09-09T19:47:27.018Z
+Overall: PASS
+
+- PASS GateProfile
+- PASS GateVerdict
+- PASS DisqualificationCode
+- PASS EvidenceKind
+- PASS TestType
+- PASS ResilienceAdapter
+- PASS ResilienceFaultModel
+- PASS SignalPhase
+- PASS SignalSemanticRole
+- PASS SignalAggregation
+
+> @quality-harness/quality-evidence-graph@0.4.0 test:fixtures
+> node tests/fixture-regression.mjs
+
+Validated 53 fixture contracts, including 22 reliability end-to-end fixtures

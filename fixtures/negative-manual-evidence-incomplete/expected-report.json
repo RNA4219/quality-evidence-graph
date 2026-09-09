@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-manual-evidence-incomplete",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-manual-evidence-incomplete",
       "status": "gate_failed",
       "exitCode": 2,
@@ -43,7 +52,13 @@
           "nodeIds": [
             "qeg:manual-case-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Diagnostic subject qeg:manual-case-001"
+            }
+          ]
         }
       ],
       "blockers": [],

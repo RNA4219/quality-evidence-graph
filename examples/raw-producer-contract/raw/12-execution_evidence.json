@@ -1,0 +1,19 @@
+{
+  "run_id": "RUN-001",
+  "feature_id": "SPEC-ORDER-01",
+  "build_id": "build-fixture",
+  "timestamp": "2026-09-10T00:00:00.000Z",
+  "tc_id": "TC-001",
+  "result": "pass",
+  "oracle_type": "specified",
+  "oracle_refs": [
+    "AC-1"
+  ],
+  "expected": [
+    "Order is cancelled"
+  ],
+  "actual": [
+    "Order is cancelled"
+  ],
+  "attachments": []
+}

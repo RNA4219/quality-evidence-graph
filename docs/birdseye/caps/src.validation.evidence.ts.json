@@ -1,16 +1,26 @@
 {
   "id": "src/validation/evidence.ts",
   "role": "runtime-evidence-validation",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 runtime-evidence-validation の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/spec/reliability-extension.md",
+    "src/cli/evidence-verify.ts",
+    "src/cli/fixture-io.ts",
+    "src/gate/context.ts",
+    "src/gate/reliability.ts",
+    "src/validation.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:93a07598bd4e61b63c66efa0d9635f8881a07f672e9d1b2f338d321353e56529"
+  "contentHash": "sha256:c4055a8c6f0edca1f44b121cc3ed6c3c79f5922a6ad5aad689136f4b838d6318"
 }

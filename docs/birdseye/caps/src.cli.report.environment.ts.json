@@ -1,0 +1,20 @@
+{
+  "id": "src/cli/report/environment.ts",
+  "role": "environment",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 environment の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts"
+  ],
+  "deps_in": [
+    "src/cli/report/command.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:120896d137ae5c23169c2805597b6f9582d5da795527880621c5789357d7419b"
+}

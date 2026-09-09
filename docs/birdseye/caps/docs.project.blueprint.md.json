@@ -1,27 +1,23 @@
 {
   "id": "docs/project/blueprint.md",
   "role": "blueprint",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG の problem、scope、I/O contract、minimal flow、CI report の運用原則、next tasks を定義する。",
+  "summary": "QEG 0.4.0 blueprint の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "docs/requirements.md",
-    "docs/spec/operational-cli-extensions.md",
-    "src/types.ts",
-    "schemas/shared-defs.schema.json",
-    "qeg-report-action/action.yml"
+    "docs/project/remediation-2026-09-10.md",
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
-    "README.md"
+    "docs/research/quality-evidence-graph-requirements-report.md"
   ],
   "risks": [
-    "requirements と scope がずれると実装判断が割れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run schema-check",
-    "npm run enum-check"
+    "npm test"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:005e356de76f972c8054d48904df56a8d1bf21b93dba8c35b0174ec7c0bd95a2"
+  "contentHash": "sha256:68871056b95d141ca3550ea5f097da36c2c3523d768a92468da78835e34eed22"
 }

@@ -3,6 +3,7 @@ import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
+import { createRawProducerFixture } from "./helpers/raw-producer-fixture.mjs";
 
 const temp = await mkdtemp(join(tmpdir(), "qeg-package-smoke-"));
 const npmCli = process.env.npm_execpath;
@@ -30,7 +31,7 @@ assert.equal(help.status, 0, help.stderr || help.stdout);
 assert.match(help.stdout, /Usage: qeg/);
 const version = runQeg(["--version"]);
 assert.equal(version.status, 0, version.stderr || version.stdout);
-assert.equal(version.stdout.trim(), "0.3.1");
+assert.equal(version.stdout.trim(), "0.4.0");
 const schemaCheck = runQeg(["schema-check"]);
 assert.equal(schemaCheck.status, 0, schemaCheck.stderr || schemaCheck.stdout);
 const imported = await import(new URL(`file:///${join(packageRoot, "dist", "index.js").replaceAll("\\", "/")}`));
@@ -38,14 +39,25 @@ assert.equal(typeof imported.evaluateGate, "function");
 assert.equal(typeof imported.validateGateInput, "function");
 assert.equal(typeof imported.verifyEvidenceArtifacts, "function");
 assert.equal(typeof imported.getExitCode, "function");
-assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.3.1");
+assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.4.0");
+assert.equal(typeof imported.buildGraph, "function");
+assert.equal(typeof imported.placeTests, "function");
+const rawConsumer = join(temp, "raw-consumer");
+await createRawProducerFixture(rawConsumer, imported);
+for (const command of ["build-graph", "place-tests", "gate", "record", "schema-check"]) {
+  const result = runQeg([command, rawConsumer]);
+  assert.equal(result.status, 0, `Packed ${command}: ${result.stderr || result.stdout}`);
+}
+const rawRecord = JSON.parse(await readFile(join(rawConsumer, "quality-evidence-record.json"), "utf8"));
+assert.equal(rawRecord.gate.verdict, "go");
+assert.equal(rawRecord.gate.evaluationScope.kind, "fixture");
 const packedActionBundle = join(packageRoot, "qeg-report-action", "dist", "cli.mjs");
 const packedActionVersion = spawnSync(process.execPath, [packedActionBundle, "--version"], {
   encoding: "utf-8",
   cwd: temp,
 });
 assert.equal(packedActionVersion.status, 0, packedActionVersion.stderr || packedActionVersion.stdout);
-assert.equal(packedActionVersion.stdout.trim(), "0.3.1");
+assert.equal(packedActionVersion.stdout.trim(), "0.4.0");
 const thirdPartyNotices = await readFile(
   join(packageRoot, "qeg-report-action", "THIRD_PARTY_NOTICES.md"),
   "utf-8",
@@ -56,7 +68,10 @@ for (const license of [
   "fast-deep-equal.txt",
   "fast-uri.txt",
   "json-schema-traverse.txt",
-  "require-from-string.txt",
+    "require-from-string.txt",
+    "code-to-gate-LICENSE.txt",
+    "manual-bb-test-harness-LICENSE.txt",
+    "manual-bb-test-harness-NOTICE.txt",
 ]) {
   const text = await readFile(join(packageRoot, "qeg-report-action", "licenses", license), "utf-8");
   assert.ok(text.trim().length > 0, `packed Action license is empty: ${license}`);

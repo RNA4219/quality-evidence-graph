@@ -1,10 +1,12 @@
 {
   "id": "tests/fixture-regression.mjs",
   "role": "fixture-e2e-harness",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
+  "summary": "QEG 0.4.0 fixture-e2e-harness の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "fixtures/manifest.json"
+  ],
   "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
@@ -12,5 +14,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:3fdbc4cc824a8f62ad99f6e113dc9f9cbeaa9e6d6d369daad632948a65c83c73"
+  "contentHash": "sha256:b0afcb4c92274b9d352c8bfbe0689977cce9beb2744f48f7ef97b963b068628f"
 }

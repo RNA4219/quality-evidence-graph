@@ -1,18 +1,27 @@
 {
   "id": "docs/release/acceptance-2026-07-20.md",
   "role": "superseded-v0.3.0-release-acceptance",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
   "summary": "v0.3.0 repository completionとnpm公開を含む過去判定。npm公開は完了せず、現行配布契約はGitHub-only v0.3.1へ移管済み。",
   "deps_out": [
-    "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/requirements.md",
+    "docs/spec/reliability-hardening.md",
+    "fixtures/manifest.json"
   ],
-  "deps_in": [],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/evaluation.md",
+    "docs/release-notes/2026-07-20-v0.3.0.md"
+  ],
   "risks": [
     "supersededなnpm公開承認を現行判定と誤認する"
   ],
   "tests": [
     "npm run birdseye-check"
   ],
-  "contentHash": "sha256:4ec8b33222d5648207be9a9449783a4158872d4e1ca5cee72e7c2c2a7808b170"
+  "contentHash": "sha256:f19cdbfb026baa0646e9db1d038ed47cf3480dd2eb965d246b445c3fdb81e45a"
 }

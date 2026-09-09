@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 import { exit } from "process";
+import { runBuildGraphCommand, runPlaceTestsCommand } from "./cli/pipeline.js";
+import { QEG_VERSION } from "./version.js";
 import {
   runBaselineCommand,
   runCheckCommand,
@@ -24,17 +26,17 @@ async function main(): Promise<void> {
 
   if (args[0] === "--help" || args[0] === "-h") {
     console.log("Usage: qeg <command> [options] <fixture-dir-or-parent>");
-    console.log("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    console.log("Commands: build-graph, place-tests, validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit(0);
   }
   if (args[0] === "--version" || args[0] === "-v") {
-    console.log("0.3.1");
+    console.log(QEG_VERSION);
     exit(0);
   }
 
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
-    console.error("Commands: validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    console.error("Commands: build-graph, place-tests, validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit(1);
   }
 
@@ -42,6 +44,12 @@ async function main(): Promise<void> {
   const fixtureDir = commandArgs[0];
 
   switch (command) {
+    case "build-graph":
+    case "place-tests":
+      if (!fixtureDir || commandArgs.length !== 1) throw new Error(`Usage: qeg ${command} <target-dir>`);
+      if (command === "build-graph") await runBuildGraphCommand(fixtureDir);
+      else await runPlaceTestsCommand(fixtureDir);
+      break;
     case "validate":
       if (!fixtureDir) {
         console.error("Usage: qeg validate <fixture-dir>");

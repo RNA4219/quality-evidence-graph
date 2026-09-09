@@ -1,0 +1,19 @@
+{
+  "id": "tools/fixture-migration/values.mjs",
+  "role": "values",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 values の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "tools/fixture-migration/artifacts.mjs",
+    "tools/migrate-fixtures-v02.mjs"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:867b7c4ff1285f47f1a077a0bd2a4e542fed29df60f6ca1de26c0015d1befce1"
+}

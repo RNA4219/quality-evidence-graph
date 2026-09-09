@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/ingest-manifest.schema.json",
+  "title": "Raw producer ingest manifest",
+  "type": "object",
+  "required": ["manifestVersion", "metadata", "policy", "artifacts"],
+  "additionalProperties": false,
+  "properties": {
+    "manifestVersion": { "const": "qeg-ingest/v1" },
+    "metadata": { "$ref": "shared-defs.schema.json#/$defs/metadata" },
+    "policy": { "$ref": "gate-policy.schema.json" },
+    "waivers": { "type": "array", "items": { "$ref": "waiver.schema.json" } },
+    "evidencePackage": { "$ref": "evidence-package.schema.json" },
+    "artifacts": {
+      "type": "array", "items": {
+        "type": "object", "required": ["id", "adapter", "kind", "path", "contractVersion"], "additionalProperties": false,
+        "properties": {
+          "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+          "adapter": { "enum": ["RanD", "code-to-gate", "manual-bb-test-harness"] },
+          "kind": { "type": "string", "minLength": 1 },
+          "path": { "type": "string", "minLength": 1 },
+          "contractVersion": { "type": "string", "minLength": 1 },
+          "schemaId": { "type": "string" }, "contentHash": { "type": "string" }, "revision": { "type": "string" }
+        }
+      }
+    }
+  },
+  "allOf": [{ "properties": { "policy": { "required": ["inputContract"], "properties": { "inputContract": { "properties": { "mode": { "const": "upstream_artifacts" } } } } }, "metadata": { "required": ["headRef"], "properties": { "headRef": { "type": "string", "minLength": 1 } } } } }]
+}

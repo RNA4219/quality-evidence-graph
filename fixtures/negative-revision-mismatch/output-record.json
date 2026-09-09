@@ -10,10 +10,14 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-revision-mismatch/input.json",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:830230b168e1a436743fb657ecbcd0d2380cf4bb4f0ad2f164d5cffbf69efeb0",
         "revision": "refs/heads/feature-branch"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -21,9 +25,44 @@
       "runId": "qeg:run-negative-revision-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:830230b168e1a436743fb657ecbcd0d2380cf4bb4f0ad2f164d5cffbf69efeb0",
+          "revision": "refs/heads/feature-branch"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-revision-mismatch",
+        "kind": "requirement",
+        "title": "Fixture context: negative-revision-mismatch",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-revision-mismatch",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -38,12 +77,33 @@
       "runId": "qeg:run-negative-revision-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:830230b168e1a436743fb657ecbcd0d2380cf4bb4f0ad2f164d5cffbf69efeb0",
+          "revision": "refs/heads/feature-branch"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-revision-mismatch",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-revision-mismatch",
@@ -55,10 +115,14 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-revision-mismatch/input.json",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:830230b168e1a436743fb657ecbcd0d2380cf4bb4f0ad2f164d5cffbf69efeb0",
           "revision": "refs/heads/feature-branch"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -72,17 +136,46 @@
         "nodeIds": [
           "qeg:artifact-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2F",
+            "path": "gate-input.json",
+            "label": "/: Diagnostic subject qeg:artifact-001"
+          }
+        ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:4e604782ac987e4cf2e5c6c3ad8dce2da106d88111d430c32d3c8c1b4cd05cab"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:8d4007ec037222c510d5c1de2ab2376585f33ef85beb6a77332ea8d0e50c81e3"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:7916fc8cff9e7c7039b8942afcfb601919e80655920ea28a1569b8bf5a2a0d8d"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:795be48944810bdb63b9b4191693bcc5a6e758c2f4d69478d7de5395ee8c3ce4"
     }
   ],
   "auditTrail": {

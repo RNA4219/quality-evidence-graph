@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-waiver-no-source",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-waiver-no-source",
       "status": "gate_failed",
       "exitCode": 2,
@@ -43,7 +52,13 @@
           "nodeIds": [
             "qeg:waiver-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Diagnostic subject qeg:waiver-001"
+            }
+          ]
         }
       ],
       "blockers": [],

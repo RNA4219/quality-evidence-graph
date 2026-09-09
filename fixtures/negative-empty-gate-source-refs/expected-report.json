@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-empty-gate-source-refs",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-empty-gate-source-refs",
       "status": "gate_failed",
       "exitCode": 2,
@@ -41,7 +50,13 @@
           "code": "DQ-13",
           "message": "Evidence package sourceRefs is empty",
           "nodeIds": [],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Evidence package sourceRefs is empty"
+            }
+          ]
         }
       ],
       "blockers": [],

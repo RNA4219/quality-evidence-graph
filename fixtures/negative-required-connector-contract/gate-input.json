@@ -5,7 +5,8 @@
     "createdAt": "2026-06-03T04:00:00.000Z",
     "profile": "ipo_controlled",
     "requiredConnectorStatus": {
-      "connector-001": "contract_violation"
+      "connector-001": "contract_violation",
+      "qeg-native": "success"
     },
     "inputArtifacts": [
       {
@@ -31,9 +32,36 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "connector-001": "contract_violation",
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-required-connector-contract",
+        "kind": "requirement",
+        "title": "Fixture context: negative-required-connector-contract",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-required-connector-contract",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -73,6 +101,32 @@
       "conditional_go": 2,
       "no_go": 2,
       "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-required-connector-contract",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-negative-required-connector-contract",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
     }
   },
   "waivers": [],
@@ -150,6 +204,32 @@
         "conditional_go": 2,
         "no_go": 2,
         "disqualified": 2
+      },
+      "inputContract": {
+        "mode": "native_graph",
+        "requiredArtifacts": [
+          {
+            "adapter": "qeg-native",
+            "kind": "test_model"
+          }
+        ],
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-required-connector-contract",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "requireExecutedTests": false,
+        "sourceRefs": [
+          {
+            "id": "qeg:fixture-contract-negative-required-connector-contract",
+            "path": "gate-input.json",
+            "label": "/policy/inputContract"
+          }
+        ]
       }
     },
     "waivers": [],
@@ -196,7 +276,11 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:6e750d20fd631d90f6fac582bb55f2ee0f0687ab3062a578f416688897ee4822"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "connector-001": "contract_violation",
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []

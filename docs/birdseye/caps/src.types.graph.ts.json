@@ -1,16 +1,29 @@
 {
   "id": "src/types/graph.ts",
   "role": "graph-types",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 graph-types の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "schemas/qeg.bundle.schema.json",
+    "src/types/evidence.ts",
+    "src/types/gate.ts",
+    "src/types/primitives.ts"
+  ],
+  "deps_in": [
+    "docs/requirements.md",
+    "docs/spec/reliability-extension.md",
+    "docs/spec/reliability-hardening.md",
+    "src/types.ts",
+    "src/types/input.ts",
+    "src/types/record.ts",
+    "tests/type-contract/contract.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:00eb747e325e55ce65da42cecf4beb729e3f8ca3150938eedf76874598505bfa"
+  "contentHash": "sha256:cbbee3a7045a55b621ebb86371a9d3125968ddb08e3ff65447818e0f218a9b42"
 }

@@ -1,0 +1,21 @@
+{
+  "id": "src/cli/report/format/text.ts",
+  "role": "text",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 text の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/report/format/shared.ts",
+    "src/cli/report/model.ts"
+  ],
+  "deps_in": [
+    "src/cli/report/formatter.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:11117a97ab803868d3c9451df444691ea4eb1566365b954554670eefff192281"
+}

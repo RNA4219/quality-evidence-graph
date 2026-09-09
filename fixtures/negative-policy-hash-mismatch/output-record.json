@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-policy-hash-mismatch/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:9d716449ff43055382bb702a12b0ae59af530c95c7d7db51b98cbe9225abd78f"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -19,9 +23,43 @@
       "runId": "qeg:run-negative-policy-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9d716449ff43055382bb702a12b0ae59af530c95c7d7db51b98cbe9225abd78f"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-policy-hash-mismatch",
+        "kind": "requirement",
+        "title": "Fixture context: negative-policy-hash-mismatch",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-policy-hash-mismatch",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -36,12 +74,32 @@
       "runId": "qeg:run-negative-policy-hash-mismatch",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9d716449ff43055382bb702a12b0ae59af530c95c7d7db51b98cbe9225abd78f"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-policy-hash-mismatch",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-policy-hash-mismatch",
@@ -52,9 +110,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-policy-hash-mismatch/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:9d716449ff43055382bb702a12b0ae59af530c95c7d7db51b98cbe9225abd78f"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -79,12 +141,35 @@
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:16e79136542428f97d713784047ac10e837534760c3977a85e3286985cd3153e"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:4e649b07d764de5f6168a0790d6608a882614f1a9a358a2159dda441767f1d3f"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:5658d14e25faef9fbed55c994932e9d0fdcea8810cb05cabc9f743c795485e45"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:e279b9e2ca3343738ba98789181e8f5c54642a6e1a1d3baf59fa742b0474b972"
     }
   ],
   "auditTrail": {

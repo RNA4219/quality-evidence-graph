@@ -1,9 +1,9 @@
 {
   "id": "tools/json-check.mjs",
   "role": "tracked-json-parser",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
+  "summary": "QEG 0.4.0 tracked-json-parser の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [

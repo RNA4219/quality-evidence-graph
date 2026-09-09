@@ -11,9 +11,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-hidden-oracle-access/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:76094f4c19029085c26a6eb2b200e350bdf95002b9201b2a3f39baae020d8811"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -21,9 +25,43 @@
       "runId": "qeg:run-negative-hidden-oracle-access",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:76094f4c19029085c26a6eb2b200e350bdf95002b9201b2a3f39baae020d8811"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-hidden-oracle-access",
+        "kind": "requirement",
+        "title": "Fixture context: negative-hidden-oracle-access",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-hidden-oracle-access",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -38,12 +76,32 @@
       "runId": "qeg:run-negative-hidden-oracle-access",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:76094f4c19029085c26a6eb2b200e350bdf95002b9201b2a3f39baae020d8811"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-hidden-oracle-access",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-hidden-oracle-access",
@@ -56,9 +114,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-hidden-oracle-access/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:76094f4c19029085c26a6eb2b200e350bdf95002b9201b2a3f39baae020d8811"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -70,17 +132,46 @@
         "code": "DQ-10",
         "message": "Candidate accessed hidden oracle in benchmark mode",
         "nodeIds": [],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2F",
+            "path": "gate-input.json",
+            "label": "/: Candidate accessed hidden oracle in benchmark mode"
+          }
+        ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:3f9dd6bf83fa899da18fe795cbc1040cd1e67710b808d3dccfa4d3f69486bba9"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:18261729ac28f159955c91af6ede9c9c9ba8826c2f8c35df329d63719083fbd4"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:b932b9512a6da573202bd0d54e4aa35fa5523366793719db7c14ced1e79565e2"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:7f42bf6e1a08e9c4404d98091f29af294dbbbd29106092568dc4cda9ce302651"
     }
   ],
   "auditTrail": {

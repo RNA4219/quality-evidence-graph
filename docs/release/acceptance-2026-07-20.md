@@ -8,7 +8,7 @@ next_review_due: 2026-10-20
 
 # QEG repository completion and v0.3.0 release acceptance — 2026-07-20
 
-> Superseded: npm公開は完了せず、配布契約はGitHub-only v0.3.1へ変更した。現行判定は`docs/release/acceptance-2026-07-20-v0.3.1.md`を正本とする。
+> Superseded: npm公開は完了せず、当時の配布契約はGitHub-only v0.3.1へ変更した。その配布受入は`docs/release/acceptance-2026-07-20-v0.3.1.md`、現行改修は`docs/project/remediation-2026-09-10.md`を参照する。
 
 ## Decision
 

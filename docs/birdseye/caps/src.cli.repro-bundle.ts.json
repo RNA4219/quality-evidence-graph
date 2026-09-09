@@ -1,29 +1,28 @@
 {
   "id": "src/cli/repro-bundle.ts",
   "role": "repro-bundle-cli",
-  "public_api": [
-    "runReproBundleCommand"
-  ],
-  "summary": "repro-bundle CLI。CI report、doctor、schema inventory、package version、workflow config、gate-input を redaction 付きで束ね、赤 CI の再現材料を artifact 化する。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 repro-bundle-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/doctor.ts",
-    "schemas/*.schema.json",
-    ".github/workflows/ci.yml"
+    "src/cli/errors.ts",
+    "src/cli/file-errors.ts",
+    "src/cli/report.ts"
   ],
   "deps_in": [
-    "src/cli.ts",
+    "docs/project/evaluation.md",
+    "docs/project/runbook.md",
     "docs/requirements.md",
     "docs/spec/operational-cli-extensions.md",
-    "docs/project/runbook.md",
-    "docs/project/evaluation.md"
+    "src/cli.ts",
+    "src/cli/commands.ts"
   ],
   "risks": [
-    "bundle に secret を含めると OSS artifact として危険なため、key/value 双方の redaction を維持する必要がある"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run build",
-    "node dist/cli.js repro-bundle --report .qeg/qeg-ci-report.json --out .qeg/repro-smoke fixtures/negative-approval-missing"
+    "npm test"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:25d0cfaafc17302e3b464c33f7b156c3eacf1e854d63ed2c7da7ce7f4f2e2abb"
+  "contentHash": "sha256:f597d41ff99bc43f0a0f3e7f7b1160a058983c4bca73b719cfdae0fadc8e143e"
 }

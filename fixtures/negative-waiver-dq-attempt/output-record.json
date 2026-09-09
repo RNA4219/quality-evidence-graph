@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-waiver-dq-attempt/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:160c44f8c2be77f3ec335521ad67a8f4e54e260803eb1d31086be0daa614263c"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -24,9 +28,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-waiver-dq-attempt/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:160c44f8c2be77f3ec335521ad67a8f4e54e260803eb1d31086be0daa614263c"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -81,12 +89,32 @@
       "runId": "qeg:run-negative-waiver-dq-attempt",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:160c44f8c2be77f3ec335521ad67a8f4e54e260803eb1d31086be0daa614263c"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-waiver-dq-attempt",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-waiver-dq-attempt",
@@ -97,9 +125,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-waiver-dq-attempt/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:160c44f8c2be77f3ec335521ad67a8f4e54e260803eb1d31086be0daa614263c"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -146,12 +178,35 @@
     "requiredHumanReview": [
       "qeg:waiver-001",
       "qeg:risk-001"
-    ]
+    ],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:47140a557870ba0dac083fc679fa67c2506677b664a1d0229d79ae2517423c7d"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:0e5c148c7d65c85825a3658bf235860860ad1140507478b8d23fcc975bbee415"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:4f78faa7227a493b8c876d19d7befa422edd63fe1726a2d204f2ad0b1924bc18"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:29f933660b58c52ee8336fca6be2458adc241dd858a94eff35bb751aa700bf89"
     }
   ],
   "auditTrail": {

@@ -1,0 +1,21 @@
+{
+  "id": "docs/evidence/remediation-2026-09-10/ci-validation.json",
+  "role": "ci-validation",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "実装commit 216cd2fのLinux Node 20 / 24とWindows Node 24 CI成功をrun・job URL付きで保存。最終記録commitはPR checksで外部確認する。",
+  "deps_out": [
+    "docs/evidence/remediation-2026-09-10/audit-validation.json"
+  ],
+  "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:e10d3ee2b8ac9b1bc8898e5270468b644ee908f4ca5f10f6f2587ddd81331db1"
+}

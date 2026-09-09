@@ -170,6 +170,12 @@ export interface TestNodeBase extends QegNodeBase {
 }
 
 export interface LegacyTestNode extends TestNodeBase {
+  readonly coveredRequirementIds?: readonly StableId[];
+  readonly coveredChangedCodeIds?: readonly StableId[];
+  readonly oracleType?: "specified" | "derived" | "implicit" | "human" | "missing";
+  readonly oracleRefs?: readonly EvidenceRef[];
+  readonly expectedResults?: readonly string[];
+  readonly coverageDimensions?: readonly string[];
   readonly testType?: Exclude<TestType, "resilience">;
   readonly resilienceScenario?: never;
 }
@@ -441,6 +447,7 @@ export interface GraphCompleteness {
 }
 
 export interface ParserFailure {
+  readonly code?: "DQ-01" | "DQ-06" | "DQ-12";
   readonly path: string;
   readonly reason: string;
   readonly sourceRefs: readonly SourceRef[];

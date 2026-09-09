@@ -1,0 +1,15 @@
+{
+  "feature_id": "SPEC-ORDER-01",
+  "risks": [
+    {
+      "id": "RISK-01",
+      "scenario": "Order stays pending after cancellation",
+      "impact": 4,
+      "likelihood": 2,
+      "priority": "P1",
+      "trace_to": [
+        "TC-001"
+      ]
+    }
+  ]
+}

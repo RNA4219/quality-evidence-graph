@@ -1,29 +1,23 @@
 {
   "id": "schemas/shared-defs.schema.json",
   "role": "schema",
-  "public_api": [
-    "gateProfile",
-    "gateVerdict",
-    "placementLayer",
-    "metadata",
-    "producerCheckRef",
-    "traceability"
-  ],
-  "summary": "共通 schema 定義。Gate profile、metadata、producerChecks、traceability の schema source。",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "schemas/gate-verdict.schema.json",
     "schemas/qeg.bundle.schema.json",
     "schemas/test-placement-plan.schema.json"
   ],
   "deps_in": [
+    "docs/spec/reliability-extension.md",
     "src/types.ts"
   ],
   "risks": [
-    "shared enum drift"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "node -e JSON parse schemas"
+    "npm test"
   ],
-  "generation": "00014",
   "contentHash": "sha256:7d61104f46aed9d4febf2ad9604c3fa9b7cccf07e549b09a93ae6d4ec1980ad2"
 }

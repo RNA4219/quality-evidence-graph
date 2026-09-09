@@ -4,8 +4,7 @@
   "public_api": [],
   "summary": "contract safety、Birdseye intake、must not、IPO controlled の変更時注意を定義する。",
   "deps_out": [
-    "docs/birdseye/index.json",
-    "docs/requirements.md"
+    "docs/birdseye/index.json"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md"
@@ -16,6 +15,6 @@
   "tests": [
     "node -e JSON parse docs/birdseye/index.json"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:f21d7df2f213d7bddd8a09bb6a4b69865a7c74b83c20cc859dfce7f91c2627e1"
+  "generation": "00015",
+  "contentHash": "sha256:9b5d234596d54913441cc33ebb92022cc87434a047c4c3307f251dc82a957f8d"
 }

@@ -2,6 +2,9 @@ export * from "./types.js";
 export { evaluateGate, getExitCode } from "./gate.js";
 export { isGateEligibleTestEvidence } from "./gate/test-evidence.js";
 export { validateGateInput, verifyEvidenceArtifacts } from "./validation.js";
+export { validateOutput } from "./validation/output.js";
+export { createRecordArtifacts } from "./record.js";
+export { upstreamInputContract, UPSTREAM_REQUIRED_ARTIFACTS } from "./input-contract.js";
 export type {
   EvidenceVerificationItem,
   EvidenceVerificationOptions,
@@ -9,3 +12,5 @@ export type {
   GateInputValidationIssue,
   GateInputValidationReport,
 } from "./validation.js";
+export { buildGraph } from "./graph.js";
+export { placeTests, PLACEMENT_LAYERS } from "./placement.js";

@@ -2,8 +2,8 @@
 intent_id: INT-QEG-RUNBOOK-001
 owner: quality-evidence-graph
 status: active
-last_reviewed_at: 2026-07-20
-next_review_due: 2026-10-20
+last_reviewed_at: 2026-09-10
+next_review_due: 2026-12-10
 ---
 
 # Runbook
@@ -189,7 +189,7 @@ uv run python -c "import json, sys; from pathlib import Path; sys.path.insert(0,
 - go=5、conditional_go=0、no_go=0
 - KanoMode の `go` は Kano-inspired requirements audit の証跡であり、正式な狩野調査または IPO controlled release approval ではない
 
-### 9. Repository completion Gate
+### 9. 現行改修の受入Gate
 
 ```sh
 npm run test:types
@@ -202,12 +202,16 @@ node tools/json-check.mjs
 
 期待結果:
 
-- 53 fixture（Reliability / Resilience 22件）のmanifest contractとsnapshotがPASS
+- manifestに列挙した全fixture（Reliability / Resilience 22件を含む）のcontract、negative出力schema、snapshotがPASS
 - public source型とpacked tarball consumer型がPASS
 - `negative-resilience-evidenced-by-conflict`がDQ-18 / exit 2
-- `docs/release/acceptance-2026-07-20-v0.3.1.md`がrepository完成、外部実環境未評価、publish別判断を分離する
+- `docs/project/remediation-2026-09-10.md`が各改修の実装・ローカル検証・CIと外部実環境未評価を記録する
 
-### 10. v0.3.1 GitHub-only release
+raw入力からの手順は `examples/raw-producer-contract/README.md` を参照する。空の `init` はDQ-01 / exit 2が期待値。生成workflowは同梱runtimeを `.qeg/runtime` へコピーして使用する。
+
+### 10. v0.3.1 GitHub-only release（履歴）
+
+以下は当時の配布手順であり、現行0.4.0は未公開。今回の改修でtag作成・release・publishは実行しない。
 
 v0.3.1ではnpm registryへpublishしない。packageは`private: true`とし、GitHub Release tarballとtag固定Actionを正規配布物とする。
 
@@ -241,7 +245,7 @@ release条件:
 - mock test は placement retirement の `evidenceStrength`、連続 green 回数、risk coverage に算入されず DQ-14 になる
 - `qeg-report-action/action.yml` が Node.js 24 action を使い、`exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` output を持つ
 - `docs/spec/operational-cli-extensions.md` が report / baseline audit / doctor / explain / schema-check / enum-check / evidence verify / policy lint / repro-bundle / check / snapshot / init / Action の contract を固定している
-- `docs/project/tasks.codex.md` が完了済みTASK-01〜TASK-10の履歴としてsupersededになっている
+- `docs/project/tasks.codex.md` がTASK-01〜TASK-10の過去履歴と完了表記の訂正を保持している
 - `fixtures/README.md` が expected verdict / DQ を固定している
 - `docs/control-mapping.md` と `docs/ipo-controlled-profile.md` が IPO 統制実装準備を固定している
 - `docs/spec/` が TASK-09 / TASK-10 の実装判断に必要な Gate policy、waiver、approval evidence、retention、immutability、evidence package を固定している
@@ -250,7 +254,7 @@ release条件:
 - `docs/spec/code-to-gate-2026-06-03/` が code-to-gate による静的 Gate 証跡を保持している
 - `docs/spec/kano-mode-2026-06-03/` が RanD KanoMode による要求価値監査証跡を保持している
 - `docs/spec/implementation-gate-2026-06-03.md` が実装 Gate と release Gate を分離している
-- `docs/release/acceptance-2026-07-20-v0.3.1.md` が現行の総合完成判定とrelease境界を記録している
+- `docs/project/remediation-2026-09-10.md` が現行改修の受入を記録し、v0.3.1 acceptanceは過去の配布証跡として保持されている
 
 ## Rollback / Retry
 

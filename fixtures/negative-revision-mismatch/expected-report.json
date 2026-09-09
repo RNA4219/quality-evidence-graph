@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-revision-mismatch",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-revision-mismatch",
       "status": "gate_failed",
       "exitCode": 2,
@@ -43,7 +52,13 @@
           "nodeIds": [
             "qeg:artifact-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Diagnostic subject qeg:artifact-001"
+            }
+          ]
         }
       ],
       "blockers": [],

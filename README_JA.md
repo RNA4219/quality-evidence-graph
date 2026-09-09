@@ -1,5 +1,9 @@
 # Quality Evidence Graph
 
+現在の開発版は0.4.0（未公開）、wire契約は0.2です。[現行改修台帳](docs/project/remediation-2026-09-10.md)と[raw入力例](examples/raw-producer-contract/README.md)を参照してください。以下のv0.3.1 Action例は過去の配布版です。
+
+0.4.0では `build-graph` → `place-tests` → `gate` → `record` を実行できます。policyに `inputContract` が必要で、必須3 producerを使う `upstream_artifacts` と明示的な `native_graph` を選びます。評価範囲・必須artifact・実行証跡の要否を宣言し、空の初期入力や配置計画だけでは成功になりません。`init`は同じ配布物のlocal Actionを `.qeg/runtime` に配置します。
+
 Quality Evidence Graph、略して QEG は、品質判断を「気合い」や「それっぽい報告」から切り離し、根拠を持った Gate 判定へ変えるための仕組みです。
 
 仕様、リスク、変更差分、テスト配置、実行証跡、承認証跡を 1 つのグラフとして扱い、release してよいか、止めるべきか、条件付きなら何を人間が承認すべきかを明確にします。
@@ -143,15 +147,15 @@ Action は `exit_code`、`gate_failed`、`cli_errors`、`dq_count`、`report_pat
 
 QEG は、品質を「説明」ではなく「証跡と判定契約」に落とすための基盤です。
 
-## 0.3.1 契約
+## 0.3.1 契約（配布履歴）
 
-v0.3.1はGitHub Releaseと自己完結したGitHub Actionで配布し、既定Actionはnpm registryや`npx`を使わない。`npm run test:release-lifecycle`で「変更 → リスク → テスト → 隔離デプロイ → 観測 → 障害 → 復旧 → 新しい証拠」を一続きで検証する。詳細は`docs/release/acceptance-2026-07-20-v0.3.1.md`を正本とする。
+以下は当時の配布契約。v0.3.1のGitHub Releaseと自己完結Action、および隔離consumerでのschema破損・復旧試験は`docs/release/acceptance-2026-07-20-v0.3.1.md`に記録している。現行0.4.0の実装・検証状態は`docs/project/remediation-2026-09-10.md`を正本とする。
 
 全CLIは共通runtime schema/evidence preflightを通る。壊れたJSONまたは判定envelope欠落はCLI error・exit 1、parse可能な必須component不適合はDQ-01・exit 2である。必須evidenceは実ファイル、SHA-256、revisionを検証し、optional evidenceだけの不適合はwarningとする。
 
 changed-onlyは差分取得成功かつ関連targetなしの場合だけno_relevant_changes・exit 0である。差分検出不能はdetection_failed・exit 1、QEG_CHANGED_FILES指定時はその値を正本にする。fixture一覧の正本はfixtures/manifest.jsonである。
 
-package version は0.3.1、graph wire contract は`qegVersion=0.2`である。0.3.1ではReliability / Resilience、DQ-18〜DQ-21、BLK-REL-01〜04、normalizer、fail-closedな`evidenced_by` provenance検証を追加する。
+当時のpackage version は0.3.1、graph wire contract は`qegVersion=0.2`。Reliability / Resilience、DQ-18〜DQ-21、BLK-REL-01〜04、normalizer、fail-closedな`evidenced_by` provenance検証を含む。
 
 外部Actionはv0.3.1を使い既定でenforceする。診断だけを収集する場合に限りenforce: "false"を明示し、exit_code outputを呼び出し側で判定する。
 

@@ -1,16 +1,30 @@
 {
   "id": "src/cli/report/core.ts",
   "role": "report-core",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 report-core の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/dq-explain.ts",
+    "src/cli/errors.ts",
+    "src/cli/fixture-io.ts",
+    "src/cli/report/baseline-diff.ts",
+    "src/cli/report/change-selection.ts",
+    "src/cli/report/model.ts",
+    "src/cli/report/targets.ts",
+    "src/cli/validation.ts",
+    "src/gate.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/report.ts",
+    "src/cli/report/command.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:409c030fac31e48c262e4f20e93a5da61cc701b6662184ddcc689bb67f19ca74"
+  "contentHash": "sha256:b7d5f9ad3e86f4df96feef5f470e8ca28012f0bc7cfcb491408a54ab9ff10d6e"
 }

@@ -5,6 +5,7 @@ import { CliError } from "../errors.js";
 import { createCiReport } from "./core.js";
 import { formatCiReportText, formatGithubSummary } from "./formatter.js";
 import type { CiReport, ReportFormat, ReportOptions } from "./model.js";
+import { githubSummaryPath } from "./environment.js";
 function parseReportArgs(args: readonly string[]): { options: ReportOptions; targets: string[] } {
   const targets: string[] = [];
   let format: ReportFormat = "text";
@@ -104,10 +105,7 @@ export async function runReportCommand(args: readonly string[]): Promise<void> {
   }
 
   if (options.githubSummary) {
-    const summaryPath = process.env.GITHUB_STEP_SUMMARY;
-    if (!summaryPath) {
-      throw new CliError("--github-summary requires GITHUB_STEP_SUMMARY to be set");
-    }
+    const summaryPath = await githubSummaryPath(process.env);
     await appendFile(summaryPath, formatGithubSummary(report), "utf-8");
   }
 

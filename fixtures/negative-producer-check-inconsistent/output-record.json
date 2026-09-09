@@ -1,0 +1,242 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-negative-producer-check-inconsistent",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "headRef": "8d6b301ea72821ab76b67d5d151782f5410f49a5",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:e9a158c2e049fc30a06b5586fcb2c1d88c0bdb1012a6aa82a940024c9f624d55",
+        "revision": "8d6b301ea72821ab76b67d5d151782f5410f49a5"
+      }
+    ],
+    "producerChecks": [
+      {
+        "id": "ctg:check-code-to-gate-analysis",
+        "producer": "code-to-gate",
+        "name": "code-to-gate Analysis",
+        "conclusion": "failure",
+        "readinessStatus": "passed",
+        "headSha": "8d6b301ea72821ab76b67d5d151782f5410f49a5",
+        "runId": "ctg:check-run-85226205920",
+        "url": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+        "sourceRefs": [
+          {
+            "id": "ctg:sr-check-code-to-gate-analysis",
+            "path": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+            "label": "Producer check summary reported failure while readiness status was passed"
+          }
+        ]
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:e9a158c2e049fc30a06b5586fcb2c1d88c0bdb1012a6aa82a940024c9f624d55",
+          "revision": "8d6b301ea72821ab76b67d5d151782f5410f49a5"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "requirement",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ],
+        "title": "All critical risks mitigated",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-claim-001",
+              "path": "docs/claims/claim-001.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "acceptanceCriteriaIds": []
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:e9a158c2e049fc30a06b5586fcb2c1d88c0bdb1012a6aa82a940024c9f624d55",
+          "revision": "8d6b301ea72821ab76b67d5d151782f5410f49a5"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
+    },
+    "obligations": [],
+    "placements": []
+  },
+  "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-producer-check-inconsistent",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-negative-producer-check-inconsistent",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "headRef": "8d6b301ea72821ab76b67d5d151782f5410f49a5",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:e9a158c2e049fc30a06b5586fcb2c1d88c0bdb1012a6aa82a940024c9f624d55",
+          "revision": "8d6b301ea72821ab76b67d5d151782f5410f49a5"
+        }
+      ],
+      "producerChecks": [
+        {
+          "id": "ctg:check-code-to-gate-analysis",
+          "producer": "code-to-gate",
+          "name": "code-to-gate Analysis",
+          "conclusion": "failure",
+          "readinessStatus": "passed",
+          "headSha": "8d6b301ea72821ab76b67d5d151782f5410f49a5",
+          "runId": "ctg:check-run-85226205920",
+          "url": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+          "sourceRefs": [
+            {
+              "id": "ctg:sr-check-code-to-gate-analysis",
+              "path": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+              "label": "Producer check summary reported failure while readiness status was passed"
+            }
+          ]
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
+    },
+    "verdict": "disqualified",
+    "reasons": [
+      "Disqualified: 1 DQ code(s)",
+      "- DQ-12: Producer check \"code-to-gate Analysis\" conclusion \"failure\" contradicts readiness status \"passed\""
+    ],
+    "disqualifications": [
+      {
+        "code": "DQ-12",
+        "message": "Producer check \"code-to-gate Analysis\" conclusion \"failure\" contradicts readiness status \"passed\"",
+        "nodeIds": [
+          "ctg:check-code-to-gate-analysis"
+        ],
+        "sourceRefs": [
+          {
+            "id": "ctg:sr-check-code-to-gate-analysis",
+            "path": "https://github.com/RNA4219/code-to-gate/runs/85226205920",
+            "label": "Producer check summary reported failure while readiness status was passed"
+          }
+        ]
+      }
+    ],
+    "blockers": [],
+    "residualRisks": [],
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:bc8fe3a0ce5cc1239d644428ed4877c7e9a8214f9d0b02d71e85d757abf67b11"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:fcc3c46d3db9b43fe3df53eca790d5f4e541085d18f22c3a5e60c3eee4fda3d0"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:15c7e6faa10d5a41697869bc3586555fb57d116f03d737bf04d94a0444ccaf09"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:35aac2831106971541721c5fba15dcf9a43eb5333bf21c332037f83b7963c1c8"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:release-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "qeg:approval-release-001",
+        "approver": "approver-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "qeg:policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
+  }
+}

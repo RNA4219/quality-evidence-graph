@@ -1,0 +1,22 @@
+{
+  "id": "src/gate/dq/evidence.ts",
+  "role": "evidence",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 evidence の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/context.ts",
+    "src/gate/dq/source-refs.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate/dq-detectors.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:73f9098691abd911ff4f4aa1529656f93319ce5f9c4abe795f1c376c5e81bfbe"
+}

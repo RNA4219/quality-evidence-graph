@@ -1,21 +1,25 @@
 {
   "id": "docs/spec/reliability-hardening.md",
   "role": "reliability-resilience-hardening-spec",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
   "summary": "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
   "deps_out": [
     "docs/spec/reliability-extension.md",
     "docs/spec/reliability-hardening-checklist.md",
-    "src/types/graph.ts",
-    "src/gate/reliability.ts",
-    "src/validation/schema.ts",
-    "src/cli/evidence-normalize.ts",
     "fixtures/manifest.json",
+    "src/cli/evidence-normalize.ts",
+    "src/gate/reliability.ts",
+    "src/types/graph.ts",
+    "src/validation/schema.ts",
     "tests/runtime.test.mjs"
   ],
   "deps_in": [
-    "docs/spec/index.md"
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md",
+    "docs/spec/index.md",
+    "docs/spec/reliability-extension-review-2026-07-19.md",
+    "docs/spec/reliability-hardening-checklist.md"
   ],
   "risks": [
     "refactor による判定 drift、legacy 型互換性の破壊、runtime test だけでの negative path 見逃し"

@@ -4,7 +4,18 @@
     "runId": "qeg:run-positive-placement-change-retirement",
     "createdAt": "2026-07-02T00:00:00.000Z",
     "profile": "ipo_controlled",
-    "inputArtifacts": []
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-positive-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -12,7 +23,18 @@
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-positive-placement-change-retirement",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -62,6 +84,31 @@
         "coveredRiskIds": [
           "qeg:risk-login-regression"
         ]
+      },
+      {
+        "id": "mbb:CASE-login-001",
+        "kind": "test",
+        "title": "Retired login manual case (historical reference)",
+        "layer": "manual-scripted",
+        "testExecutionMode": "real",
+        "existing": true,
+        "deleted": true,
+        "sourceArtifactIds": [
+          "qeg:artifact-positive-placement-change-retirement"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:retired-case-source",
+              "path": "gate-input.json",
+              "label": "/placementPlan/placement_changes/subject_id"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "Retired case remains addressable; deletion does not count as an execution or current coverage."
+          ]
+        }
       }
     ],
     "edges": [
@@ -95,7 +142,18 @@
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-positive-placement-change-retirement",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [
       {
@@ -185,12 +243,32 @@
     }
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "positive-placement-change-retirement",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-positive-placement-change-retirement",
       "createdAt": "2026-07-02T00:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-positive-placement-change-retirement",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "go",
     "reasons": [
@@ -199,12 +277,37 @@
     "disqualifications": [],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [
+        "hate:AETE-login-001"
+      ],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:0c56837b7b2c276be4611ce9af375f609604f980c10ade9a51b6d37caa431fca"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:3dbd30f3c4a5de7a6c42cdab7ba656dfa5900f7fe28350b1a2d03e0721fd4b71"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:e4888b3eb4039f47cb0af179d72bd261b2f2015e8ce39d8375cb4b5fc5572954"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:62c6d5d6adc2c365f65a803d6e471301aac8821733a0311cb9744249e574c9bf"
     }
   ],
   "auditTrail": {

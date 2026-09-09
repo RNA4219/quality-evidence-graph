@@ -1,0 +1,22 @@
+{
+  "id": "src/gate/dq/input-contract.ts",
+  "role": "input-contract",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 input-contract の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/context.ts",
+    "src/input-contract.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate/dq/basic.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:ab22f3060404de889d695b108122a0fcd80ecd290255459ba9363bc728243734"
+}

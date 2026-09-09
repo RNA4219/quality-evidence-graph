@@ -1,0 +1,18 @@
+{
+  "feature_id": "SPEC-ORDER-01",
+  "build_id": "build-fixture",
+  "status": "go",
+  "profile": "lean",
+  "reasons": [
+    "Case executed in the fixture scenario"
+  ],
+  "evidence_summary": {
+    "manual_by_priority": {
+      "P1": {
+        "total": 1,
+        "pass": 1
+      }
+    },
+    "mandatory_observation_rate": 100
+  }
+}

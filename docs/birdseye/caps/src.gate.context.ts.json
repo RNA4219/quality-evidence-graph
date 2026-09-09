@@ -1,0 +1,43 @@
+{
+  "id": "src/gate/context.ts",
+  "role": "context",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 context の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts",
+    "src/validation/evidence.ts"
+  ],
+  "deps_in": [
+    "src/gate.ts",
+    "src/gate/dq-detectors.ts",
+    "src/gate/dq/basic.ts",
+    "src/gate/dq/evidence.ts",
+    "src/gate/dq/graph-integrity.ts",
+    "src/gate/dq/helpers.ts",
+    "src/gate/dq/input-contract.ts",
+    "src/gate/dq/ipo.ts",
+    "src/gate/dq/placement-change.ts",
+    "src/gate/dq/placement-coverage.ts",
+    "src/gate/evaluate.ts",
+    "src/gate/reliability/accounting.ts",
+    "src/gate/reliability/blockers.ts",
+    "src/gate/reliability/bounds.ts",
+    "src/gate/reliability/evaluator.ts",
+    "src/gate/reliability/indexing.ts",
+    "src/gate/reliability/lifecycle.ts",
+    "src/gate/reliability/preflight.ts",
+    "src/gate/reliability/qualification.ts",
+    "src/gate/reliability/selection.ts",
+    "src/gate/reliability/signals.ts",
+    "src/gate/verdict/blockers.ts",
+    "src/gate/verdict/residual-risks.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:1860194047bf2f79bad58dd3a1f59daf5cd782bdbe774f5c426904fc3abb2d86"
+}

@@ -1,0 +1,24 @@
+{
+  "id": "docs/spec/producer-adapters.md",
+  "role": "producer-adapters",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "3 producerの14 artifactについてraw形式、写像、固定schema、revision/hash/licenseの境界を定義。",
+  "deps_out": [
+    "docs/spec/producer-schema-provenance.json",
+    "src/adapters/code-to-gate.ts",
+    "src/adapters/manual-bb.ts",
+    "src/adapters/producer-schemas.json",
+    "src/adapters/rand.ts"
+  ],
+  "deps_in": [
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:3ceb7fb5d265dbc7ec52e6707b9b588278dcb2fff434211bb627f5779e164265"
+}

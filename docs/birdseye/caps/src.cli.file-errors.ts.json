@@ -1,0 +1,27 @@
+{
+  "id": "src/cli/file-errors.ts",
+  "role": "file-errors",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 file-errors の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts"
+  ],
+  "deps_in": [
+    "src/cli/evidence-normalize/publish.ts",
+    "src/cli/init.ts",
+    "src/cli/output-integrity.ts",
+    "src/cli/raw-ingest.ts",
+    "src/cli/report/targets.ts",
+    "src/cli/repro-bundle.ts",
+    "src/cli/schema-check.ts",
+    "src/cli/snapshot.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:15bdd720276d205048a0ef7795dae44de654945c8fb98b359494e11457fdb7c7"
+}

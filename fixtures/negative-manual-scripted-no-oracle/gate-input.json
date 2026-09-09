@@ -12,7 +12,10 @@
         "path": "artifacts/input.json",
         "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -28,7 +31,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -88,6 +94,32 @@
       "conditional_go": 2,
       "no_go": 2,
       "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-manual-scripted-no-oracle",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-negative-manual-scripted-no-oracle",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
     }
   },
   "waivers": [],
@@ -165,6 +197,32 @@
         "conditional_go": 2,
         "no_go": 2,
         "disqualified": 2
+      },
+      "inputContract": {
+        "mode": "native_graph",
+        "requiredArtifacts": [
+          {
+            "adapter": "qeg-native",
+            "kind": "test_model"
+          }
+        ],
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-manual-scripted-no-oracle",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "requireExecutedTests": false,
+        "sourceRefs": [
+          {
+            "id": "qeg:fixture-contract-negative-manual-scripted-no-oracle",
+            "path": "gate-input.json",
+            "label": "/policy/inputContract"
+          }
+        ]
       }
     },
     "waivers": [],
@@ -211,9 +269,28 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "obligations": [],
+    "obligations": [
+      {
+        "id": "qeg:obligation-001",
+        "requirementIds": [],
+        "riskIds": [],
+        "failureModeIds": [],
+        "changedCodeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 0.8,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [{ "id": "qeg:manual-oracle-scope", "path": "gate-input.json#/graph/nodes", "label": "Manual oracle obligation under test" }],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      }
+    ],
     "placements": []
   }
 }

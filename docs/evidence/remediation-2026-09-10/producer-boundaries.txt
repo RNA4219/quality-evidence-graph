@@ -1,0 +1,14 @@
+✔ FIX-11/12/13: raw producers -> pure graph -> deterministic seven-layer placement (435.6581ms)
+✔ FIX-13: reuse, adapt, add and missing oracle produce distinct actionable plans (10.2465ms)
+✔ FIX-03: a valid descriptor does not hide stale revisions inside producer payloads (10.4867ms)
+✔ FIX-11/14: CLI raw -> graph -> placement -> gate -> validated complete record (2716.8893ms)
+✔ FIX-11: missing kind, malformed raw, unknown version and unresolved IDs retain partial graph (16.2714ms)
+✔ FIX-07/11: raw execution fail, skipped, mock and evidence tampering cannot become go (1495.6107ms)
+ℹ tests 6
+ℹ suites 0
+ℹ pass 6
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4853.5295

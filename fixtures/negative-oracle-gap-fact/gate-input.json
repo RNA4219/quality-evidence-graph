@@ -12,7 +12,10 @@
         "path": "artifacts/input.json",
         "contentHash": "sha256:ea633f40e7612731df19c23534606e0becac0f0b6728c7345335de08638f62a0"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -28,7 +31,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:ea633f40e7612731df19c23534606e0becac0f0b6728c7345335de08638f62a0"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -98,6 +104,32 @@
       "conditional_go": 2,
       "no_go": 2,
       "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-oracle-gap-fact",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-negative-oracle-gap-fact",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
     }
   },
   "waivers": [],
@@ -175,6 +207,32 @@
         "conditional_go": 2,
         "no_go": 2,
         "disqualified": 2
+      },
+      "inputContract": {
+        "mode": "native_graph",
+        "requiredArtifacts": [
+          {
+            "adapter": "qeg-native",
+            "kind": "test_model"
+          }
+        ],
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-oracle-gap-fact",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "requireExecutedTests": false,
+        "sourceRefs": [
+          {
+            "id": "qeg:fixture-contract-negative-oracle-gap-fact",
+            "path": "gate-input.json",
+            "label": "/policy/inputContract"
+          }
+        ]
       }
     },
     "waivers": [],
@@ -221,7 +279,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:ea633f40e7612731df19c23534606e0becac0f0b6728c7345335de08638f62a0"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []

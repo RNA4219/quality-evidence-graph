@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.4.0 - Unreleased
+
+- 実行必須時のresilience評価対象漏れとadvisory配置による未実行の見落としを修正。evidence I/Oの原因保持、診断位置、出力検証失敗時の既存成果物保護を追加検証。
+
+- 明示的な入力mode・必須artifact・評価範囲を追加。旧native入力にもinputContractを要求し、空入力のgoを廃止。
+- changed_code→obligation→placementの対応、ID重複、参照切れ、有効waiver、real/mock/未実行/失敗証跡を検証。
+- RanD・code-to-gate・manual-bbのraw adapter、pure buildGraph/placeTests、対応CLIを実装。
+- 4 JSON＋Markdown、互換alias、hash manifestを生成し、失格recordもschema検証。
+- initを同梱local Actionへ統一し、旧Actionへの参照を除去。
+- normalizer、formatter、policy lint、reliability、fixture migrationを分割し、I/O失敗を診断。
+- 過去の一括完成表記と静的解析件数を訂正。wire契約は0.2、release/tag/publishは未実施。
+
 ## 0.3.1 - 2026-07-20
 
 GitHub-only distributionとrelease lifecycle evidenceを固めるpatch release。

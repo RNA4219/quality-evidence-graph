@@ -29,7 +29,7 @@ export function validateWaiver(
   if (!waiver.sourceRefs || waiver.sourceRefs.length === 0) {
     reasons.push("sourceRefs is empty (minimum 1 required)");
   }
-  if (new Date(waiver.expiry) < executionTime) {
+  if (!Number.isFinite(Date.parse(waiver.expiry)) || new Date(waiver.expiry) <= executionTime) {
     reasons.push(`expiry "${waiver.expiry}" is past execution time`);
   }
   if (!waiver.impactScope || waiver.impactScope.trim() === "") {

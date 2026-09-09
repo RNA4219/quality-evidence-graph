@@ -7,7 +7,35 @@
     "profile": "strict",
     "policyId": "qeg:policy-reliability-fixture",
     "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-    "inputArtifacts": []
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-risk",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/native-contract.json",
+        "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "id": "qeg:artifact-scenario",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/native-contract.json",
+        "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "id": "qeg:artifact-raw",
+        "adapter": "qeg-native",
+        "kind": "execution_evidence",
+        "path": "artifacts/raw.json",
+        "contentHash": "sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -18,7 +46,35 @@
       "profile": "strict",
       "policyId": "qeg:policy-reliability-fixture",
       "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-risk",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/native-contract.json",
+          "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "qeg:artifact-scenario",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/native-contract.json",
+          "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "qeg:artifact-raw",
+          "adapter": "qeg-native",
+          "kind": "execution_evidence",
+          "path": "artifacts/raw.json",
+          "contentHash": "sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -308,12 +364,49 @@
       "profile": "strict",
       "policyId": "qeg:policy-reliability-fixture",
       "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-risk",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/native-contract.json",
+          "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "qeg:artifact-scenario",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/native-contract.json",
+          "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "qeg:artifact-raw",
+          "adapter": "qeg-native",
+          "kind": "execution_evidence",
+          "path": "artifacts/raw.json",
+          "contentHash": "sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-resilience-nonpass",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:fixture-reliability-go",
@@ -322,7 +415,35 @@
       "profile": "strict",
       "policyId": "qeg:policy-reliability-fixture",
       "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-risk",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/native-contract.json",
+          "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "qeg:artifact-scenario",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/native-contract.json",
+          "contentHash": "sha256:9c2a5fa30eba7c81e616264b69e140d3a7c182e93b8ce1b77aa2ca2a3f5b7f58",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        },
+        {
+          "id": "qeg:artifact-raw",
+          "adapter": "qeg-native",
+          "kind": "execution_evidence",
+          "path": "artifacts/raw.json",
+          "contentHash": "sha256:ca9d95c3b84769b7e96bce99633c00cf760fa2cb28f070f1ef07ff6ff3cecfe0",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "no_go",
     "reasons": [
@@ -407,7 +528,23 @@
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:aa003bcb24e4b3dfc4e7eea616eefd974b8bc83b7fc367b7b25909ef235ae8b2"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:23464b5350e36015eec6c9531e5c9d6f3cdf315ea1e6e2f84e74a34205b5986e"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:162182be08bfd66444f95415107518cbef434ffac5c4dfda7e50b020244db4c1"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:a5493e52c72826066acf2d870b27295fd29b04b433ba3a8fd52a08cf6072520a"
     }
   ]
 }

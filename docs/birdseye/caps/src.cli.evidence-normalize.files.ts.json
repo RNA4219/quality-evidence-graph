@@ -1,0 +1,20 @@
+{
+  "id": "src/cli/evidence-normalize/files.ts",
+  "role": "files",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 files の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts"
+  ],
+  "deps_in": [
+    "src/cli/evidence-normalize.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:5b2c051761db9e065e18182a7e0e86b347a06913318097fe73545f8a241df1b4"
+}

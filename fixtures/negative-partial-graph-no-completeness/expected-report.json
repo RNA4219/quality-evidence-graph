@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-partial-graph-no-completeness",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-partial-graph-no-completeness",
       "status": "gate_failed",
       "exitCode": 2,
@@ -41,7 +50,13 @@
           "code": "DQ-07",
           "message": "Partial graph without explicit completeness score",
           "nodeIds": [],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Partial graph without explicit completeness score"
+            }
+          ]
         }
       ],
       "blockers": [],

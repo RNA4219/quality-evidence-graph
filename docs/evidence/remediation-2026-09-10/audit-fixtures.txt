@@ -1,0 +1,5 @@
+
+> @quality-harness/quality-evidence-graph@0.4.0 test:fixtures
+> node tests/fixture-regression.mjs
+
+Validated 53 fixture contracts, including 22 reliability end-to-end fixtures

@@ -1,0 +1,26 @@
+{
+  "id": "docs/project/acceptance-audit-2026-09-10.md",
+  "role": "acceptance-audit-2026-09-10",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "FIX-01〜20の実装・直接検証・scopeの照合。実行必須、I/O診断、出力保護の追加修正と3 jobのCI成功を記録。",
+  "deps_out": [
+    "docs/evidence/remediation-2026-09-10/audit-validation.json",
+    "docs/evidence/remediation-2026-09-10/ci-validation.json",
+    "docs/requirements.md",
+    "src/gate/dq/graph-integrity.ts",
+    "src/gate/dq/placement-coverage.ts",
+    "src/validation/evidence.ts",
+    "tests/remediation-gate.test.mjs"
+  ],
+  "deps_in": [
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:86872528df3822c05d868f8614b623990b4ef5c20aba4675136a10d0f3e28ed9"
+}

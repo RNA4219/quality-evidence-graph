@@ -1,0 +1,22 @@
+{
+  "id": "src/cli/policy-lint/model.ts",
+  "role": "model",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 model の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/policy-lint.ts",
+    "src/cli/policy-lint/format.ts",
+    "src/cli/policy-lint/rules.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:8fa461fd7a58323963103aeb853c6878e400ad955157f563f7e1e2dbb8ff4d89"
+}

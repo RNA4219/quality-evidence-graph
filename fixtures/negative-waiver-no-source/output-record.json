@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-waiver-no-source/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:7da12ea08732887e9a6dbd78b3b336a9741495316efb7671c194b59b8bdaf9f9"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -19,7 +23,18 @@
       "runId": "qeg:run-negative-waiver-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:7da12ea08732887e9a6dbd78b3b336a9741495316efb7671c194b59b8bdaf9f9"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -32,11 +47,13 @@
               "id": "qeg:sr-risk-001",
               "path": "docs/risk-analysis.md"
             }
-          ]
+          ],
+          "assumptions": [],
+          "confidence": "high"
         },
         "sourceArtifactIds": [],
         "priority": "P1",
-        "severity": "major",
+        "severity": "high",
         "likelihood": 0.3,
         "businessImpact": 0.5,
         "complianceCriticality": 0.2,
@@ -58,12 +75,32 @@
       "runId": "qeg:run-negative-waiver-no-source",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:7da12ea08732887e9a6dbd78b3b336a9741495316efb7671c194b59b8bdaf9f9"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-waiver-no-source",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-waiver-no-source",
@@ -74,16 +111,18 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-waiver-no-source/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:7da12ea08732887e9a6dbd78b3b336a9741495316efb7671c194b59b8bdaf9f9"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
       "Disqualified: 1 DQ code(s)",
-      "- DQ-15: Waiver \"qeg:waiver-001\" is not source-backed",
-      "Residual risks: 1",
-      "Required human review: 1"
+      "- DQ-15: Waiver \"qeg:waiver-001\" is not source-backed"
     ],
     "disqualifications": [
       {
@@ -92,21 +131,46 @@
         "nodeIds": [
           "qeg:waiver-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2F",
+            "path": "gate-input.json",
+            "label": "/: Diagnostic subject qeg:waiver-001"
+          }
+        ]
       }
     ],
     "blockers": [],
-    "residualRisks": [
-      "qeg:risk-001"
-    ],
-    "requiredHumanReview": [
-      "qeg:risk-001"
-    ]
+    "residualRisks": [],
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:266c7f9a21301063cf5d85e7c55b19bb5e7fbd5fe53853aacd33f0a0155fd6f7"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:745e175e386cbc138b75ee41da8626f55ffc6d84a011414295b49eb0b7bab42b"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:26d2ad26fe88ab0f86ea089d9a318af017fd5158f5e4192cdd50eaa209f1bb05"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:21e1ff56c0182ffee21c3873e9333645066246813579f76d2e1834c932b1ce34"
     }
   ],
   "auditTrail": {

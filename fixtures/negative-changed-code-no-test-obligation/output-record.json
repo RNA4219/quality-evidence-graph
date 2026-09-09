@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-changed-code-no-test-obligation/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:f53d9467b6f5ff0d4058e23f5199e89698cfccaedc39f1160d500a691a467c64"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -19,7 +23,18 @@
       "runId": "qeg:run-negative-changed-code-no-test-obligation",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:f53d9467b6f5ff0d4058e23f5199e89698cfccaedc39f1160d500a691a467c64"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -65,12 +80,32 @@
       "runId": "qeg:run-negative-changed-code-no-test-obligation",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:f53d9467b6f5ff0d4058e23f5199e89698cfccaedc39f1160d500a691a467c64"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-changed-code-no-test-obligation",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-changed-code-no-test-obligation",
@@ -81,9 +116,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-changed-code-no-test-obligation/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:f53d9467b6f5ff0d4058e23f5199e89698cfccaedc39f1160d500a691a467c64"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -97,17 +136,46 @@
         "nodeIds": [
           "qeg:changed-code-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2FplacementPlan",
+            "path": "gate-input.json",
+            "label": "/placementPlan: Coverage for qeg:changed-code-001"
+          }
+        ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:ebc34d530929d9289a05997e5d4738cb904a17513bffaec6d255e2c8970831a7"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:b583470bed7dd345f5e780af8e4d4d19b898fd9f358cf399ed16737837481143"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:a3597865e62c61765a98500950ab307592ed8356bd8374b431ca5e31bb4c896f"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:00a99ce81a465ea9550b24944cc4849ada80e01796071ca8396b725ea58ed4cf"
     }
   ],
   "auditTrail": {

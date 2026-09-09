@@ -1,11 +1,18 @@
 {
   "id": "fixtures/manifest.json",
   "role": "fixture-manifest",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
+  "summary": "QEG 0.4.0 fixture-manifest の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
-  "deps_in": [],
+  "deps_in": [
+    "docs/project/evaluation.md",
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md",
+    "docs/spec/reliability-hardening-checklist.md",
+    "docs/spec/reliability-hardening.md",
+    "tests/fixture-regression.mjs"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],

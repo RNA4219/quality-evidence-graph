@@ -10,15 +10,13 @@
   "summary": "GitHub Actions CI。install / typecheck / build / JSON parse / package dry-run / QEG report を完走し、QEG report は qeg-report-action に委譲する。.qeg/qeg-ci-report.json を artifact と Step Summary に残してから Final CI verdict で集約失敗させる。manual demo では qeg_report_targets に failing fixture を指定できる。",
   "deps_out": [
     "qeg-report-action/action.yml",
-    "src/cli/report.ts",
-    "package.json",
-    "docs/project/runbook.md"
+    "src/cli/report.ts"
   ],
   "deps_in": [
     "README.md",
-    "docs/requirements.md",
+    "docs/project/evaluation.md",
     "docs/project/runbook.md",
-    "docs/project/evaluation.md"
+    "docs/requirements.md"
   ],
   "risks": [
     "QEG_REPORT_TARGETS が実運用 target とずれると CI artifact は生成されるが不足証跡の対象を誤る"
@@ -28,6 +26,6 @@
     "npm run build",
     "npm run report -- fixtures/positive-release-go"
   ],
-  "generation": "00014",
+  "generation": "00015",
   "contentHash": "sha256:efe816b3e7577b2841df01d01199acaf2e75a511bd7f9bc7c96b5154144be9c7"
 }

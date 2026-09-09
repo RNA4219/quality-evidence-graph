@@ -5,6 +5,7 @@ import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { createDoctorReport } from "./doctor.js";
 import { CliError } from "./errors.js";
+import { optionalText } from "./file-errors.js";
 
 interface ReproBundleManifest {
   readonly reportVersion: "qeg-repro-bundle-v1";
@@ -19,11 +20,7 @@ async function readJson<T>(path: string): Promise<T> {
 }
 
 async function safeRead(path: string): Promise<string | undefined> {
-  try {
-    return await readFile(path, "utf-8");
-  } catch {
-    return undefined;
-  }
+  return optionalText(path);
 }
 
 function sha256(content: string): string {

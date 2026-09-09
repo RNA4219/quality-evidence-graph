@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/output-manifest.schema.json",
+  "title": "QEG output hash manifest",
+  "type": "object", "required": ["manifestVersion", "runId", "files"], "additionalProperties": false,
+  "properties": {
+    "manifestVersion": { "const": "qeg-output/v1" },
+    "runId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
+    "files": { "type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {
+      "type": "object", "required": ["path", "contentHash"], "additionalProperties": false,
+      "properties": {
+        "path": { "enum": ["qeg.bundle.json", "test-placement-plan.json", "gate-verdict.json", "quality-evidence-record.json", "output-record.json", "quality-evidence-record.md"] },
+        "contentHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" }
+      }
+    } }
+  }
+}

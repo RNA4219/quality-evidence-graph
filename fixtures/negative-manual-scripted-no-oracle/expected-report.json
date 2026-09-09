@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-manual-scripted-no-oracle",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-manual-scripted-no-oracle",
       "status": "gate_failed",
       "exitCode": 2,
@@ -43,7 +52,13 @@
           "nodeIds": [
             "qeg:placement-001"
           ],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+              "path": "gate-input.json",
+              "label": "/graph/nodes/0: Diagnostic subject qeg:placement-001"
+            }
+          ]
         }
       ],
       "blockers": [],

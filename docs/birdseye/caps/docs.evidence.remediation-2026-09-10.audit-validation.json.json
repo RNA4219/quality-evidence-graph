@@ -1,0 +1,19 @@
+{
+  "id": "docs/evidence/remediation-2026-09-10/audit-validation.json",
+  "role": "audit-validation",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 audit-validation の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "docs/evidence/remediation-2026-09-10/ci-validation.json",
+    "docs/project/acceptance-audit-2026-09-10.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:5694ee923b93b8f3dbfc36dc5871d21a6febd06cb115db8e2d9e69b6c1e96cd3"
+}

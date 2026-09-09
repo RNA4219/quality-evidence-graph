@@ -1,0 +1,38 @@
+{
+  "id": "src/cli/commands.ts",
+  "role": "commands",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 commands の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/baseline.ts",
+    "src/cli/check.ts",
+    "src/cli/doctor.ts",
+    "src/cli/dq-explain.ts",
+    "src/cli/enum-check.ts",
+    "src/cli/errors.ts",
+    "src/cli/evidence-normalize.ts",
+    "src/cli/evidence-verify.ts",
+    "src/cli/fixture-io.ts",
+    "src/cli/init.ts",
+    "src/cli/policy-lint.ts",
+    "src/cli/record.ts",
+    "src/cli/report.ts",
+    "src/cli/repro-bundle.ts",
+    "src/cli/schema-check.ts",
+    "src/cli/snapshot.ts",
+    "src/cli/validation.ts",
+    "src/gate.ts",
+    "src/validation/output.ts"
+  ],
+  "deps_in": [
+    "src/cli.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:234b4d71a4ed8e31b376df35fb3241dcc6f833191084d1d5203f8a4319b0ff40"
+}

@@ -1,0 +1,16 @@
+{
+  "id": "schemas/retention.schema.json",
+  "role": "retention.schema",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 retention.schema の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:31f96a818af523648dcb21422f692561e7238d92ab9dad40d90b6c574c72a284"
+}

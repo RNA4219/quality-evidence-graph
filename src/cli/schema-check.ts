@@ -4,6 +4,9 @@ import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { CliError } from "./errors.js";
 import { loadSchemaRegistry, validateGateInput } from "../validation/schema.js";
+import { validateOutput, OUTPUT_SCHEMAS } from "../validation/output.js";
+import { optionalText } from "./file-errors.js";
+import { verifyOutputManifest } from "./output-integrity.js";
 
 export type SchemaCheckStatus = "pass" | "fail";
 export interface SchemaCheckItem {
@@ -33,6 +36,23 @@ export async function createSchemaCheckReport(rawTargets: readonly string[] = []
   }));
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   for (const target of targets) {
+    try {
+      const errors = await verifyOutputManifest(target);
+      if (errors) items.push({ name: `${target}:output-hashes`, status: errors.length ? "fail" : "pass", message: errors.length ? "Output hash verification failed" : "All output hashes verified", errors });
+    } catch (error) {
+      items.push({ name: `${target}:output-hashes`, status: "fail", message: String(error), errors: [] });
+    }
+    for (const [filename, schema] of Object.entries(OUTPUT_SCHEMAS)) {
+      try {
+        const content = await optionalText(join(target, filename));
+        if (content === undefined) continue;
+        const output = await validateOutput(JSON.parse(content), schema);
+        items.push({ name: `${target}:${filename}`, status: output.valid ? "pass" : "fail",
+          message: output.valid ? "valid output" : "output schema validation failed", errors: output.issues.map(i => `${i.path} ${i.message}`) });
+      } catch (error) {
+        items.push({ name: `${target}:${filename}`, status: "fail", message: String(error), errors: [] });
+      }
+    }
     try {
       const report = await validateGateInput(await readJson(join(target, "gate-input.json")));
       items.push({

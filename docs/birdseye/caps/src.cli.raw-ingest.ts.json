@@ -1,0 +1,24 @@
+{
+  "id": "src/cli/raw-ingest.ts",
+  "role": "raw-ingest",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 raw-ingest の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts",
+    "src/cli/file-errors.ts",
+    "src/record.ts",
+    "src/types.ts",
+    "src/validation/output.ts"
+  ],
+  "deps_in": [
+    "src/cli/pipeline.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:e5595806bbfb8ec4934c6a27fab1cc9149875bfcb13c4f46309401cd5f617591"
+}

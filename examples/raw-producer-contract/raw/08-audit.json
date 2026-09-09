@@ -1,0 +1,27 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T00:00:00.000Z",
+  "run_id": "ctg:run-fixture",
+  "repo": {
+    "root": ".",
+    "base_ref": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "head_ref": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "audit",
+  "schema": "audit@v1",
+  "inputs": [],
+  "policy": {
+    "id": "ctg:policy-1",
+    "hash": "sha256:823412d1eacb67956220e532959f0104603057c88704863ca38e7cd188fda812"
+  },
+  "exit": {
+    "code": 0,
+    "status": "passed",
+    "reason": "Fixture audit complete"
+  }
+}

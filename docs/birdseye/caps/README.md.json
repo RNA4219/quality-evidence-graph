@@ -1,32 +1,31 @@
 {
   "id": "README.md",
   "role": "overview",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG の agent / maintainer 向け入口。人間向け README、読み順、Agent Rules、CI workflow、qeg-report-action、運用CLI、検証コマンド、controlled governance の現在状態を示す。",
+  "summary": "QEG 0.4.0 overview の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "README_JA.md",
+    ".github/workflows/ci.yml",
     "README_EN.md",
+    "README_JA.md",
     "docs/agent/HUB.codex.md",
-    "docs/project/blueprint.md",
-    "docs/requirements.md",
-    "docs/spec/index.md",
+    "docs/project/remediation-2026-09-10.md",
+    "docs/release-notes/2026-07-20-v0.3.0.md",
+    "docs/release-notes/2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md",
     "docs/spec/operational-cli-extensions.md",
-    "docs/spec/implementation-gate-2026-06-03.md",
-    "src/cli/report.ts",
     "qeg-report-action/action.yml",
-    ".github/workflows/ci.yml"
+    "src/cli/report.ts"
   ],
-  "deps_in": [],
+  "deps_in": [
+    "docs/release-notes/2026-06-03-controlled-gate.md"
+  ],
   "risks": [
-    "bootstrap と Birdseye がずれると読込順が崩れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run schema-check",
-    "npm run enum-check",
-    "npm run report -- fixtures/positive-release-go",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:0d0a24e0ad0d8f008000c7220999bb84f6ede96fa2a69aa13b2cf3c9c2c0263c"
+  "contentHash": "sha256:9a008ba667ea7c55b5d2c276ac785105107475d05a548b16e506b28fba087981"
 }

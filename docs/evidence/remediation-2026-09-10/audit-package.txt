@@ -1,0 +1,5 @@
+
+> @quality-harness/quality-evidence-graph@0.4.0 test:package
+> node tests/package-smoke.mjs
+
+Clean tarball install, CLI/library/Action bundle smoke, and packed public type contract passed

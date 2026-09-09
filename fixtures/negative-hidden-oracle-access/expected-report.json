@@ -28,6 +28,15 @@
   },
   "targets": [
     {
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-hidden-oracle-access",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
       "target": "<repo>/fixtures/negative-hidden-oracle-access",
       "status": "gate_failed",
       "exitCode": 2,
@@ -41,7 +50,13 @@
           "code": "DQ-10",
           "message": "Candidate accessed hidden oracle in benchmark mode",
           "nodeIds": [],
-          "sourceRefs": []
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2F",
+              "path": "gate-input.json",
+              "label": "/: Candidate accessed hidden oracle in benchmark mode"
+            }
+          ]
         }
       ],
       "blockers": [],

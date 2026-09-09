@@ -1,0 +1,31 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T00:00:00.000Z",
+  "run_id": "ctg:run-fixture",
+  "repo": {
+    "root": ".",
+    "base_ref": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+    "head_ref": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "release-readiness",
+  "schema": "release-readiness@v1",
+  "status": "passed",
+  "completeness": "complete",
+  "summary": "Fixture producer check passed",
+  "counts": {
+    "findings": 1,
+    "critical": 0,
+    "high": 0,
+    "risks": 1,
+    "testSeeds": 1,
+    "unsupportedClaims": 0
+  },
+  "failedConditions": [],
+  "recommendedActions": [],
+  "artifactRefs": {}
+}

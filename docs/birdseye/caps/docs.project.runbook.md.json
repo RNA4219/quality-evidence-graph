@@ -4,28 +4,26 @@
   "public_api": [],
   "summary": "typecheck、schema parse、schema/enum drift check、GitHub Actions CI、qeg-report-action、CI 累積 report、運用補助CLI、release dry-run、IPO 統制仕様書とレビュー記録確認、code-to-gate Gate 証跡、RanD KanoMode 監査証跡、実装 Gate 証跡、rollback、observability の運用手順。",
   "deps_out": [
-    "docs/project/evaluation.md",
-    "docs/requirements.md",
-    "package.json",
-    "src/cli/report.ts",
-    "src/cli/doctor.ts",
-    "src/cli/dq-explain.ts",
-    "src/cli/schema-check.ts",
-    "src/cli/enum-check.ts",
-    "src/cli/snapshot.ts",
-    "qeg-report-action/action.yml",
     ".github/workflows/ci.yml",
-    "docs/spec/index.md",
+    "docs/project/evaluation.md",
+    "docs/release-notes/2026-07-20-v0.3.0.md",
+    "docs/release-notes/2026-07-20-v0.3.1.md",
     "docs/spec/operational-cli-extensions.md",
-    "docs/spec/review-2026-06-03.md",
-    "docs/spec/gate-acceptance-2026-06-03.md",
-    "docs/spec/code-to-gate-2026-06-03/analysis-report.md",
-    "docs/spec/code-to-gate-2026-06-03/release-readiness.json",
-    "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json",
-    "docs/spec/implementation-gate-2026-06-03.md"
+    "qeg-report-action/action.yml",
+    "src/cli/baseline.ts",
+    "src/cli/check.ts",
+    "src/cli/evidence-verify.ts",
+    "src/cli/policy-lint.ts",
+    "src/cli/report.ts",
+    "src/cli/repro-bundle.ts"
   ],
   "deps_in": [
-    "docs/agent/HUB.codex.md"
+    "docs/agent/HUB.codex.md",
+    "docs/project/evaluation.md",
+    "docs/spec/acceptance.md",
+    "docs/spec/gate-acceptance-2026-06-03.md",
+    "docs/spec/implementation-gate-2026-06-03.md",
+    "docs/spec/review-2026-06-03.md"
   ],
   "risks": [
     "実行手順が requirements とずれると検収証跡が再現できない"
@@ -43,6 +41,6 @@
     "RanD KanoMode build_audit_artifacts",
     "fixture validate/gate/record"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:fc925f62fad9357a0c0f1c9f5b21bcfc5f07467cf54756e927f7410646bf634d"
+  "generation": "00015",
+  "contentHash": "sha256:bd0150a223d340331f1fb27eb0ea785699ae67a7354d6baf493d8a010e4bd99d"
 }

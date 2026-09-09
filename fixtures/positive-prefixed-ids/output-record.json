@@ -9,10 +9,14 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/positive-release-go/input.json",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:a845f1cc0c28895c21dee734ad0969cfc9d2e60b495184556265ba6b080183f2",
         "revision": "refs/heads/main"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -20,12 +24,24 @@
       "runId": "qeg:run-positive-release-go",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:a845f1cc0c28895c21dee734ad0969cfc9d2e60b495184556265ba6b080183f2",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
         "id": "qeg:claim-001",
-        "kind": "claim",
+        "kind": "requirement",
         "label": "All critical risks mitigated",
         "priority": "P0",
         "severity": "critical",
@@ -36,7 +52,22 @@
             "id": "qeg:sr-claim-001",
             "path": "docs/claims/claim-001.md"
           }
-        ]
+        ],
+        "title": "All critical risks mitigated",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-claim-001",
+              "path": "docs/claims/claim-001.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "acceptanceCriteriaIds": []
       }
     ],
     "edges": [],
@@ -53,12 +84,33 @@
       "runId": "qeg:run-positive-release-go",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:a845f1cc0c28895c21dee734ad0969cfc9d2e60b495184556265ba6b080183f2",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "positive-prefixed-ids",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-positive-release-go",
@@ -69,10 +121,14 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/positive-release-go/input.json",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:a845f1cc0c28895c21dee734ad0969cfc9d2e60b495184556265ba6b080183f2",
           "revision": "refs/heads/main"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "go",
     "reasons": [
@@ -81,12 +137,35 @@
     "disqualifications": [],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:0628c3aca41271a74466c133e90bb807d18962d511f0e78352972f2e4c804990"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:50aca0332c8969fe99e7dd74be53bdd896c9a51ba79b6f66463430edaf11f55a"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:238424f45985de838b428be76c8153ceb73b6e3463696da3e21dc748964b5838"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:665d3a06d486b0c5de7b333083516216435175fc531985e86c161324ae2bd3c2"
     }
   ],
   "auditTrail": {
@@ -94,6 +173,7 @@
     "approvalEvidenceSummary": [
       {
         "id": "qeg:approval-release-001",
+        "approver": "approver-001",
         "approvedAt": "2026-06-03T04:00:00.000Z",
         "policyId": "qeg:policy-ipo-controlled-001",
         "policyHash": "sha256:abc123",

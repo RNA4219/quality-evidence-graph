@@ -1,0 +1,44 @@
+{
+  "id": "src/cli/errors.ts",
+  "role": "errors",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 errors の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "src/cli/baseline.ts",
+    "src/cli/commands.ts",
+    "src/cli/dq-explain.ts",
+    "src/cli/evidence-normalize.ts",
+    "src/cli/evidence-normalize/adapters.ts",
+    "src/cli/evidence-normalize/files.ts",
+    "src/cli/evidence-normalize/options.ts",
+    "src/cli/evidence-normalize/publish.ts",
+    "src/cli/evidence-normalize/validation.ts",
+    "src/cli/evidence-normalize/values.ts",
+    "src/cli/evidence-verify.ts",
+    "src/cli/file-errors.ts",
+    "src/cli/fixture-io.ts",
+    "src/cli/ingest-contract.ts",
+    "src/cli/init-runtime.ts",
+    "src/cli/init.ts",
+    "src/cli/output-files.ts",
+    "src/cli/pipeline.ts",
+    "src/cli/policy-lint.ts",
+    "src/cli/raw-ingest.ts",
+    "src/cli/report/command.ts",
+    "src/cli/report/core.ts",
+    "src/cli/report/environment.ts",
+    "src/cli/repro-bundle.ts",
+    "src/cli/schema-check.ts",
+    "src/cli/snapshot.ts",
+    "src/cli/validation.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:0494bbd3e21351132647ab0c592f177dd50c738b35db0545ebc9744e9e602b19"
+}

@@ -101,6 +101,7 @@ function gateTargetResult(
 ): ReportTargetResult {
   const { gateResult } = evaluated;
   return {
+    ...(gateResult.evaluationScope ? { evaluationScope: gateResult.evaluationScope } : {}),
     target: evaluated.fixtureDir,
     status,
     exitCode,

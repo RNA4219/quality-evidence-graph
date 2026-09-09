@@ -1,0 +1,24 @@
+{
+  "id": "src/cli/evidence-normalize/model.ts",
+  "role": "model",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 model の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/evidence-normalize.ts",
+    "src/cli/evidence-normalize/adapters.ts",
+    "src/cli/evidence-normalize/options.ts",
+    "src/cli/evidence-normalize/validation.ts",
+    "src/cli/evidence-normalize/values.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:bd415fa8c8c090baa72627495288ba523e567d1ac70d2d62e3d594b5c4d34f6a"
+}

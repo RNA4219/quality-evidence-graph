@@ -1,17 +1,22 @@
 {
   "id": "docs/ipo-controlled-profile.md",
   "role": "ipo-profile",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
   "summary": "ipo_controlledのDQ-01〜DQ-21、waiver、approval evidence、retention、exit codeと、repository実装完成・外部release approval分離の契約。",
   "deps_out": [
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/requirements.md",
+    "docs/spec/evidence-package.md",
     "docs/spec/gate-policy.md",
-    "docs/release/acceptance-2026-07-20-v0.3.1.md"
+    "docs/spec/retention-immutability.md",
+    "docs/spec/waiver-approval.md"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
-    "docs/control-mapping.md"
+    "docs/project/tasks.codex.md",
+    "docs/requirements.md",
+    "docs/spec/gate-policy.md"
   ],
   "risks": [
     "repository completionを外部IPO統制承認へ自動昇格する"

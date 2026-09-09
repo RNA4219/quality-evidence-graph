@@ -1,16 +1,24 @@
 {
   "id": "src/cli/report/command.ts",
   "role": "report-command",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 report-command の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts",
+    "src/cli/report/core.ts",
+    "src/cli/report/environment.ts",
+    "src/cli/report/formatter.ts",
+    "src/cli/report/model.ts"
+  ],
+  "deps_in": [
+    "src/cli/report.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:4c6ddd1a7dbc97adc8f9eb6fab71ba9ad38a0b4732f59ea17f2855e6f0fc73f5"
+  "contentHash": "sha256:d55224f9f98eaa2c2334b907855b9f8cc4193af911a510c5195e28f9f7611ab0"
 }

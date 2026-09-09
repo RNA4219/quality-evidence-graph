@@ -1,11 +1,17 @@
 {
   "id": "src/cli/report/baseline-diff.ts",
   "role": "report-baseline-diff",
-  "generation": "00014",
+  "generation": "00015",
   "public_api": [],
-  "summary": "QEG 0.3.1 fail-closed contract component.",
-  "deps_out": [],
-  "deps_in": [],
+  "summary": "QEG 0.4.0 report-baseline-diff の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/report/model.ts",
+    "src/cli/report/targets.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/report/core.ts"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],

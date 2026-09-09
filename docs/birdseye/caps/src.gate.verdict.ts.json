@@ -1,0 +1,26 @@
+{
+  "id": "src/gate/verdict.ts",
+  "role": "verdict",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 verdict の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/verdict/blockers.ts",
+    "src/gate/verdict/human-review.ts",
+    "src/gate/verdict/reasons.ts",
+    "src/gate/verdict/residual-risks.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate.ts",
+    "src/gate/dq/basic.ts",
+    "src/gate/evaluate.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:e4d72bd088695425a5904abc2de996ef539077759407ec1e80d67e3178c2cda8"
+}

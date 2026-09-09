@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-partial-graph-no-completeness/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:6ccde012f695977c00d91ee4c1fb9c8bbd678487eba2acb15f147dabb53a1932"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -19,9 +23,43 @@
       "runId": "qeg:run-negative-partial-graph-no-completeness",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:6ccde012f695977c00d91ee4c1fb9c8bbd678487eba2acb15f147dabb53a1932"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-partial-graph-no-completeness",
+        "kind": "requirement",
+        "title": "Fixture context: negative-partial-graph-no-completeness",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-partial-graph-no-completeness",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "partial": true,
@@ -35,12 +73,32 @@
       "runId": "qeg:run-negative-partial-graph-no-completeness",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:6ccde012f695977c00d91ee4c1fb9c8bbd678487eba2acb15f147dabb53a1932"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-partial-graph-no-completeness",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-partial-graph-no-completeness",
@@ -51,9 +109,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-partial-graph-no-completeness/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:6ccde012f695977c00d91ee4c1fb9c8bbd678487eba2acb15f147dabb53a1932"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -65,17 +127,46 @@
         "code": "DQ-07",
         "message": "Partial graph without explicit completeness score",
         "nodeIds": [],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2F",
+            "path": "gate-input.json",
+            "label": "/: Partial graph without explicit completeness score"
+          }
+        ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:8d3cb6f8b6b32cca1fde40d6decae3786a2ea9d528d11d5e88bbc2696c789865"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:058f04cb76851b135625d3119dd62494de9e599fd95b47862726111476c0336e"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:403423fe2bc5adaf6cf37dbcd343e2379c565e52a1e3703eeb08e143e2243faa"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:2b1e33343c8291c2d35c1ef1fc448a7dd3a8ea75a13014ccda2415625634aab5"
     }
   ],
   "auditTrail": {

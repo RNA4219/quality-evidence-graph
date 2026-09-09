@@ -1,0 +1,21 @@
+{
+  "id": "src/cli/ingest-contract.ts",
+  "role": "ingest-contract",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 ingest-contract の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/cli/errors.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/fixture-io.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:1644c4f553cec5244d4be2b60c2d141025283caa4968f1ed8b5704c9c3172399"
+}

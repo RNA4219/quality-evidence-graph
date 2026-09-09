@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "packet_id": "rand:packet-1",
+  "derived_from": "rand:kano-1",
+  "qeg_policy_hash_ref": "qeg:policyHash:unadopted-proposal",
+  "product_context": {},
+  "assumptions": [
+    "Fixture scenario"
+  ],
+  "release_readiness_prelude": {},
+  "requirements": [
+    {
+      "requirement_id": "rand:REQ-001",
+      "title": "Cancel order",
+      "statement": "Pending orders can be cancelled",
+      "priority": "P1",
+      "confidence": 0.9,
+      "evidence_refs": [
+        "rand:evidence-1"
+      ],
+      "acceptance_criteria": [
+        "Cancelling a pending order returns success"
+      ],
+      "risks": [],
+      "gate_policy_proposal": {
+        "proposal": {},
+        "policyHashRef": "qeg:policyHash:unadopted-proposal",
+        "source": "rand:kano_requirements_packet"
+      }
+    }
+  ]
+}

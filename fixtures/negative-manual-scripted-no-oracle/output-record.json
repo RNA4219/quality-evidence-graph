@@ -9,9 +9,13 @@
         "id": "qeg:artifact-001",
         "adapter": "qeg-native",
         "kind": "test_model",
-        "path": "fixtures/negative-manual-scripted-no-oracle/input.json"
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -19,7 +23,18 @@
       "runId": "qeg:run-negative-manual-scripted-no-oracle",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "nodes": [
       {
@@ -27,7 +42,9 @@
         "kind": "test_placement",
         "title": "Manual scripted placement without oracle",
         "traceability": {
-          "sourceRefs": []
+          "sourceRefs": [],
+          "assumptions": [],
+          "confidence": "high"
         },
         "sourceArtifactIds": [],
         "obligationId": "qeg:obligation-001",
@@ -52,12 +69,54 @@
       "runId": "qeg:run-negative-manual-scripted-no-oracle",
       "createdAt": "2026-06-03T04:00:00.000Z",
       "profile": "ipo_controlled",
-      "inputArtifacts": []
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "obligations": [],
+    "obligations": [
+      {
+        "id": "qeg:obligation-001",
+        "requirementIds": [],
+        "riskIds": [],
+        "failureModeIds": [],
+        "changedCodeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 0.8,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:manual-oracle-scope",
+              "path": "gate-input.json#/graph/nodes",
+              "label": "Manual oracle obligation under test"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        }
+      }
+    ],
     "placements": []
   },
   "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-manual-scripted-no-oracle",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
     "metadata": {
       "qegVersion": "0.2",
       "runId": "qeg:run-negative-manual-scripted-no-oracle",
@@ -68,9 +127,13 @@
           "id": "qeg:artifact-001",
           "adapter": "qeg-native",
           "kind": "test_model",
-          "path": "fixtures/negative-manual-scripted-no-oracle/input.json"
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:dcb17b21e15be4dc48b5efea13387f441b78131507f8389eb21f2896265cd7ef"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "verdict": "disqualified",
     "reasons": [
@@ -84,17 +147,46 @@
         "nodeIds": [
           "qeg:placement-001"
         ],
-        "sourceRefs": []
+        "sourceRefs": [
+          {
+            "id": "qeg:input-%2Fgraph%2Fnodes%2F0",
+            "path": "gate-input.json",
+            "label": "/graph/nodes/0: Diagnostic subject qeg:placement-001"
+          }
+        ]
       }
     ],
     "blockers": [],
     "residualRisks": [],
-    "requiredHumanReview": []
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
   },
   "exports": [
     {
       "kind": "json",
-      "path": "output-record.json"
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:ef4f0f68163054b39ab4bc804a6f36fa8dc2a1e2cec2eb8b764515060f20c8f4"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:170a9f2250e1835d8a952a9c16baa6059ce77c7ebab54cbb339b85bfa5035704"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:8d287dd6a52d25ff6b27d5dbc2f31fd739606d457cf0b9f1081a9617947f3e54"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:f9ac8349e3ee7fa2e2b3f498bef05f4964b0ba691d2eb5d971f9751191eeaeea"
     }
   ],
   "auditTrail": {

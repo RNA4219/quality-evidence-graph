@@ -1,0 +1,21 @@
+{
+  "id": "src/gate/verdict/blockers.ts",
+  "role": "blockers",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 blockers の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/context.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate/verdict.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:0d580514d6ce5669230f639b17da68960c1b8984d1ea27ca9ba396f9295cbf95"
+}

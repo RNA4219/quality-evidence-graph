@@ -1,0 +1,21 @@
+{
+  "id": "src/gate/reliability/bounds.ts",
+  "role": "bounds",
+  "generation": "00015",
+  "public_api": [],
+  "summary": "QEG 0.4.0 bounds の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/gate/context.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/gate/reliability/utils.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:0bf2c5b32a860fb2423eb873d4413a5687eb45eff61dd2e842a433751a94999d"
+}

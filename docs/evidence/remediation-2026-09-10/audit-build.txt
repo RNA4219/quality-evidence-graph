@@ -1,0 +1,11 @@
+
+> @quality-harness/quality-evidence-graph@0.4.0 build
+> tsc && npm run build:action
+
+
+> @quality-harness/quality-evidence-graph@0.4.0 build:action
+> esbuild src/cli.ts --bundle --platform=node --format=esm --target=node20 --outfile=qeg-report-action/dist/cli.mjs --log-level=warning
+
+
+> @quality-harness/quality-evidence-graph@0.4.0 typecheck
+> tsc --noEmit

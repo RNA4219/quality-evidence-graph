@@ -12,7 +12,10 @@
         "path": "artifacts/input.json",
         "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
       }
-    ]
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
   },
   "graph": {
     "metadata": {
@@ -28,9 +31,35 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
-    "nodes": [],
+    "nodes": [
+      {
+        "id": "qeg:fixture-context-negative-manual-case-disappeared",
+        "kind": "requirement",
+        "title": "Fixture context: negative-manual-case-disappeared",
+        "acceptanceCriteriaIds": [],
+        "sourceArtifactIds": [
+          "qeg:artifact-negative-manual-case-disappeared"
+        ],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:fixture-contract-negative-manual-case-disappeared",
+              "path": "gate-input.json",
+              "label": "/policy/inputContract"
+            }
+          ],
+          "confidence": "high",
+          "assumptions": [
+            "The negative oracle concerns the named contract, independently of empty-input rejection."
+          ]
+        }
+      }
+    ],
     "edges": [],
     "completeness": {
       "score": 1,
@@ -70,6 +99,32 @@
           "path": "docs/policy/manual-retirement.md"
         }
       ]
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-manual-case-disappeared",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": false,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-negative-manual-case-disappeared",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
     }
   },
   "waivers": [],
@@ -87,7 +142,10 @@
           "path": "artifacts/input.json",
           "contentHash": "sha256:f23792f30e5b4f45615557cc58609fcdeb8ad7a37616192ff9fe008264d21f4f"
         }
-      ]
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
     },
     "obligations": [],
     "placements": [],

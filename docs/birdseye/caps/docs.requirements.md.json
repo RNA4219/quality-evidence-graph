@@ -22,28 +22,42 @@
   ],
   "summary": "必須 3 接続、canonical graph、placement、Gate、producer check consistency、CI workflow、CI 累積 report、運用補助CLI、Action outputs、IPO governance、security、schema hardening の正本要件。",
   "deps_out": [
-    "src/types.ts",
-    "src/cli/report.ts",
+    ".github/workflows/ci.yml",
+    "docs/control-mapping.md",
+    "docs/ipo-controlled-profile.md",
+    "docs/project/tasks.codex.md",
+    "docs/spec/index.md",
+    "docs/spec/operational-cli-extensions.md",
+    "docs/spec/reliability-extension.md",
+    "fixtures/README.md",
+    "qeg-report-action/action.yml",
+    "schemas/gate-verdict.schema.json",
+    "src/cli/baseline.ts",
+    "src/cli/check.ts",
     "src/cli/doctor.ts",
     "src/cli/dq-explain.ts",
-    "src/cli/schema-check.ts",
     "src/cli/enum-check.ts",
-    "src/cli/init.ts",
-    "src/cli/snapshot.ts",
-    "src/cli/baseline.ts",
     "src/cli/evidence-verify.ts",
+    "src/cli/init.ts",
     "src/cli/policy-lint.ts",
+    "src/cli/report.ts",
     "src/cli/repro-bundle.ts",
-    "src/cli/check.ts",
-    "qeg-report-action/action.yml",
-    ".github/workflows/ci.yml",
-    "docs/spec/operational-cli-extensions.md",
-    "schemas/gate-verdict.schema.json",
-    "schemas/shared-defs.schema.json"
+    "src/cli/schema-check.ts",
+    "src/cli/snapshot.ts",
+    "src/gate/test-evidence.ts",
+    "src/types.ts",
+    "src/types/gate.ts",
+    "src/types/graph.ts"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
-    "docs/project/blueprint.md"
+    "docs/ipo-controlled-profile.md",
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/project/remediation-2026-09-10.md",
+    "docs/project/tasks.codex.md",
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md",
+    "docs/research/quality-evidence-graph-requirements-report.md"
   ],
   "risks": [
     "Git 管理外や package 対象外になると統制証跡が壊れる"
@@ -55,6 +69,6 @@
     "npm run report -- fixtures/positive-release-go",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00014",
-  "contentHash": "sha256:809a0005177994bf4044c9d663bed4d61ad522529e08801ef7cc01ed61c1b00a"
+  "generation": "00015",
+  "contentHash": "sha256:8561cdee125856c4ec68328c34f51229ecabe9f355e8f07307191e47b817cd2e"
 }
