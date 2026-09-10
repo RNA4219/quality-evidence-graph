@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs, { mkdtemp, readFile, writeFile, mkdir, readdir } from 'node:fs/promises';
+import fs, { mkdtemp, readFile, writeFile, mkdir, readdir, realpath } from 'node:fs/promises';
 import { syncBuiltinESMExports } from 'node:module';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -84,10 +84,11 @@ test('EAC-08 TC19: invalid output path or existing directory never replaces file
 test('EAC-08 TC19: real rename failure preserves the previously completed generation', async t => {
   const dir = await mkdtemp(join(tmpdir(), 'qeg-rename-fail-'));
   await publishFiles(dir, files('old'));
+  const target = join(await realpath(dir), 'b.json');
   const original = fs.rename;
   let injected = false;
   const replacement = t.mock.method(fs, 'rename', async (from, to) => {
-    if (!injected && to === join(dir, 'b.json')) { injected = true; throw Object.assign(new Error('rename denied'), { code: 'EACCES' }); }
+    if (!injected && to === target) { injected = true; throw Object.assign(new Error('rename denied'), { code: 'EACCES' }); }
     return original(from, to);
   });
   syncBuiltinESMExports();

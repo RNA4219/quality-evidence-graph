@@ -2374,7 +2374,7 @@
       "caps": "docs/birdseye/caps/tests.output-publication.test.mjs.json",
       "depsOut": [],
       "mtime": "00017",
-      "contentHash": "sha256:69012e703aa1c373b2214229c0b3b4dbe29734dea73d51e58a5b59f01f72220f"
+      "contentHash": "sha256:224385c65545e44b144f0341ff942f63b2a8ca701be76260d8a7cc857f358012"
     },
     "tests/consumer-migration.test.mjs": {
       "role": "consumer-migration.test",
