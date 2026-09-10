@@ -5,6 +5,38 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import * as api from '../dist/index.js';
+
+test('EAC-09: YAML is restricted to CTG risk data, rejects aliases and duplicate keys', () => {
+  const ref = { adapter: 'code-to-gate', kind: 'risk_register', path: 'risk-register.yaml' };
+  assert.deepEqual(api.parseProducerArtifact(ref, 'version: ctg/v1\nrisks: []\n'), { version: 'ctg/v1', risks: [] });
+  assert.throws(() => api.parseProducerArtifact(ref, 'version: one\nversion: two\n'));
+  assert.throws(() => api.parseProducerArtifact(ref, 'a: &a [1]\nb: *a\n'));
+  assert.throws(() => api.parseProducerArtifact({ ...ref, adapter: 'RanD' }, 'risks: []\n'));
+});
+
+test('EAC-04/09: explicit producer source mapping resolves real IDs and rejects unresolved mappings', async () => {
+  const { manifest, loaded } = await fixture();
+  const feature = loaded.find(item => item.ref.kind === 'feature_spec');
+  feature.payload.source_refs[0].id = 'MD-spec';
+  feature.ref.sourceRefMappings = [{ sourceId: 'MD-spec', requirementId: 'rand:REQ-001' }];
+  let graph = api.buildGraph(manifest, loaded);
+  assert.ok(graph.edges.some(edge => edge.kind === 'derives_from' && edge.to === 'rand:REQ-001'));
+  feature.ref.sourceRefMappings[0].requirementId = 'rand:missing';
+  graph = api.buildGraph(manifest, loaded);
+  assert.equal(graph.completeness.partial, true);
+  assert.ok(graph.completeness.parserFailures.some(failure => /sourceRefMapping/.test(failure.reason)));
+});
+
+test('EAC-01/09: abbreviated producer revision needs explicit resolution and mismatching revisions fail', async () => {
+  const { manifest, loaded } = await fixture();
+  const artifact = loaded.find(item => item.ref.kind === 'normalized_repo_graph');
+  artifact.payload.repo.revision = manifest.metadata.headRef.slice(0, 12);
+  assert.ok(api.buildGraph(manifest, loaded).completeness.parserFailures.some(failure => failure.code === 'DQ-12'));
+  artifact.ref.reportedRevision = artifact.payload.repo.revision;
+  assert.equal(api.buildGraph(manifest, loaded).completeness.partial, false);
+  artifact.payload.repo.revision = 'f'.repeat(12);
+  assert.ok(api.buildGraph(manifest, loaded).completeness.parserFailures.some(failure => failure.code === 'DQ-12'));
+});
 import { createRawProducerFixture, rawHash, manualTestId, persistRawFixture } from './helpers/raw-producer-fixture.mjs';
 
 const cli = resolve('dist/cli.js');

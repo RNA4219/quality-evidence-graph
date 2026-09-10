@@ -19,6 +19,6 @@
     "npm run typecheck",
     "npm run report -- fixtures/positive-release-go"
   ],
-  "generation": "00016",
-  "contentHash": "sha256:1a0bbb94f0222e90d9ed4e6f7d6f29e2240416bc99dc696de9f760f60a6ced43"
+  "generation": "00017",
+  "contentHash": "sha256:3de604963c7c5076eaeb07063545b6de2ffa263e49f6880d02c1d1b549b07ac6"
 }

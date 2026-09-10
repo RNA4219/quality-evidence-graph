@@ -17,6 +17,14 @@ import type {
   ExecutionAccounting,
 } from "@quality-harness/quality-evidence-graph";
 import { buildGraph, placeTests } from "@quality-harness/quality-evidence-graph";
+import { planConsumerMigration, applyConsumerMigration, readPublishedOutputs, recoverOutputs, parseProducerArtifact } from "@quality-harness/quality-evidence-graph";
+import type { ConsumerMigrationConfig, ConsumerMigrationReport, PublishedOutputs } from "@quality-harness/quality-evidence-graph";
+declare const migrationConfig: ConsumerMigrationConfig;
+const migrationPlan: Promise<ConsumerMigrationReport> = planConsumerMigration("consumer", migrationConfig);
+const migrationApply: Promise<ConsumerMigrationReport> = applyConsumerMigration("consumer", migrationConfig);
+const published: Promise<PublishedOutputs> = readPublishedOutputs("consumer");
+const recovered: Promise<string> = recoverOutputs("consumer");
+void [migrationPlan, migrationApply, published, recovered, parseProducerArtifact];
 
 declare const ingestManifest: IngestManifest;
 declare const rawArtifacts: readonly LoadedArtifact[];

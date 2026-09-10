@@ -1,7 +1,7 @@
 {
   "id": "docs/project/evidence-acceptance-status.md",
   "role": "normal-execution-acceptance-ledger",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
   "deps_out": [
@@ -30,5 +30,5 @@
     "npm run birdseye-check",
     "npm run json-check"
   ],
-  "contentHash": "sha256:2226051151f59d1e460645b17ef0f0eaa3422703eaf777623874da5dc2feaffa"
+  "contentHash": "sha256:3b4adec1b0077fcd29d97f3667ec078758ddbe3019fad37c77b2c7ebf0bf48b3"
 }

@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, writeFile } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, cp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -42,6 +42,8 @@ assert.equal(typeof imported.getExitCode, "function");
 assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.4.0");
 assert.equal(typeof imported.buildGraph, "function");
 assert.equal(typeof imported.placeTests, "function");
+assert.equal(typeof imported.planConsumerMigration, "function");
+assert.equal(typeof imported.readPublishedOutputs, "function");
 const rawConsumer = join(temp, "raw-consumer");
 const rawFixture = await createRawProducerFixture(rawConsumer, imported);
 for (const command of ["build-graph", "place-tests", "gate", "record", "schema-check"]) {
@@ -52,6 +54,30 @@ const rawRecord = JSON.parse(await readFile(join(rawConsumer, "quality-evidence-
 assert.equal(rawRecord.gate.verdict, "go");
 assert.equal(rawRecord.gate.evaluationScope.kind, "fixture");
 assert.equal(rawRecord.gate.executionAccounting.selections[0].selectedRunId, "RUN-001");
+assert.equal((await imported.readPublishedOutputs(rawConsumer)).files.size, 7);
+assert.equal(runQeg(["outputs", "read", rawConsumer]).status, 0);
+await writeFile(join(rawConsumer, "output-record.json"), "tampered");
+assert.equal(runQeg(["outputs", "read", rawConsumer]).status, 1);
+assert.equal(runQeg(["outputs", "recover", rawConsumer]).status, 0);
+const migrationConsumer = join(temp, "migration-consumer");
+await cp(rawConsumer, migrationConsumer, { recursive: true });
+const oldInput = JSON.parse(await readFile(join(migrationConsumer, "gate-input.json"), "utf8"));
+const migrationPolicy = structuredClone(oldInput.policy); migrationPolicy.policyHash = "sha256:" + "e".repeat(64);
+delete oldInput.policy.inputContract;
+await writeFile(join(migrationConsumer, "gate-input.json"), JSON.stringify(oldInput));
+const missingMigration = await imported.planConsumerMigration(migrationConsumer);
+const migrationConfig = { migrationVersion: "qeg-consumer-migration/v1", expectedInputHash: missingMigration.inputHash, policy: migrationPolicy };
+const migrationPlan = await imported.planConsumerMigration(migrationConsumer, migrationConfig);
+assert.equal(migrationPlan.status, "ready", JSON.stringify(migrationPlan));
+assert.equal(migrationPlan.gate.verdict, "go", JSON.stringify(migrationPlan));
+assert.equal((await imported.applyConsumerMigration(migrationConsumer, migrationConfig)).status, "applied");
+assert.equal((await imported.applyConsumerMigration(migrationConsumer, migrationConfig)).status, "unchanged");
+const liveReplay = join(temp, "live-replay");
+await cp(join(packageRoot, "docs/evidence/eac-completion-2026-09-10/producer-replay/first"), liveReplay, { recursive: true });
+for (const command of ["build-graph", "place-tests", "record"]) assert.equal(runQeg([command, liveReplay]).status, 2);
+assert.equal(runQeg(["schema-check", liveReplay]).status, 0);
+const actionReplay = spawnSync(process.execPath, [join(packageRoot, "qeg-report-action/dist/cli.mjs"), "build-graph", liveReplay], { encoding: "utf8" });
+assert.equal(actionReplay.status, 2, actionReplay.stderr || actionReplay.stdout);
 for (const [field, value, code] of [["build_id", "other-build", "DQ-12"], ["timestamp", "2026-09-10T00:00:00.001Z", "DQ-05"]]) {
   const copy = structuredClone(rawFixture); copy.loaded[12].payload[field] = value;
   await persistRawFixture(rawConsumer, copy.manifest, copy.loaded);

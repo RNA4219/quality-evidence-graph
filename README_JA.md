@@ -1,6 +1,8 @@
 # Quality Evidence Graph
 
-現在の開発版は0.4.0（未公開）、wire契約は0.2です。[現行改修台帳](docs/project/remediation-2026-09-10.md)と[raw入力例](examples/raw-producer-contract/README.md)を参照してください。以下のv0.3.1 Action例は過去の配布版です。
+証跡の世代公開・中断復旧・実producer接続・consumer移行は[操作と契約](docs/spec/output-publication-and-migration.md)を参照。`outputs read/recover`、`migrate --dry-run/--apply`を追加しています。
+
+現在の開発版は0.4.0（未公開）、wire契約は0.2です。[現行EAC受入台帳](docs/project/evidence-acceptance-status.md)と[raw入力例](examples/raw-producer-contract/README.md)を参照してください。以下のv0.3.1 Action例は過去の配布版です。
 
 0.4.0では `build-graph` → `place-tests` → `gate` → `record` を実行できます。policyに `inputContract` が必要で、必須3 producerを使う `upstream_artifacts` と明示的な `native_graph` を選びます。評価範囲・必須artifact・実行証跡の要否を宣言し、空の初期入力や配置計画だけでは成功になりません。`init`は同じ配布物のlocal Actionを `.qeg/runtime` に配置します。
 
@@ -149,7 +151,7 @@ QEG は、品質を「説明」ではなく「証跡と判定契約」に落と�
 
 ## 0.3.1 契約（配布履歴）
 
-以下は当時の配布契約。v0.3.1のGitHub Releaseと自己完結Action、および隔離consumerでのschema破損・復旧試験は`docs/release/acceptance-2026-07-20-v0.3.1.md`に記録している。現行0.4.0の実装・検証状態は`docs/project/remediation-2026-09-10.md`を正本とする。
+以下は当時の配布契約。v0.3.1のGitHub Releaseと自己完結Action、および隔離consumerでのschema破損・復旧試験は`docs/release/acceptance-2026-07-20-v0.3.1.md`に記録している。現行0.4.0のEAC実装・検証状態は`docs/project/evidence-acceptance-status.md`、R01〜R06の受入履歴は`docs/project/remediation-2026-09-10.md`を正本とする。
 
 全CLIは共通runtime schema/evidence preflightを通る。壊れたJSONまたは判定envelope欠落はCLI error・exit 1、parse可能な必須component不適合はDQ-01・exit 2である。必須evidenceは実ファイル、SHA-256、revisionを検証し、optional evidenceだけの不適合はwarningとする。
 

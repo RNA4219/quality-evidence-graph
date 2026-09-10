@@ -1,0 +1,21 @@
+{
+  "id": "src/adapters/parse.ts",
+  "role": "parse",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 parse の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/raw-ingest.ts",
+    "src/index.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:377df864295b7d5f67980f1b9cd7e77bc36206d04b5fd43b687c94d440d67c75"
+}

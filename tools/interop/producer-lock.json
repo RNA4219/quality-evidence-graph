@@ -1,0 +1,5 @@
+{
+  "RanD": { "version": "0.3.0", "revision": "b4315040fd1cb823421cff53a0c7eda6f9d89c4a", "prefixes": ["research-runtime/src"], "sourceHash": "sha256:14bd6df0b425a6fc6011031ccac25a6630fd29a51b4eb2576c3fa947dda20373" },
+  "code-to-gate": { "version": "1.5.1", "revision": "aab3d8c7833a0001e1b59f0a2b491eb9baebf0b0", "prefixes": ["src", "schemas"], "sourceHash": "sha256:7b4ba03ebe8f5b75f5f695e11a9c62f42f05f9b546ac182924ac97e4a04481a1" },
+  "manual-bb-test-harness": { "version": "3.0.0", "revision": "76722574298985100b3a6efc730b2dd0f0cb4041", "prefixes": ["src", "schemas"], "sourceHash": "sha256:988f2e4319632b9c67d74e2c16f090edb406f7fba5da21e75074e9dc35fa9516" }
+}

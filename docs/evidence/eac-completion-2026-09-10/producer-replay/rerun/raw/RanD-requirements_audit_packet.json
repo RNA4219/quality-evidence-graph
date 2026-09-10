@@ -1,0 +1,58 @@
+{
+  "schema_version": "1.0",
+  "document_id": "rand:isolated-cli",
+  "summary": "1要件監査。go=1, conditional_go=0, no_go=0.すべてgo。維持推奨。",
+  "requirements": [
+    {
+      "requirement_id": "rand:REQ-001",
+      "original_text": "The CLI increments a supplied integer",
+      "kano_estimate": "performance",
+      "confidence": 0.9,
+      "evidence": [
+        {
+          "evidence_id": "EV-AUDIT-001-increment-requir",
+          "source_type": "spec",
+          "source_tier": "primary",
+          "source_ref": "spec.md",
+          "summary": "---\nfeature_id: CLI-INCREMENT\ntitle: Increment CLI\n---\n# Increment CLI\n\n## Acceptance criteria\n- AC-1: Running node src/cli.mjs 41 exits with 0 and prints 42.\n\n## Changed areas\n- src/cli.mjs\n",
+          "weight": 0.6,
+          "freshness_days": null,
+          "locale": "und"
+        }
+      ],
+      "testability": "high",
+      "implementation_alignment": "high",
+      "risks": [
+        "classification can drift as expectations change"
+      ],
+      "issues": [],
+      "suggested_action": "維持。既存テストでcoverage確認。",
+      "gate_verdict": "go"
+    }
+  ],
+  "gate_summary": {
+    "go": 1,
+    "conditional_go": 0,
+    "no_go": 0,
+    "total": 1,
+    "verdict_distribution": {
+      "go": [
+        "rand:REQ-001"
+      ]
+    },
+    "overall_assessment": "go",
+    "overall_reason": "すべてgo。維持推奨。"
+  },
+  "source_refs": {
+    "audited_document": "spec.md",
+    "external_evidence": [],
+    "implementation_evidence": [
+      "spec.md"
+    ]
+  },
+  "assumptions": [
+    "audit items are representative of requirement coverage",
+    "external evidence may have temporal drift",
+    "implementation_alignment is inferred from available evidence"
+  ]
+}

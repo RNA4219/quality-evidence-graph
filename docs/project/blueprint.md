@@ -8,6 +8,8 @@ next_review_due: 2026-10-20
 
 # Blueprint
 
+EAC-08〜10は[世代公開・実producer接続・移行の統合契約](../spec/output-publication-and-migration.md)に従う。新旧の完全世代と明示エラーを区別し、原本・承認・履歴を保持する。改修の受入とproducer対象のrelease判定は別に記録する。
+
 ## 1. Problem Statement
 
 品質保証の材料は、仕様、実装差分、静的解析、手動テスト観点、実行結果、承認記録に分散している。
@@ -97,7 +99,7 @@ flowchart LR
 - schema validation、Gate evaluator、record / report / snapshot、resilience evidence normalizer、3 producerのraw adapter、graph builder、7層のplacement生成、成果物一式の生成を実装した。今回の受入証拠は改修台帳に記録し、以前の一括完成表記を流用しない。
 - controlled governance profile、DQ-01〜DQ-21、Reliability / Resilience blocker、waiver、artifact verification、evidence normalizer は実装済みである。
 - fixture、public TypeScript contract、package smoke、Node 20 / 24 CI を release candidate の自動受入境界とする。
-- 現行改修の状態・判定・非対象範囲は `docs/project/remediation-2026-09-10.md` を正本とする。過去の配布受入は `docs/release/acceptance-2026-07-20-v0.3.1.md` に保持する。
+- 現行EAC改修の状態・判定・非対象範囲は `docs/project/evidence-acceptance-status.md`、R01〜R06の受入履歴は `docs/project/remediation-2026-09-10.md` を正本とする。過去の配布受入は `docs/release/acceptance-2026-07-20-v0.3.1.md` に保持する。
 
 ## 8. Remaining Product Decisions
 

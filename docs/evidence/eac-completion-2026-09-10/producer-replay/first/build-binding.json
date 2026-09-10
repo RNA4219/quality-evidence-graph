@@ -1,0 +1,9 @@
+{
+  "bindingVersion": "qeg-build/v1",
+  "target": {
+    "projectId": "qeg-live-interop",
+    "buildId": "isolated-cli-build-001",
+    "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+    "environmentId": "isolated-local"
+  }
+}

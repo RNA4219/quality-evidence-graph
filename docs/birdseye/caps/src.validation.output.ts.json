@@ -1,7 +1,7 @@
 {
   "id": "src/validation/output.ts",
   "role": "output",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 output の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -14,6 +14,7 @@
     "src/cli/raw-ingest.ts",
     "src/cli/record.ts",
     "src/cli/schema-check.ts",
+    "src/consumer-migration.ts",
     "src/index.ts"
   ],
   "risks": [

@@ -8,6 +8,8 @@ next_review_due: 2026-12-10
 
 # Producer adapter契約
 
+実producerのYAML、短縮revisionの明示解決、source ID対応、microsecondを保持する時刻処理は[追加契約](output-publication-and-migration.md#実producer互換)を参照。保存した実出力の再生とproducer再実行は[受入台帳](../project/evidence-acceptance-status.md)で区別する。
+
 rawの意味・schemaはproducerが所有する。QEGは2026-09-10に確認した以下の契約を読取対応する。manifestのcontractVersionは、versionフィールドを持たないupstreamにも対応契約を明示するためのdescriptorであり、rawを書き換えるものではない。
 
 | producer | manifest contractVersion | raw識別 | 確認元 |

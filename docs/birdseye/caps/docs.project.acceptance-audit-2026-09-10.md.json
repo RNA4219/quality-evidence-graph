@@ -1,7 +1,7 @@
 {
   "id": "docs/project/acceptance-audit-2026-09-10.md",
   "role": "acceptance-audit-2026-09-10",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "FIX-01〜20の実装・直接検証・scopeの照合。実行必須、I/O診断、出力保護の追加修正と3 jobのCI成功を記録。",
   "deps_out": [

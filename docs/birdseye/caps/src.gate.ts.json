@@ -1,7 +1,7 @@
 {
   "id": "src/gate.ts",
   "role": "gate",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 gate の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -16,6 +16,7 @@
     "src/cli/fixture-io.ts",
     "src/cli/report/core.ts",
     "src/cli/validation.ts",
+    "src/consumer-migration.ts",
     "src/index.ts"
   ],
   "risks": [

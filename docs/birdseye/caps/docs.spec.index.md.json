@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/index.md",
   "role": "ipo-spec-index",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 ipo-spec-index の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -33,5 +33,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:d6b3b8964e6fcb57b063cb3fbea2c638604d59a214a1a158161adb08ed94b7d1"
+  "contentHash": "sha256:ce8c88960473aeec8cae5a244caddbb24487b4f0e971df8c15ee21db7e7d5950"
 }

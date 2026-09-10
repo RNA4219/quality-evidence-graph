@@ -1,0 +1,21 @@
+{
+  "run_id": "RUN-first",
+  "feature_id": "CLI-INCREMENT",
+  "build_id": "isolated-cli-build-001",
+  "timestamp": "2026-09-10T01:48:53.935046+00:00",
+  "tc_id": "TC-001",
+  "result": "pass",
+  "env": "isolated-local",
+  "tester": "QEG acceptance runner (agent-operated CLI observation)",
+  "oracle_type": "specified",
+  "oracle_refs": [
+    "spec.md#acceptance-criteria"
+  ],
+  "expected": [
+    "exit=0; stdout=42"
+  ],
+  "actual": [
+    "exit=0; stdout=42"
+  ],
+  "attachments": []
+}

@@ -16,12 +16,12 @@
 2. `docs/birdseye/index.json` - ノード一覧・隣接関係
 3. `docs/birdseye/caps/*.json` - 必要ノードだけ point read
 4. `docs/spec/index.md` - controlled governance 実装仕様書群の入口
-5. `docs/project/remediation-2026-09-10.md` - 現行改修の状態と受入証拠
+5. `docs/project/evidence-acceptance-status.md` - 現行EAC改修の状態と受入証拠。R01〜R06の履歴は`docs/project/remediation-2026-09-10.md`
 6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
 
-開発版: 0.4.0（未公開）。過去の配布版: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)。現行の受入状態は[改修台帳](docs/project/remediation-2026-09-10.md)を参照。
+開発版: 0.4.0（未公開）。過去の配布版: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)。現行の受入状態は[EAC受入台帳](docs/project/evidence-acceptance-status.md)を参照。
 
-追加調査後の[証跡共通受入基準](docs/spec/evidence-acceptance-standard.md)を策定し、[通常実行の資格判定](docs/spec/execution-qualification.md)を実装しました。実行対象・build対応原本・評価時計・有効期間・最新runを検証し、APIでは実体検証reportを渡します。[受入状況と残課題](docs/project/evidence-acceptance-status.md)を記録しています。
+追加調査後の[証跡共通受入基準](docs/spec/evidence-acceptance-standard.md)に沿い、実行対象・時刻・最新runの検証に加え、[世代公開・復旧・実producer接続・consumer移行](docs/spec/output-publication-and-migration.md)を実装しました。`outputs read/recover`で出力を検証・復旧し、`migrate --dry-run/--apply`で明示設定を移行できます。[受入状況](docs/project/evidence-acceptance-status.md)に検証範囲と証拠を集約しています。
 
 フォーカス手順:
 
@@ -36,7 +36,7 @@
 - 要求正本は `docs/requirements.md`。
 - controlled governance の実装仕様正本は `docs/spec/`。
 - public TypeScript contract は `src/types.ts` facade から辿る。
-- CLI contract は `build-graph <target-dir>`、`place-tests <target-dir>`、`validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`report <fixture-dir-or-parent> [...]`、`baseline audit`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`evidence verify`、`evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>`、`policy lint`、`repro-bundle`、`check`、`snapshot`、`init`。
+- CLI contract は `build-graph <target-dir>`、`place-tests <target-dir>`、`validate <fixture-dir>`、`gate <fixture-dir>`、`record <fixture-dir>`、`outputs read/recover <directory>`、`migrate <directory> [--config <file>] [--dry-run|--apply]`、`report <fixture-dir-or-parent> [...]`、`baseline audit`、`doctor`、`explain <DQ>`、`schema-check`、`enum-check`、`evidence verify`、`evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>`、`policy lint`、`repro-bundle`、`check`、`snapshot`、`init`。
 - `go` は exit code `0`。`conditional_go`、`no_go`、`disqualified` は exit code `2`。
 - `gate-input.json` 欠落・不正JSON・envelope欠落は exit `1`。解釈可能な必須componentのschema違反は DQ-01 / exit `2`。
 - `report` は複数 target を最後まで評価し、CLI failure / DQ / blocker / human review を累積レポートとして出す。

@@ -1,7 +1,7 @@
 {
   "id": "src/graph.ts",
   "role": "graph",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 graph の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -26,5 +26,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:7fa29ecb7135f009b96d8077a0878489602ab5b16dec778b06b92896fd029d0d"
+  "contentHash": "sha256:6c982ca90ffb57e409db94f42505b18adc9ec304c24d6d2d7730ba049d8ed53c"
 }

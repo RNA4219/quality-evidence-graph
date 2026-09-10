@@ -1,7 +1,7 @@
 {
   "id": "src/cli/errors.ts",
   "role": "errors",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 errors の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -32,7 +32,9 @@
     "src/cli/repro-bundle.ts",
     "src/cli/schema-check.ts",
     "src/cli/snapshot.ts",
-    "src/cli/validation.ts"
+    "src/cli/validation.ts",
+    "src/consumer-migration.ts",
+    "src/output-publication.ts"
   ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"

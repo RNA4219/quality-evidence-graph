@@ -1,7 +1,7 @@
 {
   "id": "src/types/ingest.ts",
   "role": "ingest",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 ingest の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -20,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:efae8b2ae666b3b32e820d6a8d0882199c705a51e61ab52785ad19831ca61d6a"
+  "contentHash": "sha256:d46c43f6df05100d395bb869b28f1bdda95ae3f8c3bf8130e3555306d4c4521f"
 }

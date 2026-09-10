@@ -1,0 +1,18 @@
+{
+  "id": "tools/interop/provenance.mjs",
+  "role": "provenance",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 provenance の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "tools/interop/live-producers.mjs"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:3c3ab0ad228960d7a0c96f0ced4bc5979af19bccc8fb594209d33823e5072c7b"
+}

@@ -1,7 +1,7 @@
 {
   "id": "docs/project/blueprint.md",
   "role": "blueprint",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 blueprint の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -21,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:2db5b192e7c8b7ca97abdafb996bde71478f77139f274bf3439070f549558e7f"
+  "contentHash": "sha256:e3c9c46d840f2c940a31dfb709bf64e0f4cf70664b775370b302dae1775e1327"
 }

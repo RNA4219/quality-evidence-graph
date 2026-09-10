@@ -1,5 +1,6 @@
 import type { ExecutionSelection, LegacyExecutionEvidenceNode } from "../../types.js";
-import { compareId, executionTime, same } from "./contracts.js";
+import { compareId, executionNanos, same } from "./contracts.js";
+const executionTime = (value: string) => executionNanos(value)!;
 
 export interface SelectionResult { selection: ExecutionSelection; error?: string; }
 function decision(node: LegacyExecutionEvidenceNode) {
@@ -7,7 +8,7 @@ function decision(node: LegacyExecutionEvidenceNode) {
   return { ...meaning, rawArtifactRef: { contentHash: rawArtifactRef.contentHash, revision: rawArtifactRef.revision } };
 }
 /** Candidates have already passed identity, target, clock and file qualification. */
-export function selectLatest(testId: string, candidates: readonly LegacyExecutionEvidenceNode[], evaluatedAt: number, maxAge: number,
+export function selectLatest(testId: string, candidates: readonly LegacyExecutionEvidenceNode[], evaluatedAt: bigint, maxAge: bigint,
   excluded: { evidenceId: string; reason: string }[] = []): SelectionResult {
   const empty = (reason: string): SelectionResult => ({ selection: { testId, reason, consecutivePasses: 0, excluded }, error: reason });
   const byRun = new Map<string, LegacyExecutionEvidenceNode>();
@@ -19,7 +20,10 @@ export function selectLatest(testId: string, candidates: readonly LegacyExecutio
       excluded.push({ evidenceId: node.id, reason: "duplicate" });
     } else byRun.set(run.runId, node);
   }
-  const ordered = [...byRun.values()].sort((a, b) => executionTime(b.execution!.completedAt) - executionTime(a.execution!.completedAt));
+  const ordered = [...byRun.values()].sort((a, b) => {
+    const left = executionTime(a.execution!.completedAt), right = executionTime(b.execution!.completedAt);
+    return left === right ? 0 : left > right ? -1 : 1;
+  });
   const latest = ordered[0];
   if (!latest) return empty("EAC-06 no current execution");
   const time = executionTime(latest.execution!.completedAt);

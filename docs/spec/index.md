@@ -9,6 +9,8 @@ next_review_due: 2026-10-20
 
 # IPO 統制仕様
 
+EAC追加実装: [出力公開・復旧・consumer移行・実producer互換](output-publication-and-migration.md)。profileや承認条件を弱めず、差分と必要な再承認を診断する。
+
 `docs/spec/` は `ipo_controlled` profile を実装するための仕様正本である。要求正本は `docs/requirements.md` とし、この仕様群は要求を TypeScript 型、JSON Schema、fixture、CLI 判定へ落とすための決定済み contract を記録する。
 
 ## 1. 正本関係
@@ -26,7 +28,7 @@ next_review_due: 2026-10-20
 
 ## 2. 読み順
 
-現行改修は `docs/spec/remediation-2026-09-10.md` を先に読む。要求第22節と `docs/project/remediation-2026-09-10.md` に契約変更・移行・受入状態を対応付ける。
+R01〜R06の基本契約は `docs/spec/remediation-2026-09-10.md` を先に読む。要求第22節と `docs/project/remediation-2026-09-10.md` に当時の契約変更・移行・受入履歴を対応付ける。現行EAC改修は以下の基準と実装仕様、受入台帳を参照する。
 
 証跡資格は [evidence-acceptance-standard.md](evidence-acceptance-standard.md)、通常実行の型/schema/API規則は [execution-qualification.md](execution-qualification.md) を参照する。EAC-01〜12の[実装・受入状況](../project/evidence-acceptance-status.md)は受入単位ごとに管理する。
 
@@ -86,4 +88,4 @@ next_review_due: 2026-10-20
 - `GatePolicy` は QEG 正本であり、`gatePolicyProposal` は verdict に直接影響させない。
 - すべての Gate 関連 reason、blocker、disqualification、waiver、approval evidence は `sourceRefs` を 1 件以上持つ。
 - `policyHash`、`contentHash`、`evidencePackageHash` は比較可能な文字列として扱い、アルゴリズムは原則として MVP では固定しない。ただし reliabilityPolicy 有効時の policyHash と resilience raw / signal artifact の contentHash は `docs/spec/reliability-extension.md` に従い SHA-256 に固定する。同一内容で再計算できることを実装 acceptance にする。
-- repository内の実装受入と外部のrelease / publish approvalを分離する。現行改修の判定は`docs/project/remediation-2026-09-10.md`、過去の配布受入は`docs/release/acceptance-2026-07-20-v0.3.1.md`を参照する。
+- repository内の実装受入と外部のrelease / publish approvalを分離する。現行EAC改修の判定は`docs/project/evidence-acceptance-status.md`、R01〜R06の履歴は`docs/project/remediation-2026-09-10.md`、過去の配布受入は`docs/release/acceptance-2026-07-20-v0.3.1.md`を参照する。

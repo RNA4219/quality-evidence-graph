@@ -1,0 +1,246 @@
+{
+  "evidenceClass": "live_producer_rerun",
+  "runId": "rerun",
+  "target": {
+    "projectId": "qeg-live-interop",
+    "buildId": "isolated-cli-build-001",
+    "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+    "environmentId": "isolated-local"
+  },
+  "versions": {
+    "RanD": {
+      "version": "0.3.0",
+      "revision": "b4315040fd1cb823421cff53a0c7eda6f9d89c4a",
+      "mode": "producer API execution"
+    },
+    "code-to-gate": {
+      "version": "1.5.1",
+      "revision": "aab3d8c7833a0001e1b59f0a2b491eb9baebf0b0",
+      "mode": "producer CLI execution"
+    },
+    "manual-bb-test-harness": {
+      "version": "3.0.0",
+      "revision": "76722574298985100b3a6efc730b2dd0f0cb4041",
+      "mode": "producer ingest/gate CLI; operator-authored case/risk; real subprocess observation"
+    }
+  },
+  "graphPartial": true,
+  "evidenceStatus": "pass",
+  "apiVerdict": "disqualified",
+  "cliVerdict": "disqualified",
+  "disqualifications": [
+    {
+      "code": "DQ-01",
+      "message": "Parser failure: CTG completeness is partial",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "ctg:source:raw%2Fcode-to-gate-findings.json%2F%2Fcompleteness",
+          "path": "raw/code-to-gate-findings.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "/completeness"
+        }
+      ]
+    },
+    {
+      "code": "DQ-01",
+      "message": "Parser failure: CTG completeness is partial",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "ctg:source:raw%2Fcode-to-gate-release-readiness.json%2F%2Fcompleteness",
+          "path": "raw/code-to-gate-release-readiness.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "/completeness"
+        }
+      ]
+    },
+    {
+      "code": "DQ-01",
+      "message": "Parser failure: CTG completeness is partial",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "ctg:source:raw%2Fcode-to-gate-risk-register.yaml%2F%2Fcompleteness",
+          "path": "raw/code-to-gate-risk-register.yaml",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "/completeness"
+        }
+      ]
+    },
+    {
+      "code": "DQ-01",
+      "message": "Parser failure: CTG completeness is partial",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "ctg:source:raw%2Fcode-to-gate-test-seeds.json%2F%2Fcompleteness",
+          "path": "raw/code-to-gate-test-seeds.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "/completeness"
+        }
+      ]
+    },
+    {
+      "code": "DQ-04",
+      "message": "P0/P1 risk \"classification can drift as expectations change\" with oracle gap treated as fact",
+      "nodeIds": [
+        "rand:REQ-001%2Frisk%2Fclassification%20can%20drift%20as%20expectations%20change"
+      ],
+      "sourceRefs": [
+        {
+          "id": "rand:source:raw%2FRanD-requirements_packet.json%2Frand%3AREQ-001%2Frisk%2Fclassification%20can%20drift%20as%20expectations%20change",
+          "path": "raw/RanD-requirements_packet.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "rand:REQ-001/risk/classification can drift as expectations change"
+        },
+        {
+          "id": "rand:source:raw%2FRanD-requirements_packet.json%2Frand%3AREQ-001%2Frisk%2Fclassification%20can%20drift%20as%20expectations%20change%2Fsource%2F0",
+          "path": "raw/RanD-requirements_packet.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "rand:REQ-001/risk/classification can drift as expectations change/source/0: KC-001"
+        },
+        {
+          "id": "rand:source:raw%2FRanD-requirements_packet.json%2Frand%3AREQ-001%2Frisk%2Fclassification%20can%20drift%20as%20expectations%20change%2Fsource%2F1",
+          "path": "raw/RanD-requirements_packet.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "rand:REQ-001/risk/classification can drift as expectations change/source/1: EV-001-increment-requirement"
+        }
+      ]
+    },
+    {
+      "code": "DQ-11",
+      "message": "Required connector \"code-to-gate\" contract violation treated as success",
+      "nodeIds": [],
+      "sourceRefs": [
+        {
+          "id": "SR-DQ-11",
+          "path": "docs/spec/gate-policy.md",
+          "startLine": 65,
+          "endLine": 66,
+          "label": "required connector contract violation"
+        }
+      ]
+    },
+    {
+      "code": "DQ-05",
+      "message": "Obligation \"qeg:obligation:rand%3AREQ-001%252Frisk%252Fclassification%2520can%2520drift%2520as%2520expectations%2520change\" lacks required real execution evidence",
+      "nodeIds": [
+        "qeg:obligation:rand%3AREQ-001%252Frisk%252Fclassification%2520can%2520drift%2520as%2520expectations%2520change"
+      ],
+      "sourceRefs": [
+        {
+          "id": "qeg:input-%2FplacementPlan",
+          "path": "gate-input.json",
+          "label": "/placementPlan: qeg:obligation:rand%3AREQ-001%252Frisk%252Fclassification%2520can%2520drift%2520as%2520expectations%2520change"
+        }
+      ]
+    },
+    {
+      "code": "DQ-11",
+      "message": "Upstream decision is disqualified: code-to-gate: blocked_input",
+      "nodeIds": [
+        "ctg:gate_verdict:release-readiness"
+      ],
+      "sourceRefs": [
+        {
+          "id": "ctg:source:raw%2Fcode-to-gate-release-readiness.json%2Frelease-readiness",
+          "path": "raw/code-to-gate-release-readiness.json",
+          "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+          "label": "release-readiness"
+        }
+      ]
+    }
+  ],
+  "producerLock": {
+    "RanD": {
+      "version": "0.3.0",
+      "revision": "b4315040fd1cb823421cff53a0c7eda6f9d89c4a",
+      "prefixes": [
+        "research-runtime/src"
+      ],
+      "sourceHash": "sha256:14bd6df0b425a6fc6011031ccac25a6630fd29a51b4eb2576c3fa947dda20373"
+    },
+    "code-to-gate": {
+      "version": "1.5.1",
+      "revision": "aab3d8c7833a0001e1b59f0a2b491eb9baebf0b0",
+      "prefixes": [
+        "src",
+        "schemas"
+      ],
+      "sourceHash": "sha256:7b4ba03ebe8f5b75f5f695e11a9c62f42f05f9b546ac182924ac97e4a04481a1"
+    },
+    "manual-bb-test-harness": {
+      "version": "3.0.0",
+      "revision": "76722574298985100b3a6efc730b2dd0f0cb4041",
+      "prefixes": [
+        "src",
+        "schemas"
+      ],
+      "sourceHash": "sha256:988f2e4319632b9c67d74e2c16f090edb406f7fba5da21e75074e9dc35fa9516"
+    }
+  },
+  "rawHashes": [
+    {
+      "path": "raw/RanD-requirements_packet.json",
+      "contentHash": "sha256:2c4c3ad60942a90e92d2da17489a003bc1e8ba703efb0b7209fcf59f91678b74"
+    },
+    {
+      "path": "raw/RanD-requirements_audit_packet.json",
+      "contentHash": "sha256:e1056cb46007b8bf941d8b3bc8c526311679dad5515303ecee7efb8e359b94e2"
+    },
+    {
+      "path": "raw/code-to-gate-repo-graph.json",
+      "contentHash": "sha256:7a5abc1e9680406f455977c05aef51674f493d17cb6e2564e8fa787e896bc290"
+    },
+    {
+      "path": "raw/code-to-gate-diff-analysis.json",
+      "contentHash": "sha256:33dd14f18088215db9601f9f80561d0bfd459372cdc7f50d053be61b1f29a0ef"
+    },
+    {
+      "path": "raw/code-to-gate-findings.json",
+      "contentHash": "sha256:d5a3af6a7a6cdd3f7ef68ead170f780316728ff706d631be85fcc8869fbc311f"
+    },
+    {
+      "path": "raw/code-to-gate-risk-register.yaml",
+      "contentHash": "sha256:6eca5ef8bb19da40f5852ef7dad59e228a5158c6045c3724eea1b07a7e76ee9c"
+    },
+    {
+      "path": "raw/code-to-gate-test-seeds.json",
+      "contentHash": "sha256:2c2672531341bb8725bd5d6084887acc98c54160fbbbd915d7b21bd465262e5d"
+    },
+    {
+      "path": "raw/code-to-gate-release-readiness.json",
+      "contentHash": "sha256:35659fd796df8b583167de1d9aa4254528b40f6d59829d46ec3ab4f22fccbf8b"
+    },
+    {
+      "path": "raw/code-to-gate-audit.json",
+      "contentHash": "sha256:5a2ecf154c8991b01b19af1faf5016198c4d5241ff141da093f116a2cf0a3716"
+    },
+    {
+      "path": "raw/manual-bb-test-harness-feature_spec.json",
+      "contentHash": "sha256:fbaf3fef889469e191db940879105562a0ff0398b0e15a2be3e2d2478a898037"
+    },
+    {
+      "path": "raw/manual-bb-test-harness-risk_register.json",
+      "contentHash": "sha256:42cf5a69ca2aeafecc35461e25c56c9958a91373962da8730df4c620cb499fe6"
+    },
+    {
+      "path": "raw/manual-bb-test-harness-manual_case_set.json",
+      "contentHash": "sha256:c48f15e9aeb420f0011070207fcc3ac09b1149a0c6e859a5af9831bf074407f9"
+    },
+    {
+      "path": "raw/manual-bb-test-harness-execution_evidence.json",
+      "contentHash": "sha256:eafce56694d81ab3aad5c4653d5f0734d287f9a5c011fdd91e4f29facb528aea"
+    },
+    {
+      "path": "raw/manual-bb-test-harness-gate_decision.json",
+      "contentHash": "sha256:6f75b0d966105e8ac3009e07e8ff6c6d3bdbaaeeae80380038550c876ca0645a"
+    }
+  ],
+  "excluded": [
+    "production deployment",
+    "human-executed QA",
+    "external release approval"
+  ]
+}

@@ -25,6 +25,10 @@ export interface InputContract {
 export interface IngestArtifact extends ArtifactRef {
   readonly contractVersion: string;
   readonly executionContext?: IngestExecutionContext;
+  /** Explicitly resolve a producer's abbreviated Git revision to ArtifactRef.revision. */
+  readonly reportedRevision?: string;
+  /** Link an actual manual-bb source ID to a RanD requirement without editing producer bytes. */
+  readonly sourceRefMappings?: readonly { sourceId: string; requirementId: string }[];
 }
 
 export interface IngestManifest {

@@ -1,0 +1,38 @@
+{
+  "feature_id": "CLI-INCREMENT",
+  "manual_cases": [
+    {
+      "tc_id": "TC-001",
+      "title": "Observe the increment CLI",
+      "priority": "P1",
+      "primary_view": "black",
+      "techniques": [
+        "equivalence"
+      ],
+      "source_ref": {
+        "type": "acceptance",
+        "refs": [
+          "AC-1"
+        ]
+      },
+      "steps": [
+        "Run node src/cli.mjs 41 and observe exit status and stdout"
+      ],
+      "expected_results": [
+        "exit=0; stdout=42"
+      ],
+      "oracle": {
+        "type": "specified",
+        "refs": [
+          "spec.md#acceptance-criteria"
+        ]
+      },
+      "trace_to": [
+        "RISK-01"
+      ]
+    }
+  ],
+  "exploratory_charters": [],
+  "platform_matrix": [],
+  "role_matrix": []
+}

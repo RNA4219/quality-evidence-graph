@@ -1,66 +1,40 @@
 ---
 intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-STATUS-001
 owner: quality-evidence-graph
-status: in_progress
+status: accepted
 last_reviewed_at: 2026-09-10
 next_review_due: 2026-12-10
 ---
 
 # 証跡共通基準の実装・受入状況
 
-正本は [共通受入基準 qeg-evidence-acceptance/v1](../spec/evidence-acceptance-standard.md)。本台帳は追加EAC要求を扱い、[R01〜R06の過去受入](remediation-2026-09-10.md)のCI結果やログを書き換えない。
-
-## 現在の判断
-
-- 基準制定前に調査した実装：`4054df785054e1e5cae73fdf3d375f6a00e42c61`。下表の観測はこのcommitの履歴。
-- 証跡判定の受入単位（EAC-01〜07/11/12）：**accepted**。実装commit `553aeeda7c53e66e80d966d62c825ce60fa1f301`で型/schema/adapter/evaluator/reportとTC-01〜18/25を検証。[CI 34422747335](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34422747335)のLinux Node 20/24・Windows Node 24の3 jobが成功した。
-- 別build・未来実行の既知不一致2件を修正し、古いfail→新しいpassでは最新passを採用する。採用・除外ID/理由をGate/record/reportへ保持する。
-- 同じ実装commitのローカルWindows Node 24で`npm test`成功：runtime/Action 107 tests、53 fixture、公開型、隔離tarball consumer、JSON。追加の静的解析はfinding 0。Node test件数には親testとsubtestを含む。55件のEAC testが追加分であり、TC表の群数とは区別する。
-- 出力復旧（EAC-08）の中断・競合、実producer接続（EAC-09）、一般consumerのdry-run移行（EAC-10）は未評価。既存の出力復旧試験や合成fixtureを追加受入の代用にしない。
-
-## 要求・受入対応
+正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。EAC-08〜10と実接続で判明した時刻・ID・形式の差を一括で実装し、EAC-01〜12を定義した範囲で受入済み。source commit `643a47d741a1e016f43a6bdb63f67d485e4c304f`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428936447)はLinux Node20/24・Windows Node24の3job全step成功。[今回の証拠](../evidence/eac-completion-2026-09-10/validation.json)にcommit、runtime tree、実producer原本、ローカル実測を結び付けた。
 
 | 要求 | 対象 | 必要ケース | 状況 |
 |---|---|---|---|
-| EAC-01 | build/revision/feature/case/environment | TC-01〜03/16 | accepted / 今回の証跡判定単位 |
-| EAC-02 | 評価時計・未来・期限 | TC-04〜06/10 | accepted / 今回の証跡判定単位 |
-| EAC-03 | 最新実行・履歴・競合 | TC-07〜13/16 | accepted / 今回の証跡判定単位 |
-| EAC-04 | 要求からrawまでのjoin | TC-03/11/14 | accepted / 今回の証跡判定単位 |
-| EAC-05 | raw/参照先・producer契約 | TC-02/15 | accepted / 今回の証跡判定単位 |
-| EAC-06 | pass/fail/未実行/mock | TC-07〜09/13/14/17 | accepted / 今回の証跡判定単位 |
-| EAC-07 | 決定性 | TC-12/18 | accepted / 今回の証跡判定単位 |
-| EAC-08 | 世代の完全性・復旧・競合 | TC-19〜22 | defined / 中断・競合未評価 |
-| EAC-09 | 実producerの接続証明 | TC-23 | defined / 実接続受入未実施 |
-| EAC-10 | consumer移行 | TC-24 | defined / 移行支援未実装 |
-| EAC-11 | waiver/approval/retention/profile | TC-13/17/25 | accepted / profile・waiver・既存統制回帰 |
-| EAC-12 | revisionに結び付く完了証拠 | TC-18/25、各受入単位 | accepted / 今回の単位。EAC-08〜10は未受入 |
+| EAC-01 | build/revision/feature/case/environment | TC-01〜03/16 | PR #8 accepted。実producerの短縮revisionを明示解決する追加を検証 |
+| EAC-02 | 評価時計・未来・期限 | TC-04〜06/10 | PR #8 accepted。小数秒1〜9桁、1ns未来・期限・最新順を追加 |
+| EAC-03 | 最新実行・履歴・競合 | TC-07〜13/16 | PR #8 accepted。microsecondを丸めず比較 |
+| EAC-04 | 要求からrawまでのjoin | TC-03/11/14 | PR #8 accepted。原本を変えないsource ID対応を追加 |
+| EAC-05 | raw/参照先・producer契約 | TC-02/15 | PR #8 accepted。CTG YAML原本のhash/schema検証を追加 |
+| EAC-06 | pass/fail/未実行/mock | TC-07〜09/13/14/17 | accepted。今回も既存統制を回帰検証 |
+| EAC-07 | 決定性 | TC-12/18 | accepted。API/CLI/packedと固定再生を照合 |
+| EAC-08 | 世代の完全性・復旧・競合 | TC-19〜22 | accepted。Linux/Windowsの実プロセス中断・競合・復旧 |
+| EAC-09 | 実producerの接続証明 | TC-23 | accepted。実2回と固定再生を照合。下記の接続・拒否伝播範囲 |
+| EAC-10 | consumer移行 | TC-24 | accepted。wire 0.2のdry-run・適用・中断再実行・冪等性 |
+| EAC-11 | waiver/approval/retention/profile | TC-13/17/25 | accepted。移行でも承認原本と履歴を保持 |
+| EAC-12 | revisionに結び付く完了証拠 | TC-18/25、各受入単位 | accepted。上記source commit・CI・runtime treeで固定 |
 
-実装写像は[execution-qualification.md](../spec/execution-qualification.md)。`tests/execution-qualification.test.mjs`がEAC境界、`tests/producer-pipeline.test.mjs`が3producerの写像、`tests/package-smoke.mjs`が配布物を検証する。引退判定の3fixtureだけを明示policy・合成実行へ移行し、元のverdict/DQ/blocker/残余リスク/人間確認のoracleを照合して維持した。集計成功数だけでは引退を認めない。
+実装写像と操作は[統合契約](../spec/output-publication-and-migration.md)。runtime 147 tests、53 fixture contracts（うち22 reliability）、公開型・隔離tarballのAPI/CLI/Action、Action lifecycle、19 schemas、enum、808 tracked JSON、Birdseye 234 source hashesを検証した。実行件数はnode:testの親test/subtestを含み、TC群数と混同しない。Windows CIの初回失敗は障害注入先の一時path表記差であり、runtimeと同じrealpathに揃えて再検証した。最終の文書sealはruntime treeを維持し、PR最新CIとmerge後main CIは外部で確認する。
 
-承認者・retention・waiver期限等の既存契約を緩和せず、全profileで対象/時刻/実体のDQを優先する。scopeは合成fixtureと隔離consumer/Action。実producerの実行versionや実環境の成功を主張しない。
+## 実接続の証明範囲
 
-## 受入証拠
+[producer-replay](../evidence/eac-completion-2026-09-10/producer-replay/)に、RanD 0.3.0、code-to-gate 1.5.1、manual-bb 3.0.0の固定sourceから得た14原本×2回、target/build/revision、各run、hash、command、CLI観測を保存した。producerの作業中変更を取り込まず、source lockを実行前後に照合した。
 
-[validation.json](../evidence/evidence-acceptance-2026-09-10/validation.json)にsource commit、runtime tree指紋、ローカルlogのhash、CIのjob URL、受入単位と残課題を保存した。[execution-results.json](../evidence/evidence-acceptance-2026-09-10/execution-results.json)はraw→graph→placement→gate→record→schema/hashとpure APIを同じ入力で照合した4ケースの実測。manifest、policy、target、T、producer descriptor、採用/除外理由、期待/実際のexitを含む。
+同じ隔離CLIの`41 → 42`を2回実行し、manual実行は資格を満たすpassとして採用された。上流のstatic artifactにはpartial、RanDには未被覆の要求仮説があるため、期待するQEG判定は**disqualified / exit 2**。APIとCLIは同じ拒否を返す。上流原本の不足を修正してgoに見せる操作はしていない。これは実接続と不合格伝播の受入であり、対象のrelease承認、実環境、人間が実施したQAを主張しない。合成正常系は別試験で維持する。
 
-| ケース | 今回の結果 | 比較上の意味 |
-|---|---|---|
-| TC-01 正常対照 | go / 0 | schema・raw検証・全出力hashが成功 |
-| TC-02 別build | disqualified / 2、DQ-12 | raw hashが正しくても対象不一致を拒否 |
-| TC-04 未来1ms | disqualified / 2、DQ-05 | 実体が正しくても未来時刻を拒否 |
-| TC-07 古いfail→新pass | go / 0、RUN-001採用 | 旧失敗をsupersededとして保持 |
+## 既存の受入履歴
 
-受入者はCodexによる実装・受入照合。本判定はrepo内部の今回の改修単位であり、外部release approvalではない。封印する後続commitではruntime treeが同一であることと、PR #8の最新3 jobの成功を確認してからマージする。
+PR #8でEAC-01〜07/11/12を受入済み。実装commitは`553aeeda7c53e66e80d966d62c825ce60fa1f301`、mergeは`acb15d7047b9d734e62801acba8af9a42be1dde2`。[実装CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34422747335)、[main CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34423757979)はLinux Node20/24とWindows Node24の3job成功。当時はruntime 107 tests、53 fixtures、公開型・packed consumer・JSON・静的解析を検証した。
 
-## 基準制定前の観測
-
-[baseline-observations.json](../evidence/evidence-acceptance-2026-09-10/baseline-observations.json)は、既に実行した追加調査の記録を転記したもの。現在の新基準ケースを実行した証拠ではない。
-
-| 観測 | schema / artifact検証 | 当時の結果 | 新基準との差 |
-|---|---|---|---|
-| 正常対照 | valid / pass | go / 0 | 比較用 |
-| 異なるbuildのmanual実行 | valid / pass | go / 0 | EAC-01ではDQを要求 |
-| 評価時計より1年未来のmanual実行 | valid / pass | go / 0 | EAC-02ではDQを要求 |
-| 古いfailと新しいpassを併記 | valid / pass | no_go / 2 | EAC-03で採用と履歴を分ける。これは従来仕様の挙動 |
-
-基準version・TC/subcase・source commit・実行結果は上記の新しい受入証拠へ対応付けた。旧baselineは修正後の結果で上書きしない。
+別buildと未来時刻の不一致を修正し、古いfail→新passの最新採用を実装した記録は[旧validation](../evidence/evidence-acceptance-2026-09-10/validation.json)と[4ケース実測](../evidence/evidence-acceptance-2026-09-10/execution-results.json)を保持する。[4054df7の変更前観測](../evidence/evidence-acceptance-2026-09-10/baseline-observations.json)と[R01〜R06の受入](remediation-2026-09-10.md)は履歴であり、今回の試験成功の代用にはしない。

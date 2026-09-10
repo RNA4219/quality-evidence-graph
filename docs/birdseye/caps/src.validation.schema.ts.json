@@ -1,7 +1,7 @@
 {
   "id": "src/validation/schema.ts",
   "role": "runtime-schema-validation",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 runtime-schema-validation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -15,6 +15,7 @@
     "src/cli/fixture-io.ts",
     "src/cli/pipeline.ts",
     "src/cli/schema-check.ts",
+    "src/consumer-migration.ts",
     "src/validation.ts",
     "src/validation/output.ts"
   ],

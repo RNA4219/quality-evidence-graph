@@ -2,6 +2,9 @@
 import { exit } from "process";
 import { runBuildGraphCommand, runPlaceTestsCommand } from "./cli/pipeline.js";
 import { QEG_VERSION } from "./version.js";
+import { readPublishedOutputs, recoverOutputs } from "./output-publication.js";
+import { readFile } from "fs/promises";
+import { applyConsumerMigration, planConsumerMigration } from "./consumer-migration.js";
 import {
   runBaselineCommand,
   runCheckCommand,
@@ -26,7 +29,7 @@ async function main(): Promise<void> {
 
   if (args[0] === "--help" || args[0] === "-h") {
     console.log("Usage: qeg <command> [options] <fixture-dir-or-parent>");
-    console.log("Commands: build-graph, place-tests, validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    console.log("Commands: build-graph, place-tests, validate, gate, record, outputs, migrate, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit(0);
   }
   if (args[0] === "--version" || args[0] === "-v") {
@@ -36,7 +39,7 @@ async function main(): Promise<void> {
 
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
-    console.error("Commands: build-graph, place-tests, validate, gate, record, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
+    console.error("Commands: build-graph, place-tests, validate, gate, record, outputs, migrate, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
     exit(1);
   }
 
@@ -44,6 +47,29 @@ async function main(): Promise<void> {
   const fixtureDir = commandArgs[0];
 
   switch (command) {
+    case "migrate": {
+      const directory = commandArgs[0];
+      const apply = commandArgs.includes("--apply");
+      const configIndex = commandArgs.indexOf("--config");
+      const configPath = configIndex >= 0 ? commandArgs[configIndex + 1] : undefined;
+      const remaining = commandArgs.slice(1).filter((arg, i) => arg !== "--apply" && arg !== "--dry-run" && arg !== "--config" && i + 1 !== configIndex + 1);
+      if (!directory || remaining.length || (configIndex >= 0 && !configPath) || (apply && (!configPath || commandArgs.includes("--dry-run")))) throw new Error("Usage: qeg migrate <target-dir> [--config <config.json>] [--dry-run|--apply]");
+      const config = configPath ? JSON.parse(await readFile(configPath, "utf8")) : undefined;
+      const report = apply ? await applyConsumerMigration(directory, config) : await planConsumerMigration(directory, config);
+      console.log(JSON.stringify(report, null, 2));
+      process.exitCode = ["blocked", "needs_configuration"].includes(report.status) ? 2 : 0;
+      break;
+    }
+    case "outputs": {
+      const [action, directory, ...extra] = commandArgs;
+      if (!directory || extra.length || !["read", "recover"].includes(action)) throw new Error("Usage: qeg outputs <read|recover> <target-dir>");
+      if (action === "recover") console.log(`Recovered generation: ${await recoverOutputs(directory)}`);
+      else {
+        const output = await readPublishedOutputs(directory);
+        console.log(JSON.stringify({ generation: output.generation, files: Object.fromEntries(output.files) }, null, 2));
+      }
+      break;
+    }
     case "build-graph":
     case "place-tests":
       if (!fixtureDir || commandArgs.length !== 1) throw new Error(`Usage: qeg ${command} <target-dir>`);

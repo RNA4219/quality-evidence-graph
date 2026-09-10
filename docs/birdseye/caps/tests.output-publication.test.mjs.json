@@ -1,0 +1,16 @@
+{
+  "id": "tests/output-publication.test.mjs",
+  "role": "output-publication.test",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 output-publication.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:224385c65545e44b144f0341ff942f63b2a8ca701be76260d8a7cc857f358012"
+}

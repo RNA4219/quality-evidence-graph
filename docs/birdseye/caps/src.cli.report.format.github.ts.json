@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report/format/github.ts",
   "role": "github",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 github の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

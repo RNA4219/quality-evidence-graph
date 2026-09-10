@@ -1,0 +1,315 @@
+{
+  "manifestVersion": "qeg-ingest/v1",
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:live-first",
+    "createdAt": "2026-09-10T01:48:56.559Z",
+    "headRef": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+    "profile": "lean",
+    "policyId": "qeg:live-policy",
+    "policyHash": "sha256:dd3d43e688cb409f25eea1600dadc6d4033e54a6e355eef315cfde32d02e385c",
+    "inputArtifacts": []
+  },
+  "policy": {
+    "policyId": "qeg:live-policy",
+    "policyHash": "sha256:dd3d43e688cb409f25eea1600dadc6d4033e54a6e355eef315cfde32d02e385c",
+    "profile": "lean",
+    "effectiveDate": "2026-09-10T01:48:56.559Z",
+    "approver": "acceptance-runner",
+    "sourceRefs": [
+      {
+        "id": "qeg:live-policy",
+        "path": "interop-policy.json"
+      }
+    ],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17",
+      "DQ-18",
+      "DQ-19",
+      "DQ-20",
+      "DQ-21"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "upstream_artifacts",
+      "requiredArtifacts": [
+        {
+          "adapter": "RanD",
+          "kind": "requirements_packet"
+        },
+        {
+          "adapter": "RanD",
+          "kind": "requirements_audit_packet"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "normalized_repo_graph"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "diff_analysis"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "findings"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "risk_register"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "test_seeds"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "release_readiness"
+        },
+        {
+          "adapter": "code-to-gate",
+          "kind": "audit"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "feature_spec"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "risk_register"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "manual_case_set"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "gate_decision"
+        },
+        {
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "isolated_consumer",
+        "target": "live-producer-isolated-cli",
+        "notEvaluated": [
+          "実環境の受入",
+          "人間のrelease approval"
+        ]
+      },
+      "requireExecutedTests": true,
+      "sourceRefs": [
+        {
+          "id": "qeg:input-%2Fpolicy%2FinputContract",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract: 必要証跡と評価範囲を設定する"
+        }
+      ]
+    },
+    "executionPolicy": {
+      "target": {
+        "projectId": "qeg-live-interop",
+        "buildId": "isolated-cli-build-001",
+        "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+        "environmentId": "isolated-local"
+      },
+      "maxEvidenceAgeHours": 24,
+      "sourceRefs": [
+        {
+          "id": "qeg:live-policy",
+          "path": "interop-policy.json"
+        }
+      ],
+      "buildBindingRef": {
+        "id": "qeg:live-build",
+        "path": "build-binding.json",
+        "contentHash": "sha256:0000f49741be731a2d46f97e00cc2ab003b52d93400bbf633c0e1ecc13bdbc18",
+        "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "id": "qeg:live-RanD-requirements_packet",
+      "adapter": "RanD",
+      "kind": "requirements_packet",
+      "path": "raw/RanD-requirements_packet.json",
+      "contentHash": "sha256:afe07a713dd97a741b7ea92b7dfdf88bebcd94ef58986f622abf82deb6ca1e5c",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "rand-kano/1.0"
+    },
+    {
+      "id": "qeg:live-RanD-requirements_audit_packet",
+      "adapter": "RanD",
+      "kind": "requirements_audit_packet",
+      "path": "raw/RanD-requirements_audit_packet.json",
+      "contentHash": "sha256:e1056cb46007b8bf941d8b3bc8c526311679dad5515303ecee7efb8e359b94e2",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "rand-kano/1.0"
+    },
+    {
+      "id": "qeg:live-code-to-gate-normalized_repo_graph",
+      "adapter": "code-to-gate",
+      "kind": "normalized_repo_graph",
+      "path": "raw/code-to-gate-repo-graph.json",
+      "contentHash": "sha256:b6f0d5196e9a5ef664c7e5966ad8ba785e98cb32f6da05a399050c555dd29e70",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "reportedRevision": "a78257d1fa69",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-code-to-gate-diff_analysis",
+      "adapter": "code-to-gate",
+      "kind": "diff_analysis",
+      "path": "raw/code-to-gate-diff-analysis.json",
+      "contentHash": "sha256:0c61df36231443ee048d385b91c67a9ac35a289fd80f125e4b85432809ff95a4",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-code-to-gate-findings",
+      "adapter": "code-to-gate",
+      "kind": "findings",
+      "path": "raw/code-to-gate-findings.json",
+      "contentHash": "sha256:126586d6ce557571cc4ece8d99362c24fdfd0a38d3c6012cc9521a3292c12124",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-code-to-gate-risk_register",
+      "adapter": "code-to-gate",
+      "kind": "risk_register",
+      "path": "raw/code-to-gate-risk-register.yaml",
+      "contentHash": "sha256:b5d84951439b2759806e2f8d4e99718bace396bda88f3ccd4cb0d6ddb2a75527",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-code-to-gate-test_seeds",
+      "adapter": "code-to-gate",
+      "kind": "test_seeds",
+      "path": "raw/code-to-gate-test-seeds.json",
+      "contentHash": "sha256:182612777aa87a6f7d92d923b83571f70cb07e3c52b279888083b428f3e792fb",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "reportedRevision": "a78257d1fa69",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-code-to-gate-release_readiness",
+      "adapter": "code-to-gate",
+      "kind": "release_readiness",
+      "path": "raw/code-to-gate-release-readiness.json",
+      "contentHash": "sha256:90864cc142851b5074497164d9d346fca8f3009bc6fb0293b8567beaba02cd56",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-code-to-gate-audit",
+      "adapter": "code-to-gate",
+      "kind": "audit",
+      "path": "raw/code-to-gate-audit.json",
+      "contentHash": "sha256:0f337805a5a44d9ebb5439887d66410355e44d49df24de9d8c40d35f4304ec4d",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "ctg-artifacts/v1"
+    },
+    {
+      "id": "qeg:live-manual-bb-test-harness-feature_spec",
+      "adapter": "manual-bb-test-harness",
+      "kind": "feature_spec",
+      "path": "raw/manual-bb-test-harness-feature_spec.json",
+      "contentHash": "sha256:fbaf3fef889469e191db940879105562a0ff0398b0e15a2be3e2d2478a898037",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "sourceRefMappings": [
+        {
+          "sourceId": "MD-spec",
+          "requirementId": "rand:REQ-001"
+        }
+      ],
+      "contractVersion": "manual-bb/v1",
+      "executionContext": {
+        "projectId": "qeg-live-interop",
+        "environmentId": "isolated-local",
+        "producerVersion": "3.0.0"
+      }
+    },
+    {
+      "id": "qeg:live-manual-bb-test-harness-risk_register",
+      "adapter": "manual-bb-test-harness",
+      "kind": "risk_register",
+      "path": "raw/manual-bb-test-harness-risk_register.json",
+      "contentHash": "sha256:42cf5a69ca2aeafecc35461e25c56c9958a91373962da8730df4c620cb499fe6",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "manual-bb/v1",
+      "executionContext": {
+        "projectId": "qeg-live-interop",
+        "environmentId": "isolated-local",
+        "producerVersion": "3.0.0"
+      }
+    },
+    {
+      "id": "qeg:live-manual-bb-test-harness-manual_case_set",
+      "adapter": "manual-bb-test-harness",
+      "kind": "manual_case_set",
+      "path": "raw/manual-bb-test-harness-manual_case_set.json",
+      "contentHash": "sha256:c48f15e9aeb420f0011070207fcc3ac09b1149a0c6e859a5af9831bf074407f9",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "manual-bb/v1",
+      "executionContext": {
+        "projectId": "qeg-live-interop",
+        "environmentId": "isolated-local",
+        "producerVersion": "3.0.0"
+      }
+    },
+    {
+      "id": "qeg:live-manual-bb-test-harness-execution_evidence",
+      "adapter": "manual-bb-test-harness",
+      "kind": "execution_evidence",
+      "path": "raw/manual-bb-test-harness-execution_evidence.json",
+      "contentHash": "sha256:3198c1ba230bb01cfcd37bb15a6f08c8f11882288d0bd8d17af67a1d840f5a3c",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "manual-bb/v1",
+      "executionContext": {
+        "projectId": "qeg-live-interop",
+        "environmentId": "isolated-local",
+        "producerVersion": "3.0.0"
+      }
+    },
+    {
+      "id": "qeg:live-manual-bb-test-harness-gate_decision",
+      "adapter": "manual-bb-test-harness",
+      "kind": "gate_decision",
+      "path": "raw/manual-bb-test-harness-gate_decision.json",
+      "contentHash": "sha256:6f75b0d966105e8ac3009e07e8ff6c6d3bdbaaeeae80380038550c876ca0645a",
+      "revision": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "contractVersion": "manual-bb/v1",
+      "executionContext": {
+        "projectId": "qeg-live-interop",
+        "environmentId": "isolated-local",
+        "producerVersion": "3.0.0"
+      }
+    }
+  ],
+  "waivers": []
+}

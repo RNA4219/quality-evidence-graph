@@ -1,11 +1,12 @@
 {
   "id": "src/cli/output-files.ts",
   "role": "output-files",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 output-files の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "src/cli/errors.ts"
+    "src/cli/errors.ts",
+    "src/output-publication.ts"
   ],
   "deps_in": [
     "docs/spec/evidence-acceptance-standard.md",
@@ -18,5 +19,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:94967d710e0876002d144935d66e921d830f8289958688b7698bc90ac3379ac4"
+  "contentHash": "sha256:592a92a6d3dae3c5702992afe7735d6d9daeb186e8bb298c68ca0325598ee3e2"
 }

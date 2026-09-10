@@ -1,0 +1,101 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T01:49:01.011Z",
+  "run_id": "ctg-202609100149-local",
+  "repo": {
+    "root": ".",
+    "revision": "a78257d1fa69",
+    "branch": "master",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "normalized-repo-graph",
+  "schema": "normalized-repo-graph@v1",
+  "files": [
+    {
+      "id": "file:package.json",
+      "path": "package.json",
+      "language": "unknown",
+      "role": "config",
+      "hash": "6d036c91e788d5b3493e25e68bba888e3ce74aab2463614f30060c4a6e553816",
+      "sizeBytes": 105,
+      "lineCount": 7,
+      "moduleId": "module:.",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:spec.md",
+      "path": "spec.md",
+      "language": "unknown",
+      "role": "docs",
+      "hash": "25d3f197c98a0da29945f417fc2b2bbf956309b8d5d1c23eb44c55577b1cad23",
+      "sizeBytes": 191,
+      "lineCount": 12,
+      "moduleId": "module:.",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    },
+    {
+      "id": "file:src/cli.mjs",
+      "path": "src/cli.mjs",
+      "language": "js",
+      "role": "source",
+      "hash": "8e361ca6d086942cd4d5eca3d4725109178d4bdb132753cf8a8cb8e9dfdce638",
+      "sizeBytes": 42,
+      "lineCount": 2,
+      "moduleId": "module:.",
+      "parser": {
+        "status": "skipped",
+        "adapter": "ctg-text-v0"
+      }
+    }
+  ],
+  "modules": [
+    {
+      "id": "module:.",
+      "path": ".",
+      "name": "qeg-interoperability-target",
+      "version": "1.0.0",
+      "packageManager": "unknown",
+      "workspace": false,
+      "dependencies": []
+    }
+  ],
+  "symbols": [],
+  "relations": [],
+  "tests": [],
+  "configs": [
+    {
+      "id": "config:package.json",
+      "path": "package.json"
+    }
+  ],
+  "entrypoints": [],
+  "diagnostics": [],
+  "stats": {
+    "partial": false,
+    "scan": {
+      "visitedFiles": 3,
+      "acceptedFiles": 3,
+      "acceptedBytes": 338,
+      "skippedFiles": 0,
+      "limits": {
+        "maxFiles": 100000,
+        "maxDepth": 64,
+        "maxFileSizeBytes": 10485760,
+        "maxTotalBytes": 2147483648,
+        "deadlineMs": 900000
+      },
+      "reasons": []
+    }
+  }
+}

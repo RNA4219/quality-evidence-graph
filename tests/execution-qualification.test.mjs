@@ -18,6 +18,19 @@ const has = (g, code) => g.disqualifications.some(d => d.code === code);
 function expectDq(g, code) { assert.equal(g.verdict, 'disqualified', JSON.stringify(g)); assert.ok(has(g, code), JSON.stringify(g.disqualifications)); }
 const cli = (directory, command, ...args) => spawnSync(process.execPath, [resolve('dist/cli.js'), command, directory, ...args], { encoding: 'utf8' });
 
+test('EAC-02/03 real Python timestamps: preserve sub-millisecond ordering, future and age boundaries', async t => {
+  for (const [timestamp, verdict] of [['2026-09-09T23:59:59.999999999Z', 'go'], ['2026-09-10T00:00:00.000000000Z', 'go'],
+    ['2026-09-10T00:00:00.000000001Z', 'disqualified'], ['2026-09-08T23:59:59.999999999Z', 'disqualified']]) await t.test(timestamp, async () => {
+    const f = await executionFixture([{ status: 'pass', completedAt: timestamp }]);
+    assert.equal((await api.validateGateInput(f.input)).valid, true);
+    assert.equal((await gate(f)).verdict, verdict);
+  });
+  const f = await executionFixture([{ status: 'fail', completedAt: '2026-09-09T23:59:59.123456Z' }, { status: 'pass', completedAt: '2026-09-09T23:59:59.123457Z' }]);
+  const result = await gate(f);
+  assert.equal(result.verdict, 'go');
+  assert.equal(result.executionAccounting.selections[0].selectedRunId, 'synthetic-run-1');
+});
+
 test('EAC TC-01/18: canonical API, CLI, report and record use the same qualified run', async () => {
   const f = await executionFixture();
   const g = await gate(f);

@@ -1,14 +1,17 @@
 {
   "id": "src/index.ts",
   "role": "index",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 index の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/adapters/parse.ts",
+    "src/consumer-migration.ts",
     "src/gate.ts",
     "src/gate/test-evidence.ts",
     "src/graph.ts",
     "src/input-contract.ts",
+    "src/output-publication.ts",
     "src/placement.ts",
     "src/record.ts",
     "src/types.ts",
@@ -22,5 +25,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:d2260af50f305c7b274b0655ad83821f0cc19f1e794c332bf37204c51b4c4bba"
+  "contentHash": "sha256:ae2f32b01ca373ce4513912e52cf9ca53337acad85eb19854100b4e86ce5cef3"
 }

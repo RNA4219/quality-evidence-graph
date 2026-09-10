@@ -1,0 +1,18 @@
+{
+  "id": "tools/interop/live-producers.mjs",
+  "role": "live-producers",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 live-producers の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tools/interop/provenance.mjs"
+  ],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:f633e2841ba791f8281711735bc14fbc8ee6240a4dc26957d555d2640313a0d0"
+}

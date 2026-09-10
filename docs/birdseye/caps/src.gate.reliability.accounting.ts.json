@@ -1,7 +1,7 @@
 {
   "id": "src/gate/reliability/accounting.ts",
   "role": "reliability-accounting-stage",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 reliability-accounting-stage の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

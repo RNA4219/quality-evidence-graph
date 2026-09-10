@@ -1,0 +1,16 @@
+{
+  "id": "tests/consumer-migration.test.mjs",
+  "role": "consumer-migration.test",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 consumer-migration.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:14e93ddb21c61c20febc8779c49613fec15c04e35534f031cc736ec1334e01d6"
+}

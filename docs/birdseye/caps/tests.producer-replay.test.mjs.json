@@ -1,0 +1,16 @@
+{
+  "id": "tests/producer-replay.test.mjs",
+  "role": "producer-replay.test",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 producer-replay.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:579a19b64e2e3eacec501352adcd85fb0abe0074ab8096960fc7cc7e91642c4d"
+}
