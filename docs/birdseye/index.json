@@ -2210,7 +2210,7 @@
         "文書のEAC/TC対応・リンク確認"
       ],
       "mtime": "00018",
-      "contentHash": "sha256:0034cdb3aa5bd8d065661bcd564117a14f4f32e600a9607066f4bebc60c479b5"
+      "contentHash": "sha256:399b50962ccf1430d039893a46bf7560494c02b1b73021e4617a73804c33c8c1"
     },
     "docs/project/evidence-acceptance-status.md": {
       "role": "evidence-acceptance-ledger",
@@ -2232,7 +2232,7 @@
         "npm run json-check"
       ],
       "mtime": "00018",
-      "contentHash": "sha256:30b79a2e9e8495a6dfb1b8b635a9a9fce177d36f195258650a903f294c8e1f8d"
+      "contentHash": "sha256:5f866f32fbf91c7045aacdca0698d4aab3b2a0ef964c43debe94cd51b354edb5"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2368,7 +2368,7 @@
       "role": "output-publication-and-migration",
       "caps": "docs/birdseye/caps/docs.spec.output-publication-and-migration.md.json",
       "mtime": "00018",
-      "contentHash": "sha256:8f1318ed08dfa92410d4f6a7af4e51099a1960c3e9d84aab29ff2fd3d3c8963d"
+      "contentHash": "sha256:8ae950a5cb60b88f85ceabc940593e398f770c59af06a427676a6160b7f0a85a"
     },
     "docs/evidence/eac-completion-2026-09-10/validation.json": {
       "role": "validation",
@@ -2496,13 +2496,13 @@
         "src/graph.ts"
       ],
       "mtime": "00018",
-      "contentHash": "sha256:b5d03421d43f472e5702795338c568f297126b1df9f33f07e75b8eceb0dd332e"
+      "contentHash": "sha256:694f9e7301202f0d1739439c7651d91a243f61a205dcfe24b56b9c8284e70245"
     },
     "docs/evidence/review-fixes-2026-09-11/validation.json": {
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.review-fixes-2026-09-11.validation.json.json",
       "mtime": "00018",
-      "contentHash": "sha256:8768774dca5e44cb5c8be17ba9b7a5f7bd5ab3f7047063d399e2362b5a165095"
+      "contentHash": "sha256:6e8564e3c3336330445af140fba6e235472cbf374aa171d2e39f84adb21fb008"
     },
     "tests/transaction-regression.test.mjs": {
       "role": "transaction-regression.test",

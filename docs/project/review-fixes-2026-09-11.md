@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-REVIEW-FIXES-20260911
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -19,6 +19,6 @@ next_review_due: 2026-12-11
 
 実装は[出力・移行契約](../spec/output-publication-and-migration.md)、試験は[transaction-regression](../../tests/transaction-regression.test.mjs)と[publication](../../tests/output-publication.test.mjs)。同じfile集合の公開試験だけではR2を検出できず、同じdescriptor objectを共有する試験だけではR4を検出できなかった点を受入基準へ反映した。
 
-現時点は実装・ローカル検証の段階。source commitとLinux Node20/24・Windows Node24のCIを[validation.json](../evidence/review-fixes-2026-09-11/validation.json)へ固定してから受入を確定する。node:testの実行件数には親test/subtestを含む。
+R1〜R4を受入済み。source commit `4da7cca488efb3680b0c581a211faa41b812d206`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34544057648)はLinux Node20/24・Windows Node24の3job全step成功。[validation.json](../evidence/review-fixes-2026-09-11/validation.json)にruntime tree、165 runtime tests・53 fixtures・Action lifecycle・型・schema・JSON・Birdseyeの検証を固定した。node:testの実行件数には親test/subtestを含む。
 
 既存producer原本と承認・履歴、wire 0.2、未公開0.4.0の配布状態を維持する。実producer再実行は前回の2回を履歴として参照し、今回はその不変原本の再生を回帰検証する。人手QA・本番deploy・電源断・network filesystem耐久性の受入は含めない。
