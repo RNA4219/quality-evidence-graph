@@ -1,11 +1,13 @@
 {
   "id": "docs/project/evidence-acceptance-status.md",
-  "role": "pending-evidence-acceptance-ledger",
+  "role": "normal-execution-acceptance-ledger",
   "generation": "00016",
   "public_api": [],
   "summary": "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
   "deps_out": [
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+    "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json",
+    "docs/evidence/evidence-acceptance-2026-09-10/validation.json",
     "docs/project/remediation-2026-09-10.md",
     "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/execution-qualification.md",
@@ -28,5 +30,5 @@
     "npm run birdseye-check",
     "npm run json-check"
   ],
-  "contentHash": "sha256:25cf7a39b5e4abdf304c5a7c231d38a156c6203ce5f17086f50acdc96ee92f10"
+  "contentHash": "sha256:2226051151f59d1e460645b17ef0f0eaa3422703eaf777623874da5dc2feaffa"
 }

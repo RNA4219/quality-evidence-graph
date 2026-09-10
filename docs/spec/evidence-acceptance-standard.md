@@ -3,7 +3,7 @@ intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-001
 owner: quality-evidence-graph
 status: defined
 standard_version: qeg-evidence-acceptance/v1
-implementation_status: not_accepted
+implementation_status: partially_accepted
 last_reviewed_at: 2026-09-10
 next_review_due: 2026-12-10
 ---

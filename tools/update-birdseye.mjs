@@ -247,6 +247,7 @@ const currentPaths = [
   "docs/evidence/remediation-2026-09-10/ci-validation.json",
   "docs/spec/evidence-acceptance-standard.md", "docs/project/evidence-acceptance-status.md",
   "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+  "docs/evidence/evidence-acceptance-2026-09-10/validation.json", "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json",
   "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "tests/helpers/execution-fixture.mjs", "tools/migrate-execution-fixtures.mjs",
   "examples/raw-producer-contract/README.md", "examples/raw-producer-contract/ingest-manifest.json",
   "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs", "tests/helpers/raw-producer-fixture.mjs",
@@ -287,9 +288,9 @@ Object.assign(additions["docs/spec/evidence-acceptance-standard.md"], {
   tests: ["npm run birdseye-check", "文書のEAC/TC対応・リンク確認"],
 });
 Object.assign(additions["docs/project/evidence-acceptance-status.md"], {
-  role: "pending-evidence-acceptance-ledger",
+  role: "normal-execution-acceptance-ledger",
   summary: "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
-  depsOut: ["docs/spec/evidence-acceptance-standard.md", "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "docs/project/remediation-2026-09-10.md", "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json"],
+  depsOut: ["docs/spec/evidence-acceptance-standard.md", "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "docs/project/remediation-2026-09-10.md", "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json", "docs/evidence/evidence-acceptance-2026-09-10/validation.json", "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json"],
   tests: ["npm run birdseye-check", "npm run json-check"],
 });
 Object.assign(additions["docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json"], {

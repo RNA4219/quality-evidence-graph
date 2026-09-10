@@ -2130,7 +2130,7 @@
       "caps": "docs/birdseye/caps/tools.update-birdseye.mjs.json",
       "depsOut": [],
       "mtime": "00016",
-      "contentHash": "sha256:ec949b5d768ff3cc56285fbd1f80b4ca754f90b676de6460a0d159d43b30906f"
+      "contentHash": "sha256:4c83181d71a7d14a719e7a4a679758f256f3804dc87b7c1876ce8427d7952d38"
     },
     "tools/birdseye-check.mjs": {
       "role": "birdseye-check",
@@ -2197,10 +2197,10 @@
         "文書のEAC/TC対応・リンク確認"
       ],
       "mtime": "00016",
-      "contentHash": "sha256:2096689915010b3ebfb4ddd958770021c4226a1a057e9070b5999b0e305f064f"
+      "contentHash": "sha256:7543d0d6e2c8e6c4c9b04b3c6fca5248734e9a2a500e80416140459703f2afd8"
     },
     "docs/project/evidence-acceptance-status.md": {
-      "role": "pending-evidence-acceptance-ledger",
+      "role": "normal-execution-acceptance-ledger",
       "caps": "docs/birdseye/caps/docs.project.evidence-acceptance-status.md.json",
       "summary": "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
       "depsOut": [
@@ -2208,14 +2208,16 @@
         "docs/spec/execution-qualification.md",
         "tests/execution-qualification.test.mjs",
         "docs/project/remediation-2026-09-10.md",
-        "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json"
+        "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+        "docs/evidence/evidence-acceptance-2026-09-10/validation.json",
+        "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json"
       ],
       "tests": [
         "npm run birdseye-check",
         "npm run json-check"
       ],
       "mtime": "00016",
-      "contentHash": "sha256:25cf7a39b5e4abdf304c5a7c231d38a156c6203ce5f17086f50acdc96ee92f10"
+      "contentHash": "sha256:2226051151f59d1e460645b17ef0f0eaa3422703eaf777623874da5dc2feaffa"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2334,6 +2336,18 @@
       ],
       "mtime": "00016",
       "contentHash": "sha256:ab658beb576a22ad4879cb677fc2d62b5c801b5bed083153b16004047db683ca"
+    },
+    "docs/evidence/evidence-acceptance-2026-09-10/validation.json": {
+      "role": "validation",
+      "caps": "docs/birdseye/caps/docs.evidence.evidence-acceptance-2026-09-10.validation.json.json",
+      "mtime": "00016",
+      "contentHash": "sha256:e98ba3882c4ae45de199a239058d019b94f5ef7ff2df00f4e23da25a179cab94"
+    },
+    "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json": {
+      "role": "execution-results",
+      "caps": "docs/birdseye/caps/docs.evidence.evidence-acceptance-2026-09-10.execution-results.json.json",
+      "mtime": "00016",
+      "contentHash": "sha256:9bdbbacfe509654694168acfc822e10f5113f37eef53be6095ff5db2c79fd3ca"
     }
   },
   "edges": [
@@ -5132,6 +5146,14 @@
     [
       "tools/migrate-execution-fixtures.mjs",
       "tests/helpers/execution-fixture.mjs"
+    ],
+    [
+      "docs/project/evidence-acceptance-status.md",
+      "docs/evidence/evidence-acceptance-2026-09-10/validation.json"
+    ],
+    [
+      "docs/project/evidence-acceptance-status.md",
+      "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json"
     ]
   ]
 }
