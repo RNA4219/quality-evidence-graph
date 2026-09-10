@@ -544,7 +544,7 @@ packageは0.4.0へ更新する。qegVersion=0.2の公開型は追加fieldで拡�
 
 EAC-08〜10の実装契約は[出力公開・復旧・consumer移行](spec/output-publication-and-migration.md)。完全世代を正式経路で読むこと、設定とpolicy hashを明示して移行すること、実producer原本を保持して接続することを要求する。小数秒1〜9桁の精度で最新/未来/期限を比較し、短縮Git revisionと要求source IDの対応は明示的に解決する。
 
-追加調査で、手動証跡の別build・未来実行をgoにできる不足が確認された。以下は次回改修へ適用する要求であり、策定時点で実装済みとは扱わない。意味的な判定規則・境界・再実行の選択順・受入ケースは [共通受入基準](spec/evidence-acceptance-standard.md)、完成状態は [実装・受入状況](project/evidence-acceptance-status.md) を正本とする。
+追加調査で、手動証跡の別build・未来実行をgoにできる不足が確認されたことから、以下の要求を定めた。意味的な判定規則・境界・再実行の選択順・受入ケースは [共通受入基準](spec/evidence-acceptance-standard.md)、source commitと検証範囲に対応する完成状態は [実装・受入状況](project/evidence-acceptance-status.md) を正本とする。
 
 | ID | 要求 | 受入条件 |
 |---|---|---|

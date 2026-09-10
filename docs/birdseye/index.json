@@ -5,7 +5,7 @@
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:08e72f744b9bf0691c1f239a587cb33eca0f14c286dc7b03c95e41b5cb9f2ca8",
+      "contentHash": "sha256:e8a7133e85b5e87c40940b14f824889b163c78c958e24f18b728f79c273b6359",
       "depsOut": [
         "docs/project/remediation-2026-09-10.md",
         "docs/spec/evidence-acceptance-standard.md",
@@ -16,13 +16,13 @@
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:92f4cc9a1029c64c77572703109654c47a2b1de14f4759071f9da6fa7e1a17a1"
+      "contentHash": "sha256:3de604963c7c5076eaeb07063545b6de2ffa263e49f6880d02c1d1b549b07ac6"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:c71824cb299d84aaeb73b324a2714ed36862193246c907e7d6f24133eb4567a6"
+      "contentHash": "sha256:e6f84d85b142de4d5a9400d3f6a620e9e7410964a4fea24800814c3a15232caf"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
@@ -39,7 +39,7 @@
       "role": "blueprint",
       "caps": "docs/birdseye/caps/docs.project.blueprint.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:66b601279395fc3fdea862dba0fd48aab41a3474e8eb717889287df9f715812b",
+      "contentHash": "sha256:e3c9c46d840f2c940a31dfb709bf64e0f4cf70664b775370b302dae1775e1327",
       "depsOut": [
         "docs/project/remediation-2026-09-10.md",
         "docs/spec/evidence-acceptance-standard.md",
@@ -56,7 +56,7 @@
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:0c29cfe543251956bded06fe7f9459b0b44c47cf46dc7e8150819839b732ca76",
+      "contentHash": "sha256:8a341dc33a93436d7f2e80bbfb0f14f9a6b22c3e3116f7261271f4f1b90fd779",
       "depsOut": [
         "docs/spec/evidence-acceptance-standard.md",
         "docs/project/evidence-acceptance-status.md"
@@ -92,7 +92,7 @@
         "npm pack --dry-run --cache ./.npm-cache"
       ],
       "mtime": "00017",
-      "contentHash": "sha256:80e4c191810a79cf9346f35711aa3868a819815094615894a913b510f6550129"
+      "contentHash": "sha256:f0914d81dbd4767a84bb2abda9f7a3ed5ce0f4ca129701dcc6ff02168b059ae4"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
@@ -167,7 +167,7 @@
       "role": "ipo-spec-index",
       "caps": "docs/birdseye/caps/docs.spec.index.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:38f8a25231e952716a96f5791a20cff77ca28962a1d0ff76546ce40ae32ab855",
+      "contentHash": "sha256:ce8c88960473aeec8cae5a244caddbb24487b4f0e971df8c15ee21db7e7d5950",
       "depsOut": [
         "docs/spec/evidence-acceptance-standard.md",
         "docs/project/evidence-acceptance-status.md"
@@ -2014,7 +2014,7 @@
         "docs/project/evidence-acceptance-status.md"
       ],
       "mtime": "00017",
-      "contentHash": "sha256:11a3d74ca149031b677d2c0a2ed84aa22de2e4dfdaa46104baa9aacc8a23b342"
+      "contentHash": "sha256:a5b418999c01423fe75f962a970b773d3e9d2d6f6c25dd25e80bd3b8de778f5c"
     },
     "docs/spec/remediation-2026-09-10.md": {
       "role": "remediation-2026-09-10",
@@ -2205,7 +2205,7 @@
         "文書のEAC/TC対応・リンク確認"
       ],
       "mtime": "00017",
-      "contentHash": "sha256:7543d0d6e2c8e6c4c9b04b3c6fca5248734e9a2a500e80416140459703f2afd8"
+      "contentHash": "sha256:1eed6f9b00e503fcc7b699ba10861d92d8c776a4a20db83f187a22a92211fea7"
     },
     "docs/project/evidence-acceptance-status.md": {
       "role": "normal-execution-acceptance-ledger",
@@ -2225,7 +2225,7 @@
         "npm run json-check"
       ],
       "mtime": "00017",
-      "contentHash": "sha256:6f56f7a9ed54c3d532d431697f64f01a92427df4c9830b3a9d7501455546ab45"
+      "contentHash": "sha256:3b4adec1b0077fcd29d97f3667ec078758ddbe3019fad37c77b2c7ebf0bf48b3"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2361,13 +2361,13 @@
       "role": "output-publication-and-migration",
       "caps": "docs/birdseye/caps/docs.spec.output-publication-and-migration.md.json",
       "mtime": "00017",
-      "contentHash": "sha256:4787242411ccb32bafd6221e4c22666d2e23a266d0efc729553e570483820154"
+      "contentHash": "sha256:c198015eb1d151607770fddc930395b6c5c250dcbfe716236f98bc3903bcbed5"
     },
     "docs/evidence/eac-completion-2026-09-10/validation.json": {
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.eac-completion-2026-09-10.validation.json.json",
       "mtime": "00017",
-      "contentHash": "sha256:89d6727a7de01cf88961bbceb36af73cacab4ec935ddb795ebced588fb358279"
+      "contentHash": "sha256:4436f71dca34d738e027406baf174ea6a6999e1e90717dfaed85014b8c186425"
     },
     "tests/output-publication.test.mjs": {
       "role": "output-publication.test",

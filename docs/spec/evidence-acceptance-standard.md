@@ -3,7 +3,7 @@ intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-001
 owner: quality-evidence-graph
 status: defined
 standard_version: qeg-evidence-acceptance/v1
-implementation_status: partially_accepted
+implementation_status: accepted
 last_reviewed_at: 2026-09-10
 next_review_due: 2026-12-10
 ---
@@ -12,7 +12,7 @@ next_review_due: 2026-12-10
 
 **今回の対象・時点・実行を証明できる証跡だけを、Gateを良化させる根拠として採用する。** ファイルの存在、schema適合、hash一致、CI成功は、それぞれ必要な検証の一部である。
 
-要求正本は [requirements.mdのEAC要求](../requirements.md)。本書は次回改修の判定基準を定めたものであり、現在のruntimeが充足したという記録ではない。[実装・受入状況](../project/evidence-acceptance-status.md)を別に管理する。既存のR01〜R06受入は当時の検証範囲の履歴として保持する。
+要求正本は [requirements.mdのEAC要求](../requirements.md)。本書は改修の判定規則を定め、実行結果とsource commitに対応する[実装・受入状況](../project/evidence-acceptance-status.md)を別に管理する。既存のR01〜R06受入は当時の検証範囲の履歴として保持する。
 
 ## 1. 根拠付き観点と判定規則
 
@@ -28,7 +28,7 @@ next_review_due: 2026-12-10
 | EAC-06 | 結果。FIX-07、DQ優先 | required real testの未実行・mock-only・結果不明はDQ。資格のある採用実行がfailならno_go要因。passだけでは既存blocker・DQ・承認不足を消さない |
 | EAC-07 | 決定性。G-09、REL-09/10 | 同一input/policy/revisionで採用ID・除外理由・verdictが同じ。入力順、ファイル順、machine clockで変えない |
 | EAC-08 | 出力。FIX-08〜10/14 | 有効な正式出力は全成果物が同一世代でschema/hash/相互参照を満たす。検証失敗・中断・競合を成功表示しない |
-| EAC-09 | 接続。現行受入の合成fixture範囲 | 合成fixture、実producer由来の固定artifact再生、producer再実行の結合試験を識別する。実接続を主張するには対応する実行証拠が必要 |
+| EAC-09 | 接続。策定時の受入が合成fixtureに限られたこと | 合成fixture、実producer由来の固定artifact再生、producer再実行の結合試験を識別する。実接続を主張するには対応する実行証拠が必要 |
 | EAC-10 | 移行。FIX-01/16、fixture専用migration | 旧consumerのmode/必須集合/scope/実行条件を明示する。dry-runは変更せず不足を示し、移行で承認・履歴や実行必須条件を暗黙に変更しない |
 | EAC-11 | 統制。既存waiver/approval/retention契約 | 全profileで証跡の資格を守る。waiverでDQを消さず、採用結果と外部承認・保管証明を分ける |
 | EAC-12 | 完了。FIX-16、既存CI受入条件 | 要求→基準→ケース→実装revision→実行結果を対応付ける。必要ケース未実施・不合格をCI全体の緑や過去の合格で置換しない |
@@ -47,7 +47,7 @@ build IDはcommit SHAとは限らない。build→完全なrevisionの対応を�
 
 - v1の未来許容幅は0。`t > T`はDQ、`t = T`は時刻条件を満たす。
 - Hは正の有限値で、時間単位を固定する。通常テストでは暗黙の無期限・任意の既定値を設けず、未設定をDQとする。既存resilienceのmaxEvidenceAgeHoursはその契約を維持する。
-- `0 <= T - t <= H`を満たすこと。ちょうどHは有効、Hを超えたら期限切れ。入力精度はミリ秒までで比較し、境界試験の差は1msとする。
+- `0 <= T - t <= H`を満たすこと。ちょうどHは有効、Hを超えたら期限切れ。入力の小数秒1〜9桁を丸めず整数nanosecondで比較する。従来の1ms境界に加え、1nsの未来・期限とmicrosecond間の最新順を検証する。
 - 必須の現在文脈に不正時刻・未来時刻があればDQとし、候補から消して旧passへ戻さない。古い正当な履歴は後述の規則で除外する。
 - timezoneなし、不正日時、NaN/無限大/0/負のHを拒否する。wall clockの経過だけで既存recordを再判定しない。別時点の判断には新しいTの入力を作る。
 
@@ -71,7 +71,7 @@ DQはdisqualified/exit 2、資格のある必須実行のfailはno_go要因/exit
 
 ## 2. リスク
 
-初期評価は発生率の実測ではなく、確認した挙動と影響範囲に基づく見積り。`raw=4*I*L+2*D+2*C+2*X+2*P-2*A`、`score=round(min(100,raw*100/124))`。I/Lは1〜5、D/C/X/P/Aは0〜3。今回の未検証境界には自動テスト信用A=0を使用する。
+以下は策定時の初期評価であり、発生率の実測や改修後の残存リスクではない。`raw=4*I*L+2*D+2*C+2*X+2*P-2*A`、`score=round(min(100,raw*100/124))`。I/Lは1〜5、D/C/X/P/Aは0〜3。当時の未検証境界には自動テスト信用A=0を使用した。
 
 | リスク | 対応 | I/L/D/C/X/P/A | score | 根拠 |
 |---|---|---|---:|---|
@@ -79,7 +79,7 @@ DQはdisqualified/exit 2、資格のある必須実行のfailはno_go要因/exit
 | R-E02 未来・期限切れの実行を採用 | EAC-02 | 5/3/3/2/2/0/0 | 60 | 未来時刻のgoを確認、有効期間は通常テストで未定義 |
 | R-E03 再実行と履歴を混同 | EAC-03/06/07 | 4/3/2/2/1/0/0 | 47 | 古いfailが残るno_goを確認。新しい失敗を隠す方向にも注意 |
 | R-E04 不完全な出力を有効と誤認 | EAC-08 | 5/2/3/3/1/0/0 | 44 | 強制終了・同時実行への耐性は未検証 |
-| R-E05 合成fixture成功を実接続の証明に拡大 | EAC-09/12 | 4/3/2/2/2/0/0 | 48 | 現行のproducer E2Eは合成fixtureに限定 |
+| R-E05 合成fixture成功を実接続の証明に拡大 | EAC-09/12 | 4/3/2/2/2/0/0 | 48 | 策定時のproducer E2Eは合成fixtureに限定 |
 | R-E06 移行で証跡条件・統制が変化 | EAC-10/11 | 4/3/2/2/1/0/0 | 47 | 既存migrationはfixture専用でconsumerには適用できない |
 
 ## 3. 優先度と適用単位
@@ -95,7 +95,7 @@ R-E01/02はP1、残りはP2。まず対象・時計・再実行を一緒に整�
 
 ## 4. 受入ケース
 
-すべて今後実装する基準に対する期待結果。現在の合格結果ではない。black-boxを主とし、ログ・manifestによるgray確認を補助にする。自動化済みの同一ケースは実行証拠を流用でき、手動で重複実行する必要はない。
+以下は基準に対する期待結果。実測と合否は受入台帳に記録する。black-boxを主とし、ログ・manifestによるgray確認を補助にする。自動化済みの同一ケースは実行証拠を流用でき、手動で重複実行する必要はない。
 
 共通前提はraw fixtureまたは隔離consumer、実行必須=true、正当な現在build/revision、他のGate条件を満たす正常対照。操作は「対象データを準備→raw build-graph→place-tests→gate→record→schema/hash確認」。1要因変更ではraw hashも実際のbytesへ整合させ、hashエラーで本来の意味的検証が隠れないようにする。全ケースのoracleは本書の対応EAC規則（specified）とする。
 
@@ -104,8 +104,8 @@ R-E01/02はP1、残りはP2。まず対象・時計・再実行を一緒に整�
 | TC-01 | EAC-01〜07/P1 | canonical_validで同一対象・有効時刻・pass | go/0。選択ID、scope、対象対応をrecordで確認 |
 | TC-02 | EAC-01/05/P1 | executionとgate_decisionのbuildだけ異なる | DQ/2。build不一致と両sourceRef。go禁止 |
 | TC-03 | EAC-01/04/P1 | build対応欠落、別revision、別feature/case、別環境を個別変更 | 各DQ/2。どの対応が欠けたか判別可能 |
-| TC-04 | EAC-02/P1 | 実行時刻T-1ms、T、T+1msのboundary3 | 前2件は時刻条件を充足、T+1msはDQ。入力順に非依存 |
-| TC-05 | EAC-02/P1 | 経過H-1ms、H、H+1msのboundary3 | 前2件は期間条件を充足、H+1msはDQ |
+| TC-04 | EAC-02/P1 | 実行時刻T-1ms、T、T+1msのboundary3とT+1ns | 前2件は時刻条件を充足、未来は1nsでもDQ。入力順に非依存 |
+| TC-05 | EAC-02/P1 | 経過H-1ms、H、H+1msのboundary3とnanosecond精度の期限 | ちょうどHまで充足、Hを1nsでも超えればDQ |
 | TC-06 | EAC-02/P1 | timezone欠落、不正日付、H欠落/0/負/非有限 | 各DQ/2。parse不能なCLI envelopeだけは既存exit 1 |
 | TC-07 | EAC-03/06/P1 | 同一対象の古いfail→新しいpass、未解決欠陥なし | 新passを採用、旧failは履歴。正常対照ではgo/0 |
 | TC-08 | EAC-03/06/P1 | 古いpass→新しいfail | no_go/2。旧passへのfallbackなし |

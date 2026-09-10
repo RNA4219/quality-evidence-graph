@@ -2,7 +2,7 @@
 
 Generation publication/recovery, actual producer interoperability, and explicit consumer migration are described in the [contract and commands](docs/spec/output-publication-and-migration.md). Use `outputs read/recover` and `migrate --dry-run/--apply`.
 
-The current development version is 0.4.0 (unreleased); the wire version remains 0.2. See the [current remediation ledger](docs/project/remediation-2026-09-10.md) and [raw producer example](examples/raw-producer-contract/README.md). The v0.3.1 Action examples below describe the previous distribution.
+The current development version is 0.4.0 (unreleased); the wire version remains 0.2. See the [current EAC acceptance ledger](docs/project/evidence-acceptance-status.md) and [raw producer example](examples/raw-producer-contract/README.md). The v0.3.1 Action examples below describe the previous distribution.
 
 Version 0.4.0 provides `build-graph` → `place-tests` → `gate` → `record`. A policy must declare `inputContract`, including `upstream_artifacts` or `native_graph`, required artifacts, evaluation scope, and whether executed tests are required. Empty initialization and a placement plan alone do not establish passing evidence. `init` copies the installed distribution's local Action and schemas into `.qeg/runtime`.
 

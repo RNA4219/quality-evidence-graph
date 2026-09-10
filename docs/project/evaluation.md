@@ -48,7 +48,7 @@ git diff --check
 
 ## 現行の検証記録
 
-改修ごとの実装箇所、実測結果、CI revision、非評価範囲は `docs/project/remediation-2026-09-10.md` に記録する。チェック数はmanifestと実行結果を正本とし、過去のチェック数を現在の完了証拠にしない。
+EAC改修ごとの実装箇所、実測結果、CI revision、非評価範囲は `docs/project/evidence-acceptance-status.md` に記録する。R01〜R06の受入履歴は `docs/project/remediation-2026-09-10.md` に保持する。チェック数はmanifestと実行結果を正本とし、過去のチェック数を現在の完了証拠にしない。
 
 追加EAC要求は `docs/project/evidence-acceptance-status.md` へ記録する。既知P1不具合のある受入単位はno_goとし、未実施ケースを既存CIの成功で置換しない。前のR01〜R06受入は当時の範囲の履歴として保持する。
 

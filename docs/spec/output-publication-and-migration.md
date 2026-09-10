@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-EAC-COMPLETION-001
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-10
 next_review_due: 2026-12-10
 ---

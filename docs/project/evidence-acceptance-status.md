@@ -1,14 +1,14 @@
 ---
 intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-STATUS-001
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-10
 next_review_due: 2026-12-10
 ---
 
 # 証跡共通基準の実装・受入状況
 
-正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。EAC-08〜10と実接続で判明した時刻・ID・形式の差を一括で実装した。現在は最終の統合検証・CIを実施中で、source commitに結び付く判定は[今回の証拠](../evidence/eac-completion-2026-09-10/validation.json)へ記録する。
+正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。EAC-08〜10と実接続で判明した時刻・ID・形式の差を一括で実装し、EAC-01〜12を定義した範囲で受入済み。source commit `643a47d741a1e016f43a6bdb63f67d485e4c304f`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428936447)はLinux Node20/24・Windows Node24の3job全step成功。[今回の証拠](../evidence/eac-completion-2026-09-10/validation.json)にcommit、runtime tree、実producer原本、ローカル実測を結び付けた。
 
 | 要求 | 対象 | 必要ケース | 状況 |
 |---|---|---|---|
@@ -19,13 +19,13 @@ next_review_due: 2026-12-10
 | EAC-05 | raw/参照先・producer契約 | TC-02/15 | PR #8 accepted。CTG YAML原本のhash/schema検証を追加 |
 | EAC-06 | pass/fail/未実行/mock | TC-07〜09/13/14/17 | accepted。今回も既存統制を回帰検証 |
 | EAC-07 | 決定性 | TC-12/18 | accepted。API/CLI/packedと固定再生を照合 |
-| EAC-08 | 世代の完全性・復旧・競合 | TC-19〜22 | implemented / 最終CI待ち |
-| EAC-09 | 実producerの接続証明 | TC-23 | implemented / 実2回と固定再生を照合、最終CI待ち |
-| EAC-10 | consumer移行 | TC-24 | implemented / dry-run・適用・中断再実行・冪等性、最終CI待ち |
+| EAC-08 | 世代の完全性・復旧・競合 | TC-19〜22 | accepted。Linux/Windowsの実プロセス中断・競合・復旧 |
+| EAC-09 | 実producerの接続証明 | TC-23 | accepted。実2回と固定再生を照合。下記の接続・拒否伝播範囲 |
+| EAC-10 | consumer移行 | TC-24 | accepted。wire 0.2のdry-run・適用・中断再実行・冪等性 |
 | EAC-11 | waiver/approval/retention/profile | TC-13/17/25 | accepted。移行でも承認原本と履歴を保持 |
-| EAC-12 | revisionに結び付く完了証拠 | TC-18/25、各受入単位 | 今回のsource commit・CIによる封印待ち |
+| EAC-12 | revisionに結び付く完了証拠 | TC-18/25、各受入単位 | accepted。上記source commit・CI・runtime treeで固定 |
 
-実装写像と操作は[統合契約](../spec/output-publication-and-migration.md)。追加試験は`output-publication.test.mjs`、`consumer-migration.test.mjs`、`producer-replay.test.mjs`。公開型と配布物のAPI/CLI/Actionも検証する。実行件数はnode:testの親test/subtestを含み、TC群数と混同しない。
+実装写像と操作は[統合契約](../spec/output-publication-and-migration.md)。runtime 147 tests、53 fixture contracts（うち22 reliability）、公開型・隔離tarballのAPI/CLI/Action、Action lifecycle、19 schemas、enum、808 tracked JSON、Birdseye 234 source hashesを検証した。実行件数はnode:testの親test/subtestを含み、TC群数と混同しない。Windows CIの初回失敗は障害注入先の一時path表記差であり、runtimeと同じrealpathに揃えて再検証した。最終の文書sealはruntime treeを維持し、PR最新CIとmerge後main CIは外部で確認する。
 
 ## 実接続の証明範囲
 

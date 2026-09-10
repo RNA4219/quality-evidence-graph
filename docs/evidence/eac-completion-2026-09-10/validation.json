@@ -1,15 +1,48 @@
 {
   "evidenceVersion": "qeg-eac-acceptance/v1",
   "standardVersion": "qeg-evidence-acceptance/v1",
-  "sourceCommit": null,
+  "sourceCommit": "643a47d741a1e016f43a6bdb63f67d485e4c304f",
   "acceptance": {
     "unit": "output-publication-producer-interoperability-consumer-migration",
-    "decision": "implemented",
-    "eacIds": ["EAC-08", "EAC-09", "EAC-10"],
-    "regressionEacIds": ["EAC-01", "EAC-02", "EAC-03", "EAC-04", "EAC-05", "EAC-06", "EAC-07", "EAC-11", "EAC-12"],
-    "caseGroups": ["TC-19", "TC-20", "TC-21", "TC-22", "TC-23", "TC-24", "TC-25"],
+    "decision": "accepted",
+    "eacIds": [
+      "EAC-08",
+      "EAC-09",
+      "EAC-10"
+    ],
+    "regressionEacIds": [
+      "EAC-01",
+      "EAC-02",
+      "EAC-03",
+      "EAC-04",
+      "EAC-05",
+      "EAC-06",
+      "EAC-07",
+      "EAC-11",
+      "EAC-12"
+    ],
+    "caseGroups": [
+      "TC-19",
+      "TC-20",
+      "TC-21",
+      "TC-22",
+      "TC-23",
+      "TC-24",
+      "TC-25"
+    ],
     "reviewedBy": "Codex implementation and acceptance review",
-    "excluded": ["production deployment", "human-executed QA", "external release approval", "power-loss/filesystem durability"]
+    "excluded": [
+      "production deployment",
+      "human-executed QA",
+      "external release approval",
+      "power-loss/filesystem durability"
+    ],
+    "scope": [
+      "Windows/Linux process interruption and concurrent publication",
+      "three pinned actual producers on a shared isolated CLI target",
+      "immutable raw replay through API/CLI/packed Action",
+      "wire 0.2 consumer contract migration"
+    ]
   },
   "producerEvidence": {
     "path": "producer-replay",
@@ -19,6 +52,129 @@
     "reason": "Preserve producer partial status and uncovered requirement hypotheses; the actual CLI execution itself qualifies as pass",
     "scope": "common isolated CLI target, immutable producer sources, actual producer APIs/CLI plus operator-authored manual design and subprocess observation"
   },
-  "localValidation": { "status": "running" },
-  "ci": { "status": "pending" }
+  "localValidation": {
+    "status": "passed",
+    "platform": "win32",
+    "node": "v24.11.0",
+    "runtimeTestNodes": 147,
+    "fixtureContracts": 53,
+    "reliabilityFixtures": 22,
+    "countingNote": "node:test counts include parent tests and named subtests; TC groups are not execution counts",
+    "commands": [
+      {
+        "command": "npm test",
+        "sourceCommit": "21b709af59a7787bdaba35c41af592322d81c655",
+        "exitCode": 0,
+        "scope": "Full suite; runtime product content identical to sourceCommit, subsequent test-only canonical path fix revalidated separately"
+      },
+      {
+        "command": "npm run test:runtime",
+        "sourceCommit": "643a47d741a1e016f43a6bdb63f67d485e4c304f",
+        "exitCode": 0,
+        "scope": "All 147 runtime test nodes, including corrected Windows rename fault injection"
+      }
+    ],
+    "checks": {
+      "publicTypes": "pass",
+      "packedConsumer": "pass",
+      "actionBundle": "pass",
+      "actionLifecycle": "go",
+      "compiledSchemas": 19,
+      "enum": "pass",
+      "trackedJson": 808,
+      "birdseyeGeneration": "00017",
+      "birdseyeSourceHashes": 234
+    },
+    "logs": [
+      {
+        "path": "group-exact-source-full.log",
+        "sha256": "sha256:05df6bd1bf5da879563234a5e219975cb0743bf0f24a21d71d6c9fdc4a8e1e33",
+        "availability": "Local task artifact directory; equivalent checks are linked in source CI"
+      },
+      {
+        "path": "group-windows-path-fix-runtime.log",
+        "sha256": "sha256:07f70992273d3fbce28984643451fdacfdfc87da4a02ce3a4f70bb11cac98590",
+        "availability": "Local task artifact directory; equivalent checks are linked in source CI"
+      },
+      {
+        "path": "group-lifecycle.log",
+        "sha256": "sha256:9d76a57f77d7a67e791325ca9ad260e7cd467efc847858816c639ce25f5f1e86",
+        "availability": "Local task artifact directory; equivalent checks are linked in source CI"
+      }
+    ]
+  },
+  "ci": {
+    "conclusion": "success",
+    "databaseId": 34428936447,
+    "headSha": "643a47d741a1e016f43a6bdb63f67d485e4c304f",
+    "jobs": [
+      {
+        "name": "quality (20)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428936447/job/102720064819",
+        "completedSteps": 23,
+        "failedSteps": [],
+        "skippedSteps": []
+      },
+      {
+        "name": "portability (windows-24)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428936447/job/102720065005",
+        "completedSteps": 11,
+        "failedSteps": [],
+        "skippedSteps": []
+      },
+      {
+        "name": "quality (24)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428936447/job/102720065006",
+        "completedSteps": 23,
+        "failedSteps": [],
+        "skippedSteps": []
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428936447"
+  },
+  "runtimeTree": {
+    "paths": [
+      "src",
+      "schemas",
+      "tests",
+      "fixtures",
+      "qeg-report-action",
+      "package.json",
+      "package-lock.json",
+      "examples",
+      "tools/build-action.mjs",
+      "tools/interop",
+      "docs/evidence/eac-completion-2026-09-10/producer-replay",
+      ".github",
+      ".gitattributes",
+      ".gitignore"
+    ],
+    "sha256": "sha256:5e0f281047a7552f19209c6099eb02094c9ee84bfdb6265c5e917f1b96c020cf",
+    "algorithm": "sha256 of git ls-tree -r SOURCE_COMMIT -- PATHS, LF normalized"
+  },
+  "static": {
+    "tool": "code-to-gate",
+    "version": "1.5.1",
+    "sourceCommit": "21b709af59a7787bdaba35c41af592322d81c655",
+    "runId": "ctg-202609100212-local",
+    "rawCompleteness": "partial",
+    "findings": 0,
+    "sha256": "sha256:480672e30bb2e3dd7c548f794485965943fbea6aa366c57232d8a0b02111ab70",
+    "note": "Supplemental deterministic analysis, 0 findings with producer completeness=partial; not a claim of complete analysis or live interoperability. Existing untracked .runtime accounts for dirty repository state."
+  },
+  "priorCiAttempt": {
+    "databaseId": 34428401100,
+    "headSha": "21b709af59a7787bdaba35c41af592322d81c655",
+    "conclusion": "failure",
+    "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34428401100",
+    "reason": "Windows temporary directory spelling differed from realpath, so the rename fault injection did not match; corrected test compares canonical paths. Revalidated all 147 runtime nodes and all three source CI jobs."
+  },
+  "finalSeal": "Documentation-only follow-up commit; verify identical runtimeTree and latest PR checks before merge, then verify main CI externally. No release/tag/npm publish."
 }

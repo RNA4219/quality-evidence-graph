@@ -33,5 +33,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:38f8a25231e952716a96f5791a20cff77ca28962a1d0ff76546ce40ae32ab855"
+  "contentHash": "sha256:ce8c88960473aeec8cae5a244caddbb24487b4f0e971df8c15ee21db7e7d5950"
 }
