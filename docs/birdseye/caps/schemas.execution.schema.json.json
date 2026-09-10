@@ -1,0 +1,16 @@
+{
+  "id": "schemas/execution.schema.json",
+  "role": "execution.schema",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 execution.schema の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:296e1e1d75fae925e13d9b74f226ed048b3f935d594fd96687bb01fd355a7789"
+}

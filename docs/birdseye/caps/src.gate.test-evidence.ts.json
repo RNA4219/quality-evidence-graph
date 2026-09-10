@@ -1,7 +1,7 @@
 {
   "id": "src/gate/test-evidence.ts",
   "role": "test-evidence-accounting",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 test-evidence-accounting の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -21,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:90f5af6b6f76eda9168c826c483d4e7b09f7ec04703582b0e6a03e20fde90fee"
+  "contentHash": "sha256:1473264b3e93b0779bf818d988367183b063b342ebfee238535662f49a1d13e2"
 }

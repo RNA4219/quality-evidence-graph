@@ -1,6 +1,7 @@
 import type {
   ChangedCodeNode,
   Disqualification,
+  ExecutionAccounting,
   EvidencePackage,
   GateBlocker,
   GatePolicy,
@@ -33,6 +34,7 @@ export interface GateEvaluationInput {
 }
 
 export interface DQDetectorInput {
+  executionAccounting?: ExecutionAccounting;
   metadata: QegMetadata;
   graph: QualityEvidenceGraph;
   policy: GatePolicy;

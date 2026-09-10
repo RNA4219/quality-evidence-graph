@@ -1,0 +1,30 @@
+{
+  "manifestVersion": "qeg-output/v1",
+  "runId": "qeg:run-negative-placement-change-no-evidence",
+  "files": [
+    {
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:bae37948f71ce34317502724e20c733003bdbe6f454b96b0603c10fb6ac40769"
+    },
+    {
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:6f30a49d5ec1eb14f3ee3661ca50a75d71977c864e4dc19bbd9672841a4e490d"
+    },
+    {
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:ac2e7d533b5ce314cbef72435c730220b716ff597cdfedefb4988c72c6a7033c"
+    },
+    {
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:330a1acc505efce7d085897b8065b9dd6f6e92c92a69a6650a882d9abdae109f"
+    },
+    {
+      "path": "quality-evidence-record.json",
+      "contentHash": "sha256:d217981b374d15d768033be9f476a2f4e75b1fa901e4fd196b835f795d945566"
+    },
+    {
+      "path": "output-record.json",
+      "contentHash": "sha256:d217981b374d15d768033be9f476a2f4e75b1fa901e4fd196b835f795d945566"
+    }
+  ]
+}

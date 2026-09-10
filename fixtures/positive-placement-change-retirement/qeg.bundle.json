@@ -1,0 +1,507 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-positive-placement-change-retirement",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-positive-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    },
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "nodes": [
+    {
+      "id": "qeg:risk-login-regression",
+      "kind": "risk",
+      "title": "Login regression escapes release",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-risk-login",
+            "path": "docs/risks/login-regression.md"
+          }
+        ],
+        "assumptions": [],
+        "confidence": "high"
+      },
+      "sourceArtifactIds": [],
+      "priority": "P1",
+      "severity": "high",
+      "likelihood": 0.2,
+      "businessImpact": 0.8,
+      "complianceCriticality": 0.1,
+      "evidenceGap": 0,
+      "novelty": 0.2
+    },
+    {
+      "id": "hate:AETE-login-001",
+      "kind": "test",
+      "title": "Automated login regression evidence",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "hate:sr-aete-login-001",
+            "path": "hate/reports/login-aete.json"
+          }
+        ],
+        "assumptions": [],
+        "confidence": "high"
+      },
+      "sourceArtifactIds": [],
+      "layer": "e2e",
+      "testExecutionMode": "real",
+      "command": "npm run test:e2e -- login",
+      "existing": true,
+      "evidenceStrength": 0.93,
+      "recentGreenRuns": 5,
+      "coveredRiskIds": [
+        "qeg:risk-login-regression"
+      ],
+      "executionIdentity": {
+        "producer": "qeg-native",
+        "projectId": "synthetic-eac",
+        "featureId": "synthetic-feature",
+        "caseId": "hate:AETE-login-001"
+      }
+    },
+    {
+      "id": "mbb:CASE-login-001",
+      "kind": "test",
+      "title": "Retired login manual case (historical reference)",
+      "layer": "manual-scripted",
+      "testExecutionMode": "real",
+      "existing": true,
+      "deleted": true,
+      "sourceArtifactIds": [
+        "qeg:artifact-positive-placement-change-retirement"
+      ],
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:retired-case-source",
+            "path": "gate-input.json",
+            "label": "/placementPlan/placement_changes/subject_id"
+          }
+        ],
+        "confidence": "high",
+        "assumptions": [
+          "Retired case remains addressable; deletion does not count as an execution or current coverage."
+        ]
+      }
+    },
+    {
+      "id": "qeg:eac-execution-0",
+      "kind": "execution_evidence",
+      "title": "Synthetic execution 0",
+      "sourceArtifactIds": [],
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      },
+      "execution": {
+        "executionVersion": "qeg-execution/v1",
+        "testId": "hate:AETE-login-001",
+        "identity": {
+          "producer": "qeg-native",
+          "projectId": "synthetic-eac",
+          "featureId": "synthetic-feature",
+          "caseId": "hate:AETE-login-001"
+        },
+        "producerVersion": "synthetic-contract-v1",
+        "target": {
+          "projectId": "synthetic-eac",
+          "buildId": "synthetic-build-1",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "runId": "synthetic-run-0",
+        "completedAt": "2026-07-01T23:59:56.000Z",
+        "status": "pass",
+        "executionMode": "real",
+        "rawArtifactRef": {
+          "id": "qeg:eac-raw-0",
+          "path": "execution/run-0.json",
+          "contentHash": "sha256:6f8aab1ad2feb293711998c632535ff1604f5c287ed2688f0ef2b8235d6c2f5d",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "passed": true,
+      "evidenceRefs": [
+        {
+          "id": "qeg:eac-raw-0",
+          "path": "execution/run-0.json",
+          "contentHash": "sha256:6f8aab1ad2feb293711998c632535ff1604f5c287ed2688f0ef2b8235d6c2f5d",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceKind": "test_result",
+          "capturedAt": "2026-07-01T23:59:56.000Z"
+        }
+      ]
+    },
+    {
+      "id": "qeg:eac-execution-1",
+      "kind": "execution_evidence",
+      "title": "Synthetic execution 1",
+      "sourceArtifactIds": [],
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      },
+      "execution": {
+        "executionVersion": "qeg-execution/v1",
+        "testId": "hate:AETE-login-001",
+        "identity": {
+          "producer": "qeg-native",
+          "projectId": "synthetic-eac",
+          "featureId": "synthetic-feature",
+          "caseId": "hate:AETE-login-001"
+        },
+        "producerVersion": "synthetic-contract-v1",
+        "target": {
+          "projectId": "synthetic-eac",
+          "buildId": "synthetic-build-1",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "runId": "synthetic-run-1",
+        "completedAt": "2026-07-01T23:59:57.000Z",
+        "status": "pass",
+        "executionMode": "real",
+        "rawArtifactRef": {
+          "id": "qeg:eac-raw-1",
+          "path": "execution/run-1.json",
+          "contentHash": "sha256:26001466efda4fabbddaadb155c91c28e7b5e119d7a2a55cd6eeb7a38da84a54",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "passed": true,
+      "evidenceRefs": [
+        {
+          "id": "qeg:eac-raw-1",
+          "path": "execution/run-1.json",
+          "contentHash": "sha256:26001466efda4fabbddaadb155c91c28e7b5e119d7a2a55cd6eeb7a38da84a54",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceKind": "test_result",
+          "capturedAt": "2026-07-01T23:59:57.000Z"
+        }
+      ]
+    },
+    {
+      "id": "qeg:eac-execution-2",
+      "kind": "execution_evidence",
+      "title": "Synthetic execution 2",
+      "sourceArtifactIds": [],
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      },
+      "execution": {
+        "executionVersion": "qeg-execution/v1",
+        "testId": "hate:AETE-login-001",
+        "identity": {
+          "producer": "qeg-native",
+          "projectId": "synthetic-eac",
+          "featureId": "synthetic-feature",
+          "caseId": "hate:AETE-login-001"
+        },
+        "producerVersion": "synthetic-contract-v1",
+        "target": {
+          "projectId": "synthetic-eac",
+          "buildId": "synthetic-build-1",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "runId": "synthetic-run-2",
+        "completedAt": "2026-07-01T23:59:58.000Z",
+        "status": "pass",
+        "executionMode": "real",
+        "rawArtifactRef": {
+          "id": "qeg:eac-raw-2",
+          "path": "execution/run-2.json",
+          "contentHash": "sha256:4cbe741825e9e3dd1c9f10dfc3b8740fa8e329dd05fdfdad1fd0db11f67cf0f3",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "passed": true,
+      "evidenceRefs": [
+        {
+          "id": "qeg:eac-raw-2",
+          "path": "execution/run-2.json",
+          "contentHash": "sha256:4cbe741825e9e3dd1c9f10dfc3b8740fa8e329dd05fdfdad1fd0db11f67cf0f3",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceKind": "test_result",
+          "capturedAt": "2026-07-01T23:59:58.000Z"
+        }
+      ]
+    },
+    {
+      "id": "qeg:eac-execution-3",
+      "kind": "execution_evidence",
+      "title": "Synthetic execution 3",
+      "sourceArtifactIds": [],
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      },
+      "execution": {
+        "executionVersion": "qeg-execution/v1",
+        "testId": "hate:AETE-login-001",
+        "identity": {
+          "producer": "qeg-native",
+          "projectId": "synthetic-eac",
+          "featureId": "synthetic-feature",
+          "caseId": "hate:AETE-login-001"
+        },
+        "producerVersion": "synthetic-contract-v1",
+        "target": {
+          "projectId": "synthetic-eac",
+          "buildId": "synthetic-build-1",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "runId": "synthetic-run-3",
+        "completedAt": "2026-07-01T23:59:59.000Z",
+        "status": "pass",
+        "executionMode": "real",
+        "rawArtifactRef": {
+          "id": "qeg:eac-raw-3",
+          "path": "execution/run-3.json",
+          "contentHash": "sha256:63da3ede9b4da402904877048f1955ef41196cdb08193f7e6c2d8c3a9d62ff11",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "passed": true,
+      "evidenceRefs": [
+        {
+          "id": "qeg:eac-raw-3",
+          "path": "execution/run-3.json",
+          "contentHash": "sha256:63da3ede9b4da402904877048f1955ef41196cdb08193f7e6c2d8c3a9d62ff11",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceKind": "test_result",
+          "capturedAt": "2026-07-01T23:59:59.000Z"
+        }
+      ]
+    },
+    {
+      "id": "qeg:eac-execution-4",
+      "kind": "execution_evidence",
+      "title": "Synthetic execution 4",
+      "sourceArtifactIds": [],
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      },
+      "execution": {
+        "executionVersion": "qeg-execution/v1",
+        "testId": "hate:AETE-login-001",
+        "identity": {
+          "producer": "qeg-native",
+          "projectId": "synthetic-eac",
+          "featureId": "synthetic-feature",
+          "caseId": "hate:AETE-login-001"
+        },
+        "producerVersion": "synthetic-contract-v1",
+        "target": {
+          "projectId": "synthetic-eac",
+          "buildId": "synthetic-build-1",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "runId": "synthetic-run-4",
+        "completedAt": "2026-07-02T00:00:00.000Z",
+        "status": "pass",
+        "executionMode": "real",
+        "rawArtifactRef": {
+          "id": "qeg:eac-raw-4",
+          "path": "execution/run-4.json",
+          "contentHash": "sha256:6f3ae905307445c8c8ca36c3e8e42964ac3d8cb9694ec672725a1227bc1634ea",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "passed": true,
+      "evidenceRefs": [
+        {
+          "id": "qeg:eac-raw-4",
+          "path": "execution/run-4.json",
+          "contentHash": "sha256:6f3ae905307445c8c8ca36c3e8e42964ac3d8cb9694ec672725a1227bc1634ea",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "evidenceKind": "test_result",
+          "capturedAt": "2026-07-02T00:00:00.000Z"
+        }
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "qeg:edge-risk-login-replaced-by-aete",
+      "kind": "replaced_by",
+      "from": "mbb:CASE-login-001",
+      "to": "hate:AETE-login-001",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-placement-change-login",
+            "path": "placement/changes/login-retirement.json"
+          }
+        ],
+        "assumptions": [],
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "qeg:eac-edge-0",
+      "kind": "evidenced_by",
+      "from": "hate:AETE-login-001",
+      "to": "qeg:eac-execution-0",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "qeg:eac-edge-1",
+      "kind": "evidenced_by",
+      "from": "hate:AETE-login-001",
+      "to": "qeg:eac-execution-1",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "qeg:eac-edge-2",
+      "kind": "evidenced_by",
+      "from": "hate:AETE-login-001",
+      "to": "qeg:eac-execution-2",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "qeg:eac-edge-3",
+      "kind": "evidenced_by",
+      "from": "hate:AETE-login-001",
+      "to": "qeg:eac-execution-3",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      }
+    },
+    {
+      "id": "qeg:eac-edge-4",
+      "kind": "evidenced_by",
+      "from": "hate:AETE-login-001",
+      "to": "qeg:eac-execution-4",
+      "traceability": {
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "assumptions": [
+          "Synthetic execution, not a live producer run"
+        ],
+        "confidence": "high"
+      }
+    }
+  ],
+  "completeness": {
+    "score": 1,
+    "partial": false,
+    "parserFailures": [],
+    "unsupportedClaims": []
+  }
+}

@@ -28,6 +28,8 @@ next_review_due: 2026-10-20
 
 現行改修は `docs/spec/remediation-2026-09-10.md` を先に読む。要求第22節と `docs/project/remediation-2026-09-10.md` に契約変更・移行・受入状態を対応付ける。
 
+証跡資格は [evidence-acceptance-standard.md](evidence-acceptance-standard.md)、通常実行の型/schema/API規則は [execution-qualification.md](execution-qualification.md) を参照する。EAC-01〜12の[実装・受入状況](../project/evidence-acceptance-status.md)は受入単位ごとに管理する。
+
 1. `docs/spec/index.md`
 2. `docs/spec/gate-policy.md`
 3. `docs/spec/node-identity-contract.md`

@@ -22,6 +22,7 @@ next_review_due: 2026-12-10
 8. `docs/project/runbook.md`
 9. `docs/project/evaluation.md`
 10. `docs/project/remediation-2026-09-10.md` と `docs/spec/remediation-2026-09-10.md`
+    - 追加EAC要求: `docs/spec/evidence-acceptance-standard.md` と `docs/project/evidence-acceptance-status.md`。基準策定済みと実装受入済みを区別する。
 11. `docs/project/guardrails.md`
 12. `docs/project/tasks.codex.md`（過去の実装台帳・完了表記の訂正）
 13. `fixtures/README.md`

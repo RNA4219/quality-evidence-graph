@@ -140,6 +140,8 @@ function detectPlacementChangeRetirementGaps(input: DQDetectorInput): Disqualifi
     );
     const evidenceTooWeak = concreteReplacementTests.some((test) =>
       !isGateEligibleTestEvidence(test) ||
+      (test.testType !== "resilience" && !input.executionAccounting?.selections.some(s =>
+        s.testId === test.id && s.selectedStatus === "pass" && s.consecutivePasses >= retirementPolicy.minConsecutiveGreen)) ||
       (test.evidenceStrength ?? 0) < retirementPolicy.minEvidenceStrength ||
       (test.recentGreenRuns ?? 0) < retirementPolicy.minConsecutiveGreen
     );

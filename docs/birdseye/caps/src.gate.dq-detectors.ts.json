@@ -1,7 +1,7 @@
 {
   "id": "src/gate/dq-detectors.ts",
   "role": "dq-detectors",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 dq-detectors の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

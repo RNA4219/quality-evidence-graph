@@ -1,0 +1,176 @@
+{
+  "evidenceVersion": "qeg-eac-acceptance/v1",
+  "standardVersion": "qeg-evidence-acceptance/v1",
+  "sourceCommit": "553aeeda7c53e66e80d966d62c825ce60fa1f301",
+  "acceptance": {
+    "unit": "normal-execution-qualification",
+    "decision": "accepted",
+    "reviewedBy": "Codex implementation and acceptance review",
+    "eacIds": [
+      "EAC-01",
+      "EAC-02",
+      "EAC-03",
+      "EAC-04",
+      "EAC-05",
+      "EAC-06",
+      "EAC-07",
+      "EAC-11",
+      "EAC-12"
+    ],
+    "caseGroups": [
+      "TC-01",
+      "TC-02",
+      "TC-03",
+      "TC-04",
+      "TC-05",
+      "TC-06",
+      "TC-07",
+      "TC-08",
+      "TC-09",
+      "TC-10",
+      "TC-11",
+      "TC-12",
+      "TC-13",
+      "TC-14",
+      "TC-15",
+      "TC-16",
+      "TC-17",
+      "TC-18",
+      "TC-25"
+    ],
+    "scope": [
+      "synthetic raw producer fixtures",
+      "native fixtures",
+      "pure API",
+      "CLI and reports",
+      "isolated packed consumer",
+      "isolated Action"
+    ],
+    "remaining": {
+      "EAC-08": "Process interruption and concurrent publication acceptance remains unevaluated",
+      "EAC-09": "Live producer reruns remain unevaluated",
+      "EAC-10": "General consumer dry-run migration remains unimplemented"
+    }
+  },
+  "runtimeTree": {
+    "paths": [
+      "src",
+      "schemas",
+      "tests",
+      "fixtures",
+      "qeg-report-action",
+      "package.json",
+      "package-lock.json",
+      "examples"
+    ],
+    "sha256": "sha256:c178070e89bbbde420c4e8972c0d8760f9a5b1499307290e733f96fa98e57481",
+    "algorithm": "sha256 of git ls-tree -r SOURCE_COMMIT -- PATHS, LF normalized"
+  },
+  "local": {
+    "platform": "win32",
+    "node": "v24.11.0",
+    "command": "npm test",
+    "exitCode": 0,
+    "runtimeTestNodes": 107,
+    "newBoundaryTestNodes": 55,
+    "countingNote": "node:test counts include parent tests and named subtests; TC groups are not execution counts",
+    "fixtureContracts": 53,
+    "reliabilityFixtures": 22,
+    "publicTypes": "pass",
+    "packedConsumer": "pass",
+    "actionBundle": "pass",
+    "trackedJsonAtImplementationCommit": 748,
+    "extraChecks": [
+      "Action lifecycle acceptance: go",
+      "18 JSON Schemas compiled",
+      "enum consistency: pass",
+      "Birdseye 217 source hashes: pass",
+      "git diff --check: pass"
+    ],
+    "logs": [
+      {
+        "path": "eac-final-npm-test.log",
+        "sha256": "sha256:0d40383b3e5def6ee9dda922b09784a98bf8d5d262d0000378f3a80bea09878a",
+        "availability": "Local task artifact directory; equivalent CI steps linked above",
+        "sourceNote": "Implementation commit 553aeed or identical tested runtime content"
+      },
+      {
+        "path": "eac-final-boundaries.log",
+        "sha256": "sha256:f444539de26a51656ea914282541598854cd5ca98596759b4cf700c7fb459981",
+        "availability": "Local task artifact directory; equivalent CI steps linked above",
+        "sourceNote": "Implementation commit 553aeed or identical tested runtime content"
+      },
+      {
+        "path": "eac-types-package.log",
+        "sha256": "sha256:db3f84b6cc446a3aae90e354249ce6f6920f33fd426958a3d7d2652b645e9126",
+        "availability": "Local task artifact directory; equivalent CI steps linked above",
+        "sourceNote": "Supplemental pre-seal run; final commit covered by npm test and CI"
+      },
+      {
+        "path": "eac-lifecycle.log",
+        "sha256": "sha256:af6148966d6c0774270bb34c2e5610663bbd83b0f33a02b0f82e8998bb3508a1",
+        "availability": "Local task artifact directory; equivalent CI steps linked above",
+        "sourceNote": "Supplemental pre-seal run; final commit covered by npm test and CI"
+      },
+      {
+        "path": "eac-static-final.log",
+        "sha256": "sha256:beb5ae361cb18efb4354fd92a9bf649d71bad23b174b9fb042e1023cf6702644",
+        "availability": "Local task artifact directory; equivalent CI steps linked above",
+        "sourceNote": "Implementation commit 553aeed or identical tested runtime content"
+      }
+    ]
+  },
+  "static": {
+    "tool": "code-to-gate",
+    "version": "1.6.0",
+    "sourceCommit": "553aeeda7c53e66e80d966d62c825ce60fa1f301",
+    "runId": "ctg-20260910004800247-de201be8dad24e73adb229c695c9320c",
+    "status": "passed",
+    "summary": {
+      "findings": 0,
+      "risks": 0,
+      "critical": 0,
+      "high": 0,
+      "medium": 0,
+      "low": 0,
+      "suppressed": 0
+    },
+    "note": "Local deterministic static analysis; untracked .runtime makes repository dirty, but tracked implementation matched sourceCommit. Not proof of live producer interoperability."
+  },
+  "ci": {
+    "databaseId": 34422747335,
+    "headSha": "553aeeda7c53e66e80d966d62c825ce60fa1f301",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34422747335",
+    "jobs": [
+      {
+        "name": "quality (24)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34422747335/job/102701506297",
+        "failedSteps": []
+      },
+      {
+        "name": "portability (windows-24)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34422747335/job/102701506394",
+        "failedSteps": []
+      },
+      {
+        "name": "quality (20)",
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34422747335/job/102701506397",
+        "failedSteps": []
+      }
+    ]
+  },
+  "probes": {
+    "path": "execution-results.json",
+    "sha256": "sha256:9bdbbacfe509654694168acfc822e10f5113f37eef53be6095ff5db2c79fd3ca",
+    "note": "Four raw/API/CLI/record probes supplement the CI test suite; original pre-standard observations are unchanged."
+  },
+  "finalSeal": "Documentation-only follow-up commit; verify latest PR checks and identical runtimeTree before merge. No release/tag/npm publish."
+}

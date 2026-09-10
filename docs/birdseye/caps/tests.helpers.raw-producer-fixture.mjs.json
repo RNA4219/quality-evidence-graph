@@ -1,11 +1,14 @@
 {
   "id": "tests/helpers/raw-producer-fixture.mjs",
   "role": "raw-producer-fixture",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 raw-producer-fixture の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
+    "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+    "tests/execution-qualification.test.mjs",
+    "tests/helpers/execution-fixture.mjs",
     "tests/producer-pipeline.test.mjs"
   ],
   "risks": [
@@ -14,5 +17,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:32605ccc1bde661a782582e6a918ee9e4b715e07451936b9bf069f2c44532ae0"
+  "contentHash": "sha256:198a8e55c48a2836622b7f5aa01e8aa6f2a02fb90f4b1becf4514e43c77fb068"
 }

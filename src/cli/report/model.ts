@@ -5,6 +5,7 @@ import type {
   GateVerdict,
   ReliabilityAccounting,
   EvaluationScope,
+  ExecutionAccounting,
   StableId,
 } from "../../types.js";
 import type { ReportSelection } from "./change-selection.js";
@@ -40,6 +41,7 @@ export interface ReportExpectedComparison {
 }
 
 export interface ReportTargetResult {
+  readonly executionAccounting?: ExecutionAccounting;
   readonly evaluationScope?: EvaluationScope;
   readonly target: string;
   readonly status: ReportTargetStatus;

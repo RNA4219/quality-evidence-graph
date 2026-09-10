@@ -3,7 +3,7 @@ import { mkdtemp, readFile, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
-import { createRawProducerFixture } from "./helpers/raw-producer-fixture.mjs";
+import { createRawProducerFixture, persistRawFixture } from "./helpers/raw-producer-fixture.mjs";
 
 const temp = await mkdtemp(join(tmpdir(), "qeg-package-smoke-"));
 const npmCli = process.env.npm_execpath;
@@ -43,7 +43,7 @@ assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8
 assert.equal(typeof imported.buildGraph, "function");
 assert.equal(typeof imported.placeTests, "function");
 const rawConsumer = join(temp, "raw-consumer");
-await createRawProducerFixture(rawConsumer, imported);
+const rawFixture = await createRawProducerFixture(rawConsumer, imported);
 for (const command of ["build-graph", "place-tests", "gate", "record", "schema-check"]) {
   const result = runQeg([command, rawConsumer]);
   assert.equal(result.status, 0, `Packed ${command}: ${result.stderr || result.stdout}`);
@@ -51,6 +51,18 @@ for (const command of ["build-graph", "place-tests", "gate", "record", "schema-c
 const rawRecord = JSON.parse(await readFile(join(rawConsumer, "quality-evidence-record.json"), "utf8"));
 assert.equal(rawRecord.gate.verdict, "go");
 assert.equal(rawRecord.gate.evaluationScope.kind, "fixture");
+assert.equal(rawRecord.gate.executionAccounting.selections[0].selectedRunId, "RUN-001");
+for (const [field, value, code] of [["build_id", "other-build", "DQ-12"], ["timestamp", "2026-09-10T00:00:00.001Z", "DQ-05"]]) {
+  const copy = structuredClone(rawFixture); copy.loaded[12].payload[field] = value;
+  await persistRawFixture(rawConsumer, copy.manifest, copy.loaded);
+  for (const command of ["build-graph", "place-tests"]) assert.equal(runQeg([command, rawConsumer]).status, 0);
+  const result = runQeg(["gate", rawConsumer]); assert.equal(result.status, 2);
+  const gate = JSON.parse(result.stdout); assert.ok(gate.disqualifications.some(d => d.code === code));
+  const graph = imported.buildGraph(copy.manifest, copy.loaded);
+  const input = { metadata: graph.metadata, graph, policy: copy.manifest.policy, placementPlan: imported.placeTests(graph, copy.manifest.policy), waivers: [] };
+  const evidenceVerification = await imported.verifyEvidenceArtifacts(input, { baseDir: rawConsumer });
+  assert.deepEqual(imported.evaluateGate({ ...input, evidenceVerification }).executionAccounting, gate.executionAccounting);
+}
 const packedActionBundle = join(packageRoot, "qeg-report-action", "dist", "cli.mjs");
 const packedActionVersion = spawnSync(process.execPath, [packedActionBundle, "--version"], {
   encoding: "utf-8",

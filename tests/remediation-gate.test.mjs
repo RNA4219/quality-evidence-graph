@@ -108,9 +108,9 @@ test('FIX-07: planned, mock and failed executions remain distinguishable', async
   input.graph.edges.push({ id: 'qeg:edge', kind: 'evidenced_by', from: selected.id, to: evidence.id, traceability });
   assert.equal(evaluateGate(input).verdict, 'disqualified');
   selected.testExecutionMode = 'real';
-  assert.equal(evaluateGate(input).verdict, 'go');
+  assert.equal(evaluateGate(input).verdict, 'disqualified', 'EAC requires qualified raw execution, not only passed=true');
   evidence.passed = false;
-  assert.equal(evaluateGate(input).verdict, 'no_go');
+  assert.equal(evaluateGate(input).verdict, 'disqualified', 'A bare passed flag does not establish execution identity');
 });
 
 test('FIX-07: selected resilience execution must be covered by its dedicated evaluator', async () => {

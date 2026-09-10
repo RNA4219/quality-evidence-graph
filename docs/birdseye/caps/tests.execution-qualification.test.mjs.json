@@ -1,0 +1,21 @@
+{
+  "id": "tests/execution-qualification.test.mjs",
+  "role": "execution-qualification.test",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 execution-qualification.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/execution-fixture.mjs",
+    "tests/helpers/raw-producer-fixture.mjs"
+  ],
+  "deps_in": [
+    "docs/project/evidence-acceptance-status.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:e55b3e9b01745d1ee1e544760ffc8741e66688ba1a3a27fcaae09baadcf23b35"
+}

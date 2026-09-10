@@ -59,7 +59,7 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
           statuses[ref.adapter] = "contract_violation"; continue;
         }
       }
-      const context = { ref, raw, profile: manifest.metadata.profile, knownChanges };
+      const context = { ref, raw, profile: manifest.metadata.profile, knownChanges, executionPolicy: manifest.policy.executionPolicy };
       const result = ref.adapter === "RanD" ? normalizeRand(context) : ref.adapter === "code-to-gate" ? normalizeCodeToGate(context)
         : ref.adapter === "manual-bb-test-harness" ? normalizeManualBb(context) : undefined;
       if (!result) throw new Error(`Raw adapter unavailable: ${ref.adapter}/${ref.kind}`);
@@ -101,7 +101,7 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
     else unsupportedClaims.push({ id: `qeg:unresolved:${encodeURIComponent(edge.id)}`, claim: `Unresolved edge ${edge.from} -> ${edge.to}`,
       nodeIds: [edge.from, edge.to], gateRelevant: true });
   }
-  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, ...ref }) => ref), requiredConnectorStatus: statuses };
+  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, executionContext: _context, ...ref }) => ref), requiredConnectorStatus: statuses };
   const partial = parserFailures.length > 0 || unsupportedClaims.some(c => c.gateRelevant);
   return { metadata, nodes: enrichTestCoverage(sortIds([...nodes.values()]), sortIds(validEdges)), edges: sortIds(validEdges),
     completeness: { score: partial ? 0 : 1, partial, parserFailures, unsupportedClaims: sortIds(unsupportedClaims) } };

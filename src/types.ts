@@ -5,3 +5,4 @@ export type * from "./types/graph.js";
 export type * from "./types/record.js";
 export type * from "./types/input.js";
 export type * from "./types/ingest.js";
+export type * from "./types/execution.js";

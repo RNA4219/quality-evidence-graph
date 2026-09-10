@@ -128,6 +128,28 @@
           "label": "/policy/inputContract: 必要証跡と評価範囲を設定する"
         }
       ]
+    },
+    "executionPolicy": {
+      "target": {
+        "projectId": "synthetic-order",
+        "buildId": "build-fixture",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "environmentId": "synthetic-ci"
+      },
+      "maxEvidenceAgeHours": 24,
+      "sourceRefs": [
+        {
+          "id": "qeg:raw-fixture-policy",
+          "path": "ingest-manifest.json",
+          "label": "/policy"
+        }
+      ],
+      "buildBindingRef": {
+        "id": "qeg:synthetic-build",
+        "path": "build-binding.json",
+        "contentHash": "sha256:f59454440d05deea3b841e1d22100ccc2177262019d48df18568275306801467",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
     }
   },
   "artifacts": [
@@ -219,7 +241,12 @@
       "path": "raw/09-feature_spec.json",
       "contractVersion": "manual-bb/v1",
       "contentHash": "sha256:1a2784e5d7b268a38ced8a91fbcd5105895474753809a0dcac973d1e3987297a",
-      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "executionContext": {
+        "projectId": "synthetic-order",
+        "environmentId": "synthetic-ci",
+        "producerVersion": "synthetic-contract-v1"
+      }
     },
     {
       "id": "qeg:raw-10",
@@ -228,7 +255,12 @@
       "path": "raw/10-risk_register.json",
       "contractVersion": "manual-bb/v1",
       "contentHash": "sha256:11108dbb9f6bd62390a6119484c9f632ef3205ef4784c7a58c5dccf01bd0eb8a",
-      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "executionContext": {
+        "projectId": "synthetic-order",
+        "environmentId": "synthetic-ci",
+        "producerVersion": "synthetic-contract-v1"
+      }
     },
     {
       "id": "qeg:raw-11",
@@ -237,7 +269,12 @@
       "path": "raw/11-manual_case_set.json",
       "contractVersion": "manual-bb/v1",
       "contentHash": "sha256:71e1cc62e6a2ad125a0fae35418017aaf0ab9de1117fe4226f14010b8aea1d71",
-      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "executionContext": {
+        "projectId": "synthetic-order",
+        "environmentId": "synthetic-ci",
+        "producerVersion": "synthetic-contract-v1"
+      }
     },
     {
       "id": "qeg:raw-12",
@@ -246,7 +283,12 @@
       "path": "raw/12-execution_evidence.json",
       "contractVersion": "manual-bb/v1",
       "contentHash": "sha256:fa84325c5eac6ecbb5ca52b75241a5158776c5052b826739cd0dd91e2fef2a7d",
-      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "executionContext": {
+        "projectId": "synthetic-order",
+        "environmentId": "synthetic-ci",
+        "producerVersion": "synthetic-contract-v1"
+      }
     },
     {
       "id": "qeg:raw-13",
@@ -255,7 +297,12 @@
       "path": "raw/13-gate_decision.json",
       "contractVersion": "manual-bb/v1",
       "contentHash": "sha256:f7180cc742917c5f342649ed57083b93c6fece399e6cdca596e36c450853d738",
-      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "executionContext": {
+        "projectId": "synthetic-order",
+        "environmentId": "synthetic-ci",
+        "producerVersion": "synthetic-contract-v1"
+      }
     }
   ],
   "waivers": []

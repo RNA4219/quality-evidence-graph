@@ -1,0 +1,18 @@
+{
+  "id": "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json",
+  "role": "execution-results",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 execution-results の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "docs/project/evidence-acceptance-status.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:9bdbbacfe509654694168acfc822e10f5113f37eef53be6095ff5db2c79fd3ca"
+}

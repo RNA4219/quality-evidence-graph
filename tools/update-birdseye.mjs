@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00015";
+const generation = "00016";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -245,6 +245,10 @@ const currentPaths = [
   "docs/evidence/remediation-2026-09-10/local-validation.json",
   "docs/evidence/remediation-2026-09-10/audit-validation.json", "docs/project/acceptance-audit-2026-09-10.md",
   "docs/evidence/remediation-2026-09-10/ci-validation.json",
+  "docs/spec/evidence-acceptance-standard.md", "docs/project/evidence-acceptance-status.md",
+  "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+  "docs/evidence/evidence-acceptance-2026-09-10/validation.json", "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json",
+  "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "tests/helpers/execution-fixture.mjs", "tools/migrate-execution-fixtures.mjs",
   "examples/raw-producer-contract/README.md", "examples/raw-producer-contract/ingest-manifest.json",
   "tests/remediation-gate.test.mjs", "tests/producer-pipeline.test.mjs", "tests/helpers/raw-producer-fixture.mjs",
   "tools/snapshot-producer-contracts.mjs", "tools/migrate-input-contracts.mjs", "tools/migrate-retired-case-fixtures.mjs",
@@ -276,6 +280,30 @@ Object.assign(additions["docs/spec/producer-adapters.md"], {
   summary: "3 producerの14 artifactについてraw形式、写像、固定schema、revision/hash/licenseの境界を定義。",
   depsOut: ["src/adapters/producer-schemas.json", "docs/spec/producer-schema-provenance.json", "src/adapters/rand.ts", "src/adapters/code-to-gate.ts", "src/adapters/manual-bb.ts"],
 });
+Object.assign(additions["docs/spec/evidence-acceptance-standard.md"], {
+  role: "defined-evidence-acceptance-standard",
+  summary: "EAC-01〜12の対象・時計・最新実行・出力復旧・実接続・移行基準と25群の受入ケース。状態は受入単位ごとに台帳で管理。",
+  depsOut: ["docs/requirements.md", "docs/project/evidence-acceptance-status.md", "src/adapters/manual-bb.ts", "src/gate/dq/placement-coverage.ts", "src/cli/output-files.ts", "docs/spec/reliability-extension.md"],
+  risks: ["基準策定を実装完了や全ケース実行済みと誤認する"],
+  tests: ["npm run birdseye-check", "文書のEAC/TC対応・リンク確認"],
+});
+Object.assign(additions["docs/project/evidence-acceptance-status.md"], {
+  role: "normal-execution-acceptance-ledger",
+  summary: "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
+  depsOut: ["docs/spec/evidence-acceptance-standard.md", "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "docs/project/remediation-2026-09-10.md", "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json", "docs/evidence/evidence-acceptance-2026-09-10/validation.json", "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json"],
+  tests: ["npm run birdseye-check", "npm run json-check"],
+});
+Object.assign(additions["docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json"], {
+  role: "pre-standard-observation-evidence",
+  summary: "4054df7での正常対照・別build・未来実行・fail後passの4観測。基準制定前の合成fixture証跡であり新基準の合格記録ではない。",
+  depsOut: ["tests/helpers/raw-producer-fixture.mjs", "src/adapters/manual-bb.ts", "src/gate/dq/placement-coverage.ts"],
+  tests: ["npm run json-check"],
+});
+for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/requirements.md", "docs/spec/index.md", "docs/project/evaluation.md", "docs/project/blueprint.md", "docs/project/remediation-2026-09-10.md"]) {
+  const previous = additions[path] ?? index.nodes[path];
+  additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/evidence-acceptance-standard.md", "docs/project/evidence-acceptance-status.md"])] };
+}
+additions["docs/project/remediation-2026-09-10.md"].summary = "R01〜R06の過去受入範囲と追加EAC要求の未完了状態を区別する台帳。fixture・隔離consumer・CIの証拠を保持。";
 const knownPaths = new Set([...Object.keys(index.nodes), ...Object.keys(additions)]);
 for (const path of currentPaths.filter(p => /\.(ts|mjs)$/.test(p))) {
   const code = await readFile(resolve(root, path), "utf8");

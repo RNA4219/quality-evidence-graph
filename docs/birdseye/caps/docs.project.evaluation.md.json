@@ -1,15 +1,17 @@
 {
   "id": "docs/project/evaluation.md",
   "role": "current-acceptance-criteria",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Linux Node 20 / 24とWindows Node 24 CIを含む現行受入条件。",
   "deps_out": [
     ".github/workflows/ci.yml",
+    "docs/project/evidence-acceptance-status.md",
     "docs/project/remediation-2026-09-10.md",
     "docs/project/runbook.md",
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/release/acceptance-2026-07-20.md",
+    "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/operational-cli-extensions.md",
     "fixtures/manifest.json",
     "qeg-report-action/action.yml",
@@ -37,5 +39,5 @@
     "npm run birdseye-check",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "contentHash": "sha256:e9d7281ca21a47a27a50fd84e63f02ce522f6fb34bc467bdd55523bd1820055f"
+  "contentHash": "sha256:895cccda51d19c12fd22a7728c4c2f72bdbf8812aa9fc8bfaf04c0238a2bd525"
 }

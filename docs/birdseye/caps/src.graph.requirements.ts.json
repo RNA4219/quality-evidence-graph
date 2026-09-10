@@ -1,11 +1,12 @@
 {
   "id": "src/graph/requirements.ts",
   "role": "requirements",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 requirements の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/adapters/common.ts",
+    "src/adapters/manual-bb.ts",
     "src/types.ts"
   ],
   "deps_in": [
@@ -19,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:ca540085f031a0c9622489467e46272d3f9b971b08ff66993b6c82f165c98526"
+  "contentHash": "sha256:c78b191354d7c0558f579dd95a9f31ee5960ff6ee28ad7f26e6720a31e04a7d5"
 }

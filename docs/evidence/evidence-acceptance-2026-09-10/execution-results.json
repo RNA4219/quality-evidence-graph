@@ -1,0 +1,977 @@
+{
+  "evidenceVersion": "qeg-eac-probes/v1",
+  "standardVersion": "qeg-evidence-acceptance/v1",
+  "sourceCommit": "553aeeda7c53e66e80d966d62c825ce60fa1f301",
+  "scope": "Synthetic raw producer fixtures, pure API and isolated CLI; not live producer execution",
+  "node": "v24.11.0",
+  "platform": "win32",
+  "probeHash": "sha256:8d28fd69d1cac63d88f609d975d3f1b963de7dbb581a53b67362c8c726219bca",
+  "expectationSource": "docs/spec/evidence-acceptance-standard.md",
+  "results": [
+    {
+      "caseId": "TC-01",
+      "subcase": "canonical",
+      "expected": "go",
+      "actual": "go",
+      "status": "pass",
+      "commands": [
+        {
+          "command": "node dist/cli.js build-graph <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:131d5f89aacf65ca7b0a7f70117997418c9e8c216ea56dc8daa941d01df588b5",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": "node dist/cli.js place-tests <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:365889f4770a12b986cdb4b4bd0009d08e2bea0c29ecdd00312517af63a18c34",
+          "stderrHash": "sha256:98e0c59238ba707eca96c0b6576569b818fa8387628507088b48963f9768d59d"
+        },
+        {
+          "command": "node dist/cli.js gate <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:c55aea17397fa6b7d90119c7c7282ec8f7859bb0ae97fdc0a3087e77919b6c7b",
+          "stderrHash": "sha256:d5f225aa8328443e5adbb2e95bf46a0c203de438974a6a93e9c3cf10865b01c3"
+        },
+        {
+          "command": "node dist/cli.js record <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:a2bcea21414b94ff412d7fac79c68c2e1987e8e7798423085f551f674cddcc77",
+          "stderrHash": "sha256:d5f225aa8328443e5adbb2e95bf46a0c203de438974a6a93e9c3cf10865b01c3"
+        },
+        {
+          "command": "node dist/cli.js schema-check <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:15464d73189eda312be60540927f165a086848b48617b116a05610910a6112b8",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputManifestHash": "sha256:41bdc5de52c23349555a02fe99aeb8aad85f513eb77eb6c2b05b0b5b5ace7b79",
+      "policyId": "qeg:raw-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "metadata": {
+        "createdAt": "2026-09-10T00:00:00.000Z",
+        "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": {
+          "kind": "fixture",
+          "target": "raw producer interoperability",
+          "notEvaluated": [
+            "real deployment",
+            "release approval"
+          ]
+        }
+      },
+      "executionPolicy": {
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "maxEvidenceAgeHours": 24,
+        "sourceRefs": [
+          {
+            "id": "qeg:raw-fixture-policy",
+            "path": "ingest-manifest.json",
+            "label": "/policy"
+          }
+        ],
+        "buildBindingRef": {
+          "id": "qeg:synthetic-build",
+          "path": "build-binding.json",
+          "contentHash": "sha256:f59454440d05deea3b841e1d22100ccc2177262019d48df18568275306801467",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "producerArtifacts": [
+        {
+          "id": "qeg:raw-9",
+          "adapter": "manual-bb-test-harness",
+          "kind": "feature_spec",
+          "path": "raw/09-feature_spec.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:1a2784e5d7b268a38ced8a91fbcd5105895474753809a0dcac973d1e3987297a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-10",
+          "adapter": "manual-bb-test-harness",
+          "kind": "risk_register",
+          "path": "raw/10-risk_register.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:11108dbb9f6bd62390a6119484c9f632ef3205ef4784c7a58c5dccf01bd0eb8a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-11",
+          "adapter": "manual-bb-test-harness",
+          "kind": "manual_case_set",
+          "path": "raw/11-manual_case_set.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:71e1cc62e6a2ad125a0fae35418017aaf0ab9de1117fe4226f14010b8aea1d71",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-12",
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence",
+          "path": "raw/12-execution_evidence.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:fa84325c5eac6ecbb5ca52b75241a5158776c5052b826739cd0dd91e2fef2a7d",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-13",
+          "adapter": "manual-bb-test-harness",
+          "kind": "gate_decision",
+          "path": "raw/13-gate_decision.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:f7180cc742917c5f342649ed57083b93c6fece399e6cdca596e36c450853d738",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        }
+      ],
+      "schemaValid": true,
+      "artifactVerification": "pass",
+      "executionAccounting": {
+        "evaluatedAt": "2026-09-10T00:00:00.000Z",
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "selections": [
+          {
+            "testId": "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D",
+            "selectedEvidenceId": "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-001%2FTC-001%22%5D",
+            "selectedRunId": "RUN-001",
+            "selectedStatus": "pass",
+            "reason": "latest_qualified_execution",
+            "consecutivePasses": 1,
+            "excluded": []
+          }
+        ]
+      },
+      "dqs": [],
+      "blockers": [],
+      "outputManifest": {
+        "manifestVersion": "qeg-output/v1",
+        "runId": "qeg:raw-fixture",
+        "files": [
+          {
+            "path": "qeg.bundle.json",
+            "contentHash": "sha256:5dfe956d12a9fc35fad963fd0c3169cbc00cba2fa4a04c0b003640a353928c7e"
+          },
+          {
+            "path": "test-placement-plan.json",
+            "contentHash": "sha256:4a7d2d13f44bae12bbaebd11d936bf42b0bd469eaddd4fa1dcfc710d6c6f2662"
+          },
+          {
+            "path": "gate-verdict.json",
+            "contentHash": "sha256:c55aea17397fa6b7d90119c7c7282ec8f7859bb0ae97fdc0a3087e77919b6c7b"
+          },
+          {
+            "path": "quality-evidence-record.md",
+            "contentHash": "sha256:915e90fd3ec022dc2f91e4274c3275d3a1936e157038cbdb8e601ac0913b8b68"
+          },
+          {
+            "path": "quality-evidence-record.json",
+            "contentHash": "sha256:16c348de5a0d8c12375c922461ffd14485cf65c2e671af69224a403d5b4e4a5c"
+          },
+          {
+            "path": "output-record.json",
+            "contentHash": "sha256:16c348de5a0d8c12375c922461ffd14485cf65c2e671af69224a403d5b4e4a5c"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "TC-02",
+      "subcase": "different-build",
+      "expected": "disqualified",
+      "actual": "disqualified",
+      "status": "pass",
+      "commands": [
+        {
+          "command": "node dist/cli.js build-graph <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:131d5f89aacf65ca7b0a7f70117997418c9e8c216ea56dc8daa941d01df588b5",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": "node dist/cli.js place-tests <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:365889f4770a12b986cdb4b4bd0009d08e2bea0c29ecdd00312517af63a18c34",
+          "stderrHash": "sha256:98e0c59238ba707eca96c0b6576569b818fa8387628507088b48963f9768d59d"
+        },
+        {
+          "command": "node dist/cli.js gate <isolated-fixture>",
+          "expectedExit": 2,
+          "actualExit": 2,
+          "stdoutHash": "sha256:0155c95813cd6a2589611c9a9538840917a93a649454ffc5db5b2d1405b39a27",
+          "stderrHash": "sha256:d5f225aa8328443e5adbb2e95bf46a0c203de438974a6a93e9c3cf10865b01c3"
+        },
+        {
+          "command": "node dist/cli.js record <isolated-fixture>",
+          "expectedExit": 2,
+          "actualExit": 2,
+          "stdoutHash": "sha256:fa6364d38209524184864893d3b550d59ba2754320801ab5d4d954f4c0dcc242",
+          "stderrHash": "sha256:d5f225aa8328443e5adbb2e95bf46a0c203de438974a6a93e9c3cf10865b01c3"
+        },
+        {
+          "command": "node dist/cli.js schema-check <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:260bf8a2231c330fe2a93558f178d7b2adae7d9f0a65bdc0b7856d11f88a9a5f",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputManifestHash": "sha256:aa56c077e6c826b4fe0af43667125d4219a56176ce84a80e960cab8321b168a9",
+      "policyId": "qeg:raw-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "metadata": {
+        "createdAt": "2026-09-10T00:00:00.000Z",
+        "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": {
+          "kind": "fixture",
+          "target": "raw producer interoperability",
+          "notEvaluated": [
+            "real deployment",
+            "release approval"
+          ]
+        }
+      },
+      "executionPolicy": {
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "maxEvidenceAgeHours": 24,
+        "sourceRefs": [
+          {
+            "id": "qeg:raw-fixture-policy",
+            "path": "ingest-manifest.json",
+            "label": "/policy"
+          }
+        ],
+        "buildBindingRef": {
+          "id": "qeg:synthetic-build",
+          "path": "build-binding.json",
+          "contentHash": "sha256:f59454440d05deea3b841e1d22100ccc2177262019d48df18568275306801467",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "producerArtifacts": [
+        {
+          "id": "qeg:raw-9",
+          "adapter": "manual-bb-test-harness",
+          "kind": "feature_spec",
+          "path": "raw/09-feature_spec.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:1a2784e5d7b268a38ced8a91fbcd5105895474753809a0dcac973d1e3987297a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-10",
+          "adapter": "manual-bb-test-harness",
+          "kind": "risk_register",
+          "path": "raw/10-risk_register.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:11108dbb9f6bd62390a6119484c9f632ef3205ef4784c7a58c5dccf01bd0eb8a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-11",
+          "adapter": "manual-bb-test-harness",
+          "kind": "manual_case_set",
+          "path": "raw/11-manual_case_set.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:71e1cc62e6a2ad125a0fae35418017aaf0ab9de1117fe4226f14010b8aea1d71",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-12",
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence",
+          "path": "raw/12-execution_evidence.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:cfbf4618938f76a6f4453a33b17d235f53d6b5bf76c040bd2992c59ccb732886",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-13",
+          "adapter": "manual-bb-test-harness",
+          "kind": "gate_decision",
+          "path": "raw/13-gate_decision.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:f7180cc742917c5f342649ed57083b93c6fece399e6cdca596e36c450853d738",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        }
+      ],
+      "schemaValid": true,
+      "artifactVerification": "pass",
+      "executionAccounting": {
+        "evaluatedAt": "2026-09-10T00:00:00.000Z",
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "selections": [
+          {
+            "testId": "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D",
+            "reason": "invalid_current_evidence",
+            "consecutivePasses": 0,
+            "excluded": [
+              {
+                "evidenceId": "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-001%2FTC-001%22%5D",
+                "reason": "qualification_failed"
+              }
+            ]
+          }
+        ]
+      },
+      "dqs": [
+        {
+          "code": "DQ-05",
+          "message": "Obligation \"qeg:obligation:ctg%3Arisk-order\" lacks required real execution evidence",
+          "nodeIds": [
+            "qeg:obligation:ctg%3Arisk-order",
+            "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2FplacementPlan",
+              "path": "gate-input.json",
+              "label": "/placementPlan: qeg:obligation:ctg%3Arisk-order"
+            }
+          ]
+        },
+        {
+          "code": "DQ-05",
+          "message": "Obligation \"qeg:obligation:mbb%3Arisk%3A%255B%2522synthetic-order%2522%252C%2522SPEC-ORDER-01%2522%252C%2522RISK-01%2522%255D\" lacks required real execution evidence",
+          "nodeIds": [
+            "qeg:obligation:mbb%3Arisk%3A%255B%2522synthetic-order%2522%252C%2522SPEC-ORDER-01%2522%252C%2522RISK-01%2522%255D",
+            "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2FplacementPlan",
+              "path": "gate-input.json",
+              "label": "/placementPlan: qeg:obligation:mbb%3Arisk%3A%255B%2522synthetic-order%2522%252C%2522SPEC-ORDER-01%2522%252C%2522RISK-01%2522%255D"
+            }
+          ]
+        },
+        {
+          "code": "DQ-12",
+          "message": "EAC-01 execution target differs from Gate target",
+          "nodeIds": [
+            "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-001%2FTC-001%22%5D"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2Fpolicy%2FexecutionPolicy",
+              "path": "gate-input.json",
+              "label": "/policy/executionPolicy: EAC-01 execution target differs from Gate target"
+            },
+            {
+              "id": "mbb:source:raw%2F12-execution_evidence.json%2FRUN-001%2FTC-001",
+              "path": "raw/12-execution_evidence.json",
+              "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "label": "RUN-001/TC-001"
+            },
+            {
+              "id": "qeg:synthetic-build",
+              "path": "build-binding.json",
+              "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "label": "EAC-01 target build binding"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "outputManifest": {
+        "manifestVersion": "qeg-output/v1",
+        "runId": "qeg:raw-fixture",
+        "files": [
+          {
+            "path": "qeg.bundle.json",
+            "contentHash": "sha256:e94fa30ce6e3da4ced72b6db019e613a6943545a20181cfb320847a9bf2867d9"
+          },
+          {
+            "path": "test-placement-plan.json",
+            "contentHash": "sha256:f65dfce18aef0b050edf0d06705c5c689922dee5f831dc6c174463121b904d68"
+          },
+          {
+            "path": "gate-verdict.json",
+            "contentHash": "sha256:0155c95813cd6a2589611c9a9538840917a93a649454ffc5db5b2d1405b39a27"
+          },
+          {
+            "path": "quality-evidence-record.md",
+            "contentHash": "sha256:01f463adfdcdb9f6c6805421fbbf4f18ea19d1dd3a91e41bb6fb8f46785eaa59"
+          },
+          {
+            "path": "quality-evidence-record.json",
+            "contentHash": "sha256:23d86f5b6560e01e8bac168c91f4f34a5194dc626affc7f61ab67e799313cfea"
+          },
+          {
+            "path": "output-record.json",
+            "contentHash": "sha256:23d86f5b6560e01e8bac168c91f4f34a5194dc626affc7f61ab67e799313cfea"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "TC-04",
+      "subcase": "future-one-millisecond",
+      "expected": "disqualified",
+      "actual": "disqualified",
+      "status": "pass",
+      "commands": [
+        {
+          "command": "node dist/cli.js build-graph <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:131d5f89aacf65ca7b0a7f70117997418c9e8c216ea56dc8daa941d01df588b5",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": "node dist/cli.js place-tests <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:365889f4770a12b986cdb4b4bd0009d08e2bea0c29ecdd00312517af63a18c34",
+          "stderrHash": "sha256:98e0c59238ba707eca96c0b6576569b818fa8387628507088b48963f9768d59d"
+        },
+        {
+          "command": "node dist/cli.js gate <isolated-fixture>",
+          "expectedExit": 2,
+          "actualExit": 2,
+          "stdoutHash": "sha256:6f794f14814f48387b222f7b5eeca19e2e90fe167ad62b52c71c0107d3ecd31d",
+          "stderrHash": "sha256:d5f225aa8328443e5adbb2e95bf46a0c203de438974a6a93e9c3cf10865b01c3"
+        },
+        {
+          "command": "node dist/cli.js record <isolated-fixture>",
+          "expectedExit": 2,
+          "actualExit": 2,
+          "stdoutHash": "sha256:ba4e10d3f893cd204b539674b5029746fd74b7ba0a7aed52c1fd0e5cd23fd5bb",
+          "stderrHash": "sha256:d5f225aa8328443e5adbb2e95bf46a0c203de438974a6a93e9c3cf10865b01c3"
+        },
+        {
+          "command": "node dist/cli.js schema-check <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:f1161bde5b258c4932b8b6bf566078e89776e60a77a44ac7de4dd94480044116",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputManifestHash": "sha256:9dded86271b117a406a6ed0f9be99843531f20d6319b1ea7273f5f348524b868",
+      "policyId": "qeg:raw-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "metadata": {
+        "createdAt": "2026-09-10T00:00:00.000Z",
+        "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": {
+          "kind": "fixture",
+          "target": "raw producer interoperability",
+          "notEvaluated": [
+            "real deployment",
+            "release approval"
+          ]
+        }
+      },
+      "executionPolicy": {
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "maxEvidenceAgeHours": 24,
+        "sourceRefs": [
+          {
+            "id": "qeg:raw-fixture-policy",
+            "path": "ingest-manifest.json",
+            "label": "/policy"
+          }
+        ],
+        "buildBindingRef": {
+          "id": "qeg:synthetic-build",
+          "path": "build-binding.json",
+          "contentHash": "sha256:f59454440d05deea3b841e1d22100ccc2177262019d48df18568275306801467",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "producerArtifacts": [
+        {
+          "id": "qeg:raw-9",
+          "adapter": "manual-bb-test-harness",
+          "kind": "feature_spec",
+          "path": "raw/09-feature_spec.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:1a2784e5d7b268a38ced8a91fbcd5105895474753809a0dcac973d1e3987297a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-10",
+          "adapter": "manual-bb-test-harness",
+          "kind": "risk_register",
+          "path": "raw/10-risk_register.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:11108dbb9f6bd62390a6119484c9f632ef3205ef4784c7a58c5dccf01bd0eb8a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-11",
+          "adapter": "manual-bb-test-harness",
+          "kind": "manual_case_set",
+          "path": "raw/11-manual_case_set.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:71e1cc62e6a2ad125a0fae35418017aaf0ab9de1117fe4226f14010b8aea1d71",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-12",
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence",
+          "path": "raw/12-execution_evidence.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:4a3ff1905071b466dcce299afe979d22a0efe875ecc65944dc6992eec2df5a57",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-13",
+          "adapter": "manual-bb-test-harness",
+          "kind": "gate_decision",
+          "path": "raw/13-gate_decision.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:f7180cc742917c5f342649ed57083b93c6fece399e6cdca596e36c450853d738",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        }
+      ],
+      "schemaValid": true,
+      "artifactVerification": "pass",
+      "executionAccounting": {
+        "evaluatedAt": "2026-09-10T00:00:00.000Z",
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "selections": [
+          {
+            "testId": "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D",
+            "reason": "invalid_current_evidence",
+            "consecutivePasses": 0,
+            "excluded": [
+              {
+                "evidenceId": "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-001%2FTC-001%22%5D",
+                "reason": "qualification_failed"
+              }
+            ]
+          }
+        ]
+      },
+      "dqs": [
+        {
+          "code": "DQ-05",
+          "message": "Obligation \"qeg:obligation:ctg%3Arisk-order\" lacks required real execution evidence",
+          "nodeIds": [
+            "qeg:obligation:ctg%3Arisk-order",
+            "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2FplacementPlan",
+              "path": "gate-input.json",
+              "label": "/placementPlan: qeg:obligation:ctg%3Arisk-order"
+            }
+          ]
+        },
+        {
+          "code": "DQ-05",
+          "message": "Obligation \"qeg:obligation:mbb%3Arisk%3A%255B%2522synthetic-order%2522%252C%2522SPEC-ORDER-01%2522%252C%2522RISK-01%2522%255D\" lacks required real execution evidence",
+          "nodeIds": [
+            "qeg:obligation:mbb%3Arisk%3A%255B%2522synthetic-order%2522%252C%2522SPEC-ORDER-01%2522%252C%2522RISK-01%2522%255D",
+            "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2FplacementPlan",
+              "path": "gate-input.json",
+              "label": "/placementPlan: qeg:obligation:mbb%3Arisk%3A%255B%2522synthetic-order%2522%252C%2522SPEC-ORDER-01%2522%252C%2522RISK-01%2522%255D"
+            }
+          ]
+        },
+        {
+          "code": "DQ-05",
+          "message": "EAC-02 invalid or future completion time",
+          "nodeIds": [
+            "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-001%2FTC-001%22%5D"
+          ],
+          "sourceRefs": [
+            {
+              "id": "qeg:input-%2Fpolicy%2FexecutionPolicy",
+              "path": "gate-input.json",
+              "label": "/policy/executionPolicy: EAC-02 invalid or future completion time"
+            },
+            {
+              "id": "mbb:source:raw%2F12-execution_evidence.json%2FRUN-001%2FTC-001",
+              "path": "raw/12-execution_evidence.json",
+              "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "label": "RUN-001/TC-001"
+            },
+            {
+              "id": "qeg:synthetic-build",
+              "path": "build-binding.json",
+              "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+              "label": "EAC-01 target build binding"
+            }
+          ]
+        }
+      ],
+      "blockers": [],
+      "outputManifest": {
+        "manifestVersion": "qeg-output/v1",
+        "runId": "qeg:raw-fixture",
+        "files": [
+          {
+            "path": "qeg.bundle.json",
+            "contentHash": "sha256:af986e8b0c8d136b4555f2f7a1ef2e442d7984ca46e3c126a9a4e6eeefb0e960"
+          },
+          {
+            "path": "test-placement-plan.json",
+            "contentHash": "sha256:703a06743863fc5dfbe006f342e757cbece7a35595c7cc07ad441d8e84b449aa"
+          },
+          {
+            "path": "gate-verdict.json",
+            "contentHash": "sha256:6f794f14814f48387b222f7b5eeca19e2e90fe167ad62b52c71c0107d3ecd31d"
+          },
+          {
+            "path": "quality-evidence-record.md",
+            "contentHash": "sha256:efb848223f7d18a023de2fd337e1ad329f6c119d734b4d8ad3285436b0c695ab"
+          },
+          {
+            "path": "quality-evidence-record.json",
+            "contentHash": "sha256:3f0ab1b54692aae26e22556dafe1e4208becb3a1194c27955461ac60a6839c4b"
+          },
+          {
+            "path": "output-record.json",
+            "contentHash": "sha256:3f0ab1b54692aae26e22556dafe1e4208becb3a1194c27955461ac60a6839c4b"
+          }
+        ]
+      }
+    },
+    {
+      "caseId": "TC-07",
+      "subcase": "old-fail-new-pass",
+      "expected": "go",
+      "actual": "go",
+      "status": "pass",
+      "commands": [
+        {
+          "command": "node dist/cli.js build-graph <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:416248d9805de4542273870fd7e175ca4e0596cf793c42556f5213006aa04f4b",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": "node dist/cli.js place-tests <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:365889f4770a12b986cdb4b4bd0009d08e2bea0c29ecdd00312517af63a18c34",
+          "stderrHash": "sha256:65f0de0cff91cf02d05f35c5d3ad633dc3ae39b30e774628e837bb3485c2ffcc"
+        },
+        {
+          "command": "node dist/cli.js gate <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:5e09f164e6b9181beb61dacd165721f6c513279b4c960e315d3214a164757d2e",
+          "stderrHash": "sha256:bb065c00095adcec4d58c41e1abba802d3edc46a508332b4932ace1402a561fb"
+        },
+        {
+          "command": "node dist/cli.js record <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:5ccc2c2aeb00e2b37300e8c77c1bf7411804ff182468e29eba4bfae7f38186e9",
+          "stderrHash": "sha256:bb065c00095adcec4d58c41e1abba802d3edc46a508332b4932ace1402a561fb"
+        },
+        {
+          "command": "node dist/cli.js schema-check <isolated-fixture>",
+          "expectedExit": 0,
+          "actualExit": 0,
+          "stdoutHash": "sha256:225bfcd84982b117a6485e26e2dd2c39f6874f87df57e59b3ac20fc6a7167d71",
+          "stderrHash": "sha256:e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "inputManifestHash": "sha256:ffb184fb3591a2182da8622be4526c84ab0a0b7e8d54c7f8edd312676b4353e9",
+      "policyId": "qeg:raw-fixture",
+      "policyHash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "metadata": {
+        "createdAt": "2026-09-10T00:00:00.000Z",
+        "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "scope": {
+          "kind": "fixture",
+          "target": "raw producer interoperability",
+          "notEvaluated": [
+            "real deployment",
+            "release approval"
+          ]
+        }
+      },
+      "executionPolicy": {
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "maxEvidenceAgeHours": 24,
+        "sourceRefs": [
+          {
+            "id": "qeg:raw-fixture-policy",
+            "path": "ingest-manifest.json",
+            "label": "/policy"
+          }
+        ],
+        "buildBindingRef": {
+          "id": "qeg:synthetic-build",
+          "path": "build-binding.json",
+          "contentHash": "sha256:f59454440d05deea3b841e1d22100ccc2177262019d48df18568275306801467",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      },
+      "producerArtifacts": [
+        {
+          "id": "qeg:raw-9",
+          "adapter": "manual-bb-test-harness",
+          "kind": "feature_spec",
+          "path": "raw/09-feature_spec.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:1a2784e5d7b268a38ced8a91fbcd5105895474753809a0dcac973d1e3987297a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-10",
+          "adapter": "manual-bb-test-harness",
+          "kind": "risk_register",
+          "path": "raw/10-risk_register.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:11108dbb9f6bd62390a6119484c9f632ef3205ef4784c7a58c5dccf01bd0eb8a",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-11",
+          "adapter": "manual-bb-test-harness",
+          "kind": "manual_case_set",
+          "path": "raw/11-manual_case_set.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:71e1cc62e6a2ad125a0fae35418017aaf0ab9de1117fe4226f14010b8aea1d71",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-12",
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence",
+          "path": "raw/12-execution_evidence.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:fa84325c5eac6ecbb5ca52b75241a5158776c5052b826739cd0dd91e2fef2a7d",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-13",
+          "adapter": "manual-bb-test-harness",
+          "kind": "gate_decision",
+          "path": "raw/13-gate_decision.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:f7180cc742917c5f342649ed57083b93c6fece399e6cdca596e36c450853d738",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        },
+        {
+          "id": "qeg:raw-12-old",
+          "adapter": "manual-bb-test-harness",
+          "kind": "execution_evidence",
+          "path": "raw/old-execution.json",
+          "contractVersion": "manual-bb/v1",
+          "contentHash": "sha256:db591221092ad830d2d714d3c528e2730cb12ce0369d0c75f7fbbed50e553ebc",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "executionContext": {
+            "projectId": "synthetic-order",
+            "environmentId": "synthetic-ci",
+            "producerVersion": "synthetic-contract-v1"
+          }
+        }
+      ],
+      "schemaValid": true,
+      "artifactVerification": "pass",
+      "executionAccounting": {
+        "evaluatedAt": "2026-09-10T00:00:00.000Z",
+        "target": {
+          "projectId": "synthetic-order",
+          "buildId": "build-fixture",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "selections": [
+          {
+            "testId": "mbb:test:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22TC-001%22%5D",
+            "selectedEvidenceId": "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-001%2FTC-001%22%5D",
+            "selectedRunId": "RUN-001",
+            "selectedStatus": "pass",
+            "reason": "latest_qualified_execution",
+            "consecutivePasses": 1,
+            "excluded": [
+              {
+                "evidenceId": "mbb:execution_evidence:%5B%22synthetic-order%22%2C%22SPEC-ORDER-01%22%2C%22RUN-OLD%2FTC-001%22%5D",
+                "reason": "superseded"
+              }
+            ]
+          }
+        ]
+      },
+      "dqs": [],
+      "blockers": [],
+      "outputManifest": {
+        "manifestVersion": "qeg-output/v1",
+        "runId": "qeg:raw-fixture",
+        "files": [
+          {
+            "path": "qeg.bundle.json",
+            "contentHash": "sha256:8cb1e3e9234727898b88b30952b74b3dd61ebacbfaff64f97b144e7c90f9a22c"
+          },
+          {
+            "path": "test-placement-plan.json",
+            "contentHash": "sha256:a25b72e618948e01592c4a327cfab9e758f9f92a1f73bc430ea5ce46f8d90c96"
+          },
+          {
+            "path": "gate-verdict.json",
+            "contentHash": "sha256:5e09f164e6b9181beb61dacd165721f6c513279b4c960e315d3214a164757d2e"
+          },
+          {
+            "path": "quality-evidence-record.md",
+            "contentHash": "sha256:d0cc733bf19434074f6534fc98052edba0f22a5e6937d4a1aa734ae9f82975c4"
+          },
+          {
+            "path": "quality-evidence-record.json",
+            "contentHash": "sha256:1783882b49dc0324b2c0468f4feed926bbf6f57faf27f60f434b93474a64d93f"
+          },
+          {
+            "path": "output-record.json",
+            "contentHash": "sha256:1783882b49dc0324b2c0468f4feed926bbf6f57faf27f60f434b93474a64d93f"
+          }
+        ]
+      }
+    }
+  ]
+}

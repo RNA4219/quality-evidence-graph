@@ -1,11 +1,12 @@
 {
   "id": "src/cli/report/format/shared.ts",
   "role": "shared",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 shared の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/report/model.ts",
+    "src/gate/execution/format.ts",
     "src/types.ts"
   ],
   "deps_in": [
@@ -18,5 +19,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:44e73d05465d342700fac3c0761bfaac8606256c298c5bfae528a7bc3e6d5520"
+  "contentHash": "sha256:e1c78346a5f364da13ead65927c54e922c56ee23c8081e65b6ded78c6ece2953"
 }

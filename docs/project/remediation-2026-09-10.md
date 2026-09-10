@@ -10,6 +10,8 @@ next_review_due: 2026-12-10
 
 現行改修の状態は本台帳を正本とする。20要求の実装・試験・scopeの対応は [受入照合表](acceptance-audit-2026-09-10.md) を参照する。v0.3.1のrelease acceptanceは配布物の過去受入証跡として保持する。以前のTASK-01〜10完了表記は、build-graph/place-testsと出力契約まで完成していたことを意味しない。今回の要求→仕様→実装→受入で、機能ごとに完成を証明する。
 
+**追加調査後の位置付け:** 本台帳のcompletedはR01〜R06の当時の受入範囲に限る。通常テストの別build・未来実行に判定漏れが見つかり、[共通受入基準](../spec/evidence-acceptance-standard.md)を追加した。[EAC要求の実装・受入状況](evidence-acceptance-status.md)は未完了であり、本台帳の過去CI成功を追加基準の合格として扱わない。
+
 | 改修 | 要求 | 仕様 | 状態 | 実装・受入証拠 |
 |---|---|---|---|---|
 | R01 必須証跡 | FIX-01〜04 | remediation-2026-09-10.md 入力契約 | passed | input-contract型/schema、gate/dq/input-contract、raw-ingest、空init・必須14種個別欠落試験 |

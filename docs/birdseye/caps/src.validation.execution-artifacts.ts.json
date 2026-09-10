@@ -1,0 +1,22 @@
+{
+  "id": "src/validation/execution-artifacts.ts",
+  "role": "execution-artifacts",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 execution-artifacts の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/adapters/validate.ts",
+    "src/gate/execution/contracts.ts",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/validation/evidence.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:88a0163f17eba52d2e1a5813ec518f7beda1ad1d521ecb4337e12f52f9cba410"
+}

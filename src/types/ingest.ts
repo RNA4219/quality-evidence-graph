@@ -1,6 +1,7 @@
 import type { AdapterKind, ArtifactKind } from "./primitives.js";
 import type { ArtifactRef, EvidencePackage, QegMetadata, SourceRef, Waiver } from "./evidence.js";
 import type { GatePolicy } from "./gate.js";
+import type { IngestExecutionContext } from "./execution.js";
 
 export interface EvaluationScope {
   readonly kind: "fixture" | "isolated_consumer" | "real_environment";
@@ -23,6 +24,7 @@ export interface InputContract {
 
 export interface IngestArtifact extends ArtifactRef {
   readonly contractVersion: string;
+  readonly executionContext?: IngestExecutionContext;
 }
 
 export interface IngestManifest {

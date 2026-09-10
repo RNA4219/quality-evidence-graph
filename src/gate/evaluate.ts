@@ -15,6 +15,7 @@ import { detectGraphIntegrity } from "./dq/graph-integrity.js";
 import { evaluateRequiredExecutions } from "./dq/placement-coverage.js";
 import { sourceDiagnostics } from "./diagnostics.js";
 import { upstreamDecisions } from "./upstream.js";
+import { evaluateExecutions } from "./execution/evaluator.js";
 
 export function evaluateGate(input: GateEvaluationInput): GateResult {
   // A Gate must be reproducible.  The evaluation clock is the recorded QEG
@@ -36,10 +37,12 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
   }, validWaivers);
 
   const reliability = evaluateReliability(context);
+  const qualified = evaluateExecutions(context);
+  context.executionAccounting = qualified.accounting;
   const executions = evaluateRequiredExecutions(context, reliability.accounting);
   const upstream = upstreamDecisions(input.graph);
-  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...upstream.blockers] };
-  const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
+  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...qualified.blockers, ...upstream.blockers] };
+  const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...qualified.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
   const blockers = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
   const requiredHumanReview = [...new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks), ...upstream.humanReview])];
@@ -67,7 +70,8 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
     blockers,
     residualRisks,
     requiredHumanReview,
-    testEvidenceAccounting: buildTestEvidenceAccounting(input.graph),
+    testEvidenceAccounting: buildTestEvidenceAccounting(input.graph, qualified.accounting),
+    ...(qualified.accounting ? { executionAccounting: qualified.accounting } : {}),
     reliability: reliability.accounting,
   };
 }

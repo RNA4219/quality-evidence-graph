@@ -1,7 +1,7 @@
 {
   "id": "docs/release-notes/2026-07-20-v0.3.0.md",
   "role": "superseded-v0.3.0-release-notes",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "npm package未公開のv0.3.0履歴。GitHub-only Action配布はv0.3.1へ移管済み。",
   "deps_out": [

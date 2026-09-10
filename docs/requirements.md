@@ -539,3 +539,24 @@ MVP は次を満たしたら完了とする。
 | FIX-20 | 抑制と受入を可視化する | 対象・根拠・owner・期限・再確認条件を記録し、保存済み12候補を対応済み/設計受理へ分類。警告非表示だけを成功にしない |
 
 packageは0.4.0へ更新する。qegVersion=0.2の公開型は追加fieldで拡張し、旧policyはコンパイル可能でもinputContract未設定の評価をDQ-01とする。旧fixture/consumerは明示modeと必要集合へ移行する。IPO approval、waiver、retention、resilience資格判定を緩和しない。
+
+## 証跡の共通受入基準（EAC-01〜12）
+
+追加調査で、手動証跡の別build・未来実行をgoにできる不足が確認された。以下は次回改修へ適用する要求であり、策定時点で実装済みとは扱わない。意味的な判定規則・境界・再実行の選択順・受入ケースは [共通受入基準](spec/evidence-acceptance-standard.md)、完成状態は [実装・受入状況](project/evidence-acceptance-status.md) を正本とする。
+
+| ID | 要求 | 受入条件 |
+|---|---|---|
+| EAC-01 | 今回の対象を証明する | revision/build/feature/case/environmentの対応を保持し、現在の必須入力の不一致・対応不明をDQ |
+| EAC-02 | 今回の時点で有効な実行を使う | metadata.createdAtを時計とし未来を拒否、policyの明示有効期間と境界を検証 |
+| EAC-03 | 今回採用する実行を一意にする | 同じ対象の最新実行を選択し、同時刻競合はDQ、旧pass fallback禁止、履歴と除外理由を保持 |
+| EAC-04 | 必要なtestと実行の対応を証明する | 要求/リスク/変更からrawまで逆引き可能、別case・未解決参照・ID競合で不足を解消しない |
+| EAC-05 | 実体と意味の両方を検証する | raw・参照先のhash/revision/versionとraw内部の対象対応を検証し、I/O診断原因を保持 |
+| EAC-06 | 実行結果を正しく扱う | 必須未実行/mock-only/不明はDQ、資格のある採用failはno_go要因、passで独立blockerを消さない |
+| EAC-07 | 判定を再現可能にする | 入力順・wall clock・API/CLI経路で採用ID/除外理由/verdictが変わらない |
+| EAC-08 | 完全な出力だけを正式に扱う | 中断・競合・復旧時も同一世代のschema/hashが整合、失敗時に成功を主張しない |
+| EAC-09 | 実接続の証明範囲を明示する | 合成fixture・実artifact固定再生・実producer再実行を区別し、主張に対応した証拠を持つ |
+| EAC-10 | 旧consumerを明示的に移行する | 無変更dry-runと不足診断、明示設定、統制/履歴保持、再実行の冪等性を確認 |
+| EAC-11 | 統制と資格を一貫させる | profileやwaiverで資格不適合を隠さず、外部approval/retentionの既存条件を維持 |
+| EAC-12 | 完了をケースとrevisionへ結ぶ | defined/implemented/verified/acceptedを分け、必要ケースと同一revisionの証拠で受入を判断 |
+
+共通基準は実行の成功をGate根拠に採用するすべての経路へ適用する。通常実行の追加型/schema、既存DQへの写像、互換性は[execution-qualification.md](spec/execution-qualification.md)で固定する。packageは未公開0.4.0、wireは0.2を維持する。実行必須入力では明示policyと原本検証を必要とし、引退は実測した連続成功数も満たす。

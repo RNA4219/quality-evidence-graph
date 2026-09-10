@@ -54,6 +54,8 @@
         },
         "title": { "type": "string", "minLength": 1 },
         "testExecutionMode": { "enum": ["real", "mock"] },
+        "executionIdentity": { "$ref": "execution.schema.json#/$defs/identity" },
+        "execution": { "$ref": "execution.schema.json#/$defs/execution" },
         "testType": { "$ref": "reliability.schema.json#/$defs/testType" },
         "evidenceType": { "const": "resilience" },
         "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" },
@@ -63,6 +65,8 @@
         }
       },
       "allOf": [
+        { "if": { "required": ["execution"] }, "then": { "properties": { "kind": { "const": "execution_evidence" } }, "not": { "required": ["evidenceType"] } } },
+        { "if": { "required": ["executionIdentity"] }, "then": { "properties": { "kind": { "const": "test" } }, "not": { "properties": { "testType": { "const": "resilience" } }, "required": ["testType"] } } },
         {
           "if": {
             "properties": { "kind": { "const": "test" } },

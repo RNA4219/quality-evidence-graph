@@ -1,14 +1,16 @@
 {
   "id": "docs/project/remediation-2026-09-10.md",
   "role": "remediation-2026-09-10",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
-  "summary": "R01〜R06 / FIX-01〜20の現行実装・受入台帳。fixture、隔離consumer、CI、実環境未評価を分離。",
+  "summary": "R01〜R06の過去受入範囲と追加EAC要求の未完了状態を区別する台帳。fixture・隔離consumer・CIの証拠を保持。",
   "deps_out": [
     "docs/evidence/remediation-2026-09-10/ci-validation.json",
     "docs/evidence/remediation-2026-09-10/local-validation.json",
     "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/project/evidence-acceptance-status.md",
     "docs/requirements.md",
+    "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/producer-adapters.md",
     "docs/spec/remediation-2026-09-10.md",
     "tests/producer-pipeline.test.mjs",
@@ -19,6 +21,7 @@
     "docs/agent/HUB.codex.md",
     "docs/project/blueprint.md",
     "docs/project/evaluation.md",
+    "docs/project/evidence-acceptance-status.md",
     "docs/project/tasks.codex.md"
   ],
   "risks": [
@@ -27,5 +30,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:ec8e92ccc0058df90d5b9115e57021c356662d98c97b94968c349905ca5bd8d5"
+  "contentHash": "sha256:11a3d74ca149031b677d2c0a2ed84aa22de2e4dfdaa46104baa9aacc8a23b342"
 }

@@ -37,7 +37,9 @@ rawの意味・schemaはproducerが所有する。QEGは2026-09-10に確認し�
 | manual-bb gate_decision | status/reasons/blocking_risks/unmet_conditionsをQEG入力用gate_verdictへ。外部waiverは自動承認しない |
 | manual-bb execution_evidence | run_id、tc_idまたはcharter_id、build_id/timestamp/expected/actual/result/attachmentsをexecution_evidenceへ。1ファイル1実行、複数artifactを許容 |
 
-semantic IDは既知producer prefixを維持し、prefixのない元IDはproducer:kind:encoded-local-idへ正規化する。path由来IDはslash表記を統一する。同一requirement IDはpacket/auditのtraceをunionする。異なるproducer間の一致は明示ID/参照のみでjoinし、類似文章だけを同一要件としない。
+semantic IDは既知producer prefixを維持し、prefixのない元IDはproducer:kind:encoded-local-idへ正規化する。manual-bbのローカルIDは`[projectId,featureId,localId]`をJSON化してencodeし、別機能の同じTC/risk IDを分離する。path由来IDはslash表記を統一する。同一requirement IDはpacket/auditのtraceをunionする。異なるproducer間の一致は明示ID/参照のみでjoinし、類似文章だけを同一要件としない。
+
+manual-bb descriptorには`executionContext={projectId,environmentId,producerVersion}`を必須指定する。producer raw schemaは変更しない。通常実行に用いる`policy.executionPolicy`、build対応原本、実体検証、時刻・最新実行の規則は[execution-qualification.md](execution-qualification.md)を参照。`contractVersion`と`executionContext`はingest専用で、metadataのArtifactRefへ未定義fieldとしてコピーしない。必要な実行文脈はtest/executionへ保持する。
 
 metadata.inputArtifactsには全descriptorと実hashを保持する。sourceRefsにはrawのファイル位置と元の参照情報を残す。rawがconfidenceを持たない場合の既定値と、推定した関連にはassumptionsを付ける。upstreamのstatus=no_go/failedはblocker、conditional_go/needs_reviewは人間の確認、disqualified/blocked_inputはDQとして伝播する。
 

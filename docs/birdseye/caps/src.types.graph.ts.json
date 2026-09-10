@@ -1,12 +1,13 @@
 {
   "id": "src/types/graph.ts",
   "role": "graph-types",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 graph-types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "schemas/qeg.bundle.schema.json",
     "src/types/evidence.ts",
+    "src/types/execution.ts",
     "src/types/gate.ts",
     "src/types/primitives.ts"
   ],
@@ -25,5 +26,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:cbbee3a7045a55b621ebb86371a9d3125968ddb08e3ff65447818e0f218a9b42"
+  "contentHash": "sha256:86e4997b3baa43abfedd495bec7592a41720c9896fdbf301b7639f98af4a74c9"
 }

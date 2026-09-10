@@ -1,0 +1,30 @@
+{
+  "manifestVersion": "qeg-output/v1",
+  "runId": "qeg:run-negative-placement-change-unreverted",
+  "files": [
+    {
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:6f8af275d0df4d6b0459af5dd15f1c34f8780dbe9446c176d9bf8dcfe837ede5"
+    },
+    {
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:f641fbdfaf54fa28ede099e130761f6118b7c0cfa9845aa5c46e5fe0fe0fb048"
+    },
+    {
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:0500677c4a2fcf672e9950301b4e853972192c3edb6196c7185e5c89872ba7e4"
+    },
+    {
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:fd71a9c0f8b7901ab56358a2edbe74de1259a91fb7ecd291e11a4011eb8e4db6"
+    },
+    {
+      "path": "quality-evidence-record.json",
+      "contentHash": "sha256:eb1dc61668f4f35c4c81c019b667b31e6a2be78e744428f52a824238b269b811"
+    },
+    {
+      "path": "output-record.json",
+      "contentHash": "sha256:eb1dc61668f4f35c4c81c019b667b31e6a2be78e744428f52a824238b269b811"
+    }
+  ]
+}

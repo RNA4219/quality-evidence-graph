@@ -1,7 +1,7 @@
 {
   "id": "src/adapters/validate.ts",
   "role": "validate",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 validate の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -9,7 +9,8 @@
     "src/types.ts"
   ],
   "deps_in": [
-    "src/graph.ts"
+    "src/graph.ts",
+    "src/validation/execution-artifacts.ts"
   ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"

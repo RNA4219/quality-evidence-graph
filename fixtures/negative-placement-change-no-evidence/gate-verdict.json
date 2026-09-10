@@ -1,0 +1,101 @@
+{
+  "evaluationScope": {
+    "kind": "fixture",
+    "target": "negative-placement-change-no-evidence",
+    "notEvaluated": [
+      "Upstream producer ingestion",
+      "Real deployment",
+      "Release approval"
+    ]
+  },
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-negative-placement-change-no-evidence",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "standard",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-negative-placement-change-no-evidence",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:9e5631a95a6fc479fa53242b12031ae50857f554dc8ed624ec8a1975cd9d67d7",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    },
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "verdict": "disqualified",
+  "reasons": [
+    "Disqualified: 1 DQ code(s)",
+    "- DQ-14: Placement change \"qeg:placement-change-login-retirement\" retires manual case \"mbb:CASE-login-001\" without evidence_refs"
+  ],
+  "disqualifications": [
+    {
+      "code": "DQ-14",
+      "message": "Placement change \"qeg:placement-change-login-retirement\" retires manual case \"mbb:CASE-login-001\" without evidence_refs",
+      "nodeIds": [
+        "qeg:placement-change-login-retirement",
+        "mbb:CASE-login-001"
+      ],
+      "sourceRefs": [
+        {
+          "id": "qeg:sr-policy-retirement",
+          "path": "docs/policy/manual-retirement.md"
+        }
+      ]
+    }
+  ],
+  "blockers": [],
+  "residualRisks": [],
+  "requiredHumanReview": [],
+  "testEvidenceAccounting": {
+    "countedTestIds": [
+      "hate:AETE-login-001"
+    ],
+    "excludedMockTests": []
+  },
+  "executionAccounting": {
+    "evaluatedAt": "2026-07-02T00:00:00.000Z",
+    "target": {
+      "projectId": "synthetic-eac",
+      "buildId": "synthetic-build-1",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "environmentId": "synthetic-ci"
+    },
+    "selections": [
+      {
+        "testId": "hate:AETE-login-001",
+        "selectedEvidenceId": "qeg:eac-execution-4",
+        "selectedRunId": "synthetic-run-4",
+        "selectedStatus": "pass",
+        "reason": "latest_qualified_execution",
+        "consecutivePasses": 5,
+        "excluded": [
+          {
+            "evidenceId": "qeg:eac-execution-0",
+            "reason": "superseded"
+          },
+          {
+            "evidenceId": "qeg:eac-execution-1",
+            "reason": "superseded"
+          },
+          {
+            "evidenceId": "qeg:eac-execution-2",
+            "reason": "superseded"
+          },
+          {
+            "evidenceId": "qeg:eac-execution-3",
+            "reason": "superseded"
+          }
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "enabled": false
+  }
+}

@@ -1,4 +1,4 @@
-import type { GateProfile, IngestArtifact, ParserFailure, QegEdge, QegNode, UnsupportedClaim } from "../types.js";
+import type { ExecutionPolicy, GateProfile, IngestArtifact, ParserFailure, QegEdge, QegNode, UnsupportedClaim } from "../types.js";
 import type { RawObject } from "./common.js";
 
 export interface AdapterResult {
@@ -8,6 +8,7 @@ export interface AdapterResult {
   readonly unsupportedClaims: UnsupportedClaim[];
 }
 export interface AdapterContext {
+  readonly executionPolicy?: ExecutionPolicy;
   readonly ref: IngestArtifact;
   readonly raw: RawObject;
   readonly profile: GateProfile;

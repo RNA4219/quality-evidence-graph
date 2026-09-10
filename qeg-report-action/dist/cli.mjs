@@ -7504,8 +7504,23 @@ function normalizeCodeToGate(context) {
 }
 
 // src/adapters/manual-bb.ts
-function manualId(kind, local) {
-  return stableId("mbb", kind, local);
+function manualScopedId(projectId, featureId, kind, local) {
+  if (/^(rand|ctg|hate|qeg|mbb):/.test(local)) return local;
+  return stableId("mbb", kind, JSON.stringify([projectId, featureId, local]));
+}
+function manualId(context, kind, local) {
+  return manualScopedId(context.ref.executionContext.projectId, String(context.raw.feature_id), kind, local);
+}
+function manualBase(context, kind, local, title, raw) {
+  return { ...base(context.ref, kind, local, title, raw), id: manualId(context, kind, local) };
+}
+function identity(context, caseId) {
+  return {
+    producer: "manual-bb-test-harness",
+    projectId: context.ref.executionContext.projectId,
+    featureId: text(context.raw.feature_id, "feature_id"),
+    caseId
+  };
 }
 function priority2(value) {
   if (value === "P0" || value === "P1" || value === "P2" || value === "P3") return value;
@@ -7516,20 +7531,20 @@ function scale(value, label) {
   return value / 5;
 }
 function relation(result, context, from, to, kind) {
-  result.edges.push({ id: manualId("edge", `${from}/${kind}/${to}`), from, to, kind, traceability: trace(context.ref, `${from}/${to}`) });
+  result.edges.push({ id: stableId("mbb", "edge", JSON.stringify([from, kind, to])), from, to, kind, traceability: trace(context.ref, `${from}/${to}`) });
 }
 function normalizeFeature(context, result) {
   const { raw, ref } = context;
   required(raw, ["feature_id", "title", "acceptance_criteria", "source_refs"]);
   const local = text(raw.feature_id, "feature_id");
-  const node = { ...base(ref, "requirement", local, text(raw.title, "feature title"), raw), kind: "requirement", acceptanceCriteriaIds: [] };
+  const node = { ...manualBase(context, "requirement", local, text(raw.title, "feature title"), raw), kind: "requirement", acceptanceCriteriaIds: [] };
   const acceptanceIds = [];
   for (const [index, value] of list(raw.acceptance_criteria, "acceptance_criteria").entries()) {
     const item = typeof value === "string" ? { text: value } : object(value, "acceptance criterion");
     const title = text(item.text ?? item.description ?? item.title, "acceptance criterion text");
     const localAc = `${local}/${String(item.id ?? `AC-${index + 1}`)}`;
     const ac = {
-      ...base(ref, "acceptance_criteria", localAc, title, raw),
+      ...manualBase(context, "acceptance_criteria", localAc, title, raw),
       kind: "acceptance_criteria",
       requirementIds: [node.id],
       oracleRefs: [evidenceRef(ref, `/acceptance_criteria/${index}`)]
@@ -7549,7 +7564,7 @@ function normalizeRisks2(context, result) {
     required(item, ["id", "scenario", "impact", "likelihood", "priority"]);
     const rank = priority2(item.priority);
     const node = {
-      ...base(context.ref, "risk", text(item.id, "risk id"), text(item.scenario, "risk scenario"), item),
+      ...manualBase(context, "risk", text(item.id, "risk id"), text(item.scenario, "risk scenario"), item),
       kind: "risk",
       priority: rank,
       severity: rank === "P0" ? "critical" : rank === "P1" ? "high" : rank === "P2" ? "medium" : "low",
@@ -7560,15 +7575,15 @@ function normalizeRisks2(context, result) {
       novelty: 0.5
     };
     result.nodes.push(node);
-    relation(result, context, manualId("requirement", text(context.raw.feature_id, "feature_id")), node.id, "risks");
-    for (const id of strings(item.trace_to)) if (/^(TC|CHARTER|mbb:test)/.test(id)) relation(result, context, node.id, manualId("test", id), "requires_test");
+    relation(result, context, manualId(context, "requirement", text(context.raw.feature_id, "feature_id")), node.id, "risks");
+    for (const id of strings(item.trace_to)) if (/^(TC|CHARTER|mbb:test)/.test(id)) relation(result, context, node.id, manualId(context, "test", id), "requires_test");
   }
 }
 function oracleType(value) {
   return value === "specified" || value === "derived" || value === "implicit" || value === "human" ? value : "missing";
 }
-function riskReferences(values) {
-  return values.filter((id) => /^(RISK|R-\d|ctg:|rand:risk|mbb:risk)/.test(id)).map((id) => manualId("risk", id));
+function riskReferences(context, values) {
+  return values.filter((id) => /^(RISK|R-\d|ctg:|rand:risk|mbb:risk)/.test(id)).map((id) => manualId(context, "risk", id));
 }
 function normalizeCases(context, result) {
   const { raw, ref } = context;
@@ -7581,8 +7596,9 @@ function normalizeCases(context, result) {
     const oracle = object(item.oracle ?? {}, "oracle");
     const expected = strings(item.expected_results);
     const node = {
-      ...base(ref, "test", local, text(item.title ?? item.mission, "case title"), item),
+      ...manualBase(context, "test", local, text(item.title ?? item.mission, "case title"), item),
       kind: "test",
+      executionIdentity: identity(context, local),
       layer: exploratory ? "manual-exploratory" : "manual-scripted",
       existing: true,
       testExecutionMode: "real",
@@ -7590,14 +7606,14 @@ function normalizeCases(context, result) {
       oracleRefs: strings(oracle.refs).map((id) => evidenceRef(ref, `${local}/oracle/${id}`)),
       expectedResults: expected,
       coverageDimensions: strings(item.techniques),
-      coveredRiskIds: riskReferences(strings(item.trace_to)),
-      coveredRequirementIds: [manualId("requirement", text(raw.feature_id, "feature_id"))]
+      coveredRiskIds: riskReferences(context, strings(item.trace_to)),
+      coveredRequirementIds: [manualId(context, "requirement", text(raw.feature_id, "feature_id"))]
     };
     result.nodes.push(node);
     relation(result, context, node.coveredRequirementIds[0], node.id, "requires_test");
     for (const riskId of node.coveredRiskIds ?? []) relation(result, context, riskId, node.id, "requires_test");
     if (!exploratory && (expected.length === 0 || node.oracleRefs?.length === 0)) result.unsupportedClaims.push({
-      id: manualId("oracle-gap", local),
+      id: manualId(context, "oracle-gap", local),
       claim: `Scripted case ${local} has no expected result or oracle`,
       nodeIds: [node.id],
       gateRelevant: true
@@ -7613,18 +7629,36 @@ function normalizeExecution(context, result) {
   const timestamp = text(raw.timestamp, "execution timestamp");
   if (!Number.isFinite(Date.parse(timestamp))) throw new Error("Execution timestamp is invalid");
   if (!["pass", "fail", "skip", "blocked", "unknown"].includes(String(raw.result))) throw new Error("Execution result is invalid");
+  const testId = manualId(context, "test", caseId);
+  const ingest = ref.executionContext;
+  if (raw.env !== void 0 && raw.env !== ingest.environmentId) throw new Error("Execution environment disagrees with descriptor");
+  if (!ref.contentHash || !ref.revision) throw new Error("Execution raw requires hash and revision");
   const node = {
-    ...base(ref, "execution_evidence", local, `${caseId}: ${String(raw.result)}`, raw),
+    ...manualBase(context, "execution_evidence", local, `${caseId}: ${String(raw.result)}`, raw),
     kind: "execution_evidence",
+    execution: {
+      executionVersion: "qeg-execution/v1",
+      testId,
+      identity: identity(context, caseId),
+      producerVersion: ingest.producerVersion,
+      runId: text(raw.run_id, "run_id"),
+      target: { projectId: ingest.projectId, environmentId: ingest.environmentId, buildId: text(raw.build_id, "build_id"), revision: ref.revision },
+      completedAt: timestamp,
+      status: raw.result === "skip" ? "skipped" : raw.result,
+      executionMode: "real",
+      rawArtifactRef: { id: ref.id, path: ref.path, contentHash: ref.contentHash, revision: ref.revision }
+    },
     ...raw.result === "pass" || raw.result === "fail" ? { passed: raw.result === "pass" } : {},
     evidenceRefs: [{ ...evidenceRef(ref, "/", "test_result"), capturedAt: timestamp }]
   };
   result.nodes.push(node);
-  relation(result, context, manualId("test", caseId), node.id, "evidenced_by");
+  relation(result, context, testId, node.id, "evidenced_by");
 }
 function normalizeManualBb(context) {
   const { raw, ref } = context;
   if (ref.contractVersion !== "manual-bb/v1") throw new Error("manual-bb requires manual-bb/v1 manifest contract");
+  if (!ref.executionContext) throw new Error("manual-bb requires explicit executionContext");
+  for (const key of ["projectId", "environmentId", "producerVersion"]) text(ref.executionContext[key], key);
   text(raw.feature_id, "feature_id");
   const result = emptyResult();
   switch (ref.kind) {
@@ -7642,7 +7676,10 @@ function normalizeManualBb(context) {
       break;
     case "gate_decision":
       required(raw, ["build_id", "status", "profile", "reasons", "evidence_summary"]);
-      result.nodes.push(decision(ref, `${String(raw.feature_id)}/gate`, raw.status, context.profile, raw));
+      if (!context.executionPolicy || raw.build_id !== context.executionPolicy.target.buildId || ref.executionContext.projectId !== context.executionPolicy.target.projectId || ref.executionContext.environmentId !== context.executionPolicy.target.environmentId) {
+        result.parserFailures.push({ path: ref.path, reason: "EAC-01 gate_decision target differs from executionPolicy", code: "DQ-12", sourceRefs: trace(ref, "/build_id").sourceRefs });
+      }
+      result.nodes.push(decision(ref, `${ref.executionContext.projectId}/${String(raw.feature_id)}/gate`, raw.status, context.profile, raw));
       break;
     default:
       throw new Error(`Unsupported manual-bb artifact ${ref.kind}`);
@@ -7680,7 +7717,8 @@ function requirementEdges(nodes, loaded) {
     if (failure || ref.adapter !== "manual-bb-test-harness" || ref.kind !== "feature_spec" || !payload || typeof payload !== "object") continue;
     const raw = payload;
     if (typeof raw.feature_id !== "string" || !Array.isArray(raw.source_refs)) continue;
-    const from = stableId("mbb", "requirement", raw.feature_id);
+    if (!ref.executionContext) continue;
+    const from = manualScopedId(ref.executionContext.projectId, raw.feature_id, "requirement", raw.feature_id);
     if (!requirements.has(from)) continue;
     for (const source2 of raw.source_refs) {
       const to = source2?.id;
@@ -7729,7 +7767,7 @@ function enrichTestCoverage(nodes, edges) {
       if (!test.oracleRefs?.length || !test.expectedResults?.length || !test.oracleType || test.oracleType === "missing") return false;
       const refs = new Set(edges.filter((e) => e.kind === "evidenced_by" && e.from === test.id).map((e) => e.to));
       const executions = enriched.filter((e) => e.kind === "execution_evidence" && refs.has(e.id));
-      return executions.length > 0 && executions.every((e) => e.kind === "execution_evidence" && e.passed !== void 0 && e.evidenceRefs.length > 0);
+      return executions.some((e) => e.kind === "execution_evidence" && e.passed !== void 0 && e.evidenceRefs.length > 0);
     });
     return observed ? { ...node, evidenceGap: 0 } : node;
   });
@@ -10835,7 +10873,7 @@ function buildGraph(manifest, loaded) {
           continue;
         }
       }
-      const context = { ref, raw, profile: manifest.metadata.profile, knownChanges };
+      const context = { ref, raw, profile: manifest.metadata.profile, knownChanges, executionPolicy: manifest.policy.executionPolicy };
       const result = ref.adapter === "RanD" ? normalizeRand(context) : ref.adapter === "code-to-gate" ? normalizeCodeToGate(context) : ref.adapter === "manual-bb-test-harness" ? normalizeManualBb(context) : void 0;
       if (!result) throw new Error(`Raw adapter unavailable: ${ref.adapter}/${ref.kind}`);
       parserFailures.push(...result.parserFailures);
@@ -10885,7 +10923,7 @@ function buildGraph(manifest, loaded) {
       gateRelevant: true
     });
   }
-  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, ...ref }) => ref), requiredConnectorStatus: statuses };
+  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, executionContext: _context, ...ref }) => ref), requiredConnectorStatus: statuses };
   const partial = parserFailures.length > 0 || unsupportedClaims.some((c) => c.gateRelevant);
   return {
     metadata,
@@ -11143,6 +11181,22 @@ function appendEscapedDefectNodes(graph, evaluated, placementPlan) {
   };
 }
 
+// src/gate/execution/format.ts
+function executionSummary(accounting) {
+  if (!accounting) return [];
+  const target = accounting.target;
+  return [
+    "",
+    "\u5B9F\u884C\u8A3C\u8DE1\u306E\u63A1\u7528",
+    `- \u8A55\u4FA1\u6642\u8A08: ${accounting.evaluatedAt}`,
+    ...target ? [`- \u5BFE\u8C61: ${target.projectId} / ${target.buildId} / ${target.environmentId} / ${target.revision}`] : [],
+    ...accounting.selections.flatMap((s) => [
+      `- ${s.testId}: run=${s.selectedRunId ?? "none"}; evidence=${s.selectedEvidenceId ?? "none"}; status=${s.selectedStatus ?? "none"}; reason=${s.reason}; consecutivePasses=${s.consecutivePasses}`,
+      ...s.excluded.map((e) => `  - excluded=${e.evidenceId}; reason=${e.reason}`)
+    ])
+  ];
+}
+
 // src/record.ts
 function jsonDocument(value) {
   return JSON.stringify(value, null, 2) + "\n";
@@ -11194,6 +11248,7 @@ function markdownSummary(evaluated) {
     "",
     ...evaluated.metadata.inputArtifacts.map((a) => `- ${a.adapter}/${a.kind}: ${a.path} (${a.contentHash ?? "hash\u672A\u6307\u5B9A"})`)
   );
+  lines.push(...executionSummary(gate.executionAccounting));
   return lines.join("\n") + "\n";
 }
 function createRecordArtifacts(evaluated) {
@@ -11793,10 +11848,6 @@ function detectPlacementCoverage(input, changes) {
   }
   return result;
 }
-function matchingExecutions(input, testId) {
-  const linked2 = new Set(input.graph.edges.filter((e) => e.kind === "evidenced_by" && e.from === testId).map((e) => e.to));
-  return input.graph.nodes.filter((n) => n.kind === "execution_evidence" && (n.evidenceType === "resilience" && n.testId === testId || n.evidenceType !== "resilience" && linked2.has(n.id)));
-}
 function evaluateRequiredExecutions(input, reliability) {
   const disqualifications = [];
   const blockers2 = [];
@@ -11825,16 +11876,8 @@ function evaluateRequiredExecutions(input, reliability) {
         if (!reliability.enabled || !reliability.drillDown.some((item) => item.testId === test.id)) missing2 = true;
         continue;
       }
-      const evidence = matchingExecutions(input, test.id);
-      if (evidence.length === 0 || evidence.some((e) => e.passed === void 0 || e.evidenceRefs.length === 0)) missing2 = true;
-      for (const failed of evidence.filter((e) => e.passed === false)) blockers2.push({
-        id: `qeg:failed-${obligation2.id}-${test.id}-${failed.id}`,
-        message: `Required test "${test.title}" failed`,
-        riskIds: obligation2.riskIds,
-        testId: test.id,
-        evidenceId: failed.id,
-        sourceRefs: failed.traceability.sourceRefs.length > 0 ? failed.traceability.sourceRefs : [inputSource("/graph/nodes", failed.id)]
-      });
+      const selection = input.executionAccounting?.selections.find((s) => s.testId === test.id);
+      if (!selection?.selectedEvidenceId || !["pass", "fail"].includes(selection.selectedStatus ?? "")) missing2 = true;
     }
     if (missing2) disqualifications.push({
       code: "DQ-05",
@@ -12235,10 +12278,10 @@ function isTestNode(node) {
 function isGateEligibleTestEvidence(test) {
   return test.testExecutionMode === "real";
 }
-function buildTestEvidenceAccounting(graph) {
+function buildTestEvidenceAccounting(graph, execution) {
   const tests = graph.nodes.filter(isTestNode);
   const countedTestIds = tests.filter(
-    (test) => isGateEligibleTestEvidence(test) && (test.evidenceStrength !== void 0 || test.recentGreenRuns !== void 0)
+    (test) => isGateEligibleTestEvidence(test) && (test.testType === "resilience" || execution?.selections.some((s) => s.testId === test.id && s.selectedStatus === "pass")) && (test.evidenceStrength !== void 0 || test.recentGreenRuns !== void 0)
   ).map((test) => test.id);
   const excludedMockTests = tests.filter((test) => !isGateEligibleTestEvidence(test)).map((test) => ({
     testId: test.id,
@@ -12346,7 +12389,7 @@ function detectPlacementChangeRetirementGaps(input) {
       (test) => !isGateEligibleTestEvidence(test)
     );
     const evidenceTooWeak = concreteReplacementTests.some(
-      (test) => !isGateEligibleTestEvidence(test) || (test.evidenceStrength ?? 0) < retirementPolicy.minEvidenceStrength || (test.recentGreenRuns ?? 0) < retirementPolicy.minConsecutiveGreen
+      (test) => !isGateEligibleTestEvidence(test) || test.testType !== "resilience" && !input.executionAccounting?.selections.some((s) => s.testId === test.id && s.selectedStatus === "pass" && s.consecutivePasses >= retirementPolicy.minConsecutiveGreen) || (test.evidenceStrength ?? 0) < retirementPolicy.minEvidenceStrength || (test.recentGreenRuns ?? 0) < retirementPolicy.minConsecutiveGreen
     );
     const requiredRiskIds = riskIdsForSubject(input.placementPlan.obligations, input.placementPlan.placements, change.subject_id);
     const coveredRiskIds = new Set(concreteReplacementTests.flatMap((test) => test.coveredRiskIds ?? []));
@@ -13512,7 +13555,7 @@ function evaluateReliability(input) {
 }
 
 // src/gate/waivers.ts
-function validateWaiver(waiver, graph, executionTime) {
+function validateWaiver(waiver, graph, executionTime2) {
   const reasons = [];
   const riskIds = new Set(
     graph.nodes.filter((node) => node.kind === "risk").map((node) => node.id)
@@ -13528,7 +13571,7 @@ function validateWaiver(waiver, graph, executionTime) {
   if (!waiver.sourceRefs || waiver.sourceRefs.length === 0) {
     reasons.push("sourceRefs is empty (minimum 1 required)");
   }
-  if (!Number.isFinite(Date.parse(waiver.expiry)) || new Date(waiver.expiry) <= executionTime) {
+  if (!Number.isFinite(Date.parse(waiver.expiry)) || new Date(waiver.expiry) <= executionTime2) {
     reasons.push(`expiry "${waiver.expiry}" is past execution time`);
   }
   if (!waiver.impactScope || waiver.impactScope.trim() === "") {
@@ -13659,6 +13702,216 @@ function upstreamDecisions(graph) {
   return { disqualifications, blockers: blockers2, humanReview };
 }
 
+// src/gate/execution/contracts.ts
+import { createHash as createHash3 } from "crypto";
+var same = (a, b) => canonicalJson(a) === canonicalJson(b);
+var compareId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
+var nonblank = (v) => typeof v === "string" && v.trim().length > 0;
+var fullRevision = (v) => typeof v === "string" && /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/i.test(v);
+function validSources(v) {
+  return Array.isArray(v) && v.length > 0 && v.every((r) => r && nonblank(r.id) && nonblank(r.path));
+}
+function validRef(v) {
+  return Boolean(v && nonblank(v.id) && nonblank(v.path) && /^sha256:[a-f0-9]{64}$/.test(v.contentHash) && fullRevision(v.revision));
+}
+function validTarget(v) {
+  return Boolean(v && nonblank(v.projectId) && nonblank(v.buildId) && nonblank(v.environmentId) && fullRevision(v.revision));
+}
+function validIdentity(v) {
+  return Boolean(v && [v.producer, v.projectId, v.featureId, v.caseId].every(nonblank));
+}
+function validPolicy(v) {
+  return Boolean(v && validTarget(v.target) && Number.isFinite(v.maxEvidenceAgeHours) && v.maxEvidenceAgeHours > 0 && Number.isFinite(v.maxEvidenceAgeHours * 36e5) && validRef(v.buildBindingRef) && validSources(v.sourceRefs));
+}
+function validExecution(v) {
+  return Boolean(v && v.executionVersion === "qeg-execution/v1" && validIdentity(v.identity) && validTarget(v.target) && [v.testId, v.producerVersion, v.runId].every(nonblank) && validRef(v.rawArtifactRef) && ["pass", "fail", "skipped", "blocked", "cancelled", "unknown", "running"].includes(v.status) && ["real", "mock"].includes(v.executionMode) && (v.historySourceRefs === void 0 || validSources(v.historySourceRefs)));
+}
+function executionTime(value) {
+  if (typeof value !== "string") return NaN;
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?(Z|[+-]\d{2}:\d{2})$/.exec(value);
+  if (!m) return NaN;
+  const [, y, mo, d, h, mi, s, , tz] = m;
+  const year = Number(y);
+  const days = [31, year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][Number(mo) - 1] ?? 0;
+  if (+mo < 1 || +mo > 12 || +d < 1 || +d > days || +h > 23 || +mi > 59 || +s > 59) return NaN;
+  if (tz !== "Z" && (Number(tz.slice(1, 3)) > 23 || Number(tz.slice(4, 6)) > 59)) return NaN;
+  return Date.parse(value);
+}
+function normalTests(input) {
+  return input.graph.nodes.filter((n) => n.kind === "test" && n.testType !== "resilience").sort(compareId);
+}
+function normalEvidence(input) {
+  return input.graph.nodes.filter((n) => n.kind === "execution_evidence" && n.evidenceType !== "resilience").sort(compareId);
+}
+function executionFingerprint(input) {
+  const sorted = (items) => [...items].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
+  return createHash3("sha256").update(canonicalJson({
+    metadata: { ...input.metadata, inputArtifacts: sorted(input.metadata.inputArtifacts) },
+    graphMetadata: { ...input.graph.metadata, inputArtifacts: sorted(input.graph.metadata.inputArtifacts) },
+    policy: input.policy.executionPolicy,
+    tests: sorted(normalTests(input)),
+    evidence: sorted(normalEvidence(input)),
+    edges: sorted(input.graph.edges)
+  })).digest("hex");
+}
+
+// src/gate/execution/selection.ts
+function decision2(node) {
+  const { rawArtifactRef, ...meaning } = node.execution;
+  return { ...meaning, rawArtifactRef: { contentHash: rawArtifactRef.contentHash, revision: rawArtifactRef.revision } };
+}
+function selectLatest(testId, candidates, evaluatedAt, maxAge, excluded = []) {
+  const empty = (reason) => ({ selection: { testId, reason, consecutivePasses: 0, excluded }, error: reason });
+  const byRun = /* @__PURE__ */ new Map();
+  for (const node of [...candidates].sort(compareId)) {
+    const run = node.execution;
+    const previous = byRun.get(run.runId);
+    if (previous) {
+      if (!same(decision2(previous), decision2(node))) return empty("EAC-03 conflicting execution identity");
+      excluded.push({ evidenceId: node.id, reason: "duplicate" });
+    } else byRun.set(run.runId, node);
+  }
+  const ordered2 = [...byRun.values()].sort((a, b) => executionTime(b.execution.completedAt) - executionTime(a.execution.completedAt));
+  const latest = ordered2[0];
+  if (!latest) return empty("EAC-06 no current execution");
+  const time = executionTime(latest.execution.completedAt);
+  if (ordered2[1] && time === executionTime(ordered2[1].execution.completedAt)) return empty("EAC-03 ambiguous latest completion time");
+  if (evaluatedAt - time > maxAge) return empty("EAC-02 latest execution is stale");
+  let consecutivePasses = 0;
+  for (let i = 0; i < ordered2.length; i++) {
+    const current = ordered2[i];
+    const detail = current.execution;
+    const t = executionTime(detail.completedAt);
+    if (i > 0) excluded.push({ evidenceId: current.id, reason: evaluatedAt - t > maxAge ? "superseded_stale" : "superseded" });
+    if (consecutivePasses === i && detail.status === "pass" && evaluatedAt - t <= maxAge && !(ordered2[i + 1] && t === executionTime(ordered2[i + 1].execution.completedAt))) consecutivePasses++;
+  }
+  return { selection: {
+    testId,
+    selectedEvidenceId: latest.id,
+    selectedRunId: latest.execution.runId,
+    selectedStatus: latest.execution.status,
+    reason: "latest_qualified_execution",
+    consecutivePasses,
+    excluded: excluded.sort((a, b) => a.evidenceId.localeCompare(b.evidenceId, "en"))
+  } };
+}
+
+// src/gate/execution/evaluator.ts
+function evaluateExecutions(input) {
+  const evidence = normalEvidence(input);
+  const tests = normalTests(input);
+  const requiredObligations = new Set(input.placementPlan?.obligations.filter((o) => (o.gateRelevance === "blocking" || o.changedCodeIds.length > 0) && !(o.riskIds.length > 0 && o.riskIds.every((id) => input.validWaivers.some((w) => w.linkedRiskIds.includes(id))))).map((o) => o.id));
+  const selected = new Set(input.policy.inputContract?.requireExecutedTests ? input.placementPlan?.placements.filter((p) => p.disposition !== "blocked" && requiredObligations.has(p.obligationId)).flatMap((p) => [...p.selectedTestIds]) ?? [] : []);
+  const active = tests.filter((t) => selected.has(t.id) || t.evidenceStrength !== void 0 || t.recentGreenRuns !== void 0 || evidence.some((e) => e.execution?.testId === t.id || input.graph.edges.some((edge2) => edge2.kind === "evidenced_by" && edge2.from === t.id && edge2.to === e.id)));
+  if (!active.length && !evidence.some((e) => e.execution)) return { disqualifications: [], blockers: [] };
+  const disqualifications = [];
+  const blockers2 = [];
+  const add2 = (code, message, nodeIds) => {
+    const binding = input.policy.executionPolicy?.buildBindingRef;
+    const refs = [
+      inputSource("/policy/executionPolicy", message),
+      ...input.graph.nodes.filter((n) => nodeIds.includes(n.id)).flatMap((n) => [...n.traceability.sourceRefs]),
+      ...binding ? [{ id: binding.id, path: binding.path, revision: binding.revision, label: "EAC-01 target build binding" }] : []
+    ];
+    disqualifications.push({ code, message, nodeIds, sourceRefs: [...new Map(refs.map((r) => [JSON.stringify(r), r])).values()] });
+  };
+  const policy = input.policy.executionPolicy;
+  const selections = [];
+  const result = () => ({
+    accounting: { evaluatedAt: input.metadata.createdAt, ...validTarget(policy?.target) ? { target: policy.target } : {}, selections },
+    disqualifications,
+    blockers: blockers2
+  });
+  if (!validPolicy(policy)) {
+    add2("DQ-01", "EAC-01/02 explicit source-backed executionPolicy is required", active.map((t) => t.id));
+    return result();
+  }
+  if (policy.target.revision !== input.metadata.headRef || policy.target.revision !== input.graph.metadata.headRef || policy.buildBindingRef.revision !== policy.target.revision) add2("DQ-12", "EAC-01 policy, build binding and Gate revisions disagree", []);
+  const now = executionTime(input.metadata.createdAt);
+  if (!Number.isFinite(now)) add2("DQ-05", "EAC-02 invalid evaluation clock (timezone and valid calendar required)", []);
+  if (input.evidenceVerification?.executionFingerprint !== executionFingerprint(input) || input.evidenceVerification?.status === "fail") {
+    add2("DQ-06", "EAC-05 verified artifacts and matching execution fingerprint are required", evidence.map((e) => e.id));
+  }
+  for (const test of active) {
+    const aliases = tests.filter((other) => other.id !== test.id && validIdentity(test.executionIdentity) && same(test.executionIdentity, other.executionIdentity));
+    if (aliases.length) add2("DQ-03", "EAC-04 one execution identity maps to multiple tests", [test.id, ...aliases.map((t) => t.id)]);
+  }
+  const globalInvalid = disqualifications.length > 0;
+  for (const node of evidence.filter((e) => e.execution)) {
+    if (!tests.some((t) => t.id === node.execution.testId)) add2("DQ-03", "EAC-04 execution references missing or incompatible test", [node.id]);
+  }
+  for (const test of [...active].sort((a, b) => a.id.localeCompare(b.id, "en"))) {
+    const candidates = evidence.filter((e) => e.execution?.testId === test.id || input.graph.edges.some((edge2) => edge2.kind === "evidenced_by" && edge2.from === test.id && edge2.to === e.id));
+    const before = disqualifications.length;
+    if (!validIdentity(test.executionIdentity)) add2("DQ-01", "EAC-04 test executionIdentity is required", [test.id]);
+    if (test.testExecutionMode !== "real" || test.deleted) add2("DQ-05", "EAC-06 test is mock or deleted", [test.id]);
+    const current = [];
+    const excluded = [];
+    for (const node of candidates) {
+      const detail = node.execution;
+      if (!validExecution(detail)) {
+        add2("DQ-01", "EAC-01/04 execution contract is incomplete", [test.id, node.id]);
+        continue;
+      }
+      const linked2 = input.graph.edges.filter((e) => e.kind === "evidenced_by" && e.to === node.id).map((e) => e.from);
+      if (detail.testId !== test.id || !same(test.executionIdentity, detail.identity) || new Set(linked2).size !== 1 || linked2[0] !== test.id) {
+        add2("DQ-03", "EAC-04 test, case, feature, producer or graph link disagrees", [test.id, node.id]);
+        continue;
+      }
+      if (detail.historySourceRefs !== void 0 && validSources(detail.historySourceRefs)) {
+        excluded.push({ evidenceId: node.id, reason: "explicit_history" });
+        continue;
+      }
+      if (!same(detail.target, policy.target) || detail.identity.projectId !== policy.target.projectId || detail.rawArtifactRef.revision !== policy.target.revision) {
+        add2("DQ-12", "EAC-01 execution target differs from Gate target", [node.id]);
+      }
+      const completed = executionTime(detail.completedAt);
+      if (!Number.isFinite(completed) || completed > now) add2("DQ-05", "EAC-02 invalid or future completion time", [node.id]);
+      if (detail.executionMode !== "real") add2("DQ-05", "EAC-06 mock execution cannot qualify", [node.id]);
+      if (node.passed !== void 0 && (detail.status !== "pass" && detail.status !== "fail" || node.passed !== (detail.status === "pass"))) {
+        add2("DQ-03", "EAC-03 passed flag contradicts execution status", [node.id]);
+      }
+      if (!node.evidenceRefs.length || node.evidenceRefs.some((ref) => !validRef(ref) || ref.revision !== detail.target.revision || ref.evidenceKind === "test_result" && executionTime(ref.capturedAt) !== completed)) {
+        add2("DQ-06", "EAC-05 execution evidence refs need matching revision, hash and capture time", [node.id]);
+      }
+      if (detail.identity.producer === "manual-bb-test-harness") {
+        const ref = detail.rawArtifactRef;
+        if (!node.sourceArtifactIds.includes(ref.id) || !input.metadata.inputArtifacts.some((a) => a.id === ref.id && a.adapter === detail.identity.producer && a.kind === "execution_evidence" && a.path === ref.path && a.contentHash === ref.contentHash && a.revision === ref.revision)) {
+          add2("DQ-06", "EAC-04/05 raw execution disagrees with its source artifact descriptor", [node.id, ref.id]);
+        }
+      }
+      current.push(node);
+    }
+    if (globalInvalid || before !== disqualifications.length) {
+      selections.push({
+        testId: test.id,
+        reason: "invalid_current_evidence",
+        consecutivePasses: 0,
+        excluded: candidates.map((e) => ({ evidenceId: e.id, reason: "qualification_failed" }))
+      });
+      continue;
+    }
+    const selection = selectLatest(test.id, current, now, policy.maxEvidenceAgeHours * 36e5, excluded);
+    if (selection.error) add2(selection.error.includes("conflicting") ? "DQ-03" : "DQ-05", selection.error, [test.id, ...current.map((e) => e.id)]);
+    else if (selection.selection.selectedStatus !== "pass" && selection.selection.selectedStatus !== "fail") add2("DQ-05", "EAC-06 latest execution is not completed pass/fail", [test.id]);
+    selections.push(selection.selection);
+    if (selection.selection.selectedStatus === "fail") {
+      const failed = current.find((e) => e.id === selection.selection.selectedEvidenceId);
+      const obligationIds = new Set(input.placementPlan?.placements.filter((p) => p.disposition !== "blocked" && p.selectedTestIds.includes(test.id)).map((p) => p.obligationId));
+      const riskIds = [.../* @__PURE__ */ new Set([...test.coveredRiskIds ?? [], ...input.placementPlan?.obligations.filter((o) => obligationIds.has(o.id)).flatMap((o) => [...o.riskIds]) ?? []])].sort();
+      blockers2.push({
+        id: `qeg:failed-${test.id}-${failed.id}`,
+        message: `EAC-03 latest qualified test "${test.title}" failed`,
+        testId: test.id,
+        evidenceId: failed.id,
+        riskIds,
+        sourceRefs: failed.traceability.sourceRefs.length ? failed.traceability.sourceRefs : [inputSource("/graph/nodes", failed.id)]
+      });
+    }
+  }
+  return result();
+}
+
 // src/gate/evaluate.ts
 function evaluateGate(input) {
   const executionMs = Date.parse(input.metadata.createdAt);
@@ -13668,19 +13921,21 @@ function evaluateGate(input) {
     nodeIds: [],
     sourceRefs: [{ id: "qeg:evaluation-clock", path: "docs/spec/reliability-extension.md" }]
   }];
-  const executionTime = new Date(executionMs);
+  const executionTime2 = new Date(executionMs);
   const validWaivers = Number.isFinite(executionMs) ? input.waivers.filter(
-    (waiver) => validateWaiver(waiver, input.graph, executionTime).valid
+    (waiver) => validateWaiver(waiver, input.graph, executionTime2).valid
   ) : [];
   const context = createGateEvaluationContext({
     ...input,
     preflightDisqualifications: [...input.preflightDisqualifications ?? [], ...clockDqs]
   }, validWaivers);
   const reliability = evaluateReliability(context);
+  const qualified = evaluateExecutions(context);
+  context.executionAccounting = qualified.accounting;
   const executions = evaluateRequiredExecutions(context, reliability.accounting);
   const upstream = upstreamDecisions(input.graph);
-  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...upstream.blockers] };
-  const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
+  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...qualified.blockers, ...upstream.blockers] };
+  const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...qualified.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
   const blockers2 = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
   const requiredHumanReview = [.../* @__PURE__ */ new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks), ...upstream.humanReview])];
@@ -13707,7 +13962,8 @@ function evaluateGate(input) {
     blockers: blockers2,
     residualRisks,
     requiredHumanReview,
-    testEvidenceAccounting: buildTestEvidenceAccounting(input.graph),
+    testEvidenceAccounting: buildTestEvidenceAccounting(input.graph, qualified.accounting),
+    ...qualified.accounting ? { executionAccounting: qualified.accounting } : {},
     reliability: reliability.accounting
   };
 }
@@ -13828,12 +14084,62 @@ function validateIngestContract(rawInput) {
 }
 
 // src/validation/evidence.ts
-import { createHash as createHash3 } from "crypto";
+import { createHash as createHash4 } from "crypto";
 import { readFile as readFile4, realpath as realpath2, stat as stat3 } from "fs/promises";
 import { isAbsolute as isAbsolute2, relative as relative2, resolve as resolve3 } from "path";
+
+// src/validation/execution-artifacts.ts
+function executionArtifacts(input) {
+  const result = [];
+  const required2 = { required: true, enforceRequired: true, requireContainedRelativePath: true };
+  const policy = input.policy.executionPolicy;
+  if (validPolicy(policy)) result.push({
+    ...required2,
+    artifact: policy.buildBindingRef,
+    payloadKey: "build-binding",
+    payloadMatches: (value) => same(value, { bindingVersion: "qeg-build/v1", target: policy.target })
+  });
+  if (validPolicy(policy)) for (const ref of input.metadata.inputArtifacts.filter((a) => a.adapter === "manual-bb-test-harness" && a.kind === "gate_decision")) {
+    result.push({
+      ...required2,
+      artifact: ref,
+      payloadKey: "manual-build-decision",
+      payloadMatches: (value) => {
+        if (!value || typeof value !== "object" || Array.isArray(value)) return false;
+        validateProducerPayload({ ...ref, contractVersion: "manual-bb/v1" }, value);
+        return value.build_id === policy.target.buildId;
+      }
+    });
+  }
+  for (const node of normalEvidence(input)) {
+    const detail = node.execution;
+    if (!validExecution(detail)) continue;
+    const historical = detail.historySourceRefs !== void 0;
+    result.push({
+      ...required2,
+      artifact: detail.rawArtifactRef,
+      historical,
+      payloadKey: node.id,
+      payloadMatches: (value) => {
+        if (!value || typeof value !== "object") return false;
+        const raw = value;
+        if (detail.identity.producer === "manual-bb-test-harness") {
+          validateProducerPayload({ ...detail.rawArtifactRef, adapter: "manual-bb-test-harness", kind: "execution_evidence", contractVersion: "manual-bb/v1" }, raw);
+          return raw.feature_id === detail.identity.featureId && (raw.tc_id ?? raw.charter_id) === detail.identity.caseId && Boolean(raw.tc_id) !== Boolean(raw.charter_id) && raw.build_id === detail.target.buildId && raw.run_id === detail.runId && raw.timestamp === detail.completedAt && (raw.result === "skip" ? "skipped" : raw.result) === detail.status && (raw.env === void 0 || raw.env === detail.target.environmentId);
+        }
+        const { rawArtifactRef: _ref, historySourceRefs: _history, ...meaning } = detail;
+        return same(raw, meaning);
+      }
+    });
+    for (const ref of node.evidenceRefs) result.push({ ...required2, artifact: ref, historical });
+  }
+  return result;
+}
+
+// src/validation/evidence.ts
 var OPTIONAL_ADAPTERS = /* @__PURE__ */ new Set(["junit", "coverage", "sarif", "git-diff"]);
 function hash(bytes) {
-  return "sha256:" + createHash3("sha256").update(bytes).digest("hex");
+  return "sha256:" + createHash4("sha256").update(bytes).digest("hex");
 }
 function severity2(strict, required2) {
   return strict && required2 ? "fail" : "warn";
@@ -13862,15 +14168,16 @@ function allArtifacts(input) {
       candidates.push({ artifact: signalRef, required: true, requireContainedRelativePath: true });
     }
   }
-  return candidates;
+  return [...candidates, ...executionArtifacts(input)];
 }
 function uniqueArtifacts(input) {
   const byKey = /* @__PURE__ */ new Map();
   for (const candidate of allArtifacts(input)) {
     const artifact = candidate.artifact;
-    const key = [artifact.id, artifact.path, artifact.contentHash ?? "", artifact.revision ?? "", candidate.requireContainedRelativePath ? "contained" : "legacy"].join(String.fromCharCode(0));
+    const key = [artifact.id, artifact.path, artifact.contentHash ?? "", artifact.revision ?? "", candidate.requireContainedRelativePath ? "contained" : "legacy", candidate.historical, candidate.payloadKey].join(String.fromCharCode(0));
     const previous = byKey.get(key);
     byKey.set(key, previous ? {
+      ...candidate,
       artifact,
       required: previous.required || candidate.required,
       enforceRequired: previous.enforceRequired || candidate.enforceRequired,
@@ -13890,7 +14197,7 @@ async function verifyEvidenceArtifacts(input, options) {
     baseResolutionError = `Cannot realpath ${baseDir}: ${String(error)}`;
   }
   const items = [];
-  for (const { artifact, required: required2, enforceRequired, requireContainedRelativePath } of uniqueArtifacts(input)) {
+  for (const { artifact, required: required2, enforceRequired, requireContainedRelativePath, historical, payloadMatches } of uniqueArtifacts(input)) {
     const failureSeverity = severity2(strict || Boolean(enforceRequired) || Boolean(requireContainedRelativePath), required2);
     if (!artifact.path) {
       items.push({ artifactId: artifact.id, severity: failureSeverity, code: "PATH_MISSING", message: "artifact path is missing" });
@@ -13953,14 +14260,28 @@ async function verifyEvidenceArtifacts(input, options) {
         continue;
       }
       const actual = hash(bytes);
+      if (payloadMatches) {
+        let matches = false;
+        try {
+          matches = payloadMatches(JSON.parse(bytes.toString("utf8")));
+        } catch {
+        }
+        if (!matches) items.push({
+          artifactId: artifact.id,
+          path: artifact.path,
+          severity: "fail",
+          code: "PAYLOAD_MISMATCH",
+          message: "EAC-01/05 raw payload disagrees with normalized execution or build binding"
+        });
+      }
       items.push(actual === artifact.contentHash ? { artifactId: artifact.id, path: artifact.path, severity: "pass", code: "VERIFIED", message: "artifact path and hash verified" } : { artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISMATCH", message: "artifact hash mismatch: expected " + artifact.contentHash + ", got " + actual });
     }
-    if (input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {
+    if (!historical && input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {
       items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "REVISION_MISMATCH", message: "artifact revision " + artifact.revision + " does not match " + input.metadata.headRef });
     }
   }
   const status = items.some((item) => item.severity === "fail") ? "fail" : items.some((item) => item.severity === "warn") ? "warn" : "pass";
-  return { reportVersion: "qeg-evidence-verification-v2", status, items };
+  return { reportVersion: "qeg-evidence-verification-v2", status, items, executionFingerprint: executionFingerprint(input) };
 }
 
 // src/cli/fixture-io.ts
@@ -14801,6 +15122,7 @@ function gateTargetResult(evaluated, status, exitCode, expected) {
     residualRisks: gateResult.residualRisks,
     requiredHumanReview: gateResult.requiredHumanReview,
     reliability: gateResult.reliability,
+    ...gateResult.executionAccounting ? { executionAccounting: gateResult.executionAccounting } : {},
     expected
   };
 }
@@ -14916,6 +15238,7 @@ function rateLabel(value) {
   return value === null ? "n/a" : `${(value * 100).toFixed(2)}%`;
 }
 function appendReliabilityTarget(lines, target) {
+  lines.push(...executionSummary(target.executionAccounting));
   const reliability = target.reliability;
   lines.push(`- ${target.target}`);
   lines.push(`  enabled: ${reliability.enabled}`);
@@ -16158,7 +16481,7 @@ function adapterFields(adapter, raw) {
 }
 
 // src/cli/evidence-normalize/files.ts
-import { createHash as createHash4 } from "crypto";
+import { createHash as createHash5 } from "crypto";
 import { readFile as readFile15, realpath as realpath3 } from "fs/promises";
 import { dirname as dirname2, isAbsolute as isAbsolute4, relative as relative7, resolve as resolve10 } from "path";
 function containedPath(baseDir, rawPath, label) {
@@ -16205,7 +16528,7 @@ async function readBytes(path, label) {
   }
 }
 function sha256(bytes) {
-  return `sha256:${createHash4("sha256").update(bytes).digest("hex")}`;
+  return `sha256:${createHash5("sha256").update(bytes).digest("hex")}`;
 }
 
 // src/cli/evidence-normalize/model.ts
@@ -16603,7 +16926,7 @@ async function runInitCommand(args) {
 }
 
 // src/cli/repro-bundle.ts
-import { createHash as createHash5 } from "crypto";
+import { createHash as createHash6 } from "crypto";
 import { mkdir as mkdir4, readFile as readFile17, readdir as readdir4, stat as stat8, writeFile as writeFile5 } from "fs/promises";
 import { basename as basename5, join as join16, resolve as resolve15 } from "path";
 import { exit as exit13 } from "process";
@@ -16614,7 +16937,7 @@ async function safeRead(path) {
   return optionalText(path);
 }
 function sha2562(content) {
-  return createHash5("sha256").update(content).digest("hex");
+  return createHash6("sha256").update(content).digest("hex");
 }
 function redact(value) {
   if (typeof value === "string") {
