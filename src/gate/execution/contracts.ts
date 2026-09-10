@@ -29,10 +29,10 @@ export function validExecution(v: ExecutionDetails | undefined): v is ExecutionD
     ["pass", "fail", "skipped", "blocked", "cancelled", "unknown", "running"].includes(v.status) &&
     ["real", "mock"].includes(v.executionMode) && (v.historySourceRefs === undefined || validSources(v.historySourceRefs)));
 }
-/** Millisecond precision, explicit timezone, and actual calendar validation. No wall clock. */
+/** Explicit timezone and actual calendar validation. No wall clock. */
 export function executionTime(value: unknown): number {
   if (typeof value !== "string") return NaN;
-  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,3}))?(Z|[+-]\d{2}:\d{2})$/.exec(value);
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?(Z|[+-]\d{2}:\d{2})$/.exec(value);
   if (!m) return NaN;
   const [, y, mo, d, h, mi, s, , tz] = m;
   const year = Number(y);
@@ -40,6 +40,14 @@ export function executionTime(value: unknown): number {
   if (+mo! < 1 || +mo! > 12 || +d! < 1 || +d! > days || +h! > 23 || +mi! > 59 || +s! > 59) return NaN;
   if (tz !== "Z" && (Number(tz!.slice(1, 3)) > 23 || Number(tz!.slice(4, 6)) > 59)) return NaN;
   return Date.parse(value);
+}
+
+/** Preserve producer micro/nanoseconds when ordering, checking freshness and rejecting future evidence. */
+export function executionNanos(value: unknown): bigint | undefined {
+  const milliseconds = executionTime(value);
+  if (!Number.isFinite(milliseconds)) return undefined;
+  const fraction = /\.(\d{1,9})(?:Z|[+-]\d{2}:\d{2})$/.exec(String(value))?.[1] ?? "";
+  return BigInt(milliseconds) * 1000000n + BigInt(fraction.padEnd(9, "0").slice(3));
 }
 type ExecutionInput = Pick<GateEvaluationInput, "metadata" | "graph" | "policy">;
 export function normalTests(input: ExecutionInput): LegacyTestNode[] {

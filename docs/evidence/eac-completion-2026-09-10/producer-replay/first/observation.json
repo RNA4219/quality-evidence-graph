@@ -1,0 +1,10 @@
+{
+  "command": [
+    "node",
+    "src/cli.mjs",
+    "41"
+  ],
+  "exitCode": 0,
+  "stdout": "42\n",
+  "stderr": ""
+}

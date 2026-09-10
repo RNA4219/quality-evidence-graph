@@ -1,7 +1,7 @@
 {
   "id": "src/gate/execution/selection.ts",
   "role": "selection",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 selection の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -17,5 +17,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:acea188928bb9330bda46fd1d587bb8d6c62dc0ad12a4c6a80b4014e339dd3b3"
+  "contentHash": "sha256:9203e8b3862e7263ef60e523a91171923db4538249ab1c66af3a0c6136925e22"
 }

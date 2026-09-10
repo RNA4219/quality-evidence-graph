@@ -1,0 +1,16 @@
+{
+  "id": "tools/interop/producer-lock.json",
+  "role": "producer-lock",
+  "generation": "00017",
+  "public_api": [],
+  "summary": "QEG 0.4.0 producer-lock の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:fa69c83e3906bed58d9189b35580dd49d97baa0279ee9f33ed0cefdfee055630"
+}

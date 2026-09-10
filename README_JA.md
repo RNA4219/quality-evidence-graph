@@ -1,5 +1,7 @@
 # Quality Evidence Graph
 
+証跡の世代公開・中断復旧・実producer接続・consumer移行は[操作と契約](docs/spec/output-publication-and-migration.md)を参照。`outputs read/recover`、`migrate --dry-run/--apply`を追加しています。
+
 現在の開発版は0.4.0（未公開）、wire契約は0.2です。[現行改修台帳](docs/project/remediation-2026-09-10.md)と[raw入力例](examples/raw-producer-contract/README.md)を参照してください。以下のv0.3.1 Action例は過去の配布版です。
 
 0.4.0では `build-graph` → `place-tests` → `gate` → `record` を実行できます。policyに `inputContract` が必要で、必須3 producerを使う `upstream_artifacts` と明示的な `native_graph` を選びます。評価範囲・必須artifact・実行証跡の要否を宣言し、空の初期入力や配置計画だけでは成功になりません。`init`は同じ配布物のlocal Actionを `.qeg/runtime` に配置します。

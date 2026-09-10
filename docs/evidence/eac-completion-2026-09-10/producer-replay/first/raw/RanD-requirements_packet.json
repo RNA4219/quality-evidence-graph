@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "packet_id": "rand:rp-first",
+  "derived_from": "kano.json",
+  "qeg_policy_hash_ref": "qeg:policyHash:unadopted-proposal",
+  "product_context": {
+    "name": "QEG isolated interoperability",
+    "domain": "requirements discovery",
+    "target_segment": "unspecified",
+    "locales": [
+      "ja-JP",
+      "en-US"
+    ]
+  },
+  "assumptions": [
+    "Locally authored specification; no survey or production claim"
+  ],
+  "requirements": [
+    {
+      "requirement_id": "rand:REQ-001",
+      "title": "The CLI increments a supplied integer",
+      "statement": "The CLI increments a supplied integer",
+      "kano_type": "performance",
+      "priority": "P1",
+      "confidence": 0.9,
+      "evidence_refs": [
+        "KC-001",
+        "EV-001-increment-requirement"
+      ],
+      "kpi": [
+        {
+          "name": "task_success_rate",
+          "target": ">=0.80",
+          "measurement": "pilot review"
+        }
+      ],
+      "acceptance_criteria": [
+        "candidate has evidence references and explicit gate policy"
+      ],
+      "risks": [
+        "classification can drift as expectations change"
+      ],
+      "manual_bb_focus": [
+        "evidence absence",
+        "conflicting evidence",
+        "locale-specific expectation"
+      ],
+      "downstream_hooks": {
+        "workflow_cookbook": "task_seed_and_evidence",
+        "manual_bb_test_harness": "feature_spec_and_test_model",
+        "code_to_gate": "phase_contract_or_intake",
+        "shipyard_cp": "plan_stage_task"
+      },
+      "gate_policy_proposal": {
+        "proposal": "threshold_gate",
+        "policyHashRef": "qeg:policyHash:unadopted-proposal",
+        "source": "rand:kano_requirements_packet"
+      },
+      "bias_note": "A small isolated CLI does not establish production readiness",
+      "kill_condition": "Reject if observed CLI output differs from the specification"
+    }
+  ],
+  "release_readiness_prelude": {
+    "status": "draft",
+    "preconditions": [
+      "offline eval passes",
+      "human review accepts promoted requirements"
+    ]
+  }
+}

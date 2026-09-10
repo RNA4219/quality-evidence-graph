@@ -1,0 +1,42 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T01:48:55.784Z",
+  "run_id": "ctg-20260910014855",
+  "repo": {
+    "root": "."
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "config_hash": "de076773254676e69dc6c3b72f1b7e617b34bc98213d7a46c99148563258e8b1",
+    "plugin_versions": []
+  },
+  "artifact": "audit",
+  "schema": "audit@v1",
+  "inputs": [
+    {
+      "path": "package.json",
+      "hash": "6d036c91e788d5b3493e25e68bba888e3ce74aab2463614f30060c4a6e553816",
+      "kind": "config"
+    },
+    {
+      "path": "spec.md",
+      "hash": "25d3f197c98a0da29945f417fc2b2bbf956309b8d5d1c23eb44c55577b1cad23",
+      "kind": "source"
+    },
+    {
+      "path": "src/cli.mjs",
+      "hash": "8e361ca6d086942cd4d5eca3d4725109178d4bdb132753cf8a8cb8e9dfdce638",
+      "kind": "source"
+    }
+  ],
+  "policy": {
+    "id": "default",
+    "hash": "none"
+  },
+  "exit": {
+    "code": 0,
+    "status": "passed_with_risk",
+    "reason": "No findings in changed files"
+  }
+}

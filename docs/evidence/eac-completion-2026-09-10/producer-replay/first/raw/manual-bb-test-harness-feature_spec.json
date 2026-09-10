@@ -1,0 +1,17 @@
+{
+  "feature_id": "CLI-INCREMENT",
+  "title": "Increment CLI",
+  "source_refs": [
+    {
+      "id": "MD-spec",
+      "kind": "spec",
+      "excerpt": "Ingested from spec.md"
+    }
+  ],
+  "acceptance_criteria": [
+    "AC-1: Running node src/cli.mjs 41 exits with 0 and prints 42."
+  ],
+  "changed_areas": [
+    "src/cli.mjs"
+  ]
+}

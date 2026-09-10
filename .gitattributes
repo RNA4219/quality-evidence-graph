@@ -1,3 +1,4 @@
 fixtures/**/*.json text eol=lf
 qeg-report-action/dist/** text eol=lf
 *.sh text eol=lf
+docs/evidence/eac-completion-2026-09-10/producer-replay/** -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol

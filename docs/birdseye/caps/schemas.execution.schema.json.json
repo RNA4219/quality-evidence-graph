@@ -1,7 +1,7 @@
 {
   "id": "schemas/execution.schema.json",
   "role": "execution.schema",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 execution.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:296e1e1d75fae925e13d9b74f226ed048b3f935d594fd96687bb01fd355a7789"
+  "contentHash": "sha256:db276f5144318c44b3035b3060e39d3a97a8acb036586a10c32cf958952a7056"
 }

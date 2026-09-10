@@ -53,6 +53,10 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
       validateProducerPayload(ref, raw);
       if (ref.adapter === "code-to-gate") {
         const repo = object(raw.repo, "repo");
+        if (repo.dirty === true || repo.revision && repo.revision !== manifest.metadata.headRef &&
+          !(typeof repo.revision === "string" && /^[a-f0-9]{12,64}$/.test(repo.revision) && ref.reportedRevision === repo.revision && manifest.metadata.headRef?.startsWith(repo.revision))) {
+          parserFailures.push({ code: "DQ-12", path: ref.path, reason: "CTG reported revision requires explicit canonical binding and clean source", sourceRefs: [source(ref, "/repo/revision")] });
+        }
         if ((repo.head_ref && repo.head_ref !== manifest.metadata.headRef) ||
           (repo.base_ref && manifest.metadata.baseRef && repo.base_ref !== manifest.metadata.baseRef)) {
           parserFailures.push({ code: "DQ-12", path: ref.path, reason: "CTG raw repo revision differs from manifest metadata", sourceRefs: [source(ref, "/repo")] });
@@ -95,13 +99,16 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
       sourceRefs: [{ id: `qeg:missing:${artifactKey(ref)}`, path: "ingest-manifest.json", label: "/artifacts" }] });
   }
   const validEdges: QegEdge[] = [];
-  for (const edge of requirementEdges([...nodes.values()], loaded)) edges.set(edge.id, edge);
+  try {
+    for (const ref of artifacts) if (ref.sourceRefMappings && (ref.adapter !== "manual-bb-test-harness" || ref.kind !== "feature_spec")) throw new Error("sourceRefMappings require a manual-bb feature_spec");
+    for (const edge of requirementEdges([...nodes.values()], loaded)) edges.set(edge.id, edge);
+  } catch (error) { parserFailures.push({ code: "DQ-01", path: "ingest-manifest.json", reason: String(error), sourceRefs: [{ id: "qeg:source-mapping", path: "ingest-manifest.json" }] }); }
   for (const edge of edges.values()) {
     if (nodes.has(edge.from) && nodes.has(edge.to)) validEdges.push(edge);
     else unsupportedClaims.push({ id: `qeg:unresolved:${encodeURIComponent(edge.id)}`, claim: `Unresolved edge ${edge.from} -> ${edge.to}`,
       nodeIds: [edge.from, edge.to], gateRelevant: true });
   }
-  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, executionContext: _context, ...ref }) => ref), requiredConnectorStatus: statuses };
+  const metadata = { ...manifest.metadata, inputArtifacts: artifacts.map(({ contractVersion: _version, executionContext: _context, reportedRevision: _reported, sourceRefMappings: _mappings, ...ref }) => ref), requiredConnectorStatus: statuses };
   const partial = parserFailures.length > 0 || unsupportedClaims.some(c => c.gateRelevant);
   return { metadata, nodes: enrichTestCoverage(sortIds([...nodes.values()]), sortIds(validEdges)), edges: sortIds(validEdges),
     completeness: { score: partial ? 0 : 1, partial, parserFailures, unsupportedClaims: sortIds(unsupportedClaims) } };

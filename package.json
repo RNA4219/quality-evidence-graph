@@ -50,7 +50,7 @@
     "enum-check": "node dist/cli.js enum-check",
     "baseline": "node dist/cli.js baseline",
     "evidence": "node dist/cli.js evidence",
-    "test:runtime": "node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs tests/execution-qualification.test.mjs",
+    "test:runtime": "node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs tests/execution-qualification.test.mjs tests/output-publication.test.mjs tests/consumer-migration.test.mjs tests/producer-replay.test.mjs",
     "build-graph": "node dist/cli.js build-graph",
     "place-tests": "node dist/cli.js place-tests",
     "policy": "node dist/cli.js policy",
@@ -63,7 +63,7 @@
     "test:package": "node tests/package-smoke.mjs",
     "birdseye-check": "node tools/birdseye-check.mjs",
     "json-check": "node tools/json-check.mjs",
-    "build:action": "esbuild src/cli.ts --bundle --platform=node --format=esm --target=node20 --outfile=qeg-report-action/dist/cli.mjs --log-level=warning",
+    "build:action": "node tools/build-action.mjs",
     "test:release-lifecycle": "node tools/action-lifecycle-acceptance.mjs"
   },
   "keywords": [
@@ -79,7 +79,8 @@
     "node": ">=20"
   },
   "dependencies": {
-    "ajv": "^8.20.0"
+    "ajv": "^8.20.0",
+    "yaml": "2.9.0"
   },
   "devDependencies": {
     "@types/node": "^25.9.1",

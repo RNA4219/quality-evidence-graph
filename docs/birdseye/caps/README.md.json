@@ -1,7 +1,7 @@
 {
   "id": "README.md",
   "role": "overview",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 overview の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -29,5 +29,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:25d6554559ac3df5c123a213128f7db3ca4a6eaa48144254eb6cc6ed49521e12"
+  "contentHash": "sha256:08e72f744b9bf0691c1f239a587cb33eca0f14c286dc7b03c95e41b5cb9f2ca8"
 }

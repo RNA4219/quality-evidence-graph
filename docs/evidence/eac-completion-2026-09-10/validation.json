@@ -1,0 +1,24 @@
+{
+  "evidenceVersion": "qeg-eac-acceptance/v1",
+  "standardVersion": "qeg-evidence-acceptance/v1",
+  "sourceCommit": null,
+  "acceptance": {
+    "unit": "output-publication-producer-interoperability-consumer-migration",
+    "decision": "implemented",
+    "eacIds": ["EAC-08", "EAC-09", "EAC-10"],
+    "regressionEacIds": ["EAC-01", "EAC-02", "EAC-03", "EAC-04", "EAC-05", "EAC-06", "EAC-07", "EAC-11", "EAC-12"],
+    "caseGroups": ["TC-19", "TC-20", "TC-21", "TC-22", "TC-23", "TC-24", "TC-25"],
+    "reviewedBy": "Codex implementation and acceptance review",
+    "excluded": ["production deployment", "human-executed QA", "external release approval", "power-loss/filesystem durability"]
+  },
+  "producerEvidence": {
+    "path": "producer-replay",
+    "liveRuns": 2,
+    "rawArtifactsPerRun": 14,
+    "replayExpectedVerdict": "disqualified",
+    "reason": "Preserve producer partial status and uncovered requirement hypotheses; the actual CLI execution itself qualifies as pass",
+    "scope": "common isolated CLI target, immutable producer sources, actual producer APIs/CLI plus operator-authored manual design and subprocess observation"
+  },
+  "localValidation": { "status": "running" },
+  "ci": { "status": "pending" }
+}

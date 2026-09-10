@@ -21,6 +21,12 @@
           "path": { "type": "string", "minLength": 1 },
           "contractVersion": { "type": "string", "minLength": 1 },
           "executionContext": { "$ref": "execution.schema.json#/$defs/context" },
+          "reportedRevision": { "type": "string", "pattern": "^[a-f0-9]{12,64}$" },
+          "sourceRefMappings": { "type": "array", "minItems": 1, "uniqueItems": true, "items": {
+            "type": "object", "additionalProperties": false, "required": ["sourceId", "requirementId"], "properties": {
+              "sourceId": { "type": "string", "minLength": 1 }, "requirementId": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
+            }
+          } },
           "schemaId": { "type": "string" }, "contentHash": { "type": "string" }, "revision": { "type": "string" }
         }
       }

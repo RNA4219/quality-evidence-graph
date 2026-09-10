@@ -1,0 +1,16 @@
+{
+  "feature_id": "CLI-INCREMENT",
+  "risks": [
+    {
+      "id": "RISK-01",
+      "scenario": "The result is not the specified successor",
+      "impact": 4,
+      "likelihood": 2,
+      "priority": "P1",
+      "trace_to": [
+        "TC-001"
+      ],
+      "rationale": "spec.md AC-1: 41 must produce 42"
+    }
+  ]
+}

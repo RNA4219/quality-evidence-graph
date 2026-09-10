@@ -1,0 +1,50 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T01:48:55.516Z",
+  "run_id": "ctg-20260910014855",
+  "repo": {
+    "root": ".",
+    "base_ref": "51ea481e62576c7fff9369635d72d767bf957adc",
+    "head_ref": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc"
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "diff-analysis",
+  "schema": "diff-analysis@v1",
+  "changed_files": [
+    {
+      "path": "src/cli.mjs",
+      "status": "modified",
+      "additions": 1,
+      "deletions": 1,
+      "hunks": [
+        {
+          "startLine": 1,
+          "endLine": 1
+        }
+      ]
+    }
+  ],
+  "added_files": [],
+  "deleted_files": [],
+  "modified_files": [
+    "src/cli.mjs"
+  ],
+  "blast_radius": {
+    "affectedFiles": [
+      "src/cli.mjs"
+    ],
+    "affectedSymbols": [],
+    "affectedTests": [],
+    "affectedEntrypoints": [],
+    "maxDepth": 1
+  },
+  "diff_findings": {
+    "new_findings": [],
+    "potentially_affected_findings": [],
+    "resolved_findings": []
+  }
+}

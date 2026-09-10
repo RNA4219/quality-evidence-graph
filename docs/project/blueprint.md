@@ -8,6 +8,8 @@ next_review_due: 2026-10-20
 
 # Blueprint
 
+EAC-08〜10は[世代公開・実producer接続・移行の統合契約](../spec/output-publication-and-migration.md)に従う。新旧の完全世代と明示エラーを区別し、原本・承認・履歴を保持する。改修の受入とproducer対象のrelease判定は別に記録する。
+
 ## 1. Problem Statement
 
 品質保証の材料は、仕様、実装差分、静的解析、手動テスト観点、実行結果、承認記録に分散している。

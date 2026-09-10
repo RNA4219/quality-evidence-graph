@@ -1,7 +1,7 @@
 {
   "id": "docs/agent/HUB.codex.md",
   "role": "navigation",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 navigation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -39,5 +39,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:8ee5efe52fadb828678ca81d4fc8f5b35daf02da63cf4460dd2467b95f2b6190"
+  "contentHash": "sha256:9511de3bb6e52799eb68b55f00fe33369a4b28eaeba3c0312d67c174912747ba"
 }

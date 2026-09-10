@@ -3,6 +3,9 @@ dist/
 coverage/
 .qeg/
 .npm-cache/
+.qeg-generations/
+.qeg-current.json
+.qeg-replace-*
 .DS_Store
 *.log
 !qeg-report-action/dist/

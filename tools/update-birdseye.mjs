@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00016";
+const generation = "00017";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,9 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/spec/output-publication-and-migration.md", "docs/evidence/eac-completion-2026-09-10/validation.json",
+  "tests/output-publication.test.mjs", "tests/consumer-migration.test.mjs", "tests/producer-replay.test.mjs", "tests/helpers/publication-child.mjs",
+  "tools/build-action.mjs", "tools/interop/live-producers.mjs", "tools/interop/provenance.mjs", "tools/interop/producer-lock.json", "tools/interop/producer-bridge.py",
   ...await sourceFiles("src"), ...await sourceFiles("schemas"),
   "docs/project/remediation-2026-09-10.md", "docs/spec/remediation-2026-09-10.md",
   "docs/spec/producer-adapters.md", "docs/spec/producer-schema-provenance.json",

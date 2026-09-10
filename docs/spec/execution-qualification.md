@@ -49,4 +49,4 @@ const gate = evaluateGate({ ...input, waivers: input.waivers ?? [], evidenceVeri
 
 検証後に対象やnodeを変更した場合は再検証が必要。reportは呼出元の信頼境界内で扱う。指紋は取り違えの検出であり、第三者の署名やreport発行者の認証ではない。`strict:false`でも実行受入の必須証跡検証を警告へ弱めない。
 
-`ipo_controlled`のwaiver、approval、retention契約は変更しない。waiverは入力資格DQを免除せず、成功率やprofileでも相殺しない。出力の中断復旧・並列公開、実producer収集、一般consumerのdry-run移行はEAC-08〜10の別受入単位に残す。
+`ipo_controlled`のwaiver、approval、retention契約は変更しない。waiverは入力資格DQを免除せず、成功率やprofileでも相殺しない。小数秒1〜9桁を保持する時刻比較、出力の中断復旧・排他、実producer収集、consumer移行は[統合実装契約](output-publication-and-migration.md)を参照する。

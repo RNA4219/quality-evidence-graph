@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/consumer-migration.schema.json",
+  "title": "Explicit consumer migration configuration",
+  "type": "object", "additionalProperties": false,
+  "required": ["migrationVersion", "expectedInputHash", "policy"],
+  "properties": {
+    "migrationVersion": { "const": "qeg-consumer-migration/v1" },
+    "expectedInputHash": { "type": "string", "pattern": "^sha256:[0-9a-f]{64}$" },
+    "policy": { "$ref": "gate-policy.schema.json" }
+  }
+}

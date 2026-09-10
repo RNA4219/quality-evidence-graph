@@ -1,0 +1,22 @@
+{
+  "version": "ctg/v1",
+  "generated_at": "2026-09-10T01:48:54.941Z",
+  "run_id": "ctg-202609100148-local",
+  "repo": {
+    "root": ".",
+    "revision": "a78257d1fa69",
+    "branch": "master",
+    "dirty": false
+  },
+  "tool": {
+    "name": "code-to-gate",
+    "version": "1.5.1",
+    "plugin_versions": []
+  },
+  "artifact": "test-seeds",
+  "schema": "test-seeds@v1",
+  "completeness": "partial",
+  "seeds": [],
+  "oracle_gaps": [],
+  "known_gaps": []
+}

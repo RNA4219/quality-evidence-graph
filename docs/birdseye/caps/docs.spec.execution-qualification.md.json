@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/execution-qualification.md",
   "role": "execution-qualification",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 execution-qualification の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -14,5 +14,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:38a4ef9ed5a399b408aecd8541d78a077acdc180d35ad13a8aa34506659106f2"
+  "contentHash": "sha256:13c10507eab922ec00a13900dee45532d9d71cadfe3d86c6705ebf34674ca358"
 }

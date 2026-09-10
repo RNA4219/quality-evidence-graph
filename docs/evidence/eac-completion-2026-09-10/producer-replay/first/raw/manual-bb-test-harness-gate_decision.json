@@ -1,0 +1,55 @@
+{
+  "feature_id": "CLI-INCREMENT",
+  "status": "no_go",
+  "profile": "lean",
+  "reasons": [
+    "P0 evidence is missing",
+    "automation evidence missing"
+  ],
+  "build_id": "isolated-cli-build-001",
+  "evidence_summary": {
+    "manual_by_priority": {
+      "P0": {
+        "pass": 0,
+        "fail": 0,
+        "skip": 0,
+        "blocked": 0,
+        "unknown": 0,
+        "untested": 0,
+        "total": 0
+      },
+      "P1": {
+        "pass": 1,
+        "fail": 0,
+        "skip": 0,
+        "blocked": 0,
+        "unknown": 0,
+        "untested": 0,
+        "total": 1
+      },
+      "P2": {
+        "pass": 0,
+        "fail": 0,
+        "skip": 0,
+        "blocked": 0,
+        "unknown": 0,
+        "untested": 0,
+        "total": 0
+      },
+      "P3": {
+        "pass": 0,
+        "fail": 0,
+        "skip": 0,
+        "blocked": 0,
+        "unknown": 0,
+        "untested": 0,
+        "total": 0
+      }
+    },
+    "mandatory_observation_rate": 0.0
+  },
+  "unmet_conditions": [
+    "P0 evidence is missing",
+    "automation evidence missing"
+  ]
+}

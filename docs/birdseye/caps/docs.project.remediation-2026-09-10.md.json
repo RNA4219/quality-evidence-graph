@@ -1,7 +1,7 @@
 {
   "id": "docs/project/remediation-2026-09-10.md",
   "role": "remediation-2026-09-10",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "R01〜R06の過去受入範囲と追加EAC要求の未完了状態を区別する台帳。fixture・隔離consumer・CIの証拠を保持。",
   "deps_out": [

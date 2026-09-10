@@ -1,10 +1,11 @@
 {
   "id": "src/cli/raw-ingest.ts",
   "role": "raw-ingest",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 raw-ingest の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/adapters/parse.ts",
     "src/cli/errors.ts",
     "src/cli/file-errors.ts",
     "src/record.ts",
@@ -20,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:e5595806bbfb8ec4934c6a27fab1cc9149875bfcb13c4f46309401cd5f617591"
+  "contentHash": "sha256:35f68df312ec376a8375e130c70dadb11d4a222cc787cd6b0f3c96e0295dd1e3"
 }

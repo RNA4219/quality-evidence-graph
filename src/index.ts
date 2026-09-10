@@ -14,3 +14,8 @@ export type {
 } from "./validation.js";
 export { buildGraph } from "./graph.js";
 export { placeTests, PLACEMENT_LAYERS } from "./placement.js";
+export { readPublishedOutputs, recoverOutputs, publishFiles } from "./output-publication.js";
+export type { PublishedOutputs } from "./output-publication.js";
+export { planConsumerMigration, applyConsumerMigration } from "./consumer-migration.js";
+export type { ConsumerMigrationConfig, ConsumerMigrationReport } from "./consumer-migration.js";
+export { parseProducerArtifact } from "./adapters/parse.js";

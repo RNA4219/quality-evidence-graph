@@ -1,7 +1,7 @@
 {
   "id": "schemas/ingest-manifest.schema.json",
   "role": "ingest-manifest.schema",
-  "generation": "00016",
+  "generation": "00017",
   "public_api": [],
   "summary": "QEG 0.4.0 ingest-manifest.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:89edc4e6e6d329f4ef6172434ee41244e47f73dae004fd697b0c11ed21cd9835"
+  "contentHash": "sha256:45f9dd2c42771b8543306ddc3931113e2c9086366d47916cfd20c988ee3a97e3"
 }

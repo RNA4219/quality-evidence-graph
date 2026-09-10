@@ -10,6 +10,8 @@ next_review_due: 2026-12-10
 
 ## Acceptance Criteria
 
+EAC-08〜10は`output-publication.test.mjs`、`consumer-migration.test.mjs`、`producer-replay.test.mjs`とpacked consumerで統合確認する。実producer再実行のsource lock・raw・観測は`docs/evidence/eac-completion-2026-09-10/producer-replay/`へ保存する。実入力の期待DQを維持できた試験成功を、入力対象のGate成功と混同しない。
+
 [証跡の共通受入基準](../spec/evidence-acceptance-standard.md) EAC-01〜12を適用する。通常実行の資格判定は[実装契約](../spec/execution-qualification.md)に従い、[実装・受入状況](evidence-acceptance-status.md)を受入単位ごとに記録する。基準の制定、コードへの実装、試験成功、受入完了を別の状態として記録する。
 
 - `docs/requirements.md` を要求正本とし、`README.md`、`docs/project/blueprint.md`、`docs/project/tasks.codex.md`、仕様書、fixture契約、完了記録が現在状態について矛盾しないこと。

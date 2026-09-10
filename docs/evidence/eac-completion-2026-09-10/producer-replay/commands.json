@@ -1,0 +1,418 @@
+[
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "init"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "Initialized empty Git repository in C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target/.git/\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "config",
+      "user.name",
+      "QEG acceptance"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "config",
+      "user.email",
+      "qeg@example.invalid"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "add",
+      "."
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'spec.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/cli.mjs', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "commit",
+      "-m",
+      "Isolated CLI baseline"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "[master (root-commit) 51ea481] Isolated CLI baseline\n 3 files changed, 18 insertions(+)\n create mode 100644 package.json\n create mode 100644 spec.md\n create mode 100644 src/cli.mjs\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "51ea481e62576c7fff9369635d72d767bf957adc\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "add",
+      "."
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "",
+    "stderr": "warning: in the working copy of 'package.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'spec.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'src/cli.mjs', LF will be replaced by CRLF the next time Git touches it\n"
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "commit",
+      "-m",
+      "Implement specified increment"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "[master a78257d] Implement specified increment\n 1 file changed, 1 insertion(+), 1 deletion(-)\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "rev-parse",
+      "HEAD"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:/Users/ryo-n/Codex_dev/manual-bb-test-harness/.venv/Scripts/python.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\tools\\interop\\producer-bridge.py",
+      "--rand",
+      "C:\\Users\\ryo-n\\Codex_dev\\RanD",
+      "--manual",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\manual-bb-7672257",
+      "--target",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\producer",
+      "--run",
+      "first",
+      "--build",
+      "isolated-cli-build-001",
+      "--node",
+      "C:\\Program Files\\nodejs\\node.exe"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 0,
+    "stdout": "Generated: C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\producer\\feature_spec.json\r\nGenerated: C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\producer\\gate_decision.json\r\n  Status: no_go\r\n  Feature: CLI-INCREMENT\r\n  Build: isolated-cli-build-001\r\n  P0: 0/0 passed\r\n  P1: 1/1 passed\r\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\dist\\cli.js",
+      "analyze",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--base",
+      "51ea481e62576c7fff9369635d72d767bf957adc",
+      "--head",
+      "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\ctg",
+      "--cache",
+      "disabled",
+      "--llm-provider",
+      "deterministic",
+      "--emit",
+      "all"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "{\"schema\":\"ctg.cli.summary@v1\",\"tool\":\"code-to-gate\",\"command\":\"analyze\",\"status\":\"passed\",\"exit_code\":0,\"run_id\":\"ctg-202609100148-local\",\"llm\":{\"provider\":\"deterministic\",\"model\":\"default\",\"available\":true},\"artifacts\":[\"..\\\\first\\\\ctg\\\\raw-findings.json\",\"..\\\\first\\\\ctg\\\\findings.json\",\"..\\\\first\\\\ctg\\\\risk-register.yaml\",\"..\\\\first\\\\ctg\\\\analysis-report.md\",\"..\\\\first\\\\ctg\\\\test-seeds.json\",\"..\\\\first\\\\ctg\\\\invariants.json\",\"..\\\\first\\\\ctg\\\\repo-graph.json\",\"..\\\\first\\\\ctg\\\\audit.json\"],\"summary\":{\"findings\":0,\"risks\":0,\"critical\":0,\"high\":0,\"medium\":0,\"low\":0,\"suppressed\":0}}\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\dist\\cli.js",
+      "diff",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--base",
+      "51ea481e62576c7fff9369635d72d767bf957adc",
+      "--head",
+      "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\ctg",
+      "--cache",
+      "disabled"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "{\"tool\":\"code-to-gate\",\"command\":\"diff\",\"run_id\":\"ctg-20260910014855\",\"artifacts\":[\"..\\\\first\\\\ctg\\\\diff-analysis.json\",\"..\\\\first\\\\ctg\\\\findings.json\",\"..\\\\first\\\\ctg\\\\blast-radius.mmd\",\"..\\\\first\\\\ctg\\\\audit.json\"],\"summary\":{\"changed_files\":1,\"blast_radius_files\":1,\"blast_radius_tests\":0,\"blast_radius_entrypoints\":0,\"findings\":0,\"critical\":0,\"high\":0}}\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\dist\\cli.js",
+      "readiness",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--policy",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\.github\\ctg-policy.yaml",
+      "--from",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\ctg",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first\\ctg"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 1,
+    "stdout": "{\"tool\":\"code-to-gate\",\"command\":\"readiness\",\"policy\":\"ci-release-readiness\",\"status\":\"blocked_input\",\"artifact\":\"..\\\\first\\\\ctg\\\\release-readiness.json\",\"summary\":{\"findings\":0,\"critical\":0,\"high\":0,\"failed_conditions\":1}}\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "rev-parse",
+      "a78257d1fa69"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "rev-parse",
+      "a78257d1fa69"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\dist\\cli.js",
+      "build-graph",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 2,
+    "stdout": "Graph: 12 nodes, 9 edges; partial=true. Test placement and Gate evaluation remain required.\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\dist\\cli.js",
+      "place-tests",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 2,
+    "stdout": "Plan: 3 obligations, 1 blocked. This is a plan, not execution evidence.\n",
+    "stderr": "Warning: Deprecated prefixless ID at gate-input.json.graph.nodes.3.execution.runId: \"RUN-first\"\n"
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\dist\\cli.js",
+      "record",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 2,
+    "stdout": "Own-output validation: PASS (all generated JSON artifacts passed their schemas)\nRecord written to: C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\first/quality-evidence-record.json\n",
+    "stderr": "Warning: Deprecated prefixless ID at gate-input.json.graph.nodes.3.execution.runId: \"RUN-first\"\nUsing gate-input.json (runtime schema and evidence preflight complete)\n"
+  },
+  {
+    "executable": "C:/Users/ryo-n/Codex_dev/manual-bb-test-harness/.venv/Scripts/python.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\tools\\interop\\producer-bridge.py",
+      "--rand",
+      "C:\\Users\\ryo-n\\Codex_dev\\RanD",
+      "--manual",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\manual-bb-7672257",
+      "--target",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\producer",
+      "--run",
+      "rerun",
+      "--build",
+      "isolated-cli-build-001",
+      "--node",
+      "C:\\Program Files\\nodejs\\node.exe"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 0,
+    "stdout": "Generated: C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\producer\\feature_spec.json\r\nGenerated: C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\producer\\gate_decision.json\r\n  Status: no_go\r\n  Feature: CLI-INCREMENT\r\n  Build: isolated-cli-build-001\r\n  P0: 0/0 passed\r\n  P1: 1/1 passed\r\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\dist\\cli.js",
+      "analyze",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--base",
+      "51ea481e62576c7fff9369635d72d767bf957adc",
+      "--head",
+      "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\ctg",
+      "--cache",
+      "disabled",
+      "--llm-provider",
+      "deterministic",
+      "--emit",
+      "all"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "{\"schema\":\"ctg.cli.summary@v1\",\"tool\":\"code-to-gate\",\"command\":\"analyze\",\"status\":\"passed\",\"exit_code\":0,\"run_id\":\"ctg-202609100149-local\",\"llm\":{\"provider\":\"deterministic\",\"model\":\"default\",\"available\":true},\"artifacts\":[\"..\\\\rerun\\\\ctg\\\\raw-findings.json\",\"..\\\\rerun\\\\ctg\\\\findings.json\",\"..\\\\rerun\\\\ctg\\\\risk-register.yaml\",\"..\\\\rerun\\\\ctg\\\\analysis-report.md\",\"..\\\\rerun\\\\ctg\\\\test-seeds.json\",\"..\\\\rerun\\\\ctg\\\\invariants.json\",\"..\\\\rerun\\\\ctg\\\\repo-graph.json\",\"..\\\\rerun\\\\ctg\\\\audit.json\"],\"summary\":{\"findings\":0,\"risks\":0,\"critical\":0,\"high\":0,\"medium\":0,\"low\":0,\"suppressed\":0}}\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\dist\\cli.js",
+      "diff",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--base",
+      "51ea481e62576c7fff9369635d72d767bf957adc",
+      "--head",
+      "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\ctg",
+      "--cache",
+      "disabled"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "{\"tool\":\"code-to-gate\",\"command\":\"diff\",\"run_id\":\"ctg-20260910014902\",\"artifacts\":[\"..\\\\rerun\\\\ctg\\\\diff-analysis.json\",\"..\\\\rerun\\\\ctg\\\\findings.json\",\"..\\\\rerun\\\\ctg\\\\blast-radius.mmd\",\"..\\\\rerun\\\\ctg\\\\audit.json\"],\"summary\":{\"changed_files\":1,\"blast_radius_files\":1,\"blast_radius_tests\":0,\"blast_radius_entrypoints\":0,\"findings\":0,\"critical\":0,\"high\":0}}\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\dist\\cli.js",
+      "readiness",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+      "--policy",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\ctg-aab3d8c\\.github\\ctg-policy.yaml",
+      "--from",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\ctg",
+      "--out",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun\\ctg"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 1,
+    "stdout": "{\"tool\":\"code-to-gate\",\"command\":\"readiness\",\"policy\":\"ci-release-readiness\",\"status\":\"blocked_input\",\"artifact\":\"..\\\\rerun\\\\ctg\\\\release-readiness.json\",\"summary\":{\"findings\":0,\"critical\":0,\"high\":0,\"failed_conditions\":1}}\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "rev-parse",
+      "a78257d1fa69"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc\n",
+    "stderr": ""
+  },
+  {
+    "executable": "git",
+    "args": [
+      "-c",
+      "safe.directory=C:/Users/ryo-n/Codex_dev/artifacts/qeg-review-20260910/live-interop-final/target",
+      "rev-parse",
+      "a78257d1fa69"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\target",
+    "exitCode": 0,
+    "stdout": "a78257d1fa69b3f11ee40b856f7e6ebd618e89bc\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\dist\\cli.js",
+      "build-graph",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 2,
+    "stdout": "Graph: 12 nodes, 9 edges; partial=true. Test placement and Gate evaluation remain required.\n",
+    "stderr": ""
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\dist\\cli.js",
+      "place-tests",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 2,
+    "stdout": "Plan: 3 obligations, 1 blocked. This is a plan, not execution evidence.\n",
+    "stderr": "Warning: Deprecated prefixless ID at gate-input.json.graph.nodes.3.execution.runId: \"RUN-rerun\"\n"
+  },
+  {
+    "executable": "C:\\Program Files\\nodejs\\node.exe",
+    "args": [
+      "C:\\Users\\ryo-n\\Codex_dev\\quality-evidence-graph\\dist\\cli.js",
+      "record",
+      "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun"
+    ],
+    "cwd": "C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final",
+    "exitCode": 2,
+    "stdout": "Own-output validation: PASS (all generated JSON artifacts passed their schemas)\nRecord written to: C:\\Users\\ryo-n\\Codex_dev\\artifacts\\qeg-review-20260910\\live-interop-final\\rerun/quality-evidence-record.json\n",
+    "stderr": "Warning: Deprecated prefixless ID at gate-input.json.graph.nodes.3.execution.runId: \"RUN-rerun\"\nUsing gate-input.json (runtime schema and evidence preflight complete)\n"
+  }
+]

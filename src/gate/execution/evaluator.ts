@@ -1,7 +1,7 @@
 import type { Disqualification, DisqualificationCode, ExecutionAccounting, ExecutionSelection, GateBlocker, LegacyExecutionEvidenceNode } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { inputSource } from "../../input-contract.js";
-import { executionFingerprint, executionTime, normalEvidence, normalTests, same, validExecution, validIdentity, validPolicy, validRef, validSources, validTarget } from "./contracts.js";
+import { executionFingerprint, executionNanos, normalEvidence, normalTests, same, validExecution, validIdentity, validPolicy, validRef, validSources, validTarget } from "./contracts.js";
 import { selectLatest } from "./selection.js";
 
 export function evaluateExecutions(input: DQDetectorInput): { accounting?: ExecutionAccounting; disqualifications: Disqualification[]; blockers: GateBlocker[] } {
@@ -31,8 +31,8 @@ export function evaluateExecutions(input: DQDetectorInput): { accounting?: Execu
   if (!validPolicy(policy)) { add("DQ-01", "EAC-01/02 explicit source-backed executionPolicy is required", active.map(t => t.id)); return result(); }
   if (policy.target.revision !== input.metadata.headRef || policy.target.revision !== input.graph.metadata.headRef ||
     policy.buildBindingRef.revision !== policy.target.revision) add("DQ-12", "EAC-01 policy, build binding and Gate revisions disagree", []);
-  const now = executionTime(input.metadata.createdAt);
-  if (!Number.isFinite(now)) add("DQ-05", "EAC-02 invalid evaluation clock (timezone and valid calendar required)", []);
+  const now = executionNanos(input.metadata.createdAt);
+  if (now === undefined) add("DQ-05", "EAC-02 invalid evaluation clock (timezone and valid calendar required)", []);
   if (input.evidenceVerification?.executionFingerprint !== executionFingerprint(input) || input.evidenceVerification?.status === "fail") {
     add("DQ-06", "EAC-05 verified artifacts and matching execution fingerprint are required", evidence.map(e => e.id));
   }
@@ -64,14 +64,14 @@ export function evaluateExecutions(input: DQDetectorInput): { accounting?: Execu
       if (!same(detail.target, policy.target) || detail.identity.projectId !== policy.target.projectId || detail.rawArtifactRef.revision !== policy.target.revision) {
         add("DQ-12", "EAC-01 execution target differs from Gate target", [node.id]);
       }
-      const completed = executionTime(detail.completedAt);
-      if (!Number.isFinite(completed) || completed > now) add("DQ-05", "EAC-02 invalid or future completion time", [node.id]);
+      const completed = executionNanos(detail.completedAt);
+      if (completed === undefined || now === undefined || completed > now) add("DQ-05", "EAC-02 invalid or future completion time", [node.id]);
       if (detail.executionMode !== "real") add("DQ-05", "EAC-06 mock execution cannot qualify", [node.id]);
       if (node.passed !== undefined && (detail.status !== "pass" && detail.status !== "fail" || node.passed !== (detail.status === "pass"))) {
         add("DQ-03", "EAC-03 passed flag contradicts execution status", [node.id]);
       }
       if (!node.evidenceRefs.length || node.evidenceRefs.some(ref => !validRef(ref as Parameters<typeof validRef>[0]) ||
-        ref.revision !== detail.target.revision || ref.evidenceKind === "test_result" && executionTime(ref.capturedAt) !== completed)) {
+        ref.revision !== detail.target.revision || ref.evidenceKind === "test_result" && executionNanos(ref.capturedAt) !== completed)) {
         add("DQ-06", "EAC-05 execution evidence refs need matching revision, hash and capture time", [node.id]);
       }
       if (detail.identity.producer === "manual-bb-test-harness") {
@@ -87,7 +87,9 @@ export function evaluateExecutions(input: DQDetectorInput): { accounting?: Execu
       selections.push({ testId: test.id, reason: "invalid_current_evidence", consecutivePasses: 0,
         excluded: candidates.map(e => ({ evidenceId: e.id, reason: "qualification_failed" })) }); continue;
     }
-    const selection = selectLatest(test.id, current, now, policy.maxEvidenceAgeHours * 3600000, excluded);
+    const ageMs = policy.maxEvidenceAgeHours * 3600000;
+    const maxAge = BigInt(Math.floor(ageMs)) * 1000000n + BigInt(Math.floor(ageMs % 1 * 1000000));
+    const selection = selectLatest(test.id, current, now!, maxAge, excluded);
     if (selection.error) add(selection.error.includes("conflicting") ? "DQ-03" : "DQ-05", selection.error, [test.id, ...current.map(e => e.id)]);
     else if (selection.selection.selectedStatus !== "pass" && selection.selection.selectedStatus !== "fail") add("DQ-05", "EAC-06 latest execution is not completed pass/fail", [test.id]);
     selections.push(selection.selection);

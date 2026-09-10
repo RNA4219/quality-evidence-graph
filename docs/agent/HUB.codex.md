@@ -10,6 +10,8 @@ next_review_due: 2026-12-10
 
 `quality-evidence-graph` の仕様、運用、検収、Birdseye を束ねる Codex 用ハブ。
 
+EAC-08〜10の実装入口は`docs/spec/output-publication-and-migration.md`。受入証拠は`docs/evidence/eac-completion-2026-09-10/`にまとめ、旧PRの受入記録は保持する。
+
 ## 1. 読み順
 
 1. `README.md`

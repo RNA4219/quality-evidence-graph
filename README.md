@@ -21,7 +21,7 @@
 
 開発版: 0.4.0（未公開）。過去の配布版: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)。現行の受入状態は[改修台帳](docs/project/remediation-2026-09-10.md)を参照。
 
-追加調査後の[証跡共通受入基準](docs/spec/evidence-acceptance-standard.md)を策定し、[通常実行の資格判定](docs/spec/execution-qualification.md)を実装しました。実行対象・build対応原本・評価時計・有効期間・最新runを検証し、APIでは実体検証reportを渡します。[受入状況と残課題](docs/project/evidence-acceptance-status.md)を記録しています。
+追加調査後の[証跡共通受入基準](docs/spec/evidence-acceptance-standard.md)に沿い、実行対象・時刻・最新runの検証に加え、[世代公開・復旧・実producer接続・consumer移行](docs/spec/output-publication-and-migration.md)を実装しました。`outputs read/recover`で出力を検証・復旧し、`migrate --dry-run/--apply`で明示設定を移行できます。[受入状況](docs/project/evidence-acceptance-status.md)に検証範囲と証拠を集約しています。
 
 フォーカス手順:
 

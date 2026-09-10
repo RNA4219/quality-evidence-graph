@@ -5,6 +5,7 @@ import { contentHash } from "../record.js";
 import { validateOutput } from "../validation/output.js";
 import { CliError } from "./errors.js";
 import { isMissingFile } from "./file-errors.js";
+import { parseProducerArtifact } from "../adapters/parse.js";
 
 function outside(base: string, target: string): boolean {
   const path = relative(base, target);
@@ -35,7 +36,7 @@ export async function loadRawArtifacts(directory: string): Promise<{ manifest: I
     }
     if (!ref.contentHash || ref.contentHash !== contentHash(bytes)) { fail("DQ-06", `Artifact contentHash missing or mismatched: ${ref.path}`); continue; }
     if (!ref.revision || ref.revision !== manifest.metadata.headRef) { fail("DQ-12", `Artifact revision missing or mismatched: ${ref.path}`); continue; }
-    try { loaded.push({ ref, payload: JSON.parse(bytes.toString("utf8")) }); }
+    try { loaded.push({ ref, payload: parseProducerArtifact(ref, bytes.toString("utf8")) }); }
     catch (error) { fail("DQ-01", `Parse artifact ${ref.path}: ${String(error)}`); }
   }
   return { manifest, loaded };
