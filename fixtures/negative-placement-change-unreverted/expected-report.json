@@ -69,6 +69,26 @@
       "reliability": {
         "enabled": false
       },
+      "executionAccounting": {
+        "evaluatedAt": "2026-07-02T00:00:00.000Z",
+        "target": {
+          "projectId": "synthetic-eac",
+          "buildId": "synthetic-build-1",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "environmentId": "synthetic-ci"
+        },
+        "selections": [
+          {
+            "testId": "hate:AETE-login-001",
+            "selectedEvidenceId": "qeg:eac-execution-0",
+            "selectedRunId": "synthetic-run-0",
+            "selectedStatus": "pass",
+            "reason": "latest_qualified_execution",
+            "consecutivePasses": 1,
+            "excluded": []
+          }
+        ]
+      },
       "expected": {
         "fixture": "negative-placement-change-unreverted",
         "expectedVerdict": "disqualified",

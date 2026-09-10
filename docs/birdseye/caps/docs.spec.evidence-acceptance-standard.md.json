@@ -1,0 +1,33 @@
+{
+  "id": "docs/spec/evidence-acceptance-standard.md",
+  "role": "defined-evidence-acceptance-standard",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "EAC-01〜12の対象・時計・最新実行・出力復旧・実接続・移行基準と25群の受入ケース。状態は受入単位ごとに台帳で管理。",
+  "deps_out": [
+    "docs/project/evidence-acceptance-status.md",
+    "docs/requirements.md",
+    "docs/spec/reliability-extension.md",
+    "src/adapters/manual-bb.ts",
+    "src/cli/output-files.ts",
+    "src/gate/dq/placement-coverage.ts"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/evaluation.md",
+    "docs/project/evidence-acceptance-status.md",
+    "docs/project/remediation-2026-09-10.md",
+    "docs/requirements.md",
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "基準策定を実装完了や全ケース実行済みと誤認する"
+  ],
+  "tests": [
+    "npm run birdseye-check",
+    "文書のEAC/TC対応・リンク確認"
+  ],
+  "contentHash": "sha256:2096689915010b3ebfb4ddd958770021c4226a1a057e9070b5999b0e305f064f"
+}

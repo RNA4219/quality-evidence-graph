@@ -24,6 +24,7 @@ import type {
 } from "./primitives.js";
 import type { EvidenceRef, QegMetadata, SignalEvidenceRef, SourceRef } from "./evidence.js";
 import type { Disqualification, GateBlocker } from "./gate.js";
+import type { ExecutionDetails, ExecutionIdentity } from "./execution.js";
 
 export interface Traceability {
   readonly sourceRefs: readonly SourceRef[];
@@ -170,6 +171,7 @@ export interface TestNodeBase extends QegNodeBase {
 }
 
 export interface LegacyTestNode extends TestNodeBase {
+  readonly executionIdentity?: ExecutionIdentity;
   readonly coveredRequirementIds?: readonly StableId[];
   readonly coveredChangedCodeIds?: readonly StableId[];
   readonly oracleType?: "specified" | "derived" | "implicit" | "human" | "missing";
@@ -205,6 +207,7 @@ export interface ExecutionEvidenceNodeBase extends QegNodeBase {
 }
 
 export interface LegacyExecutionEvidenceNode extends ExecutionEvidenceNodeBase {
+  readonly execution?: ExecutionDetails;
   readonly evidenceType?: never;
 }
 

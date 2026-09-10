@@ -24,7 +24,7 @@ export function enrichTestCoverage(nodes: readonly QegNode[], edges: readonly Qe
       if (!test.oracleRefs?.length || !test.expectedResults?.length || !test.oracleType || test.oracleType === "missing") return false;
       const refs = new Set(edges.filter(e => e.kind === "evidenced_by" && e.from === test.id).map(e => e.to));
       const executions = enriched.filter(e => e.kind === "execution_evidence" && refs.has(e.id));
-      return executions.length > 0 && executions.every(e => e.kind === "execution_evidence" && e.passed !== undefined && e.evidenceRefs.length > 0);
+      return executions.some(e => e.kind === "execution_evidence" && e.passed !== undefined && e.evidenceRefs.length > 0);
     });
     // Evidence completeness is separate from passing: a failed execution remains a Gate blocker.
     return observed ? { ...node, evidenceGap: 0 } : node;

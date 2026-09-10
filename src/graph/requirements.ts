@@ -1,5 +1,6 @@
 import type { LoadedArtifact, QegEdge, QegNode } from "../types.js";
-import { stableId, trace } from "../adapters/common.js";
+import { trace } from "../adapters/common.js";
+import { manualScopedId } from "../adapters/manual-bb.js";
 
 /** Resolve explicit upstream IDs when the referenced requirement exists in this graph. */
 export function requirementEdges(nodes: readonly QegNode[], loaded: readonly LoadedArtifact[]): QegEdge[] {
@@ -9,7 +10,8 @@ export function requirementEdges(nodes: readonly QegNode[], loaded: readonly Loa
     if (failure || ref.adapter !== "manual-bb-test-harness" || ref.kind !== "feature_spec" || !payload || typeof payload !== "object") continue;
     const raw = payload as { feature_id?: unknown; source_refs?: { id?: unknown }[] };
     if (typeof raw.feature_id !== "string" || !Array.isArray(raw.source_refs)) continue;
-    const from = stableId("mbb", "requirement", raw.feature_id);
+    if (!ref.executionContext) continue;
+    const from = manualScopedId(ref.executionContext.projectId, raw.feature_id, "requirement", raw.feature_id);
     if (!requirements.has(from)) continue;
     for (const source of raw.source_refs) {
       const to = source?.id;

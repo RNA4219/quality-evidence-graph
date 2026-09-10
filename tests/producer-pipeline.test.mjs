@@ -5,15 +5,16 @@ import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import * as api from '../dist/index.js';
-import { createRawProducerFixture, rawHash } from './helpers/raw-producer-fixture.mjs';
+import { createRawProducerFixture, rawHash, manualTestId, persistRawFixture } from './helpers/raw-producer-fixture.mjs';
 
 const cli = resolve('dist/cli.js');
 const run = (dir, cmd, expected) => { const result = spawnSync(process.execPath, [cli, cmd, dir], { encoding: 'utf8' }); assert.equal(result.status, expected, `${cmd}: ${result.stdout}\n${result.stderr}`); return result; };
 const fixture = async () => { const dir = await mkdtemp(join(tmpdir(), 'qeg-raw-')); return { dir, ...await createRawProducerFixture(dir, api) }; };
 const inputOf = (manifest, graph) => ({ metadata: graph.metadata, graph, policy: manifest.policy, waivers: [], placementPlan: api.placeTests(graph, manifest.policy) });
+const verifiedGate = async (input, dir) => api.evaluateGate({ ...input, evidenceVerification: await api.verifyEvidenceArtifacts(input, { baseDir: dir }) });
 
 test('FIX-11/12/13: raw producers -> pure graph -> deterministic seven-layer placement', async () => {
-  const { manifest, loaded } = await fixture();
+  const { manifest, loaded, dir } = await fixture();
   const before = JSON.stringify({ manifest, loaded });
   const graph = api.buildGraph(manifest, loaded);
   assert.equal(graph.completeness.partial, false, JSON.stringify(graph.completeness));
@@ -23,19 +24,19 @@ test('FIX-11/12/13: raw producers -> pure graph -> deterministic seven-layer pla
   const input = inputOf(manifest, graph);
   assert.equal((await api.validateGateInput(input)).valid, true);
   assert.ok(input.placementPlan.placements.every(p => p.candidateScores.length === 7));
-  assert.ok(input.placementPlan.placements.every(p => p.selectedTestIds.includes('mbb:test:TC-001')));
-  const gate = api.evaluateGate(input);
+  assert.ok(input.placementPlan.placements.every(p => p.selectedTestIds.includes(manualTestId)));
+  const gate = await verifiedGate(input, dir);
   assert.equal(gate.verdict, 'go', JSON.stringify(gate));
   assert.equal(graph.nodes.filter(n => n.id === 'rand:REQ-001').length, 1);
   assert.equal(graph.nodes.find(n => n.id === 'rand:REQ-001').sourceArtifactIds.length, 2);
-  assert.ok(graph.nodes.find(n => n.id === 'mbb:test:TC-001').coveredRequirementIds.includes('rand:REQ-001'));
+  assert.ok(graph.nodes.find(n => n.id === manualTestId).coveredRequirementIds.includes('rand:REQ-001'));
   assert.equal(graph.nodes.find(n => n.kind === 'changed_code').blastRadius, 1);
 });
 
 test('FIX-13: reuse, adapt, add and missing oracle produce distinct actionable plans', async () => {
   const { manifest, loaded } = await fixture();
   const graph = api.buildGraph(manifest, loaded);
-  const selected = graph.nodes.find(n => n.id === 'mbb:test:TC-001');
+  const selected = graph.nodes.find(n => n.id === manualTestId);
   selected.layer = 'unit'; selected.existing = true;
   assert.ok(api.placeTests(graph).placements.every(p => p.disposition === 'reuse'));
   const extra = { ...structuredClone(selected), id: 'qeg:test-addition', existing: false };
@@ -87,13 +88,14 @@ test('FIX-11: missing kind, malformed raw, unknown version and unresolved IDs re
 test('FIX-07/11: raw execution fail, skipped, mock and evidence tampering cannot become go', async () => {
   const { manifest, loaded, dir } = await fixture();
   const failed = structuredClone(loaded); failed[12].payload.result = 'fail';
+  await persistRawFixture(dir, manifest, failed);
   let graph = api.buildGraph(manifest, failed);
-  assert.equal(api.evaluateGate(inputOf(manifest, graph)).verdict, 'no_go');
+  assert.equal((await verifiedGate(inputOf(manifest, graph), dir)).verdict, 'no_go');
   const skipped = structuredClone(loaded); skipped[12].payload.result = 'skip';
   graph = api.buildGraph(manifest, skipped);
   assert.equal(api.evaluateGate(inputOf(manifest, graph)).verdict, 'disqualified');
   graph = api.buildGraph(manifest, loaded);
-  graph.nodes.find(n => n.id === 'mbb:test:TC-001').testExecutionMode = 'mock';
+  graph.nodes.find(n => n.id === manualTestId).testExecutionMode = 'mock';
   assert.equal(api.evaluateGate(inputOf(manifest, graph)).verdict, 'disqualified');
   await writeFile(join(dir, loaded[12].ref.path), '{}');
   run(dir, 'build-graph', 2); run(dir, 'place-tests', 2); run(dir, 'record', 2);

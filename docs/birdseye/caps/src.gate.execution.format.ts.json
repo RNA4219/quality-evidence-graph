@@ -1,0 +1,21 @@
+{
+  "id": "src/gate/execution/format.ts",
+  "role": "format",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 format の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src/cli/report/format/shared.ts",
+    "src/record.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:b6c79601dc6886ee0b93b5cfcc0cd46e1c9e5afcdffe153d24387830909e781d"
+}

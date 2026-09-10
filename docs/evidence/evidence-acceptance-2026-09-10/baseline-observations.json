@@ -1,0 +1,110 @@
+{
+  "evidenceVersion": "qeg-evidence-acceptance-baseline/v1",
+  "recordedOn": "2026-09-10",
+  "sourceCommit": "4054df785054e1e5cae73fdf3d375f6a00e42c61",
+  "scope": "synthetic contract fixtures only",
+  "purpose": "基準策定前の追加調査結果。EAC受入ケースの合格証拠ではない。",
+  "sourceRecording": {
+    "filename": "additional-review-results.json",
+    "sha256": "sha256:eaaef6889c0d6159e4c07e0e7ad5dd7ab14d771168f481b85e21f681a1add020"
+  },
+  "findings": [
+    {
+      "scenario": "baseline",
+      "schemaValid": true,
+      "evidenceVerification": "pass",
+      "verdict": "go",
+      "disqualifications": [],
+      "blockers": [],
+      "stages": [
+        {
+          "stage": "build-graph",
+          "exitCode": 0
+        },
+        {
+          "stage": "place-tests",
+          "exitCode": 0
+        },
+        {
+          "stage": "gate",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "scenario": "different_build",
+      "schemaValid": true,
+      "evidenceVerification": "pass",
+      "verdict": "go",
+      "disqualifications": [],
+      "blockers": [],
+      "stages": [
+        {
+          "stage": "build-graph",
+          "exitCode": 0
+        },
+        {
+          "stage": "place-tests",
+          "exitCode": 0
+        },
+        {
+          "stage": "gate",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "scenario": "future_execution",
+      "schemaValid": true,
+      "evidenceVerification": "pass",
+      "verdict": "go",
+      "disqualifications": [],
+      "blockers": [],
+      "stages": [
+        {
+          "stage": "build-graph",
+          "exitCode": 0
+        },
+        {
+          "stage": "place-tests",
+          "exitCode": 0
+        },
+        {
+          "stage": "gate",
+          "exitCode": 0
+        }
+      ]
+    },
+    {
+      "scenario": "failed_then_passed",
+      "schemaValid": true,
+      "evidenceVerification": "pass",
+      "verdict": "no_go",
+      "disqualifications": [],
+      "blockers": [
+        {
+          "message": "Required test \"Cancel order\" failed",
+          "evidenceId": "mbb:execution_evidence:RUN-000%2FTC-001"
+        },
+        {
+          "message": "Required test \"Cancel order\" failed",
+          "evidenceId": "mbb:execution_evidence:RUN-000%2FTC-001"
+        }
+      ],
+      "stages": [
+        {
+          "stage": "build-graph",
+          "exitCode": 0
+        },
+        {
+          "stage": "place-tests",
+          "exitCode": 0
+        },
+        {
+          "stage": "gate",
+          "exitCode": 2
+        }
+      ]
+    }
+  ]
+}

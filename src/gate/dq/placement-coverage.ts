@@ -1,4 +1,4 @@
-import type { ChangedCodeNode, Disqualification, ExecutionEvidenceNode, GateBlocker, ReliabilityAccounting, TestObligation, TestPlacementNode } from "../../types.js";
+import type { ChangedCodeNode, Disqualification, GateBlocker, ReliabilityAccounting, TestObligation, TestPlacementNode } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { inputSource } from "../../input-contract.js";
 
@@ -33,12 +33,6 @@ export function detectPlacementCoverage(input: DQDetectorInput, changes: readonl
   return result;
 }
 
-function matchingExecutions(input: DQDetectorInput, testId: string): readonly ExecutionEvidenceNode[] {
-  const linked = new Set(input.graph.edges.filter(e => e.kind === "evidenced_by" && e.from === testId).map(e => e.to));
-  return input.graph.nodes.filter((n): n is ExecutionEvidenceNode => n.kind === "execution_evidence" &&
-    ((n.evidenceType === "resilience" && n.testId === testId) || (n.evidenceType !== "resilience" && linked.has(n.id))));
-}
-
 export function evaluateRequiredExecutions(input: DQDetectorInput, reliability: ReliabilityAccounting): { disqualifications: Disqualification[]; blockers: GateBlocker[] } {
   const disqualifications: Disqualification[] = [];
   const blockers: GateBlocker[] = [];
@@ -61,13 +55,8 @@ export function evaluateRequiredExecutions(input: DQDetectorInput, reliability: 
         if (!reliability.enabled || !reliability.drillDown.some(item => item.testId === test.id)) missing = true;
         continue;
       }
-      const evidence = matchingExecutions(input, test.id);
-      if (evidence.length === 0 || evidence.some(e => e.passed === undefined || e.evidenceRefs.length === 0)) missing = true;
-      for (const failed of evidence.filter(e => e.passed === false)) blockers.push({
-        id: `qeg:failed-${obligation.id}-${test.id}-${failed.id}`, message: `Required test "${test.title}" failed`,
-        riskIds: obligation.riskIds, testId: test.id, evidenceId: failed.id,
-        sourceRefs: failed.traceability.sourceRefs.length > 0 ? failed.traceability.sourceRefs : [inputSource("/graph/nodes", failed.id)],
-      });
+      const selection = input.executionAccounting?.selections.find(s => s.testId === test.id);
+      if (!selection?.selectedEvidenceId || !["pass", "fail"].includes(selection.selectedStatus ?? "")) missing = true;
     }
     if (missing) disqualifications.push({ code: "DQ-05", message: `Obligation "${obligation.id}" lacks required real execution evidence`,
       nodeIds: [obligation.id, ...selectedIds], sourceRefs: [inputSource("/placementPlan", obligation.id)] });

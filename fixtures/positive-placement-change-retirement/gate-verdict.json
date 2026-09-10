@@ -1,0 +1,85 @@
+{
+  "evaluationScope": {
+    "kind": "fixture",
+    "target": "positive-placement-change-retirement",
+    "notEvaluated": [
+      "Upstream producer ingestion",
+      "Real deployment",
+      "Release approval"
+    ]
+  },
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-positive-placement-change-retirement",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-positive-placement-change-retirement",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:ee4e3d131531183991b409e2952fb46350ccc4e6fdd0c6fe8c746b7519a15a62",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    },
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "verdict": "go",
+  "reasons": [
+    "All gate conditions satisfied"
+  ],
+  "disqualifications": [],
+  "blockers": [],
+  "residualRisks": [],
+  "requiredHumanReview": [],
+  "testEvidenceAccounting": {
+    "countedTestIds": [
+      "hate:AETE-login-001"
+    ],
+    "excludedMockTests": []
+  },
+  "executionAccounting": {
+    "evaluatedAt": "2026-07-02T00:00:00.000Z",
+    "target": {
+      "projectId": "synthetic-eac",
+      "buildId": "synthetic-build-1",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "environmentId": "synthetic-ci"
+    },
+    "selections": [
+      {
+        "testId": "hate:AETE-login-001",
+        "selectedEvidenceId": "qeg:eac-execution-4",
+        "selectedRunId": "synthetic-run-4",
+        "selectedStatus": "pass",
+        "reason": "latest_qualified_execution",
+        "consecutivePasses": 5,
+        "excluded": [
+          {
+            "evidenceId": "qeg:eac-execution-0",
+            "reason": "superseded"
+          },
+          {
+            "evidenceId": "qeg:eac-execution-1",
+            "reason": "superseded"
+          },
+          {
+            "evidenceId": "qeg:eac-execution-2",
+            "reason": "superseded"
+          },
+          {
+            "evidenceId": "qeg:eac-execution-3",
+            "reason": "superseded"
+          }
+        ]
+      }
+    ]
+  },
+  "reliability": {
+    "enabled": false
+  }
+}

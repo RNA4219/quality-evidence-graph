@@ -1,4 +1,5 @@
 import type { SourceRef } from "../../../types.js";
+import { executionSummary } from "../../../gate/execution/format.js";
 import type {
   ReportExpectedComparison,
   ReportTargetResult
@@ -81,6 +82,7 @@ export function rateLabel(value: number | null): string {
 
 
 export function appendReliabilityTarget(lines: string[], target: ReportTargetResult): void {
+  lines.push(...executionSummary(target.executionAccounting));
   const reliability = target.reliability;
   lines.push(`- ${target.target}`);
   lines.push(`  enabled: ${reliability.enabled}`);

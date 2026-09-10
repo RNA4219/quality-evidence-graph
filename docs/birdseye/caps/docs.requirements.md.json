@@ -1,31 +1,16 @@
 {
   "id": "docs/requirements.md",
   "role": "requirements",
-  "public_api": [
-    "RequiredAdapterKind",
-    "GateProfile",
-    "GateVerdict",
-    "DisqualificationCode",
-    "report CLI",
-    "doctor CLI",
-    "DQ explain",
-    "schema/enum drift check",
-    "snapshot",
-    "init",
-    "baseline audit",
-    "evidence verify",
-    "policy lint",
-    "repro-bundle",
-    "check",
-    "qeg-report-action",
-    "CI artifact"
-  ],
-  "summary": "必須 3 接続、canonical graph、placement、Gate、producer check consistency、CI workflow、CI 累積 report、運用補助CLI、Action outputs、IPO governance、security、schema hardening の正本要件。",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 requirements の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     ".github/workflows/ci.yml",
     "docs/control-mapping.md",
     "docs/ipo-controlled-profile.md",
+    "docs/project/evidence-acceptance-status.md",
     "docs/project/tasks.codex.md",
+    "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/index.md",
     "docs/spec/operational-cli-extensions.md",
     "docs/spec/reliability-extension.md",
@@ -57,18 +42,14 @@
     "docs/project/tasks.codex.md",
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/release/acceptance-2026-07-20.md",
-    "docs/research/quality-evidence-graph-requirements-report.md"
+    "docs/research/quality-evidence-graph-requirements-report.md",
+    "docs/spec/evidence-acceptance-standard.md"
   ],
   "risks": [
-    "Git 管理外や package 対象外になると統制証跡が壊れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run schema-check",
-    "npm run enum-check",
-    "npm run report -- fixtures/positive-release-go",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00015",
-  "contentHash": "sha256:8561cdee125856c4ec68328c34f51229ecabe9f355e8f07307191e47b817cd2e"
+  "contentHash": "sha256:78a9c4c72e2368c03db7e8f2f75012f9eeee9ba5ac493c1342739fc52bcf2ea5"
 }

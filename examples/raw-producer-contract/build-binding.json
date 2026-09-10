@@ -1,0 +1,9 @@
+{
+  "bindingVersion": "qeg-build/v1",
+  "target": {
+    "projectId": "synthetic-order",
+    "buildId": "build-fixture",
+    "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "environmentId": "synthetic-ci"
+  }
+}

@@ -68,6 +68,8 @@ Output:
 
 要件定義の正本は `docs/requirements.md` とする。
 
+追加EAC要求の対象・時点・実行資格は [証跡共通受入基準](../spec/evidence-acceptance-standard.md) で定義する。[通常実行の実装契約](../spec/execution-qualification.md)は、build原本検証→対象・identity・時計の資格判定→最新run採用→実測連続成功数の会計を行う。API/CLI/recordで同じ採用結果を共有する。[実装受入](evidence-acceptance-status.md)は単位ごとに管理する。
+
 特に次を固定する。
 
 - `upstream_artifacts` の必須adapterは `RanD`、`code-to-gate`、`manual-bb-test-harness`。`native_graph` はpolicyで必須artifactと評価範囲を明示する。

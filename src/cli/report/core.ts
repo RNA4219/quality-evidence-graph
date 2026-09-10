@@ -112,6 +112,7 @@ function gateTargetResult(
     residualRisks: gateResult.residualRisks,
     requiredHumanReview: gateResult.requiredHumanReview,
     reliability: gateResult.reliability,
+    ...(gateResult.executionAccounting ? { executionAccounting: gateResult.executionAccounting } : {}),
     expected,
   };
 }

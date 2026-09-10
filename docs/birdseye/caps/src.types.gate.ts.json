@@ -1,12 +1,13 @@
 {
   "id": "src/types/gate.ts",
   "role": "gate-types",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 gate-types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "schemas/gate-verdict.schema.json",
     "src/types/evidence.ts",
+    "src/types/execution.ts",
     "src/types/ingest.ts",
     "src/types/primitives.ts"
   ],
@@ -26,5 +27,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:bc8d373d85badf744ff17c080aed622a9010490be04a1d3904b78cc2f31ef3b5"
+  "contentHash": "sha256:37eec6d43070904f12ca3b2ebadfa2585bc6c7bbbb5f43f3dda5c615525a0222"
 }

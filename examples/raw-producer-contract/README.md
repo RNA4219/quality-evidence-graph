@@ -17,6 +17,8 @@ node dist/cli.js schema-check .qeg/raw-demo
 
 コピー先が既に存在する場合は別名を使ってください。`ingest-manifest.json` に入力mode、必須集合、producer契約version、相対path、revision、SHA-256、評価scopeを明示しています。rawを書き換える場合は内容に対応するhashをmanifestへ反映します。誤ったhashやrevisionは失格になります。
 
+通常実行の受入では`executionPolicy`と`build-binding.json`でproject/build/revision/environmentの対応を指定し、manual descriptorの`executionContext`を明記します。この例の有効期間24時間、project/environment、producerVersionは合成fixture用の設定です。実環境の既定値ではありません。時計はmetadata.createdAtで固定し、未来実行や対象違いをDQとします。
+
 `build-graph` はbundleとgate-input、`place-tests` は配置計画を生成します。配置前のgateは証拠不足でexit 2、全工程後はfixture scope内でgoになります。`record` は4種のJSON、Markdown、互換alias、6出力のhash manifestを生成し、全JSONをschema検証します。
 
 APIでは `buildGraph(manifest, loadedArtifacts)` と `placeTests(graph, policy)` が同じ処理を提供します。ファイル読込・hash検証はCLI側の責務です。tarballにも本例と固定producer schemaが含まれ、producer repoへの参照なしに動作します。

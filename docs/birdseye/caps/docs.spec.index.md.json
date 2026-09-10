@@ -1,17 +1,13 @@
 {
   "id": "docs/spec/index.md",
   "role": "ipo-spec-index",
-  "public_api": [
-    "GatePolicy",
-    "Waiver",
-    "ApprovalEvidence",
-    "EvidencePackage",
-    "ControlRoles",
-    "operational CLI contract"
-  ],
-  "summary": "IPO 統制仕様群の入口、正本関係、読み順、MVP / IPO controlled 境界、共通判定原則、運用CLI仕様、レビュー記録と Gate 検収記録への導線を定義する。",
+  "generation": "00016",
+  "public_api": [],
+  "summary": "QEG 0.4.0 ipo-spec-index の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "docs/project/evidence-acceptance-status.md",
     "docs/spec/acceptance.md",
+    "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/evidence-package.md",
     "docs/spec/gate-acceptance-2026-06-03.md",
     "docs/spec/gate-policy.md",
@@ -32,12 +28,10 @@
     "docs/spec/gate-policy.md"
   ],
   "risks": [
-    "仕様正本と要求正本が矛盾すると TASK-09 / TASK-10 の実装判断が揺れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "git ls-files docs/spec/*.md",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00015",
-  "contentHash": "sha256:f47377e540427a03a5b480ea0e38a760a7143bf0e92183d966153a3cc84fcf03"
+  "contentHash": "sha256:d6b3b8964e6fcb57b063cb3fbea2c638604d59a214a1a158161adb08ed94b7d1"
 }

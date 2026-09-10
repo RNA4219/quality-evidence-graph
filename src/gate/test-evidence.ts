@@ -1,5 +1,6 @@
 import type {
   ExcludedTestEvidence,
+  ExecutionAccounting,
   QualityEvidenceGraph,
   QegNode,
   TestEvidenceAccounting,
@@ -20,12 +21,13 @@ export function isGateEligibleTestEvidence(test: TestNode): boolean {
 }
 
 export function buildTestEvidenceAccounting(
-  graph: QualityEvidenceGraph
+  graph: QualityEvidenceGraph, execution?: ExecutionAccounting
 ): TestEvidenceAccounting {
   const tests = graph.nodes.filter(isTestNode);
   const countedTestIds = tests
     .filter((test) =>
       isGateEligibleTestEvidence(test) &&
+      (test.testType === "resilience" || execution?.selections.some(s => s.testId === test.id && s.selectedStatus === "pass")) &&
       (test.evidenceStrength !== undefined || test.recentGreenRuns !== undefined)
     )
     .map((test) => test.id);

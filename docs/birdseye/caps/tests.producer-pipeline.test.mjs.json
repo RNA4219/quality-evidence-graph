@@ -1,7 +1,7 @@
 {
   "id": "tests/producer-pipeline.test.mjs",
   "role": "producer-pipeline.test",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 producer-pipeline.test の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -16,5 +16,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:d3e4497f5076c00e24e8b4a300f9d314cba49b1347d243c020c58648c2878506"
+  "contentHash": "sha256:6ad4c9b5b6f5c043b9741771dce5bfa8d6464ee2de18f9650389d565183064a5"
 }

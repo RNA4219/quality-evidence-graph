@@ -1,0 +1,30 @@
+{
+  "manifestVersion": "qeg-output/v1",
+  "runId": "qeg:run-positive-placement-change-retirement",
+  "files": [
+    {
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:4d62268c21093deb26402e77bc48492f6e0fb594033bfa3a49ae079bae046271"
+    },
+    {
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:6415dc5ae343643c4291ecae5bfdd05e5446a30af15dce3afa3c7eee4134ee86"
+    },
+    {
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:bf84d60107c569a3dbcd97bed9b880e70d1abfcb224505bdaf70d220251e43e8"
+    },
+    {
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:39524af03521c0ce3a743084e3417477bcda41e2d065672f5b2793bf7bc13765"
+    },
+    {
+      "path": "quality-evidence-record.json",
+      "contentHash": "sha256:4cb4c893e8a32b207d0141e9a7f1897179565aa2430b866fdc2e17ccb20048b0"
+    },
+    {
+      "path": "output-record.json",
+      "contentHash": "sha256:4cb4c893e8a32b207d0141e9a7f1897179565aa2430b866fdc2e17ccb20048b0"
+    }
+  ]
+}

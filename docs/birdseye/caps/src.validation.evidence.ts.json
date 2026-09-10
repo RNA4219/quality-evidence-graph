@@ -1,11 +1,13 @@
 {
   "id": "src/validation/evidence.ts",
   "role": "runtime-evidence-validation",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 runtime-evidence-validation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
-    "src/types.ts"
+    "src/gate/execution/contracts.ts",
+    "src/types.ts",
+    "src/validation/execution-artifacts.ts"
   ],
   "deps_in": [
     "docs/project/acceptance-audit-2026-09-10.md",
@@ -22,5 +24,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:c4055a8c6f0edca1f44b121cc3ed6c3c79f5922a6ad5aad689136f4b838d6318"
+  "contentHash": "sha256:d25769f68938f999ed23381cb6a3742d89e4615e153b59129140f04b54ed41bb"
 }

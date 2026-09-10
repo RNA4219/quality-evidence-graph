@@ -12,6 +12,9 @@ import type {
   LoadedArtifact,
   QualityEvidenceGraph,
   TestPlacementPlan,
+  ExecutionDetails,
+  ExecutionPolicy,
+  ExecutionAccounting,
 } from "@quality-harness/quality-evidence-graph";
 import { buildGraph, placeTests } from "@quality-harness/quality-evidence-graph";
 
@@ -22,6 +25,13 @@ const generatedPlan: TestPlacementPlan = placeTests(generatedGraph, ingestManife
 void generatedPlan;
 
 declare const testBase: TestNodeBase;
+declare const execution: ExecutionDetails;
+declare const executionPolicy: ExecutionPolicy;
+declare const executionAccounting: ExecutionAccounting;
+void executionPolicy; void executionAccounting;
+const normalExecution: LegacyExecutionEvidenceNode = { id: 'qeg:execution-typed', kind: 'execution_evidence', title: 'Typed execution',
+  sourceArtifactIds: [], traceability: { sourceRefs: [], assumptions: [], confidence: 'high' }, evidenceRefs: [], execution };
+void normalExecution;
 declare const scenario: ResilienceScenario;
 
 const legacyTest: TestNode = testBase;

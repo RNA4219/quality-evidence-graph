@@ -1,7 +1,7 @@
 {
   "id": "schemas/qeg.bundle.schema.json",
   "role": "schema",
-  "generation": "00015",
+  "generation": "00016",
   "public_api": [],
   "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -18,5 +18,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:90b542653ff1afdbd70e0de421264ce1ad7bd96e4f116cbaa84508e30712237c"
+  "contentHash": "sha256:1a390a07172070cca50931cde279b8d24f42bf5b97c09d5da124d4f20902bb06"
 }

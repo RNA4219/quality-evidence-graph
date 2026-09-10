@@ -1,0 +1,86 @@
+{
+  "evaluationScope": {
+    "kind": "fixture",
+    "target": "negative-placement-change-unreverted",
+    "notEvaluated": [
+      "Upstream producer ingestion",
+      "Real deployment",
+      "Release approval"
+    ]
+  },
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-negative-placement-change-unreverted",
+    "createdAt": "2026-07-02T00:00:00.000Z",
+    "profile": "standard",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-negative-placement-change-unreverted",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:9fa8e511107a0fb246464ed29e38903e0a08579566492cfc7d402c45830be937",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    },
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "verdict": "disqualified",
+  "reasons": [
+    "Disqualified: 1 DQ code(s)",
+    "- DQ-14: Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy"
+  ],
+  "disqualifications": [
+    {
+      "code": "DQ-14",
+      "message": "Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy",
+      "nodeIds": [
+        "qeg:placement-change-login-retirement",
+        "mbb:CASE-login-001",
+        "hate:AETE-login-001",
+        "qeg:risk-login-regression"
+      ],
+      "sourceRefs": [
+        {
+          "id": "hate:ev-login-weak",
+          "path": "hate/reports/login-aete.json"
+        }
+      ]
+    }
+  ],
+  "blockers": [],
+  "residualRisks": [],
+  "requiredHumanReview": [],
+  "testEvidenceAccounting": {
+    "countedTestIds": [
+      "hate:AETE-login-001"
+    ],
+    "excludedMockTests": []
+  },
+  "executionAccounting": {
+    "evaluatedAt": "2026-07-02T00:00:00.000Z",
+    "target": {
+      "projectId": "synthetic-eac",
+      "buildId": "synthetic-build-1",
+      "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "environmentId": "synthetic-ci"
+    },
+    "selections": [
+      {
+        "testId": "hate:AETE-login-001",
+        "selectedEvidenceId": "qeg:eac-execution-0",
+        "selectedRunId": "synthetic-run-0",
+        "selectedStatus": "pass",
+        "reason": "latest_qualified_execution",
+        "consecutivePasses": 1,
+        "excluded": []
+      }
+    ]
+  },
+  "reliability": {
+    "enabled": false
+  }
+}

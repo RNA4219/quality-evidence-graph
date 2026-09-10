@@ -2,13 +2,15 @@ import { createHash } from "crypto";
 import { readFile, realpath, stat } from "fs/promises";
 import { isAbsolute, relative, resolve } from "path";
 import type { ArtifactRef, QegGateInput, ResilienceExecutionEvidenceNode } from "../types.js";
+import { executionArtifacts } from "./execution-artifacts.js";
+import { executionFingerprint } from "../gate/execution/contracts.js";
 
 export type EvidenceVerificationSeverity = "pass" | "warn" | "fail";
 export interface EvidenceVerificationItem {
   readonly artifactId: string;
   readonly path?: string;
   readonly severity: EvidenceVerificationSeverity;
-  readonly code: "PATH_MISSING" | "PATH_OUTSIDE_BASE" | "FILE_MISSING" | "IO_ERROR" | "HASH_MISSING" | "HASH_MISMATCH" | "REVISION_MISMATCH" | "VERIFIED";
+  readonly code: "PATH_MISSING" | "PATH_OUTSIDE_BASE" | "FILE_MISSING" | "IO_ERROR" | "HASH_MISSING" | "HASH_MISMATCH" | "REVISION_MISMATCH" | "PAYLOAD_MISMATCH" | "VERIFIED";
   readonly message: string;
 }
 export interface EvidenceVerificationOptions { readonly baseDir: string; readonly strict?: boolean; }
@@ -16,9 +18,13 @@ export interface EvidenceVerificationReport {
   readonly reportVersion: "qeg-evidence-verification-v2";
   readonly status: EvidenceVerificationSeverity;
   readonly items: readonly EvidenceVerificationItem[];
+  readonly executionFingerprint?: string;
 }
 
 interface ArtifactCandidate {
+  readonly historical?: boolean;
+  readonly payloadKey?: string;
+  readonly payloadMatches?: (value: unknown) => boolean;
   readonly artifact: Pick<ArtifactRef, "id" | "path" | "contentHash" | "revision">;
   readonly required: boolean;
   /** Explicit input requirements cannot be weakened by profile or diagnostic strictness. */
@@ -60,15 +66,16 @@ function allArtifacts(input: QegGateInput): ArtifactCandidate[] {
       candidates.push({ artifact: signalRef, required: true, requireContainedRelativePath: true });
     }
   }
-  return candidates;
+  return [...candidates, ...executionArtifacts(input)];
 }
 function uniqueArtifacts(input: QegGateInput): ArtifactCandidate[] {
   const byKey = new Map<string, ArtifactCandidate>();
   for (const candidate of allArtifacts(input)) {
     const artifact = candidate.artifact;
-    const key = [artifact.id, artifact.path, artifact.contentHash ?? "", artifact.revision ?? "", candidate.requireContainedRelativePath ? "contained" : "legacy"].join(String.fromCharCode(0));
+    const key = [artifact.id, artifact.path, artifact.contentHash ?? "", artifact.revision ?? "", candidate.requireContainedRelativePath ? "contained" : "legacy", candidate.historical, candidate.payloadKey].join(String.fromCharCode(0));
     const previous = byKey.get(key);
     byKey.set(key, previous ? {
+      ...candidate,
       artifact,
       required: previous.required || candidate.required,
       enforceRequired: previous.enforceRequired || candidate.enforceRequired,
@@ -86,7 +93,7 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
   try { realBaseDir = await realpath(baseDir); }
   catch (error) { baseResolutionError = `Cannot realpath ${baseDir}: ${String(error)}`; }
   const items: EvidenceVerificationItem[] = [];
-  for (const { artifact, required, enforceRequired, requireContainedRelativePath } of uniqueArtifacts(input)) {
+  for (const { artifact, required, enforceRequired, requireContainedRelativePath, historical, payloadMatches } of uniqueArtifacts(input)) {
     const failureSeverity = severity(strict || Boolean(enforceRequired) || Boolean(requireContainedRelativePath), required);
     if (!artifact.path) {
       items.push({ artifactId: artifact.id, severity: failureSeverity, code: "PATH_MISSING", message: "artifact path is missing" });
@@ -141,14 +148,20 @@ export async function verifyEvidenceArtifacts(input: QegGateInput, options: Evid
         continue;
       }
       const actual = hash(bytes);
+      if (payloadMatches) {
+        let matches = false;
+        try { matches = payloadMatches(JSON.parse(bytes.toString("utf8"))); } catch { /* Invalid JSON is a payload mismatch. */ }
+        if (!matches) items.push({ artifactId: artifact.id, path: artifact.path, severity: "fail", code: "PAYLOAD_MISMATCH",
+          message: "EAC-01/05 raw payload disagrees with normalized execution or build binding" });
+      }
       items.push(actual === artifact.contentHash
         ? { artifactId: artifact.id, path: artifact.path, severity: "pass", code: "VERIFIED", message: "artifact path and hash verified" }
         : { artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "HASH_MISMATCH", message: "artifact hash mismatch: expected " + artifact.contentHash + ", got " + actual });
     }
-    if (input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {
+    if (!historical && input.metadata.headRef && artifact.revision && artifact.revision !== input.metadata.headRef) {
       items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "REVISION_MISMATCH", message: "artifact revision " + artifact.revision + " does not match " + input.metadata.headRef });
     }
   }
   const status = items.some((item) => item.severity === "fail") ? "fail" : items.some((item) => item.severity === "warn") ? "warn" : "pass";
-  return { reportVersion: "qeg-evidence-verification-v2", status, items };
+  return { reportVersion: "qeg-evidence-verification-v2", status, items, executionFingerprint: executionFingerprint(input) };
 }

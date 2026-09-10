@@ -4,6 +4,17 @@ import { createHash } from 'node:crypto';
 
 export const rawHash = bytes => 'sha256:' + createHash('sha256').update(bytes).digest('hex');
 const json = value => JSON.stringify(value, null, 2) + '\n';
+export const manualTestId = 'mbb:test:' + encodeURIComponent(JSON.stringify(['synthetic-order', 'SPEC-ORDER-01', 'TC-001']));
+export async function persistRawFixture(directory, manifest, loaded) {
+  for (const item of loaded) {
+    const bytes = json(item.payload);
+    item.ref.contentHash = rawHash(bytes);
+    const ref = manifest.artifacts.find(a => a.id === item.ref.id);
+    if (ref) ref.contentHash = item.ref.contentHash;
+    await writeFile(join(directory, item.ref.path), bytes);
+  }
+  await writeFile(join(directory, 'ingest-manifest.json'), json(manifest));
+}
 export async function createRawProducerFixture(directory, api) {
   const createdAt = '2026-09-10T00:00:00.000Z';
   const headRef = 'a'.repeat(40);
@@ -13,6 +24,12 @@ export async function createRawProducerFixture(directory, api) {
     exitCodePolicy: { go: 0, conditional_go: 2, no_go: 2, disqualified: 2 },
     inputContract: { ...api.upstreamInputContract('raw-producer-contract'), evaluationScope: { kind: 'fixture', target: 'raw producer interoperability', notEvaluated: ['real deployment', 'release approval'] } } };
   const metadata = { qegVersion: '0.2', runId: 'qeg:raw-fixture', createdAt, headRef, profile: 'lean', policyId: policy.policyId, policyHash: policy.policyHash, inputArtifacts: [] };
+  const target = { projectId: 'synthetic-order', buildId: 'build-fixture', revision: headRef, environmentId: 'synthetic-ci' };
+  const binding = json({ bindingVersion: 'qeg-build/v1', target });
+  await mkdir(directory, { recursive: true });
+  await writeFile(join(directory, 'build-binding.json'), binding);
+  policy.executionPolicy = { target, maxEvidenceAgeHours: 24, sourceRefs,
+    buildBindingRef: { id: 'qeg:synthetic-build', path: 'build-binding.json', contentHash: rawHash(binding), revision: headRef } };
   const evidence = [{ id: 'ctg:source-order', path: 'src/order.ts', startLine: 1, endLine: 2, kind: 'diff' }];
   const header = name => ({ version: 'ctg/v1', generated_at: createdAt, run_id: 'ctg:run-fixture', repo: { root: '.', base_ref: 'b'.repeat(40), head_ref: headRef },
     tool: { name: 'code-to-gate', version: '1.5.1', plugin_versions: [] }, artifact: name, schema: `${name}@v1` });
@@ -44,6 +61,7 @@ export async function createRawProducerFixture(directory, api) {
     const path = `raw/${String(index).padStart(2, '0')}-${kind}.json`;
     const bytes = json(payload);
     const ref = { id: `qeg:raw-${index}`, adapter, kind, path, contractVersion: adapter === 'RanD' ? 'rand-kano/1.0' : adapter === 'code-to-gate' ? 'ctg-artifacts/v1' : 'manual-bb/v1', contentHash: rawHash(bytes), revision: headRef };
+    if (adapter === 'manual-bb-test-harness') ref.executionContext = { projectId: target.projectId, environmentId: target.environmentId, producerVersion: 'synthetic-contract-v1' };
     await writeFile(join(directory, path), bytes);
     loaded.push({ ref, payload });
   }
