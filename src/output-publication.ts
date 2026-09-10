@@ -1,35 +1,18 @@
 import { createHash, randomUUID } from "crypto";
-import { lstat, mkdir, open, readFile, realpath, rename, unlink } from "fs/promises";
+import { AsyncLocalStorage } from "async_hooks";
+import { lstat, mkdir, readFile, realpath } from "fs/promises";
 import { createServer } from "net";
 import { join } from "path";
 import { CliError } from "./cli/errors.js";
+import { digest, filename, GENERATIONS, missing, POINTER, regular, replace, writeSynced } from "./output-storage.js";
+import { assertPublicationComplete, preparePublication, recoverPendingPublication } from "./output-transaction.js";
 
-const POINTER = ".qeg-current.json";
-const GENERATIONS = ".qeg-generations";
-const digest = (bytes: string | Buffer) => "sha256:" + createHash("sha256").update(bytes).digest("hex");
-const missing = (error: unknown) => (error as NodeJS.ErrnoException)?.code === "ENOENT";
-const filename = (name: string) => /^[a-zA-Z0-9][a-zA-Z0-9._-]*$/.test(name) && name !== "generation.json";
+const leaseContext = new AsyncLocalStorage<{ identity: string; active: boolean }>();
 interface Generation { version: "qeg-generation/v1"; id: string; previous?: Pointer; files: { name: string; hash: string }[]; }
 interface Pointer { version: "qeg-pointer/v1"; id: string; hash: string; }
 export interface PublishedOutputs { readonly generation: string; readonly files: ReadonlyMap<string, string>; }
 /** Process-level acceptance instrumentation; never selected through environment variables. */
 export interface PublishOptions { readonly onBoundary?: (boundary: string) => Promise<void>; }
-
-async function regular(path: string): Promise<void> {
-  if (!(await lstat(path)).isFile()) throw new CliError(`Output is not a regular file: ${path}`);
-}
-async function writeSynced(path: string, bytes: string): Promise<void> {
-  const file = await open(path, "wx");
-  try { await file.writeFile(bytes, "utf8"); await file.sync(); } finally { await file.close(); }
-}
-async function replace(root: string, name: string, bytes: string): Promise<void> {
-  const target = join(root, name);
-  try { await regular(target); } catch (error) { if (!missing(error)) throw error; }
-  const temporary = join(root, `.qeg-replace-${randomUUID()}`);
-  await writeSynced(temporary, bytes);
-  try { await rename(temporary, target); }
-  catch (error) { await unlink(temporary).catch(() => undefined); throw error; }
-}
 
 /** OS-owned lease, released on process death without stale-PID removal races.
  * Windows named pipes and Linux abstract sockets have no stale filesystem entry.
@@ -38,6 +21,8 @@ async function replace(root: string, name: string, bytes: string): Promise<void>
 export async function withOutputLease<T>(directory: string, operation: (root: string) => Promise<T>): Promise<T> {
   const root = await realpath(directory);
   const identity = process.platform === "win32" ? root.toLowerCase() : root;
+  const held = leaseContext.getStore();
+  if (held?.active && held.identity === identity) return operation(root);
   const hash = createHash("sha256").update(identity).digest();
   const endpoint = process.platform === "win32" ? { path: `\\\\.\\pipe\\qeg-output-${hash.toString("hex")}` }
     : process.platform === "linux" ? { path: `\0qeg-output-${hash.toString("hex")}` }
@@ -47,8 +32,18 @@ export async function withOutputLease<T>(directory: string, operation: (root: st
     server.once("error", error => reject(new CliError(`Output busy or lease unavailable (${root}): ${error}`)));
     server.listen(endpoint, accept);
   });
-  try { return await operation(root); }
-  finally { await new Promise<void>((accept, reject) => server.close(error => error ? reject(error) : accept())); }
+  const scope = { identity, active: true };
+  try { return await leaseContext.run(scope, () => operation(root)); }
+  finally { scope.active = false; await new Promise<void>((accept, reject) => server.close(error => error ? reject(error) : accept())); }
+}
+
+/** Native inputs remain editable; a managed write that has not committed must be recovered first. */
+export async function readGateInput(directory: string): Promise<string> {
+  return withOutputLease(directory, async root => {
+    await assertPublicationComplete(root);
+    await regular(join(root, "gate-input.json"));
+    return readFile(join(root, "gate-input.json"), "utf8");
+  });
 }
 
 async function generation(root: string, selected?: Pointer): Promise<(PublishedOutputs & { previous?: Pointer }) | undefined> {
@@ -90,6 +85,7 @@ export async function hasCommittedFile(root: string, name: string, bytes: string
 
 export async function readPublishedOutputs(directory: string): Promise<PublishedOutputs> {
   return withOutputLease(directory, async root => {
+    await assertPublicationComplete(root);
     const current = await generation(root);
     if (!current) throw new CliError("No completed output generation; rerun the original producer command");
     for (const [name, bytes] of current.files) {
@@ -100,10 +96,11 @@ export async function readPublishedOutputs(directory: string): Promise<Published
   });
 }
 
-/** Restore only a verified completed generation; retain uncommitted stages for diagnosis. */
+/** Roll back interrupted writes, then restore verified completed aliases; retain stages for diagnosis. */
 export async function recoverOutputs(directory: string): Promise<string> {
   return withOutputLease(directory, async root => {
     const current = await generation(root);
+    await recoverPendingPublication(root);
     if (!current) throw new CliError("No completed generation to recover; rerun the original producer command");
     for (const [name, bytes] of current.files) await replace(root, name, bytes);
     return current.generation;
@@ -120,7 +117,9 @@ export async function publishFiles(directory: string, files: ReadonlyMap<string,
 /** Internal: caller must hold withOutputLease through its read/compare/write transaction. */
 export async function publishFilesUnderLease(root: string, files: ReadonlyMap<string, string>, options: PublishOptions = {}): Promise<void> {
   if (!files.size || [...files.keys()].some(name => !filename(name))) throw new CliError("Invalid output filename or empty publication");
+  await assertPublicationComplete(root);
   const previous = await generation(root);
+  await recoverPendingPublication(root); // Remove a journal left after a successful pointer commit.
   const before = new Map<string, string | undefined>();
   for (const name of files.keys()) {
     try { await regular(join(root, name)); before.set(name, await readFile(join(root, name), "utf8")); }
@@ -132,7 +131,6 @@ export async function publishFilesUnderLease(root: string, files: ReadonlyMap<st
   const stage = join(root, GENERATIONS, id);
   await mkdir(stage);
   const boundary = async (name: string) => options.onBoundary?.(name);
-  const published: string[] = [];
   let committed = false;
   try {
     await boundary("staged-directory");
@@ -143,20 +141,20 @@ export async function publishFilesUnderLease(root: string, files: ReadonlyMap<st
     const bytes = JSON.stringify(manifest) + "\n";
     await writeSynced(join(stage, "generation.json"), bytes);
     await boundary("sealed");
+    const pointer = JSON.stringify({ version: "qeg-pointer/v1", id, hash: digest(bytes) }) + "\n";
+    await preparePublication(root, id, before, pointer);
+    await boundary("prepared");
     for (const [name, content] of files) {
-      await replace(root, name, content); published.push(name); await boundary(`alias:${name}`);
+      await replace(root, name, content); await boundary(`alias:${name}`);
     }
-    await replace(root, POINTER, JSON.stringify({ version: "qeg-pointer/v1", id, hash: digest(bytes) }) + "\n");
+    await replace(root, POINTER, pointer);
     committed = true;
+    await boundary("pointer-committed");
+    await recoverPendingPublication(root);
     await boundary("committed");
   } catch (error) {
     const recovery: string[] = [];
-    if (!committed) for (const name of published.reverse()) {
-      try {
-        const bytes = previous?.files.get(name) ?? before.get(name);
-        if (bytes === undefined) await unlink(join(root, name)); else await replace(root, name, bytes);
-      } catch (failure) { recovery.push(String(failure)); }
-    }
+    try { await recoverPendingPublication(root); } catch (failure) { recovery.push(String(failure)); }
     throw new CliError(`Publishing outputs failed: ${error}; recovery files: ${stage}; ${committed ? "new generation committed" : "previous generation retained"}${recovery.length ? `; recovery errors: ${recovery.join("; ")}` : ""}`);
   }
 }

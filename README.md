@@ -23,6 +23,8 @@
 
 追加調査後の[証跡共通受入基準](docs/spec/evidence-acceptance-standard.md)に沿い、実行対象・時刻・最新runの検証に加え、[世代公開・復旧・実producer接続・consumer移行](docs/spec/output-publication-and-migration.md)を実装しました。`outputs read/recover`で出力を検証・復旧し、`migrate --dry-run/--apply`で明示設定を移行できます。[受入状況](docs/project/evidence-acceptance-status.md)に検証範囲と証拠を集約しています。
 
+2026-09-11の[再レビュー修正](docs/project/review-fixes-2026-09-11.md)では、配置と移行の競合、入力を含む中断復旧、移行previewとCLIの整合、API/CLIの要求mappingを追加検証しています。
+
 フォーカス手順:
 
 - 直近変更ファイル±2hopの node ID を `docs/birdseye/index.json` から取得する。

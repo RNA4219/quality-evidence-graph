@@ -1,0 +1,111 @@
+{
+  "evidenceVersion": "qeg-review-fixes/v1",
+  "reviewDate": "2026-09-11",
+  "baselineCommit": "d957fc25907e1b678add65eb47f92853dd093d32",
+  "sourceCommit": null,
+  "acceptance": {
+    "decision": "implemented",
+    "findingIds": [
+      "R1",
+      "R2",
+      "R3",
+      "R4"
+    ],
+    "eacIds": [
+      "EAC-04",
+      "EAC-07",
+      "EAC-08",
+      "EAC-10",
+      "EAC-12"
+    ],
+    "pending": [
+      "source commit CI on Linux Node20/24 and Windows Node24"
+    ],
+    "excluded": [
+      "production deployment",
+      "human-executed QA",
+      "new live producer runs",
+      "power-loss/filesystem durability"
+    ]
+  },
+  "baseline": {
+    "runtimeTestNodes": 147,
+    "fixtureContracts": 53,
+    "allFourFindingsReproduced": true,
+    "mainCi": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34429798603",
+    "localReceipt": "artifacts/qeg-rereview-20260911/review-receipt.json",
+    "note": "Sibling task artifacts preserve the original review, reproductions and log hashes; existing green checks did not cover these four scenarios.",
+    "localReceiptHash": "sha256:5349f4cd3c82bd39f2a47c3159285a11874fefadc55a9b5f45e77f352795e7c1"
+  },
+  "regressionTests": [
+    "tests/transaction-regression.test.mjs",
+    "tests/output-publication.test.mjs"
+  ],
+  "localValidation": {
+    "status": "passed",
+    "platform": "win32",
+    "node": "v24.11.0",
+    "runtimeTestNodes": 165,
+    "fixtureContracts": 53,
+    "reliabilityFixtures": 22,
+    "countingNote": "node:test includes parent tests and named subtests",
+    "commands": [
+      {
+        "command": "npm test",
+        "exitCode": 0,
+        "scope": "Full suite before the final recovery validation-order guard and two stronger assertions"
+      },
+      {
+        "command": "npm run build && npm run test:runtime",
+        "exitCode": 0,
+        "scope": "Final source and tests; all 165 nodes, including recovery-source corruption and actual CLI DQ-01"
+      },
+      {
+        "command": "npm run test:release-lifecycle",
+        "exitCode": 0,
+        "scope": "Final bundled Action lifecycle"
+      },
+      {
+        "command": "npm run schema-check && npm run enum-check",
+        "exitCode": 0
+      }
+    ],
+    "checks": {
+      "publicTypes": "pass",
+      "packedConsumer": "pass",
+      "actionBundle": "pass",
+      "actionLifecycle": "go",
+      "compiledSchemas": 19,
+      "enum": "pass",
+      "birdseyeGeneration": "00018"
+    },
+    "logs": [
+      {
+        "path": "full-test.log",
+        "sha256": "sha256:9b439385370f0611255ed3967345a3595bce6131f34e4a527f0537d504f0c9db"
+      },
+      {
+        "path": "final-build.log",
+        "sha256": "sha256:9dbc822a339882d25ac193dd6effea3a086327ff18bf003f71a28ced3027dace"
+      },
+      {
+        "path": "final-runtime.log",
+        "sha256": "sha256:0db9f36bd7c560b59e93b9a1303dcbbc60dbfd96bcdf95bc47d3b69e89b7344b"
+      },
+      {
+        "path": "lifecycle.log",
+        "sha256": "sha256:68c191582ad2183abad3dfc9834dffc4edf55632a5143712291165c609074e25"
+      },
+      {
+        "path": "schema.log",
+        "sha256": "sha256:44ed990ba47037c453f576961052d211f424d872972653f1e2d08b7eaa1ac500"
+      },
+      {
+        "path": "enum.log",
+        "sha256": "sha256:68b87e1d020bded5941fd2a630be69220722426a5d23cbacd65a2745e5bfda33"
+      }
+    ],
+    "logAvailability": "Sibling artifacts/qeg-fixes-20260911; equivalent checks are linked in source CI"
+  },
+  "ci": null
+}

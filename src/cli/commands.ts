@@ -18,6 +18,7 @@ import { runSchemaCheckCommand } from "./schema-check.js";
 import { runSnapshotCommand } from "./snapshot.js";
 import { validateEvaluatedFixture } from "./validation.js";
 import { assertValidOutput } from "../validation/output.js";
+import { withOutputLease } from "../output-publication.js";
 
 export async function runValidateCommand(fixtureDir: string): Promise<void> {
   try {
@@ -50,9 +51,12 @@ export async function runGateCommand(fixtureDir: string): Promise<void> {
 
 export async function runRecordCommand(fixtureDir: string): Promise<void> {
   try {
-    const evaluated = await evaluateFixture(fixtureDir);
-    await writeOutputRecord(evaluated);
-    exit(getExitCode(evaluated.gateResult.verdict, evaluated.policy));
+    const code = await withOutputLease(fixtureDir, async root => {
+      const evaluated = await evaluateFixture(root);
+      await writeOutputRecord(evaluated);
+      return getExitCode(evaluated.gateResult.verdict, evaluated.policy);
+    });
+    exit(code);
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);

@@ -26,9 +26,14 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
   const parserFailures: ParserFailure[] = [];
   const unsupportedClaims: UnsupportedClaim[] = [];
   const artifacts = [...manifest.artifacts].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : a.id < b.id ? -1 : 1);
+  // Payloads may have been loaded before a descriptor was edited. The manifest owns all bindings.
+  const boundLoaded: LoadedArtifact[] = loaded.flatMap(item => {
+    const ref = artifacts.find(candidate => candidate.id === item.ref.id && candidate.path === item.ref.path);
+    return ref ? [{ ...item, ref }] : [];
+  });
   const statuses: Record<string, "success" | "contract_violation"> = {};
   const knownChanges = new Map<string, string>();
-  for (const item of loaded) {
+  for (const item of boundLoaded) {
     if (item.failure || item.ref.adapter !== "code-to-gate" || item.ref.kind !== "diff_analysis") continue;
     const raw = item.payload as { changed_files?: { path?: unknown }[] } | null;
     if (Array.isArray(raw?.changed_files)) for (const file of raw.changed_files) if (typeof file?.path === "string") {
@@ -41,7 +46,7 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
     try {
       if (seenArtifactIds.has(ref.id)) throw new Error(`Duplicate artifact ID ${ref.id}`);
       seenArtifactIds.add(ref.id);
-      const matches = loaded.filter(item => item.ref.id === ref.id && item.ref.path === ref.path);
+      const matches = boundLoaded.filter(item => item.ref.id === ref.id && item.ref.path === ref.path);
       if (matches.length !== 1) throw new Error(`Expected one loaded payload for ${ref.id}`);
       const item = matches[0];
       if (item.failure) {
@@ -101,7 +106,7 @@ export function buildGraph(manifest: IngestManifest, loaded: readonly LoadedArti
   const validEdges: QegEdge[] = [];
   try {
     for (const ref of artifacts) if (ref.sourceRefMappings && (ref.adapter !== "manual-bb-test-harness" || ref.kind !== "feature_spec")) throw new Error("sourceRefMappings require a manual-bb feature_spec");
-    for (const edge of requirementEdges([...nodes.values()], loaded)) edges.set(edge.id, edge);
+    for (const edge of requirementEdges([...nodes.values()], boundLoaded)) edges.set(edge.id, edge);
   } catch (error) { parserFailures.push({ code: "DQ-01", path: "ingest-manifest.json", reason: String(error), sourceRefs: [{ id: "qeg:source-mapping", path: "ingest-manifest.json" }] }); }
   for (const edge of edges.values()) {
     if (nodes.has(edge.from) && nodes.has(edge.to)) validEdges.push(edge);

@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00017";
+const generation = "00018";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,8 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/project/review-fixes-2026-09-11.md", "docs/evidence/review-fixes-2026-09-11/validation.json",
+  "tests/transaction-regression.test.mjs", "tests/helpers/command-transaction-child.mjs",
   "docs/spec/output-publication-and-migration.md", "docs/evidence/eac-completion-2026-09-10/validation.json",
   "tests/output-publication.test.mjs", "tests/consumer-migration.test.mjs", "tests/producer-replay.test.mjs", "tests/helpers/publication-child.mjs",
   "tools/build-action.mjs", "tools/interop/live-producers.mjs", "tools/interop/provenance.mjs", "tools/interop/producer-lock.json", "tools/interop/producer-bridge.py",
@@ -291,10 +293,14 @@ Object.assign(additions["docs/spec/evidence-acceptance-standard.md"], {
   tests: ["npm run birdseye-check", "文書のEAC/TC対応・リンク確認"],
 });
 Object.assign(additions["docs/project/evidence-acceptance-status.md"], {
-  role: "normal-execution-acceptance-ledger",
-  summary: "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
-  depsOut: ["docs/spec/evidence-acceptance-standard.md", "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "docs/project/remediation-2026-09-10.md", "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json", "docs/evidence/evidence-acceptance-2026-09-10/validation.json", "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json"],
+  role: "evidence-acceptance-ledger",
+  summary: "EAC-01〜12の実装・受入台帳。R1〜R4の追加修正とsource・CIを対応付け、旧受入と実producer原本を履歴として保持。",
+  depsOut: ["docs/spec/evidence-acceptance-standard.md", "docs/spec/output-publication-and-migration.md", "docs/project/review-fixes-2026-09-11.md", "docs/evidence/review-fixes-2026-09-11/validation.json", "docs/evidence/eac-completion-2026-09-10/validation.json", "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "docs/project/remediation-2026-09-10.md", "docs/evidence/evidence-acceptance-2026-09-10/validation.json"],
   tests: ["npm run birdseye-check", "npm run json-check"],
+});
+Object.assign(additions["docs/project/review-fixes-2026-09-11.md"], {
+  summary: "R1〜R4の再現、全command排他、入力rollback、preview整合、manifest bindingの修正と追加受入。",
+  depsOut: ["docs/evidence/review-fixes-2026-09-11/validation.json", "tests/transaction-regression.test.mjs", "src/output-transaction.ts", "src/output-publication.ts", "src/consumer-migration.ts", "src/graph.ts"],
 });
 Object.assign(additions["docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json"], {
   role: "pre-standard-observation-evidence",

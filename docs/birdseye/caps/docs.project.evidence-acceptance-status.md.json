@@ -1,16 +1,20 @@
 {
   "id": "docs/project/evidence-acceptance-status.md",
-  "role": "normal-execution-acceptance-ledger",
-  "generation": "00017",
+  "role": "evidence-acceptance-ledger",
+  "generation": "00018",
   "public_api": [],
-  "summary": "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
+  "summary": "EAC-01〜12の実装・受入台帳。R1〜R4の追加修正とsource・CIを対応付け、旧受入と実producer原本を履歴として保持。",
   "deps_out": [
+    "docs/evidence/eac-completion-2026-09-10/validation.json",
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
     "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json",
     "docs/evidence/evidence-acceptance-2026-09-10/validation.json",
+    "docs/evidence/review-fixes-2026-09-11/validation.json",
     "docs/project/remediation-2026-09-10.md",
+    "docs/project/review-fixes-2026-09-11.md",
     "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/execution-qualification.md",
+    "docs/spec/output-publication-and-migration.md",
     "tests/execution-qualification.test.mjs"
   ],
   "deps_in": [
@@ -30,5 +34,5 @@
     "npm run birdseye-check",
     "npm run json-check"
   ],
-  "contentHash": "sha256:3b4adec1b0077fcd29d97f3667ec078758ddbe3019fad37c77b2c7ebf0bf48b3"
+  "contentHash": "sha256:30b79a2e9e8495a6dfb1b8b635a9a9fce177d36f195258650a903f294c8e1f8d"
 }

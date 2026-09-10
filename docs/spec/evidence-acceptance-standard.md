@@ -3,9 +3,9 @@ intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-001
 owner: quality-evidence-graph
 status: defined
 standard_version: qeg-evidence-acceptance/v1
-implementation_status: accepted
-last_reviewed_at: 2026-09-10
-next_review_due: 2026-12-10
+implementation_status: implemented
+last_reviewed_at: 2026-09-11
+next_review_due: 2026-12-11
 ---
 
 # 証跡の共通受入基準
@@ -97,6 +97,8 @@ R-E01/02はP1、残りはP2。まず対象・時計・再実行を一緒に整�
 
 以下は基準に対する期待結果。実測と合否は受入台帳に記録する。black-boxを主とし、ログ・manifestによるgray確認を補助にする。自動化済みの同一ケースは実行証拠を流用でき、手動で重複実行する必要はない。
 
+2026-09-11の再レビューで、同じfile集合だけの中断試験と共有objectを使ったmapping試験では不足があった。TC-20〜22/24に加え、EAC-04/07のAPI/CLI照合はmanifestとloaded descriptorを別objectにし、正しいmappingと存在しない要求へのmappingの両方を試す。[R1〜R4の追加受入](../project/review-fixes-2026-09-11.md)を参照。
+
 共通前提はraw fixtureまたは隔離consumer、実行必須=true、正当な現在build/revision、他のGate条件を満たす正常対照。操作は「対象データを準備→raw build-graph→place-tests→gate→record→schema/hash確認」。1要因変更ではraw hashも実際のbytesへ整合させ、hashエラーで本来の意味的検証が隠れないようにする。全ケースのoracleは本書の対応EAC規則（specified）とする。
 
 | ケース | 対応/優先 | データ・操作 | 期待結果・確認する証拠 |
@@ -120,11 +122,11 @@ R-E01/02はP1、残りはP2。まず対象・時計・再実行を一緒に整�
 | TC-17 | EAC-06/11/P2 | optional-only不正、requireExecutedTests=falseの計画評価 | 既存warning契約を維持。実行受入済みとは表示しない |
 | TC-18 | EAC-07/12/P1 | 入力順・実行日のwall clock・API/CLI/packed consumerを変更 | 同じ記録時計と入力で意味的結果が一致。採用/除外理由も一致 |
 | TC-19 | EAC-08/P2 | 既存出力を作り、schema不正/rename失敗を注入 | schema失敗では既存bytes不変。I/O失敗は復旧/診断、成功表示なし |
-| TC-20 | EAC-08/P2 | 公開各境界でプロセス終了→正式経路で読取→再起動 | 旧/新の完全世代、または明示エラー。混在物を有効と扱わない |
-| TC-21 | EAC-08/P2 | 同じ出力先へ2実行、公開中に正式読取 | 直列化/明示拒否。成功世代にhash矛盾なし |
-| TC-22 | EAC-08/P2 | 初回中断、復旧再実行、manifest/alias改変 | 中断物を完了としない。復旧の再実行で完全世代、改変は検出 |
+| TC-20 | EAC-08/P1 | 公開各境界とrecord→migrationの入力更新前後・pointer確定後で実プロセス終了 | 旧/新の完全世代、または明示エラー。復旧前の未確定入力をGateが採用しない |
+| TC-21 | EAC-08/P1 | 配置/recordの入力読取り後にmigrationを競合、公開中にGate/schema-check/正式読取 | 入力読取りから公開まで直列化/明示拒否。成功した移行を古い入力で上書きしない |
+| TC-22 | EAC-08/P1 | 初回・既存recordから中断、復旧中も終了、journal/manifest/alias改変 | 異なるfile集合でも元入力を復元。復旧再実行は冪等で、破損原本では上書きしない |
 | TC-23 | EAC-09/P2 | 共通対象への3producerの実出力を保存・再生し、実producer再実行と比較 | version/revision/build/runとraw hashを保持、QEGまで完走。schemaを合わせるための原文改変なし |
-| TC-24 | EAC-10/P2 | 旧consumerへdry-run→明示設定して移行→再度移行 | dry-run無変更。不足と差分を提示し、繰返しで不要な変更なし |
+| TC-24 | EAC-10/P2 | 旧consumerへdry-run→移行→再適用。未定義ID prefix、同設定/不一致設定の中断再実行 | previewと実CLIの前処理が一致。不適合では無変更、適合時だけ再開し、完了後は冪等 |
 | TC-25 | EAC-11/12/P1 | 全profileでP1不正入力、waiver/承認/retentionの組合せ | DQをwaiverで消さず、scopeやstrict=falseで資格を緩めない。既存統制回帰成功 |
 
 CIへ登録する際は各表行の「個別」「各」を独立したsubcaseとして展開する。表の25行をテスト実行件数と呼ばない。期待結果を修正後の実際の出力から自動採用せず、表のoracleとの一致を確認する。

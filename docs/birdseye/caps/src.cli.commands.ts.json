@@ -1,7 +1,7 @@
 {
   "id": "src/cli/commands.ts",
   "role": "commands",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 commands の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -23,6 +23,7 @@
     "src/cli/snapshot.ts",
     "src/cli/validation.ts",
     "src/gate.ts",
+    "src/output-publication.ts",
     "src/validation/output.ts"
   ],
   "deps_in": [
@@ -34,5 +35,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:234b4d71a4ed8e31b376df35fb3241dcc6f833191084d1d5203f8a4319b0ff40"
+  "contentHash": "sha256:cce0abd9a866e4b8a65cac3c69b56d78842ac3cf3625e7c06e631bc7546fe7ec"
 }

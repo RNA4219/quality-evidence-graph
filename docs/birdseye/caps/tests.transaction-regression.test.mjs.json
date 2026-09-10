@@ -1,0 +1,20 @@
+{
+  "id": "tests/transaction-regression.test.mjs",
+  "role": "transaction-regression.test",
+  "generation": "00018",
+  "public_api": [],
+  "summary": "QEG 0.4.0 transaction-regression.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/raw-producer-fixture.mjs"
+  ],
+  "deps_in": [
+    "docs/project/review-fixes-2026-09-11.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:e1d0852db83fdbe79d1466a6bf0eaac7802e15cf685521509b55f86f62061bb3"
+}

@@ -1,8 +1,9 @@
 import { readFile } from "fs/promises";
 import { join, resolve } from "path";
 import { CliError } from "./errors.js";
+import { readGateInput, withOutputLease } from "../output-publication.js";
 import { evaluateGate } from "../gate.js";
-import { validateIngestContract } from "./ingest-contract.js";
+import { prepareIngestInput } from "./ingest-contract.js";
 import { validateGateInput, type GateInputValidationReport } from "../validation/schema.js";
 import { buildTestEvidenceAccounting } from "../gate/test-evidence.js";
 import { verifyEvidenceArtifacts, type EvidenceVerificationReport } from "../validation/evidence.js";
@@ -13,7 +14,6 @@ import type {
   GatePolicy,
   GateResult,
   OptionalEvidence,
-  ParserFailure,
   QegGateInput,
   QualityEvidenceGraph,
   QegMetadata,
@@ -71,10 +71,6 @@ async function readJsonFile(path: string): Promise<unknown> {
 function isObject(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
 }
-function withParserFailures(input: FixtureInput, parserFailures: readonly ParserFailure[]): FixtureInput {
-  if (parserFailures.length === 0) return input;
-  return { ...input, graph: { ...input.graph, completeness: { ...input.graph.completeness, parserFailures: [...input.graph.completeness.parserFailures, ...parserFailures] } } };
-}
 function emitDeprecationWarnings(warnings: readonly string[]): void {
   for (const warning of warnings.slice(0, 5)) console.warn(`Warning: ${warning}`);
   if (warnings.length > 5) console.warn(`Warning: ${warnings.length - 5} additional prefixless IDs accepted during deprecation period`);
@@ -93,7 +89,7 @@ Promise<{ input: FixtureInput; schema: GateInputValidationReport }> {
   const inputPath = join(fixtureDir, "gate-input.json");
   let raw: unknown;
   try {
-    raw = await readJsonFile(inputPath);
+    raw = JSON.parse(await readGateInput(fixtureDir));
   } catch (error) {
     throw new CliError(`gate-input.json not found or invalid\nInput file: ${inputPath}\nError: ${error}`, error instanceof Error ? error : undefined);
   }
@@ -105,9 +101,9 @@ Promise<{ input: FixtureInput; schema: GateInputValidationReport }> {
   if (!options.quiet) {
     for (const warning of schema.warnings) console.warn("Warning: optional artifact " + warning.path + " " + warning.message);
   }
-  const ingest = validateIngestContract(raw);
+  const ingest = prepareIngestInput(schema.input);
   if (!options.quiet) emitDeprecationWarnings(ingest.warnings);
-  return { input: withParserFailures(schema.input, ingest.parserFailures), schema };
+  return { input: ingest.input, schema };
 }
 export async function readFixtureInput(fixtureDir: string, options: FixtureIoOptions = {}): Promise<FixtureInput> {
   return (await loadFixtureInput(fixtureDir, options)).input;
@@ -162,6 +158,9 @@ function evidenceDq(report: EvidenceVerificationReport): Disqualification[] {
 }
 
 export async function evaluateFixture(rawFixtureDir: string, options: FixtureIoOptions = {}): Promise<EvaluatedFixture> {
+  return withOutputLease(rawFixtureDir, root => evaluateFixtureUnderLease(root, options));
+}
+async function evaluateFixtureUnderLease(rawFixtureDir: string, options: FixtureIoOptions): Promise<EvaluatedFixture> {
   const fixtureDir = resolve(rawFixtureDir);
   let input: FixtureInput;
   let schemaValidation: GateInputValidationReport;

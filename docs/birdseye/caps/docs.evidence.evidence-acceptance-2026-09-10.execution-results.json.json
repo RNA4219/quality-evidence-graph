@@ -1,7 +1,7 @@
 {
   "id": "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json",
   "role": "execution-results",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 execution-results の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],

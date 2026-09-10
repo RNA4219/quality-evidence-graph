@@ -1,7 +1,7 @@
 {
   "id": "src/cli/fixture-io.ts",
   "role": "fixture-io",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 fixture-io の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -9,6 +9,7 @@
     "src/cli/ingest-contract.ts",
     "src/gate.ts",
     "src/gate/test-evidence.ts",
+    "src/output-publication.ts",
     "src/types.ts",
     "src/validation/evidence.ts",
     "src/validation/schema.ts"
@@ -28,5 +29,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:fb0c39fe9bd832ece7bc956bf57b08070a4f72c09f58b1fa07b88f14df22700a"
+  "contentHash": "sha256:2feceb3eebed2cab137c802eed8780386aa885d0b99de8874a7eae8db86f8604"
 }

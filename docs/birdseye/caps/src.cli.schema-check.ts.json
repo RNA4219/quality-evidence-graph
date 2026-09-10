@@ -1,7 +1,7 @@
 {
   "id": "src/cli/schema-check.ts",
   "role": "schema-check-cli",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 schema-check-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -9,6 +9,8 @@
     "src/cli/file-errors.ts",
     "src/cli/output-integrity.ts",
     "src/cli/report.ts",
+    "src/output-publication.ts",
+    "src/output-transaction.ts",
     "src/validation/output.ts",
     "src/validation/schema.ts"
   ],
@@ -26,5 +28,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:0402e3fb69a621b55623c689d814a8d631986a78f31505dee58606689419f706"
+  "contentHash": "sha256:ddb18ee41d5eefce664610522e4a81db4d6c11cefe959750b925d0484175a254"
 }

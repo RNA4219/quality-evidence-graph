@@ -5,6 +5,7 @@ import { assertValidOutput } from "../validation/output.js";
 import { validateGateInput } from "../validation/schema.js";
 import { loadRawArtifacts } from "./raw-ingest.js";
 import { publishFiles } from "./output-files.js";
+import { withOutputLease } from "../output-publication.js";
 import { readFixtureInput } from "./fixture-io.js";
 import { CliError } from "./errors.js";
 import type { QegGateInput } from "../types.js";
@@ -14,6 +15,9 @@ async function validateInput(input: QegGateInput): Promise<void> {
   if (!validation.valid) throw new CliError(`Generated gate input invalid: ${validation.issues.map(i => `${i.path} ${i.message}`).join("; ")}`);
 }
 export async function runBuildGraphCommand(directory: string): Promise<void> {
+  return withOutputLease(directory, runBuildGraphUnderLease);
+}
+async function runBuildGraphUnderLease(directory: string): Promise<void> {
   const { manifest, loaded } = await loadRawArtifacts(directory);
   const graph = buildGraph(manifest, loaded);
   const input: QegGateInput = { metadata: graph.metadata, graph, policy: manifest.policy, waivers: manifest.waivers ?? [],
@@ -25,6 +29,9 @@ export async function runBuildGraphCommand(directory: string): Promise<void> {
   process.exitCode = graph.completeness.partial ? 2 : 0;
 }
 export async function runPlaceTestsCommand(directory: string): Promise<void> {
+  return withOutputLease(directory, runPlaceTestsUnderLease);
+}
+async function runPlaceTestsUnderLease(directory: string): Promise<void> {
   const input = await readFixtureInput(directory);
   const placementPlan = placeTests(input.graph, input.policy);
   const updated = { ...input, placementPlan };

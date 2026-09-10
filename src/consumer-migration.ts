@@ -6,7 +6,9 @@ import { evaluateGate } from "./gate.js";
 import { validateGateInput } from "./validation/schema.js";
 import { validateOutput } from "./validation/output.js";
 import { verifyEvidenceArtifacts } from "./validation/evidence.js";
-import { hasCommittedFile, publishFilesUnderLease, withOutputLease } from "./output-publication.js";
+import { hasCommittedFile, publishFilesUnderLease, readGateInput, withOutputLease } from "./output-publication.js";
+import { pendingPublication, recoverPendingPublication } from "./output-transaction.js";
+import { prepareIngestInput } from "./cli/ingest-contract.js";
 import { CliError } from "./cli/errors.js";
 
 export interface ConsumerMigrationConfig {
@@ -30,7 +32,7 @@ const canonical = (value: unknown): string => JSON.stringify(value, (_key, entry
 async function plan(directory: string, config?: ConsumerMigrationConfig, savedOriginal?: string): Promise<{ report: ConsumerMigrationReport; original: string; candidate?: string }> {
   const path = join(directory, "gate-input.json");
   if (!(await lstat(path)).isFile()) throw new CliError("Migration input must be a regular gate-input.json file");
-  const original = savedOriginal ?? await readFile(path, "utf8");
+  const original = savedOriginal ?? await readGateInput(directory);
   const input = JSON.parse(original) as QegGateInput;
   const inputHash = contentHash(original);
   const missingInputs: string[] = [];
@@ -62,13 +64,18 @@ async function plan(directory: string, config?: ConsumerMigrationConfig, savedOr
   }
   const schema = await validateGateInput(candidateInput);
   if (!schema.valid) missingInputs.push(...schema.issues.map(issue => `${issue.path} ${issue.message}`));
+  let evaluationInput: QegGateInput | undefined;
+  if (schema.input) {
+    try { evaluationInput = prepareIngestInput(schema.input).input; }
+    catch (error) { missingInputs.push(error instanceof Error ? error.message : String(error)); }
+  }
   if (changes.length && inputHash !== config.expectedInputHash) missingInputs.push("expectedInputHash mismatch: consumer changed since review");
   if (changes.length && input.policy?.policyHash === config.policy?.policyHash) missingInputs.push("Changed policy requires an explicit new policyHash; existing approvals remain attached to their original policy");
   const candidate = changes.length ? jsonDocument(candidateInput) : original;
   let gate: ConsumerMigrationReport["gate"];
-  if (!missingInputs.length) {
-    const evidenceVerification = await verifyEvidenceArtifacts(candidateInput, { baseDir: directory });
-    const result = evaluateGate({ ...candidateInput, waivers: candidateInput.waivers ?? [], evidenceVerification,
+  if (!missingInputs.length && evaluationInput) {
+    const evidenceVerification = await verifyEvidenceArtifacts(evaluationInput, { baseDir: directory });
+    const result = evaluateGate({ ...evaluationInput, waivers: evaluationInput.waivers ?? [], evidenceVerification,
       preflightDisqualifications: evidenceVerification.items.filter(item => item.severity === "fail").map(item => ({ code: "DQ-06" as const, nodeIds: [],
         message: item.message, sourceRefs: [{ id: item.artifactId, path: item.path ?? "gate-input.json" }] })) });
     gate = { verdict: result.verdict, disqualifications: result.disqualifications.map(item => item.code) };
@@ -80,11 +87,19 @@ async function plan(directory: string, config?: ConsumerMigrationConfig, savedOr
 
 /** Inspect a consumer using explicit configuration. No directory, receipt or backup is created. */
 export async function planConsumerMigration(directory: string, config?: ConsumerMigrationConfig): Promise<ConsumerMigrationReport> {
-  return (await plan(directory, config)).report;
+  return withOutputLease(directory, async root => (await plan(root, config)).report);
 }
 
 export async function applyConsumerMigration(directory: string, config: ConsumerMigrationConfig): Promise<ConsumerMigrationReport> {
   return withOutputLease(directory, async root => {
+    const pending = await pendingPublication(root);
+    if (pending && !pending.committed) {
+      const original = pending.before.get("gate-input.json");
+      if (original === undefined || !pending.before.has("migration-report.json")) throw new CliError("Another publication was interrupted; run outputs recover");
+      const resumed = await plan(root, config, original);
+      if (resumed.report.status !== "ready") throw new CliError(`Migration blocked: ${resumed.report.missingInputs.join("; ")}`);
+      await recoverPendingPublication(root);
+    }
     let result = await plan(root, config);
     if (result.report.status === "unchanged") {
       let receipt: string | undefined;

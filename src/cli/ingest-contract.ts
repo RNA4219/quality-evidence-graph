@@ -1,4 +1,4 @@
-import type { ParserFailure, SourceRef } from "../types.js";
+import type { ParserFailure, QegGateInput, SourceRef } from "../types.js";
 import { CliError } from "./errors.js";
 
 const RESERVED_PRODUCERS = new Set(["rand", "ctg", "mbb", "hate", "qeg"]);
@@ -141,4 +141,11 @@ export function validateIngestContract(rawInput: unknown): IngestContractValidat
   const warnings: string[] = [];
   inspectRawValue(rawInput, ["gate-input.json"], parserFailures, warnings);
   return { parserFailures, warnings };
+}
+
+/** Share CLI identity/policy preflight with consumer migration previews. */
+export function prepareIngestInput(input: QegGateInput): IngestContractValidation & { input: QegGateInput } {
+  const ingest = validateIngestContract(input);
+  return { ...ingest, input: ingest.parserFailures.length ? { ...input, graph: { ...input.graph, completeness: { ...input.graph.completeness,
+    parserFailures: [...input.graph.completeness.parserFailures, ...ingest.parserFailures] } } } : input };
 }

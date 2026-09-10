@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/remediation-2026-09-10.md",
   "role": "remediation-2026-09-10",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "明示入力、参照整合、raw生成、7層配置、出力schema/hash、診断、互換性の0.4.0仕様。",
   "deps_out": [
