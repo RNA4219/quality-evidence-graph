@@ -1,7 +1,7 @@
 {
   "id": "tools/interop/live-producers.mjs",
   "role": "live-producers",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 live-producers の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

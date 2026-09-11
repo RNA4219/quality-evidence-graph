@@ -1,13 +1,15 @@
 {
   "id": "src/consumer-migration.ts",
   "role": "consumer-migration",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 consumer-migration の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/errors.ts",
+    "src/cli/ingest-contract.ts",
     "src/gate.ts",
     "src/output-publication.ts",
+    "src/output-transaction.ts",
     "src/record.ts",
     "src/types.ts",
     "src/validation/evidence.ts",
@@ -15,6 +17,7 @@
     "src/validation/schema.ts"
   ],
   "deps_in": [
+    "docs/project/review-fixes-2026-09-11.md",
     "src/cli.ts",
     "src/index.ts"
   ],
@@ -24,5 +27,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:6dca7a1cf23c79b426f4285c754c97c9dd7d82997c56037edb5eca3d62e59299"
+  "contentHash": "sha256:af7343666ec0b39adea5301220d28b75fc55eb7cd4c119e6c36caa0c89e52b82"
 }

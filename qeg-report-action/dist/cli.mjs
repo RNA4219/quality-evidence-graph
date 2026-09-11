@@ -18184,9 +18184,13 @@ function buildGraph(manifest, loaded) {
   const parserFailures = [];
   const unsupportedClaims = [];
   const artifacts = [...manifest.artifacts].sort((a, b) => a.path < b.path ? -1 : a.path > b.path ? 1 : a.id < b.id ? -1 : 1);
+  const boundLoaded = loaded.flatMap((item) => {
+    const ref = artifacts.find((candidate) => candidate.id === item.ref.id && candidate.path === item.ref.path);
+    return ref ? [{ ...item, ref }] : [];
+  });
   const statuses = {};
   const knownChanges = /* @__PURE__ */ new Map();
-  for (const item of loaded) {
+  for (const item of boundLoaded) {
     if (item.failure || item.ref.adapter !== "code-to-gate" || item.ref.kind !== "diff_analysis") continue;
     const raw = item.payload;
     if (Array.isArray(raw?.changed_files)) {
@@ -18202,7 +18206,7 @@ function buildGraph(manifest, loaded) {
     try {
       if (seenArtifactIds.has(ref.id)) throw new Error(`Duplicate artifact ID ${ref.id}`);
       seenArtifactIds.add(ref.id);
-      const matches = loaded.filter((item2) => item2.ref.id === ref.id && item2.ref.path === ref.path);
+      const matches = boundLoaded.filter((item2) => item2.ref.id === ref.id && item2.ref.path === ref.path);
       if (matches.length !== 1) throw new Error(`Expected one loaded payload for ${ref.id}`);
       const item = matches[0];
       if (item.failure) {
@@ -18266,7 +18270,7 @@ function buildGraph(manifest, loaded) {
   const validEdges = [];
   try {
     for (const ref of artifacts) if (ref.sourceRefMappings && (ref.adapter !== "manual-bb-test-harness" || ref.kind !== "feature_spec")) throw new Error("sourceRefMappings require a manual-bb feature_spec");
-    for (const edge2 of requirementEdges([...nodes.values()], loaded)) edges.set(edge2.id, edge2);
+    for (const edge2 of requirementEdges([...nodes.values()], boundLoaded)) edges.set(edge2.id, edge2);
   } catch (error) {
     parserFailures.push({ code: "DQ-01", path: "ingest-manifest.json", reason: String(error), sourceRefs: [{ id: "qeg:source-mapping", path: "ingest-manifest.json" }] });
   }
@@ -18951,9 +18955,15 @@ async function loadRawArtifacts(directory) {
 }
 
 // src/output-publication.ts
-import { createHash as createHash2, randomUUID } from "crypto";
-import { lstat, mkdir, open, readFile as readFile4, realpath as realpath2, rename, unlink } from "fs/promises";
+import { createHash as createHash3, randomUUID as randomUUID2 } from "crypto";
+import { AsyncLocalStorage } from "async_hooks";
+import { lstat as lstat3, mkdir as mkdir2, readFile as readFile6, realpath as realpath2 } from "fs/promises";
 import { createServer } from "net";
+import { join as join4 } from "path";
+
+// src/output-storage.ts
+import { createHash as createHash2, randomUUID } from "crypto";
+import { lstat, open, readFile as readFile4, rename, unlink } from "fs/promises";
 import { join as join2 } from "path";
 var POINTER = ".qeg-current.json";
 var GENERATIONS = ".qeg-generations";
@@ -18988,29 +18998,117 @@ async function replace(root, name, bytes) {
     throw error;
   }
 }
+async function optionalRegular(path) {
+  try {
+    await regular(path);
+    return await readFile4(path, "utf8");
+  } catch (error) {
+    if (missing(error)) return void 0;
+    throw error;
+  }
+}
+
+// src/output-transaction.ts
+import { lstat as lstat2, mkdir, readFile as readFile5, unlink as unlink2 } from "fs/promises";
+import { join as join3 } from "path";
+var PENDING = ".qeg-pending.json";
+async function preparePublication(root, id, before, next) {
+  const stage = join3(root, GENERATIONS, id);
+  await mkdir(join3(stage, ".qeg-rollback"));
+  const files = [];
+  for (const [name, bytes2] of before) {
+    if (bytes2 !== void 0) await writeSynced(join3(stage, ".qeg-rollback", name), bytes2);
+    files.push({ name, ...bytes2 === void 0 ? {} : { hash: digest(bytes2) } });
+  }
+  const journal = { version: "qeg-transaction/v1", id, previous: await optionalRegular(join3(root, POINTER)), next, files };
+  const bytes = JSON.stringify(journal) + "\n";
+  await writeSynced(join3(stage, ".qeg-transaction.json"), bytes);
+  await replace(root, PENDING, JSON.stringify({ version: "qeg-pending/v1", id, hash: digest(bytes) }) + "\n");
+}
+async function pendingPublication(root) {
+  const bytes = await optionalRegular(join3(root, PENDING));
+  if (bytes === void 0) return void 0;
+  const ref = JSON.parse(bytes);
+  if (ref.version !== "qeg-pending/v1" || !/^[0-9a-f-]{36}$/.test(ref.id) || !/^sha256:[0-9a-f]{64}$/.test(ref.hash)) throw new CliError("Invalid pending publication pointer");
+  const stage = join3(root, GENERATIONS, ref.id);
+  for (const path of [join3(root, GENERATIONS), stage, join3(stage, ".qeg-rollback")]) if (!(await lstat2(path)).isDirectory()) throw new CliError("Invalid publication rollback directory");
+  await regular(join3(stage, ".qeg-transaction.json"));
+  const journalBytes = await readFile5(join3(stage, ".qeg-transaction.json"), "utf8");
+  if (digest(journalBytes) !== ref.hash) throw new CliError("Publication journal hash mismatch");
+  const journal = JSON.parse(journalBytes);
+  if (journal.version !== "qeg-transaction/v1" || journal.id !== ref.id || typeof journal.next !== "string" || journal.previous !== void 0 && typeof journal.previous !== "string" || !Array.isArray(journal.files) || !journal.files.length) throw new CliError("Invalid publication journal");
+  const next = JSON.parse(journal.next);
+  if (next.version !== "qeg-pointer/v1" || next.id !== ref.id || !/^sha256:[0-9a-f]{64}$/.test(next.hash)) throw new CliError("Invalid publication commit pointer");
+  const current = await optionalRegular(join3(root, POINTER));
+  if (current !== journal.next && current !== journal.previous) throw new CliError("Publication pointer differs from both journal generations");
+  const before = /* @__PURE__ */ new Map();
+  for (const file of journal.files) {
+    if (!file || !filename(file.name) || before.has(file.name)) throw new CliError("Invalid publication rollback filename");
+    if (file.hash === void 0) before.set(file.name, void 0);
+    else {
+      const original = await optionalRegular(join3(stage, ".qeg-rollback", file.name));
+      if (original === void 0 || digest(original) !== file.hash) throw new CliError(`Publication rollback hash mismatch: ${file.name}`);
+      before.set(file.name, original);
+    }
+  }
+  return { id: ref.id, committed: current === journal.next, before };
+}
+async function assertPublicationComplete(root) {
+  const pending = await pendingPublication(root);
+  if (pending && !pending.committed) throw new CliError("Interrupted output publication; run outputs recover before reading or writing this input");
+}
+async function recoverPendingPublication(root) {
+  const pending = await pendingPublication(root);
+  if (!pending) return;
+  if (!pending.committed) for (const [name, bytes] of pending.before) {
+    if (bytes === void 0) {
+      try {
+        await regular(join3(root, name));
+        await unlink2(join3(root, name));
+      } catch (error) {
+        if (!missing(error)) throw error;
+      }
+    } else await replace(root, name, bytes);
+  }
+  await unlink2(join3(root, PENDING));
+}
+
+// src/output-publication.ts
+var leaseContext = new AsyncLocalStorage();
 async function withOutputLease(directory, operation) {
   const root = await realpath2(directory);
   const identity2 = process.platform === "win32" ? root.toLowerCase() : root;
-  const hash2 = createHash2("sha256").update(identity2).digest();
+  const held = leaseContext.getStore();
+  if (held?.active && held.identity === identity2) return operation(root);
+  const hash2 = createHash3("sha256").update(identity2).digest();
   const endpoint = process.platform === "win32" ? { path: `\\\\.\\pipe\\qeg-output-${hash2.toString("hex")}` } : process.platform === "linux" ? { path: `\0qeg-output-${hash2.toString("hex")}` } : { host: "127.0.0.1", port: 2e4 + hash2.readUInt32BE(0) % 4e4, exclusive: true };
   const server = createServer((socket) => socket.destroy());
   await new Promise((accept, reject) => {
     server.once("error", (error) => reject(new CliError(`Output busy or lease unavailable (${root}): ${error}`)));
     server.listen(endpoint, accept);
   });
+  const scope = { identity: identity2, active: true };
   try {
-    return await operation(root);
+    return await leaseContext.run(scope, () => operation(root));
   } finally {
+    scope.active = false;
     await new Promise((accept, reject) => server.close((error) => error ? reject(error) : accept()));
   }
+}
+async function readGateInput(directory) {
+  return withOutputLease(directory, async (root) => {
+    await assertPublicationComplete(root);
+    await regular(join4(root, "gate-input.json"));
+    return readFile6(join4(root, "gate-input.json"), "utf8");
+  });
 }
 async function generation(root, selected) {
   let pointerBytes;
   try {
     if (selected) pointerBytes = JSON.stringify(selected);
     else {
-      await regular(join2(root, POINTER));
-      pointerBytes = await readFile4(join2(root, POINTER), "utf8");
+      await regular(join4(root, POINTER));
+      pointerBytes = await readFile6(join4(root, POINTER), "utf8");
     }
   } catch (error) {
     if (missing(error)) return void 0;
@@ -19018,18 +19116,18 @@ async function generation(root, selected) {
   }
   const pointer = JSON.parse(pointerBytes);
   if (pointer.version !== "qeg-pointer/v1" || !/^[0-9a-f-]{36}$/.test(pointer.id) || !/^sha256:[0-9a-f]{64}$/.test(pointer.hash)) throw new CliError("Invalid output generation pointer");
-  const directory = join2(root, GENERATIONS, pointer.id);
-  if (!(await lstat(join2(root, GENERATIONS))).isDirectory() || !(await lstat(directory)).isDirectory()) throw new CliError("Invalid generation directory");
-  await regular(join2(directory, "generation.json"));
-  const bytes = await readFile4(join2(directory, "generation.json"), "utf8");
+  const directory = join4(root, GENERATIONS, pointer.id);
+  if (!(await lstat3(join4(root, GENERATIONS))).isDirectory() || !(await lstat3(directory)).isDirectory()) throw new CliError("Invalid generation directory");
+  await regular(join4(directory, "generation.json"));
+  const bytes = await readFile6(join4(directory, "generation.json"), "utf8");
   if (digest(bytes) !== pointer.hash) throw new CliError("Generation manifest hash mismatch");
   const manifest = JSON.parse(bytes);
   if (manifest.version !== "qeg-generation/v1" || manifest.id !== pointer.id || !Array.isArray(manifest.files) || !manifest.files.length) throw new CliError("Invalid generation manifest");
   const files = /* @__PURE__ */ new Map();
   for (const file of manifest.files) {
     if (!filename(file.name) || files.has(file.name)) throw new CliError("Invalid or duplicate generation filename");
-    await regular(join2(directory, file.name));
-    const content = await readFile4(join2(directory, file.name), "utf8");
+    await regular(join4(directory, file.name));
+    const content = await readFile6(join4(directory, file.name), "utf8");
     if (digest(content) !== file.hash) throw new CliError(`Generation hash mismatch: ${file.name}`);
     files.set(file.name, content);
   }
@@ -19048,11 +19146,12 @@ async function hasCommittedFile(root, name, bytes) {
 }
 async function readPublishedOutputs(directory) {
   return withOutputLease(directory, async (root) => {
+    await assertPublicationComplete(root);
     const current = await generation(root);
     if (!current) throw new CliError("No completed output generation; rerun the original producer command");
     for (const [name, bytes] of current.files) {
-      await regular(join2(root, name));
-      if (digest(await readFile4(join2(root, name))) !== digest(bytes)) throw new CliError(`Output alias hash mismatch: ${name}; run outputs recover`);
+      await regular(join4(root, name));
+      if (digest(await readFile6(join4(root, name))) !== digest(bytes)) throw new CliError(`Output alias hash mismatch: ${name}; run outputs recover`);
     }
     return current;
   });
@@ -19060,6 +19159,7 @@ async function readPublishedOutputs(directory) {
 async function recoverOutputs(directory) {
   return withOutputLease(directory, async (root) => {
     const current = await generation(root);
+    await recoverPendingPublication(root);
     if (!current) throw new CliError("No completed generation to recover; rerun the original producer command");
     for (const [name, bytes] of current.files) await replace(root, name, bytes);
     return current.generation;
@@ -19067,71 +19167,72 @@ async function recoverOutputs(directory) {
 }
 async function publishFiles(directory, files, options = {}) {
   if (!files.size || [...files.keys()].some((name) => !filename(name))) throw new CliError("Invalid output filename or empty publication");
-  await mkdir(directory, { recursive: true });
+  await mkdir2(directory, { recursive: true });
   await withOutputLease(directory, (root) => publishFilesUnderLease(root, files, options));
 }
 async function publishFilesUnderLease(root, files, options = {}) {
   if (!files.size || [...files.keys()].some((name) => !filename(name))) throw new CliError("Invalid output filename or empty publication");
+  await assertPublicationComplete(root);
   const previous = await generation(root);
+  await recoverPendingPublication(root);
   const before = /* @__PURE__ */ new Map();
   for (const name of files.keys()) {
     try {
-      await regular(join2(root, name));
-      before.set(name, await readFile4(join2(root, name), "utf8"));
+      await regular(join4(root, name));
+      before.set(name, await readFile6(join4(root, name), "utf8"));
     } catch (error) {
       if (!missing(error)) throw error;
       before.set(name, void 0);
     }
   }
-  const id = randomUUID();
-  await mkdir(join2(root, GENERATIONS), { recursive: true });
-  if (!(await lstat(join2(root, GENERATIONS))).isDirectory()) throw new CliError("Invalid generation root");
-  const stage = join2(root, GENERATIONS, id);
-  await mkdir(stage);
+  const id = randomUUID2();
+  await mkdir2(join4(root, GENERATIONS), { recursive: true });
+  if (!(await lstat3(join4(root, GENERATIONS))).isDirectory()) throw new CliError("Invalid generation root");
+  const stage = join4(root, GENERATIONS, id);
+  await mkdir2(stage);
   const boundary = async (name) => options.onBoundary?.(name);
-  const published = [];
   let committed = false;
   try {
     await boundary("staged-directory");
     for (const [name, bytes2] of files) {
-      await writeSynced(join2(stage, name), bytes2);
+      await writeSynced(join4(stage, name), bytes2);
       await boundary(`staged:${name}`);
     }
     const manifest = {
       version: "qeg-generation/v1",
       id,
-      ...previous ? { previous: JSON.parse(await readFile4(join2(root, POINTER), "utf8")) } : {},
+      ...previous ? { previous: JSON.parse(await readFile6(join4(root, POINTER), "utf8")) } : {},
       files: [...files].map(([name, bytes2]) => ({ name, hash: digest(bytes2) }))
     };
     const bytes = JSON.stringify(manifest) + "\n";
-    await writeSynced(join2(stage, "generation.json"), bytes);
+    await writeSynced(join4(stage, "generation.json"), bytes);
     await boundary("sealed");
+    const pointer = JSON.stringify({ version: "qeg-pointer/v1", id, hash: digest(bytes) }) + "\n";
+    await preparePublication(root, id, before, pointer);
+    await boundary("prepared");
     for (const [name, content] of files) {
       await replace(root, name, content);
-      published.push(name);
       await boundary(`alias:${name}`);
     }
-    await replace(root, POINTER, JSON.stringify({ version: "qeg-pointer/v1", id, hash: digest(bytes) }) + "\n");
+    await replace(root, POINTER, pointer);
     committed = true;
+    await boundary("pointer-committed");
+    await recoverPendingPublication(root);
     await boundary("committed");
   } catch (error) {
     const recovery = [];
-    if (!committed) for (const name of published.reverse()) {
-      try {
-        const bytes = previous?.files.get(name) ?? before.get(name);
-        if (bytes === void 0) await unlink(join2(root, name));
-        else await replace(root, name, bytes);
-      } catch (failure) {
-        recovery.push(String(failure));
-      }
+    try {
+      await recoverPendingPublication(root);
+    } catch (failure) {
+      recovery.push(String(failure));
     }
     throw new CliError(`Publishing outputs failed: ${error}; recovery files: ${stage}; ${committed ? "new generation committed" : "previous generation retained"}${recovery.length ? `; recovery errors: ${recovery.join("; ")}` : ""}`);
   }
 }
 
 // src/cli/fixture-io.ts
-import { readFile as readFile6 } from "fs/promises";
-import { join as join3, resolve as resolve3 } from "path";
+import { readFile as readFile8 } from "fs/promises";
+import { join as join5, resolve as resolve3 } from "path";
 
 // src/gate/context.ts
 function isRiskNode(node) {
@@ -20029,7 +20130,7 @@ function metricMatchesSlo(metric, slo) {
 }
 
 // src/gate/reliability/fingerprint.ts
-import { createHash as createHash3 } from "crypto";
+import { createHash as createHash4 } from "crypto";
 function canonicalJson(value) {
   if (value === void 0) return "null";
   if (Array.isArray(value)) return "[" + value.map(canonicalJson).join(",") + "]";
@@ -20047,7 +20148,7 @@ function decisionFingerprint(evidence) {
     sourceArtifactIds: _sourceArtifactIds,
     ...decisionFields
   } = evidence;
-  return createHash3("sha256").update(canonicalJson(decisionFields)).digest("hex");
+  return createHash4("sha256").update(canonicalJson(decisionFields)).digest("hex");
 }
 
 // src/gate/reliability/utils.ts
@@ -21199,7 +21300,7 @@ function upstreamDecisions(graph) {
 }
 
 // src/gate/execution/contracts.ts
-import { createHash as createHash4 } from "crypto";
+import { createHash as createHash5 } from "crypto";
 var same = (a, b) => canonicalJson(a) === canonicalJson(b);
 var compareId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
 var nonblank = (v) => typeof v === "string" && v.trim().length > 0;
@@ -21247,7 +21348,7 @@ function normalEvidence(input) {
 }
 function executionFingerprint(input) {
   const sorted = (items) => [...items].sort((a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0);
-  return createHash4("sha256").update(canonicalJson({
+  return createHash5("sha256").update(canonicalJson({
     metadata: { ...input.metadata, inputArtifacts: sorted(input.metadata.inputArtifacts) },
     graphMetadata: { ...input.graph.metadata, inputArtifacts: sorted(input.graph.metadata.inputArtifacts) },
     policy: input.policy.executionPolicy,
@@ -21590,10 +21691,17 @@ function validateIngestContract(rawInput) {
   inspectRawValue(rawInput, ["gate-input.json"], parserFailures, warnings);
   return { parserFailures, warnings };
 }
+function prepareIngestInput(input) {
+  const ingest = validateIngestContract(input);
+  return { ...ingest, input: ingest.parserFailures.length ? { ...input, graph: { ...input.graph, completeness: {
+    ...input.graph.completeness,
+    parserFailures: [...input.graph.completeness.parserFailures, ...ingest.parserFailures]
+  } } } : input };
+}
 
 // src/validation/evidence.ts
-import { createHash as createHash5 } from "crypto";
-import { readFile as readFile5, realpath as realpath3, stat as stat3 } from "fs/promises";
+import { createHash as createHash6 } from "crypto";
+import { readFile as readFile7, realpath as realpath3, stat as stat3 } from "fs/promises";
 import { isAbsolute as isAbsolute2, relative as relative2, resolve as resolve2 } from "path";
 
 // src/validation/execution-artifacts.ts
@@ -21647,7 +21755,7 @@ function executionArtifacts(input) {
 // src/validation/evidence.ts
 var OPTIONAL_ADAPTERS = /* @__PURE__ */ new Set(["junit", "coverage", "sarif", "git-diff"]);
 function hash(bytes) {
-  return "sha256:" + createHash5("sha256").update(bytes).digest("hex");
+  return "sha256:" + createHash6("sha256").update(bytes).digest("hex");
 }
 function severity2(strict, required2) {
   return strict && required2 ? "fail" : "warn";
@@ -21762,7 +21870,7 @@ async function verifyEvidenceArtifacts(input, options) {
     } else {
       let bytes;
       try {
-        bytes = await readFile5(path);
+        bytes = await readFile7(path);
       } catch (error) {
         items.push({ artifactId: artifact.id, path: artifact.path, severity: failureSeverity, code: "IO_ERROR", message: `Cannot read ${path}: ${String(error)}` });
         continue;
@@ -21803,14 +21911,10 @@ var SchemaGateInputError = class extends Error {
   report;
 };
 async function readJsonFile(path) {
-  return JSON.parse(await readFile6(path, "utf-8"));
+  return JSON.parse(await readFile8(path, "utf-8"));
 }
 function isObject3(value) {
   return Boolean(value) && typeof value === "object" && !Array.isArray(value);
-}
-function withParserFailures(input, parserFailures) {
-  if (parserFailures.length === 0) return input;
-  return { ...input, graph: { ...input.graph, completeness: { ...input.graph.completeness, parserFailures: [...input.graph.completeness.parserFailures, ...parserFailures] } } };
 }
 function emitDeprecationWarnings(warnings) {
   for (const warning of warnings.slice(0, 5)) console.warn(`Warning: ${warning}`);
@@ -21818,16 +21922,16 @@ function emitDeprecationWarnings(warnings) {
 }
 async function readExpectedVerdict(fixtureDir) {
   try {
-    return await readJsonFile(join3(fixtureDir, "expected-gate-verdict.json"));
+    return await readJsonFile(join5(fixtureDir, "expected-gate-verdict.json"));
   } catch (error) {
     throw new CliError(`Error reading expected verdict: ${error}`, error instanceof Error ? error : void 0);
   }
 }
 async function loadFixtureInput(fixtureDir, options = {}) {
-  const inputPath = join3(fixtureDir, "gate-input.json");
+  const inputPath = join5(fixtureDir, "gate-input.json");
   let raw;
   try {
-    raw = await readJsonFile(inputPath);
+    raw = JSON.parse(await readGateInput(fixtureDir));
   } catch (error) {
     throw new CliError(`gate-input.json not found or invalid
 Input file: ${inputPath}
@@ -21842,9 +21946,9 @@ Input file: ${inputPath}`);
   if (!options.quiet) {
     for (const warning of schema.warnings) console.warn("Warning: optional artifact " + warning.path + " " + warning.message);
   }
-  const ingest = validateIngestContract(raw);
+  const ingest = prepareIngestInput(schema.input);
   if (!options.quiet) emitDeprecationWarnings(ingest.warnings);
-  return { input: withParserFailures(schema.input, ingest.parserFailures), schema };
+  return { input: ingest.input, schema };
 }
 async function readFixtureInput(fixtureDir, options = {}) {
   return (await loadFixtureInput(fixtureDir, options)).input;
@@ -21912,6 +22016,9 @@ function evidenceDq(report) {
   }];
 }
 async function evaluateFixture(rawFixtureDir, options = {}) {
+  return withOutputLease(rawFixtureDir, (root) => evaluateFixtureUnderLease(root, options));
+}
+async function evaluateFixtureUnderLease(rawFixtureDir, options) {
   const fixtureDir = resolve3(rawFixtureDir);
   let input;
   let schemaValidation;
@@ -21956,6 +22063,9 @@ async function validateInput(input) {
   if (!validation.valid) throw new CliError(`Generated gate input invalid: ${validation.issues.map((i) => `${i.path} ${i.message}`).join("; ")}`);
 }
 async function runBuildGraphCommand(directory) {
+  return withOutputLease(directory, runBuildGraphUnderLease);
+}
+async function runBuildGraphUnderLease(directory) {
   const { manifest, loaded } = await loadRawArtifacts(directory);
   const graph = buildGraph(manifest, loaded);
   const input = {
@@ -21972,6 +22082,9 @@ async function runBuildGraphCommand(directory) {
   process.exitCode = graph.completeness.partial ? 2 : 0;
 }
 async function runPlaceTestsCommand(directory) {
+  return withOutputLease(directory, runPlaceTestsUnderLease);
+}
+async function runPlaceTestsUnderLease(directory) {
   const input = await readFixtureInput(directory);
   const placementPlan = placeTests(input.graph, input.policy);
   const updated = { ...input, placementPlan };
@@ -21986,16 +22099,16 @@ async function runPlaceTestsCommand(directory) {
 var QEG_VERSION = "0.4.0";
 
 // src/cli.ts
-import { readFile as readFile20 } from "fs/promises";
+import { readFile as readFile22 } from "fs/promises";
 
 // src/consumer-migration.ts
-import { lstat as lstat2, readFile as readFile7 } from "fs/promises";
-import { join as join4 } from "path";
+import { lstat as lstat4, readFile as readFile9 } from "fs/promises";
+import { join as join6 } from "path";
 var canonical = (value) => JSON.stringify(value, (_key, entry) => entry && typeof entry === "object" && !Array.isArray(entry) ? Object.fromEntries(Object.keys(entry).sort().map((key) => [key, entry[key]])) : entry);
 async function plan(directory, config, savedOriginal) {
-  const path = join4(directory, "gate-input.json");
-  if (!(await lstat2(path)).isFile()) throw new CliError("Migration input must be a regular gate-input.json file");
-  const original = savedOriginal ?? await readFile7(path, "utf8");
+  const path = join6(directory, "gate-input.json");
+  if (!(await lstat4(path)).isFile()) throw new CliError("Migration input must be a regular gate-input.json file");
+  const original = savedOriginal ?? await readGateInput(directory);
   const input = JSON.parse(original);
   const inputHash = contentHash(original);
   const missingInputs = [];
@@ -22035,15 +22148,23 @@ async function plan(directory, config, savedOriginal) {
   }
   const schema = await validateGateInput(candidateInput);
   if (!schema.valid) missingInputs.push(...schema.issues.map((issue) => `${issue.path} ${issue.message}`));
+  let evaluationInput;
+  if (schema.input) {
+    try {
+      evaluationInput = prepareIngestInput(schema.input).input;
+    } catch (error) {
+      missingInputs.push(error instanceof Error ? error.message : String(error));
+    }
+  }
   if (changes.length && inputHash !== config.expectedInputHash) missingInputs.push("expectedInputHash mismatch: consumer changed since review");
   if (changes.length && input.policy?.policyHash === config.policy?.policyHash) missingInputs.push("Changed policy requires an explicit new policyHash; existing approvals remain attached to their original policy");
   const candidate = changes.length ? jsonDocument(candidateInput) : original;
   let gate;
-  if (!missingInputs.length) {
-    const evidenceVerification = await verifyEvidenceArtifacts(candidateInput, { baseDir: directory });
+  if (!missingInputs.length && evaluationInput) {
+    const evidenceVerification = await verifyEvidenceArtifacts(evaluationInput, { baseDir: directory });
     const result = evaluateGate({
-      ...candidateInput,
-      waivers: candidateInput.waivers ?? [],
+      ...evaluationInput,
+      waivers: evaluationInput.waivers ?? [],
       evidenceVerification,
       preflightDisqualifications: evidenceVerification.items.filter((item) => item.severity === "fail").map((item) => ({
         code: "DQ-06",
@@ -22067,22 +22188,30 @@ async function plan(directory, config, savedOriginal) {
   } };
 }
 async function planConsumerMigration(directory, config) {
-  return (await plan(directory, config)).report;
+  return withOutputLease(directory, async (root) => (await plan(root, config)).report);
 }
 async function applyConsumerMigration(directory, config) {
   return withOutputLease(directory, async (root) => {
+    const pending = await pendingPublication(root);
+    if (pending && !pending.committed) {
+      const original = pending.before.get("gate-input.json");
+      if (original === void 0 || !pending.before.has("migration-report.json")) throw new CliError("Another publication was interrupted; run outputs recover");
+      const resumed = await plan(root, config, original);
+      if (resumed.report.status !== "ready") throw new CliError(`Migration blocked: ${resumed.report.missingInputs.join("; ")}`);
+      await recoverPendingPublication(root);
+    }
     let result = await plan(root, config);
     if (result.report.status === "unchanged") {
       let receipt;
       try {
-        receipt = await readFile7(join4(root, "migration-report.json"), "utf8");
+        receipt = await readFile9(join6(root, "migration-report.json"), "utf8");
       } catch (error) {
         if (error.code !== "ENOENT") throw error;
       }
       if (!receipt) return result.report;
       const previous = JSON.parse(receipt);
       if (previous.inputHash !== config.expectedInputHash || previous.outputHash !== result.report.inputHash || await hasCommittedFile(root, "migration-report.json", receipt)) return result.report;
-      const original = await readFile7(join4(root, "migration-original.json"), "utf8");
+      const original = await readFile9(join6(root, "migration-original.json"), "utf8");
       if (contentHash(original) !== config.expectedInputHash) throw new CliError("Interrupted migration backup hash mismatch");
       result = await plan(root, config, original);
     }
@@ -22097,13 +22226,13 @@ async function applyConsumerMigration(directory, config) {
 import { exit as exit14 } from "process";
 
 // src/cli/baseline.ts
-import { readFile as readFile10, stat as stat5 } from "fs/promises";
+import { readFile as readFile12, stat as stat5 } from "fs/promises";
 import { relative as relative5, resolve as resolve7 } from "path";
 import { exit as exit3 } from "process";
 
 // src/cli/report/targets.ts
 import { readdir as readdir2 } from "fs/promises";
-import { join as join5, relative as relative3, resolve as resolve4 } from "path";
+import { join as join7, relative as relative3, resolve as resolve4 } from "path";
 async function safeStat(path) {
   return optionalStat(path);
 }
@@ -22114,15 +22243,15 @@ function relativeTarget(target) {
   return portable(relative3(process.cwd(), target));
 }
 async function isFixtureLikeDirectory(path) {
-  const input = await safeStat(join5(path, "gate-input.json"));
-  const expected = await safeStat(join5(path, "expected-gate-verdict.json"));
+  const input = await safeStat(join7(path, "gate-input.json"));
+  const expected = await safeStat(join7(path, "expected-gate-verdict.json"));
   return Boolean(input?.isFile() || expected?.isFile());
 }
 async function collectChildFixtures(path, children) {
   const fixtures = [];
   for (const child of children) {
     if (!child.isDirectory()) continue;
-    const childPath = join5(path, child.name);
+    const childPath = join7(path, child.name);
     if (await isFixtureLikeDirectory(childPath)) {
       fixtures.push(childPath);
     }
@@ -22149,7 +22278,7 @@ async function collectReportTargets(rawTargets) {
 }
 
 // src/cli/report/core.ts
-import { join as join7 } from "path";
+import { join as join9 } from "path";
 
 // src/cli/dq-explain.ts
 import { exit } from "process";
@@ -22516,8 +22645,8 @@ function validateEvaluatedFixture(expected, evaluated) {
 
 // src/cli/report/change-selection.ts
 import { execFile } from "child_process";
-import { readFile as readFile8 } from "fs/promises";
-import { join as join6, relative as relative4 } from "path";
+import { readFile as readFile10 } from "fs/promises";
+import { join as join8, relative as relative4 } from "path";
 import { promisify } from "util";
 var execFileAsync = promisify(execFile);
 function portable2(path) {
@@ -22563,7 +22692,7 @@ async function targetMentionsChangedFile(target, files) {
   const relTarget = relativeTarget2(target);
   if (files.some((file) => file === relTarget || file.startsWith(relTarget + "/"))) return true;
   try {
-    const input = JSON.parse(await readFile8(join6(target, "gate-input.json"), "utf-8"));
+    const input = JSON.parse(await readFile10(join8(target, "gate-input.json"), "utf-8"));
     const artifacts = (input.metadata?.inputArtifacts ?? []).map((artifact) => artifact.path).filter((path) => Boolean(path)).map(portable2);
     const changedCode = (input.graph?.nodes ?? []).filter((node) => node.kind === "changed_code" && node.path).map((node) => portable2(node.path));
     return [...artifacts, ...changedCode].some((path) => files.includes(path));
@@ -22590,9 +22719,9 @@ async function selectChangedTargets(targets, changedOnly = false) {
 }
 
 // src/cli/report/baseline-diff.ts
-import { readFile as readFile9 } from "fs/promises";
+import { readFile as readFile11 } from "fs/promises";
 async function readJsonFile2(path) {
-  return JSON.parse(await readFile9(path, "utf-8"));
+  return JSON.parse(await readFile11(path, "utf-8"));
 }
 async function readBaseline(path) {
   if (!path) return void 0;
@@ -22676,7 +22805,7 @@ function applyBaseline(target, baseline) {
 
 // src/cli/report/core.ts
 async function readExpectedIfPresent(target) {
-  const expectedPath = join7(target, "expected-gate-verdict.json");
+  const expectedPath = join9(target, "expected-gate-verdict.json");
   if (!(await safeStat(expectedPath))?.isFile()) {
     return void 0;
   }
@@ -23032,19 +23161,19 @@ function formatCiReportText(report) {
 }
 
 // src/cli/report/command.ts
-import { appendFile, mkdir as mkdir2, writeFile } from "fs/promises";
+import { appendFile, mkdir as mkdir3, writeFile } from "fs/promises";
 import { dirname, resolve as resolve6 } from "path";
 import { exit as exit2 } from "process";
 
 // src/cli/report/environment.ts
-import { lstat as lstat3 } from "fs/promises";
+import { lstat as lstat5 } from "fs/promises";
 import { isAbsolute as isAbsolute3, resolve as resolve5 } from "path";
 async function githubSummaryPath(environment) {
   const value = environment.GITHUB_STEP_SUMMARY;
   if (!value || !value.trim() || value.includes("\0") || !isAbsolute3(value)) throw new CliError("--github-summary requires an absolute GITHUB_STEP_SUMMARY file path");
   const path = resolve5(value);
   try {
-    if (!(await lstat3(path)).isFile()) throw new Error("not a regular file");
+    if (!(await lstat5(path)).isFile()) throw new Error("not a regular file");
   } catch (error) {
     throw new CliError(`Inspect GITHUB_STEP_SUMMARY ${path}: ${String(error)}`);
   }
@@ -23138,7 +23267,7 @@ async function runReportCommand(args) {
   const output = formatReport(report, options.format);
   if (options.outPath) {
     const outputPath = resolve6(options.outPath);
-    await mkdir2(dirname(outputPath), { recursive: true });
+    await mkdir3(dirname(outputPath), { recursive: true });
     await writeFile(outputPath, output, "utf-8");
   }
   if (options.githubSummary) {
@@ -23158,7 +23287,7 @@ async function exists(path) {
   }
 }
 async function readJson(path) {
-  return JSON.parse(await readFile10(path, "utf-8"));
+  return JSON.parse(await readFile12(path, "utf-8"));
 }
 function portable3(path) {
   return path.replace(/\\/g, "/");
@@ -23263,20 +23392,20 @@ async function runBaselineCommand(args) {
 import { exit as exit10 } from "process";
 
 // src/cli/doctor.ts
-import { readFile as readFile13, stat as stat6 } from "fs/promises";
-import { join as join11, resolve as resolve8 } from "path";
+import { readFile as readFile15, stat as stat6 } from "fs/promises";
+import { join as join13, resolve as resolve8 } from "path";
 import { exit as exit5 } from "process";
 
 // src/cli/schema-check.ts
-import { readFile as readFile12 } from "fs/promises";
-import { join as join10 } from "path";
+import { readFile as readFile14 } from "fs/promises";
+import { join as join12 } from "path";
 import { exit as exit4 } from "process";
 
 // src/cli/output-integrity.ts
-import { lstat as lstat4, readFile as readFile11 } from "fs/promises";
-import { join as join9 } from "path";
+import { lstat as lstat6, readFile as readFile13 } from "fs/promises";
+import { join as join11 } from "path";
 async function verifyOutputManifest(directory) {
-  if (await optionalText(join9(directory, ".qeg-current.json")) !== void 0) {
+  if (await optionalText(join11(directory, ".qeg-current.json")) !== void 0) {
     const snapshot = await readPublishedOutputs(directory);
     const content2 = snapshot.files.get("output-manifest.json");
     if (!content2) return ["Current generation is an intermediate result, not a completed record"];
@@ -23287,14 +23416,14 @@ async function verifyOutputManifest(directory) {
     });
   }
   try {
-    await lstat4(join9(directory, ".qeg-generations"));
+    await lstat6(join11(directory, ".qeg-generations"));
     return ["Output publication was interrupted or its pointer is missing; no completed generation"];
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
-  const content = await optionalText(join9(directory, "output-manifest.json"));
+  const content = await optionalText(join11(directory, "output-manifest.json"));
   if (content === void 0) return void 0;
-  return checkManifest(content, (name) => readFile11(join9(directory, name), "utf8"));
+  return checkManifest(content, (name) => readFile13(join11(directory, name), "utf8"));
 }
 async function checkManifest(content, read) {
   const raw = JSON.parse(content);
@@ -23315,7 +23444,7 @@ async function checkManifest(content, read) {
 
 // src/cli/schema-check.ts
 async function readJson2(path) {
-  return JSON.parse(await readFile12(path, "utf-8"));
+  return JSON.parse(await readFile14(path, "utf-8"));
 }
 async function createSchemaCheckReport(rawTargets = []) {
   const registry = await loadSchemaRegistry();
@@ -23328,41 +23457,12 @@ async function createSchemaCheckReport(rawTargets = []) {
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   for (const target of targets) {
     try {
-      const errors = await verifyOutputManifest(target);
-      if (errors) items.push({ name: `${target}:output-hashes`, status: errors.length ? "fail" : "pass", message: errors.length ? "Output hash verification failed" : "All output hashes verified", errors });
+      await withOutputLease(target, async (root) => {
+        await assertPublicationComplete(root);
+        await checkTarget(target, items);
+      });
     } catch (error) {
       items.push({ name: `${target}:output-hashes`, status: "fail", message: String(error), errors: [] });
-    }
-    for (const [filename2, schema] of Object.entries(OUTPUT_SCHEMAS)) {
-      try {
-        const content = await optionalText(join10(target, filename2));
-        if (content === void 0) continue;
-        const output = await validateOutput(JSON.parse(content), schema);
-        items.push({
-          name: `${target}:${filename2}`,
-          status: output.valid ? "pass" : "fail",
-          message: output.valid ? "valid output" : "output schema validation failed",
-          errors: output.issues.map((i) => `${i.path} ${i.message}`)
-        });
-      } catch (error) {
-        items.push({ name: `${target}:${filename2}`, status: "fail", message: String(error), errors: [] });
-      }
-    }
-    try {
-      const report = await validateGateInput(await readJson2(join10(target, "gate-input.json")));
-      items.push({
-        name: `${target}:gate-input`,
-        status: report.valid ? "pass" : "fail",
-        message: report.valid ? "valid" : "schema validation failed",
-        errors: report.issues.map((issue) => `${issue.path} ${issue.message}`)
-      });
-    } catch (error) {
-      items.push({
-        name: `${target}:gate-input`,
-        status: "fail",
-        message: error instanceof Error ? error.message : String(error),
-        errors: []
-      });
     }
   }
   return {
@@ -23371,6 +23471,45 @@ async function createSchemaCheckReport(rawTargets = []) {
     status: items.every((item) => item.status === "pass") ? "pass" : "fail",
     items
   };
+}
+async function checkTarget(target, items) {
+  try {
+    const errors = await verifyOutputManifest(target);
+    if (errors) items.push({ name: `${target}:output-hashes`, status: errors.length ? "fail" : "pass", message: errors.length ? "Output hash verification failed" : "All output hashes verified", errors });
+  } catch (error) {
+    items.push({ name: `${target}:output-hashes`, status: "fail", message: String(error), errors: [] });
+  }
+  for (const [filename2, schema] of Object.entries(OUTPUT_SCHEMAS)) {
+    try {
+      const content = await optionalText(join12(target, filename2));
+      if (content === void 0) continue;
+      const output = await validateOutput(JSON.parse(content), schema);
+      items.push({
+        name: `${target}:${filename2}`,
+        status: output.valid ? "pass" : "fail",
+        message: output.valid ? "valid output" : "output schema validation failed",
+        errors: output.issues.map((i) => `${i.path} ${i.message}`)
+      });
+    } catch (error) {
+      items.push({ name: `${target}:${filename2}`, status: "fail", message: String(error), errors: [] });
+    }
+  }
+  try {
+    const report = await validateGateInput(await readJson2(join12(target, "gate-input.json")));
+    items.push({
+      name: `${target}:gate-input`,
+      status: report.valid ? "pass" : "fail",
+      message: report.valid ? "valid" : "schema validation failed",
+      errors: report.issues.map((issue) => `${issue.path} ${issue.message}`)
+    });
+  } catch (error) {
+    items.push({
+      name: `${target}:gate-input`,
+      status: "fail",
+      message: error instanceof Error ? error.message : String(error),
+      errors: []
+    });
+  }
 }
 function formatSchemaCheckText(report) {
   const lines = ["QEG Schema Check", `Generated at: ${report.generatedAt}`, `Overall: ${report.status.toUpperCase()}`, ""];
@@ -23399,7 +23538,7 @@ async function exists2(path) {
   }
 }
 async function readJson3(path) {
-  return JSON.parse(await readFile13(path, "utf-8"));
+  return JSON.parse(await readFile15(path, "utf-8"));
 }
 function nodeMajor(version = process.versions.node) {
   return Number(version.split(".")[0]);
@@ -23465,7 +23604,7 @@ async function checkWorkflow() {
       remediation: "Use qeg init or qeg-report-action to add a workflow that uploads qeg-ci-report."
     }];
   }
-  const content = await readFile13(path, "utf-8");
+  const content = await readFile15(path, "utf-8");
   const usesQegAction = content.includes("qeg-report-action");
   const uploadsReportArtifact = usesQegAction || content.includes("actions/upload-artifact") && content.includes("qeg-ci-report");
   const writesSummary = usesQegAction || content.includes("GITHUB_STEP_SUMMARY") || content.includes("--github-summary") || content.includes("github-summary");
@@ -23484,9 +23623,9 @@ async function checkWorkflow() {
     }
   ];
 }
-async function checkTarget(rawTarget) {
+async function checkTarget2(rawTarget) {
   const target = resolve8(rawTarget);
-  const inputPath = join11(target, "gate-input.json");
+  const inputPath = join13(target, "gate-input.json");
   if (!await exists2(inputPath)) {
     return [{
       name: `target:${rawTarget}:gate-input`,
@@ -23534,7 +23673,7 @@ async function createDoctorReport(rawTargets) {
   ];
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   for (const target of targets) {
-    checks.push(...await checkTarget(target));
+    checks.push(...await checkTarget2(target));
   }
   return {
     reportVersion: "qeg-doctor-v1",
@@ -23568,7 +23707,7 @@ async function runDoctorCommand(args) {
 }
 
 // src/cli/enum-check.ts
-import { readFile as readFile14 } from "fs/promises";
+import { readFile as readFile16 } from "fs/promises";
 import { exit as exit6 } from "process";
 var CHECKS = [
   { typeName: "GateProfile", schemaDef: "gateProfile", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
@@ -23583,7 +23722,7 @@ var CHECKS = [
   { typeName: "SignalAggregation", schemaDef: "signalAggregation", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" }
 ];
 async function readJson4(path) {
-  return JSON.parse(await readFile14(path, "utf-8"));
+  return JSON.parse(await readFile16(path, "utf-8"));
 }
 function extractStringUnion(source2, typeName) {
   const match = source2.match(new RegExp(`export type ${typeName} =([\\s\\S]*?);`));
@@ -23600,7 +23739,7 @@ async function createEnumCheckReport() {
   for (const check of CHECKS) {
     let typeSource = sourceCache.get(check.typeFile);
     if (!typeSource) {
-      typeSource = await readFile14(check.typeFile, "utf-8");
+      typeSource = await readFile16(check.typeFile, "utf-8");
       sourceCache.set(check.typeFile, typeSource);
     }
     let schema = schemaCache.get(check.schemaFile);
@@ -23657,7 +23796,7 @@ async function runEnumCheckCommand(args) {
 
 // src/cli/snapshot.ts
 import { writeFile as writeFile2 } from "fs/promises";
-import { join as join12, relative as relative6 } from "path";
+import { join as join14, relative as relative6 } from "path";
 import { exit as exit7 } from "process";
 function parseSnapshotArgs(args) {
   const targets = [];
@@ -23694,7 +23833,7 @@ function normalizeReport(report) {
   return normalizeValue(report);
 }
 function snapshotPath(target) {
-  return join12(target, "expected-report.json");
+  return join14(target, "expected-report.json");
 }
 async function readSnapshot(path) {
   return optionalText(path);
@@ -23738,8 +23877,8 @@ async function runSnapshotCommand(args) {
 }
 
 // src/cli/evidence-verify.ts
-import { readFile as readFile15 } from "fs/promises";
-import { join as join13 } from "path";
+import { readFile as readFile17 } from "fs/promises";
+import { join as join15 } from "path";
 import { exit as exit8 } from "process";
 function worst2(items) {
   if (items.some((item) => item.severity === "fail")) return "fail";
@@ -23751,7 +23890,7 @@ async function createEvidenceVerifyReport(rawTargets) {
   const items = [];
   for (const target of targets) {
     try {
-      const validation = await validateGateInput(JSON.parse(await readFile15(join13(target, "gate-input.json"), "utf-8")));
+      const validation = await validateGateInput(JSON.parse(await readFile17(join15(target, "gate-input.json"), "utf-8")));
       if (!validation.valid || !validation.input) {
         items.push({ target, artifactId: "gate-input", severity: "fail", code: "PATH_MISSING", message: `schema invalid: ${validation.issues.map((issue) => `${issue.path} ${issue.message}`).join("; ")}` });
         continue;
@@ -23780,8 +23919,8 @@ async function runEvidenceVerifyCommand(args) {
 }
 
 // src/cli/policy-lint.ts
-import { readFile as readFile16 } from "fs/promises";
-import { join as join14 } from "path";
+import { readFile as readFile18 } from "fs/promises";
+import { join as join16 } from "path";
 import { exit as exit9 } from "process";
 
 // src/cli/policy-lint/format.ts
@@ -23873,14 +24012,14 @@ function worst3(items) {
 
 // src/cli/policy-lint.ts
 async function readJson5(path) {
-  return JSON.parse(await readFile16(path, "utf-8"));
+  return JSON.parse(await readFile18(path, "utf-8"));
 }
 async function createPolicyLintReport(rawTargets) {
   const targets = await collectReportTargets(rawTargets);
   const items = [];
   for (const target of targets) {
     try {
-      const input = await readJson5(join14(target, "gate-input.json"));
+      const input = await readJson5(join16(target, "gate-input.json"));
       lintPolicy(items, target, input.policy, "policy");
       if (input.evidencePackage?.gatePolicy) {
         lintPolicy(items, target, input.evidencePackage.gatePolicy, "evidencePackage.gatePolicy");
@@ -24116,8 +24255,8 @@ function adapterFields(adapter, raw) {
 }
 
 // src/cli/evidence-normalize/files.ts
-import { createHash as createHash6 } from "crypto";
-import { readFile as readFile17, realpath as realpath4 } from "fs/promises";
+import { createHash as createHash7 } from "crypto";
+import { readFile as readFile19, realpath as realpath4 } from "fs/promises";
 import { dirname as dirname2, isAbsolute as isAbsolute4, relative as relative7, resolve as resolve9 } from "path";
 function containedPath(baseDir, rawPath, label) {
   const resolved = resolve9(baseDir, rawPath);
@@ -24157,13 +24296,13 @@ function sameFilesystemPath(left, right) {
 }
 async function readBytes(path, label) {
   try {
-    return await readFile17(path);
+    return await readFile19(path);
   } catch (error) {
     throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
   }
 }
 function sha256(bytes) {
-  return `sha256:${createHash6("sha256").update(bytes).digest("hex")}`;
+  return `sha256:${createHash7("sha256").update(bytes).digest("hex")}`;
 }
 
 // src/cli/evidence-normalize/model.ts
@@ -24204,18 +24343,18 @@ function parseArgs(args) {
 }
 
 // src/cli/evidence-normalize/publish.ts
-import { randomUUID as randomUUID2 } from "crypto";
-import { lstat as lstat5, open as open2, rename as rename2, unlink as unlink2 } from "fs/promises";
+import { randomUUID as randomUUID3 } from "crypto";
+import { lstat as lstat7, open as open2, rename as rename2, unlink as unlink3 } from "fs/promises";
 import { basename as basename2, dirname as dirname3, resolve as resolve11 } from "path";
 async function publishNormalizedEvidence(outPath, content, force) {
   try {
-    const destination = await lstat5(outPath);
+    const destination = await lstat7(outPath);
     if (!destination.isFile()) throw new CliError(`Output is not a regular file: ${outPath}`);
     if (!force) throw new CliError(`Output already exists: ${outPath} (use --force to replace it)`);
   } catch (error) {
     if (!isMissingFile(error)) throw new CliError(`Inspect normalization output ${outPath}: ${String(error)}`);
   }
-  const tempPath = resolve11(dirname3(outPath), `.${basename2(outPath)}.${process.pid}.${randomUUID2()}.tmp`);
+  const tempPath = resolve11(dirname3(outPath), `.${basename2(outPath)}.${process.pid}.${randomUUID3()}.tmp`);
   let owned = false;
   try {
     const handle = await open2(tempPath, "wx");
@@ -24230,7 +24369,7 @@ async function publishNormalizedEvidence(outPath, content, force) {
   } catch (error) {
     if (owned) {
       try {
-        await unlink2(tempPath);
+        await unlink3(tempPath);
       } catch (cleanup) {
         if (!isMissingFile(cleanup)) throw new CliError(`Publish ${outPath}: ${String(error)}; cleanup ${tempPath}: ${String(cleanup)}`);
       }
@@ -24357,29 +24496,29 @@ async function runEvidenceNormalizeCommand(args) {
 }
 
 // src/cli/init.ts
-import { mkdir as mkdir3, writeFile as writeFile3 } from "fs/promises";
-import { dirname as dirname4, join as join16, resolve as resolve13 } from "path";
+import { mkdir as mkdir4, writeFile as writeFile3 } from "fs/promises";
+import { dirname as dirname4, join as join18, resolve as resolve13 } from "path";
 import { exit as exit12 } from "process";
 
 // src/cli/init-runtime.ts
-import { readFile as readFile18, readdir as readdir3 } from "fs/promises";
-import { join as join15 } from "path";
+import { readFile as readFile20, readdir as readdir3 } from "fs/promises";
+import { join as join17 } from "path";
 import { fileURLToPath as fileURLToPath2 } from "url";
 async function starterRuntimeFiles() {
   const root = fileURLToPath2(new URL("../../", import.meta.url));
   const files = /* @__PURE__ */ new Map();
   const visit = async (relativePath) => {
-    for (const entry of (await readdir3(join15(root, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-      const path = join15(relativePath, entry.name);
+    for (const entry of (await readdir3(join17(root, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      const path = join17(relativePath, entry.name);
       if (entry.isDirectory()) await visit(path);
-      else if (entry.isFile()) files.set(path, await readFile18(join15(root, path), "utf8"));
+      else if (entry.isFile()) files.set(path, await readFile20(join17(root, path), "utf8"));
       else throw new CliError(`Unsupported packaged runtime entry ${path}`);
     }
   };
   try {
     await visit("qeg-report-action");
     await visit("schemas");
-    files.set("LICENSE", await readFile18(join15(root, "LICENSE"), "utf8"));
+    files.set("LICENSE", await readFile20(join17(root, "LICENSE"), "utf8"));
   } catch (error) {
     throw new CliError(`Read starter runtime in ${root}: ${String(error)}`);
   }
@@ -24523,34 +24662,34 @@ async function writeNewFile(path, content, force) {
 async function runInitCommand(args) {
   const options = parseInitArgs(args);
   const root = resolve13(options.root);
-  const qegDir = join16(root, ".qeg");
-  const workflowDir = join16(root, ".github", "workflows");
-  await mkdir3(qegDir, { recursive: true });
-  await mkdir3(workflowDir, { recursive: true });
+  const qegDir = join18(root, ".qeg");
+  const workflowDir = join18(root, ".github", "workflows");
+  await mkdir4(qegDir, { recursive: true });
+  await mkdir4(workflowDir, { recursive: true });
   const results = [
     {
-      path: join16(qegDir, "gate-input.json"),
-      status: await writeNewFile(join16(qegDir, "gate-input.json"), minimalGateInput(), options.force)
+      path: join18(qegDir, "gate-input.json"),
+      status: await writeNewFile(join18(qegDir, "gate-input.json"), minimalGateInput(), options.force)
     },
     {
-      path: join16(qegDir, "qeg-baseline.json"),
-      status: await writeNewFile(join16(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
+      path: join18(qegDir, "qeg-baseline.json"),
+      status: await writeNewFile(join18(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
     },
     {
-      path: join16(workflowDir, "qeg.yml"),
-      status: await writeNewFile(join16(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
+      path: join18(workflowDir, "qeg.yml"),
+      status: await writeNewFile(join18(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
     }
   ];
   const runtimeFiles = await starterRuntimeFiles();
   let runtimeWritten = 0;
   for (const [relativePath, content] of runtimeFiles) {
-    const path = join16(qegDir, "runtime", relativePath);
-    await mkdir3(dirname4(path), { recursive: true });
+    const path = join18(qegDir, "runtime", relativePath);
+    await mkdir4(dirname4(path), { recursive: true });
     const status = await writeNewFile(path, content, options.force);
     if (status !== "skipped") runtimeWritten++;
   }
   console.log("QEG init");
-  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join16(qegDir, "runtime")}`);
+  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join18(qegDir, "runtime")}`);
   for (const result of results) {
     console.log(`- ${result.status}: ${result.path}`);
   }
@@ -24561,18 +24700,18 @@ async function runInitCommand(args) {
 }
 
 // src/cli/repro-bundle.ts
-import { createHash as createHash7 } from "crypto";
-import { mkdir as mkdir4, readFile as readFile19, readdir as readdir4, stat as stat8, writeFile as writeFile4 } from "fs/promises";
-import { basename as basename4, join as join17, resolve as resolve14 } from "path";
+import { createHash as createHash8 } from "crypto";
+import { mkdir as mkdir5, readFile as readFile21, readdir as readdir4, stat as stat8, writeFile as writeFile4 } from "fs/promises";
+import { basename as basename4, join as join19, resolve as resolve14 } from "path";
 import { exit as exit13 } from "process";
 async function readJson6(path) {
-  return JSON.parse(await readFile19(path, "utf-8"));
+  return JSON.parse(await readFile21(path, "utf-8"));
 }
 async function safeRead(path) {
   return optionalText(path);
 }
 function sha2562(content) {
-  return createHash7("sha256").update(content).digest("hex");
+  return createHash8("sha256").update(content).digest("hex");
 }
 function redact(value) {
   if (typeof value === "string") {
@@ -24590,7 +24729,7 @@ function redact(value) {
   return value;
 }
 async function writeJson(outDir, name, data) {
-  const path = join17(outDir, name);
+  const path = join19(outDir, name);
   const content = `${JSON.stringify(redact(data), null, 2)}
 `;
   await writeFile4(path, content, "utf-8");
@@ -24600,8 +24739,8 @@ async function schemaInventory() {
   const schemas = await readdir4("schemas");
   const rows2 = [];
   for (const file of schemas.filter((name) => name.endsWith(".schema.json")).sort()) {
-    const path = join17("schemas", file);
-    const content = await readFile19(path, "utf-8");
+    const path = join19("schemas", file);
+    const content = await readFile21(path, "utf-8");
     rows2.push({ file, sha256: sha2562(content), bytes: content.length });
   }
   return rows2;
@@ -24630,7 +24769,7 @@ function parseArgs2(args) {
 async function runReproBundleCommand(args) {
   const options = parseArgs2(args);
   const outDir = resolve14(options.outDir);
-  await mkdir4(outDir, { recursive: true });
+  await mkdir5(outDir, { recursive: true });
   const pkg = await readJson6("package.json");
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
   const files = [];
@@ -24645,7 +24784,7 @@ async function runReproBundleCommand(args) {
     files.push(await writeJson(outDir, "workflow.json", { path: ".github/workflows/ci.yml", content: workflow }));
   }
   for (const target of targets) {
-    const inputPath = join17(target, "gate-input.json");
+    const inputPath = join19(target, "gate-input.json");
     try {
       if ((await stat8(inputPath)).isFile()) {
         files.push(await writeJson(outDir, `gate-input-${basename4(target)}.json`, await readJson6(inputPath)));
@@ -24660,7 +24799,7 @@ async function runReproBundleCommand(args) {
     reportPath: options.reportPath,
     files
   };
-  const manifestPath = join17(outDir, "manifest.json");
+  const manifestPath = join19(outDir, "manifest.json");
   await writeFile4(manifestPath, `${JSON.stringify(manifest, null, 2)}
 `, "utf-8");
   console.log(`QEG repro bundle written to: ${outDir}`);
@@ -24710,9 +24849,12 @@ async function runGateCommand(fixtureDir) {
 }
 async function runRecordCommand(fixtureDir) {
   try {
-    const evaluated = await evaluateFixture(fixtureDir);
-    await writeOutputRecord(evaluated);
-    exit14(getExitCode(evaluated.gateResult.verdict, evaluated.policy));
+    const code = await withOutputLease(fixtureDir, async (root) => {
+      const evaluated = await evaluateFixture(root);
+      await writeOutputRecord(evaluated);
+      return getExitCode(evaluated.gateResult.verdict, evaluated.policy);
+    });
+    exit14(code);
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
@@ -24749,7 +24891,7 @@ async function main() {
       const configPath = configIndex >= 0 ? commandArgs[configIndex + 1] : void 0;
       const remaining = commandArgs.slice(1).filter((arg, i) => arg !== "--apply" && arg !== "--dry-run" && arg !== "--config" && i + 1 !== configIndex + 1);
       if (!directory || remaining.length || configIndex >= 0 && !configPath || apply && (!configPath || commandArgs.includes("--dry-run"))) throw new Error("Usage: qeg migrate <target-dir> [--config <config.json>] [--dry-run|--apply]");
-      const config = configPath ? JSON.parse(await readFile20(configPath, "utf8")) : void 0;
+      const config = configPath ? JSON.parse(await readFile22(configPath, "utf8")) : void 0;
       const report = apply ? await applyConsumerMigration(directory, config) : await planConsumerMigration(directory, config);
       console.log(JSON.stringify(report, null, 2));
       process.exitCode = ["blocked", "needs_configuration"].includes(report.status) ? 2 : 0;

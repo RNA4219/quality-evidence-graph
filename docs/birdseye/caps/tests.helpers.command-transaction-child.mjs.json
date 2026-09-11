@@ -1,0 +1,16 @@
+{
+  "id": "tests/helpers/command-transaction-child.mjs",
+  "role": "command-transaction-child",
+  "generation": "00018",
+  "public_api": [],
+  "summary": "QEG 0.4.0 command-transaction-child の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:aa668d64e8ca8e1422100ae5065a12c20d08a90c74f451519920c827bdb48c97"
+}

@@ -7,6 +7,8 @@ import { loadSchemaRegistry, validateGateInput } from "../validation/schema.js";
 import { validateOutput, OUTPUT_SCHEMAS } from "../validation/output.js";
 import { optionalText } from "./file-errors.js";
 import { verifyOutputManifest } from "./output-integrity.js";
+import { withOutputLease } from "../output-publication.js";
+import { assertPublicationComplete } from "../output-transaction.js";
 
 export type SchemaCheckStatus = "pass" | "fail";
 export interface SchemaCheckItem {
@@ -36,6 +38,24 @@ export async function createSchemaCheckReport(rawTargets: readonly string[] = []
   }));
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   for (const target of targets) {
+    try {
+      await withOutputLease(target, async root => {
+        await assertPublicationComplete(root);
+        await checkTarget(target, items);
+      });
+    } catch (error) {
+      items.push({ name: `${target}:output-hashes`, status: "fail", message: String(error), errors: [] });
+    }
+  }
+  return {
+    reportVersion: "qeg-schema-check-v2",
+    generatedAt: new Date().toISOString(),
+    status: items.every((item) => item.status === "pass") ? "pass" : "fail",
+    items,
+  };
+}
+
+async function checkTarget(target: string, items: SchemaCheckItem[]): Promise<void> {
     try {
       const errors = await verifyOutputManifest(target);
       if (errors) items.push({ name: `${target}:output-hashes`, status: errors.length ? "fail" : "pass", message: errors.length ? "Output hash verification failed" : "All output hashes verified", errors });
@@ -69,13 +89,6 @@ export async function createSchemaCheckReport(rawTargets: readonly string[] = []
         errors: [],
       });
     }
-  }
-  return {
-    reportVersion: "qeg-schema-check-v2",
-    generatedAt: new Date().toISOString(),
-    status: items.every((item) => item.status === "pass") ? "pass" : "fail",
-    items,
-  };
 }
 
 function formatSchemaCheckText(report: SchemaCheckReport): string {

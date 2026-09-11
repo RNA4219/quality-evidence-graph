@@ -1,7 +1,7 @@
 {
   "id": "src/cli/pipeline.ts",
   "role": "pipeline",
-  "generation": "00017",
+  "generation": "00018",
   "public_api": [],
   "summary": "QEG 0.4.0 pipeline の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -10,6 +10,7 @@
     "src/cli/output-files.ts",
     "src/cli/raw-ingest.ts",
     "src/graph.ts",
+    "src/output-publication.ts",
     "src/placement.ts",
     "src/record.ts",
     "src/types.ts",
@@ -26,5 +27,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:dd03de74017ea0027779dd8563aa1f3a294d27b583561cf01b631ae03683db09"
+  "contentHash": "sha256:c50f6e32af8c800925613180447a517a15e59c9ece9ba6d2028f8ba8fbe0650f"
 }

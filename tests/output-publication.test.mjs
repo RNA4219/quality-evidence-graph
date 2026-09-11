@@ -10,7 +10,7 @@ import { publishFiles, readPublishedOutputs, recoverOutputs } from '../dist/inde
 import { verifyOutputManifest } from '../dist/cli/output-integrity.js';
 
 const files = value => new Map(['a.json', 'b.json', 'output-manifest.json'].map(name => [name, JSON.stringify({ value }) + '\n']));
-const boundaries = ['staged-directory', ...[...files('').keys()].map(name => `staged:${name}`), 'sealed', ...[...files('').keys()].map(name => `alias:${name}`), 'committed'];
+const boundaries = ['staged-directory', ...[...files('').keys()].map(name => `staged:${name}`), 'sealed', 'prepared', ...[...files('').keys()].map(name => `alias:${name}`), 'pointer-committed', 'committed'];
 async function paused(directory, boundary) {
   const child = fork(new URL('./helpers/publication-child.mjs', import.meta.url), [directory, boundary], { stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
   let errors = ''; child.stderr.on('data', bytes => { errors += bytes; });
@@ -29,14 +29,14 @@ for (const existing of [false, true]) test(`EAC-08 TC20/22: process termination 
     const child = await paused(dir, boundary);
     await assert.rejects(readPublishedOutputs(dir), /busy|lease/);
     const exited = once(child, 'exit'); child.kill('SIGKILL'); await exited;
-    if (boundary === 'committed') assert.deepEqual((await readPublishedOutputs(dir)).files, files('new'));
+    if (['pointer-committed', 'committed'].includes(boundary)) assert.deepEqual((await readPublishedOutputs(dir)).files, files('new'));
     else if (existing) {
-      if (boundary.startsWith('alias:')) await assert.rejects(readPublishedOutputs(dir), /hash mismatch/);
+      if (boundary.startsWith('alias:') || boundary === 'prepared') await assert.rejects(readPublishedOutputs(dir), /Interrupted/);
       else assert.deepEqual((await readPublishedOutputs(dir)).files, files('old'));
       await recoverOutputs(dir);
       assert.deepEqual((await readPublishedOutputs(dir)).files, files('old'));
     } else {
-      await assert.rejects(readPublishedOutputs(dir), /No completed/);
+      await assert.rejects(readPublishedOutputs(dir), /No completed|Interrupted/);
       assert.match((await verifyOutputManifest(dir)).join(' '), /interrupted|missing/);
       await assert.rejects(recoverOutputs(dir), /No completed/);
     }

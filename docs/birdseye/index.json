@@ -1,11 +1,11 @@
 {
-  "generated_at": "00017",
+  "generated_at": "00018",
   "nodes": {
     "README.md": {
       "role": "overview",
       "caps": "docs/birdseye/caps/README.md.json",
-      "mtime": "00017",
-      "contentHash": "sha256:e8a7133e85b5e87c40940b14f824889b163c78c958e24f18b728f79c273b6359",
+      "mtime": "00018",
+      "contentHash": "sha256:835a265363726fe7ffe347c5d24ccf8f6752af948e0c743a199d405753ca23d0",
       "depsOut": [
         "docs/project/remediation-2026-09-10.md",
         "docs/spec/evidence-acceptance-standard.md",
@@ -15,20 +15,20 @@
     "README_JA.md": {
       "role": "human-overview-ja",
       "caps": "docs/birdseye/caps/README_JA.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:3de604963c7c5076eaeb07063545b6de2ffa263e49f6880d02c1d1b549b07ac6"
     },
     "README_EN.md": {
       "role": "human-overview-en",
       "caps": "docs/birdseye/caps/README_EN.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e6f84d85b142de4d5a9400d3f6a620e9e7410964a4fea24800814c3a15232caf"
     },
     "docs/agent/HUB.codex.md": {
       "role": "navigation",
       "caps": "docs/birdseye/caps/docs.agent.HUB.codex.md.json",
-      "mtime": "00017",
-      "contentHash": "sha256:9511de3bb6e52799eb68b55f00fe33369a4b28eaeba3c0312d67c174912747ba",
+      "mtime": "00018",
+      "contentHash": "sha256:a3451002b939db57459e3c7d078f86c177ecc7b87493d0616a679961052f8347",
       "depsOut": [
         "docs/project/remediation-2026-09-10.md",
         "docs/spec/evidence-acceptance-standard.md",
@@ -38,7 +38,7 @@
     "docs/project/blueprint.md": {
       "role": "blueprint",
       "caps": "docs/birdseye/caps/docs.project.blueprint.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e3c9c46d840f2c940a31dfb709bf64e0f4cf70664b775370b302dae1775e1327",
       "depsOut": [
         "docs/project/remediation-2026-09-10.md",
@@ -49,13 +49,13 @@
     "docs/research/quality-evidence-graph-requirements-report.md": {
       "role": "deep-research-report",
       "caps": "docs/birdseye/caps/docs.research.quality-evidence-graph-requirements-report.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:548679a58e28d15e785b821de74973606fcf94dec38f29da1200fd4631e9ced0"
     },
     "docs/requirements.md": {
       "role": "requirements",
       "caps": "docs/birdseye/caps/docs.requirements.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8a341dc33a93436d7f2e80bbfb0f14f9a6b22c3e3116f7261271f4f1b90fd779",
       "depsOut": [
         "docs/spec/evidence-acceptance-standard.md",
@@ -65,7 +65,7 @@
     "docs/project/runbook.md": {
       "role": "operations",
       "caps": "docs/birdseye/caps/docs.project.runbook.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:bd0150a223d340331f1fb27eb0ea785699ae67a7354d6baf493d8a010e4bd99d"
     },
     "docs/project/evaluation.md": {
@@ -91,13 +91,13 @@
         "npm run birdseye-check",
         "npm pack --dry-run --cache ./.npm-cache"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f0914d81dbd4767a84bb2abda9f7a3ed5ce0f4ca129701dcc6ff02168b059ae4"
     },
     "docs/project/guardrails.md": {
       "role": "policy",
       "caps": "docs/birdseye/caps/docs.project.guardrails.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9b5d234596d54913441cc33ebb92022cc87434a047c4c3307f251dc82a957f8d"
     },
     "docs/project/tasks.codex.md": {
@@ -118,25 +118,25 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9508270fef7b064d16a4a123b0b42703ba3bfad5d2c253ddbe67f2fcc79dd771"
     },
     "docs/project/checklists.md": {
       "role": "checklist",
       "caps": "docs/birdseye/caps/docs.project.checklists.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2718c34ee1b160b596ed695dbf53bbb72ba2d312e3df26a3771c2df2fe73ddde"
     },
     "fixtures/README.md": {
       "role": "fixture-contract",
       "caps": "docs/birdseye/caps/fixtures.README.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e8ee78e7f918bd4c68c735b1651809e4096894514c54f2d788d16867c9efa18e"
     },
     "docs/control-mapping.md": {
       "role": "control-mapping",
       "caps": "docs/birdseye/caps/docs.control-mapping.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157"
     },
     "docs/ipo-controlled-profile.md": {
@@ -160,13 +160,13 @@
         "npm run enum-check",
         "npm run birdseye-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:981beff34126837272fc3a260e9ea3c87fd849e2829b5ea674aa342c0ebf35ae"
     },
     "docs/spec/index.md": {
       "role": "ipo-spec-index",
       "caps": "docs/birdseye/caps/docs.spec.index.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ce8c88960473aeec8cae5a244caddbb24487b4f0e971df8c15ee21db7e7d5950",
       "depsOut": [
         "docs/spec/evidence-acceptance-standard.md",
@@ -176,7 +176,7 @@
     "docs/spec/operational-cli-extensions.md": {
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0c2beb1c0dd49ecf4fc407e3e04a92058aae1664aa8654d8004b27ebf7be1147"
     },
     "docs/spec/gate-policy.md": {
@@ -200,25 +200,25 @@
         "npm run enum-check",
         "npm run test:fixtures"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8babf394f38eb1f55a64a2acf603cde0e62971aa8568a3c6e39c2a71db521ff6"
     },
     "docs/spec/waiver-approval.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.waiver-approval.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f13c7bf1ad3784e30b851e34a8f514d38461cc8376bb67152baeb60eaf2ff73c"
     },
     "docs/spec/evidence-package.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.evidence-package.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:cc09b04ccfb5749ce4d9d88ed0f673c72e2319dfb3caa40e9af3521ed032eb97"
     },
     "docs/spec/retention-immutability.md": {
       "role": "ipo-spec",
       "caps": "docs/birdseye/caps/docs.spec.retention-immutability.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2f305330f47376b5bfa81282f1cb8ae0c156726bf60315d7052cd23bc59028b1"
     },
     "docs/spec/acceptance.md": {
@@ -239,67 +239,67 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:96ac579cfc4790a530b95eb4dbc25d49b5dcf9517d219b38654b0467814a017f"
     },
     "docs/spec/review-2026-06-03.md": {
       "role": "ipo-spec-review",
       "caps": "docs/birdseye/caps/docs.spec.review-2026-06-03.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e"
     },
     "docs/spec/gate-acceptance-2026-06-03.md": {
       "role": "ipo-spec-gate-acceptance",
       "caps": "docs/birdseye/caps/docs.spec.gate-acceptance-2026-06-03.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:937efe7d94dd846c5c92e51fabfc42ff439234cf775eb56969a197abe7c9c81b"
     },
     "docs/spec/implementation-gate-2026-06-03.md": {
       "role": "ipo-implementation-gate",
       "caps": "docs/birdseye/caps/docs.spec.implementation-gate-2026-06-03.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:cb50ac1d1c61f7cd046d9e7b463e2ac89b0c547e2ab5ad98fb3cddf3feb920f5"
     },
     "docs/release-notes/2026-06-03-controlled-gate.md": {
       "role": "release-notes",
       "caps": "docs/birdseye/caps/docs.release-notes.2026-06-03-controlled-gate.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5cd627f4a110f5c55bc4130fec78db3437f4c76d34e831334cffcf4f0f92e4c3"
     },
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md": {
       "role": "code-to-gate-analysis",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.analysis-report.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8055a2fb4edb36e2274e0a925bb351c6561b99fdf39c70a842ea3c811eb1a26d"
     },
     "docs/spec/code-to-gate-2026-06-03/release-readiness.json": {
       "role": "code-to-gate-readiness",
       "caps": "docs/birdseye/caps/docs.spec.code-to-gate-2026-06-03.release-readiness.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a"
     },
     "docs/spec/kano-mode-2026-06-03/kano.json": {
       "role": "kano-mode-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.kano.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:914385a71a9e2d917aae2a3267662d8213e55b20741ec63bd7d46655cfd71144"
     },
     "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json": {
       "role": "kano-mode-requirements-audit",
       "caps": "docs/birdseye/caps/docs.spec.kano-mode-2026-06-03.requirements_audit_packet.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0c0c9d3dea624290dceeca699a2a5addc833a81f91493b4d207a75a0b8e74852"
     },
     "docs/implementation-prep-gate-2026-06-02.md": {
       "role": "gate-record",
       "caps": "docs/birdseye/caps/docs.implementation-prep-gate-2026-06-02.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda"
     },
     "src/types.ts": {
       "role": "types",
       "caps": "docs/birdseye/caps/src.types.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:bfa1c4ae7e1f1b6296f1d9d6ad0276de2e6b6288311157f632201b864e5d9a70",
       "depsOut": [
         "src/types/evidence.ts",
@@ -315,7 +315,7 @@
     "src/cli/report.ts": {
       "role": "ci-report-cli",
       "caps": "docs/birdseye/caps/src.cli.report.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d5eee76abfae4f1df02fcfc4011f78a38bd3f687b49de72d4db4afa62d2c9d19",
       "depsOut": [
         "src/cli/report/command.ts",
@@ -328,7 +328,7 @@
     "src/cli.ts": {
       "role": "cli-entrypoint",
       "caps": "docs/birdseye/caps/src.cli.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5e44c30acac1a2734e2862792e725b2c4f50b69b58a49de56122b7772a266b31",
       "depsOut": [
         "src/cli/commands.ts",
@@ -341,7 +341,7 @@
     "src/cli/dq-explain.ts": {
       "role": "dq-explain-cli",
       "caps": "docs/birdseye/caps/src.cli.dq-explain.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3",
       "depsOut": [
         "src/cli/errors.ts",
@@ -351,7 +351,7 @@
     "src/cli/doctor.ts": {
       "role": "doctor-cli",
       "caps": "docs/birdseye/caps/src.cli.doctor.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9f51aa6cd70bcacf6b0321cff2e6b50911da72ec24167f9f94f3263cf69cdced",
       "depsOut": [
         "src/cli/report.ts",
@@ -361,13 +361,15 @@
     "src/cli/schema-check.ts": {
       "role": "schema-check-cli",
       "caps": "docs/birdseye/caps/src.cli.schema-check.ts.json",
-      "mtime": "00017",
-      "contentHash": "sha256:0402e3fb69a621b55623c689d814a8d631986a78f31505dee58606689419f706",
+      "mtime": "00018",
+      "contentHash": "sha256:ddb18ee41d5eefce664610522e4a81db4d6c11cefe959750b925d0484175a254",
       "depsOut": [
         "src/cli/errors.ts",
         "src/cli/file-errors.ts",
         "src/cli/output-integrity.ts",
         "src/cli/report.ts",
+        "src/output-publication.ts",
+        "src/output-transaction.ts",
         "src/validation/output.ts",
         "src/validation/schema.ts"
       ]
@@ -375,14 +377,14 @@
     "src/cli/enum-check.ts": {
       "role": "enum-drift-cli",
       "caps": "docs/birdseye/caps/src.cli.enum-check.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:1a04578e936a9b3f61c04284234a01fba646f78a2726e886a7e982fa5f7b7dc0",
       "depsOut": []
     },
     "src/cli/init.ts": {
       "role": "oss-init-cli",
       "caps": "docs/birdseye/caps/src.cli.init.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:6ab8a49f69f52eea0dbfc7bfec5313510d3bcf70c4aa862b0d4b85b573373b91",
       "depsOut": [
         "src/cli/errors.ts",
@@ -394,7 +396,7 @@
     "src/cli/snapshot.ts": {
       "role": "report-snapshot-cli",
       "caps": "docs/birdseye/caps/src.cli.snapshot.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:4771a6fbf3f322fbcda30170cf1be8a8e874e6b41285528f60d9ee6a80044aa3",
       "depsOut": [
         "src/cli/errors.ts",
@@ -405,7 +407,7 @@
     "src/cli/baseline.ts": {
       "role": "baseline-audit-cli",
       "caps": "docs/birdseye/caps/src.cli.baseline.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:3e58e363fa931153f13da06aa55b4b82963fa9a4486cafb3c4bef367e38208ce",
       "depsOut": [
         "src/cli/errors.ts",
@@ -416,7 +418,7 @@
     "src/cli/evidence-verify.ts": {
       "role": "evidence-verify-cli",
       "caps": "docs/birdseye/caps/src.cli.evidence-verify.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:967677439972e82d731d6a8eca73e349b39ff695a13f35679742b2cd238bb79a",
       "depsOut": [
         "src/cli/errors.ts",
@@ -428,7 +430,7 @@
     "src/cli/policy-lint.ts": {
       "role": "policy-lint-cli",
       "caps": "docs/birdseye/caps/src.cli.policy-lint.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:81cbf662ad035967939672d639144c963af6ab729950f794e649c5dc4a02cf6d",
       "depsOut": [
         "src/cli/errors.ts",
@@ -441,7 +443,7 @@
     "src/cli/repro-bundle.ts": {
       "role": "repro-bundle-cli",
       "caps": "docs/birdseye/caps/src.cli.repro-bundle.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f597d41ff99bc43f0a0f3e7f7b1160a058983c4bca73b719cfdae0fadc8e143e",
       "depsOut": [
         "src/cli/doctor.ts",
@@ -453,7 +455,7 @@
     "src/cli/check.ts": {
       "role": "local-check-cli",
       "caps": "docs/birdseye/caps/src.cli.check.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:64d86a6998b58b031b5cf8710bb308e53e393670630d41f72a0aefe77201d6bc",
       "depsOut": [
         "src/cli/doctor.ts",
@@ -468,55 +470,55 @@
     ".github/workflows/ci.yml": {
       "role": "github-actions-ci",
       "caps": "docs/birdseye/caps/.github.workflows.ci.yml.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:efe816b3e7577b2841df01d01199acaf2e75a511bd7f9bc7c96b5154144be9c7"
     },
     "qeg-report-action/action.yml": {
       "role": "github-action",
       "caps": "docs/birdseye/caps/qeg-report-action.action.yml.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d1656315104c429c8a37ca22e8f372c6a9ee306e0acb844f73257982a5f23e4d"
     },
     "schemas/shared-defs.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.shared-defs.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:7d61104f46aed9d4febf2ad9604c3fa9b7cccf07e549b09a93ae6d4ec1980ad2"
     },
     "schemas/gate-verdict.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.gate-verdict.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:174a2936fd8b7351b3659ff430e39ffa18c5105185c26456f7a8e38b2727ebba"
     },
     "schemas/qeg.bundle.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.qeg.bundle.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:1a390a07172070cca50931cde279b8d24f42bf5b97c09d5da124d4f20902bb06"
     },
     "schemas/test-placement-plan.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.test-placement-plan.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:db7ff07b16f786f5272b1aeadb4e89079e3bdb37e7cb8d2c7bd9c9ccbe705ef1"
     },
     "schemas/quality-evidence-record.schema.json": {
       "role": "schema",
       "caps": "docs/birdseye/caps/schemas.quality-evidence-record.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:629439ddcf2ad1d950f033a397213e53c3bcfbb89020cf936ca55eaa20242a7f"
     },
     "schemas/gate-input.schema.json": {
       "role": "top-level-runtime-schema",
       "caps": "docs/birdseye/caps/schemas.gate-input.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:782d530d4832e34caeec5d97f9784cefc0490d6cc14e86f30e3accf6487fd72c"
     },
     "fixtures/manifest.json": {
       "role": "fixture-manifest",
       "caps": "docs/birdseye/caps/fixtures.manifest.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:a4fddedd237f44e31f67e249819f9ae1e363e99ec14fb77d3fcaa56f0f144bcf"
     },
     "src/validation.ts": {
@@ -527,14 +529,14 @@
         "src/validation/reliability-semantics.ts",
         "src/validation/schema.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f1b5b665abe4a2ff884c20968853ccdddf053cbee2e35297c329f092d071cb90"
     },
     "src/cli/report/change-selection.ts": {
       "role": "changed-target-selection",
       "caps": "docs/birdseye/caps/src.cli.report.change-selection.ts.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e70d804b3fa1b0ad00cda48107d2b992a9371781da6532d3fc6c3b65046c9dfc"
     },
     "src/validation/schema.ts": {
@@ -544,7 +546,7 @@
         "src/types.ts",
         "src/validation/reliability-semantics.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:44d669908c0228c1354c018e876448e179196f12d434ce4dd3e98bb45c006914"
     },
     "src/validation/evidence.ts": {
@@ -555,7 +557,7 @@
         "src/types.ts",
         "src/validation/execution-artifacts.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d25769f68938f999ed23381cb6a3742d89e4615e153b59129140f04b54ed41bb"
     },
     "src/cli/report/model.ts": {
@@ -565,7 +567,7 @@
         "src/cli/report/change-selection.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:06c74b0ed722252ca911fd1717b7f7450eed36fd504820828a1e821527930b97"
     },
     "src/cli/report/targets.ts": {
@@ -574,7 +576,7 @@
       "depsOut": [
         "src/cli/file-errors.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0567ac4f552f6dac2d8f0176795def29efa3d6d9ff48f91c535c1adb6dca6932"
     },
     "src/cli/report/baseline-diff.ts": {
@@ -585,7 +587,7 @@
         "src/cli/report/targets.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9de5ba1b4e462c9b5e4e971ab8ce89acee3e2ce9d2999bead0da71e46c9f9905"
     },
     "src/cli/report/core.ts": {
@@ -603,7 +605,7 @@
         "src/gate.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0360baabd19c05e7063f01b948ab4bd0b9cf86bab977a6e6aaf06f1e93b76c60"
     },
     "src/cli/report/formatter.ts": {
@@ -613,7 +615,7 @@
         "src/cli/report/format/github.ts",
         "src/cli/report/format/text.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f1f03daa9969dcc67d726c69b7f4eae0600d002824e85d8c85f4b6c8e988f967"
     },
     "src/cli/report/command.ts": {
@@ -626,14 +628,14 @@
         "src/cli/report/formatter.ts",
         "src/cli/report/model.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d55224f9f98eaa2c2334b907855b9f8cc4193af911a510c5195e28f9f7611ab0"
     },
     "src/types/primitives.ts": {
       "role": "primitive-types",
       "caps": "docs/birdseye/caps/src.types.primitives.ts.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9d92e2e3f433920fb51d96a5ccd27abff66864b1188e1f682d717f89a04238b5"
     },
     "src/types/graph.ts": {
@@ -645,7 +647,7 @@
         "src/types/gate.ts",
         "src/types/primitives.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:86e4997b3baa43abfedd495bec7592a41720c9896fdbf301b7639f98af4a74c9"
     },
     "src/types/gate.ts": {
@@ -657,7 +659,7 @@
         "src/types/ingest.ts",
         "src/types/primitives.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:37eec6d43070904f12ca3b2ebadfa2585bc6c7bbbb5f43f3dda5c615525a0222"
     },
     "src/gate/test-evidence.ts": {
@@ -666,7 +668,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:1473264b3e93b0779bf818d988367183b063b342ebfee238535662f49a1d13e2"
     },
     "src/gate/dq/placement-change.ts": {
@@ -677,7 +679,7 @@
         "src/gate/test-evidence.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:99bdbfb3912a0048c493adc6c3b58876495892f7dc0c367bef1a4dbeb6609bc1"
     },
     "src/gate/evaluate.ts": {
@@ -697,13 +699,13 @@
         "src/gate/waivers.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d443e279f111a1447ad0b750aa9df18ccd56d623bc7000baa388aa9f18d5cb9d"
     },
     "tests/runtime.test.mjs": {
       "role": "runtime-contract-tests",
       "caps": "docs/birdseye/caps/tests.runtime.test.mjs.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:4a56752c6bba8cd40e93aecf9bfd2ba256a0b7759aba6d00c78d6383a998c341"
     },
     "docs/spec/reliability-extension.md": {
@@ -736,7 +738,7 @@
         "npm run schema-check",
         "npm run enum-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:587cff6d7f16b0ffb2b22732d5e3ab2f13675e54edbabd14bf39939d8e9e27cc"
     },
     "docs/spec/reliability-extension-review-2026-07-19.md": {
@@ -757,7 +759,7 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:81112d3a7ae73874e4a56a09d01485f346228a271d26d74c9aed6c79deec2de7"
     },
     "src/types/evidence.ts": {
@@ -767,7 +769,7 @@
         "src/types/gate.ts",
         "src/types/primitives.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:22c866b90d093be81e21d44d34bcfa1f06ea6ae03dbeb7c9a5a6b562d788a04b"
     },
     "src/gate/reliability.ts": {
@@ -777,7 +779,7 @@
         "src/gate/reliability/contracts.ts",
         "src/gate/reliability/evaluator.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0c855392e95cd921498b22cc959b34bfb6b637411aa422e05c574e3a6986ac73"
     },
     "src/cli/evidence-normalize.ts": {
@@ -794,19 +796,19 @@
         "src/cli/evidence-normalize/values.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d70047bf3784d1ee252cadd885a9c62fb8d67d189b11f9249465e8ef75168ecb"
     },
     "schemas/reliability.schema.json": {
       "role": "reliability-schema",
       "caps": "docs/birdseye/caps/schemas.reliability.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5adafd504e603703afb1e19d6995012d3e3f72c9de3997d3548cc85c43980ad0"
     },
     "schemas/resilience-normalize-context.schema.json": {
       "role": "resilience-normalize-context-schema",
       "caps": "docs/birdseye/caps/schemas.resilience-normalize-context.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f6777125b4ee250360185cd81a5a28439f6070cf24f4c3a3e6cb7571c38db4f1"
     },
     "docs/spec/reliability-hardening.md": {
@@ -836,7 +838,7 @@
         "npm run test:package",
         "npm run birdseye-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:842e3fe2c37de7c70fbd5a0787a121acbaba59ff10e748eafb81f50b40aff3bb"
     },
     "docs/spec/reliability-hardening-checklist.md": {
@@ -860,7 +862,7 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ea4ca2c78f1e7698e26b501f5d0f098c589c22e35386ad041671cddc7f66ba2f"
     },
     "src/gate/reliability/contracts.ts": {
@@ -869,7 +871,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:996cf4dd8edcb32c008271e42b951c2d13c683ef2d22c26125eddd9a6f90d41b"
     },
     "src/gate/reliability/utils.ts": {
@@ -881,7 +883,7 @@
         "src/gate/reliability/fingerprint.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c6f7f952f432b9958aa2ff22591997c9d53f892443a7863c6b7e18e04aebaa2e"
     },
     "src/gate/reliability/indexing.ts": {
@@ -893,7 +895,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:97d47318e0fddcd20c580709a032d54d23626d098399668e4c194192f3164557"
     },
     "src/gate/reliability/selection.ts": {
@@ -906,7 +908,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d895958aee39e642ca3cdcdf68e575d2726a34c1b21f7b62e46a0bb6c399ffba"
     },
     "src/gate/reliability/qualification.ts": {
@@ -920,7 +922,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:aec4d6c3fc69c21d91d97cfeecdc16f9a85b3013673e0230b8208e572ad7f8f2"
     },
     "src/gate/reliability/signals.ts": {
@@ -931,7 +933,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e87b3fa7d7ed6643d15f2ed5b50a0a67e843d77a3f30c627c2a4cf9b7ac93361"
     },
     "src/gate/reliability/blockers.ts": {
@@ -943,7 +945,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:de061f3a9b6d5dc287c1bbcea53968b994be027ea97eab6316e8d9fe067465b6"
     },
     "src/gate/reliability/accounting.ts": {
@@ -955,7 +957,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:987f19c5d9aa0bf5f8bb43fdb0fa96395031c998b947c430e6bb822a0e89508f"
     },
     "src/gate/reliability/evaluator.ts": {
@@ -972,38 +974,38 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2ae6c16f5a11d70e63ef873cd84c3fe8a65e166dbd3cd401282b1efd7e9e590d"
     },
     "src/validation/reliability-semantics.ts": {
       "role": "reliability-semantic-validator",
       "caps": "docs/birdseye/caps/src.validation.reliability-semantics.ts.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e86a3e297793b92f600dcc5967748a72a7ce57a420735303f444f8e8a278864e"
     },
     "tests/fixture-regression.mjs": {
       "role": "fixture-e2e-harness",
       "caps": "docs/birdseye/caps/tests.fixture-regression.mjs.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:b0afcb4c92274b9d352c8bfbe0689977cce9beb2744f48f7ef97b963b068628f"
     },
     "tests/package-smoke.mjs": {
       "role": "package-and-packed-types-smoke",
       "caps": "docs/birdseye/caps/tests.package-smoke.mjs.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:19b1d48829d4bce0e7141fd1704cb38a7b7b0a578049adb4014674bd6531892b"
     },
     "tests/type-contract/contract.ts": {
       "role": "public-type-contract",
       "caps": "docs/birdseye/caps/tests.type-contract.contract.ts.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:1cd352f050eeba9f6cb42ea09c41e51243bdbf9237d686a789411151fdc44b45"
     },
     "tools/json-check.mjs": {
       "role": "tracked-json-parser",
       "caps": "docs/birdseye/caps/tools.json-check.mjs.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:53e5edcb47db306b567dc568a79c473be78d45b54f42f42ddfb74c629cda3f5d"
     },
     "docs/release/acceptance-2026-07-20.md": {
@@ -1019,7 +1021,7 @@
       "tests": [
         "npm run birdseye-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f19cdbfb026baa0646e9db1d038ed47cf3480dd2eb965d246b445c3fdb81e45a"
     },
     "docs/release-notes/2026-07-20-v0.3.0.md": {
@@ -1035,7 +1037,7 @@
       "tests": [
         "npm run birdseye-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f51e6d34df341a79ec1faf795e82de1ffeaf4f9876c295bbb6b410115413a0f9"
     },
     "schemas/action-lifecycle-evidence.schema.json": {
@@ -1049,7 +1051,7 @@
         "npm run schema-check",
         "npm run test:release-lifecycle"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:28afa0ea006486c7e3be7c4564a70b2dbdfb978fa81e307672210675384160b1"
     },
     "tools/action-lifecycle-acceptance.mjs": {
@@ -1066,7 +1068,7 @@
       "tests": [
         "npm run test:release-lifecycle"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:fd4e1a2254dbd1925f6abd0f64ef8a5f37db1598ebdea6ec8b33a250591be2c3"
     },
     "qeg-report-action/THIRD_PARTY_NOTICES.md": {
@@ -1079,7 +1081,7 @@
       "tests": [
         "npm run test:package"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:711fabf9f964bdbf6352c3fa2800e31d9ed512be2adf4c80ce062a4fff3dc1fd"
     },
     "docs/spec/code-to-gate-v0.3.1-2026-07-20/analysis-report.md": {
@@ -1093,7 +1095,7 @@
         "code-to-gate readiness",
         "npm test"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f2564d99453f2c6abc489d0faa0aed77cd97d22e47396c843a4bc6dd20fef38f"
     },
     "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json": {
@@ -1107,7 +1109,7 @@
         "code-to-gate schema validate",
         "npm run json-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:cb2d9deae3fca5011403866ed30a341502b3cacd3e619f318efae0629991f281"
     },
     "docs/release/acceptance-2026-07-20-v0.3.1.md": {
@@ -1135,7 +1137,7 @@
         "npm run birdseye-check",
         "git diff --check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2a9b3cd549825801c3198f5c40dbe0be05bf45a8af06a603f158a66b4a9f7800"
     },
     "docs/release-notes/2026-07-20-v0.3.1.md": {
@@ -1159,7 +1161,7 @@
         "npm run test:runtime",
         "npm run birdseye-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:13e3e9f4fb1ecbc831db7d368b1b9f4bcbac21c227543389fff8dbafef6c8142"
     },
     "src/adapters/code-to-gate.ts": {
@@ -1171,7 +1173,7 @@
         "src/adapters/decisions.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:192ff3cb2343bffb4e6ae4eaa01537e9cf9e53cefca8aa3b1803ea82d087ff13"
     },
     "src/adapters/common.ts": {
@@ -1180,7 +1182,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e2f68c4a0a780aee1ea542eb20db084814dd82defdfa68967ade8a4cf8827eca"
     },
     "src/adapters/contracts.ts": {
@@ -1190,7 +1192,7 @@
         "src/adapters/common.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c71794fa289d23a0c8713af9375b1538943869ee1be41eb273760a34311e9bbf"
     },
     "src/adapters/decisions.ts": {
@@ -1200,7 +1202,7 @@
         "src/adapters/common.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e534903f1d225176049b3f99a9f9414cfafb237b2a727af092e1d49b93e57b8f"
     },
     "src/adapters/manual-bb.ts": {
@@ -1212,13 +1214,13 @@
         "src/adapters/decisions.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d2698376a3d080d14dc76ecc3a23368296e101f27ab29975940760e26a21233c"
     },
     "src/adapters/producer-schemas.json": {
       "role": "producer-schemas",
       "caps": "docs/birdseye/caps/src.adapters.producer-schemas.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:fd0bd8539eaa73a4416bc0af0791474a515f200e3837d4e549864ab9fbe75d64"
     },
     "src/adapters/rand.ts": {
@@ -1230,7 +1232,7 @@
         "src/adapters/decisions.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9933c340bb3d1aea60635baa71be782ed5e344a20f8b634d96b7177d63f40349"
     },
     "src/adapters/validate.ts": {
@@ -1240,7 +1242,7 @@
         "src/adapters/producer-schemas.json",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:6f03a573c02841d81219639a0b41a4612dc8d8df146bbcb64fe178f4330978b3"
     },
     "src/cli/commands.ts": {
@@ -1265,16 +1267,17 @@
         "src/cli/snapshot.ts",
         "src/cli/validation.ts",
         "src/gate.ts",
+        "src/output-publication.ts",
         "src/validation/output.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:234b4d71a4ed8e31b376df35fb3241dcc6f833191084d1d5203f8a4319b0ff40"
+      "mtime": "00018",
+      "contentHash": "sha256:cce0abd9a866e4b8a65cac3c69b56d78842ac3cf3625e7c06e631bc7546fe7ec"
     },
     "src/cli/errors.ts": {
       "role": "errors",
       "caps": "docs/birdseye/caps/src.cli.errors.ts.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0494bbd3e21351132647ab0c592f177dd50c738b35db0545ebc9744e9e602b19"
     },
     "src/cli/evidence-normalize/adapters.ts": {
@@ -1286,7 +1289,7 @@
         "src/cli/evidence-normalize/values.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:aa0961b833712ad10273b36ce28434c6ba85845311870f2035b24285bf14b37c"
     },
     "src/cli/evidence-normalize/files.ts": {
@@ -1295,7 +1298,7 @@
       "depsOut": [
         "src/cli/errors.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5b2c051761db9e065e18182a7e0e86b347a06913318097fe73545f8a241df1b4"
     },
     "src/cli/evidence-normalize/model.ts": {
@@ -1304,7 +1307,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:bd415fa8c8c090baa72627495288ba523e567d1ac70d2d62e3d594b5c4d34f6a"
     },
     "src/cli/evidence-normalize/options.ts": {
@@ -1315,7 +1318,7 @@
         "src/cli/evidence-normalize/model.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2ad671dc3314d4c38bb42ba3342735514bbed91867c5208a98f4a5103f159f8d"
     },
     "src/cli/evidence-normalize/publish.ts": {
@@ -1325,7 +1328,7 @@
         "src/cli/errors.ts",
         "src/cli/file-errors.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2e88cc892444f0abf54aaf19e20ac1649cfda62cd72d517a9efa977db0d6098b"
     },
     "src/cli/evidence-normalize/validation.ts": {
@@ -1337,7 +1340,7 @@
         "src/types.ts",
         "src/validation/schema.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:555415968f8a09db6ea4005cc8cb4814ca47e11a490d421a9c3863fa2c2cb751"
     },
     "src/cli/evidence-normalize/values.ts": {
@@ -1348,7 +1351,7 @@
         "src/cli/evidence-normalize/model.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:4699bec8b923f64365312a074b863b0894bd26d38e08cd4be36619528a859a34"
     },
     "src/cli/file-errors.ts": {
@@ -1357,7 +1360,7 @@
       "depsOut": [
         "src/cli/errors.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:15bdd720276d205048a0ef7795dae44de654945c8fb98b359494e11457fdb7c7"
     },
     "src/cli/fixture-io.ts": {
@@ -1368,12 +1371,13 @@
         "src/cli/ingest-contract.ts",
         "src/gate.ts",
         "src/gate/test-evidence.ts",
+        "src/output-publication.ts",
         "src/types.ts",
         "src/validation/evidence.ts",
         "src/validation/schema.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:fb0c39fe9bd832ece7bc956bf57b08070a4f72c09f58b1fa07b88f14df22700a"
+      "mtime": "00018",
+      "contentHash": "sha256:2feceb3eebed2cab137c802eed8780386aa885d0b99de8874a7eae8db86f8604"
     },
     "src/cli/ingest-contract.ts": {
       "role": "ingest-contract",
@@ -1382,8 +1386,8 @@
         "src/cli/errors.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:1644c4f553cec5244d4be2b60c2d141025283caa4968f1ed8b5704c9c3172399"
+      "mtime": "00018",
+      "contentHash": "sha256:66deb068a4c253157b4091424f4cd9d4aa2da1af8f5ab1bbeac541e147f97a98"
     },
     "src/cli/init-runtime.ts": {
       "role": "init-runtime",
@@ -1391,7 +1395,7 @@
       "depsOut": [
         "src/cli/errors.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:efcd20c64118b545d895c1c4361b8716401764d82b28abe2133aab79ae136c62"
     },
     "src/cli/output-files.ts": {
@@ -1401,7 +1405,7 @@
         "src/cli/errors.ts",
         "src/output-publication.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:592a92a6d3dae3c5702992afe7735d6d9daeb186e8bb298c68ca0325598ee3e2"
     },
     "src/cli/output-integrity.ts": {
@@ -1413,7 +1417,7 @@
         "src/record.ts",
         "src/validation/output.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ed670c6df53df528148c9c38ddc749639212808ee056e5ce327abe546f49bccc"
     },
     "src/cli/pipeline.ts": {
@@ -1425,14 +1429,15 @@
         "src/cli/output-files.ts",
         "src/cli/raw-ingest.ts",
         "src/graph.ts",
+        "src/output-publication.ts",
         "src/placement.ts",
         "src/record.ts",
         "src/types.ts",
         "src/validation/output.ts",
         "src/validation/schema.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:dd03de74017ea0027779dd8563aa1f3a294d27b583561cf01b631ae03683db09"
+      "mtime": "00018",
+      "contentHash": "sha256:c50f6e32af8c800925613180447a517a15e59c9ece9ba6d2028f8ba8fbe0650f"
     },
     "src/cli/policy-lint/format.ts": {
       "role": "format",
@@ -1440,7 +1445,7 @@
       "depsOut": [
         "src/cli/policy-lint/model.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:3c7dc6ec5375df45bf860eaa8cee6a8a3987abb16d012243aaadf11ed2555490"
     },
     "src/cli/policy-lint/model.ts": {
@@ -1449,7 +1454,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8fa461fd7a58323963103aeb853c6878e400ad955157f563f7e1e2dbb8ff4d89"
     },
     "src/cli/policy-lint/rules.ts": {
@@ -1459,7 +1464,7 @@
         "src/cli/policy-lint/model.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:385fc9f09dd5d2eee0c1a249f0ab6df3c07e4c1250ac223642e2bab7eb2dc7d9"
     },
     "src/cli/raw-ingest.ts": {
@@ -1473,7 +1478,7 @@
         "src/types.ts",
         "src/validation/output.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:35f68df312ec376a8375e130c70dadb11d4a222cc787cd6b0f3c96e0295dd1e3"
     },
     "src/cli/record.ts": {
@@ -1485,7 +1490,7 @@
         "src/record.ts",
         "src/validation/output.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:7e5985288a4cb8f00509be296641a9d7a12d2703c2d9b5fe43bcf3ed2f5e44ea"
     },
     "src/cli/report/environment.ts": {
@@ -1494,7 +1499,7 @@
       "depsOut": [
         "src/cli/errors.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:120896d137ae5c23169c2805597b6f9582d5da795527880621c5789357d7419b"
     },
     "src/cli/report/format/github.ts": {
@@ -1504,7 +1509,7 @@
         "src/cli/report/format/shared.ts",
         "src/cli/report/model.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:941f2d28e4568ba29a78cb5d37ec660d798c742f07cd2fecd0f3eb2c0961f8af"
     },
     "src/cli/report/format/shared.ts": {
@@ -1515,7 +1520,7 @@
         "src/gate/execution/format.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e1c78346a5f364da13ead65927c54e922c56ee23c8081e65b6ded78c6ece2953"
     },
     "src/cli/report/format/text.ts": {
@@ -1525,7 +1530,7 @@
         "src/cli/report/format/shared.ts",
         "src/cli/report/model.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:11117a97ab803868d3c9451df444691ea4eb1566365b954554670eefff192281"
     },
     "src/cli/validation.ts": {
@@ -1537,7 +1542,7 @@
         "src/gate.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8ad0dfc7fe86ad5bcbecf299045669bd8087ef5d32ccdf91ea402e91f7fd8a9e"
     },
     "src/gate/context.ts": {
@@ -1547,7 +1552,7 @@
         "src/types.ts",
         "src/validation/evidence.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e4dcf6cfb35cac493ca0b977f23d321a2560bb4c8750239b76cc8f2af5d13d9d"
     },
     "src/gate/diagnostics.ts": {
@@ -1557,7 +1562,7 @@
         "src/input-contract.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:33d8e129263c422c2db565c00433a9dbc9b7caa30bc86537292f830d5b22e621"
     },
     "src/gate/dq/basic.ts": {
@@ -1570,7 +1575,7 @@
         "src/gate/verdict.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:b13eaaca6a4efdbc9592b46f2755035e9eba8c6c2f79f176edb664b42270f44f"
     },
     "src/gate/dq/evidence.ts": {
@@ -1581,7 +1586,7 @@
         "src/gate/dq/source-refs.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:73f9098691abd911ff4f4aa1529656f93319ce5f9c4abe795f1c376c5e81bfbe"
     },
     "src/gate/dq/graph-integrity.ts": {
@@ -1592,7 +1597,7 @@
         "src/input-contract.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:042b0c72890a02ed98513aaed00e0e0f94ce1472b5c43b2e6f26c6d6d7a01a41"
     },
     "src/gate/dq/helpers.ts": {
@@ -1603,7 +1608,7 @@
         "src/gate/dq/source-refs.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9222074d3cc9ff411edaa7bb3d02a53aaffd1a0a4902685d3d77cb3953a0d6be"
     },
     "src/gate/dq/input-contract.ts": {
@@ -1614,7 +1619,7 @@
         "src/input-contract.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ab22f3060404de889d695b108122a0fcd80ecd290255459ba9363bc728243734"
     },
     "src/gate/dq/ipo.ts": {
@@ -1626,7 +1631,7 @@
         "src/gate/dq/source-refs.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:de99d32b3a9d30e5a6997e0786792ab0524560dc405dc44ee48232b85ffb40d5"
     },
     "src/gate/dq/placement-coverage.ts": {
@@ -1637,7 +1642,7 @@
         "src/input-contract.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:76b2c1b53b7c154e17314beeef50c0fc23d3c0d62ff1454557c520e8de4b35ac"
     },
     "src/gate/dq/source-refs.ts": {
@@ -1646,7 +1651,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:600f22f1c6d938dbda08d4d0ed02a8de27e69c24da7758871930a86d20e05167"
     },
     "src/gate/dq-detectors.ts": {
@@ -1660,7 +1665,7 @@
         "src/gate/dq/placement-change.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c55d526bd5b736fc73befa6319b4325a2c3a472dfed8baa8489c23fba3eb8b69"
     },
     "src/gate/reliability/bounds.ts": {
@@ -1670,7 +1675,7 @@
         "src/gate/context.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0bf2c5b32a860fb2423eb873d4413a5687eb45eff61dd2e842a433751a94999d"
     },
     "src/gate/reliability/collections.ts": {
@@ -1679,7 +1684,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9ecab542ee3c4107c7f145935b6089bc4c42d6ef25bea8a201ea5b9975cdbcc1"
     },
     "src/gate/reliability/fingerprint.ts": {
@@ -1689,7 +1694,7 @@
         "src/gate/reliability/collections.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:3a216ea14ae8919b30749e746bb2cb06a79083c81c10172b64a12852a36ca017"
     },
     "src/gate/reliability/lifecycle.ts": {
@@ -1701,7 +1706,7 @@
         "src/gate/reliability/utils.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:fa742c5eb4a2e9aa012c23a34a5c4a1167288f95fa7a3afdd44fa2e62bb61361"
     },
     "src/gate/reliability/preflight.ts": {
@@ -1713,7 +1718,7 @@
         "src/types.ts",
         "src/validation/reliability-semantics.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:cbacc608a1df06cff51cce1cfb9b0f11ccdf4d5b468254d95b95f92b9db5c3e2"
     },
     "src/gate/upstream.ts": {
@@ -1722,7 +1727,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:afcbd4f9a7d20578b5d3879b401a430e5185ad09be8da3373b2fe153c5f4904c"
     },
     "src/gate/verdict/blockers.ts": {
@@ -1732,7 +1737,7 @@
         "src/gate/context.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0d580514d6ce5669230f639b17da68960c1b8984d1ea27ca9ba396f9295cbf95"
     },
     "src/gate/verdict/human-review.ts": {
@@ -1741,7 +1746,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:0477985d5ae22de714e7c057d3ab57d7a42529de2a28db34e0723fee2237c0b6"
     },
     "src/gate/verdict/reasons.ts": {
@@ -1750,7 +1755,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:cbf880d41d8af608bba2085d8edea3aa386ed6daf90637027eb810497033cef3"
     },
     "src/gate/verdict/residual-risks.ts": {
@@ -1760,7 +1765,7 @@
         "src/gate/context.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:a0259e2c46ddc8b9fa64f9f638a70a31dd575251c1d6b37b9bfcf20a036f65e3"
     },
     "src/gate/verdict.ts": {
@@ -1773,7 +1778,7 @@
         "src/gate/verdict/residual-risks.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e4d72bd088695425a5904abc2de996ef539077759407ec1e80d67e3178c2cda8"
     },
     "src/gate/waivers.ts": {
@@ -1782,7 +1787,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:7b646425c26855ff77fabe1e615f8fd2e474c3d9f758a24c10683a455cc767ae"
     },
     "src/gate-efficacy.ts": {
@@ -1792,7 +1797,7 @@
         "src/cli/fixture-io.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:527fe5eab7dbb08f505dca51ab1e88e7937a8dfc572880864ea0399bc40b9f24"
     },
     "src/gate.ts": {
@@ -1805,7 +1810,7 @@
         "src/gate/verdict.ts",
         "src/gate/waivers.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5eebf0eb5fb091752ef6723eb6a9de6593e6817962bc4ed9b378fd153ae2bcdd"
     },
     "src/graph/coverage.ts": {
@@ -1815,7 +1820,7 @@
         "src/graph/requirements.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:84c7fba27dd5ed89a649819b3c70f0008aade95dae8f5c1a9921f91901e09049"
     },
     "src/graph/requirements.ts": {
@@ -1826,7 +1831,7 @@
         "src/adapters/manual-bb.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:75a2468a70f4e47fa7113095a4617dbc8af6c6c9b567921d20595fa94ed4cb0a"
     },
     "src/graph.ts": {
@@ -1843,8 +1848,8 @@
         "src/input-contract.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:6c982ca90ffb57e409db94f42505b18adc9ec304c24d6d2d7730ba049d8ed53c"
+      "mtime": "00018",
+      "contentHash": "sha256:99a76e4e07cb23682335fb5132e1265e34ddd7e91187820bd7c74ebe8b3fdc6c"
     },
     "src/index.ts": {
       "role": "index",
@@ -1863,7 +1868,7 @@
         "src/validation.ts",
         "src/validation/output.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ae2f32b01ca373ce4513912e52cf9ca53337acad85eb19854100b4e86ce5cef3"
     },
     "src/input-contract.ts": {
@@ -1872,7 +1877,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:6ebf3e4576462aaf92f82eaeb0bffe096501b5e4cdd410e9bcde264bc331337d"
     },
     "src/placement.ts": {
@@ -1882,7 +1887,7 @@
         "src/graph/requirements.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:4dc5ffb080e702261ca90cc4b007e7ff0c718f9db392c45f56c58179c3c5bb2b"
     },
     "src/record.ts": {
@@ -1894,7 +1899,7 @@
         "src/gate/execution/format.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:eef21dfb5622e463d42c23e2efc0d7f10b8db1787a89eaefe2dbc35f7e9eb99c"
     },
     "src/types/ingest.ts": {
@@ -1906,7 +1911,7 @@
         "src/types/gate.ts",
         "src/types/primitives.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d46c43f6df05100d395bb869b28f1bdda95ae3f8c3bf8130e3555306d4c4521f"
     },
     "src/types/input.ts": {
@@ -1918,7 +1923,7 @@
         "src/types/graph.ts",
         "src/types/record.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f8c16e627590834adc25df7a9c36478fa303fa689eb23c60558f0c27f1f755a8"
     },
     "src/types/record.ts": {
@@ -1930,7 +1935,7 @@
         "src/types/graph.ts",
         "src/types/primitives.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d8c42c54faee00126d8e8074c3af26b308b9e5e7aa9c5e88584383452adb2930"
     },
     "src/validation/output.ts": {
@@ -1939,62 +1944,62 @@
       "depsOut": [
         "src/validation/schema.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f1e28026e55a48a0b6904f04694e5dc082d7451a4f799703f994b31a64c580d0"
     },
     "src/version.ts": {
       "role": "version",
       "caps": "docs/birdseye/caps/src.version.ts.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:7ec5743ced80dc27b35340aca8338bb536f8c3290e1c11ded4e0b017afff8e01"
     },
     "schemas/approval-evidence.schema.json": {
       "role": "approval-evidence.schema",
       "caps": "docs/birdseye/caps/schemas.approval-evidence.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5827fefe9fa54fee2beb8795a000b26ba055daa56944f5bad5483c4ff2d20ae4"
     },
     "schemas/evidence-package.schema.json": {
       "role": "evidence-package.schema",
       "caps": "docs/birdseye/caps/schemas.evidence-package.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d356297568e06955567e77522504e4b13aa077eb68f42fc210de37d943176dd3"
     },
     "schemas/gate-policy.schema.json": {
       "role": "gate-policy.schema",
       "caps": "docs/birdseye/caps/schemas.gate-policy.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:317d1d161a7878427dfb779df82befd613bbfff2a369d5d33baee8cf435acfb6"
     },
     "schemas/ingest-manifest.schema.json": {
       "role": "ingest-manifest.schema",
       "caps": "docs/birdseye/caps/schemas.ingest-manifest.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:45f9dd2c42771b8543306ddc3931113e2c9086366d47916cfd20c988ee3a97e3"
     },
     "schemas/input-contract.schema.json": {
       "role": "input-contract.schema",
       "caps": "docs/birdseye/caps/schemas.input-contract.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:6a0ff174aee61b2d9e354abf0c4c7937ed1985712c858197f52460beb7c8a1d8"
     },
     "schemas/output-manifest.schema.json": {
       "role": "output-manifest.schema",
       "caps": "docs/birdseye/caps/schemas.output-manifest.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:2b5a7da86a7ee05d15630dbf46997511449456624ccf956b97cdc2a4d0669307"
     },
     "schemas/retention.schema.json": {
       "role": "retention.schema",
       "caps": "docs/birdseye/caps/schemas.retention.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:31f96a818af523648dcb21422f692561e7238d92ab9dad40d90b6c574c72a284"
     },
     "schemas/waiver.schema.json": {
       "role": "waiver.schema",
       "caps": "docs/birdseye/caps/schemas.waiver.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d2651ef51fae3c16cf54b725c707c26c983cc7e08af76903dfa354a4e860fa88"
     },
     "docs/project/remediation-2026-09-10.md": {
@@ -2013,7 +2018,7 @@
         "docs/spec/evidence-acceptance-standard.md",
         "docs/project/evidence-acceptance-status.md"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:a5b418999c01423fe75f962a970b773d3e9d2d6f6c25dd25e80bd3b8de778f5c"
     },
     "docs/spec/remediation-2026-09-10.md": {
@@ -2028,7 +2033,7 @@
         "src/cli/pipeline.ts",
         "src/gate/dq/graph-integrity.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:032aa0e39fc609bd910d76c2152c8027fc8fca429c8b7fdd53a58d726f4d954a"
     },
     "docs/spec/producer-adapters.md": {
@@ -2042,32 +2047,32 @@
         "src/adapters/code-to-gate.ts",
         "src/adapters/manual-bb.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:90c07faac61369660992c938884e780bc2d5dd6523a51c9442efadd52aefc161"
     },
     "docs/spec/producer-schema-provenance.json": {
       "role": "producer-schema-provenance",
       "caps": "docs/birdseye/caps/docs.spec.producer-schema-provenance.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8949e830d46f2c2bb956a3009367e4cd3b182a946e9f7436629e634a011471f7"
     },
     "examples/raw-producer-contract/README.md": {
       "role": "README",
       "caps": "docs/birdseye/caps/examples.raw-producer-contract.README.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c62d7807cacf1be1a025a6499653a0c4e2a6d536046ed025e208b7313e6c7915"
     },
     "examples/raw-producer-contract/ingest-manifest.json": {
       "role": "ingest-manifest",
       "caps": "docs/birdseye/caps/examples.raw-producer-contract.ingest-manifest.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:41bdc5de52c23349555a02fe99aeb8aad85f513eb77eb6c2b05b0b5b5ace7b79"
     },
     "tests/remediation-gate.test.mjs": {
       "role": "remediation-gate.test",
       "caps": "docs/birdseye/caps/tests.remediation-gate.test.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:81224339366f8257ab992c99d9e3a10ad8673174d9d5ee5ab52f9fe61f6cd6ca"
     },
     "tests/producer-pipeline.test.mjs": {
@@ -2076,35 +2081,35 @@
       "depsOut": [
         "tests/helpers/raw-producer-fixture.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:d7193697e09706b181b2ee7c70662a0627e97c234bceba561b1e5630d8db351b"
     },
     "tests/helpers/raw-producer-fixture.mjs": {
       "role": "raw-producer-fixture",
       "caps": "docs/birdseye/caps/tests.helpers.raw-producer-fixture.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:198a8e55c48a2836622b7f5aa01e8aa6f2a02fb90f4b1becf4514e43c77fb068"
     },
     "tools/snapshot-producer-contracts.mjs": {
       "role": "snapshot-producer-contracts",
       "caps": "docs/birdseye/caps/tools.snapshot-producer-contracts.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f5e9d2fc1d70d76cff2b1720b43e44c8ec08473f314ff0d2ece656840f8e83a6"
     },
     "tools/migrate-input-contracts.mjs": {
       "role": "migrate-input-contracts",
       "caps": "docs/birdseye/caps/tools.migrate-input-contracts.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:b4e91f71dc4c107ee5cc0e99b40856b96ac0ece32cbec1a2a3cd196a6a787120"
     },
     "tools/migrate-retired-case-fixtures.mjs": {
       "role": "migrate-retired-case-fixtures",
       "caps": "docs/birdseye/caps/tools.migrate-retired-case-fixtures.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c2071a2e7f0486581b4c9ec2f443fd0311f2f6249d68ae37aa0653211ed78355"
     },
     "tools/migrate-fixtures-v02.mjs": {
@@ -2114,14 +2119,14 @@
         "tools/fixture-migration/artifacts.mjs",
         "tools/fixture-migration/values.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9b9f1fc212b428635f7c6388d121e9752566ada6ea202a395ff2679333759349"
     },
     "tools/fixture-migration/values.mjs": {
       "role": "values",
       "caps": "docs/birdseye/caps/tools.fixture-migration.values.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:867b7c4ff1285f47f1a077a0bd2a4e542fed29df60f6ca1de26c0015d1befce1"
     },
     "tools/fixture-migration/artifacts.mjs": {
@@ -2130,33 +2135,33 @@
       "depsOut": [
         "tools/fixture-migration/values.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:8a825861d427c8848056cfe9c2d9f9847f2ef9e5b906b43d733dc2453ae262c8"
     },
     "tools/update-birdseye.mjs": {
       "role": "update-birdseye",
       "caps": "docs/birdseye/caps/tools.update-birdseye.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
-      "contentHash": "sha256:00bfa542288fdc073c0ac006335ddc0d5388f9c3ca4cef3537983d71937ceb92"
+      "mtime": "00018",
+      "contentHash": "sha256:4f7f184fb2ee2d05930dd502042ea494e026b0cf4c5a640ab78b50df3df2c53e"
     },
     "tools/birdseye-check.mjs": {
       "role": "birdseye-check",
       "caps": "docs/birdseye/caps/tools.birdseye-check.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:c3b854bf15068bff067fd4534c5ae2e81f0fd800e4730448407fccaad7f0bd79"
     },
     "docs/evidence/remediation-2026-09-10/local-validation.json": {
       "role": "local-validation",
       "caps": "docs/birdseye/caps/docs.evidence.remediation-2026-09-10.local-validation.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:346b31c251bec5ff9ab8b4dbf3707aec3594552d9e3c115524feb4e5ab8e93f8"
     },
     "docs/evidence/remediation-2026-09-10/audit-validation.json": {
       "role": "audit-validation",
       "caps": "docs/birdseye/caps/docs.evidence.remediation-2026-09-10.audit-validation.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:5694ee923b93b8f3dbfc36dc5871d21a6febd06cb115db8e2d9e69b6c1e96cd3"
     },
     "docs/project/acceptance-audit-2026-09-10.md": {
@@ -2172,7 +2177,7 @@
         "src/validation/evidence.ts",
         "tests/remediation-gate.test.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:86872528df3822c05d868f8614b623990b4ef5c20aba4675136a10d0f3e28ed9"
     },
     "docs/evidence/remediation-2026-09-10/ci-validation.json": {
@@ -2182,7 +2187,7 @@
       "depsOut": [
         "docs/evidence/remediation-2026-09-10/audit-validation.json"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e10d3ee2b8ac9b1bc8898e5270468b644ee908f4ca5f10f6f2587ddd81331db1"
     },
     "docs/spec/evidence-acceptance-standard.md": {
@@ -2204,28 +2209,30 @@
         "npm run birdseye-check",
         "文書のEAC/TC対応・リンク確認"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:1eed6f9b00e503fcc7b699ba10861d92d8c776a4a20db83f187a22a92211fea7"
+      "mtime": "00018",
+      "contentHash": "sha256:399b50962ccf1430d039893a46bf7560494c02b1b73021e4617a73804c33c8c1"
     },
     "docs/project/evidence-acceptance-status.md": {
-      "role": "normal-execution-acceptance-ledger",
+      "role": "evidence-acceptance-ledger",
       "caps": "docs/birdseye/caps/docs.project.evidence-acceptance-status.md.json",
-      "summary": "通常実行の資格判定を実装し、source・CIと結び付けて受入を記録。中断復旧・実接続・consumer移行は別受入単位として残す。",
+      "summary": "EAC-01〜12の実装・受入台帳。R1〜R4の追加修正とsource・CIを対応付け、旧受入と実producer原本を履歴として保持。",
       "depsOut": [
         "docs/spec/evidence-acceptance-standard.md",
+        "docs/spec/output-publication-and-migration.md",
+        "docs/project/review-fixes-2026-09-11.md",
+        "docs/evidence/review-fixes-2026-09-11/validation.json",
+        "docs/evidence/eac-completion-2026-09-10/validation.json",
         "docs/spec/execution-qualification.md",
         "tests/execution-qualification.test.mjs",
         "docs/project/remediation-2026-09-10.md",
-        "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
-        "docs/evidence/evidence-acceptance-2026-09-10/validation.json",
-        "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json"
+        "docs/evidence/evidence-acceptance-2026-09-10/validation.json"
       ],
       "tests": [
         "npm run birdseye-check",
         "npm run json-check"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:3b4adec1b0077fcd29d97f3667ec078758ddbe3019fad37c77b2c7ebf0bf48b3"
+      "mtime": "00018",
+      "contentHash": "sha256:5f866f32fbf91c7045aacdca0698d4aab3b2a0ef964c43debe94cd51b354edb5"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2239,7 +2246,7 @@
       "tests": [
         "npm run json-check"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:944c8abac7676f913085c1ca92e76b14dbb6d033b057a7036945fcb4a14edc7a"
     },
     "src/gate/execution/contracts.ts": {
@@ -2250,7 +2257,7 @@
         "src/gate/reliability/fingerprint.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:99a52d6be062611429781924984f10ecd897feb4f46c95845dbabd208321ab5a"
     },
     "src/gate/execution/evaluator.ts": {
@@ -2263,7 +2270,7 @@
         "src/input-contract.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ebe89e66ab92b397db0301aa2978f38acc02f3b57fcc9b5a9e7d5b13b6e1194d"
     },
     "src/gate/execution/format.ts": {
@@ -2272,7 +2279,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:b6c79601dc6886ee0b93b5cfcc0cd46e1c9e5afcdffe153d24387830909e781d"
     },
     "src/gate/execution/selection.ts": {
@@ -2282,7 +2289,7 @@
         "src/gate/execution/contracts.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9203e8b3862e7263ef60e523a91171923db4538249ab1c66af3a0c6136925e22"
     },
     "src/types/execution.ts": {
@@ -2291,7 +2298,7 @@
       "depsOut": [
         "src/types/evidence.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:19ce646f73402a55a69f4159528bf413785049c9cba9caecca2c73d24b805b2a"
     },
     "src/validation/execution-artifacts.ts": {
@@ -2302,19 +2309,19 @@
         "src/gate/execution/contracts.ts",
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:88a0163f17eba52d2e1a5813ec518f7beda1ad1d521ecb4337e12f52f9cba410"
     },
     "schemas/execution.schema.json": {
       "role": "execution.schema",
       "caps": "docs/birdseye/caps/schemas.execution.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:db276f5144318c44b3035b3060e39d3a97a8acb036586a10c32cf958952a7056"
     },
     "docs/spec/execution-qualification.md": {
       "role": "execution-qualification",
       "caps": "docs/birdseye/caps/docs.spec.execution-qualification.md.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:13c10507eab922ec00a13900dee45532d9d71cadfe3d86c6705ebf34674ca358"
     },
     "tests/execution-qualification.test.mjs": {
@@ -2324,7 +2331,7 @@
         "tests/helpers/execution-fixture.mjs",
         "tests/helpers/raw-producer-fixture.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:12489fc51a09e37ff43444ba53f7dd458bba7424e61be7c1ea24edaf0046ebe2"
     },
     "tests/helpers/execution-fixture.mjs": {
@@ -2333,7 +2340,7 @@
       "depsOut": [
         "tests/helpers/raw-producer-fixture.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:7b41d5ec8f14f1705dc0bb950458bd5acc6119f6662a64123dbea81af4671da5"
     },
     "tools/migrate-execution-fixtures.mjs": {
@@ -2342,66 +2349,66 @@
       "depsOut": [
         "tests/helpers/execution-fixture.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ab658beb576a22ad4879cb677fc2d62b5c801b5bed083153b16004047db683ca"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/validation.json": {
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.evidence-acceptance-2026-09-10.validation.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e98ba3882c4ae45de199a239058d019b94f5ef7ff2df00f4e23da25a179cab94"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/execution-results.json": {
       "role": "execution-results",
       "caps": "docs/birdseye/caps/docs.evidence.evidence-acceptance-2026-09-10.execution-results.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:9bdbbacfe509654694168acfc822e10f5113f37eef53be6095ff5db2c79fd3ca"
     },
     "docs/spec/output-publication-and-migration.md": {
       "role": "output-publication-and-migration",
       "caps": "docs/birdseye/caps/docs.spec.output-publication-and-migration.md.json",
-      "mtime": "00017",
-      "contentHash": "sha256:c198015eb1d151607770fddc930395b6c5c250dcbfe716236f98bc3903bcbed5"
+      "mtime": "00018",
+      "contentHash": "sha256:8ae950a5cb60b88f85ceabc940593e398f770c59af06a427676a6160b7f0a85a"
     },
     "docs/evidence/eac-completion-2026-09-10/validation.json": {
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.eac-completion-2026-09-10.validation.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:4436f71dca34d738e027406baf174ea6a6999e1e90717dfaed85014b8c186425"
     },
     "tests/output-publication.test.mjs": {
       "role": "output-publication.test",
       "caps": "docs/birdseye/caps/tests.output-publication.test.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
-      "contentHash": "sha256:224385c65545e44b144f0341ff942f63b2a8ca701be76260d8a7cc857f358012"
+      "mtime": "00018",
+      "contentHash": "sha256:94aee39a9344c5df7c2b6cd6a32a7cd146b668a40392a53bdb5932a155f7f219"
     },
     "tests/consumer-migration.test.mjs": {
       "role": "consumer-migration.test",
       "caps": "docs/birdseye/caps/tests.consumer-migration.test.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:14e93ddb21c61c20febc8779c49613fec15c04e35534f031cc736ec1334e01d6"
     },
     "tests/producer-replay.test.mjs": {
       "role": "producer-replay.test",
       "caps": "docs/birdseye/caps/tests.producer-replay.test.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:579a19b64e2e3eacec501352adcd85fb0abe0074ab8096960fc7cc7e91642c4d"
     },
     "tests/helpers/publication-child.mjs": {
       "role": "publication-child",
       "caps": "docs/birdseye/caps/tests.helpers.publication-child.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:74abda3bd5684922e70f876ce071f971cb93e07400f7cad23de47014b243d945"
     },
     "tools/build-action.mjs": {
       "role": "build-action",
       "caps": "docs/birdseye/caps/tools.build-action.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:e34a607d939764ece40ca479a6873b40cff3907b74f1f37c554e6f7623618efe"
     },
     "tools/interop/live-producers.mjs": {
@@ -2410,26 +2417,26 @@
       "depsOut": [
         "tools/interop/provenance.mjs"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:f633e2841ba791f8281711735bc14fbc8ee6240a4dc26957d555d2640313a0d0"
     },
     "tools/interop/provenance.mjs": {
       "role": "provenance",
       "caps": "docs/birdseye/caps/tools.interop.provenance.mjs.json",
       "depsOut": [],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:3c3ab0ad228960d7a0c96f0ced4bc5979af19bccc8fb594209d33823e5072c7b"
     },
     "tools/interop/producer-lock.json": {
       "role": "producer-lock",
       "caps": "docs/birdseye/caps/tools.interop.producer-lock.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:fa69c83e3906bed58d9189b35580dd49d97baa0279ee9f33ed0cefdfee055630"
     },
     "tools/interop/producer-bridge.py": {
       "role": "producer-bridge.py",
       "caps": "docs/birdseye/caps/tools.interop.producer-bridge.py.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:30f1c321d1b6111062d636a2a7a0d8b39414ac445eb548d2da1045505a5f9a1b"
     },
     "src/adapters/parse.ts": {
@@ -2438,7 +2445,7 @@
       "depsOut": [
         "src/types.ts"
       ],
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:377df864295b7d5f67980f1b9cd7e77bc36206d04b5fd43b687c94d440d67c75"
     },
     "src/consumer-migration.ts": {
@@ -2446,31 +2453,91 @@
       "caps": "docs/birdseye/caps/src.consumer-migration.ts.json",
       "depsOut": [
         "src/cli/errors.ts",
+        "src/cli/ingest-contract.ts",
         "src/gate.ts",
         "src/output-publication.ts",
+        "src/output-transaction.ts",
         "src/record.ts",
         "src/types.ts",
         "src/validation/evidence.ts",
         "src/validation/output.ts",
         "src/validation/schema.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:6dca7a1cf23c79b426f4285c754c97c9dd7d82997c56037edb5eca3d62e59299"
+      "mtime": "00018",
+      "contentHash": "sha256:af7343666ec0b39adea5301220d28b75fc55eb7cd4c119e6c36caa0c89e52b82"
     },
     "src/output-publication.ts": {
       "role": "output-publication",
       "caps": "docs/birdseye/caps/src.output-publication.ts.json",
       "depsOut": [
-        "src/cli/errors.ts"
+        "src/cli/errors.ts",
+        "src/output-storage.ts",
+        "src/output-transaction.ts"
       ],
-      "mtime": "00017",
-      "contentHash": "sha256:0163acbaf5d3664909d20f24bd2814cebfc8632a1697b007a1505963ac62729f"
+      "mtime": "00018",
+      "contentHash": "sha256:4dfe91c067a654c4eef29a34d9cef06a8ea15909df50460190c75ad604e8e713"
     },
     "schemas/consumer-migration.schema.json": {
       "role": "consumer-migration.schema",
       "caps": "docs/birdseye/caps/schemas.consumer-migration.schema.json.json",
-      "mtime": "00017",
+      "mtime": "00018",
       "contentHash": "sha256:ac3a11207ffdb86dbf1c6cdd155b888a1e6eff00afd0d7b7a97195ae709bfa31"
+    },
+    "docs/project/review-fixes-2026-09-11.md": {
+      "role": "review-fixes-2026-09-11",
+      "caps": "docs/birdseye/caps/docs.project.review-fixes-2026-09-11.md.json",
+      "summary": "R1〜R4の再現、全command排他、入力rollback、preview整合、manifest bindingの修正と追加受入。",
+      "depsOut": [
+        "docs/evidence/review-fixes-2026-09-11/validation.json",
+        "tests/transaction-regression.test.mjs",
+        "src/output-transaction.ts",
+        "src/output-publication.ts",
+        "src/consumer-migration.ts",
+        "src/graph.ts"
+      ],
+      "mtime": "00018",
+      "contentHash": "sha256:694f9e7301202f0d1739439c7651d91a243f61a205dcfe24b56b9c8284e70245"
+    },
+    "docs/evidence/review-fixes-2026-09-11/validation.json": {
+      "role": "validation",
+      "caps": "docs/birdseye/caps/docs.evidence.review-fixes-2026-09-11.validation.json.json",
+      "mtime": "00018",
+      "contentHash": "sha256:6e8564e3c3336330445af140fba6e235472cbf374aa171d2e39f84adb21fb008"
+    },
+    "tests/transaction-regression.test.mjs": {
+      "role": "transaction-regression.test",
+      "caps": "docs/birdseye/caps/tests.transaction-regression.test.mjs.json",
+      "depsOut": [
+        "tests/helpers/raw-producer-fixture.mjs"
+      ],
+      "mtime": "00018",
+      "contentHash": "sha256:e1d0852db83fdbe79d1466a6bf0eaac7802e15cf685521509b55f86f62061bb3"
+    },
+    "tests/helpers/command-transaction-child.mjs": {
+      "role": "command-transaction-child",
+      "caps": "docs/birdseye/caps/tests.helpers.command-transaction-child.mjs.json",
+      "depsOut": [],
+      "mtime": "00018",
+      "contentHash": "sha256:aa668d64e8ca8e1422100ae5065a12c20d08a90c74f451519920c827bdb48c97"
+    },
+    "src/output-storage.ts": {
+      "role": "output-storage",
+      "caps": "docs/birdseye/caps/src.output-storage.ts.json",
+      "depsOut": [
+        "src/cli/errors.ts"
+      ],
+      "mtime": "00018",
+      "contentHash": "sha256:ae1963d11a166cd652bc6150f86a75799f7076a5972638da47924430ea215c99"
+    },
+    "src/output-transaction.ts": {
+      "role": "output-transaction",
+      "caps": "docs/birdseye/caps/src.output-transaction.ts.json",
+      "depsOut": [
+        "src/cli/errors.ts",
+        "src/output-storage.ts"
+      ],
+      "mtime": "00018",
+      "contentHash": "sha256:cca5128cee642dc205d9078527422e94b9b9db0c9201e9ebe2b1e0a965ec1f17"
     }
   },
   "edges": [
@@ -5353,6 +5420,98 @@
     [
       "src/output-publication.ts",
       "src/cli/errors.ts"
+    ],
+    [
+      "docs/project/review-fixes-2026-09-11.md",
+      "docs/evidence/review-fixes-2026-09-11/validation.json"
+    ],
+    [
+      "docs/project/review-fixes-2026-09-11.md",
+      "tests/transaction-regression.test.mjs"
+    ],
+    [
+      "docs/project/review-fixes-2026-09-11.md",
+      "src/output-transaction.ts"
+    ],
+    [
+      "docs/project/review-fixes-2026-09-11.md",
+      "src/output-publication.ts"
+    ],
+    [
+      "docs/project/review-fixes-2026-09-11.md",
+      "src/consumer-migration.ts"
+    ],
+    [
+      "docs/project/review-fixes-2026-09-11.md",
+      "src/graph.ts"
+    ],
+    [
+      "tests/transaction-regression.test.mjs",
+      "tests/helpers/raw-producer-fixture.mjs"
+    ],
+    [
+      "src/cli/commands.ts",
+      "src/output-publication.ts"
+    ],
+    [
+      "src/cli/fixture-io.ts",
+      "src/output-publication.ts"
+    ],
+    [
+      "src/cli/pipeline.ts",
+      "src/output-publication.ts"
+    ],
+    [
+      "src/cli/schema-check.ts",
+      "src/output-publication.ts"
+    ],
+    [
+      "src/cli/schema-check.ts",
+      "src/output-transaction.ts"
+    ],
+    [
+      "src/consumer-migration.ts",
+      "src/cli/ingest-contract.ts"
+    ],
+    [
+      "src/consumer-migration.ts",
+      "src/output-transaction.ts"
+    ],
+    [
+      "src/output-publication.ts",
+      "src/output-storage.ts"
+    ],
+    [
+      "src/output-publication.ts",
+      "src/output-transaction.ts"
+    ],
+    [
+      "src/output-storage.ts",
+      "src/cli/errors.ts"
+    ],
+    [
+      "src/output-transaction.ts",
+      "src/cli/errors.ts"
+    ],
+    [
+      "src/output-transaction.ts",
+      "src/output-storage.ts"
+    ],
+    [
+      "docs/project/evidence-acceptance-status.md",
+      "docs/spec/output-publication-and-migration.md"
+    ],
+    [
+      "docs/project/evidence-acceptance-status.md",
+      "docs/project/review-fixes-2026-09-11.md"
+    ],
+    [
+      "docs/project/evidence-acceptance-status.md",
+      "docs/evidence/review-fixes-2026-09-11/validation.json"
+    ],
+    [
+      "docs/project/evidence-acceptance-status.md",
+      "docs/evidence/eac-completion-2026-09-10/validation.json"
     ]
   ]
 }

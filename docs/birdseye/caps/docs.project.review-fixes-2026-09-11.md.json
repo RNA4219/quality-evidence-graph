@@ -1,0 +1,25 @@
+{
+  "id": "docs/project/review-fixes-2026-09-11.md",
+  "role": "review-fixes-2026-09-11",
+  "generation": "00018",
+  "public_api": [],
+  "summary": "R1〜R4の再現、全command排他、入力rollback、preview整合、manifest bindingの修正と追加受入。",
+  "deps_out": [
+    "docs/evidence/review-fixes-2026-09-11/validation.json",
+    "src/consumer-migration.ts",
+    "src/graph.ts",
+    "src/output-publication.ts",
+    "src/output-transaction.ts",
+    "tests/transaction-regression.test.mjs"
+  ],
+  "deps_in": [
+    "docs/project/evidence-acceptance-status.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:694f9e7301202f0d1739439c7651d91a243f61a205dcfe24b56b9c8284e70245"
+}
