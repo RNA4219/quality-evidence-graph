@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00018";
+const generation = "00019";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,7 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/project/followup-fixes-2026-09-11.md", "docs/evidence/followup-fixes-2026-09-11/validation.json", "tests/followup-regression.test.mjs",
   "docs/project/review-fixes-2026-09-11.md", "docs/evidence/review-fixes-2026-09-11/validation.json",
   "tests/transaction-regression.test.mjs", "tests/helpers/command-transaction-child.mjs",
   "docs/spec/output-publication-and-migration.md", "docs/evidence/eac-completion-2026-09-10/validation.json",
@@ -294,13 +295,18 @@ Object.assign(additions["docs/spec/evidence-acceptance-standard.md"], {
 });
 Object.assign(additions["docs/project/evidence-acceptance-status.md"], {
   role: "evidence-acceptance-ledger",
-  summary: "EAC-01〜12の実装・受入台帳。R1〜R4の追加修正とsource・CIを対応付け、旧受入と実producer原本を履歴として保持。",
+  summary: "EAC-01〜12とC-15/19の実装・受入台帳。R5〜R7の追加修正とsource・CIを対応付け、旧受入と実producer原本を履歴として保持。",
   depsOut: ["docs/spec/evidence-acceptance-standard.md", "docs/spec/output-publication-and-migration.md", "docs/project/review-fixes-2026-09-11.md", "docs/evidence/review-fixes-2026-09-11/validation.json", "docs/evidence/eac-completion-2026-09-10/validation.json", "docs/spec/execution-qualification.md", "tests/execution-qualification.test.mjs", "docs/project/remediation-2026-09-10.md", "docs/evidence/evidence-acceptance-2026-09-10/validation.json"],
   tests: ["npm run birdseye-check", "npm run json-check"],
 });
 Object.assign(additions["docs/project/review-fixes-2026-09-11.md"], {
   summary: "R1〜R4の再現、全command排他、入力rollback、preview整合、manifest bindingの修正と追加受入。",
   depsOut: ["docs/evidence/review-fixes-2026-09-11/validation.json", "tests/transaction-regression.test.mjs", "src/output-transaction.ts", "src/output-publication.ts", "src/consumer-migration.ts", "src/graph.ts"],
+});
+additions["docs/project/evidence-acceptance-status.md"].depsOut.push("docs/project/followup-fixes-2026-09-11.md", "docs/evidence/followup-fixes-2026-09-11/validation.json");
+Object.assign(additions["docs/project/followup-fixes-2026-09-11.md"], {
+  summary: "R5〜R7の差分検査・native編集保護・診断bundle保存を一括修正し、操作順の組合せと実行証拠で受入を管理。",
+  depsOut: ["docs/evidence/followup-fixes-2026-09-11/validation.json", "tests/followup-regression.test.mjs", "src/output-publication.ts", "src/cli/report/change-selection.ts", "src/cli/repro-bundle.ts", "docs/spec/operational-cli-extensions.md"],
 });
 Object.assign(additions["docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json"], {
   role: "pre-standard-observation-evidence",

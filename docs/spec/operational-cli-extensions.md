@@ -3,8 +3,8 @@ intent_id: INT-QEG-OPERATIONS-CLI-001
 owner: quality-evidence-graph
 status: active
 profile: ipo_controlled
-last_reviewed_at: 2026-07-04
-next_review_due: 2026-08-04
+last_reviewed_at: 2026-09-11
+next_review_due: 2026-12-11
 ---
 
 # Operational CLI Extensions
@@ -22,7 +22,7 @@ next_review_due: 2026-08-04
 | `qeg report` | 複数 target の累積 Gate report を作る | target を最後まで評価し、`qeg-ci-report-v2` を出力する |
 | `qeg report --github-summary` | GitHub Actions Step Summary へ人間向け要約を書く | `GITHUB_STEP_SUMMARY` がある場合に Markdown summary を追記する |
 | `qeg report --baseline <path>` | 既知 DQ を baseline として受理する | すべての current DQ が baseline で覆われ、他の failure がない場合だけ `baseline_accepted` にする |
-| `qeg report --changed-only` | 変更に関係する target だけを評価する | `QEG_CHANGED_FILES` または git diff で target を絞り込む |
+| `qeg report --changed-only` | 変更に関係する target だけを評価する | 削除・rename両端を含めて絞り込み、読取り失敗や不正入力は通常評価へ回す |
 | `qeg report --diff <previous-report.json>` | 前回 report との差分を作る | DQ を `new` / `resolved` / `unchanged` に分類する |
 | `qeg baseline audit` | baseline の寿命を管理する | 期限切れ、owner 未設定、存在しない target、解消済み DQ を検出する |
 | `qeg doctor` | 導入環境を診断する | Node version、`dist/cli.js`、schema compile、workflow、target artifact を検査する |
@@ -32,7 +32,7 @@ next_review_due: 2026-08-04
 | `qeg evidence verify` | 証跡実体を高速検証する | artifact path、hash、revision、retention、storageClassification を検査する |
 | `qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json> [--base-dir <dir>] [--force]` | 外部 resilience evidence を canonical node へ変換する | base-dir containment、raw/context conflict、schema validation、atomic output を実施し、provenance と hash を保持した qeg-resilience-evidence-v1 を出力する |
 | `qeg policy lint` | GatePolicy を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile の矛盾を検出する |
-| `qeg repro-bundle` | CI failure の再現 bundle を作る | report、doctor、schema inventory、package version、workflow、gate-input を redaction 付きでまとめる |
+| `qeg repro-bundle` | CI failure の再現 bundle を作る | redaction、target別の一意な入力名、取得失敗の明示、全fileのhashと完了世代を検証する |
 | `qeg check` | ローカル総合確認を行う | schema-check、enum-check、doctor、evidence verify、policy lint、snapshot、report をまとめて実行する |
 | `qeg snapshot` | report の golden snapshot を検証する | `generatedAt` と絶対 path を正規化して比較する |
 | `qeg init` | 他 repo へ最小構成を導入する | `.qeg/` と GitHub Actions workflow の starter を生成する |
@@ -94,11 +94,19 @@ baseline は既知 DQ の移行補助であり、DQ を削除する仕組みで�
 `--changed-only` は次の順に変更ファイルを取得する。
 
 1. `QEG_CHANGED_FILES`
-2. `git diff --name-only --diff-filter=ACMRTUXB origin/main...HEAD`
-3. `git diff --name-only --diff-filter=ACMRTUXB HEAD~1...HEAD`
-4. `git diff --name-only --diff-filter=ACMRTUXB`
+2. `git diff --name-only -z --no-renames --diff-filter=ACDMRTUXB origin/main...HEAD`
+3. `git diff --name-only -z --no-renames --diff-filter=ACDMRTUXB HEAD~1...HEAD`
+4. `git status --porcelain=v1 -z --untracked-files=all`（履歴を取得できない場合）
 
-対象 target は、target directory 自体、`metadata.inputArtifacts[].path`、または graph の `changed_code.path` が変更ファイルと一致した場合に評価対象になる。対象が 0 件の場合、空 report を生成し exit `0` とする。
+対象 target は、target directory 自体、`metadata.inputArtifacts[].path`、または graph の `changed_code.path` が変更ファイルと一致した場合に評価対象になる。Gitの削除Dを含め、renameは旧pathの削除と新pathの追加として両端を収集する。NUL区切りを使い、空白・日本語・Gitのpath quotingで対応が失われることを防ぐ。
+
+入力は世代排他とschema検証を通して読む。欠落・不正JSON・schema違反・公開中・中断状態などで関連性を確定できない場合、そのtargetを通常評価へ回し、CLI errorまたはDQを累積する。正常に読み取れて無関係なtargetだけを除外する。確実に対象が0件なら空report / exit `0`。履歴も変更を含むworktreeも取得できなければ`detection_failed` / exit `1`。
+
+### Repro bundle の完全性
+
+`qeg-repro-bundle-v1`のmanifestを維持し、入力の`files[]`へ`sourceTarget`、取得できなかった入力へ`inputErrors: [{target, error}]`を追加する。入力の保存名はtargetの完全pathのSHA-256から作る。同じbasenameの別targetも別ファイルとなり、入力順を変えて再実行しても対応付けを維持する。利用者はmanifestの`files`を参照し、古いfileをglobで取り込まない。
+
+全JSONをメモリ上で組み立て、入力・report・診断本文へredactionを適用してからhashを記録する。manifestの構造path・sourceTarget・hashは対応関係を維持するためそのまま保持し、保存先名にsecret等の語があっても参照を壊さない。`manifest.json`を含めて世代公開し、正式読取り・全file hash照合まで同じlease内で行う。書込み失敗を入力欠落として握りつぶさない。入力欠落・不正JSON等の取得失敗は`inputErrors`とCLI出力へ明示する。診断bundle生成のexit `0`は対象のGate合格を意味しない。
 
 ## 6. GitHub Action
 

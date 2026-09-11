@@ -1,17 +1,19 @@
 {
   "id": "src/cli/repro-bundle.ts",
   "role": "repro-bundle-cli",
-  "generation": "00018",
+  "generation": "00019",
   "public_api": [],
   "summary": "QEG 0.4.0 repro-bundle-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/doctor.ts",
     "src/cli/errors.ts",
     "src/cli/file-errors.ts",
-    "src/cli/report.ts"
+    "src/cli/report.ts",
+    "src/output-publication.ts"
   ],
   "deps_in": [
     "docs/project/evaluation.md",
+    "docs/project/followup-fixes-2026-09-11.md",
     "docs/project/runbook.md",
     "docs/requirements.md",
     "docs/spec/operational-cli-extensions.md",
@@ -24,5 +26,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:f597d41ff99bc43f0a0f3e7f7b1160a058983c4bca73b719cfdae0fadc8e143e"
+  "contentHash": "sha256:b3c4ecfa0e9abe8011ba75746f3709fc90900934389fcf3f501abbbd0f5db0b0"
 }

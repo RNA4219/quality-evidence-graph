@@ -25,6 +25,8 @@
 
 2026-09-11の[再レビュー修正](docs/project/review-fixes-2026-09-11.md)では、配置と移行の競合、入力を含む中断復旧、移行previewとCLIの整合、API/CLIの要求mappingを追加検証しています。
 
+続く[R5〜R7の一括修正](docs/project/followup-fixes-2026-09-11.md)では、native編集を古い世代で戻さない復旧、差分検査の削除・不正入力検出、同名targetの再現bundle保存を追加しています。入力と過去の出力が異なる場合、`outputs recover`は入力を保護して再評価を要求します。
+
 フォーカス手順:
 
 - 直近変更ファイル±2hopの node ID を `docs/birdseye/index.json` から取得する。

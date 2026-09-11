@@ -1,18 +1,20 @@
 import { createHash } from "crypto";
-import { mkdir, readFile, readdir, stat, writeFile } from "fs/promises";
+import { mkdir, readFile, readdir } from "fs/promises";
 import { basename, join, resolve } from "path";
 import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { createDoctorReport } from "./doctor.js";
 import { CliError } from "./errors.js";
 import { optionalText } from "./file-errors.js";
+import { publishFiles, readGateInput, readPublishedOutputs, withOutputLease } from "../output-publication.js";
 
 interface ReproBundleManifest {
   readonly reportVersion: "qeg-repro-bundle-v1";
   readonly generatedAt: string;
   readonly package: { readonly name: string; readonly version: string };
   readonly reportPath?: string;
-  readonly files: readonly { readonly path: string; readonly sha256: string }[];
+  readonly files: readonly { readonly path: string; readonly sha256: string; readonly sourceTarget?: string }[];
+  readonly inputErrors: readonly { readonly target: string; readonly error: string }[];
 }
 
 async function readJson<T>(path: string): Promise<T> {
@@ -43,11 +45,12 @@ function redact(value: unknown): unknown {
   return value;
 }
 
-async function writeJson(outDir: string, name: string, data: unknown): Promise<{ path: string; sha256: string }> {
+function stageJson(contents: Map<string, string>, outDir: string, name: string, data: unknown, sourceTarget?: string): ReproBundleManifest["files"][number] {
+  if (contents.has(name)) throw new CliError(`Duplicate repro bundle filename: ${name}`);
   const path = join(outDir, name);
   const content = `${JSON.stringify(redact(data), null, 2)}\n`;
-  await writeFile(path, content, "utf-8");
-  return { path, sha256: sha256(content) };
+  contents.set(name, content);
+  return { path, sha256: sha256(content), ...(sourceTarget ? { sourceTarget } : {}) };
 }
 
 async function schemaInventory(): Promise<unknown[]> {
@@ -86,32 +89,33 @@ function parseArgs(args: readonly string[]): { reportPath?: string; outDir: stri
 export async function runReproBundleCommand(args: readonly string[]): Promise<void> {
   const options = parseArgs(args);
   const outDir = resolve(options.outDir);
-  await mkdir(outDir, { recursive: true });
   const pkg = await readJson<{ name: string; version: string }>("package.json");
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
-  const files: { path: string; sha256: string }[] = [];
+  const files: ReproBundleManifest["files"][number][] = [];
+  const contents = new Map<string, string>();
+  const inputErrors: { target: string; error: string }[] = [];
 
   if (options.reportPath) {
     const report = await readJson<unknown>(options.reportPath);
-    files.push(await writeJson(outDir, "qeg-ci-report.json", report));
+    files.push(stageJson(contents, outDir, "qeg-ci-report.json", report));
   }
-  files.push(await writeJson(outDir, "doctor.json", await createDoctorReport(targets)));
-  files.push(await writeJson(outDir, "schemas.json", await schemaInventory()));
+  files.push(stageJson(contents, outDir, "doctor.json", await createDoctorReport(targets)));
+  files.push(stageJson(contents, outDir, "schemas.json", await schemaInventory()));
 
   const workflow = await safeRead(".github/workflows/ci.yml");
   if (workflow !== undefined) {
-    files.push(await writeJson(outDir, "workflow.json", { path: ".github/workflows/ci.yml", content: workflow }));
+    files.push(stageJson(contents, outDir, "workflow.json", { path: ".github/workflows/ci.yml", content: workflow }));
   }
 
   for (const target of targets) {
-    const inputPath = join(target, "gate-input.json");
+    let input: unknown;
     try {
-      if ((await stat(inputPath)).isFile()) {
-        files.push(await writeJson(outDir, `gate-input-${basename(target)}.json`, await readJson<unknown>(inputPath)));
-      }
-    } catch {
-      // Missing gate-input is already covered by doctor.
+      input = JSON.parse(await readGateInput(target));
+    } catch (error) {
+      inputErrors.push({ target, error: String(redact(error instanceof Error ? error.message : String(error))) });
+      continue;
     }
+    files.push(stageJson(contents, outDir, `gate-input-${sha256(target)}.json`, input, target));
   }
 
   const manifest: ReproBundleManifest = {
@@ -120,10 +124,25 @@ export async function runReproBundleCommand(args: readonly string[]): Promise<vo
     package: { name: pkg.name, version: pkg.version },
     reportPath: options.reportPath,
     files,
+    inputErrors,
   };
   const manifestPath = join(outDir, "manifest.json");
-  await writeFile(manifestPath, `${JSON.stringify(manifest, null, 2)}\n`, "utf-8");
+  // Structural paths must remain usable even when directory names contain words such as "secret".
+  // Payloads and diagnostic messages were redacted before their hashes were recorded.
+  contents.set("manifest.json", `${JSON.stringify(manifest, null, 2)}\n`);
+  await mkdir(outDir, { recursive: true });
+  await withOutputLease(outDir, async root => {
+    await publishFiles(root, contents);
+    const published = await readPublishedOutputs(root);
+    const sealed = JSON.parse(published.files.get("manifest.json")!) as ReproBundleManifest;
+    if (sealed.files.length !== files.length || new Set(sealed.files.map(file => file.path)).size !== files.length) throw new CliError("Repro bundle manifest file set mismatch");
+    for (const file of sealed.files) {
+      const content = published.files.get(basename(file.path));
+      if (content === undefined || sha256(content) !== file.sha256) throw new CliError(`Repro bundle hash mismatch: ${file.path}`);
+    }
+  });
   console.log(`QEG repro bundle written to: ${outDir}`);
   console.log(`Manifest: ${manifestPath}`);
+  if (inputErrors.length) console.log(`Input capture diagnostics: ${inputErrors.length}; see manifest.inputErrors`);
   exit(0);
 }
