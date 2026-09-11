@@ -1,9 +1,9 @@
 {
   "id": "schemas/waiver.schema.json",
   "role": "waiver.schema",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 waiver.schema の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG waiver.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/project/gate-contract-fixes-2026-09-11.md",

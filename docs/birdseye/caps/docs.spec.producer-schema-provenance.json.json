@@ -1,9 +1,9 @@
 {
   "id": "docs/spec/producer-schema-provenance.json",
   "role": "producer-schema-provenance",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 producer-schema-provenance の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG producer-schema-provenance の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/spec/producer-adapters.md"

@@ -1,6 +1,14 @@
 # Changelog
 
-## 0.4.0 - Unreleased
+## 0.4.1 - 2026-09-12 パッケージ
+
+- 0.4.0の未公開開発分とR1〜R28の受入済み改修をまとめ、package・CLI・Action・runtime metadataを0.4.1へ統一。
+- 世代公開と復旧、consumer移行、CLIのpath/discovery/baseline/diff、配置・実行資格・統制の整合を修正。
+- 手動証拠の省略をDQ-08と記録へ反映。手動失敗・未完了、実行結果との矛盾、削除済みケースの誤復帰、未承認reviewのgoを修正。
+- CLI/API/Action/配布物/初期化runtimeの回帰テストと62 fixtureを同梱。インストール・更新・復旧の検証対象を0.4.1へ更新。
+- wire契約は0.2、Node.js 20以上、private packageを維持。tarballとSHA-256を配布単位とする。
+
+## 0.4.0 - 開発履歴（単独配布なし）
 
 - R14〜R19: 明示coverageの矛盾、plan-only手動配置のoracle漏れ、human/implicitの無確認go、不正statusのpass化、空白waiver承認者、snapshotのcwd依存を修正。snapshot --updateは対象基準のversioned形式を保存し、旧形式は読み取り互換を維持。
 

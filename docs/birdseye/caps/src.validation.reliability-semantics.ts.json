@@ -1,9 +1,9 @@
 {
   "id": "src/validation/reliability-semantics.ts",
   "role": "reliability-semantic-validator",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 reliability-semantic-validator の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG reliability-semantic-validator の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "src/gate/reliability/preflight.ts",

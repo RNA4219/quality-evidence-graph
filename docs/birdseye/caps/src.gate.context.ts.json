@@ -1,9 +1,9 @@
 {
   "id": "src/gate/context.ts",
   "role": "context",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 context の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG context の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/gate/manual-evidence.ts",
     "src/placement-contract.ts",

@@ -181,7 +181,7 @@ export async function verifyDistribution(run, fixtures, directory) {
     const out = join(directory, localFiles ? 'bundle-with-local-files' : 'bundle');
     exit(run(['repro-bundle', target, '--out', out], { cwd: directory }), 0);
     const manifest = JSON.parse(await readFile(join(out, 'manifest.json'), 'utf8'));
-    assert.equal(manifest.package.name, '@quality-harness/quality-evidence-graph'); assert.equal(manifest.package.version, '0.4.0');
+    assert.equal(manifest.package.name, '@quality-harness/quality-evidence-graph'); assert.equal(manifest.package.version, '0.4.1');
     for (const file of manifest.files) assert.equal(createHash('sha256').update(await readFile(file.path)).digest('hex'), file.sha256);
     assert.deepEqual(manifest.inputErrors, []);
   }

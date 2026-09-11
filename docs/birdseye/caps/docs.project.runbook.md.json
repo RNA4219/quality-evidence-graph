@@ -1,13 +1,15 @@
 {
   "id": "docs/project/runbook.md",
   "role": "operations",
+  "generation": "00024",
   "public_api": [],
-  "summary": "typecheck、schema parse、schema/enum drift check、GitHub Actions CI、qeg-report-action、CI 累積 report、運用補助CLI、release dry-run、IPO 統制仕様書とレビュー記録確認、code-to-gate Gate 証跡、RanD KanoMode 監査証跡、実装 Gate 証跡、rollback、observability の運用手順。",
+  "summary": "QEG operations の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     ".github/workflows/ci.yml",
     "docs/project/evaluation.md",
     "docs/release-notes/2026-07-20-v0.3.0.md",
     "docs/release-notes/2026-07-20-v0.3.1.md",
+    "docs/release-notes/2026-09-12-v0.4.1.md",
     "docs/spec/operational-cli-extensions.md",
     "qeg-report-action/action.yml",
     "src/cli/baseline.ts",
@@ -26,21 +28,10 @@
     "docs/spec/review-2026-06-03.md"
   ],
   "risks": [
-    "実行手順が requirements とずれると検収証跡が再現できない"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run schema-check",
-    "npm run enum-check",
-    "npm run explain -- DQ-15",
-    "npm run doctor -- fixtures/positive-release-go",
-    "npm run snapshot -- fixtures/positive-release-go",
-    "npm run report -- fixtures/positive-release-go",
-    "npm pack --dry-run --cache ./.npm-cache",
-    "code-to-gate analyze/readiness/export",
-    "RanD KanoMode build_audit_artifacts",
-    "fixture validate/gate/record"
+    "npm test"
   ],
-  "generation": "00023",
-  "contentHash": "sha256:bd0150a223d340331f1fb27eb0ea785699ae67a7354d6baf493d8a010e4bd99d"
+  "contentHash": "sha256:84e43fb5cd9f337e9dd82390430be44ba8ea320b97d90b01e5379802d9609e28"
 }

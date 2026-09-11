@@ -86,8 +86,8 @@ async function main() {
   const options = parseArgs(process.argv.slice(2));
   const packageManifest = JSON.parse(await readFile(join(repoRoot, "package.json"), "utf8"));
   const releaseVersion = packageManifest.version;
-  if (releaseVersion !== "0.4.0") {
-    throw new Error(`release lifecycle acceptance requires package version 0.4.0, got ${releaseVersion}`);
+  if (releaseVersion !== "0.4.1") {
+    throw new Error(`release lifecycle acceptance requires package version 0.4.1, got ${releaseVersion}`);
   }
 
   const sourceRevision = process.env.GITHUB_SHA ?? process.env.QEG_SOURCE_REVISION ?? "worktree";

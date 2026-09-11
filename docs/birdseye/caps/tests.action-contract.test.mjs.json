@@ -1,0 +1,16 @@
+{
+  "id": "tests/action-contract.test.mjs",
+  "role": "action-contract.test",
+  "generation": "00024",
+  "public_api": [],
+  "summary": "QEG action-contract.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:c4695450f6c5f97d97263d40c87df7d41a3936a7d7fcadde897ca04792b94067"
+}

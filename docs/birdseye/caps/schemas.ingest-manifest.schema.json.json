@@ -1,9 +1,9 @@
 {
   "id": "schemas/ingest-manifest.schema.json",
   "role": "ingest-manifest.schema",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 ingest-manifest.schema の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG ingest-manifest.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [

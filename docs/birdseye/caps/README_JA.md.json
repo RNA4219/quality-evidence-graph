@@ -1,10 +1,12 @@
 {
   "id": "README_JA.md",
   "role": "human-overview-ja",
+  "generation": "00024",
   "public_api": [],
-  "summary": "人間向け日本語 README。QEG の目的、解決する QA 課題、基本概念、controlled governance profile、CLI、運用補助コマンド、qeg-report-action、GitHub Actions CI、CI 累積 report、verdict の読み方、現在状態を説明する。",
+  "summary": "QEG human-overview-ja の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/agent/HUB.codex.md",
+    "docs/release-notes/2026-09-12-v0.4.1.md",
     "qeg-report-action/action.yml"
   ],
   "deps_in": [
@@ -13,12 +15,10 @@
     "docs/release-notes/2026-06-03-controlled-gate.md"
   ],
   "risks": [
-    "人間向け説明が仕様正本と乖離すると製品理解を誤る"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run report -- fixtures/positive-release-go"
+    "npm test"
   ],
-  "generation": "00023",
-  "contentHash": "sha256:3de604963c7c5076eaeb07063545b6de2ffa263e49f6880d02c1d1b549b07ac6"
+  "contentHash": "sha256:f0569ac10b647f39b919d6e448537617d4a7666b0afd585e8a29ef9c218b8e45"
 }

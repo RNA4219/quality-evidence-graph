@@ -1,9 +1,9 @@
 {
   "id": "tools/migrate-input-contracts.mjs",
   "role": "migrate-input-contracts",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 migrate-input-contracts の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG migrate-input-contracts の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [

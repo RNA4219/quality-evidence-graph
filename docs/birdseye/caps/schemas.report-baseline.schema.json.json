@@ -1,9 +1,9 @@
 {
   "id": "schemas/report-baseline.schema.json",
   "role": "report-baseline.schema",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 report-baseline.schema の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG report-baseline.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/project/cli-boundary-fixes-2026-09-11.md"

@@ -16,10 +16,13 @@ const npmCacheResult = spawnSync(process.execPath, [npmCli, "config", "get", "ca
 assert.equal(npmCacheResult.status, 0, npmCacheResult.stderr || npmCacheResult.stdout);
 const npmCache = npmCacheResult.stdout.trim();
 assert.ok(npmCache, "npm cache path is required");
-const packed = spawnSync(process.execPath, [npmCli, "pack", "--json", "--pack-destination", temp, "--cache", npmCache], { encoding: "utf-8" });
-assert.equal(packed.status, 0, packed.stderr || packed.stdout);
-const [{ filename }] = JSON.parse(packed.stdout);
-const tarball = join(temp, filename);
+let tarball = process.env.QEG_PACKAGE_TARBALL ? resolve(process.env.QEG_PACKAGE_TARBALL) : undefined;
+if (!tarball) {
+  const packed = spawnSync(process.execPath, [npmCli, "pack", "--json", "--pack-destination", temp, "--cache", npmCache], { encoding: "utf-8" });
+  assert.equal(packed.status, 0, packed.stderr || packed.stdout);
+  const [{ filename }] = JSON.parse(packed.stdout);
+  tarball = join(temp, filename);
+}
 const installed = spawnSync(process.execPath, [npmCli, "install", tarball, "--prefix", temp, "--ignore-scripts", "--no-audit", "--no-fund", "--prefer-offline", "--cache", npmCache], { encoding: "utf-8" });
 assert.equal(installed.status, 0, installed.stderr || installed.stdout);
 const packageRoot = join(temp, "node_modules", "@quality-harness", "quality-evidence-graph");
@@ -35,7 +38,7 @@ assert.equal(help.status, 0, help.stderr || help.stdout);
 assert.match(help.stdout, /Usage: qeg/);
 const version = runQeg(["--version"]);
 assert.equal(version.status, 0, version.stderr || version.stdout);
-assert.equal(version.stdout.trim(), "0.4.0");
+assert.equal(version.stdout.trim(), "0.4.1");
 const schemaCheck = runQeg(["schema-check"]);
 assert.equal(schemaCheck.status, 0, schemaCheck.stderr || schemaCheck.stdout);
 const imported = await import(new URL(`file:///${join(packageRoot, "dist", "index.js").replaceAll("\\", "/")}`));
@@ -43,7 +46,7 @@ assert.equal(typeof imported.evaluateGate, "function");
 assert.equal(typeof imported.validateGateInput, "function");
 assert.equal(typeof imported.verifyEvidenceArtifacts, "function");
 assert.equal(typeof imported.getExitCode, "function");
-assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.4.0");
+assert.equal(JSON.parse(await readFile(join(packageRoot, "package.json"), "utf-8")).version, "0.4.1");
 assert.equal(typeof imported.buildGraph, "function");
 assert.equal(typeof imported.placeTests, "function");
 assert.equal(typeof imported.planConsumerMigration, "function");
@@ -99,7 +102,7 @@ const packedActionVersion = spawnSync(process.execPath, [packedActionBundle, "--
   cwd: temp,
 });
 assert.equal(packedActionVersion.status, 0, packedActionVersion.stderr || packedActionVersion.stdout);
-assert.equal(packedActionVersion.stdout.trim(), "0.4.0");
+assert.equal(packedActionVersion.stdout.trim(), "0.4.1");
 const thirdPartyNotices = await readFile(
   join(packageRoot, "qeg-report-action", "THIRD_PARTY_NOTICES.md"),
   "utf-8",

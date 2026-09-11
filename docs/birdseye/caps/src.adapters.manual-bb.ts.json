@@ -1,9 +1,9 @@
 {
   "id": "src/adapters/manual-bb.ts",
   "role": "manual-bb",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 manual-bb の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG manual-bb の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/adapters/common.ts",
     "src/adapters/contracts.ts",

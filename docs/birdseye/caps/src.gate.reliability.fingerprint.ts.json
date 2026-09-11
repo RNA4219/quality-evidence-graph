@@ -1,9 +1,9 @@
 {
   "id": "src/gate/reliability/fingerprint.ts",
   "role": "fingerprint",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 fingerprint の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG fingerprint の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/gate/reliability/collections.ts",
     "src/types.ts"

@@ -209,7 +209,7 @@ test("qeg init generates a schema-valid 0.2 wire contract with the installed loc
   assert.match(workflow, /uses: \.\/\.qeg\/runtime\/qeg-report-action/);
   const bundled = spawnSync(process.execPath, [join(root, ".qeg/runtime/qeg-report-action/dist/cli.mjs"), "--version"], { encoding: "utf8" });
   assert.equal(bundled.status, 0, bundled.stderr);
-  assert.equal(bundled.stdout.trim(), "0.4.0");
+  assert.equal(bundled.stdout.trim(), "0.4.1");
   assert.equal(run(["gate", join(root, ".qeg")]).status, 2);
   assert.doesNotMatch(workflow, /enforce: "false"/);
 });
