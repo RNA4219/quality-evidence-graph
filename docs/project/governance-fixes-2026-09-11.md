@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-GOVERNANCE-FIXES-20260911
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -20,6 +20,6 @@ PR #13 merge 7960bd29f971f0191fabbfb15d1ffcdf66697ba3の追加レビューで5�
 
 [共通matrix](../../tests/helpers/governance-matrix.mjs)をsource CLI/API、Action、tarball CLI/API/Action、初期化runtimeへ適用する。固定fixtureで3種類のDQを追加し、以前の全fixture期待値とdocs/evidence原本を保持する。
 
-現在は実装・ローカル検証中。source commitのLinux Node20/24・Windows Node24 CI完了後に受入を固定する。[validation.json](../evidence/governance-fixes-2026-09-11/validation.json)を正本とする。
+R20〜R24を受入済み。source commit 2660cc6dbd43e8300b2537f9bd4196dacb272016 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34575322967)は3job全step成功。222 runtime nodes・58 fixtures・CLI/API/Action/tarball/初期化runtimeとlifecycleを検証した。[validation.json](../evidence/governance-fixes-2026-09-11/validation.json)を正本とする。
 
 契約は[整合仕様](../spec/governance-consistency.md)。IPOの不明保管を失格とし、役割の空白と不正waiver日時を受理しない。approval binding、過去producer原本、package0.4.0未公開 / wire0.2は維持する。本番操作・実producer再実行・人間による手動QAは今回の範囲外。
