@@ -18,6 +18,8 @@ R5〜R7（native編集保護・差分選択・診断bundle）は`docs/project/fo
 
 ## 1. 読み順
 
+R14〜R19の実装・受入は`docs/project/gate-contract-fixes-2026-09-11.md`、具体契約は`docs/spec/gate-contract-consistency.md`、新しい証拠は`docs/evidence/gate-contract-fixes-2026-09-11/`を参照する。
+
 1. `README.md`
 2. `README_JA.md` / `README_EN.md`
 3. `docs/birdseye/index.json`

@@ -1,0 +1,617 @@
+{
+  "recordVersion": "qeg-gate-contract-acceptance/v1",
+  "baselineCommit": "3c26458fe78af092aaa763bf7c75c1d0e9d90011",
+  "acceptance": {
+    "decision": "accepted",
+    "findingIds": [
+      "R14",
+      "R15",
+      "R16",
+      "R17",
+      "R18",
+      "R19"
+    ]
+  },
+  "scope": "Synthetic regression and fixed fixtures; no live producer or production rerun. Prior evidence is retained.",
+  "baselineReview": {
+    "path": "artifacts/qeg-postmerge-review3-20260911/validated-review.json",
+    "hash": "sha256:4939fa466af5e96fca2d0e04c8194c4e4be27c308392b87044676e12ca9d473b",
+    "receiptHash": "sha256:f24114104e62be26d5b1bab3805724223e2d14c6fd4369be20bba64843b6083a",
+    "cliInvocations": 36,
+    "apiComparisons": 5
+  },
+  "localValidation": {
+    "status": "passed",
+    "platform": "win32",
+    "node": "v24.11.0",
+    "runtimeTestNodes": 210,
+    "addedTestNodes": 13,
+    "fixtureContracts": 55,
+    "addedFixtures": 2,
+    "reliabilityFixtures": 22,
+    "countingNote": "node:test parent/subtest nodes; matrix nodes contain multiple cases and are not equivalent to CLI invocation counts",
+    "commands": [
+      {
+        "command": "npm test",
+        "exitCode": 0
+      },
+      {
+        "command": "npm run test:release-lifecycle",
+        "exitCode": 0
+      },
+      {
+        "command": "schema-check --json / enum-check --json",
+        "exitCode": 0
+      }
+    ],
+    "checks": {
+      "publicTypes": "pass",
+      "packedCliApiAction": "pass",
+      "sourceCliApiAction": "pass",
+      "initializedRuntime": "pass",
+      "actionLifecycle": "go",
+      "compiledSchemas": 20,
+      "enums": 10,
+      "birdseyeGeneration": "00021",
+      "birdseyeSourceHashes": 259,
+      "trackedJson": 854
+    },
+    "logs": [
+      {
+        "path": "final-full-test.log",
+        "hash": "sha256:f3aa23ecfc637b4b670d2db935459073076a90fb43f6dd1aefc00bd2909a2b3e"
+      },
+      {
+        "path": "final-full-test.exit",
+        "hash": "sha256:13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      {
+        "path": "lifecycle.log",
+        "hash": "sha256:63c8f4111b5c04e98455f17bec9faf2c2ed2fee67e7c6ca351f0b05d7b8f7594"
+      },
+      {
+        "path": "lifecycle.exit",
+        "hash": "sha256:13bf7b3039c63bf5a50491fa3cfd8eb4e699d1ba1436315aef9cbe5711530354"
+      },
+      {
+        "path": "schema.json",
+        "hash": "sha256:1f4b0887476deb16e80827ccf788b3ae56338ce71704c3a10961941adab68b17"
+      },
+      {
+        "path": "enum.json",
+        "hash": "sha256:3d0e264e0dcb7523252f4c5257a985899e4b1817def73079779d271736975bc3"
+      }
+    ],
+    "logAvailability": "Sibling artifacts/qeg-gate-contract-fixes-20260911; all checks also run in source CI"
+  },
+  "implementationReview": {
+    "changedContracts": "docs/spec/gate-contract-consistency.md",
+    "fixedFixtures": [
+      "negative-explicit-placement-coverage",
+      "negative-plan-only-manual-oracle"
+    ],
+    "priorFixtureExpectationsChanged": false,
+    "correction": "Retired manual history remains governed by retirement DQ-14; object key ordering does not duplicate equivalent placements",
+    "ipoImpact": "Whitespace approvers rejected; human oracle requires review. Approval binding and retention rules unchanged."
+  },
+  "sourceCommit": "802e5b04de33a2bd37eaf5e1b34b982b15d7a529",
+  "ci": {
+    "conclusion": "success",
+    "headSha": "802e5b04de33a2bd37eaf5e1b34b982b15d7a529",
+    "jobs": [
+      {
+        "completedAt": "2026-09-11T05:07:24Z",
+        "conclusion": "success",
+        "databaseId": 103153654594,
+        "name": "portability (windows-24)",
+        "startedAt": "2026-09-11T05:03:14Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-11T05:03:16Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-11T05:03:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:21Z",
+            "conclusion": "success",
+            "name": "Checkout",
+            "number": 2,
+            "startedAt": "2026-09-11T05:03:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:39Z",
+            "conclusion": "success",
+            "name": "Setup Node.js",
+            "number": 3,
+            "startedAt": "2026-09-11T05:03:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:47Z",
+            "conclusion": "success",
+            "name": "Install dependencies",
+            "number": 4,
+            "startedAt": "2026-09-11T05:03:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:51Z",
+            "conclusion": "success",
+            "name": "Build",
+            "number": 5,
+            "startedAt": "2026-09-11T05:03:47Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:07:16Z",
+            "conclusion": "success",
+            "name": "Runtime contracts",
+            "number": 6,
+            "startedAt": "2026-09-11T05:03:51Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:07:20Z",
+            "conclusion": "success",
+            "name": "Release lifecycle acceptance",
+            "number": 7,
+            "startedAt": "2026-09-11T05:07:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:07:20Z",
+            "conclusion": "success",
+            "name": "Upload release lifecycle evidence",
+            "number": 8,
+            "startedAt": "2026-09-11T05:07:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:07:21Z",
+            "conclusion": "success",
+            "name": "Post Setup Node.js",
+            "number": 15,
+            "startedAt": "2026-09-11T05:07:20Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:07:23Z",
+            "conclusion": "success",
+            "name": "Post Checkout",
+            "number": 16,
+            "startedAt": "2026-09-11T05:07:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:07:23Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 17,
+            "startedAt": "2026-09-11T05:07:23Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34564476819/job/103153654594"
+      },
+      {
+        "completedAt": "2026-09-11T05:12:18Z",
+        "conclusion": "success",
+        "databaseId": 103153654761,
+        "name": "quality (24)",
+        "startedAt": "2026-09-11T05:03:15Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-11T05:03:17Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-11T05:03:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:18Z",
+            "conclusion": "success",
+            "name": "Checkout",
+            "number": 2,
+            "startedAt": "2026-09-11T05:03:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:21Z",
+            "conclusion": "success",
+            "name": "Setup Node.js",
+            "number": 3,
+            "startedAt": "2026-09-11T05:03:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:23Z",
+            "conclusion": "success",
+            "name": "Install dependencies",
+            "number": 4,
+            "startedAt": "2026-09-11T05:03:21Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:26Z",
+            "conclusion": "success",
+            "name": "Typecheck",
+            "number": 5,
+            "startedAt": "2026-09-11T05:03:23Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:28Z",
+            "conclusion": "success",
+            "name": "Build",
+            "number": 6,
+            "startedAt": "2026-09-11T05:03:26Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:05:39Z",
+            "conclusion": "success",
+            "name": "Public type contracts",
+            "number": 7,
+            "startedAt": "2026-09-11T05:03:28Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:04Z",
+            "conclusion": "success",
+            "name": "Runtime and action contracts",
+            "number": 8,
+            "startedAt": "2026-09-11T05:05:39Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:06Z",
+            "conclusion": "success",
+            "name": "Release lifecycle acceptance",
+            "number": 9,
+            "startedAt": "2026-09-11T05:08:04Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:07Z",
+            "conclusion": "success",
+            "name": "Upload release lifecycle evidence",
+            "number": 10,
+            "startedAt": "2026-09-11T05:08:06Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:08Z",
+            "conclusion": "success",
+            "name": "Schema validation",
+            "number": 11,
+            "startedAt": "2026-09-11T05:08:07Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:08Z",
+            "conclusion": "success",
+            "name": "Enum consistency",
+            "number": 12,
+            "startedAt": "2026-09-11T05:08:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:10:02Z",
+            "conclusion": "success",
+            "name": "Fixture and snapshot regression",
+            "number": 13,
+            "startedAt": "2026-09-11T05:08:08Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:09Z",
+            "conclusion": "success",
+            "name": "Package install smoke",
+            "number": 14,
+            "startedAt": "2026-09-11T05:10:02Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:09Z",
+            "conclusion": "success",
+            "name": "Birdseye freshness",
+            "number": 15,
+            "startedAt": "2026-09-11T05:12:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:10Z",
+            "conclusion": "success",
+            "name": "Parse all tracked JSON",
+            "number": 16,
+            "startedAt": "2026-09-11T05:12:09Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:11Z",
+            "conclusion": "success",
+            "name": "Package dry-run",
+            "number": 17,
+            "startedAt": "2026-09-11T05:12:10Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:14Z",
+            "conclusion": "success",
+            "name": "QEG cumulative report",
+            "number": 18,
+            "startedAt": "2026-09-11T05:12:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:14Z",
+            "conclusion": "success",
+            "name": "Final CI verdict",
+            "number": 19,
+            "startedAt": "2026-09-11T05:12:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:14Z",
+            "conclusion": "success",
+            "name": "Post QEG cumulative report",
+            "number": 36,
+            "startedAt": "2026-09-11T05:12:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:14Z",
+            "conclusion": "success",
+            "name": "Post Setup Node.js",
+            "number": 37,
+            "startedAt": "2026-09-11T05:12:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:14Z",
+            "conclusion": "success",
+            "name": "Post Checkout",
+            "number": 38,
+            "startedAt": "2026-09-11T05:12:14Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:14Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 39,
+            "startedAt": "2026-09-11T05:12:14Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34564476819/job/103153654761"
+      },
+      {
+        "completedAt": "2026-09-11T05:12:23Z",
+        "conclusion": "success",
+        "databaseId": 103153654775,
+        "name": "quality (20)",
+        "startedAt": "2026-09-11T05:03:15Z",
+        "status": "completed",
+        "steps": [
+          {
+            "completedAt": "2026-09-11T05:03:17Z",
+            "conclusion": "success",
+            "name": "Set up job",
+            "number": 1,
+            "startedAt": "2026-09-11T05:03:16Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:18Z",
+            "conclusion": "success",
+            "name": "Checkout",
+            "number": 2,
+            "startedAt": "2026-09-11T05:03:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:24Z",
+            "conclusion": "success",
+            "name": "Setup Node.js",
+            "number": 3,
+            "startedAt": "2026-09-11T05:03:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:25Z",
+            "conclusion": "success",
+            "name": "Install dependencies",
+            "number": 4,
+            "startedAt": "2026-09-11T05:03:24Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:27Z",
+            "conclusion": "success",
+            "name": "Typecheck",
+            "number": 5,
+            "startedAt": "2026-09-11T05:03:25Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:03:30Z",
+            "conclusion": "success",
+            "name": "Build",
+            "number": 6,
+            "startedAt": "2026-09-11T05:03:27Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:05:40Z",
+            "conclusion": "success",
+            "name": "Public type contracts",
+            "number": 7,
+            "startedAt": "2026-09-11T05:03:30Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:15Z",
+            "conclusion": "success",
+            "name": "Runtime and action contracts",
+            "number": 8,
+            "startedAt": "2026-09-11T05:05:40Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:17Z",
+            "conclusion": "success",
+            "name": "Release lifecycle acceptance",
+            "number": 9,
+            "startedAt": "2026-09-11T05:08:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:18Z",
+            "conclusion": "success",
+            "name": "Upload release lifecycle evidence",
+            "number": 10,
+            "startedAt": "2026-09-11T05:08:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:19Z",
+            "conclusion": "success",
+            "name": "Schema validation",
+            "number": 11,
+            "startedAt": "2026-09-11T05:08:18Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:08:19Z",
+            "conclusion": "success",
+            "name": "Enum consistency",
+            "number": 12,
+            "startedAt": "2026-09-11T05:08:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:10:11Z",
+            "conclusion": "success",
+            "name": "Fixture and snapshot regression",
+            "number": 13,
+            "startedAt": "2026-09-11T05:08:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:15Z",
+            "conclusion": "success",
+            "name": "Package install smoke",
+            "number": 14,
+            "startedAt": "2026-09-11T05:10:11Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:15Z",
+            "conclusion": "success",
+            "name": "Birdseye freshness",
+            "number": 15,
+            "startedAt": "2026-09-11T05:12:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:15Z",
+            "conclusion": "success",
+            "name": "Parse all tracked JSON",
+            "number": 16,
+            "startedAt": "2026-09-11T05:12:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:17Z",
+            "conclusion": "success",
+            "name": "Package dry-run",
+            "number": 17,
+            "startedAt": "2026-09-11T05:12:15Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:19Z",
+            "conclusion": "success",
+            "name": "QEG cumulative report",
+            "number": 18,
+            "startedAt": "2026-09-11T05:12:17Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:19Z",
+            "conclusion": "success",
+            "name": "Final CI verdict",
+            "number": 19,
+            "startedAt": "2026-09-11T05:12:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:19Z",
+            "conclusion": "success",
+            "name": "Post QEG cumulative report",
+            "number": 36,
+            "startedAt": "2026-09-11T05:12:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:19Z",
+            "conclusion": "success",
+            "name": "Post Setup Node.js",
+            "number": 37,
+            "startedAt": "2026-09-11T05:12:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:20Z",
+            "conclusion": "success",
+            "name": "Post Checkout",
+            "number": 38,
+            "startedAt": "2026-09-11T05:12:19Z",
+            "status": "completed"
+          },
+          {
+            "completedAt": "2026-09-11T05:12:20Z",
+            "conclusion": "success",
+            "name": "Complete job",
+            "number": 39,
+            "startedAt": "2026-09-11T05:12:20Z",
+            "status": "completed"
+          }
+        ],
+        "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34564476819/job/103153654775"
+      }
+    ],
+    "status": "completed",
+    "url": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34564476819"
+  },
+  "runtimeTree": {
+    "sourceCommit": "802e5b04de33a2bd37eaf5e1b34b982b15d7a529",
+    "paths": [
+      "src",
+      "schemas",
+      "tests",
+      "fixtures",
+      "qeg-report-action",
+      "package.json",
+      "package-lock.json",
+      "examples",
+      "tools",
+      "docs/evidence/eac-completion-2026-09-10/producer-replay",
+      ".github",
+      ".gitattributes",
+      ".gitignore",
+      "LICENSE"
+    ],
+    "algorithm": "sha256 of git ls-tree -r output normalized to LF",
+    "hash": "sha256:f5d9539a30d58c3fae951247fd31d0de55b544320a5688ba434d1aec6e646c8d",
+    "sealRule": "Only documentation changes in seal; latest PR and merge main CI checked externally"
+  }
+}

@@ -1,0 +1,117 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [
+        {
+          "code": "DQ-05",
+          "count": 1,
+          "remediation": "Add test placement obligations for changed code, or provide an accepted waiver."
+        }
+      ],
+      "blockerCount": 0,
+      "residualRiskCount": 0,
+      "humanReviewCount": 0
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-explicit-placement-coverage",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "disqualified",
+        "reasons": [
+          "Disqualified: 1 DQ code(s)",
+          "- DQ-05: Selected tests do not cover obligation \"qeg:obligation-A\""
+        ],
+        "disqualifications": [
+          {
+            "code": "DQ-05",
+            "message": "Selected tests do not cover obligation \"qeg:obligation-A\"",
+            "nodeIds": [
+              "qeg:obligation-A",
+              "qeg:test-B"
+            ],
+            "sourceRefs": [
+              {
+                "id": "qeg:input-%2FplacementPlan",
+                "path": "gate-input.json",
+                "label": "/placementPlan: qeg:obligation-A"
+              }
+            ]
+          }
+        ],
+        "blockers": [],
+        "residualRisks": [],
+        "requiredHumanReview": [],
+        "reliability": {
+          "enabled": false
+        },
+        "executionAccounting": {
+          "evaluatedAt": "2026-06-03T04:00:00.000Z",
+          "target": {
+            "projectId": "synthetic-eac",
+            "buildId": "synthetic-build-1",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "synthetic-ci"
+          },
+          "selections": [
+            {
+              "testId": "qeg:test-B",
+              "selectedEvidenceId": "qeg:eac-execution-0",
+              "selectedRunId": "synthetic-run-0",
+              "selectedStatus": "pass",
+              "reason": "latest_qualified_execution",
+              "consecutivePasses": 1,
+              "excluded": []
+            }
+          ]
+        },
+        "expected": {
+          "fixture": "negative-explicit-placement-coverage",
+          "expectedVerdict": "disqualified",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/gate-contract-consistency.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [
+            "DQ-05"
+          ],
+          "actualDqCodes": [
+            "DQ-05"
+          ],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [],
+          "actualBlockerIds": []
+        }
+      }
+    ]
+  }
+}

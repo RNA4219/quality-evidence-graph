@@ -166,6 +166,7 @@ export interface TestNodeBase extends QegNodeBase {
   readonly existing: boolean;
   readonly evidenceStrength?: number;
   readonly recentGreenRuns?: number;
+  /** Explicit declarations must agree with selected obligations; all-omitted native legacy inputs remain supported. */
   readonly coveredRiskIds?: readonly StableId[];
   readonly deleted?: boolean;
 }
@@ -174,6 +175,7 @@ export interface LegacyTestNode extends TestNodeBase {
   readonly executionIdentity?: ExecutionIdentity;
   readonly coveredRequirementIds?: readonly StableId[];
   readonly coveredChangedCodeIds?: readonly StableId[];
+  /** manual-scripted: specified/derived qualify; human requires review; implicit alone does not qualify. */
   readonly oracleType?: "specified" | "derived" | "implicit" | "human" | "missing";
   readonly oracleRefs?: readonly EvidenceRef[];
   readonly expectedResults?: readonly string[];

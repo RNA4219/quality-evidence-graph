@@ -1,0 +1,23 @@
+{
+  "id": "tests/helpers/gate-contract-matrix.mjs",
+  "role": "gate-contract-matrix",
+  "generation": "00021",
+  "public_api": [],
+  "summary": "QEG 0.4.0 gate-contract-matrix の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/cli-boundary-matrix.mjs",
+    "tests/helpers/execution-fixture.mjs"
+  ],
+  "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/spec/gate-contract-consistency.md",
+    "tests/gate-contract-regression.test.mjs"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:54c6f9056d535cc4af771c489380f41b53777267c310eb15ced229298722a8da"
+}

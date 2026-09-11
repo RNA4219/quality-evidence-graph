@@ -9,6 +9,8 @@ next_review_due: 2026-10-20
 
 # IPO 統制仕様
 
+配置coverage、手動oracle、正規化status、waiver承認者、snapshot互換性の具体規則は[配置・判定・正規化の整合契約](gate-contract-consistency.md)を参照する。
+
 EAC追加実装: [出力公開・復旧・consumer移行・実producer互換](output-publication-and-migration.md)。profileや承認条件を弱めず、差分と必要な再承認を診断する。
 
 `docs/spec/` は `ipo_controlled` profile を実装するための仕様正本である。要求正本は `docs/requirements.md` とし、この仕様群は要求を TypeScript 型、JSON Schema、fixture、CLI 判定へ落とすための決定済み contract を記録する。

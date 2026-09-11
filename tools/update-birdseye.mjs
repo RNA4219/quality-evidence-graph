@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00020";
+const generation = "00021";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,8 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/project/gate-contract-fixes-2026-09-11.md", "docs/spec/gate-contract-consistency.md", "docs/evidence/gate-contract-fixes-2026-09-11/validation.json",
+  "tests/gate-contract-regression.test.mjs", "tests/helpers/gate-contract-matrix.mjs",
   "docs/project/cli-boundary-fixes-2026-09-11.md", "docs/evidence/cli-boundary-fixes-2026-09-11/validation.json",
   "src/cli/path-key.ts", "src/cli/report/baseline-contract.ts", "src/cli/distribution.ts", "src/cli/enum-contracts.json",
   "schemas/report-baseline.schema.json", "qeg-report-action/runtime-metadata.json", "tests/cli-boundary-regression.test.mjs", "tests/helpers/cli-boundary-matrix.mjs",
@@ -327,6 +329,18 @@ for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/requirements.m
   additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/evidence-acceptance-standard.md", "docs/project/evidence-acceptance-status.md"])] };
 }
 additions["docs/project/remediation-2026-09-10.md"].summary = "R01〜R06の過去受入範囲と追加EAC要求の未完了状態を区別する台帳。fixture・隔離consumer・CIの証拠を保持。";
+additions["docs/project/evidence-acceptance-status.md"].depsOut.push("docs/project/gate-contract-fixes-2026-09-11.md", "docs/evidence/gate-contract-fixes-2026-09-11/validation.json");
+Object.assign(additions["docs/project/gate-contract-fixes-2026-09-11.md"], {
+  summary: "R14〜R19の配置coverage・手動oracle・raw status・waiver・snapshotをまとめて修正し、共通matrixとsource CIで受入を管理。",
+  depsOut: ["docs/spec/gate-contract-consistency.md", "docs/evidence/gate-contract-fixes-2026-09-11/validation.json", "tests/gate-contract-regression.test.mjs", "tests/helpers/gate-contract-matrix.mjs", "src/placement-contract.ts", "src/cli/snapshot.ts", "src/cli/evidence-normalize/values.ts", "schemas/waiver.schema.json"],
+});
+Object.assign(additions["docs/spec/gate-contract-consistency.md"], {
+  depsOut: ["docs/requirements.md", "src/placement-contract.ts", "src/gate/dq/placement-coverage.ts", "src/gate/dq/placement-change.ts", "src/gate/verdict/human-review.ts", "src/gate/waivers.ts", "src/cli/evidence-normalize/values.ts", "src/cli/snapshot.ts", "schemas/waiver.schema.json", "tests/helpers/gate-contract-matrix.mjs"],
+});
+for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md", "docs/requirements.md", "docs/spec/index.md"]) {
+  const previous = additions[path] ?? index.nodes[path];
+  additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/gate-contract-consistency.md", "docs/project/gate-contract-fixes-2026-09-11.md"])] };
+}
 const knownPaths = new Set([...Object.keys(index.nodes), ...Object.keys(additions)]);
 for (const path of currentPaths.filter(p => /\.(ts|mjs)$/.test(p))) {
   const code = await readFile(resolve(root, path), "utf8");

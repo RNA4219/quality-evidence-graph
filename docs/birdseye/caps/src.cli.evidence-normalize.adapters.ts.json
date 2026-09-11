@@ -1,7 +1,7 @@
 {
   "id": "src/cli/evidence-normalize/adapters.ts",
   "role": "adapters",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 adapters の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -19,5 +19,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:aa0961b833712ad10273b36ce28434c6ba85845311870f2035b24285bf14b37c"
+  "contentHash": "sha256:038144954b906af47ef3b4aec658b9964944a5e42220eb9310ce4246417302f1"
 }

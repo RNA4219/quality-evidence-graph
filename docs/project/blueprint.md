@@ -8,6 +8,8 @@ next_review_due: 2026-10-20
 
 # Blueprint
 
+配置・正規化・snapshotのR14〜R19契約は[gate-contract-consistency](../spec/gate-contract-consistency.md)。選択coverageとoracle適格性をplanner/Gateで共通化し、graph/plan双方を検証する。human oracleは確認待ち、不正statusと空白waiver承認者は拒否する。wire0.2を維持し、snapshotの新形式と旧形式の読み取りを区別する。
+
 EAC-08〜10は[世代公開・実producer接続・移行の統合契約](../spec/output-publication-and-migration.md)に従う。新旧の完全世代と明示エラーを区別し、原本・承認・履歴を保持する。改修の受入とproducer対象のrelease判定は別に記録する。
 
 ## 1. Problem Statement

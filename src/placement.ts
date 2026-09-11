@@ -1,5 +1,6 @@
 import type { GatePolicy, LegacyTestNode, PlacementCandidateScore, PlacementLayer, QegNode, QualityEvidenceGraph, RiskNode, TestNode, TestObligation, TestPlacementNode, TestPlacementPlan } from "./types.js";
 import { requirementAncestors } from "./graph/requirements.js";
+import { declaredCoverage, hasUsableOracle, requiredCoverage } from "./placement-contract.js";
 
 export const PLACEMENT_LAYERS: readonly PlacementLayer[] = ["unit", "integration", "system", "e2e", "manual-scripted", "manual-exploratory", "spec-clarification"];
 const COSTS = [0.1, 0.25, 0.45, 0.7, 0.6, 0.65, 0.15];
@@ -20,12 +21,11 @@ function obligation(graph: QualityEvidenceGraph, node: QegNode): TestObligation 
 }
 function covers(test: TestNode, obligation: TestObligation): boolean {
   if (test.deleted || test.testExecutionMode !== "real") return false;
-  if (obligation.riskIds.length) return obligation.riskIds.every(id => test.coveredRiskIds?.includes(id));
-  return test.testType !== "resilience" && obligation.changedCodeIds.length > 0 && obligation.changedCodeIds.every(id => test.coveredChangedCodeIds?.includes(id));
+  const required = requiredCoverage(obligation);
+  return required.length > 0 && required.every(id => declaredCoverage(test, obligation)?.includes(id));
 }
 function hasOracle(test: TestNode): boolean {
-  if (test.testType === "resilience") return true;
-  return test.oracleType !== undefined && test.oracleType !== "missing" && (test.oracleRefs?.length ?? 0) > 0 && (test.expectedResults?.length ?? 0) > 0;
+  return hasUsableOracle(test);
 }
 function score(layer: PlacementLayer, index: number, tests: readonly TestNode[], subject: TestObligation): PlacementCandidateScore {
   const matching = tests.filter(t => t.layer === layer && hasOracle(t));

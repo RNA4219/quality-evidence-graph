@@ -1,13 +1,15 @@
 {
   "id": "src/gate/verdict/human-review.ts",
   "role": "human-review",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 human-review の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/placement-contract.ts",
     "src/types.ts"
   ],
   "deps_in": [
+    "docs/spec/gate-contract-consistency.md",
     "src/gate/verdict.ts"
   ],
   "risks": [
@@ -16,5 +18,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:0477985d5ae22de714e7c057d3ab57d7a42529de2a28db34e0723fee2237c0b6"
+  "contentHash": "sha256:edf9f7a823a6a120f2ca7098e06a28cc58218e4dc41442795acadf73d2293585"
 }

@@ -1,7 +1,7 @@
 {
   "id": "src/cli/evidence-normalize/values.ts",
   "role": "values",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 values の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -10,6 +10,8 @@
     "src/types.ts"
   ],
   "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/spec/gate-contract-consistency.md",
     "src/cli/evidence-normalize.ts",
     "src/cli/evidence-normalize/adapters.ts"
   ],
@@ -19,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:4699bec8b923f64365312a074b863b0894bd26d38e08cd4be36619528a859a34"
+  "contentHash": "sha256:a53d5b00e7ddfd23711b7f0dde5d2a558b0e63220d9272b921346f847eb364ee"
 }

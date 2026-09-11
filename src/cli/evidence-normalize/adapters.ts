@@ -1,7 +1,7 @@
 import type { ResilienceEvidenceStatus } from "../../types.js";
 import { CliError } from "../errors.js";
 import { type JsonObject, type NormalizeAdapter } from "./model.js";
-import { isObject, normalizeStatus, rawValue } from "./values.js";
+import { isObject, shellStatus, statusAliases, rawValue } from "./values.js";
 
 
 export function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
@@ -16,6 +16,7 @@ export function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
   readonly observed?: unknown;
   readonly lifecycle?: JsonObject;
 } {
+  if (raw.lifecycle !== undefined && !isObject(raw.lifecycle)) throw new CliError("Raw lifecycle must be a JSON object");
   if (adapter === "lakda") {
     const contract = rawValue(raw, "contractVersion", "schema", "version");
     if (contract !== "HATE/v1") throw new CliError("Lakda normalize accepts only HATE/v1 artifacts");
@@ -25,7 +26,7 @@ export function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
       targetRevision: rawValue(raw, "commit", "headSha", "head_sha") as string | undefined,
       startedAt: rawValue(raw, "startedAt", "started_at") as string | undefined,
       endedAt: rawValue(raw, "endedAt", "ended_at") as string | undefined,
-      status: normalizeStatus(rawValue(raw, "status", "conclusion", "passed")),
+      status: statusAliases(raw, "status", "conclusion", "passed"),
       adapterVersion: rawValue(raw, "adapterVersion") as string | undefined,
       fault: raw.fault,
       observed: raw.observed,
@@ -64,7 +65,7 @@ export function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
       targetRevision: rawValue(raw, "commit", "headSha", "revision") as string | undefined,
       startedAt: rawValue(raw, "startedAt") as string | undefined,
       endedAt: rawValue(raw, "endedAt") as string | undefined,
-      status: normalizeStatus(rawValue(raw, "status", "passed")),
+      status: statusAliases(raw, "status", "passed"),
       adapterVersion: rawValue(raw, "adapterVersion") as string | undefined,
       fault,
       observed: raw.observed,
@@ -79,7 +80,7 @@ export function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
       targetRevision: rawValue(raw, "commit", "headSha") as string | undefined,
       startedAt: rawValue(raw, "startedAt") as string | undefined,
       endedAt: rawValue(raw, "endedAt") as string | undefined,
-      status: normalizeStatus(rawValue(raw, "status")) ?? (typeof raw.exitCode === "number" ? (raw.exitCode === 0 ? "pass" : "fail") : undefined),
+      status: shellStatus(raw),
       adapterVersion: rawValue(raw, "adapterVersion") as string | undefined,
       fault: raw.fault,
       observed: raw.observed,
@@ -93,7 +94,7 @@ export function adapterFields(adapter: NormalizeAdapter, raw: JsonObject): {
     targetRevision: rawValue(raw, "headSha", "commit") as string | undefined,
     startedAt: rawValue(raw, "startedAt") as string | undefined,
     endedAt: rawValue(raw, "endedAt") as string | undefined,
-    status: normalizeStatus(rawValue(raw, "conclusion", "status")),
+    status: statusAliases(raw, "conclusion", "status"),
     adapterVersion: rawValue(raw, "adapterVersion") as string | undefined,
     fault: raw.fault,
     observed: raw.observed,

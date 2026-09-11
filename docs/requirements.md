@@ -253,6 +253,8 @@ MVP では score の重みを policy として外出ししなくてよい。既�
 
 manual-scripted に配置するには specified または derived oracle を原則必須にする。implicit oracle は補助 evidence に限定し、human oracle は reviewer または requiredHumanReview を必要とする。
 
+R14〜R19の具体規則は[配置・判定・正規化の整合契約](spec/gate-contract-consistency.md)。配置をgraph/planの双方から検証し、現行wireのhuman oracleはtest IDをrequiredHumanReviewへ残す。明示coverageの矛盾、不正statusのpass fallback、空白approverは受理しない。native旧入力のcoverage省略と、引退記録を伴うdeleted testの履歴を区別する。snapshotはtargetを基準に比較し、内容変更を検出する。
+
 manual case の引退は waiver ではなく placement の変更として記録する。引退は risk node の削除を伴わず、risk は automated layer の replacement test によりカバー中として辿れる必要がある。引退 criteria の値は policy 側に固定し、QEG は policy を読んで判定する。waiver は例外承認、placement_change はテスト配置の変更履歴であり、互いに代替しない。
 
 ## 10. Gate 要件

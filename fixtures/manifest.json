@@ -770,6 +770,28 @@
         "primaryDq": null
       },
       "snapshot": true
+    },
+    {
+      "name": "negative-explicit-placement-coverage",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-05",
+        "primaryBlocker": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-plan-only-manual-oracle",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14",
+        "primaryBlocker": null
+      },
+      "snapshot": true
     }
   ]
 }

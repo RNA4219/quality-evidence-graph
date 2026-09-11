@@ -15,6 +15,8 @@ next_review_due: 2026-12-10
 | Directory | Purpose | Expected verdict | Required DQ |
 |---|---|---|---|
 | `positive-release-go/` | 明示的native_graphのhappy path | `go` | none |
+| `negative-explicit-placement-coverage/` | 明示coverageが選択obligationと矛盾 | `disqualified` | `DQ-05` |
+| `negative-plan-only-manual-oracle/` | planのみのmanual配置でoracle不足 | `disqualified` | `DQ-14` |
 | `negative-required-connector-contract/` | 必須接続先の契約違反 | `disqualified` | `DQ-11` |
 | `negative-empty-gate-source-refs/` | Gate 関連 sourceRefs 空 | `disqualified` | `DQ-13` |
 | `negative-revision-mismatch/` | `base_ref` / `head_ref` と artifact revision 不一致 | `disqualified` | `DQ-12` |

@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json",
   "role": "v0.3.1-static-readiness-evidence",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "ci-release-readiness policyのfailed conditions 0とpassedを記録するmachine-readable証拠。",
   "deps_out": [

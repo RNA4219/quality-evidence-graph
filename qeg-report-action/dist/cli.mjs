@@ -3638,7 +3638,7 @@ var require_fast_uri = __commonJS({
     function normalize(uri, options) {
       if (typeof uri === "string") {
         uri = /** @type {T} */
-        normalizeString2(uri, options);
+        normalizeString(uri, options);
       } else if (typeof uri === "object") {
         uri = /** @type {T} */
         parse(serialize(uri, options), options);
@@ -3881,7 +3881,7 @@ var require_fast_uri = __commonJS({
     function parse(uri, opts) {
       return parseWithStatus(uri, opts).parsed;
     }
-    function normalizeString2(uri, opts) {
+    function normalizeString(uri, opts) {
       return normalizeStringWithStatus(uri, opts).normalized;
     }
     function normalizeStringWithStatus(uri, opts) {
@@ -18293,6 +18293,40 @@ function buildGraph(manifest, loaded) {
   };
 }
 
+// src/placement-contract.ts
+import { isDeepStrictEqual } from "util";
+function allTestPlacements(graph, plan2) {
+  const placements = graph.nodes.filter((node) => node.kind === "test_placement");
+  for (const placement of plan2?.placements ?? []) {
+    if (!placements.some((node) => isDeepStrictEqual(node, placement))) placements.push(placement);
+  }
+  return placements;
+}
+function hasUsableOracle(test, manualScripted = test.layer === "manual-scripted") {
+  if (test.testType === "resilience") return !manualScripted;
+  const type = test.oracleType;
+  return type !== void 0 && type !== "missing" && (!manualScripted || type !== "implicit") && (test.oracleRefs?.length ?? 0) > 0 && (test.expectedResults?.length ?? 0) > 0;
+}
+function isRetiredManualTest(test, plan2) {
+  return test.deleted === true && !plan2?.manual_case_inventory?.current_subject_ids.includes(test.id) && (plan2?.placement_changes?.some((change) => change.subject_id === test.id && ["manual-scripted", "manual-exploratory"].includes(change.from_layer) && change.to_layer === "automated") ?? false);
+}
+function declaredCoverage(test, obligation2) {
+  return obligation2.riskIds.length ? test.coveredRiskIds : test.testType === "resilience" ? void 0 : test.coveredChangedCodeIds;
+}
+function requiredCoverage(obligation2) {
+  return obligation2.riskIds.length ? obligation2.riskIds : obligation2.changedCodeIds;
+}
+function consistentSelectedCoverage(tests, obligation2, legacyNative) {
+  const required2 = requiredCoverage(obligation2);
+  if (required2.length === 0) return true;
+  const undeclared = (test) => test.coveredRiskIds === void 0 && test.testType !== "resilience" && test.coveredChangedCodeIds === void 0;
+  if (legacyNative && tests.length > 0 && tests.every(undeclared)) return true;
+  const explicit = tests.filter((test) => !undeclared(test));
+  if (explicit.some((test) => !declaredCoverage(test, obligation2)?.some((id) => required2.includes(id)))) return false;
+  const covered = new Set(explicit.flatMap((test) => [...declaredCoverage(test, obligation2) ?? []]));
+  return required2.every((id) => covered.has(id));
+}
+
 // src/placement.ts
 var PLACEMENT_LAYERS = ["unit", "integration", "system", "e2e", "manual-scripted", "manual-exploratory", "spec-clarification"];
 var COSTS = [0.1, 0.25, 0.45, 0.7, 0.6, 0.65, 0.15];
@@ -18320,12 +18354,11 @@ function obligation(graph, node) {
 }
 function covers(test, obligation2) {
   if (test.deleted || test.testExecutionMode !== "real") return false;
-  if (obligation2.riskIds.length) return obligation2.riskIds.every((id) => test.coveredRiskIds?.includes(id));
-  return test.testType !== "resilience" && obligation2.changedCodeIds.length > 0 && obligation2.changedCodeIds.every((id) => test.coveredChangedCodeIds?.includes(id));
+  const required2 = requiredCoverage(obligation2);
+  return required2.length > 0 && required2.every((id) => declaredCoverage(test, obligation2)?.includes(id));
 }
 function hasOracle(test) {
-  if (test.testType === "resilience") return true;
-  return test.oracleType !== void 0 && test.oracleType !== "missing" && (test.oracleRefs?.length ?? 0) > 0 && (test.expectedResults?.length ?? 0) > 0;
+  return hasUsableOracle(test);
 }
 function score(layer, index, tests, subject) {
   const matching = tests.filter((t) => t.layer === layer && hasOracle(t));
@@ -19249,9 +19282,6 @@ function isRiskNode(node) {
 function isChangedCodeNode(node) {
   return node.kind === "changed_code";
 }
-function isTestPlacementNode(node) {
-  return node.kind === "test_placement";
-}
 function buildBlockers(riskNodes2) {
   const blockers2 = [];
   for (const risk of riskNodes2) {
@@ -19269,7 +19299,7 @@ function buildBlockers(riskNodes2) {
 function createGateEvaluationContext(input, validWaivers) {
   const riskNodes2 = input.graph.nodes.filter(isRiskNode);
   const changedCodeNodes2 = input.graph.nodes.filter(isChangedCodeNode);
-  const testPlacementNodes2 = input.graph.nodes.filter(isTestPlacementNode);
+  const testPlacementNodes2 = allTestPlacements(input.graph, input.placementPlan);
   const waiverRiskIds = new Set(validWaivers.flatMap((waiver) => waiver.linkedRiskIds));
   return {
     metadata: input.metadata,
@@ -19304,7 +19334,7 @@ function computeBlockers(graph, validWaivers) {
 }
 
 // src/gate/verdict/human-review.ts
-function computeRequiredHumanReview(graph, validWaivers, residualRisks) {
+function computeRequiredHumanReview(graph, validWaivers, residualRisks, placementPlan) {
   const required2 = [];
   for (const waiver of validWaivers) {
     required2.push(waiver.id);
@@ -19317,7 +19347,11 @@ function computeRequiredHumanReview(graph, validWaivers, residualRisks) {
       required2.push(node.id);
     }
   }
-  return required2;
+  const manualTests = new Set(allTestPlacements(graph, placementPlan).filter((placement) => placement.primaryLayer === "manual-scripted").flatMap((placement) => [...placement.selectedTestIds]));
+  for (const node of graph.nodes) {
+    if (node.kind === "test" && node.testType !== "resilience" && node.oracleType === "human" && manualTests.has(node.id) && !isRetiredManualTest(node, placementPlan)) required2.push(node.id);
+  }
+  return [...new Set(required2)];
 }
 function isLowConfidenceRisk(node) {
   return node.kind === "risk" && node.traceability.confidence === "low";
@@ -19441,6 +19475,17 @@ function placementsFor(input, obligation2) {
 }
 function detectPlacementCoverage(input, changes) {
   const result = [];
+  for (const obligation2 of input.placementPlan?.obligations ?? []) {
+    const selectedIds = new Set(placementsFor(input, obligation2).flatMap((p) => [...p.selectedTestIds]));
+    if (selectedIds.size === 0) continue;
+    const tests = input.graph.nodes.filter((node) => node.kind === "test" && selectedIds.has(node.id));
+    if (!consistentSelectedCoverage(tests, obligation2, input.policy.inputContract?.mode === "native_graph")) result.push({
+      code: "DQ-05",
+      message: `Selected tests do not cover obligation "${obligation2.id}"`,
+      nodeIds: [obligation2.id, ...selectedIds],
+      sourceRefs: [inputSource("/placementPlan", obligation2.id)]
+    });
+  }
   for (const change of changes) {
     const obligations = input.placementPlan?.obligations.filter((o) => o.changedCodeIds.includes(change.id)) ?? [];
     const covered = obligations.length > 0 && obligations.every((o) => placementsFor(input, o).length > 0);
@@ -19898,9 +19943,7 @@ function buildTestEvidenceAccounting(graph, execution) {
 
 // src/gate/dq/placement-change.ts
 function testPlacementNodes(input) {
-  return input.testPlacementNodes ?? input.graph.nodes.filter(
-    (node) => node.kind === "test_placement"
-  );
+  return input.testPlacementNodes ?? allTestPlacements(input.graph, input.placementPlan);
 }
 function testNodes(input) {
   return input.graph.nodes.filter((node) => node.kind === "test");
@@ -19931,13 +19974,9 @@ function detectManualScriptedOracleGaps(input) {
   const disqualifications = [];
   for (const placement of testPlacementNodes(input)) {
     if (placement.primaryLayer !== "manual-scripted") continue;
-    const selected = placement.selectedTestIds.map((id) => input.graph.nodes.find((n) => n.id === id));
-    const selectedOracles = selected.length > 0 && selected.every((n) => n?.kind === "test" && n.testType !== "resilience" && n.oracleType && n.oracleType !== "missing" && (n.oracleRefs?.length ?? 0) > 0 && (n.expectedResults?.length ?? 0) > 0);
-    const hasAcceptableOracle = selectedOracles || input.policy.inputContract?.mode !== "upstream_artifacts" && (input.evidencePackage?.manualEvidence.some(
-      (manual) => manual.oracleRefs.some((oracle) => oracle.evidenceKind === "human_review")
-    ) || placement.candidateScores.some(
-      (score2) => score2.sourceRefs.some((sourceRef) => sourceRef.label?.includes("oracle"))
-    ));
+    const selected = placement.selectedTestIds.map((id) => input.graph.nodes.find((n) => n.id === id)).filter((node) => node?.kind !== "test" || !isRetiredManualTest(node, input.placementPlan));
+    if (placement.selectedTestIds.length > 0 && selected.length === 0) continue;
+    const hasAcceptableOracle = selected.length > 0 && selected.every((n) => n?.kind === "test" && hasUsableOracle(n, true));
     if (!hasAcceptableOracle) {
       disqualifications.push({
         code: "DQ-14",
@@ -21170,6 +21209,9 @@ function validateWaiver(waiver, graph, executionTime3) {
       reasons.push(`linkedRiskId "${riskId}" does not resolve to a risk node`);
     }
   }
+  if (typeof waiver.approver !== "string" || waiver.approver.trim() === "") {
+    reasons.push("approver is empty");
+  }
   if (!waiver.approvalAuthority || waiver.approvalAuthority.trim() === "") {
     reasons.push("approvalAuthority is empty");
   }
@@ -21555,7 +21597,7 @@ function evaluateGate(input) {
   const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...qualified.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
   const blockers2 = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
-  const requiredHumanReview = [.../* @__PURE__ */ new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks), ...upstream.humanReview])];
+  const requiredHumanReview = [.../* @__PURE__ */ new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks, input.placementPlan), ...upstream.humanReview])];
   const verdict = computeVerdict(
     disqualifications,
     blockers2,
@@ -23873,24 +23915,37 @@ function parseSnapshotArgs(args) {
   }
   return { update, targets };
 }
-function normalizeString(value) {
-  const cwd = process.cwd().replace(/\\/g, "/");
-  return value.replace(/\\/g, "/").replaceAll(cwd, "<repo>");
-}
-function normalizeValue(value) {
-  if (typeof value === "string") return normalizeString(value);
-  if (Array.isArray(value)) return value.map(normalizeValue);
+function legacyValue(value, target, anchor) {
+  if (typeof value === "string") return portablePath(value).split(target).join(anchor);
+  if (Array.isArray(value)) return value.map((child) => legacyValue(child, target, anchor));
   if (value && typeof value === "object") {
     const normalized = {};
     for (const [key, child] of Object.entries(value)) {
-      normalized[key] = key === "generatedAt" ? "<snapshot>" : normalizeValue(child);
+      normalized[key] = key === "generatedAt" ? "<snapshot>" : legacyValue(child, target, anchor);
     }
     return normalized;
   }
   return value;
 }
 function normalizeReport(report) {
-  return normalizeValue(report);
+  return { snapshotVersion: "qeg-report-snapshot-v1", report: {
+    ...report,
+    generatedAt: "<snapshot>",
+    targets: report.targets.map((target) => ({ ...target, target: "<target>" }))
+  } };
+}
+function matchesSnapshot(expected, report) {
+  let parsed;
+  try {
+    parsed = JSON.parse(expected);
+  } catch {
+    return false;
+  }
+  if (!parsed || typeof parsed !== "object") return false;
+  if (parsed.snapshotVersion !== void 0) return JSON.stringify(parsed) === JSON.stringify(normalizeReport(report));
+  const anchor = parsed.targets?.length === 1 ? parsed.targets[0]?.target : void 0;
+  if (typeof anchor !== "string" || !anchor || report.targets.length !== 1) return false;
+  return JSON.stringify(parsed) === JSON.stringify(legacyValue(report, portablePath(report.targets[0].target), anchor));
 }
 function snapshotPath(target) {
   return join14(target, "expected-report.json");
@@ -23899,8 +23954,8 @@ async function readSnapshot(path) {
   return optionalText(path);
 }
 async function checkTargetSnapshot(target, update) {
-  const report = normalizeReport(await createCiReport([target]));
-  const content = `${JSON.stringify(report, null, 2)}
+  const report = await createCiReport([pathKey(target)]);
+  const content = `${JSON.stringify(normalizeReport(report), null, 2)}
 `;
   const path = snapshotPath(target);
   if (update) {
@@ -23913,7 +23968,7 @@ async function checkTargetSnapshot(target, update) {
   }
   return {
     target,
-    status: expected === content ? "pass" : "mismatch",
+    status: matchesSnapshot(expected, report) ? "pass" : "mismatch",
     path
   };
 }
@@ -24203,8 +24258,9 @@ function rawValue(raw, ...keys) {
   return void 0;
 }
 function normalizeStatus(value) {
+  if (value === void 0) return void 0;
   if (typeof value === "boolean") return value ? "pass" : "fail";
-  if (typeof value !== "string") return void 0;
+  if (typeof value !== "string") throw new CliError("Raw status must be a recognized string or boolean");
   const map = {
     pass: "pass",
     success: "pass",
@@ -24219,7 +24275,21 @@ function normalizeStatus(value) {
     timeout: "timeout",
     skipped: "skipped"
   };
-  return map[value.toLowerCase()];
+  const status = Object.hasOwn(map, value.toLowerCase()) ? map[value.toLowerCase()] : void 0;
+  if (!status) throw new CliError("Raw status is unrecognized");
+  return status;
+}
+function statusAliases(raw, ...keys) {
+  let status;
+  for (const key of keys) status = choose("raw status aliases", status, normalizeStatus(raw[key]), false);
+  return status;
+}
+function shellStatus(raw) {
+  const status = statusAliases(raw, "status");
+  if (raw.exitCode === void 0) return status;
+  if (typeof raw.exitCode !== "number" || !Number.isSafeInteger(raw.exitCode)) throw new CliError("Raw exitCode must be an integer");
+  if (status !== void 0 && status === "pass" !== (raw.exitCode === 0)) conflict("raw status and exitCode", status, raw.exitCode);
+  return status ?? (raw.exitCode === 0 ? "pass" : "fail");
 }
 function asObject(value, label) {
   if (!isObject4(value)) throw new CliError(`${label} must be a JSON object`);
@@ -24237,6 +24307,7 @@ function parseJson(bytes, label) {
 
 // src/cli/evidence-normalize/adapters.ts
 function adapterFields(adapter, raw) {
+  if (raw.lifecycle !== void 0 && !isObject4(raw.lifecycle)) throw new CliError("Raw lifecycle must be a JSON object");
   if (adapter === "lakda") {
     const contract = rawValue(raw, "contractVersion", "schema", "version");
     if (contract !== "HATE/v1") throw new CliError("Lakda normalize accepts only HATE/v1 artifacts");
@@ -24246,7 +24317,7 @@ function adapterFields(adapter, raw) {
       targetRevision: rawValue(raw, "commit", "headSha", "head_sha"),
       startedAt: rawValue(raw, "startedAt", "started_at"),
       endedAt: rawValue(raw, "endedAt", "ended_at"),
-      status: normalizeStatus(rawValue(raw, "status", "conclusion", "passed")),
+      status: statusAliases(raw, "status", "conclusion", "passed"),
       adapterVersion: rawValue(raw, "adapterVersion"),
       fault: raw.fault,
       observed: raw.observed,
@@ -24277,7 +24348,7 @@ function adapterFields(adapter, raw) {
       targetRevision: rawValue(raw, "commit", "headSha", "revision"),
       startedAt: rawValue(raw, "startedAt"),
       endedAt: rawValue(raw, "endedAt"),
-      status: normalizeStatus(rawValue(raw, "status", "passed")),
+      status: statusAliases(raw, "status", "passed"),
       adapterVersion: rawValue(raw, "adapterVersion"),
       fault,
       observed: raw.observed,
@@ -24292,7 +24363,7 @@ function adapterFields(adapter, raw) {
       targetRevision: rawValue(raw, "commit", "headSha"),
       startedAt: rawValue(raw, "startedAt"),
       endedAt: rawValue(raw, "endedAt"),
-      status: normalizeStatus(rawValue(raw, "status")) ?? (typeof raw.exitCode === "number" ? raw.exitCode === 0 ? "pass" : "fail" : void 0),
+      status: shellStatus(raw),
       adapterVersion: rawValue(raw, "adapterVersion"),
       fault: raw.fault,
       observed: raw.observed,
@@ -24306,7 +24377,7 @@ function adapterFields(adapter, raw) {
     targetRevision: rawValue(raw, "headSha", "commit"),
     startedAt: rawValue(raw, "startedAt"),
     endedAt: rawValue(raw, "endedAt"),
-    status: normalizeStatus(rawValue(raw, "conclusion", "status")),
+    status: statusAliases(raw, "conclusion", "status"),
     adapterVersion: rawValue(raw, "adapterVersion"),
     fault: raw.fault,
     observed: raw.observed,

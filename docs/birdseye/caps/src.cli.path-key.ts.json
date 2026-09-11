@@ -1,14 +1,15 @@
 {
   "id": "src/cli/path-key.ts",
   "role": "path-key",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 path-key の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "src/cli/report/baseline-contract.ts",
     "src/cli/report/baseline-diff.ts",
-    "src/cli/report/change-selection.ts"
+    "src/cli/report/change-selection.ts",
+    "src/cli/snapshot.ts"
   ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"

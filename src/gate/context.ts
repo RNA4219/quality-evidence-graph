@@ -16,6 +16,7 @@ import type {
   Waiver,
 } from "../types.js";
 import type { EvidenceVerificationReport } from "../validation/evidence.js";
+import { allTestPlacements } from "../placement-contract.js";
 
 export interface GateEvaluationInput {
   metadata: QegMetadata;
@@ -70,10 +71,6 @@ function isChangedCodeNode(node: QegNode): node is ChangedCodeNode {
   return node.kind === "changed_code";
 }
 
-function isTestPlacementNode(node: QegNode): node is TestPlacementNode {
-  return node.kind === "test_placement";
-}
-
 export function buildBlockers(riskNodes: readonly RiskNode[]): GateBlocker[] {
   const blockers: GateBlocker[] = [];
 
@@ -97,7 +94,7 @@ export function createGateEvaluationContext(
 ): GateEvaluationContext {
   const riskNodes = input.graph.nodes.filter(isRiskNode);
   const changedCodeNodes = input.graph.nodes.filter(isChangedCodeNode);
-  const testPlacementNodes = input.graph.nodes.filter(isTestPlacementNode);
+  const testPlacementNodes = allTestPlacements(input.graph, input.placementPlan);
   const waiverRiskIds = new Set(validWaivers.flatMap((waiver) => waiver.linkedRiskIds));
 
   return {

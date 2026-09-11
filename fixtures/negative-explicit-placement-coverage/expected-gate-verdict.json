@@ -1,0 +1,20 @@
+{
+  "fixture": "negative-explicit-placement-coverage",
+  "description": "negative-explicit-placement-coverage",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-05",
+      "message": "Selected tests do not cover obligation \"qeg:obligation-A\"",
+      "nodeIds": [
+        "qeg:obligation-A",
+        "qeg:test-B"
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-contract-consistency.md"
+}

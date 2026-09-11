@@ -1,7 +1,7 @@
 {
   "id": "src/types/evidence.ts",
   "role": "evidence-types",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 evidence-types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -23,5 +23,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:22c866b90d093be81e21d44d34bcfa1f06ea6ae03dbeb7c9a5a6b562d788a04b"
+  "contentHash": "sha256:abefa8ee98a0f02ba9fdd8efe67f9a98762cde54120229185c224de0f8907c97"
 }

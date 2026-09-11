@@ -2,6 +2,8 @@
 
 ## 0.4.0 - Unreleased
 
+- R14〜R19: 明示coverageの矛盾、plan-only手動配置のoracle漏れ、human/implicitの無確認go、不正statusのpass化、空白waiver承認者、snapshotのcwd依存を修正。snapshot --updateは対象基準のversioned形式を保存し、旧形式は読み取り互換を維持。
+
 - 実行必須時のresilience評価対象漏れとadvisory配置による未実行の見落としを修正。evidence I/Oの原因保持、診断位置、出力検証失敗時の既存成果物保護を追加検証。
 
 - 明示的な入力mode・必須artifact・評価範囲を追加。旧native入力にもinputContractを要求し、空入力のgoを廃止。

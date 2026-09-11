@@ -1,7 +1,7 @@
 {
   "id": "docs/project/tasks.codex.md",
   "role": "superseded-implementation-task-ledger",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "TASK-01〜TASK-10の過去台帳。生成機能が当時未充足だった完了表記を訂正し、現行状態は改修台帳へ移管。",
   "deps_out": [

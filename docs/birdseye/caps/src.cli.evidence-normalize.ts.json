@@ -1,7 +1,7 @@
 {
   "id": "src/cli/evidence-normalize.ts",
   "role": "resilience-evidence-normalize",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 resilience-evidence-normalize の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

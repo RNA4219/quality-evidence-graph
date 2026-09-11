@@ -1,15 +1,17 @@
 {
   "id": "docs/project/blueprint.md",
   "role": "blueprint",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 blueprint の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/project/evidence-acceptance-status.md",
+    "docs/project/gate-contract-fixes-2026-09-11.md",
     "docs/project/remediation-2026-09-10.md",
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/release/acceptance-2026-07-20.md",
-    "docs/spec/evidence-acceptance-standard.md"
+    "docs/spec/evidence-acceptance-standard.md",
+    "docs/spec/gate-contract-consistency.md"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
@@ -21,5 +23,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:e3c9c46d840f2c940a31dfb709bf64e0f4cf70664b775370b302dae1775e1327"
+  "contentHash": "sha256:b8163c7ac28f13d3ae68af15fc8ef9355bab5d7a32e4d1630735cfaed434cb54"
 }
