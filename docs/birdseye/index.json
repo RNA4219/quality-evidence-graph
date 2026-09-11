@@ -2250,7 +2250,7 @@
         "npm run json-check"
       ],
       "mtime": "00020",
-      "contentHash": "sha256:f15955a2259ea61c6ef1e2d6723970766f7e16e0ba088be841c82963ba76f32e"
+      "contentHash": "sha256:ec605f1a6facf798ce192c80f09d435f95182e3d15f18a38e74da5704e06c44f"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2604,13 +2604,13 @@
         "docs/spec/operational-cli-extensions.md"
       ],
       "mtime": "00020",
-      "contentHash": "sha256:11fccd747466d5e36ee6bf71a8aac82415dd7dc75ee69c794e8b5df60cee582d"
+      "contentHash": "sha256:8e985632a9b4d1aeabf751e93aabd5fb44d9aa57793efc9bbfdd0e2aa2856908"
     },
     "docs/evidence/cli-boundary-fixes-2026-09-11/validation.json": {
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.cli-boundary-fixes-2026-09-11.validation.json.json",
       "mtime": "00020",
-      "contentHash": "sha256:41775db51d999c41013054f31cbd03c1029d7f51697b927ca4fc972efef4c3bc"
+      "contentHash": "sha256:b853095714654a54868bb7d368367d6a3cc0402acf4b7802083421d3505f6ab3"
     },
     "src/cli/path-key.ts": {
       "role": "path-key",

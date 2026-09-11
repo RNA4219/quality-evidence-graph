@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-CLI-BOUNDARY-FIXES-20260911
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -21,7 +21,7 @@ PR #11 merge 57d303b34a8cca0ea2ed0c7be52054f807996a8e の追加レビューで�
 
 共通harnessは[cli-boundary-matrix](../../tests/helpers/cli-boundary-matrix.mjs)。[runtime試験](../../tests/cli-boundary-regression.test.mjs)からsource CLIとAction bundleへ同じmatrixを適用し、[package smoke](../../tests/package-smoke.mjs)からtarball consumerへ適用する。initが作るruntimeの診断、enum両側欠落・drift拒否も含む。fixture期待値を現在の結果へ自動追従させない。
 
-ローカル検証後、source CIを[validation.json](../evidence/cli-boundary-fixes-2026-09-11/validation.json)へ固定して受入を確定する。追加CI待ち。
+R8〜R13を受入済み。source commit bce4012e6788d7515375a1311afc6d9c5155edb1 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34559142365)はLinux Node20/24・Windows Node24の3job全step成功。[validation.json](../evidence/cli-boundary-fixes-2026-09-11/validation.json)にruntime tree、197 runtime nodes・53 fixtures・配布matrix・初期化runtime・Action lifecycleを固定した。
 
 初回CIのWindows runtimeでは、別名pathとevaluator/Gitの実体pathが一致しない3種類の失敗がCLI/Action各3ケースに現れた。junction経由で同じ失敗を再現し、最寄りの存在する祖先まで実体pathへ正規化する修正を追加した。共通matrixの変更選択・baseline・diffはjunction（Windows）/symlink（Linux）経由でも評価する。
 
