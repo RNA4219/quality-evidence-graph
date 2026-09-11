@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-MANUAL-GOVERNANCE-FIXES-20260911
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -17,7 +17,7 @@ main 71199ece186771dc36a54dd3342987002d60ecf1の追加レビューで確認し�
 | R27 | current inventoryだけによる誤復帰 | 実体・deleted・real/manual・配置・oracle、劣化と復帰 |
 | R28 | 未承認pre_release_reviewのgo | phase/承認、空白/不正/不一致/未来/重複、requiredHumanReviewと記録 |
 
-現在は実装・検証中。source commitのLinux Node20/24・Windows Node24 CI完了後に受入を固定する。
+R25〜R28を受入済み。source commit d845bda8436283c3883a08bbcbf7494ed89abdab の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34590905384)は3job全step成功。233 runtime nodes・62 fixtures・CLI/API/Action/tarball/初期化runtimeとlifecycleを検証した。
 
 IPOへの影響: 手動結果や復帰文字列で誤goを出さず、承認前reviewを最大conditional_goにする。waiverはDQと手動失敗を消さず、approval binding・retention・producer原本を保持する。implementation_preparationのgoは準備評価であり、release承認ではない。package 0.4.0未公開 / wire 0.2を維持する。
 

@@ -2299,7 +2299,7 @@
         "npm run json-check"
       ],
       "mtime": "00023",
-      "contentHash": "sha256:f5d04388239a983cf13f780d21ffe8cc212e42b8c954588b9dde315ec1a68ca1"
+      "contentHash": "sha256:022ff812dc25387a17f5b42ad5caa7202c8610498324fcd698f5f835a43247ed"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2866,7 +2866,7 @@
         "docs/evidence/manual-governance-fixes-2026-09-11/validation.json"
       ],
       "mtime": "00023",
-      "contentHash": "sha256:e7dd27b05b4e709ee22602eec89e4105fdb4046f5b93e4f8625f61f8e0acd78f"
+      "contentHash": "sha256:8c163d76ab2b8e3a0fbf015455ded6625c4b2698174d4979e7652b497266d77c"
     },
     "docs/spec/manual-evidence-and-review.md": {
       "role": "manual-evidence-and-review",
@@ -2885,7 +2885,7 @@
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.manual-governance-fixes-2026-09-11.validation.json.json",
       "mtime": "00023",
-      "contentHash": "sha256:2eed55cbb3fbc0e8deffc9ba5024e8f09bde5da11a5748ca0d87d7ff1b43d9cc"
+      "contentHash": "sha256:0123f349081f0d8b7ea53d4a04a2b15f23c37384055939ba69a299c2f2791167"
     },
     "tests/manual-governance-regression.test.mjs": {
       "role": "manual-governance-regression.test",
