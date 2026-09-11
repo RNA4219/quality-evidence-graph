@@ -1,0 +1,21 @@
+{
+  "executionVersion": "qeg-execution/v1",
+  "testId": "qeg:test-B",
+  "identity": {
+    "producer": "qeg-native",
+    "projectId": "synthetic-eac",
+    "featureId": "synthetic-feature",
+    "caseId": "qeg:test-B"
+  },
+  "producerVersion": "synthetic-contract-v1",
+  "target": {
+    "projectId": "synthetic-eac",
+    "buildId": "synthetic-build-1",
+    "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "environmentId": "synthetic-ci"
+  },
+  "runId": "synthetic-run-0",
+  "completedAt": "2026-06-03T04:00:00.000Z",
+  "status": "pass",
+  "executionMode": "real"
+}

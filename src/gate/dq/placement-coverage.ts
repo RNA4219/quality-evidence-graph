@@ -1,6 +1,7 @@
-import type { ChangedCodeNode, Disqualification, GateBlocker, ReliabilityAccounting, TestObligation, TestPlacementNode } from "../../types.js";
+import type { ChangedCodeNode, Disqualification, GateBlocker, ReliabilityAccounting, TestNode, TestObligation, TestPlacementNode } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { inputSource } from "../../input-contract.js";
+import { consistentSelectedCoverage } from "../../placement-contract.js";
 
 function relatedRiskIds(input: DQDetectorInput, changeId: string): Set<string> {
   const ids = new Set(input.placementPlan?.obligations.filter(o => o.changedCodeIds.includes(changeId)).flatMap(o => [...o.riskIds]) ?? []);
@@ -22,6 +23,15 @@ function placementsFor(input: DQDetectorInput, obligation: TestObligation): read
 
 export function detectPlacementCoverage(input: DQDetectorInput, changes: readonly ChangedCodeNode[]): Disqualification[] {
   const result: Disqualification[] = [];
+  for (const obligation of input.placementPlan?.obligations ?? []) {
+    const selectedIds = new Set(placementsFor(input, obligation).flatMap(p => [...p.selectedTestIds]));
+    if (selectedIds.size === 0) continue; // Missing placement/execution has its own diagnostic.
+    const tests = input.graph.nodes.filter((node): node is TestNode => node.kind === "test" && selectedIds.has(node.id));
+    if (!consistentSelectedCoverage(tests, obligation, input.policy.inputContract?.mode === "native_graph")) result.push({
+      code: "DQ-05", message: `Selected tests do not cover obligation "${obligation.id}"`,
+      nodeIds: [obligation.id, ...selectedIds], sourceRefs: [inputSource("/placementPlan", obligation.id)],
+    });
+  }
   for (const change of changes) {
     const obligations = input.placementPlan?.obligations.filter(o => o.changedCodeIds.includes(change.id)) ?? [];
     const covered = obligations.length > 0 && obligations.every(o => placementsFor(input, o).length > 0);

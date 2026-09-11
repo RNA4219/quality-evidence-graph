@@ -1,13 +1,14 @@
 {
   "id": "src/gate/waivers.ts",
   "role": "waivers",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 waivers の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/types.ts"
   ],
   "deps_in": [
+    "docs/spec/gate-contract-consistency.md",
     "src/gate.ts",
     "src/gate/evaluate.ts"
   ],
@@ -17,5 +18,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:7b646425c26855ff77fabe1e615f8fd2e474c3d9f758a24c10683a455cc767ae"
+  "contentHash": "sha256:dda57ae7223fe219fc73ddd966db483d901af04ee7d2c8cafbea5aa1e6fb5c3c"
 }

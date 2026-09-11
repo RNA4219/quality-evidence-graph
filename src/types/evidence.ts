@@ -101,6 +101,7 @@ export interface Waiver {
   readonly linkedRiskIds: readonly StableId[];
   /** Required when waiving BLK-REL-01 through BLK-REL-03. */
   readonly linkedTestIds?: readonly StableId[];
+  /** Must contain a non-whitespace approver identity. */
   readonly approver: string;
   readonly approvalAuthority: string;
   readonly reason: string;

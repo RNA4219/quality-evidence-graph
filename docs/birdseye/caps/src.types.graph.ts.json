@@ -1,7 +1,7 @@
 {
   "id": "src/types/graph.ts",
   "role": "graph-types",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 graph-types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -26,5 +26,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:86e4997b3baa43abfedd495bec7592a41720c9896fdbf301b7639f98af4a74c9"
+  "contentHash": "sha256:caf5f1abef32af65687b6de9e85478c9a2d41c8ce24b18cc34184e165669a3b3"
 }

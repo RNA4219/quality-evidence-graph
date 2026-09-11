@@ -1,0 +1,32 @@
+{
+  "id": "docs/project/gate-contract-fixes-2026-09-11.md",
+  "role": "gate-contract-fixes-2026-09-11",
+  "generation": "00021",
+  "public_api": [],
+  "summary": "R14〜R19の配置coverage・手動oracle・raw status・waiver・snapshotをまとめて修正し、共通matrixとsource CIで受入を管理。",
+  "deps_out": [
+    "docs/evidence/gate-contract-fixes-2026-09-11/validation.json",
+    "docs/spec/gate-contract-consistency.md",
+    "schemas/waiver.schema.json",
+    "src/cli/evidence-normalize/values.ts",
+    "src/cli/snapshot.ts",
+    "src/placement-contract.ts",
+    "tests/gate-contract-regression.test.mjs",
+    "tests/helpers/gate-contract-matrix.mjs"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/evidence-acceptance-status.md",
+    "docs/requirements.md",
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:98f40c7b4b7f5cad1a2aae9d2dd6ec33b7d2562325a7e57e0dbe4fc4f65d15b9"
+}

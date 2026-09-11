@@ -1,0 +1,19 @@
+{
+  "fixture": "negative-plan-only-manual-oracle",
+  "description": "negative-plan-only-manual-oracle",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-14",
+      "message": "Manual-scripted placement \"qeg:manual-placement\" without acceptable oracle",
+      "nodeIds": [
+        "qeg:manual-placement"
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/gate-contract-consistency.md"
+}

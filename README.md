@@ -31,6 +31,8 @@
 
 フォーカス手順:
 
+[R14〜R19改修](docs/project/gate-contract-fixes-2026-09-11.md)では、配置coverageの矛盾、plan-only手動配置、human/implicit oracle、不正statusのpass化、空白waiver承認者、cwd依存snapshotを修正します。human oracleは確認待ち、implicit単独はDQ-14です。旧snapshotは読み取り互換を保ち、`snapshot --update`は対象基準の新形式を保存します。[互換性と判定規則](docs/spec/gate-contract-consistency.md)を参照してください。
+
 - 直近変更ファイル±2hopの node ID を `docs/birdseye/index.json` から取得する。
 - 対応する `docs/birdseye/caps/*.json` だけを読む。
 - Birdseye の世代や capsule が不整合なら stale とみなし、暫定読みに留める。

@@ -1,16 +1,19 @@
 {
   "id": "src/cli/snapshot.ts",
   "role": "report-snapshot-cli",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 report-snapshot-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/errors.ts",
     "src/cli/file-errors.ts",
+    "src/cli/path-key.ts",
     "src/cli/report.ts"
   ],
   "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md",
     "docs/requirements.md",
+    "docs/spec/gate-contract-consistency.md",
     "docs/spec/operational-cli-extensions.md",
     "src/cli.ts",
     "src/cli/check.ts",
@@ -22,5 +25,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:4771a6fbf3f322fbcda30170cf1be8a8e874e6b41285528f60d9ee6a80044aa3"
+  "contentHash": "sha256:bb3a63adf5cdd8763199ea25fc4891c45cf754ec9e2b01db37860f9c7f1ea46b"
 }

@@ -53,13 +53,30 @@ export function rawValue(raw: JsonObject, ...keys: readonly string[]): unknown {
 
 
 export function normalizeStatus(value: unknown): ResilienceEvidenceStatus | undefined {
+  if (value === undefined) return undefined;
   if (typeof value === "boolean") return value ? "pass" : "fail";
-  if (typeof value !== "string") return undefined;
+  if (typeof value !== "string") throw new CliError("Raw status must be a recognized string or boolean");
   const map: Readonly<Record<string, ResilienceEvidenceStatus>> = {
     pass: "pass", success: "pass", passed: "pass", failure: "fail", failed: "fail", fail: "fail",
     cancelled: "aborted", canceled: "aborted", aborted: "aborted", error: "error", timeout: "timeout", skipped: "skipped",
   };
-  return map[value.toLowerCase()];
+  const status = Object.hasOwn(map, value.toLowerCase()) ? map[value.toLowerCase()] : undefined;
+  if (!status) throw new CliError("Raw status is unrecognized");
+  return status;
+}
+
+export function statusAliases(raw: JsonObject, ...keys: readonly string[]): ResilienceEvidenceStatus | undefined {
+  let status: ResilienceEvidenceStatus | undefined;
+  for (const key of keys) status = choose("raw status aliases", status, normalizeStatus(raw[key]), false);
+  return status;
+}
+
+export function shellStatus(raw: JsonObject): ResilienceEvidenceStatus | undefined {
+  const status = statusAliases(raw, "status");
+  if (raw.exitCode === undefined) return status;
+  if (typeof raw.exitCode !== "number" || !Number.isSafeInteger(raw.exitCode)) throw new CliError("Raw exitCode must be an integer");
+  if (status !== undefined && (status === "pass") !== (raw.exitCode === 0)) conflict("raw status and exitCode", status, raw.exitCode);
+  return status ?? (raw.exitCode === 0 ? "pass" : "fail");
 }
 
 

@@ -11,11 +11,10 @@ import type {
 } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { isGateEligibleTestEvidence } from "../test-evidence.js";
+import { allTestPlacements, hasUsableOracle, isRetiredManualTest } from "../../placement-contract.js";
 
 function testPlacementNodes(input: DQDetectorInput): readonly TestPlacementNode[] {
-  return input.testPlacementNodes ?? input.graph.nodes.filter(
-    (node: QegNode): node is TestPlacementNode => node.kind === "test_placement"
-  );
+  return input.testPlacementNodes ?? allTestPlacements(input.graph, input.placementPlan);
 }
 
 function testNodes(input: DQDetectorInput): readonly TestNode[] {
@@ -66,14 +65,10 @@ function detectManualScriptedOracleGaps(input: DQDetectorInput): Disqualificatio
   for (const placement of testPlacementNodes(input)) {
     if (placement.primaryLayer !== "manual-scripted") continue;
 
-    const selected = placement.selectedTestIds.map(id => input.graph.nodes.find(n => n.id === id));
-    const selectedOracles = selected.length > 0 && selected.every(n => n?.kind === "test" && n.testType !== "resilience" &&
-      n.oracleType && n.oracleType !== "missing" && (n.oracleRefs?.length ?? 0) > 0 && (n.expectedResults?.length ?? 0) > 0);
-    const hasAcceptableOracle = selectedOracles || (input.policy.inputContract?.mode !== "upstream_artifacts" && (input.evidencePackage?.manualEvidence.some(
-      (manual) => manual.oracleRefs.some((oracle) => oracle.evidenceKind === "human_review")
-    ) || placement.candidateScores.some(
-      (score) => score.sourceRefs.some((sourceRef) => sourceRef.label?.includes("oracle"))
-    )));
+    const selected = placement.selectedTestIds.map(id => input.graph.nodes.find(n => n.id === id))
+      .filter(node => node?.kind !== "test" || !isRetiredManualTest(node, input.placementPlan));
+    if (placement.selectedTestIds.length > 0 && selected.length === 0) continue;
+    const hasAcceptableOracle = selected.length > 0 && selected.every(n => n?.kind === "test" && hasUsableOracle(n, true));
     if (!hasAcceptableOracle) {
       disqualifications.push({
         code: "DQ-14" as DisqualificationCode,

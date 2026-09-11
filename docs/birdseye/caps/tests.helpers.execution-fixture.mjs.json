@@ -1,7 +1,7 @@
 {
   "id": "tests/helpers/execution-fixture.mjs",
   "role": "execution-fixture",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 execution-fixture の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -9,6 +9,7 @@
   ],
   "deps_in": [
     "tests/execution-qualification.test.mjs",
+    "tests/helpers/gate-contract-matrix.mjs",
     "tools/migrate-execution-fixtures.mjs"
   ],
   "risks": [

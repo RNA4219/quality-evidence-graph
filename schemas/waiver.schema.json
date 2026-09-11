@@ -30,7 +30,7 @@
       "uniqueItems": true,
       "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
     },
-    "approver": { "type": "string", "minLength": 1 },
+    "approver": { "type": "string", "minLength": 1, "pattern": "\\S" },
     "approvalAuthority": { "type": "string", "minLength": 1 },
     "reason": { "type": "string", "minLength": 1 },
     "expiry": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },

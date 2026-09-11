@@ -1,7 +1,7 @@
 {
   "id": "src/types.ts",
   "role": "types",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -92,6 +92,7 @@
     "src/graph/requirements.ts",
     "src/index.ts",
     "src/input-contract.ts",
+    "src/placement-contract.ts",
     "src/placement.ts",
     "src/record.ts",
     "src/validation/evidence.ts",

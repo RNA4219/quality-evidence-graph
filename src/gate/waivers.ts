@@ -23,6 +23,9 @@ export function validateWaiver(
     }
   }
 
+  if (typeof waiver.approver !== "string" || waiver.approver.trim() === "") {
+    reasons.push("approver is empty");
+  }
   if (!waiver.approvalAuthority || waiver.approvalAuthority.trim() === "") {
     reasons.push("approvalAuthority is empty");
   }

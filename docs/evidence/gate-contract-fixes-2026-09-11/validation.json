@@ -1,0 +1,10 @@
+{
+  "recordVersion": "qeg-gate-contract-acceptance/v1",
+  "baselineCommit": "3c26458fe78af092aaa763bf7c75c1d0e9d90011",
+  "acceptance": {
+    "decision": "implemented",
+    "findingIds": ["R14", "R15", "R16", "R17", "R18", "R19"],
+    "pending": ["full local validation", "source CI on Linux Node20/24 and Windows Node24"]
+  },
+  "scope": "Synthetic regression and fixed fixtures; no live producer or production rerun. Prior evidence is retained."
+}

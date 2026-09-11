@@ -1,0 +1,21 @@
+{
+  "id": "tests/gate-contract-regression.test.mjs",
+  "role": "gate-contract-regression.test",
+  "generation": "00021",
+  "public_api": [],
+  "summary": "QEG 0.4.0 gate-contract-regression.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/cli-boundary-matrix.mjs",
+    "tests/helpers/gate-contract-matrix.mjs"
+  ],
+  "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:6b40a0cc0d3e0f43dcd240c1a684efab47db57adf8a3728e41f0cbc091fc68ce"
+}

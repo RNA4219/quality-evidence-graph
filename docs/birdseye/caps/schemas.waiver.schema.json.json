@@ -1,16 +1,19 @@
 {
   "id": "schemas/waiver.schema.json",
   "role": "waiver.schema",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 waiver.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
-  "deps_in": [],
+  "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/spec/gate-contract-consistency.md"
+  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:d2651ef51fae3c16cf54b725c707c26c983cc7e08af76903dfa354a4e860fa88"
+  "contentHash": "sha256:851e30927e56ded4231b30c1c1be16f6aef3f8b430f30f412e2ac9139afd57d8"
 }

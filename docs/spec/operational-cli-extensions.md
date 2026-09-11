@@ -34,7 +34,7 @@ next_review_due: 2026-12-11
 | `qeg policy lint` | GatePolicy を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile の矛盾を検出する |
 | `qeg repro-bundle` | CI failure の再現 bundle を作る | redaction、target別の一意な入力名、取得失敗の明示、全fileのhashと完了世代を検証する |
 | `qeg check` | ローカル総合確認を行う | schema-check、enum-check、doctor、evidence verify、policy lint、snapshot、report をまとめて実行する |
-| `qeg snapshot` | report の golden snapshot を検証する | `generatedAt` と絶対 path を正規化して比較する |
+| `qeg snapshot` | report の golden snapshot を検証する | 新形式はreportのgeneratedAtとtarget欄のみを正規化。旧形式は保存target基準で読み取り互換を維持する |
 | `qeg init` | 他 repo へ最小構成を導入する | `.qeg/` と GitHub Actions workflow の starter を生成する |
 
 ## 3. Exit code

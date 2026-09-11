@@ -5,6 +5,7 @@ import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { createRawProducerFixture, persistRawFixture } from "./helpers/raw-producer-fixture.mjs";
 import { cliRunner, verifyPathSelection, verifyTargetDiscovery, verifyBaseline, verifyDiff, verifyDistribution } from "./helpers/cli-boundary-matrix.mjs";
+import { gateContractMatrix } from "./helpers/gate-contract-matrix.mjs";
 
 const temp = await mkdtemp(join(tmpdir(), "qeg-package-smoke-"));
 const npmCli = process.env.npm_execpath;
@@ -156,4 +157,8 @@ for (const [name, verify] of [['paths', verifyPathSelection], ['discovery', veri
 }
 await verifyDistribution(cliRunner(packedActionBundle, temp), join(packageRoot, 'fixtures'), join(temp, 'boundary-packed-action'));
 console.log("Packed CLI boundary matrix R8-R13 and Action diagnostics passed");
+for (const [surface, run] of [['cli', packedCli], ['action', cliRunner(packedActionBundle, temp)]]) {
+  for (const [name, verify] of gateContractMatrix) await verify(run, join(packageRoot, 'fixtures'), join(temp, 'contract-' + surface + '-' + name.replaceAll('/', '-')), surface === 'cli' ? imported : undefined);
+}
+console.log("Packed CLI/API and Action contract matrix R14-R19 passed");
 console.log("Clean tarball install, CLI/library/Action bundle smoke, and packed public type contract passed");

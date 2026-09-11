@@ -1,0 +1,34 @@
+{
+  "id": "docs/spec/gate-contract-consistency.md",
+  "role": "gate-contract-consistency",
+  "generation": "00021",
+  "public_api": [],
+  "summary": "QEG 0.4.0 gate-contract-consistency の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "docs/requirements.md",
+    "schemas/waiver.schema.json",
+    "src/cli/evidence-normalize/values.ts",
+    "src/cli/snapshot.ts",
+    "src/gate/dq/placement-change.ts",
+    "src/gate/dq/placement-coverage.ts",
+    "src/gate/verdict/human-review.ts",
+    "src/gate/waivers.ts",
+    "src/placement-contract.ts",
+    "tests/helpers/gate-contract-matrix.mjs"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/requirements.md",
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:a7bb3ed79a4b9e16689dabc0f134f5708c96415cf12339d45c04733a0ffb993f"
+}

@@ -1,11 +1,12 @@
 {
   "id": "src/placement.ts",
   "role": "placement",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 placement の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/graph/requirements.ts",
+    "src/placement-contract.ts",
     "src/types.ts"
   ],
   "deps_in": [
@@ -19,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:4dc5ffb080e702261ca90cc4b007e7ff0c718f9db392c45f56c58179c3c5bb2b"
+  "contentHash": "sha256:25544f32cdc29ad37bc3ba88ca3d76f52d296cf3adce3f69736a5cecec9682fc"
 }

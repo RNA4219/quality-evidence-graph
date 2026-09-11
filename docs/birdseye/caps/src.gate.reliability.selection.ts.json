@@ -1,7 +1,7 @@
 {
   "id": "src/gate/reliability/selection.ts",
   "role": "reliability-selection-stage",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 reliability-selection-stage の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

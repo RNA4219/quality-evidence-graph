@@ -8,10 +8,15 @@ next_review_due: 2026-12-11
 
 # 証跡共通基準の実装・受入状況
 
+最新の[R14〜R19整合改修](gate-contract-fixes-2026-09-11.md)は実装・ローカル検証中。[今回の証拠](../evidence/gate-contract-fixes-2026-09-11/validation.json)にsource commitとCIを固定する。以下のR1〜R13および実producerの受入原本は保持する。
+
 正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。[R8〜R13のCLI境界改修](cli-boundary-fixes-2026-09-11.md)を受入済み。source commit bce4012e6788d7515375a1311afc6d9c5155edb1 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34559142365)はLinux Node20/24・Windows Node24の3job全step成功。[今回の証拠](../evidence/cli-boundary-fixes-2026-09-11/validation.json)にsource/runtime tree/全stepを固定し、R1〜R7と実producer原本は履歴として保持する。
 
 | 要求 | 対象 | 必要ケース | 状況 |
 |---|---|---|---|
+| EAC-04 / T-09 | 配置coverageと手動oracle | R14〜R16 | 明示coverage集合、plan-only/複製/矛盾、human/implicit/引退履歴を共通matrixで確認。source CI待ち |
+| EAC-06 / V-08 | 正規化結果とwaiver資格 | R17/18 | 全4 adapterの不正・競合status、空白approver、正常対照。source CI待ち |
+| EAC-07 / C-11 | snapshotの再現性 | R19 | 旧/新形式、cwd、alias、内容変更、自由文保持。source CI待ち |
 | EAC-01 | build/revision/feature/case/environment | TC-01〜03/16 | PR #8 accepted。実producerの短縮revisionを明示解決する追加を検証 |
 | EAC-02 | 評価時計・未来・期限 | TC-04〜06/10 | PR #8 accepted。小数秒1〜9桁、1ns未来・期限・最新順を追加 |
 | EAC-03 | 最新実行・履歴・競合 | TC-07〜13/16 | PR #8 accepted。microsecondを丸めず比較 |

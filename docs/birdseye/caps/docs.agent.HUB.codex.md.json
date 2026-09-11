@@ -1,7 +1,7 @@
 {
   "id": "docs/agent/HUB.codex.md",
   "role": "navigation",
-  "generation": "00020",
+  "generation": "00021",
   "public_api": [],
   "summary": "QEG 0.4.0 navigation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -14,6 +14,7 @@
     "docs/project/blueprint.md",
     "docs/project/evaluation.md",
     "docs/project/evidence-acceptance-status.md",
+    "docs/project/gate-contract-fixes-2026-09-11.md",
     "docs/project/guardrails.md",
     "docs/project/remediation-2026-09-10.md",
     "docs/project/runbook.md",
@@ -24,6 +25,7 @@
     "docs/requirements.md",
     "docs/research/quality-evidence-graph-requirements-report.md",
     "docs/spec/evidence-acceptance-standard.md",
+    "docs/spec/gate-contract-consistency.md",
     "docs/spec/index.md",
     "docs/spec/operational-cli-extensions.md",
     "fixtures/README.md"
@@ -39,5 +41,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:24dc49b77bd5d593828526538c27d68fe7588a5b3cc31e2a334d0737e10bcf35"
+  "contentHash": "sha256:27ca69138ebf0721a85d541e0881df94ab07c6996f63f5e65c07c91b1728f33d"
 }

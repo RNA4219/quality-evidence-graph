@@ -45,7 +45,7 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
   const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...qualified.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
   const blockers = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
-  const requiredHumanReview = [...new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks), ...upstream.humanReview])];
+  const requiredHumanReview = [...new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks, input.placementPlan), ...upstream.humanReview])];
   const verdict = computeVerdict(
     disqualifications,
     blockers,

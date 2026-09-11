@@ -1,0 +1,516 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-positive-release-go",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "lean",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    },
+    "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "lean",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      },
+      "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "requirement",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ],
+        "title": "All critical risks mitigated",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-claim-001",
+              "path": "docs/claims/claim-001.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "acceptanceCriteriaIds": []
+      },
+      {
+        "id": "qeg:risk-A",
+        "kind": "risk",
+        "title": "qeg:risk-A",
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        },
+        "priority": "P1",
+        "severity": "high",
+        "likelihood": 0.1,
+        "businessImpact": 0.1,
+        "complianceCriticality": 0,
+        "evidenceGap": 0,
+        "novelty": 0
+      },
+      {
+        "id": "qeg:risk-B",
+        "kind": "risk",
+        "title": "qeg:risk-B",
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        },
+        "priority": "P1",
+        "severity": "high",
+        "likelihood": 0.1,
+        "businessImpact": 0.1,
+        "complianceCriticality": 0,
+        "evidenceGap": 0,
+        "novelty": 0
+      },
+      {
+        "id": "qeg:change-A",
+        "kind": "changed_code",
+        "title": "Change A",
+        "path": "src/A.ts",
+        "symbols": [],
+        "hunks": [],
+        "blastRadius": 1,
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "qeg:test-B",
+        "kind": "test",
+        "title": "qeg:test-B",
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        },
+        "layer": "unit",
+        "existing": true,
+        "testExecutionMode": "real",
+        "coveredRiskIds": [
+          "qeg:risk-B"
+        ],
+        "coveredChangedCodeIds": [],
+        "oracleType": "specified",
+        "oracleRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "expectedResults": [
+          "B behaves correctly"
+        ],
+        "executionIdentity": {
+          "producer": "qeg-native",
+          "projectId": "synthetic-eac",
+          "featureId": "synthetic-feature",
+          "caseId": "qeg:test-B"
+        }
+      },
+      {
+        "id": "qeg:eac-execution-0",
+        "kind": "execution_evidence",
+        "title": "Synthetic execution 0",
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        },
+        "execution": {
+          "executionVersion": "qeg-execution/v1",
+          "testId": "qeg:test-B",
+          "identity": {
+            "producer": "qeg-native",
+            "projectId": "synthetic-eac",
+            "featureId": "synthetic-feature",
+            "caseId": "qeg:test-B"
+          },
+          "producerVersion": "synthetic-contract-v1",
+          "target": {
+            "projectId": "synthetic-eac",
+            "buildId": "synthetic-build-1",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "synthetic-ci"
+          },
+          "runId": "synthetic-run-0",
+          "completedAt": "2026-06-03T04:00:00.000Z",
+          "status": "pass",
+          "executionMode": "real",
+          "rawArtifactRef": {
+            "id": "qeg:eac-raw-0",
+            "path": "execution/run-0.json",
+            "contentHash": "sha256:01225514e5e5d17e46c6b3decddcc598d164514a407f434bc4d5948e17dce103",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        },
+        "passed": true,
+        "evidenceRefs": [
+          {
+            "id": "qeg:eac-raw-0",
+            "path": "execution/run-0.json",
+            "contentHash": "sha256:01225514e5e5d17e46c6b3decddcc598d164514a407f434bc4d5948e17dce103",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "evidenceKind": "test_result",
+            "capturedAt": "2026-06-03T04:00:00.000Z"
+          }
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "qeg:change-risk",
+        "kind": "touches",
+        "from": "qeg:change-A",
+        "to": "qeg:risk-A",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "qeg:eac-edge-0",
+        "kind": "evidenced_by",
+        "from": "qeg:test-B",
+        "to": "qeg:eac-execution-0",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "policy": {
+    "policyId": "qeg:policy-ipo-controlled-001",
+    "policyHash": "sha256:abc123",
+    "profile": "lean",
+    "effectiveDate": "2026-01-01T00:00:00.000Z",
+    "approver": "policy-approver-001",
+    "sourceRefs": [
+      {
+        "id": "qeg:sr-policy-001",
+        "path": "docs/policy/ipo-controlled-001.md"
+      }
+    ],
+    "dqScope": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17"
+    ],
+    "exitCodePolicy": {
+      "go": 0,
+      "conditional_go": 2,
+      "no_go": 2,
+      "disqualified": 2
+    },
+    "inputContract": {
+      "mode": "native_graph",
+      "requiredArtifacts": [
+        {
+          "adapter": "qeg-native",
+          "kind": "test_model"
+        }
+      ],
+      "evaluationScope": {
+        "kind": "fixture",
+        "target": "negative-explicit-placement-coverage",
+        "notEvaluated": [
+          "Upstream producer ingestion",
+          "Real deployment",
+          "Release approval"
+        ]
+      },
+      "requireExecutedTests": true,
+      "sourceRefs": [
+        {
+          "id": "qeg:fixture-contract-positive-release-go",
+          "path": "gate-input.json",
+          "label": "/policy/inputContract"
+        }
+      ]
+    },
+    "executionPolicy": {
+      "target": {
+        "projectId": "synthetic-eac",
+        "buildId": "synthetic-build-1",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "environmentId": "synthetic-ci"
+      },
+      "maxEvidenceAgeHours": 24,
+      "sourceRefs": [
+        {
+          "id": "qeg:eac-synthetic-source",
+          "path": "gate-input.json",
+          "label": "EAC synthetic acceptance scenario"
+        }
+      ],
+      "buildBindingRef": {
+        "id": "qeg:eac-build",
+        "path": "execution/build.json",
+        "contentHash": "sha256:2bf25780b245856d955566ef911bfb2a0fe51dccc8b69da0b142eb50c0d11195",
+        "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      }
+    }
+  },
+  "waivers": [],
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "lean",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      },
+      "headRef": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    },
+    "obligations": [
+      {
+        "id": "qeg:obligation-A",
+        "changedCodeIds": [
+          "qeg:change-A"
+        ],
+        "riskIds": [
+          "qeg:risk-A"
+        ],
+        "requirementIds": [],
+        "failureModeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 0.5,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "qeg:obligation-B",
+        "changedCodeIds": [],
+        "riskIds": [
+          "qeg:risk-B"
+        ],
+        "requirementIds": [],
+        "failureModeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 0.5,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "placements": [
+      {
+        "id": "qeg:placement-A",
+        "kind": "test_placement",
+        "title": "qeg:placement-A",
+        "obligationId": "qeg:obligation-A",
+        "primaryLayer": "unit",
+        "disposition": "reuse",
+        "gateRelevance": "blocking",
+        "candidateScores": [],
+        "selectedTestIds": [
+          "qeg:test-B"
+        ],
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      },
+      {
+        "id": "qeg:placement-B",
+        "kind": "test_placement",
+        "title": "qeg:placement-B",
+        "obligationId": "qeg:obligation-B",
+        "primaryLayer": "unit",
+        "disposition": "reuse",
+        "gateRelevance": "blocking",
+        "candidateScores": [],
+        "selectedTestIds": [
+          "qeg:test-B"
+        ],
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      }
+    ]
+  }
+}
