@@ -1,7 +1,7 @@
 {
   "id": "src/gate/dq/placement-change.ts",
   "role": "placement-change-dq",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 placement-change-dq の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -12,6 +12,7 @@
   ],
   "deps_in": [
     "docs/spec/gate-contract-consistency.md",
+    "docs/spec/governance-consistency.md",
     "src/gate/dq-detectors.ts"
   ],
   "risks": [
@@ -20,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:68b2b035f6375bc0a017ef49e99d0fc6d04d44f86f2bae3428f7a1017f05741a"
+  "contentHash": "sha256:6af0576ecafa2b3341189d8b563f288832d11cc9cf05c67e580a3b48afcbe378"
 }

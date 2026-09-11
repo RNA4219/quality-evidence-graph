@@ -1,14 +1,16 @@
 {
   "id": "src/validation/schema.ts",
   "role": "runtime-schema-validation",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 runtime-schema-validation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/timestamps.ts",
     "src/types.ts",
     "src/validation/reliability-semantics.ts"
   ],
   "deps_in": [
+    "docs/spec/governance-consistency.md",
     "docs/spec/reliability-hardening.md",
     "src/cli/evidence-normalize/validation.ts",
     "src/cli/evidence-verify.ts",
@@ -27,5 +29,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:44d669908c0228c1354c018e876448e179196f12d434ce4dd3e98bb45c006914"
+  "contentHash": "sha256:2cd139e6f865711d347bc22e6e0156eadac3cb3e090155a9c26acfa8c43292c8"
 }

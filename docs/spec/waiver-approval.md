@@ -33,7 +33,7 @@ waiver は次をすべて満たす場合だけ valid とする。
 
 - `linkedRiskIds` が QEG graph 上の risk に解決できる。
 - `approvalAuthority` と `sourceRefs` が存在する。
-- `expiry` が Gate 実行時点で期限内である。
+- `expiry` は実在暦日・明示timezone付き日時で、記録されたmetadata.createdAtより厳密に後である。小数秒1〜9桁を保持して比較し、実行マシンのtimezoneで補完しない。
 - `impactScope` が release 対象と対応している。
 - `rollbackOrContainment`、`followUpOwner`、`recheckCondition` が空でない。
 - waiver 自体が secret / token / PII を unredacted で含まない。
@@ -77,6 +77,8 @@ approval evidence は QEG が生成する Gate verdict と分離して保持す�
 | `releaseOwner` | yes | release 責任者。 |
 
 `ipo_controlled` release Go では、上記 roles が metadata または external control evidence に記録されていることを必須にする。未記録なら DQ-17 とする。
+
+controlRolesの各値は非空白の担当者を必要とし、objectの存在や空白文字だけでは記録とみなさない。schemaと公開APIの両方で検証する。[R20〜R24契約](governance-consistency.md)を参照する。
 
 ## 6. Human review
 

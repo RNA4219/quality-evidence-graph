@@ -1,7 +1,7 @@
 {
   "id": "tests/package-smoke.mjs",
   "role": "package-and-packed-types-smoke",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 package-and-packed-types-smoke の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -14,5 +14,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:55edae4ebda4b0ac84de03441a2b1642bf1c4756934bd6a6ed673dc7159a7d2d"
+  "contentHash": "sha256:51b78205e9bd0b8ebe0e32bd5cee04f95d60ca56b96f5295b517906d44fade16"
 }

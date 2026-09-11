@@ -1,4 +1,4 @@
-import type { Disqualification, QegNode } from "../../types.js";
+import type { Disqualification, QegNode, TestPlacementNode } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
 import { inputSource } from "../../input-contract.js";
 
@@ -23,6 +23,14 @@ export function detectGraphIntegrity(input: DQDetectorInput): Disqualification[]
       issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
     }
   };
+  const checkPlacementLayer = (placement: TestPlacementNode, pointer: string): void => {
+    for (const id of placement.selectedTestIds) {
+      const test = nodes.get(id);
+      if (test?.kind === "test" && test.layer !== placement.primaryLayer) {
+        issue(pointer, `Placement "${placement.id}" layer disagrees with selected test "${id}"`, [placement.id, id]);
+      }
+    }
+  };
   for (const [index, edge] of input.graph.edges.entries()) resolve([edge.from, edge.to], undefined, `/graph/edges/${index}`);
   const artifacts = new Set(input.metadata.inputArtifacts.map(a => a.id));
   for (const [index, node] of input.graph.nodes.entries()) {
@@ -44,6 +52,7 @@ export function detectGraphIntegrity(input: DQDetectorInput): Disqualification[]
   for (const [index, node] of input.graph.nodes.entries()) if (node.kind === "test_placement") {
     const pointer = `/graph/nodes/${index}`;
     resolve(node.selectedTestIds, "test", pointer);
+    checkPlacementLayer(node, pointer);
     if (!input.placementPlan?.obligations.some(o => o.id === node.obligationId)) {
       issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
     }
@@ -69,6 +78,7 @@ export function detectGraphIntegrity(input: DQDetectorInput): Disqualification[]
     const pointer = `/placementPlan/placements/${index}`;
     if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
     resolve(placement.selectedTestIds, "test", pointer);
+    checkPlacementLayer(placement, pointer);
   }
   return result;
 }

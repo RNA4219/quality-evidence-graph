@@ -50,7 +50,7 @@
     "enum-check": "node dist/cli.js enum-check",
     "baseline": "node dist/cli.js baseline",
     "evidence": "node dist/cli.js evidence",
-    "test:runtime": "node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs tests/execution-qualification.test.mjs tests/output-publication.test.mjs tests/consumer-migration.test.mjs tests/producer-replay.test.mjs tests/transaction-regression.test.mjs tests/followup-regression.test.mjs tests/cli-boundary-regression.test.mjs tests/gate-contract-regression.test.mjs",
+    "test:runtime": "node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs tests/execution-qualification.test.mjs tests/output-publication.test.mjs tests/consumer-migration.test.mjs tests/producer-replay.test.mjs tests/transaction-regression.test.mjs tests/followup-regression.test.mjs tests/cli-boundary-regression.test.mjs tests/gate-contract-regression.test.mjs tests/governance-regression.test.mjs",
     "build-graph": "node dist/cli.js build-graph",
     "place-tests": "node dist/cli.js place-tests",
     "policy": "node dist/cli.js policy",

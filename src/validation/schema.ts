@@ -4,6 +4,7 @@ import { basename, join } from "path";
 import { fileURLToPath } from "url";
 import type { QegGateInput } from "../types.js";
 import { validateReliabilitySemantics } from "./reliability-semantics.js";
+import { timestampNanos } from "../timestamps.js";
 
 export interface GateInputValidationIssue {
   readonly path: string;
@@ -48,7 +49,8 @@ async function schemaFiles(schemaDir: string): Promise<string[]> {
 export async function loadSchemaRegistry(schemaDir = DEFAULT_SCHEMA_DIR): Promise<SchemaRegistry> {
   if (schemaDir === DEFAULT_SCHEMA_DIR && defaultRegistry) return defaultRegistry;
   const load = (async (): Promise<SchemaRegistry> => {
-    const ajv = new Ajv2020({ allErrors: true, strict: false, validateFormats: false });
+    const ajv = new Ajv2020({ allErrors: true, strict: false });
+    ajv.addFormat("date-time", { type: "string", validate: value => timestampNanos(value) !== undefined });
     const schemas = new Map<string, AnySchema>();
     for (const file of await schemaFiles(schemaDir)) {
       const schema = JSON.parse(await readFile(file, "utf-8")) as AnySchema;

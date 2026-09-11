@@ -1,7 +1,7 @@
 {
   "id": "src/cli/evidence-normalize/publish.ts",
   "role": "publish",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 publish の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

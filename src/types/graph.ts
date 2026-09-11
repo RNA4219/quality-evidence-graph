@@ -195,6 +195,7 @@ export type TestNode = LegacyTestNode | ResilienceTestNode;
 export interface TestPlacementNode extends QegNodeBase {
   readonly kind: "test_placement";
   readonly obligationId: StableId;
+  /** 選択した全testのlayerと一致する。 */
   readonly primaryLayer: PlacementLayer;
   readonly disposition: PlacementDisposition;
   readonly gateRelevance: GateRelevance;
@@ -414,6 +415,7 @@ export interface PlacementChangeRecord {
   readonly subject_id: StableId;
   readonly from_layer: PlacementChangeLayer;
   readonly to_layer: PlacementChangeLayer;
+  /** 自動layerのtestを参照し、subjectからのreplaced_by edgeを持つ。 */
   readonly replacement_ids: readonly StableId[];
   readonly evidence_refs: readonly EvidenceRef[];
   readonly policy_ref: StableId;

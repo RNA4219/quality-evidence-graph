@@ -1,12 +1,13 @@
 {
   "id": "src/gate/execution/contracts.ts",
   "role": "contracts",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 contracts の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/gate/context.ts",
     "src/gate/reliability/fingerprint.ts",
+    "src/timestamps.ts",
     "src/types.ts"
   ],
   "deps_in": [
@@ -21,5 +22,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:99a52d6be062611429781924984f10ecd897feb4f46c95845dbabd208321ab5a"
+  "contentHash": "sha256:c369c9195564c958415a3a19c01e96d559a1ef5d6597ffb1dbe15de65035b23b"
 }

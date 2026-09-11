@@ -18,6 +18,8 @@ R5〜R7（native編集保護・差分選択・診断bundle）は`docs/project/fo
 
 ## 1. 読み順
 
+R20〜R24の配置実体・引退・時刻・IPO統制は`docs/spec/governance-consistency.md`、受入状況は`docs/project/governance-fixes-2026-09-11.md`を参照する。
+
 R14〜R19の実装・受入は`docs/project/gate-contract-fixes-2026-09-11.md`、具体契約は`docs/spec/gate-contract-consistency.md`、新しい証拠は`docs/evidence/gate-contract-fixes-2026-09-11/`を参照する。
 
 1. `README.md`

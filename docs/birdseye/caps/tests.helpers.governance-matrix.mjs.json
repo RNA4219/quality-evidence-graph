@@ -1,0 +1,23 @@
+{
+  "id": "tests/helpers/governance-matrix.mjs",
+  "role": "governance-matrix",
+  "generation": "00022",
+  "public_api": [],
+  "summary": "QEG 0.4.0 governance-matrix の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/cli-boundary-matrix.mjs",
+    "tests/helpers/execution-fixture.mjs"
+  ],
+  "deps_in": [
+    "docs/project/governance-fixes-2026-09-11.md",
+    "docs/spec/governance-consistency.md",
+    "tests/governance-regression.test.mjs"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:3620931ce42a86b94a55018b4c5eed627421e2cd0ab73e5b5ce48b35ea0c0fd7"
+}

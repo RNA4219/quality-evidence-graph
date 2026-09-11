@@ -1,0 +1,10 @@
+{
+  "validationVersion": "qeg-governance-fixes/v1",
+  "baselineCommit": "7960bd29f971f0191fabbfb15d1ffcdf66697ba3",
+  "acceptance": {
+    "decision": "implementation_in_progress",
+    "findingIds": ["R20", "R21", "R22", "R23", "R24"],
+    "pending": ["local validation", "source CI"]
+  },
+  "scope": "synthetic fixture and isolated consumer; no production release or live producer rerun"
+}

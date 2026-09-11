@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-retention-unknown",
+  "description": "negative-retention-unknown",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-16",
+      "message": "Evidence storage immutability is unknown; release judgment requires a verified storage classification",
+      "nodeIds": []
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/governance-consistency.md"
+}

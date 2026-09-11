@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/producer-adapters.md",
   "role": "producer-adapters",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "3 producerの14 artifactについてraw形式、写像、固定schema、revision/hash/licenseの境界を定義。",
   "deps_out": [

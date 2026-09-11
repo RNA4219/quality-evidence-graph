@@ -1,7 +1,7 @@
 {
   "id": "README.md",
   "role": "overview",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 overview の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -11,6 +11,7 @@
     "docs/agent/HUB.codex.md",
     "docs/project/evidence-acceptance-status.md",
     "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/project/governance-fixes-2026-09-11.md",
     "docs/project/remediation-2026-09-10.md",
     "docs/release-notes/2026-07-20-v0.3.0.md",
     "docs/release-notes/2026-07-20-v0.3.1.md",
@@ -18,6 +19,7 @@
     "docs/release/acceptance-2026-07-20.md",
     "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/gate-contract-consistency.md",
+    "docs/spec/governance-consistency.md",
     "docs/spec/operational-cli-extensions.md",
     "qeg-report-action/action.yml",
     "src/cli/report.ts"
@@ -31,5 +33,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:f3ece7f4e6e36c14a936d44683df0476d9d2ea0416cd87b3f1e59fb6f56a090b"
+  "contentHash": "sha256:4a50c155842dc9b86d0b45a92af959bb8691a31c3db228e21b904c333d543709"
 }

@@ -4,11 +4,12 @@ import type {
   RiskNode,
   Waiver,
 } from "../types.js";
+import { timestampNanos } from "../timestamps.js";
 
 export function validateWaiver(
   waiver: Waiver,
   graph: QualityEvidenceGraph,
-  executionTime: Date
+  executionTime: Date | string
 ): { valid: boolean; invalidReason?: string } {
   const reasons: string[] = [];
   const riskIds = new Set(
@@ -32,8 +33,12 @@ export function validateWaiver(
   if (!waiver.sourceRefs || waiver.sourceRefs.length === 0) {
     reasons.push("sourceRefs is empty (minimum 1 required)");
   }
-  if (!Number.isFinite(Date.parse(waiver.expiry)) || new Date(waiver.expiry) <= executionTime) {
-    reasons.push(`expiry "${waiver.expiry}" is past execution time`);
+  const expiry = timestampNanos(waiver.expiry);
+  const clock = executionTime instanceof Date
+    ? Number.isFinite(executionTime.valueOf()) ? BigInt(executionTime.valueOf()) * 1000000n : undefined
+    : timestampNanos(executionTime);
+  if (expiry === undefined || clock === undefined || expiry <= clock) {
+    reasons.push(`expiry "${waiver.expiry}" is invalid or not after the evaluation time`);
   }
   if (!waiver.impactScope || waiver.impactScope.trim() === "") {
     reasons.push("impactScope is empty");

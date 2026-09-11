@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/gate-contract-consistency.md",
   "role": "gate-contract-consistency",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 gate-contract-consistency の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

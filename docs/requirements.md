@@ -257,6 +257,8 @@ R14〜R19の具体規則は[配置・判定・正規化の整合契約](spec/gat
 
 manual case の引退は waiver ではなく placement の変更として記録する。引退は risk node の削除を伴わず、risk は automated layer の replacement test によりカバー中として辿れる必要がある。引退 criteria の値は policy 側に固定し、QEG は policy を読んで判定する。waiver は例外承認、placement_change はテスト配置の変更履歴であり、互いに代替しない。
 
+R20〜R24の具体規則は[統制整合契約](spec/governance-consistency.md)。全selected test.layerとprimaryLayerを一致させる。引退subject/from_layer、policy_ref、各自動replacementとreplaced_byの方向を照合する。waiverと評価時計は実在暦日・明示timezone・小数秒1〜9桁を検証して比較し、同時刻のexpiryは期限切れとする。IPO役割は非空白の担当者が必須で、unknown保管方式はDQ-16となる。
+
 ## 10. Gate 要件
 
 | ID | 要件 | 受入条件 |
@@ -303,7 +305,7 @@ Gate profile の既定は `standard` とする。`strict` は認証、決済、�
 | DQ-13 | Gate 関連 node / edge / placement / blocker / disqualification の sourceRefs が空 |
 | DQ-14 | manual-scripted placement が acceptable oracle を持たない、または manual→automated の replacement が mock test 証跡だけで成立している |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない |
-| DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する |
+| DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する、または保管方式がunknown |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない |
 | DQ-18 | 必須 risk に matching real resilience evidence がない、mock-only、selected evidence の `testId` と incoming `evidenced_by` provenance が矛盾する、stale / future / invalid timestamp、wrong scenario / environment、またはsteady state / fault / abort / recovery lifecycleが不整合である |
 | DQ-19 | 同一execution identityまたはlatest instantのresilience evidenceが異なるdecision fingerprintを持ち、選択が曖昧である |

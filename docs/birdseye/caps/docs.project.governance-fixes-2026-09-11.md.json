@@ -1,0 +1,28 @@
+{
+  "id": "docs/project/governance-fixes-2026-09-11.md",
+  "role": "governance-fixes-2026-09-11",
+  "generation": "00022",
+  "public_api": [],
+  "summary": "R20〜R24の配置実体・引退・厳密な時刻・IPO役割・保管方式を共通matrixで検証する受入台帳。",
+  "deps_out": [
+    "docs/evidence/governance-fixes-2026-09-11/validation.json",
+    "docs/spec/governance-consistency.md",
+    "tests/governance-regression.test.mjs",
+    "tests/helpers/governance-matrix.mjs"
+  ],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/evidence-acceptance-status.md",
+    "docs/requirements.md",
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:c1bf21426e7c5c94223154931de06b73f893c54d4811caa7fc4dab81b64249d8"
+}

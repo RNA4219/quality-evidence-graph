@@ -1,7 +1,7 @@
 {
   "id": "docs/project/followup-fixes-2026-09-11.md",
   "role": "followup-fixes-2026-09-11",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "R5〜R7の差分検査・native編集保護・診断bundle保存を一括修正し、操作順の組合せと実行証拠で受入を管理。",
   "deps_out": [

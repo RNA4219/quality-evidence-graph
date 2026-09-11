@@ -73,7 +73,7 @@
         "traceability": { "$ref": "shared-defs.schema.json#/$defs/traceability" },
         "sourceArtifactIds": { "type": "array", "items": { "type": "string" } },
         "obligationId": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
-        "primaryLayer": { "$ref": "shared-defs.schema.json#/$defs/placementLayer" },
+        "primaryLayer": { "$ref": "shared-defs.schema.json#/$defs/placementLayer", "description": "全selected testのlayerと一致する。矛盾はDQ-03。" },
         "disposition": { "enum": ["reuse", "adapt", "add", "manual-only", "blocked"] },
         "gateRelevance": { "enum": ["informational", "advisory", "blocking"] },
         "candidateScores": { "type": "array", "items": { "type": "object" } },
@@ -102,6 +102,7 @@
         "from_layer": { "$ref": "shared-defs.schema.json#/$defs/placementChangeLayer" },
         "to_layer": { "$ref": "shared-defs.schema.json#/$defs/placementChangeLayer" },
         "replacement_ids": {
+          "description": "自動引退では自動layerのtestを参照し、subjectからのreplaced_by edgeを必要とする。",
           "type": "array",
           "minItems": 1,
           "items": { "$ref": "shared-defs.schema.json#/$defs/stableId" }
