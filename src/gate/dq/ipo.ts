@@ -34,11 +34,13 @@ export function detectDQ15(input: DQDetectorInput): Disqualification[] {
  * cannot provide audit trail integrity for release decisions.
  */
 export function detectDQ16(input: DQDetectorInput): Disqualification | null {
-  if (input.evidencePackage?.retention.storageClassification === "mutable") {
+  const classification = input.evidencePackage?.retention.storageClassification;
+  if (classification === "mutable" || classification === "unknown") {
     return {
       code: "DQ-16" as DisqualificationCode,
-      message:
-        "Evidence used for release judgment exists only in silent-overwrite capable storage",
+      message: classification === "unknown"
+        ? "Evidence storage immutability is unknown; release judgment requires a verified storage classification"
+        : "Evidence used for release judgment exists only in silent-overwrite capable storage",
       nodeIds: [],
       sourceRefs: [SR_DQ_16],
     };
@@ -55,7 +57,9 @@ export function detectDQ16(input: DQDetectorInput): Disqualification | null {
 export function detectDQ17(input: DQDetectorInput): Disqualification[] {
   if (input.metadata.profile !== "ipo_controlled") return [];
 
-  if (!input.evidencePackage || !input.evidencePackage.controlRoles) {
+  const roles = input.evidencePackage?.controlRoles;
+  if (!roles || [roles.producer, roles.reviewer, roles.approver, roles.waiverApprover, roles.releaseOwner]
+    .some(role => typeof role !== "string" || role.trim() === "")) {
     return [
       {
         code: "DQ-17" as DisqualificationCode,

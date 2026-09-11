@@ -1,0 +1,21 @@
+{
+  "fixture": "negative-retirement-manual-replacement",
+  "description": "negative-retirement-manual-replacement",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-14",
+      "message": "Placement change \"qeg:placement-change-login-retirement\" requires automated replacements linked by replaced_by",
+      "nodeIds": [
+        "qeg:placement-change-login-retirement",
+        "mbb:CASE-login-001",
+        "hate:AETE-login-001"
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/governance-consistency.md"
+}

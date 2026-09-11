@@ -105,6 +105,7 @@ export interface Waiver {
   readonly approver: string;
   readonly approvalAuthority: string;
   readonly reason: string;
+  /** 明示timezone付きの実在日時。評価時計より厳密に後であること。 */
   readonly expiry: IsoDateTime;
   readonly impactScope: string;
   readonly rollbackOrContainment: string;
@@ -127,6 +128,7 @@ export interface ApprovalEvidence {
   readonly evidencePackageHash: string;
 }
 
+/** 全役割に非空白の担当者を記録する。 */
 export interface ControlRoles {
   readonly producer: string;
   readonly reviewer: string;
@@ -144,6 +146,7 @@ export interface Retention {
   readonly tamperEvidence: string;
   readonly reverificationMethod: string;
   readonly sourceRefs: readonly SourceRef[];
+  /** unknown / mutable はDQ-16となり、release判定には使用できない。 */
   readonly storageClassification: StorageClassification;
 }
 

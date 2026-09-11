@@ -31,6 +31,8 @@
 
 フォーカス手順:
 
+[R20〜R24改修](docs/project/governance-fixes-2026-09-11.md)では、test実体と配置先の不一致、手動引退の自動replacement条件、waiver日時、IPO担当者の空白、不明な証拠保管方式を検証します。unknown保管はDQ-16とし、日時は明示timezoneとnanosecond精度で比較します。[整合契約](docs/spec/governance-consistency.md)を参照してください。
+
 [R14〜R19改修](docs/project/gate-contract-fixes-2026-09-11.md)では、配置coverageの矛盾、plan-only手動配置、human/implicit oracle、不正statusのpass化、空白waiver承認者、cwd依存snapshotを修正します。human oracleは確認待ち、implicit単独はDQ-14です。旧snapshotは読み取り互換を保ち、`snapshot --update`は対象基準の新形式を保存します。[互換性と判定規則](docs/spec/gate-contract-consistency.md)を参照してください。
 
 - 直近変更ファイル±2hopの node ID を `docs/birdseye/index.json` から取得する。

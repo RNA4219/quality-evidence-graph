@@ -8,12 +8,16 @@ next_review_due: 2026-12-11
 
 # 証跡共通基準の実装・受入状況
 
+最新の[R20〜R24統制整合改修](governance-fixes-2026-09-11.md)を受入済み。source commit 2660cc6dbd43e8300b2537f9bd4196dacb272016 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34575322967)は3job全step成功。[今回の証拠](../evidence/governance-fixes-2026-09-11/validation.json)へ固定した。
+
 最新の[R14〜R19整合改修](gate-contract-fixes-2026-09-11.md)を受入済み。source commit 802e5b04de33a2bd37eaf5e1b34b982b15d7a529 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34564476819)は3job全step成功。[今回の証拠](../evidence/gate-contract-fixes-2026-09-11/validation.json)へ固定した。以下のR1〜R13および実producerの受入原本は保持する。
 
 正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。[R8〜R13のCLI境界改修](cli-boundary-fixes-2026-09-11.md)を受入済み。source commit bce4012e6788d7515375a1311afc6d9c5155edb1 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34559142365)はLinux Node20/24・Windows Node24の3job全step成功。[今回の証拠](../evidence/cli-boundary-fixes-2026-09-11/validation.json)にsource/runtime tree/全stepを固定し、R1〜R7と実producer原本は履歴として保持する。
 
 | 要求 | 対象 | 必要ケース | 状況 |
 |---|---|---|---|
+| T-02/09/10/12 | 配置実体と引退資格 | R20/21 | layer・subject/policy・replaced_byと復帰条件。accepted（今回のsource CIで確認） |
+| S-03 / REL-09 / EAC-11 | 時刻・役割・保管の統制 | R22〜R24 | 明示timezone・nanosecond期限、役割の非空白、unknown保管の失格。accepted（今回のsource CIで確認） |
 | EAC-04 / T-09 | 配置coverageと手動oracle | R14〜R16 | 明示coverage集合、plan-only/複製/矛盾、human/implicit/引退履歴を共通matrixで確認。accepted（今回のsource CIで確認） |
 | EAC-06 / V-08 | 正規化結果とwaiver資格 | R17/18 | 全4 adapterの不正・競合status、空白approver、正常対照。accepted（今回のsource CIで確認） |
 | EAC-07 / C-11 | snapshotの再現性 | R19 | 旧/新形式、cwd、alias、内容変更、自由文保持。accepted（今回のsource CIで確認） |

@@ -1,7 +1,7 @@
 {
   "id": "src/gate/dq/ipo.ts",
   "role": "ipo",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 ipo の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -11,6 +11,7 @@
     "src/types.ts"
   ],
   "deps_in": [
+    "docs/spec/governance-consistency.md",
     "src/gate/dq-detectors.ts"
   ],
   "risks": [
@@ -19,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:de99d32b3a9d30e5a6997e0786792ab0524560dc405dc44ee48232b85ffb40d5"
+  "contentHash": "sha256:b158741896eec0b176bb7640866396f249facbdcaed2044a62fc0883cc09cb6e"
 }

@@ -792,6 +792,39 @@
         "primaryBlocker": null
       },
       "snapshot": true
+    },
+    {
+      "name": "negative-placement-layer-mismatch",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-03",
+        "primaryBlocker": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-retirement-manual-replacement",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14",
+        "primaryBlocker": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-retention-unknown",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-16",
+        "primaryBlocker": null
+      },
+      "snapshot": true
     }
   ]
 }

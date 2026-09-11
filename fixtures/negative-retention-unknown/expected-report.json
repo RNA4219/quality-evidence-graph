@@ -1,0 +1,96 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [
+        {
+          "code": "DQ-16",
+          "count": 1,
+          "remediation": "Move release evidence to immutable, append-only, or versioned storage before using it for release judgment."
+        }
+      ],
+      "blockerCount": 0,
+      "residualRiskCount": 0,
+      "humanReviewCount": 0
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-retention-unknown",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "disqualified",
+        "reasons": [
+          "Disqualified: 1 DQ code(s)",
+          "- DQ-16: Evidence storage immutability is unknown; release judgment requires a verified storage classification"
+        ],
+        "disqualifications": [
+          {
+            "code": "DQ-16",
+            "message": "Evidence storage immutability is unknown; release judgment requires a verified storage classification",
+            "nodeIds": [],
+            "sourceRefs": [
+              {
+                "id": "SR-DQ-16",
+                "path": "docs/spec/retention-immutability.md",
+                "startLine": 1,
+                "endLine": 10,
+                "label": "storage classification must be immutable/versioned"
+              }
+            ]
+          }
+        ],
+        "blockers": [],
+        "residualRisks": [],
+        "requiredHumanReview": [],
+        "reliability": {
+          "enabled": false
+        },
+        "expected": {
+          "fixture": "negative-retention-unknown",
+          "expectedVerdict": "disqualified",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/governance-consistency.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [
+            "DQ-16"
+          ],
+          "actualDqCodes": [
+            "DQ-16"
+          ],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [],
+          "actualBlockerIds": []
+        }
+      }
+    ]
+  }
+}

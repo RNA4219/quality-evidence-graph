@@ -82,7 +82,7 @@ Gate evaluator は次の順で判定する。
 | DQ-13 | Gate 関連 sourceRefs が空。 |
 | DQ-14 | manual-scripted placement が acceptable oracle を持たない。 |
 | DQ-15 | Gate policy / waiver / approval evidence が版管理または source-backed でない。 |
-| DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する。 |
+| DQ-16 | release 判定に使った evidence が silent overwrite 可能な保管先だけに存在する、または保管方式がunknown。 |
 | DQ-17 | producer / reviewer / approver / waiver approver の職務分掌が記録されていない。 |
 | DQ-18 | 必須 risk にmatching real resilience evidenceがない、mock-only、矛盾した`evidenced_by` provenance、stale / future / invalid time、environment、steady state、fault、abort、recovery lifecycleが不整合。 |
 | DQ-19 | 同一execution identityまたはlatest instantのevidenceが異なるdecision fingerprintを持ち、選択が曖昧。 |

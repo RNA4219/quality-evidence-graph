@@ -1,7 +1,7 @@
 {
   "id": "docs/project/cli-boundary-fixes-2026-09-11.md",
   "role": "cli-boundary-fixes-2026-09-11",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "R8〜R13のpath/discovery/baseline/diff/配布診断を共通matrixで修正・検証し、source CIへ結び付ける受入単位。",
   "deps_out": [

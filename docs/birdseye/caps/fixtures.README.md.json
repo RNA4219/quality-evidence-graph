@@ -18,6 +18,6 @@
     "npm run validate -- fixtures/negative-producer-check-stale-sha",
     "schema JSON parse"
   ],
-  "generation": "00021",
-  "contentHash": "sha256:1714ca4c5269d72c2688f45fb7889535727f3d221e83e913aea302a52c68b3f5"
+  "generation": "00022",
+  "contentHash": "sha256:401113fa2fc5e64ba5d1b86058ae6a54a482b931ed1023c55634778efc0c569d"
 }

@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/gate-policy.md",
   "role": "ipo-gate-policy-spec",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "ipo_controlledのGate policy、基本DQ-01〜DQ-17、reliability DQ-18〜DQ-21、exit code、verdict優先順位、waiver境界を固定する。",
   "deps_out": [
@@ -21,5 +21,5 @@
     "npm run enum-check",
     "npm run test:fixtures"
   ],
-  "contentHash": "sha256:8babf394f38eb1f55a64a2acf603cde0e62971aa8568a3c6e39c2a71db521ff6"
+  "contentHash": "sha256:1becf890a9a7e94fa36f4aadb31e1770b6dd3f2973e95de72717180edfbffb45"
 }

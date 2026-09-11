@@ -1,0 +1,117 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [
+        {
+          "code": "DQ-03",
+          "count": 1,
+          "remediation": "Replace gate-relevant unsupported claims with source-backed evidence or mark them non-gate-relevant."
+        }
+      ],
+      "blockerCount": 0,
+      "residualRiskCount": 0,
+      "humanReviewCount": 0
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-placement-layer-mismatch",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "disqualified",
+        "reasons": [
+          "Disqualified: 1 DQ code(s)",
+          "- DQ-03: Placement \"qeg:manual-placement\" layer disagrees with selected test \"qeg:manual-test\""
+        ],
+        "disqualifications": [
+          {
+            "code": "DQ-03",
+            "message": "Placement \"qeg:manual-placement\" layer disagrees with selected test \"qeg:manual-test\"",
+            "nodeIds": [
+              "qeg:manual-placement",
+              "qeg:manual-test"
+            ],
+            "sourceRefs": [
+              {
+                "id": "qeg:input-%2FplacementPlan%2Fplacements%2F0",
+                "path": "gate-input.json",
+                "label": "/placementPlan/placements/0: Placement \"qeg:manual-placement\" layer disagrees with selected test \"qeg:manual-test\""
+              }
+            ]
+          }
+        ],
+        "blockers": [],
+        "residualRisks": [],
+        "requiredHumanReview": [],
+        "reliability": {
+          "enabled": false
+        },
+        "executionAccounting": {
+          "evaluatedAt": "2026-06-03T04:00:00.000Z",
+          "target": {
+            "projectId": "synthetic-eac",
+            "buildId": "synthetic-build-1",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "synthetic-ci"
+          },
+          "selections": [
+            {
+              "testId": "qeg:manual-test",
+              "selectedEvidenceId": "qeg:eac-execution-0",
+              "selectedRunId": "synthetic-run-0",
+              "selectedStatus": "pass",
+              "reason": "latest_qualified_execution",
+              "consecutivePasses": 1,
+              "excluded": []
+            }
+          ]
+        },
+        "expected": {
+          "fixture": "negative-placement-layer-mismatch",
+          "expectedVerdict": "disqualified",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/governance-consistency.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [
+            "DQ-03"
+          ],
+          "actualDqCodes": [
+            "DQ-03"
+          ],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [],
+          "actualBlockerIds": []
+        }
+      }
+    ]
+  }
+}

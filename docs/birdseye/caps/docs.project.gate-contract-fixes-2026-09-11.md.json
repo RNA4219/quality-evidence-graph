@@ -1,7 +1,7 @@
 {
   "id": "docs/project/gate-contract-fixes-2026-09-11.md",
   "role": "gate-contract-fixes-2026-09-11",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "R14〜R19の配置coverage・手動oracle・raw status・waiver・snapshotをまとめて修正し、共通matrixとsource CIで受入を管理。",
   "deps_out": [

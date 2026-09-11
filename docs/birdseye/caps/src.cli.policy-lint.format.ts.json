@@ -1,7 +1,7 @@
 {
   "id": "src/cli/policy-lint/format.ts",
   "role": "format",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 format の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

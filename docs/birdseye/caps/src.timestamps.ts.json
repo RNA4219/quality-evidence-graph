@@ -1,0 +1,22 @@
+{
+  "id": "src/timestamps.ts",
+  "role": "timestamps",
+  "generation": "00022",
+  "public_api": [],
+  "summary": "QEG 0.4.0 timestamps の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "docs/spec/governance-consistency.md",
+    "src/gate/evaluate.ts",
+    "src/gate/execution/contracts.ts",
+    "src/gate/waivers.ts",
+    "src/validation/schema.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:01902a2bf172b6e3b1209ff18689f7458252bd4e5f8705afd35156f07c6ac210"
+}

@@ -16,20 +16,20 @@ import { evaluateRequiredExecutions } from "./dq/placement-coverage.js";
 import { sourceDiagnostics } from "./diagnostics.js";
 import { upstreamDecisions } from "./upstream.js";
 import { evaluateExecutions } from "./execution/evaluator.js";
+import { timestampNanos } from "../timestamps.js";
 
 export function evaluateGate(input: GateEvaluationInput): GateResult {
   // A Gate must be reproducible.  The evaluation clock is the recorded QEG
   // creation time, never the machine clock of the evaluator.
-  const executionMs = Date.parse(input.metadata.createdAt);
-  const clockDqs: Disqualification[] = Number.isFinite(executionMs) ? [] : [{
+  const executionNanos = timestampNanos(input.metadata.createdAt);
+  const clockDqs: Disqualification[] = executionNanos !== undefined ? [] : [{
     code: "DQ-01",
     message: `metadata.createdAt is not a parseable evaluation clock: ${input.metadata.createdAt}`,
     nodeIds: [],
     sourceRefs: [{ id: "qeg:evaluation-clock", path: "docs/spec/reliability-extension.md" }],
   }];
-  const executionTime = new Date(executionMs);
-  const validWaivers = Number.isFinite(executionMs) ? input.waivers.filter(
-    (waiver) => validateWaiver(waiver, input.graph, executionTime).valid
+  const validWaivers = executionNanos !== undefined ? input.waivers.filter(
+    (waiver) => validateWaiver(waiver, input.graph, input.metadata.createdAt).valid
   ) : [];
   const context = createGateEvaluationContext({
     ...input,

@@ -1,7 +1,7 @@
 {
   "id": "schemas/test-placement-plan.schema.json",
   "role": "schema",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -16,5 +16,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:db7ff07b16f786f5272b1aeadb4e89079e3bdb37e7cb8d2c7bd9c9ccbe705ef1"
+  "contentHash": "sha256:9fa71f2582796ad86f9d3acd6ed2e3ea34eabe534be9a72d1b8ae627d61f8c23"
 }

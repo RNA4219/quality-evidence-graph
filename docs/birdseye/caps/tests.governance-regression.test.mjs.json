@@ -1,0 +1,21 @@
+{
+  "id": "tests/governance-regression.test.mjs",
+  "role": "governance-regression.test",
+  "generation": "00022",
+  "public_api": [],
+  "summary": "QEG 0.4.0 governance-regression.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/cli-boundary-matrix.mjs",
+    "tests/helpers/governance-matrix.mjs"
+  ],
+  "deps_in": [
+    "docs/project/governance-fixes-2026-09-11.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:fd3d9f4233d577a8a5d0a44396ea1e888d459bb970d5d494252bc2e0cab66ece"
+}

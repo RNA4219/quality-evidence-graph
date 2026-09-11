@@ -1,7 +1,7 @@
 {
   "id": "docs/requirements.md",
   "role": "requirements",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 requirements の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -10,9 +10,11 @@
     "docs/ipo-controlled-profile.md",
     "docs/project/evidence-acceptance-status.md",
     "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/project/governance-fixes-2026-09-11.md",
     "docs/project/tasks.codex.md",
     "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/gate-contract-consistency.md",
+    "docs/spec/governance-consistency.md",
     "docs/spec/index.md",
     "docs/spec/operational-cli-extensions.md",
     "docs/spec/reliability-extension.md",
@@ -46,7 +48,8 @@
     "docs/release/acceptance-2026-07-20.md",
     "docs/research/quality-evidence-graph-requirements-report.md",
     "docs/spec/evidence-acceptance-standard.md",
-    "docs/spec/gate-contract-consistency.md"
+    "docs/spec/gate-contract-consistency.md",
+    "docs/spec/governance-consistency.md"
   ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
@@ -54,5 +57,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:b627d832cacefbfd8f6fdb69a4721068dfd59dace75ee0eb3418311caa2b997e"
+  "contentHash": "sha256:e94fb1464213bcb6a3c7cd165ce7c827f18dc3b4e1826447bb05703634fba245"
 }

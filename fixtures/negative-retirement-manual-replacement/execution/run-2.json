@@ -1,0 +1,21 @@
+{
+  "executionVersion": "qeg-execution/v1",
+  "testId": "hate:AETE-login-001",
+  "identity": {
+    "producer": "qeg-native",
+    "projectId": "synthetic-eac",
+    "featureId": "synthetic-feature",
+    "caseId": "hate:AETE-login-001"
+  },
+  "producerVersion": "synthetic-contract-v1",
+  "target": {
+    "projectId": "synthetic-eac",
+    "buildId": "synthetic-build-1",
+    "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "environmentId": "synthetic-ci"
+  },
+  "runId": "synthetic-run-2",
+  "completedAt": "2026-07-01T23:59:58.000Z",
+  "status": "pass",
+  "executionMode": "real"
+}

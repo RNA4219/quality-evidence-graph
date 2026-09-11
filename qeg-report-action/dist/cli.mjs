@@ -18792,6 +18792,25 @@ function validateReliabilitySemantics(raw) {
   );
 }
 
+// src/timestamps.ts
+function timestampMillis(value) {
+  if (typeof value !== "string") return NaN;
+  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?(Z|[+-]\d{2}:\d{2})$/.exec(value);
+  if (!m) return NaN;
+  const [, y, mo, d, h, mi, s, , tz] = m;
+  const year = Number(y);
+  const days = [31, year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][Number(mo) - 1] ?? 0;
+  if (+mo < 1 || +mo > 12 || +d < 1 || +d > days || +h > 23 || +mi > 59 || +s > 59) return NaN;
+  if (tz !== "Z" && (Number(tz.slice(1, 3)) > 23 || Number(tz.slice(4, 6)) > 59)) return NaN;
+  return Date.parse(value);
+}
+function timestampNanos(value) {
+  const milliseconds = timestampMillis(value);
+  if (!Number.isFinite(milliseconds)) return void 0;
+  const fraction = /\.(\d{1,9})(?:Z|[+-]\d{2}:\d{2})$/.exec(String(value))?.[1] ?? "";
+  return BigInt(milliseconds) * 1000000n + BigInt(fraction.padEnd(9, "0").slice(3));
+}
+
 // src/validation/schema.ts
 var DEFAULT_SCHEMA_DIR = fileURLToPath(new URL("../../schemas/", import.meta.url));
 var defaultRegistry;
@@ -18815,7 +18834,8 @@ async function schemaFiles(schemaDir) {
 async function loadSchemaRegistry(schemaDir = DEFAULT_SCHEMA_DIR) {
   if (schemaDir === DEFAULT_SCHEMA_DIR && defaultRegistry) return defaultRegistry;
   const load = (async () => {
-    const ajv = new import__2.Ajv2020({ allErrors: true, strict: false, validateFormats: false });
+    const ajv = new import__2.Ajv2020({ allErrors: true, strict: false });
+    ajv.addFormat("date-time", { type: "string", validate: (value) => timestampNanos(value) !== void 0 });
     const schemas = /* @__PURE__ */ new Map();
     for (const file of await schemaFiles(schemaDir)) {
       const schema = JSON.parse(await readFile(file, "utf-8"));
@@ -19896,10 +19916,11 @@ function detectDQ15(input) {
   ].filter((d) => d !== null);
 }
 function detectDQ16(input) {
-  if (input.evidencePackage?.retention.storageClassification === "mutable") {
+  const classification = input.evidencePackage?.retention.storageClassification;
+  if (classification === "mutable" || classification === "unknown") {
     return {
       code: "DQ-16",
-      message: "Evidence used for release judgment exists only in silent-overwrite capable storage",
+      message: classification === "unknown" ? "Evidence storage immutability is unknown; release judgment requires a verified storage classification" : "Evidence used for release judgment exists only in silent-overwrite capable storage",
       nodeIds: [],
       sourceRefs: [SR_DQ_16]
     };
@@ -19908,7 +19929,8 @@ function detectDQ16(input) {
 }
 function detectDQ17(input) {
   if (input.metadata.profile !== "ipo_controlled") return [];
-  if (!input.evidencePackage || !input.evidencePackage.controlRoles) {
+  const roles = input.evidencePackage?.controlRoles;
+  if (!roles || [roles.producer, roles.reviewer, roles.approver, roles.waiverApprover, roles.releaseOwner].some((role) => typeof role !== "string" || role.trim() === "")) {
     return [
       {
         code: "DQ-17",
@@ -19998,6 +20020,16 @@ function detectPlacementChangeRetirementGaps(input) {
     const sourceRefs = sourceRefsForPlacementChange(input, change.evidence_refs);
     const isRetirement = isManualLayer(change.from_layer) && change.to_layer === "automated";
     if (!isRetirement) continue;
+    const subject = knownTests.get(change.subject_id);
+    if (!subject || subject.layer !== change.from_layer || change.policy_ref !== input.policy.policyId) {
+      disqualifications.push({
+        code: "DQ-14",
+        message: `Placement change "${change.id}" has an inconsistent manual subject or policy reference`,
+        nodeIds: [change.id, change.subject_id, change.policy_ref],
+        sourceRefs
+      });
+      continue;
+    }
     if (change.evidence_refs.length === 0) {
       disqualifications.push({
         code: "DQ-14",
@@ -20029,6 +20061,9 @@ function detectPlacementChangeRetirementGaps(input) {
       continue;
     }
     const concreteReplacementTests = replacementTests.filter((test) => test !== void 0);
+    const invalidReplacement = concreteReplacementTests.length === 0 || concreteReplacementTests.some(
+      (test) => !["unit", "integration", "system", "e2e"].includes(test.layer) || !input.graph.edges.some((edge2) => edge2.kind === "replaced_by" && edge2.from === change.subject_id && edge2.to === test.id)
+    );
     const hasMockEvidence = concreteReplacementTests.some(
       (test) => !isGateEligibleTestEvidence(test)
     );
@@ -20044,6 +20079,13 @@ function detectPlacementChangeRetirementGaps(input) {
         code: "DQ-14",
         message: `Placement change "${change.id}" is a revert candidate: ${reason}`,
         nodeIds: [change.id, change.subject_id, ...change.replacement_ids, ...requiredRiskIds],
+        sourceRefs
+      });
+    } else if (invalidReplacement && !isRestored(input, change.subject_id)) {
+      disqualifications.push({
+        code: "DQ-14",
+        message: `Placement change "${change.id}" requires automated replacements linked by replaced_by`,
+        nodeIds: [change.id, change.subject_id, ...change.replacement_ids],
         sourceRefs
       });
     }
@@ -21199,7 +21241,7 @@ function evaluateReliability(input) {
 }
 
 // src/gate/waivers.ts
-function validateWaiver(waiver, graph, executionTime3) {
+function validateWaiver(waiver, graph, executionTime2) {
   const reasons = [];
   const riskIds = new Set(
     graph.nodes.filter((node) => node.kind === "risk").map((node) => node.id)
@@ -21218,8 +21260,10 @@ function validateWaiver(waiver, graph, executionTime3) {
   if (!waiver.sourceRefs || waiver.sourceRefs.length === 0) {
     reasons.push("sourceRefs is empty (minimum 1 required)");
   }
-  if (!Number.isFinite(Date.parse(waiver.expiry)) || new Date(waiver.expiry) <= executionTime3) {
-    reasons.push(`expiry "${waiver.expiry}" is past execution time`);
+  const expiry = timestampNanos(waiver.expiry);
+  const clock = executionTime2 instanceof Date ? Number.isFinite(executionTime2.valueOf()) ? BigInt(executionTime2.valueOf()) * 1000000n : void 0 : timestampNanos(executionTime2);
+  if (expiry === void 0 || clock === void 0 || expiry <= clock) {
+    reasons.push(`expiry "${waiver.expiry}" is invalid or not after the evaluation time`);
   }
   if (!waiver.impactScope || waiver.impactScope.trim() === "") {
     reasons.push("impactScope is empty");
@@ -21261,6 +21305,14 @@ function detectGraphIntegrity(input) {
       issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
     }
   };
+  const checkPlacementLayer = (placement, pointer) => {
+    for (const id of placement.selectedTestIds) {
+      const test = nodes.get(id);
+      if (test?.kind === "test" && test.layer !== placement.primaryLayer) {
+        issue(pointer, `Placement "${placement.id}" layer disagrees with selected test "${id}"`, [placement.id, id]);
+      }
+    }
+  };
   for (const [index, edge2] of input.graph.edges.entries()) resolve16([edge2.from, edge2.to], void 0, `/graph/edges/${index}`);
   const artifacts = new Set(input.metadata.inputArtifacts.map((a) => a.id));
   for (const [index, node] of input.graph.nodes.entries()) {
@@ -21282,6 +21334,7 @@ function detectGraphIntegrity(input) {
   for (const [index, node] of input.graph.nodes.entries()) if (node.kind === "test_placement") {
     const pointer = `/graph/nodes/${index}`;
     resolve16(node.selectedTestIds, "test", pointer);
+    checkPlacementLayer(node, pointer);
     if (!input.placementPlan?.obligations.some((o) => o.id === node.obligationId)) {
       issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
     }
@@ -21306,6 +21359,7 @@ function detectGraphIntegrity(input) {
     const pointer = `/placementPlan/placements/${index}`;
     if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
     resolve16(placement.selectedTestIds, "test", pointer);
+    checkPlacementLayer(placement, pointer);
   }
   return result;
 }
@@ -21373,23 +21427,6 @@ function validPolicy(v) {
 function validExecution(v) {
   return Boolean(v && v.executionVersion === "qeg-execution/v1" && validIdentity(v.identity) && validTarget(v.target) && [v.testId, v.producerVersion, v.runId].every(nonblank) && validRef(v.rawArtifactRef) && ["pass", "fail", "skipped", "blocked", "cancelled", "unknown", "running"].includes(v.status) && ["real", "mock"].includes(v.executionMode) && (v.historySourceRefs === void 0 || validSources(v.historySourceRefs)));
 }
-function executionTime(value) {
-  if (typeof value !== "string") return NaN;
-  const m = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2}):(\d{2})(?:\.(\d{1,9}))?(Z|[+-]\d{2}:\d{2})$/.exec(value);
-  if (!m) return NaN;
-  const [, y, mo, d, h, mi, s, , tz] = m;
-  const year = Number(y);
-  const days = [31, year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0) ? 29 : 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31][Number(mo) - 1] ?? 0;
-  if (+mo < 1 || +mo > 12 || +d < 1 || +d > days || +h > 23 || +mi > 59 || +s > 59) return NaN;
-  if (tz !== "Z" && (Number(tz.slice(1, 3)) > 23 || Number(tz.slice(4, 6)) > 59)) return NaN;
-  return Date.parse(value);
-}
-function executionNanos(value) {
-  const milliseconds = executionTime(value);
-  if (!Number.isFinite(milliseconds)) return void 0;
-  const fraction = /\.(\d{1,9})(?:Z|[+-]\d{2}:\d{2})$/.exec(String(value))?.[1] ?? "";
-  return BigInt(milliseconds) * 1000000n + BigInt(fraction.padEnd(9, "0").slice(3));
-}
 function normalTests(input) {
   return input.graph.nodes.filter((n) => n.kind === "test" && n.testType !== "resilience").sort(compareId);
 }
@@ -21409,7 +21446,7 @@ function executionFingerprint(input) {
 }
 
 // src/gate/execution/selection.ts
-var executionTime2 = (value) => executionNanos(value);
+var executionTime = (value) => timestampNanos(value);
 function decision2(node) {
   const { rawArtifactRef, ...meaning } = node.execution;
   return { ...meaning, rawArtifactRef: { contentHash: rawArtifactRef.contentHash, revision: rawArtifactRef.revision } };
@@ -21426,21 +21463,21 @@ function selectLatest(testId, candidates, evaluatedAt, maxAge, excluded = []) {
     } else byRun.set(run.runId, node);
   }
   const ordered2 = [...byRun.values()].sort((a, b) => {
-    const left = executionTime2(a.execution.completedAt), right = executionTime2(b.execution.completedAt);
+    const left = executionTime(a.execution.completedAt), right = executionTime(b.execution.completedAt);
     return left === right ? 0 : left > right ? -1 : 1;
   });
   const latest = ordered2[0];
   if (!latest) return empty("EAC-06 no current execution");
-  const time = executionTime2(latest.execution.completedAt);
-  if (ordered2[1] && time === executionTime2(ordered2[1].execution.completedAt)) return empty("EAC-03 ambiguous latest completion time");
+  const time = executionTime(latest.execution.completedAt);
+  if (ordered2[1] && time === executionTime(ordered2[1].execution.completedAt)) return empty("EAC-03 ambiguous latest completion time");
   if (evaluatedAt - time > maxAge) return empty("EAC-02 latest execution is stale");
   let consecutivePasses = 0;
   for (let i = 0; i < ordered2.length; i++) {
     const current = ordered2[i];
     const detail = current.execution;
-    const t = executionTime2(detail.completedAt);
+    const t = executionTime(detail.completedAt);
     if (i > 0) excluded.push({ evidenceId: current.id, reason: evaluatedAt - t > maxAge ? "superseded_stale" : "superseded" });
-    if (consecutivePasses === i && detail.status === "pass" && evaluatedAt - t <= maxAge && !(ordered2[i + 1] && t === executionTime2(ordered2[i + 1].execution.completedAt))) consecutivePasses++;
+    if (consecutivePasses === i && detail.status === "pass" && evaluatedAt - t <= maxAge && !(ordered2[i + 1] && t === executionTime(ordered2[i + 1].execution.completedAt))) consecutivePasses++;
   }
   return { selection: {
     testId,
@@ -21484,7 +21521,7 @@ function evaluateExecutions(input) {
     return result();
   }
   if (policy.target.revision !== input.metadata.headRef || policy.target.revision !== input.graph.metadata.headRef || policy.buildBindingRef.revision !== policy.target.revision) add2("DQ-12", "EAC-01 policy, build binding and Gate revisions disagree", []);
-  const now = executionNanos(input.metadata.createdAt);
+  const now = timestampNanos(input.metadata.createdAt);
   if (now === void 0) add2("DQ-05", "EAC-02 invalid evaluation clock (timezone and valid calendar required)", []);
   if (input.evidenceVerification?.executionFingerprint !== executionFingerprint(input) || input.evidenceVerification?.status === "fail") {
     add2("DQ-06", "EAC-05 verified artifacts and matching execution fingerprint are required", evidence.map((e) => e.id));
@@ -21522,13 +21559,13 @@ function evaluateExecutions(input) {
       if (!same(detail.target, policy.target) || detail.identity.projectId !== policy.target.projectId || detail.rawArtifactRef.revision !== policy.target.revision) {
         add2("DQ-12", "EAC-01 execution target differs from Gate target", [node.id]);
       }
-      const completed = executionNanos(detail.completedAt);
+      const completed = timestampNanos(detail.completedAt);
       if (completed === void 0 || now === void 0 || completed > now) add2("DQ-05", "EAC-02 invalid or future completion time", [node.id]);
       if (detail.executionMode !== "real") add2("DQ-05", "EAC-06 mock execution cannot qualify", [node.id]);
       if (node.passed !== void 0 && (detail.status !== "pass" && detail.status !== "fail" || node.passed !== (detail.status === "pass"))) {
         add2("DQ-03", "EAC-03 passed flag contradicts execution status", [node.id]);
       }
-      if (!node.evidenceRefs.length || node.evidenceRefs.some((ref) => !validRef(ref) || ref.revision !== detail.target.revision || ref.evidenceKind === "test_result" && executionNanos(ref.capturedAt) !== completed)) {
+      if (!node.evidenceRefs.length || node.evidenceRefs.some((ref) => !validRef(ref) || ref.revision !== detail.target.revision || ref.evidenceKind === "test_result" && timestampNanos(ref.capturedAt) !== completed)) {
         add2("DQ-06", "EAC-05 execution evidence refs need matching revision, hash and capture time", [node.id]);
       }
       if (detail.identity.producer === "manual-bb-test-harness") {
@@ -21573,16 +21610,15 @@ function evaluateExecutions(input) {
 
 // src/gate/evaluate.ts
 function evaluateGate(input) {
-  const executionMs = Date.parse(input.metadata.createdAt);
-  const clockDqs = Number.isFinite(executionMs) ? [] : [{
+  const executionNanos = timestampNanos(input.metadata.createdAt);
+  const clockDqs = executionNanos !== void 0 ? [] : [{
     code: "DQ-01",
     message: `metadata.createdAt is not a parseable evaluation clock: ${input.metadata.createdAt}`,
     nodeIds: [],
     sourceRefs: [{ id: "qeg:evaluation-clock", path: "docs/spec/reliability-extension.md" }]
   }];
-  const executionTime3 = new Date(executionMs);
-  const validWaivers = Number.isFinite(executionMs) ? input.waivers.filter(
-    (waiver) => validateWaiver(waiver, input.graph, executionTime3).valid
+  const validWaivers = executionNanos !== void 0 ? input.waivers.filter(
+    (waiver) => validateWaiver(waiver, input.graph, input.metadata.createdAt).valid
   ) : [];
   const context = createGateEvaluationContext({
     ...input,

@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00021";
+const generation = "00022";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,8 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/project/governance-fixes-2026-09-11.md", "docs/spec/governance-consistency.md", "docs/evidence/governance-fixes-2026-09-11/validation.json",
+  "tests/governance-regression.test.mjs", "tests/helpers/governance-matrix.mjs",
   "docs/project/gate-contract-fixes-2026-09-11.md", "docs/spec/gate-contract-consistency.md", "docs/evidence/gate-contract-fixes-2026-09-11/validation.json",
   "tests/gate-contract-regression.test.mjs", "tests/helpers/gate-contract-matrix.mjs",
   "docs/project/cli-boundary-fixes-2026-09-11.md", "docs/evidence/cli-boundary-fixes-2026-09-11/validation.json",
@@ -340,6 +342,17 @@ Object.assign(additions["docs/spec/gate-contract-consistency.md"], {
 for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md", "docs/requirements.md", "docs/spec/index.md"]) {
   const previous = additions[path] ?? index.nodes[path];
   additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/gate-contract-consistency.md", "docs/project/gate-contract-fixes-2026-09-11.md"])] };
+}
+Object.assign(additions["docs/project/governance-fixes-2026-09-11.md"], {
+  summary: "R20〜R24の配置実体・引退・厳密な時刻・IPO役割・保管方式を共通matrixで検証する受入台帳。",
+  depsOut: ["docs/spec/governance-consistency.md", "docs/evidence/governance-fixes-2026-09-11/validation.json", "tests/governance-regression.test.mjs", "tests/helpers/governance-matrix.mjs"],
+});
+Object.assign(additions["docs/spec/governance-consistency.md"], {
+  depsOut: ["docs/requirements.md", "src/gate/dq/graph-integrity.ts", "src/gate/dq/placement-change.ts", "src/gate/dq/ipo.ts", "src/gate/waivers.ts", "src/timestamps.ts", "src/validation/schema.ts", "schemas/shared-defs.schema.json", "tests/helpers/governance-matrix.mjs"],
+});
+for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md", "docs/requirements.md", "docs/spec/index.md", "docs/project/evidence-acceptance-status.md"]) {
+  const previous = additions[path] ?? index.nodes[path];
+  additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/governance-consistency.md", "docs/project/governance-fixes-2026-09-11.md"])] };
 }
 const knownPaths = new Set([...Object.keys(index.nodes), ...Object.keys(additions)]);
 for (const path of currentPaths.filter(p => /\.(ts|mjs)$/.test(p))) {

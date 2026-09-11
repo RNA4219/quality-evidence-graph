@@ -32,7 +32,7 @@ next_review_due: 2026-07-03
 | append_only | release 判定に利用可能。 |
 | versioned | revision と hash が一致する場合だけ利用可能。 |
 | mutable | 補助情報としてのみ利用可能。release 判定の唯一根拠にはできない。 |
-| unknown | DQ-16 候補。 |
+| unknown | DQ-16。保管方式を確認した新入力で再評価するまでrelease判定へ利用しない。 |
 
 silent overwrite 可能な保管先だけに存在する evidence を release 判定の根拠にした場合は DQ-16 とする。
 

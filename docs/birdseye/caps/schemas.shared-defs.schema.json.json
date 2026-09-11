@@ -1,7 +1,7 @@
 {
   "id": "schemas/shared-defs.schema.json",
   "role": "schema",
-  "generation": "00021",
+  "generation": "00022",
   "public_api": [],
   "summary": "QEG 0.4.0 schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -10,6 +10,7 @@
     "schemas/test-placement-plan.schema.json"
   ],
   "deps_in": [
+    "docs/spec/governance-consistency.md",
     "docs/spec/reliability-extension.md",
     "src/types.ts"
   ],
@@ -19,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:7d61104f46aed9d4febf2ad9604c3fa9b7cccf07e549b09a93ae6d4ec1980ad2"
+  "contentHash": "sha256:9735e4ac2b9679a05dda8a9692ea8bdd6356523ee6b574d571369726cf1f41eb"
 }

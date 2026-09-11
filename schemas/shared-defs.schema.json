@@ -11,6 +11,7 @@
     },
     "isoDateTime": {
       "type": "string",
+      "description": "実在する暦日・明示timezoneを持つ日時。小数秒は1〜9桁を保持する。",
       "format": "date-time"
     },
     "confidence": {
@@ -249,11 +250,11 @@
       "required": ["producer", "reviewer", "approver", "waiverApprover", "releaseOwner"],
       "additionalProperties": false,
       "properties": {
-        "producer": { "type": "string", "minLength": 1 },
-        "reviewer": { "type": "string", "minLength": 1 },
-        "approver": { "type": "string", "minLength": 1 },
-        "waiverApprover": { "type": "string", "minLength": 1 },
-        "releaseOwner": { "type": "string", "minLength": 1 }
+        "producer": { "type": "string", "minLength": 1, "pattern": "\\S" },
+        "reviewer": { "type": "string", "minLength": 1, "pattern": "\\S" },
+        "approver": { "type": "string", "minLength": 1, "pattern": "\\S" },
+        "waiverApprover": { "type": "string", "minLength": 1, "pattern": "\\S" },
+        "releaseOwner": { "type": "string", "minLength": 1, "pattern": "\\S" }
       }
     },
     "evidenceRef": {
