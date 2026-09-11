@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-FOLLOWUP-FIXES-20260911
 owner: quality-evidence-graph
-status: implemented
+status: accepted
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -19,6 +19,6 @@ PR #10のmerge commit `e42359872f51d9d1bb1251325fa67d0040b0a6ed`に対する追�
 
 試験は[followup-regression](../../tests/followup-regression.test.mjs)。追加21 test nodes（親test/subtestを含む）を既存runtime suiteへ組み込んだ。通常の出力修復でnative入力を戻さない運用変更は[復旧契約](../spec/output-publication-and-migration.md)、差分検査とbundleの変更は[CLI契約](../spec/operational-cli-extensions.md)に定義する。
 
-現時点は実装と追加21件のローカル検証まで完了。全体回帰とLinux Node20/24・Windows Node24 CIを[validation.json](../evidence/followup-fixes-2026-09-11/validation.json)へ固定してから受入を確定する。元のレビューと4ケース実測はworkspaceの`artifacts/qeg-postmerge-review-20260911/`に保持する。
+R5〜R7を受入済み。source commit `f89e82219d80eff5e2085a73194915e992942483`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34552047197)はLinux Node20/24・Windows Node24の3job全step成功。[validation.json](../evidence/followup-fixes-2026-09-11/validation.json)にruntime tree、186 runtime tests・53 fixtures・Action lifecycle・型・schema・JSON・Birdseyeの検証を固定した。元のレビューと4ケース実測はworkspaceの`artifacts/qeg-postmerge-review-20260911/`に保持する。
 
 wire 0.2、未公開0.4.0、producer原本と過去のhash付き受入記録は維持する。今回の受入範囲は上記3系統と既存suiteの回帰であり、repository全体の無欠陥、本番deploy、人手QA、電源断やnetwork filesystemの耐久性を主張しない。

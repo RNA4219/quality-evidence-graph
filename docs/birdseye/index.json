@@ -2214,7 +2214,7 @@
         "文書のEAC/TC対応・リンク確認"
       ],
       "mtime": "00019",
-      "contentHash": "sha256:8eff6004e389becf6d0e839dd5cb069542bec6d407c2473bdd7b18f6afc788f9"
+      "contentHash": "sha256:e6621e31eda052222c36b9db623155f3e35224622117ff29425306fd9aab3fc5"
     },
     "docs/project/evidence-acceptance-status.md": {
       "role": "evidence-acceptance-ledger",
@@ -2238,7 +2238,7 @@
         "npm run json-check"
       ],
       "mtime": "00019",
-      "contentHash": "sha256:1d3544c5a5907070b83a6452219fb24c690846214ad5a0174a3ae7b72daa639f"
+      "contentHash": "sha256:907d90902b64ebc062b469e7f5314bef18bc85b37802e6c1dec7ad6c9993a0d4"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2374,7 +2374,7 @@
       "role": "output-publication-and-migration",
       "caps": "docs/birdseye/caps/docs.spec.output-publication-and-migration.md.json",
       "mtime": "00019",
-      "contentHash": "sha256:1b8642f7aa210a3ed1ddbb95d187e2ad8209716209f74b5087f441da6e713196"
+      "contentHash": "sha256:776beb9dd795f9d3d72adfa9b336ef932b325e067f39688a8afa1ed245e1815a"
     },
     "docs/evidence/eac-completion-2026-09-10/validation.json": {
       "role": "validation",
@@ -2558,13 +2558,13 @@
         "docs/spec/operational-cli-extensions.md"
       ],
       "mtime": "00019",
-      "contentHash": "sha256:21a3e186a2150b8421bce99b5a565625757aaf515c1370a13c517b584065b592"
+      "contentHash": "sha256:26008131ce0936d9fbb52abb632c630d760c655b3a4bbf8243ac129a030fa237"
     },
     "docs/evidence/followup-fixes-2026-09-11/validation.json": {
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.followup-fixes-2026-09-11.validation.json.json",
       "mtime": "00019",
-      "contentHash": "sha256:e850b774fe7453d751e6b841577d6eb9f99b30666efc42648f7889c25710da98"
+      "contentHash": "sha256:13911e454209d48c87b61b6cb4a11d02eac46eec5bec3fc4936d30c5ddabdc2d"
     },
     "tests/followup-regression.test.mjs": {
       "role": "followup-regression.test",
