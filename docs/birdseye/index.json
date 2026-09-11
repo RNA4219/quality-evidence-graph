@@ -2268,7 +2268,7 @@
         "npm run json-check"
       ],
       "mtime": "00021",
-      "contentHash": "sha256:0703b7c8ef723dd62fc861c3a40151c531ec885e5fa15ac72ec23b53d964ba3d"
+      "contentHash": "sha256:c1b53ff16448f05c625b372f68a63d283083b6c43766463c130d85cbdadcbee7"
     },
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json": {
       "role": "pre-standard-observation-evidence",
@@ -2708,7 +2708,7 @@
         "schemas/waiver.schema.json"
       ],
       "mtime": "00021",
-      "contentHash": "sha256:98f40c7b4b7f5cad1a2aae9d2dd6ec33b7d2562325a7e57e0dbe4fc4f65d15b9"
+      "contentHash": "sha256:d6ba1979dda44ebfbebcf935187fde2de83736278cfd8971df16980a3f19c586"
     },
     "docs/spec/gate-contract-consistency.md": {
       "role": "gate-contract-consistency",
@@ -2732,7 +2732,7 @@
       "role": "validation",
       "caps": "docs/birdseye/caps/docs.evidence.gate-contract-fixes-2026-09-11.validation.json.json",
       "mtime": "00021",
-      "contentHash": "sha256:3162beccf373848e76a96ec09e059f3973355197dcb12212cd85ed30155975c9"
+      "contentHash": "sha256:cdd014f14e36d7b5d8c93e19d63d93fac9c99743c239828d2533d1ac1c5e5659"
     },
     "tests/gate-contract-regression.test.mjs": {
       "role": "gate-contract-regression.test",
