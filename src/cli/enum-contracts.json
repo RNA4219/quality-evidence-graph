@@ -1,0 +1,12 @@
+[
+  { "typeName": "GateProfile", "schemaDef": "gateProfile", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/shared-defs.schema.json" },
+  { "typeName": "GateVerdict", "schemaDef": "gateVerdict", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/shared-defs.schema.json" },
+  { "typeName": "DisqualificationCode", "schemaDef": "disqualificationCode", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/shared-defs.schema.json" },
+  { "typeName": "EvidenceKind", "schemaDef": "evidenceKind", "typeFile": "src/types/evidence.ts", "schemaFile": "schemas/shared-defs.schema.json" },
+  { "typeName": "TestType", "schemaDef": "testType", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/reliability.schema.json" },
+  { "typeName": "ResilienceAdapter", "schemaDef": "resilienceAdapter", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/reliability.schema.json" },
+  { "typeName": "ResilienceFaultModel", "schemaDef": "resilienceFaultModel", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/reliability.schema.json" },
+  { "typeName": "SignalPhase", "schemaDef": "signalPhase", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/reliability.schema.json" },
+  { "typeName": "SignalSemanticRole", "schemaDef": "signalSemanticRole", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/reliability.schema.json" },
+  { "typeName": "SignalAggregation", "schemaDef": "signalAggregation", "typeFile": "src/types/primitives.ts", "schemaFile": "schemas/reliability.schema.json" }
+]

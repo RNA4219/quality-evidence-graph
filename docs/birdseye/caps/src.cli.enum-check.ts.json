@@ -1,10 +1,13 @@
 {
   "id": "src/cli/enum-check.ts",
   "role": "enum-drift-cli",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 enum-drift-cli の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
+  "deps_out": [
+    "src/cli/distribution.ts",
+    "src/cli/enum-contracts.json"
+  ],
   "deps_in": [
     "docs/requirements.md",
     "docs/spec/operational-cli-extensions.md",
@@ -18,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:1a04578e936a9b3f61c04284234a01fba646f78a2726e886a7e982fa5f7b7dc0"
+  "contentHash": "sha256:46c3a7a120b302f930b86c3d83dbc9b8a82c47560a2361d8442fbe1514b177f5"
 }

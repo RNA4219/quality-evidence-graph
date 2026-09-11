@@ -15,9 +15,11 @@ export function relativeTarget(target: string): string {
   return portable(relative(process.cwd(), target));
 }
 async function isFixtureLikeDirectory(path: string): Promise<boolean> {
-  const input = await safeStat(join(path, "gate-input.json"));
-  const expected = await safeStat(join(path, "expected-gate-verdict.json"));
-  return Boolean(input?.isFile() || expected?.isFile());
+  // Managed consumers remain targets when their input has disappeared or is not a regular file.
+  for (const marker of ["gate-input.json", "expected-gate-verdict.json", "ingest-manifest.json", "qeg.bundle.json", "test-placement-plan.json", "output-manifest.json", "quality-evidence-record.json", "migration-report.json"]) {
+    if (await safeStat(join(path, marker))) return true;
+  }
+  return false;
 }
 
 async function collectChildFixtures(path: string, children: readonly Dirent[]): Promise<string[]> {

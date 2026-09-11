@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/evidence-acceptance-standard.md",
   "role": "defined-evidence-acceptance-standard",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "EAC-01〜12の対象・時計・最新実行・出力復旧・実接続・移行基準と25群の受入ケース。状態は受入単位ごとに台帳で管理。",
   "deps_out": [
@@ -29,5 +29,5 @@
     "npm run birdseye-check",
     "文書のEAC/TC対応・リンク確認"
   ],
-  "contentHash": "sha256:e6621e31eda052222c36b9db623155f3e35224622117ff29425306fd9aab3fc5"
+  "contentHash": "sha256:6c5d7aaadcdfc532cbc83271e9e79369efdd346e609d8d48acc670961b1708eb"
 }

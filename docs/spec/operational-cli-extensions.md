@@ -77,15 +77,20 @@ baseline は既知 DQ の移行補助であり、DQ を削除する仕組みで�
 - blocker、residual risk、required human review が残っている。
 - expected verdict / expected DQ との比較に失敗している。
 - baseline の target、code、message、nodeIds が current DQ と一致しない。
-- `baseline audit` で owner 未設定、期限切れ、target 消失、解消済み DQ と判定された。
+- schema不正、owner未設定/空白、期限切れ、不正日付、target消失がある。reportとauditは共通の適用資格判定を用いる。
+
+baselineは`report-baseline.schema.json`に従う。target省略だけを全対象への明示許容とし、指定時はcwdを基準に絶対pathへ正規化して完全一致させる。suffix一致は行わない。expiry省略はwarning、評価時点は読取り開始時の時計を使う。現在のDQと一致しない項目はaudit warningであり、reportでも何も許容しない。不適格baselineはreport-level `BASELINE_INVALID` / exit 1を返し、targetの評価と診断出力は継続する。
 
 ## 4.1 Report diff
 
 `report --diff <previous-report.json>` は前回 CI report と current report を比較し、`diff` field に次を出力する。
 
 - `new`: current report にだけ存在する DQ。
-- `resolved`: previous report にだけ存在する DQ。
+- `resolved`: 今回評価できた同じtargetで消えたDQ。入力DQ-01を含むtargetは解消の証明にしない。
 - `unchanged`: 両方に存在する DQ。
+- `unverified`: 前回DQのうち、targetが未選択なら`not_evaluated`、CLI error・verdict欠落・入力DQ-01なら`evaluation_failed`として解消未確認を記録する。
+
+JSON/text/GitHub SummaryとActionのsummary artifactでunverifiedを表示する。旧qeg-ci-report-v2にunverifiedがなくても読める。未選択targetを評価済みに昇格しない。
 
 比較 key は target、DQ code、message、nodeIds とする。absolute path は repo root を `<repo>` に正規化する。
 
@@ -94,13 +99,23 @@ baseline は既知 DQ の移行補助であり、DQ を削除する仕組みで�
 `--changed-only` は次の順に変更ファイルを取得する。
 
 1. `QEG_CHANGED_FILES`
-2. `git diff --name-only -z --no-renames --diff-filter=ACDMRTUXB origin/main...HEAD`
-3. `git diff --name-only -z --no-renames --diff-filter=ACDMRTUXB HEAD~1...HEAD`
+2. `git diff --name-only -z --no-relative --no-renames --diff-filter=ACDMRTUXB origin/main...HEAD`
+3. `git diff --name-only -z --no-relative --no-renames --diff-filter=ACDMRTUXB HEAD~1...HEAD`
 4. `git status --porcelain=v1 -z --untracked-files=all`（履歴を取得できない場合）
+
+Git取得pathは`git rev-parse --show-toplevel`を基準とし、QEG_CHANGED_FILESはcwd相対または絶対pathとする。targetはcwd相対または絶対path。絶対pathへ正規化して比較し、Windowsでは大文字小文字を同一視する。target相対artifact参照と既存workspace相対参照を保守的に照合する。
+
+変更選択・baseline・差分比較では、junction/symlinkやWindowsの短縮名を実体pathへ揃える。削除済みpathは最寄りの存在する祖先を解決して残りの相対部分を接続し、変更対象から落とさない。別々の実体directoryは同名でも一致させない。
+
+親指定のtarget discoveryはgate-input/expected verdictに加え、ingest-manifest、qeg.bundle、test-placement-plan、output-manifest、quality-evidence-record、migration-reportをconsumer markerとする。入力が欠落/ディレクトリでもmarkerがある子は評価へ渡し、無関係な子folderだけを除く。すべての識別markerを削除したfolderは自動識別できないため、その場合はtargetを明示する。
 
 対象 target は、target directory 自体、`metadata.inputArtifacts[].path`、または graph の `changed_code.path` が変更ファイルと一致した場合に評価対象になる。Gitの削除Dを含め、renameは旧pathの削除と新pathの追加として両端を収集する。NUL区切りを使い、空白・日本語・Gitのpath quotingで対応が失われることを防ぐ。
 
 入力は世代排他とschema検証を通して読む。欠落・不正JSON・schema違反・公開中・中断状態などで関連性を確定できない場合、そのtargetを通常評価へ回し、CLI errorまたはDQを累積する。正常に読み取れて無関係なtargetだけを除外する。確実に対象が0件なら空report / exit `0`。履歴も変更を含むworktreeも取得できなければ`detection_failed` / exit `1`。
+
+### 配布物とconsumer workspace
+
+QEG自身のCLI/schema/バージョン/Node要件は配布物の位置から解決し、workflowと実入力はconsumer側を調べる。build-actionは型のunionから`qeg-report-action/runtime-metadata.json`を生成し、package情報とenum検査データを同梱する。enum-checkはこの型由来データと同梱schemaを比較し、双方の空集合も失敗にする。srcを含まないtarballと、initがコピーしたruntimeでもdoctor/enum-check/check/repro-bundleが動作する。consumerの同名package.json/schemasはQEGの検査データとして使わない。
 
 ### Repro bundle の完全性
 

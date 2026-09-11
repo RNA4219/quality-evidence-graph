@@ -2981,22 +2981,22 @@ var require_compile = __commonJS({
       }
     }
     exports.compileSchema = compileSchema;
-    function resolveRef(root, baseId, ref) {
+    function resolveRef(root2, baseId, ref) {
       var _a;
       ref = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, ref);
-      const schOrFunc = root.refs[ref];
+      const schOrFunc = root2.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve15.call(this, root, ref);
+      let _sch = resolve16.call(this, root2, ref);
       if (_sch === void 0) {
-        const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
+        const schema = (_a = root2.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
         if (schema)
-          _sch = new SchemaEnv({ schema, schemaId, root, baseId });
+          _sch = new SchemaEnv({ schema, schemaId, root: root2, baseId });
       }
       if (_sch === void 0)
         return;
-      return root.refs[ref] = inlineOrCompile.call(this, _sch);
+      return root2.refs[ref] = inlineOrCompile.call(this, _sch);
     }
     exports.resolveRef = resolveRef;
     function inlineOrCompile(sch) {
@@ -3014,23 +3014,23 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve15(root, ref) {
+    function resolve16(root2, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
-      return sch || this.schemas[ref] || resolveSchema.call(this, root, ref);
+      return sch || this.schemas[ref] || resolveSchema.call(this, root2, ref);
     }
-    function resolveSchema(root, ref) {
+    function resolveSchema(root2, ref) {
       const p = this.opts.uriResolver.parse(ref);
       const refPath = (0, resolve_1._getFullPath)(this.opts.uriResolver, p);
-      let baseId = (0, resolve_1.getFullPath)(this.opts.uriResolver, root.baseId, void 0);
-      if (Object.keys(root.schema).length > 0 && refPath === baseId) {
-        return getJsonPointer.call(this, p, root);
+      let baseId = (0, resolve_1.getFullPath)(this.opts.uriResolver, root2.baseId, void 0);
+      if (Object.keys(root2.schema).length > 0 && refPath === baseId) {
+        return getJsonPointer.call(this, p, root2);
       }
       const id = (0, resolve_1.normalizeId)(refPath);
       const schOrRef = this.refs[id] || this.schemas[id];
       if (typeof schOrRef == "string") {
-        const sch = resolveSchema.call(this, root, schOrRef);
+        const sch = resolveSchema.call(this, root2, schOrRef);
         if (typeof (sch === null || sch === void 0 ? void 0 : sch.schema) !== "object")
           return;
         return getJsonPointer.call(this, p, sch);
@@ -3045,7 +3045,7 @@ var require_compile = __commonJS({
         const schId = schema[schemaId];
         if (schId)
           baseId = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, schId);
-        return new SchemaEnv({ schema, schemaId, root, baseId });
+        return new SchemaEnv({ schema, schemaId, root: root2, baseId });
       }
       return getJsonPointer.call(this, p, schOrRef);
     }
@@ -3057,7 +3057,7 @@ var require_compile = __commonJS({
       "dependencies",
       "definitions"
     ]);
-    function getJsonPointer(parsedRef, { baseId, schema, root }) {
+    function getJsonPointer(parsedRef, { baseId, schema, root: root2 }) {
       var _a;
       if (((_a = parsedRef.fragment) === null || _a === void 0 ? void 0 : _a[0]) !== "/")
         return;
@@ -3076,10 +3076,10 @@ var require_compile = __commonJS({
       let env;
       if (typeof schema != "boolean" && schema.$ref && !(0, util_1.schemaHasRulesButRef)(schema, this.RULES)) {
         const $ref = (0, resolve_1.resolveUrl)(this.opts.uriResolver, baseId, schema.$ref);
-        env = resolveSchema.call(this, root, $ref);
+        env = resolveSchema.call(this, root2, $ref);
       }
       const { schemaId } = this.opts;
-      env = env || new SchemaEnv({ schema, schemaId, root, baseId });
+      env = env || new SchemaEnv({ schema, schemaId, root: root2, baseId });
       if (env.schema !== env.root.schema)
         return env;
       return void 0;
@@ -3645,55 +3645,55 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve15(baseURI, relativeURI, options) {
+    function resolve16(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
       return serialize(resolved, schemelessOptions);
     }
-    function resolveComponent(base2, relative9, options, skipNormalization) {
+    function resolveComponent(base2, relative8, options, skipNormalization) {
       const target = {};
       if (!skipNormalization) {
         base2 = parse(serialize(base2, options), options);
-        relative9 = parse(serialize(relative9, options), options);
+        relative8 = parse(serialize(relative8, options), options);
       }
       options = options || {};
-      if (!options.tolerant && relative9.scheme) {
-        target.scheme = relative9.scheme;
-        target.userinfo = relative9.userinfo;
-        target.host = relative9.host;
-        target.port = relative9.port;
-        target.path = removeDotSegments(relative9.path || "");
-        target.query = relative9.query;
+      if (!options.tolerant && relative8.scheme) {
+        target.scheme = relative8.scheme;
+        target.userinfo = relative8.userinfo;
+        target.host = relative8.host;
+        target.port = relative8.port;
+        target.path = removeDotSegments(relative8.path || "");
+        target.query = relative8.query;
       } else {
-        if (relative9.userinfo !== void 0 || relative9.host !== void 0 || relative9.port !== void 0) {
-          target.userinfo = relative9.userinfo;
-          target.host = relative9.host;
-          target.port = relative9.port;
-          target.path = removeDotSegments(relative9.path || "");
-          target.query = relative9.query;
+        if (relative8.userinfo !== void 0 || relative8.host !== void 0 || relative8.port !== void 0) {
+          target.userinfo = relative8.userinfo;
+          target.host = relative8.host;
+          target.port = relative8.port;
+          target.path = removeDotSegments(relative8.path || "");
+          target.query = relative8.query;
         } else {
-          if (!relative9.path) {
+          if (!relative8.path) {
             target.path = base2.path;
-            if (relative9.query !== void 0) {
-              target.query = relative9.query;
+            if (relative8.query !== void 0) {
+              target.query = relative8.query;
             } else {
               target.query = base2.query;
             }
           } else {
-            if (relative9.path[0] === "/") {
-              target.path = removeDotSegments(relative9.path);
+            if (relative8.path[0] === "/") {
+              target.path = removeDotSegments(relative8.path);
             } else {
               if ((base2.userinfo !== void 0 || base2.host !== void 0 || base2.port !== void 0) && !base2.path) {
-                target.path = "/" + relative9.path;
+                target.path = "/" + relative8.path;
               } else if (!base2.path) {
-                target.path = relative9.path;
+                target.path = relative8.path;
               } else {
-                target.path = base2.path.slice(0, base2.path.lastIndexOf("/") + 1) + relative9.path;
+                target.path = base2.path.slice(0, base2.path.lastIndexOf("/") + 1) + relative8.path;
               }
               target.path = removeDotSegments(target.path);
             }
-            target.query = relative9.query;
+            target.query = relative8.query;
           }
           target.userinfo = base2.userinfo;
           target.host = base2.host;
@@ -3701,7 +3701,7 @@ var require_fast_uri = __commonJS({
         }
         target.scheme = base2.scheme;
       }
-      target.fragment = relative9.fragment;
+      target.fragment = relative8.fragment;
       return target;
     }
     function equal(uriA, uriB, options) {
@@ -3903,7 +3903,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve15,
+      resolve: resolve16,
       resolveComponent,
       equal,
       serialize,
@@ -4208,8 +4208,8 @@ var require_core = __commonJS({
           keyRef = sch;
         if (sch === void 0) {
           const { schemaId } = this.opts;
-          const root = new compile_1.SchemaEnv({ schema: {}, schemaId });
-          sch = compile_1.resolveSchema.call(this, root, keyRef);
+          const root2 = new compile_1.SchemaEnv({ schema: {}, schemaId });
+          sch = compile_1.resolveSchema.call(this, root2, keyRef);
           if (!sch)
             return;
           this.refs[keyRef] = sch;
@@ -4570,20 +4570,20 @@ var require_ref = __commonJS({
       code(cxt) {
         const { gen, schema: $ref, it } = cxt;
         const { baseId, schemaEnv: env, validateName, opts, self } = it;
-        const { root } = env;
-        if (($ref === "#" || $ref === "#/") && baseId === root.baseId)
+        const { root: root2 } = env;
+        if (($ref === "#" || $ref === "#/") && baseId === root2.baseId)
           return callRootRef();
-        const schOrEnv = compile_1.resolveRef.call(self, root, baseId, $ref);
+        const schOrEnv = compile_1.resolveRef.call(self, root2, baseId, $ref);
         if (schOrEnv === void 0)
           throw new ref_error_1.default(it.opts.uriResolver, baseId, $ref);
         if (schOrEnv instanceof compile_1.SchemaEnv)
           return callValidate(schOrEnv);
         return inlineRefSchema(schOrEnv);
         function callRootRef() {
-          if (env === root)
+          if (env === root2)
             return callRef(cxt, validateName, env, env.$async);
-          const rootName = gen.scopeValue("root", { ref: root });
-          return callRef(cxt, (0, codegen_1._)`${rootName}.validate`, root, root.$async);
+          const rootName = gen.scopeValue("root", { ref: root2 });
+          return callRef(cxt, (0, codegen_1._)`${rootName}.validate`, root2, root2.$async);
         }
         function callValidate(sch) {
           const v = getValidate(cxt, sch);
@@ -6108,9 +6108,9 @@ var require_dynamicAnchor = __commonJS({
     exports.dynamicAnchor = dynamicAnchor;
     function _getValidate(cxt) {
       const { schemaEnv, schema, self } = cxt.it;
-      const { root, baseId, localRefs, meta } = schemaEnv.root;
+      const { root: root2, baseId, localRefs, meta } = schemaEnv.root;
       const { schemaId } = self.opts;
-      const sch = new compile_1.SchemaEnv({ schema, schemaId, root, baseId, localRefs, meta });
+      const sch = new compile_1.SchemaEnv({ schema, schemaId, root: root2, baseId, localRefs, meta });
       compile_1.compileSchema.call(self, sch);
       return (0, ref_1.getValidate)(cxt, sch);
     }
@@ -7550,9 +7550,9 @@ var require_anchors = __commonJS({
       }
       return true;
     }
-    function anchorNames(root) {
+    function anchorNames(root2) {
       const anchors = /* @__PURE__ */ new Set();
-      visit.visit(root, {
+      visit.visit(root2, {
         Value(_key, node) {
           if (node.anchor)
             anchors.add(node.anchor);
@@ -18982,14 +18982,14 @@ async function writeSynced(path, bytes) {
     await file.close();
   }
 }
-async function replace(root, name, bytes) {
-  const target = join2(root, name);
+async function replace(root2, name, bytes) {
+  const target = join2(root2, name);
   try {
     await regular(target);
   } catch (error) {
     if (!missing(error)) throw error;
   }
-  const temporary = join2(root, `.qeg-replace-${randomUUID()}`);
+  const temporary = join2(root2, `.qeg-replace-${randomUUID()}`);
   await writeSynced(temporary, bytes);
   try {
     await rename(temporary, target);
@@ -19012,26 +19012,26 @@ async function optionalRegular(path) {
 import { lstat as lstat2, mkdir, readFile as readFile5, unlink as unlink2 } from "fs/promises";
 import { join as join3 } from "path";
 var PENDING = ".qeg-pending.json";
-async function preparePublication(root, id, before, next) {
-  const stage = join3(root, GENERATIONS, id);
+async function preparePublication(root2, id, before, next) {
+  const stage = join3(root2, GENERATIONS, id);
   await mkdir(join3(stage, ".qeg-rollback"));
   const files = [];
   for (const [name, bytes2] of before) {
     if (bytes2 !== void 0) await writeSynced(join3(stage, ".qeg-rollback", name), bytes2);
     files.push({ name, ...bytes2 === void 0 ? {} : { hash: digest(bytes2) } });
   }
-  const journal = { version: "qeg-transaction/v1", id, previous: await optionalRegular(join3(root, POINTER)), next, files };
+  const journal = { version: "qeg-transaction/v1", id, previous: await optionalRegular(join3(root2, POINTER)), next, files };
   const bytes = JSON.stringify(journal) + "\n";
   await writeSynced(join3(stage, ".qeg-transaction.json"), bytes);
-  await replace(root, PENDING, JSON.stringify({ version: "qeg-pending/v1", id, hash: digest(bytes) }) + "\n");
+  await replace(root2, PENDING, JSON.stringify({ version: "qeg-pending/v1", id, hash: digest(bytes) }) + "\n");
 }
-async function pendingPublication(root) {
-  const bytes = await optionalRegular(join3(root, PENDING));
+async function pendingPublication(root2) {
+  const bytes = await optionalRegular(join3(root2, PENDING));
   if (bytes === void 0) return void 0;
   const ref = JSON.parse(bytes);
   if (ref.version !== "qeg-pending/v1" || !/^[0-9a-f-]{36}$/.test(ref.id) || !/^sha256:[0-9a-f]{64}$/.test(ref.hash)) throw new CliError("Invalid pending publication pointer");
-  const stage = join3(root, GENERATIONS, ref.id);
-  for (const path of [join3(root, GENERATIONS), stage, join3(stage, ".qeg-rollback")]) if (!(await lstat2(path)).isDirectory()) throw new CliError("Invalid publication rollback directory");
+  const stage = join3(root2, GENERATIONS, ref.id);
+  for (const path of [join3(root2, GENERATIONS), stage, join3(stage, ".qeg-rollback")]) if (!(await lstat2(path)).isDirectory()) throw new CliError("Invalid publication rollback directory");
   await regular(join3(stage, ".qeg-transaction.json"));
   const journalBytes = await readFile5(join3(stage, ".qeg-transaction.json"), "utf8");
   if (digest(journalBytes) !== ref.hash) throw new CliError("Publication journal hash mismatch");
@@ -19039,7 +19039,7 @@ async function pendingPublication(root) {
   if (journal.version !== "qeg-transaction/v1" || journal.id !== ref.id || typeof journal.next !== "string" || journal.previous !== void 0 && typeof journal.previous !== "string" || !Array.isArray(journal.files) || !journal.files.length) throw new CliError("Invalid publication journal");
   const next = JSON.parse(journal.next);
   if (next.version !== "qeg-pointer/v1" || next.id !== ref.id || !/^sha256:[0-9a-f]{64}$/.test(next.hash)) throw new CliError("Invalid publication commit pointer");
-  const current = await optionalRegular(join3(root, POINTER));
+  const current = await optionalRegular(join3(root2, POINTER));
   if (current !== journal.next && current !== journal.previous) throw new CliError("Publication pointer differs from both journal generations");
   const before = /* @__PURE__ */ new Map();
   for (const file of journal.files) {
@@ -19053,62 +19053,62 @@ async function pendingPublication(root) {
   }
   return { id: ref.id, committed: current === journal.next, before };
 }
-async function assertPublicationComplete(root) {
-  const pending = await pendingPublication(root);
+async function assertPublicationComplete(root2) {
+  const pending = await pendingPublication(root2);
   if (pending && !pending.committed) throw new CliError("Interrupted output publication; run outputs recover before reading or writing this input");
 }
-async function recoverPendingPublication(root) {
-  const pending = await pendingPublication(root);
+async function recoverPendingPublication(root2) {
+  const pending = await pendingPublication(root2);
   if (!pending) return;
   if (!pending.committed) for (const [name, bytes] of pending.before) {
     if (bytes === void 0) {
       try {
-        await regular(join3(root, name));
-        await unlink2(join3(root, name));
+        await regular(join3(root2, name));
+        await unlink2(join3(root2, name));
       } catch (error) {
         if (!missing(error)) throw error;
       }
-    } else await replace(root, name, bytes);
+    } else await replace(root2, name, bytes);
   }
-  await unlink2(join3(root, PENDING));
+  await unlink2(join3(root2, PENDING));
 }
 
 // src/output-publication.ts
 var leaseContext = new AsyncLocalStorage();
 async function withOutputLease(directory, operation) {
-  const root = await realpath2(directory);
-  const identity2 = process.platform === "win32" ? root.toLowerCase() : root;
+  const root2 = await realpath2(directory);
+  const identity2 = process.platform === "win32" ? root2.toLowerCase() : root2;
   const held = leaseContext.getStore();
-  if (held?.active && held.identity === identity2) return operation(root);
+  if (held?.active && held.identity === identity2) return operation(root2);
   const hash2 = createHash3("sha256").update(identity2).digest();
   const endpoint = process.platform === "win32" ? { path: `\\\\.\\pipe\\qeg-output-${hash2.toString("hex")}` } : process.platform === "linux" ? { path: `\0qeg-output-${hash2.toString("hex")}` } : { host: "127.0.0.1", port: 2e4 + hash2.readUInt32BE(0) % 4e4, exclusive: true };
   const server = createServer((socket) => socket.destroy());
   await new Promise((accept, reject) => {
-    server.once("error", (error) => reject(new CliError(`Output busy or lease unavailable (${root}): ${error}`)));
+    server.once("error", (error) => reject(new CliError(`Output busy or lease unavailable (${root2}): ${error}`)));
     server.listen(endpoint, accept);
   });
   const scope = { identity: identity2, active: true };
   try {
-    return await leaseContext.run(scope, () => operation(root));
+    return await leaseContext.run(scope, () => operation(root2));
   } finally {
     scope.active = false;
     await new Promise((accept, reject) => server.close((error) => error ? reject(error) : accept()));
   }
 }
 async function readGateInput(directory) {
-  return withOutputLease(directory, async (root) => {
-    await assertPublicationComplete(root);
-    await regular(join4(root, "gate-input.json"));
-    return readFile6(join4(root, "gate-input.json"), "utf8");
+  return withOutputLease(directory, async (root2) => {
+    await assertPublicationComplete(root2);
+    await regular(join4(root2, "gate-input.json"));
+    return readFile6(join4(root2, "gate-input.json"), "utf8");
   });
 }
-async function generation(root, selected) {
+async function generation(root2, selected) {
   let pointerBytes;
   try {
     if (selected) pointerBytes = JSON.stringify(selected);
     else {
-      await regular(join4(root, POINTER));
-      pointerBytes = await readFile6(join4(root, POINTER), "utf8");
+      await regular(join4(root2, POINTER));
+      pointerBytes = await readFile6(join4(root2, POINTER), "utf8");
     }
   } catch (error) {
     if (missing(error)) return void 0;
@@ -19116,8 +19116,8 @@ async function generation(root, selected) {
   }
   const pointer = JSON.parse(pointerBytes);
   if (pointer.version !== "qeg-pointer/v1" || !/^[0-9a-f-]{36}$/.test(pointer.id) || !/^sha256:[0-9a-f]{64}$/.test(pointer.hash)) throw new CliError("Invalid output generation pointer");
-  const directory = join4(root, GENERATIONS, pointer.id);
-  if (!(await lstat3(join4(root, GENERATIONS))).isDirectory() || !(await lstat3(directory)).isDirectory()) throw new CliError("Invalid generation directory");
+  const directory = join4(root2, GENERATIONS, pointer.id);
+  if (!(await lstat3(join4(root2, GENERATIONS))).isDirectory() || !(await lstat3(directory)).isDirectory()) throw new CliError("Invalid generation directory");
   await regular(join4(directory, "generation.json"));
   const bytes = await readFile6(join4(directory, "generation.json"), "utf8");
   if (digest(bytes) !== pointer.hash) throw new CliError("Generation manifest hash mismatch");
@@ -19133,70 +19133,70 @@ async function generation(root, selected) {
   }
   return { generation: pointer.id, files, previous: manifest.previous };
 }
-async function hasCommittedFile(root, name, bytes) {
-  let current = await generation(root);
+async function hasCommittedFile(root2, name, bytes) {
+  let current = await generation(root2);
   const seen = /* @__PURE__ */ new Set();
   while (current) {
     if (seen.has(current.generation)) throw new CliError("Cyclic output generation history");
     seen.add(current.generation);
     if (current.files.get(name) === bytes) return true;
-    current = current.previous ? await generation(root, current.previous) : void 0;
+    current = current.previous ? await generation(root2, current.previous) : void 0;
   }
   return false;
 }
-async function assertNativeInputMatches(root, files) {
+async function assertNativeInputMatches(root2, files) {
   const input = files.get("gate-input.json");
-  if (input !== void 0 && await optionalRegular(join4(root, "gate-input.json")) !== input) {
+  if (input !== void 0 && await optionalRegular(join4(root2, "gate-input.json")) !== input) {
     throw new CliError("Output alias hash mismatch: gate-input.json; native input preserved. Review the input and rerun the producer command to create a matching generation");
   }
 }
 async function readPublishedOutputs(directory) {
-  return withOutputLease(directory, async (root) => {
-    await assertPublicationComplete(root);
-    const current = await generation(root);
+  return withOutputLease(directory, async (root2) => {
+    await assertPublicationComplete(root2);
+    const current = await generation(root2);
     if (!current) throw new CliError("No completed output generation; rerun the original producer command");
-    await assertNativeInputMatches(root, current.files);
+    await assertNativeInputMatches(root2, current.files);
     for (const [name, bytes] of current.files) {
-      await regular(join4(root, name));
-      if (digest(await readFile6(join4(root, name))) !== digest(bytes)) throw new CliError(`Output alias hash mismatch: ${name}; run outputs recover`);
+      await regular(join4(root2, name));
+      if (digest(await readFile6(join4(root2, name))) !== digest(bytes)) throw new CliError(`Output alias hash mismatch: ${name}; run outputs recover`);
     }
     return current;
   });
 }
 async function recoverOutputs(directory) {
-  return withOutputLease(directory, async (root) => {
-    const current = await generation(root);
-    await recoverPendingPublication(root);
+  return withOutputLease(directory, async (root2) => {
+    const current = await generation(root2);
+    await recoverPendingPublication(root2);
     if (!current) throw new CliError("No completed generation to recover; rerun the original producer command");
-    for (const [name, bytes] of current.files) if (name !== "gate-input.json") await replace(root, name, bytes);
-    await assertNativeInputMatches(root, current.files);
+    for (const [name, bytes] of current.files) if (name !== "gate-input.json") await replace(root2, name, bytes);
+    await assertNativeInputMatches(root2, current.files);
     return current.generation;
   });
 }
 async function publishFiles(directory, files, options = {}) {
   if (!files.size || [...files.keys()].some((name) => !filename(name))) throw new CliError("Invalid output filename or empty publication");
   await mkdir2(directory, { recursive: true });
-  await withOutputLease(directory, (root) => publishFilesUnderLease(root, files, options));
+  await withOutputLease(directory, (root2) => publishFilesUnderLease(root2, files, options));
 }
-async function publishFilesUnderLease(root, files, options = {}) {
+async function publishFilesUnderLease(root2, files, options = {}) {
   if (!files.size || [...files.keys()].some((name) => !filename(name))) throw new CliError("Invalid output filename or empty publication");
-  await assertPublicationComplete(root);
-  const previous = await generation(root);
-  await recoverPendingPublication(root);
+  await assertPublicationComplete(root2);
+  const previous = await generation(root2);
+  await recoverPendingPublication(root2);
   const before = /* @__PURE__ */ new Map();
   for (const name of files.keys()) {
     try {
-      await regular(join4(root, name));
-      before.set(name, await readFile6(join4(root, name), "utf8"));
+      await regular(join4(root2, name));
+      before.set(name, await readFile6(join4(root2, name), "utf8"));
     } catch (error) {
       if (!missing(error)) throw error;
       before.set(name, void 0);
     }
   }
   const id = randomUUID2();
-  await mkdir2(join4(root, GENERATIONS), { recursive: true });
-  if (!(await lstat3(join4(root, GENERATIONS))).isDirectory()) throw new CliError("Invalid generation root");
-  const stage = join4(root, GENERATIONS, id);
+  await mkdir2(join4(root2, GENERATIONS), { recursive: true });
+  if (!(await lstat3(join4(root2, GENERATIONS))).isDirectory()) throw new CliError("Invalid generation root");
+  const stage = join4(root2, GENERATIONS, id);
   await mkdir2(stage);
   const boundary = async (name) => options.onBoundary?.(name);
   let committed = false;
@@ -19209,28 +19209,28 @@ async function publishFilesUnderLease(root, files, options = {}) {
     const manifest = {
       version: "qeg-generation/v1",
       id,
-      ...previous ? { previous: JSON.parse(await readFile6(join4(root, POINTER), "utf8")) } : {},
+      ...previous ? { previous: JSON.parse(await readFile6(join4(root2, POINTER), "utf8")) } : {},
       files: [...files].map(([name, bytes2]) => ({ name, hash: digest(bytes2) }))
     };
     const bytes = JSON.stringify(manifest) + "\n";
     await writeSynced(join4(stage, "generation.json"), bytes);
     await boundary("sealed");
     const pointer = JSON.stringify({ version: "qeg-pointer/v1", id, hash: digest(bytes) }) + "\n";
-    await preparePublication(root, id, before, pointer);
+    await preparePublication(root2, id, before, pointer);
     await boundary("prepared");
     for (const [name, content] of files) {
-      await replace(root, name, content);
+      await replace(root2, name, content);
       await boundary(`alias:${name}`);
     }
-    await replace(root, POINTER, pointer);
+    await replace(root2, POINTER, pointer);
     committed = true;
     await boundary("pointer-committed");
-    await recoverPendingPublication(root);
+    await recoverPendingPublication(root2);
     await boundary("committed");
   } catch (error) {
     const recovery = [];
     try {
-      await recoverPendingPublication(root);
+      await recoverPendingPublication(root2);
     } catch (failure) {
       recovery.push(String(failure));
     }
@@ -21214,32 +21214,32 @@ function detectGraphIntegrity(input) {
   unique2(input.graph.edges, "/graph/edges");
   unique2(input.metadata.inputArtifacts, "/metadata/inputArtifacts");
   const nodes = new Map(input.graph.nodes.map((n) => [n.id, n]));
-  const resolve15 = (ids, kind, pointer) => {
+  const resolve16 = (ids, kind, pointer) => {
     for (const id of ids) if (!nodes.has(id) || kind && nodes.get(id)?.kind !== kind) {
       issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
     }
   };
-  for (const [index, edge2] of input.graph.edges.entries()) resolve15([edge2.from, edge2.to], void 0, `/graph/edges/${index}`);
+  for (const [index, edge2] of input.graph.edges.entries()) resolve16([edge2.from, edge2.to], void 0, `/graph/edges/${index}`);
   const artifacts = new Set(input.metadata.inputArtifacts.map((a) => a.id));
   for (const [index, node] of input.graph.nodes.entries()) {
     const pointer = `/graph/nodes/${index}`;
     for (const id of node.sourceArtifactIds) if (!artifacts.has(id)) issue(pointer, `Unresolved artifact reference "${id}"`, [node.id, id]);
-    if (node.kind === "requirement") resolve15(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
-    if (node.kind === "acceptance_criteria") resolve15(node.requirementIds, "requirement", pointer);
-    if (node.kind === "finding") resolve15(node.changedCodeIds, "changed_code", pointer);
-    if (node.kind === "failure_mode") resolve15(node.riskIds, "risk", pointer);
+    if (node.kind === "requirement") resolve16(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
+    if (node.kind === "acceptance_criteria") resolve16(node.requirementIds, "requirement", pointer);
+    if (node.kind === "finding") resolve16(node.changedCodeIds, "changed_code", pointer);
+    if (node.kind === "failure_mode") resolve16(node.riskIds, "risk", pointer);
     if (node.kind === "test") {
-      resolve15(node.coveredRiskIds ?? [], "risk", pointer);
+      resolve16(node.coveredRiskIds ?? [], "risk", pointer);
       if (node.testType !== "resilience") {
-        resolve15(node.coveredRequirementIds ?? [], "requirement", pointer);
-        resolve15(node.coveredChangedCodeIds ?? [], "changed_code", pointer);
+        resolve16(node.coveredRequirementIds ?? [], "requirement", pointer);
+        resolve16(node.coveredChangedCodeIds ?? [], "changed_code", pointer);
       }
     }
-    if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve15([node.testId], "test", pointer);
+    if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve16([node.testId], "test", pointer);
   }
   for (const [index, node] of input.graph.nodes.entries()) if (node.kind === "test_placement") {
     const pointer = `/graph/nodes/${index}`;
-    resolve15(node.selectedTestIds, "test", pointer);
+    resolve16(node.selectedTestIds, "test", pointer);
     if (!input.placementPlan?.obligations.some((o) => o.id === node.obligationId)) {
       issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
     }
@@ -21255,15 +21255,15 @@ function detectGraphIntegrity(input) {
   const obligations = new Set(plan2.obligations.map((o) => o.id));
   for (const [index, obligation2] of plan2.obligations.entries()) {
     const pointer = `/placementPlan/obligations/${index}`;
-    resolve15(obligation2.changedCodeIds, "changed_code", pointer);
-    resolve15(obligation2.riskIds, "risk", pointer);
-    resolve15(obligation2.requirementIds, "requirement", pointer);
-    resolve15(obligation2.failureModeIds, "failure_mode", pointer);
+    resolve16(obligation2.changedCodeIds, "changed_code", pointer);
+    resolve16(obligation2.riskIds, "risk", pointer);
+    resolve16(obligation2.requirementIds, "requirement", pointer);
+    resolve16(obligation2.failureModeIds, "failure_mode", pointer);
   }
   for (const [index, placement] of plan2.placements.entries()) {
     const pointer = `/placementPlan/placements/${index}`;
     if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
-    resolve15(placement.selectedTestIds, "test", pointer);
+    resolve16(placement.selectedTestIds, "test", pointer);
   }
   return result;
 }
@@ -22024,7 +22024,7 @@ function evidenceDq(report) {
   }];
 }
 async function evaluateFixture(rawFixtureDir, options = {}) {
-  return withOutputLease(rawFixtureDir, (root) => evaluateFixtureUnderLease(root, options));
+  return withOutputLease(rawFixtureDir, (root2) => evaluateFixtureUnderLease(root2, options));
 }
 async function evaluateFixtureUnderLease(rawFixtureDir, options) {
   const fixtureDir = resolve3(rawFixtureDir);
@@ -22107,7 +22107,7 @@ async function runPlaceTestsUnderLease(directory) {
 var QEG_VERSION = "0.4.0";
 
 // src/cli.ts
-import { readFile as readFile21 } from "fs/promises";
+import { readFile as readFile22 } from "fs/promises";
 
 // src/consumer-migration.ts
 import { lstat as lstat4, readFile as readFile9 } from "fs/promises";
@@ -22196,36 +22196,36 @@ async function plan(directory, config, savedOriginal) {
   } };
 }
 async function planConsumerMigration(directory, config) {
-  return withOutputLease(directory, async (root) => (await plan(root, config)).report);
+  return withOutputLease(directory, async (root2) => (await plan(root2, config)).report);
 }
 async function applyConsumerMigration(directory, config) {
-  return withOutputLease(directory, async (root) => {
-    const pending = await pendingPublication(root);
+  return withOutputLease(directory, async (root2) => {
+    const pending = await pendingPublication(root2);
     if (pending && !pending.committed) {
       const original = pending.before.get("gate-input.json");
       if (original === void 0 || !pending.before.has("migration-report.json")) throw new CliError("Another publication was interrupted; run outputs recover");
-      const resumed = await plan(root, config, original);
+      const resumed = await plan(root2, config, original);
       if (resumed.report.status !== "ready") throw new CliError(`Migration blocked: ${resumed.report.missingInputs.join("; ")}`);
-      await recoverPendingPublication(root);
+      await recoverPendingPublication(root2);
     }
-    let result = await plan(root, config);
+    let result = await plan(root2, config);
     if (result.report.status === "unchanged") {
       let receipt;
       try {
-        receipt = await readFile9(join6(root, "migration-report.json"), "utf8");
+        receipt = await readFile9(join6(root2, "migration-report.json"), "utf8");
       } catch (error) {
         if (error.code !== "ENOENT") throw error;
       }
       if (!receipt) return result.report;
       const previous = JSON.parse(receipt);
-      if (previous.inputHash !== config.expectedInputHash || previous.outputHash !== result.report.inputHash || await hasCommittedFile(root, "migration-report.json", receipt)) return result.report;
-      const original = await readFile9(join6(root, "migration-original.json"), "utf8");
+      if (previous.inputHash !== config.expectedInputHash || previous.outputHash !== result.report.inputHash || await hasCommittedFile(root2, "migration-report.json", receipt)) return result.report;
+      const original = await readFile9(join6(root2, "migration-original.json"), "utf8");
       if (contentHash(original) !== config.expectedInputHash) throw new CliError("Interrupted migration backup hash mismatch");
-      result = await plan(root, config, original);
+      result = await plan(root2, config, original);
     }
     if (result.report.status !== "ready" || !result.candidate) throw new CliError(`Migration blocked: ${result.report.missingInputs.join("; ")}`);
     const report = { ...result.report, status: "applied" };
-    await publishFilesUnderLease(root, /* @__PURE__ */ new Map([["migration-original.json", result.original], ["migration-report.json", jsonDocument(report)], ["gate-input.json", result.candidate]]));
+    await publishFilesUnderLease(root2, /* @__PURE__ */ new Map([["migration-original.json", result.original], ["migration-report.json", jsonDocument(report)], ["gate-input.json", result.candidate]]));
     return report;
   });
 }
@@ -22234,8 +22234,6 @@ async function applyConsumerMigration(directory, config) {
 import { exit as exit14 } from "process";
 
 // src/cli/baseline.ts
-import { readFile as readFile11, stat as stat5 } from "fs/promises";
-import { relative as relative5, resolve as resolve7 } from "path";
 import { exit as exit3 } from "process";
 
 // src/cli/report/targets.ts
@@ -22247,13 +22245,11 @@ async function safeStat(path) {
 function portable(path) {
   return path.split(String.fromCharCode(92)).join("/");
 }
-function relativeTarget(target) {
-  return portable(relative3(process.cwd(), target));
-}
 async function isFixtureLikeDirectory(path) {
-  const input = await safeStat(join7(path, "gate-input.json"));
-  const expected = await safeStat(join7(path, "expected-gate-verdict.json"));
-  return Boolean(input?.isFile() || expected?.isFile());
+  for (const marker of ["gate-input.json", "expected-gate-verdict.json", "ingest-manifest.json", "qeg.bundle.json", "test-placement-plan.json", "output-manifest.json", "quality-evidence-record.json", "migration-report.json"]) {
+    if (await safeStat(join7(path, marker))) return true;
+  }
+  return false;
 }
 async function collectChildFixtures(path, children) {
   const fixtures = [];
@@ -22286,7 +22282,7 @@ async function collectReportTargets(rawTargets) {
 }
 
 // src/cli/report/core.ts
-import { join as join8 } from "path";
+import { join as join9 } from "path";
 
 // src/cli/dq-explain.ts
 import { exit } from "process";
@@ -22653,34 +22649,60 @@ function validateEvaluatedFixture(expected, evaluated) {
 
 // src/cli/report/change-selection.ts
 import { execFile } from "child_process";
-import { relative as relative4 } from "path";
 import { promisify } from "util";
+
+// src/cli/path-key.ts
+import { realpathSync } from "fs";
+import { basename as basename2, dirname, join as join8, resolve as resolve5 } from "path";
+function portablePath(path) {
+  return path.replace(/\\/g, "/");
+}
+function pathKey(path, base2 = process.cwd()) {
+  let ancestor = resolve5(base2, portablePath(path));
+  const missing2 = [];
+  while (true) {
+    try {
+      ancestor = realpathSync.native(ancestor);
+      break;
+    } catch (error) {
+      if (!["ENOENT", "ENOTDIR"].includes(error.code ?? "")) throw error;
+      const parent = dirname(ancestor);
+      if (parent === ancestor) break;
+      missing2.unshift(basename2(ancestor));
+      ancestor = parent;
+    }
+  }
+  const absolute = portablePath(join8(ancestor, ...missing2));
+  return process.platform === "win32" ? absolute.toLowerCase() : absolute;
+}
+function pathWithin(path, directory) {
+  const root2 = pathKey(directory);
+  const candidate = pathKey(path);
+  return candidate === root2 || candidate.startsWith(root2.endsWith("/") ? root2 : root2 + "/");
+}
+
+// src/cli/report/change-selection.ts
 var execFileAsync = promisify(execFile);
-function portable2(path) {
-  return path.split(String.fromCharCode(92)).join("/");
-}
-function relativeTarget2(target) {
-  return portable2(relative4(process.cwd(), target));
-}
 async function changedFiles() {
+  let base2 = process.cwd();
   if (process.env.QEG_CHANGED_FILES !== void 0) {
-    const files = process.env.QEG_CHANGED_FILES.split(/[,\r\n]+/).map((file) => portable2(file.trim())).filter(Boolean);
-    return { files, strategy: "env" };
+    const files = process.env.QEG_CHANGED_FILES.split(/[,\r\n]+/).map((file) => file.trim()).filter(Boolean).map((file) => pathKey(file, base2));
+    return { files, base: base2, strategy: "env" };
   }
   try {
-    await execFileAsync("git", ["rev-parse", "--is-inside-work-tree"]);
+    base2 = (await execFileAsync("git", ["rev-parse", "--show-toplevel"])).stdout.replace(/\r?\n$/, "");
   } catch (error) {
-    return { files: [], strategy: "worktree", error: "git repository detection failed: " + error };
+    return { files: [], base: base2, strategy: "worktree", error: "git repository detection failed: " + error };
   }
   const attempts = [
-    { strategy: "origin_main", args: ["diff", "--name-only", "-z", "--no-renames", "--diff-filter=ACDMRTUXB", "origin/main...HEAD"] },
-    { strategy: "head_parent", args: ["diff", "--name-only", "-z", "--no-renames", "--diff-filter=ACDMRTUXB", "HEAD~1...HEAD"] }
+    { strategy: "origin_main", args: ["diff", "--name-only", "-z", "--no-relative", "--no-renames", "--diff-filter=ACDMRTUXB", "origin/main...HEAD"] },
+    { strategy: "head_parent", args: ["diff", "--name-only", "-z", "--no-relative", "--no-renames", "--diff-filter=ACDMRTUXB", "HEAD~1...HEAD"] }
   ];
   const errors = [];
   for (const attempt of attempts) {
     try {
       const { stdout } = await execFileAsync("git", attempt.args);
-      return { files: stdout.split("\0").filter(Boolean).map(portable2), strategy: attempt.strategy };
+      return { files: stdout.split("\0").filter(Boolean).map((file) => pathKey(file, base2)), base: base2, strategy: attempt.strategy };
     } catch (error) {
       errors.push(attempt.strategy + ": " + error);
     }
@@ -22691,27 +22713,26 @@ async function changedFiles() {
     const files = [];
     for (let index = 0; index < records.length; index++) {
       const record = records[index];
-      files.push(portable2(record.slice(3)));
-      if (/[RC]/.test(record.slice(0, 2)) && records[index + 1] !== void 0) files.push(portable2(records[++index]));
+      files.push(pathKey(record.slice(3), base2));
+      if (/[RC]/.test(record.slice(0, 2)) && records[index + 1] !== void 0) files.push(pathKey(records[++index], base2));
     }
-    if (files.length > 0) return { files, strategy: "worktree" };
+    if (files.length > 0) return { files, base: base2, strategy: "worktree" };
     errors.push("worktree: clean worktree cannot replace unavailable history");
   } catch (error) {
     errors.push("worktree: " + error);
   }
-  return { files: [], strategy: "worktree", error: "all changed-file detection strategies failed: " + errors.join(" | ") };
+  return { files: [], base: base2, strategy: "worktree", error: "all changed-file detection strategies failed: " + errors.join(" | ") };
 }
-async function targetMentionsChangedFile(target, files) {
-  const relTarget = relativeTarget2(target);
-  if (files.some((file) => file === relTarget || file.startsWith(relTarget + "/"))) return true;
+async function targetMentionsChangedFile(target, files, base2) {
+  if (files.some((file) => pathWithin(file, target))) return true;
   try {
-    return await withOutputLease(target, async (root) => {
-      const validation = await validateGateInput(JSON.parse(await readGateInput(root)));
+    return await withOutputLease(target, async (root2) => {
+      const validation = await validateGateInput(JSON.parse(await readGateInput(root2)));
       if (!validation.valid || !validation.input) return true;
       const input = validation.input;
-      const artifacts = input.metadata.inputArtifacts.map((artifact) => portable2(artifact.path));
-      const changedCode = input.graph.nodes.filter((node) => node.kind === "changed_code").map((node) => portable2(node.path));
-      return [...artifacts, ...changedCode].some((path) => files.includes(path));
+      const artifacts = input.metadata.inputArtifacts.map((artifact) => portablePath(artifact.path));
+      const changedCode = input.graph.nodes.filter((node) => node.kind === "changed_code").map((node) => portablePath(node.path));
+      return [...artifacts, ...changedCode].some((path) => files.includes(pathKey(path, root2)) || files.includes(pathKey(path, base2)));
     });
   } catch {
     return true;
@@ -22722,7 +22743,7 @@ async function selectChangedTargets(targets, changedOnly = false) {
   const detected = await changedFiles();
   if (detected.error) return { targets: [], selection: { mode: "changed_only", status: "detection_failed", strategy: detected.strategy, changedFileCount: 0, selectedTargetCount: 0, error: detected.error } };
   const selected = [];
-  for (const target of targets) if (await targetMentionsChangedFile(target, detected.files)) selected.push(target);
+  for (const target of targets) if (await targetMentionsChangedFile(target, detected.files, detected.base)) selected.push(target);
   return {
     targets: selected,
     selection: {
@@ -22736,16 +22757,56 @@ async function selectChangedTargets(targets, changedOnly = false) {
 }
 
 // src/cli/report/baseline-diff.ts
+import { readFile as readFile11 } from "fs/promises";
+import { isAbsolute as isAbsolute3, relative as relative4 } from "path";
+
+// src/cli/report/baseline-contract.ts
 import { readFile as readFile10 } from "fs/promises";
+import { resolve as resolve6 } from "path";
+async function readBaselineFile(path) {
+  const raw = JSON.parse(await readFile10(path, "utf8"));
+  const validate = (await loadSchemaRegistry()).validators.get("report-baseline.schema.json");
+  if (!validate || !validate(raw)) throw new CliError(`Invalid baseline structure: ${path}; ${JSON.stringify(validate?.errors ?? [])}`);
+  return raw;
+}
+function baselineTargetMatches(entry, target) {
+  return entry.target === void 0 || pathKey(entry.target) === pathKey(target);
+}
+function baselineDqMatches(entry, dq2) {
+  const expected = entry.nodeIds ? [...entry.nodeIds].sort() : void 0;
+  const actual = [...dq2.nodeIds].sort();
+  return entry.code === dq2.code && (entry.message === void 0 || entry.message === dq2.message) && (!expected || expected.length === actual.length && expected.every((id, index) => id === actual[index]));
+}
+async function baselineEntryIssues(entry, now) {
+  const issues = [];
+  if (!entry.owner?.trim()) issues.push({ severity: "fail", message: "baseline entry has no owner" });
+  if (entry.expiresAt === void 0) issues.push({ severity: "warn", message: "baseline entry has no expiresAt" });
+  else if (!Number.isFinite(Date.parse(entry.expiresAt))) issues.push({ severity: "fail", message: "baseline entry expiresAt is not a valid date" });
+  else if (Date.parse(entry.expiresAt) <= now) issues.push({ severity: "fail", message: "baseline entry is expired" });
+  if (entry.target !== void 0 && !(await optionalStat(resolve6(entry.target)))?.isDirectory()) issues.push({ severity: "fail", message: "baseline target does not exist or is not a directory" });
+  return issues;
+}
+
+// src/cli/report/baseline-diff.ts
 async function readJsonFile2(path) {
-  return JSON.parse(await readFile10(path, "utf-8"));
+  return JSON.parse(await readFile11(path, "utf-8"));
 }
 async function readBaseline(path) {
   if (!path) return void 0;
-  return readJsonFile2(path);
+  const baseline = await readBaselineFile(path);
+  const now = Date.now();
+  const errors = [];
+  for (const [index, entry] of baseline.entries.entries()) {
+    for (const issue of await baselineEntryIssues(entry, now)) if (issue.severity === "fail") errors.push(`entry ${index}: ${issue.message}`);
+  }
+  if (errors.length) throw new CliError(`Baseline is not eligible: ${errors.join("; ")}`);
+  return baseline;
 }
 function normalizeTargetForDiff(target) {
-  return portable(target).replace(portable(process.cwd()), "<repo>");
+  if (target === "<repo>" || target.startsWith("<repo>/")) return target;
+  const key = pathKey(target);
+  const rel = portable(relative4(pathKey(process.cwd()), key));
+  return !isAbsolute3(rel) && rel !== ".." && !rel.startsWith("../") ? `<repo>${rel ? "/" + rel : ""}` : key;
 }
 function diffItemKey(item) {
   return JSON.stringify({
@@ -22776,27 +22837,27 @@ async function createReportDiff(current, previousPath) {
   const previousItems = reportDiffItems(previous);
   const currentKeys = new Set(currentItems.map(diffItemKey));
   const previousKeys = new Set(previousItems.map(diffItemKey));
+  const currentTargets = new Map(current.targets.map((target) => [normalizeTargetForDiff(target.target), target]));
+  const missing2 = previousItems.filter((item) => !currentKeys.has(diffItemKey(item)));
+  const unverified = [];
+  const resolved = [];
+  for (const item of missing2) {
+    const target = currentTargets.get(item.target);
+    if (!target) unverified.push({ ...item, reason: "not_evaluated" });
+    else if (target.status === "cli_error" || !target.verdict || target.disqualifications.some((dq2) => dq2.code === "DQ-01")) unverified.push({ ...item, reason: "evaluation_failed" });
+    else resolved.push(item);
+  }
   return {
     previousReport: previousPath,
     new: currentItems.filter((item) => !previousKeys.has(diffItemKey(item))),
-    resolved: previousItems.filter((item) => !currentKeys.has(diffItemKey(item))),
-    unchanged: currentItems.filter((item) => previousKeys.has(diffItemKey(item)))
+    resolved,
+    unchanged: currentItems.filter((item) => previousKeys.has(diffItemKey(item))),
+    unverified
   };
-}
-function sameNodeIds(left, right) {
-  if (!left) return true;
-  const sortedLeft = [...left].sort();
-  const sortedRight = [...right].sort();
-  return sortedLeft.length === sortedRight.length && sortedLeft.every((value, index) => value === sortedRight[index]);
 }
 function baselineCovers(baseline, target, disqualification) {
   if (!baseline) return false;
-  const relTarget = relativeTarget(target);
-  return baseline.entries.some((entry) => {
-    const targetMatches2 = !entry.target || portable(entry.target) === relTarget || relTarget.endsWith(portable(entry.target));
-    const messageMatches = !entry.message || entry.message === disqualification.message;
-    return targetMatches2 && entry.code === disqualification.code && messageMatches && sameNodeIds(entry.nodeIds, disqualification.nodeIds);
-  });
+  return baseline.entries.some((entry) => baselineTargetMatches(entry, target) && baselineDqMatches(entry, disqualification));
 }
 function applyBaseline(target, baseline) {
   if (!baseline || target.status !== "gate_failed" || target.disqualifications.length === 0) {
@@ -22822,7 +22883,7 @@ function applyBaseline(target, baseline) {
 
 // src/cli/report/core.ts
 async function readExpectedIfPresent(target) {
-  const expectedPath = join8(target, "expected-gate-verdict.json");
+  const expectedPath = join9(target, "expected-gate-verdict.json");
   if (!(await safeStat(expectedPath))?.isFile()) {
     return void 0;
   }
@@ -22918,7 +22979,12 @@ async function createCiReport(rawTargets, options = {}) {
   const collectedTargets = await collectReportTargets(rawTargets);
   const selected = await selectChangedTargets(collectedTargets, options.changedOnly);
   const errors = selected.selection.status === "detection_failed" ? [{ code: "CHANGE_DETECTION_FAILED", message: selected.selection.error ?? "change detection failed" }] : [];
-  const baseline = await readBaseline(options.baselinePath);
+  let baseline;
+  try {
+    baseline = await readBaseline(options.baselinePath);
+  } catch (error) {
+    errors.push({ code: "BASELINE_INVALID", message: error instanceof Error ? error.message : String(error) });
+  }
   const results = [];
   for (const target of selected.targets) {
     results.push(applyBaseline(await evaluateReportTarget(target), baseline));
@@ -23048,6 +23114,7 @@ function formatGithubSummary(report) {
     `- required human review: ${summary.humanReviewCount}`,
     ""
   ];
+  for (const error of report.errors) lines.push(`- ${error.code}: ${error.message}`);
   const reliabilityTargets = report.targets;
   for (const target of report.targets) if (target.evaluationScope) {
     const scope = target.evaluationScope;
@@ -23071,6 +23138,7 @@ function formatGithubSummary(report) {
     lines.push(`- new DQs: ${report.diff.new.length}`);
     lines.push(`- resolved DQs: ${report.diff.resolved.length}`);
     lines.push(`- unchanged DQs: ${report.diff.unchanged.length}`);
+    lines.push(`- unverified DQs: ${report.diff.unverified?.length ?? 0}`);
     lines.push("");
     for (const item of report.diff.new) {
       lines.push(`- new ${item.code}: ${item.target} - ${item.message}`);
@@ -23078,6 +23146,7 @@ function formatGithubSummary(report) {
     for (const item of report.diff.resolved) {
       lines.push(`- resolved ${item.code}: ${item.target} - ${item.message}`);
     }
+    for (const item of report.diff.unverified ?? []) lines.push(`- unverified ${item.code}: ${item.target} - ${item.reason}`);
     if (report.diff.new.length > 0 || report.diff.resolved.length > 0) {
       lines.push("");
     }
@@ -23117,7 +23186,7 @@ function formatCiReportText(report) {
   const lines = [
     "Quality Evidence Graph CI Report",
     `Generated at: ${report.generatedAt}`,
-    `Overall: ${failingTargets.length === 0 ? "PASS" : "FAIL"}`,
+    `Overall: ${failingTargets.length === 0 && summary.cliErrors === 0 ? "PASS" : "FAIL"}`,
     "",
     "Summary",
     `- targets: ${summary.totalTargets}`,
@@ -23129,6 +23198,7 @@ function formatCiReportText(report) {
     `- residual risks: ${summary.residualRiskCount}`,
     `- required human review: ${summary.humanReviewCount}`
   ];
+  for (const error of report.errors) lines.push(`- ${error.code}: ${error.message}`);
   const reliabilityTargets = report.targets;
   for (const target of report.targets) if (target.evaluationScope) {
     const scope = target.evaluationScope;
@@ -23152,7 +23222,8 @@ function formatCiReportText(report) {
       `- previous report: ${report.diff.previousReport}`,
       `- new DQs: ${report.diff.new.length}`,
       `- resolved DQs: ${report.diff.resolved.length}`,
-      `- unchanged DQs: ${report.diff.unchanged.length}`
+      `- unchanged DQs: ${report.diff.unchanged.length}`,
+      `- unverified DQs: ${report.diff.unverified?.length ?? 0}`
     );
     for (const item of report.diff.new) {
       lines.push(`  new ${item.code}: ${item.target} - ${item.message}`);
@@ -23160,6 +23231,7 @@ function formatCiReportText(report) {
     for (const item of report.diff.resolved) {
       lines.push(`  resolved ${item.code}: ${item.target} - ${item.message}`);
     }
+    for (const item of report.diff.unverified ?? []) lines.push(`  unverified ${item.code}: ${item.target} - ${item.reason}`);
   }
   if (failingTargets.length > 0) {
     lines.push("", "Target details");
@@ -23179,16 +23251,16 @@ function formatCiReportText(report) {
 
 // src/cli/report/command.ts
 import { appendFile, mkdir as mkdir3, writeFile } from "fs/promises";
-import { dirname, resolve as resolve6 } from "path";
+import { dirname as dirname2, resolve as resolve8 } from "path";
 import { exit as exit2 } from "process";
 
 // src/cli/report/environment.ts
 import { lstat as lstat5 } from "fs/promises";
-import { isAbsolute as isAbsolute3, resolve as resolve5 } from "path";
+import { isAbsolute as isAbsolute4, resolve as resolve7 } from "path";
 async function githubSummaryPath(environment) {
   const value = environment.GITHUB_STEP_SUMMARY;
-  if (!value || !value.trim() || value.includes("\0") || !isAbsolute3(value)) throw new CliError("--github-summary requires an absolute GITHUB_STEP_SUMMARY file path");
-  const path = resolve5(value);
+  if (!value || !value.trim() || value.includes("\0") || !isAbsolute4(value)) throw new CliError("--github-summary requires an absolute GITHUB_STEP_SUMMARY file path");
+  const path = resolve7(value);
   try {
     if (!(await lstat5(path)).isFile()) throw new Error("not a regular file");
   } catch (error) {
@@ -23283,8 +23355,8 @@ async function runReportCommand(args) {
   });
   const output = formatReport(report, options.format);
   if (options.outPath) {
-    const outputPath = resolve6(options.outPath);
-    await mkdir3(dirname(outputPath), { recursive: true });
+    const outputPath = resolve8(options.outPath);
+    await mkdir3(dirname2(outputPath), { recursive: true });
     await writeFile(outputPath, output, "utf-8");
   }
   if (options.githubSummary) {
@@ -23296,42 +23368,15 @@ async function runReportCommand(args) {
 }
 
 // src/cli/baseline.ts
-async function exists(path) {
-  try {
-    return (await stat5(path)).isDirectory() || (await stat5(path)).isFile();
-  } catch {
-    return false;
-  }
-}
-async function readJson(path) {
-  return JSON.parse(await readFile11(path, "utf-8"));
-}
-function portable3(path) {
-  return path.replace(/\\/g, "/");
-}
 function entryLabel(entry) {
   return `${entry.target ?? "*"} ${entry.code}${entry.message ? ` ${entry.message}` : ""}`;
 }
-function targetMatches(entry, target) {
-  if (!entry.target) return true;
-  const rel = portable3(relative5(process.cwd(), target));
-  const entryTarget = portable3(entry.target);
-  return rel === entryTarget || rel.endsWith(entryTarget);
-}
-function sameNodeIds2(left, right) {
-  if (!left) return true;
-  const sortedLeft = [...left].sort();
-  const sortedRight = [...right].sort();
-  return sortedLeft.length === sortedRight.length && sortedLeft.every((value, index) => value === sortedRight[index]);
-}
 async function baselineEntryStillApplies(entry, targets) {
   for (const target of targets) {
-    if (!targetMatches(entry, target)) continue;
+    if (!baselineTargetMatches(entry, target)) continue;
     const report = await createCiReport([target]);
     if (report.targets.some(
-      (result) => result.disqualifications.some(
-        (dq2) => dq2.code === entry.code && (!entry.message || dq2.message === entry.message) && sameNodeIds2(entry.nodeIds, dq2.nodeIds)
-      )
+      (result) => result.disqualifications.some((dq2) => baselineDqMatches(entry, dq2))
     )) {
       return true;
     }
@@ -23344,24 +23389,12 @@ function worst(items) {
   return "pass";
 }
 async function createBaselineAuditReport(baselinePath, rawTargets) {
-  const baseline = await readJson(baselinePath);
+  const baseline = await readBaselineFile(baselinePath);
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   const items = [];
   const now = Date.now();
   for (const entry of baseline.entries) {
-    if (!entry.owner) {
-      items.push({ severity: "fail", entry, message: "baseline entry has no owner" });
-    }
-    if (!entry.expiresAt) {
-      items.push({ severity: "warn", entry, message: "baseline entry has no expiresAt" });
-    } else if (Number.isNaN(Date.parse(entry.expiresAt))) {
-      items.push({ severity: "fail", entry, message: "baseline entry expiresAt is not a valid date" });
-    } else if (Date.parse(entry.expiresAt) < now) {
-      items.push({ severity: "fail", entry, message: "baseline entry is expired" });
-    }
-    if (entry.target && !await exists(resolve7(entry.target))) {
-      items.push({ severity: "fail", entry, message: "baseline target does not exist" });
-    }
+    for (const issue of await baselineEntryIssues(entry, now)) items.push({ ...issue, entry });
     if (targets.length > 0 && !await baselineEntryStillApplies(entry, targets)) {
       items.push({ severity: "warn", entry, message: "baseline entry no longer matches a current DQ" });
     }
@@ -23409,8 +23442,8 @@ async function runBaselineCommand(args) {
 import { exit as exit10 } from "process";
 
 // src/cli/doctor.ts
-import { readFile as readFile14, stat as stat6 } from "fs/promises";
-import { join as join12, resolve as resolve8 } from "path";
+import { readFile as readFile15, stat as stat5 } from "fs/promises";
+import { join as join13, resolve as resolve9 } from "path";
 import { exit as exit5 } from "process";
 
 // src/cli/schema-check.ts
@@ -23460,7 +23493,7 @@ async function checkManifest(content, read) {
 }
 
 // src/cli/schema-check.ts
-async function readJson2(path) {
+async function readJson(path) {
   return JSON.parse(await readFile13(path, "utf-8"));
 }
 async function createSchemaCheckReport(rawTargets = []) {
@@ -23474,8 +23507,8 @@ async function createSchemaCheckReport(rawTargets = []) {
   const targets = rawTargets.length > 0 ? await collectReportTargets(rawTargets) : [];
   for (const target of targets) {
     try {
-      await withOutputLease(target, async (root) => {
-        await assertPublicationComplete(root);
+      await withOutputLease(target, async (root2) => {
+        await assertPublicationComplete(root2);
         await checkTarget(target, items);
       });
     } catch (error) {
@@ -23512,7 +23545,7 @@ async function checkTarget(target, items) {
     }
   }
   try {
-    const report = await validateGateInput(await readJson2(join11(target, "gate-input.json")));
+    const report = await validateGateInput(await readJson(join11(target, "gate-input.json")));
     items.push({
       name: `${target}:gate-input`,
       status: report.valid ? "pass" : "fail",
@@ -23546,16 +23579,31 @@ async function runSchemaCheckCommand(args) {
   exit4(report.status === "pass" ? 0 : 2);
 }
 
+// src/cli/distribution.ts
+import { readFile as readFile14 } from "fs/promises";
+import { join as join12 } from "path";
+import { fileURLToPath as fileURLToPath2 } from "url";
+var root = fileURLToPath2(new URL("../../", import.meta.url));
+function distributionPath(...segments) {
+  return join12(root, ...segments);
+}
+async function readDistributionMetadata() {
+  const path = distributionPath("qeg-report-action", "runtime-metadata.json");
+  const value = JSON.parse(await readFile14(path, "utf8"));
+  if (value?.runtimeVersion !== "qeg-runtime/v1" || typeof value.package?.name !== "string" || typeof value.package?.version !== "string" || !value.enums || typeof value.enums !== "object") throw new CliError(`Invalid packaged runtime metadata: ${path}`);
+  return value;
+}
+
 // src/cli/doctor.ts
-async function exists2(path) {
+async function exists(path) {
   try {
-    return (await stat6(path)).isFile() || (await stat6(path)).isDirectory();
+    return (await stat5(path)).isFile() || (await stat5(path)).isDirectory();
   } catch {
     return false;
   }
 }
-async function readJson3(path) {
-  return JSON.parse(await readFile14(path, "utf-8"));
+async function readJson2(path) {
+  return JSON.parse(await readFile15(path, "utf-8"));
 }
 function nodeMajor(version = process.versions.node) {
   return Number(version.split(".")[0]);
@@ -23570,7 +23618,7 @@ function worstSeverity(checks) {
   return "pass";
 }
 async function checkNode() {
-  const pkg = await readJson3("package.json");
+  const pkg = (await readDistributionMetadata()).package;
   const actual = nodeMajor();
   const minimum = minimumNodeMajor(pkg.engines?.node);
   if (actual < minimum) {
@@ -23588,18 +23636,18 @@ async function checkNode() {
   };
 }
 async function checkDist() {
-  if (await exists2("dist/cli.js")) {
+  if (await exists(distributionPath("dist/cli.js")) || await exists(distributionPath("qeg-report-action/dist/cli.mjs"))) {
     return {
       name: "dist-cli",
       severity: "pass",
-      message: "dist/cli.js exists"
+      message: "QEG packaged CLI exists"
     };
   }
   return {
     name: "dist-cli",
     severity: "fail",
-    message: "dist/cli.js is missing",
-    remediation: "Run npm run build before CI report, or let the GitHub Action build first."
+    message: "QEG packaged CLI is missing",
+    remediation: "Reinstall QEG, or rebuild the QEG distribution in its source repository."
   };
 }
 async function checkSchemas() {
@@ -23613,7 +23661,7 @@ async function checkSchemas() {
 }
 async function checkWorkflow() {
   const path = ".github/workflows/ci.yml";
-  if (!await exists2(path)) {
+  if (!await exists(path)) {
     return [{
       name: "github-actions-workflow",
       severity: "warn",
@@ -23621,7 +23669,7 @@ async function checkWorkflow() {
       remediation: "Use qeg init or qeg-report-action to add a workflow that uploads qeg-ci-report."
     }];
   }
-  const content = await readFile14(path, "utf-8");
+  const content = await readFile15(path, "utf-8");
   const usesQegAction = content.includes("qeg-report-action");
   const uploadsReportArtifact = usesQegAction || content.includes("actions/upload-artifact") && content.includes("qeg-ci-report");
   const writesSummary = usesQegAction || content.includes("GITHUB_STEP_SUMMARY") || content.includes("--github-summary") || content.includes("github-summary");
@@ -23641,9 +23689,9 @@ async function checkWorkflow() {
   ];
 }
 async function checkTarget2(rawTarget) {
-  const target = resolve8(rawTarget);
-  const inputPath = join12(target, "gate-input.json");
-  if (!await exists2(inputPath)) {
+  const target = resolve9(rawTarget);
+  const inputPath = join13(target, "gate-input.json");
+  if (!await exists(inputPath)) {
     return [{
       name: `target:${rawTarget}:gate-input`,
       severity: "fail",
@@ -23657,17 +23705,17 @@ async function checkTarget2(rawTarget) {
     message: "gate-input.json exists"
   }];
   try {
-    const input = await readJson3(inputPath);
+    const input = await readJson2(inputPath);
     const artifactPaths = [
       ...(input.metadata?.inputArtifacts ?? []).map((artifact) => artifact.path),
       ...(input.evidencePackage?.inputArtifactHashes ?? []).map((artifact) => artifact.path)
     ].filter((path) => Boolean(path));
     for (const artifactPath of artifactPaths) {
-      const resolved = resolve8(artifactPath);
+      const resolved = resolve9(target, artifactPath);
       checks.push({
         name: `target:${rawTarget}:artifact:${artifactPath}`,
-        severity: await exists2(resolved) ? "pass" : "warn",
-        message: await exists2(resolved) ? "artifact path exists" : "artifact path does not exist in this workspace",
+        severity: await exists(resolved) ? "pass" : "warn",
+        message: await exists(resolved) ? "artifact path exists" : "artifact path does not exist in this workspace",
         remediation: "Ensure CI checks out or generates the artifact before qeg report."
       });
     }
@@ -23724,9 +23772,11 @@ async function runDoctorCommand(args) {
 }
 
 // src/cli/enum-check.ts
-import { readFile as readFile15 } from "fs/promises";
+import { readFile as readFile16 } from "fs/promises";
 import { exit as exit6 } from "process";
-var CHECKS = [
+
+// src/cli/enum-contracts.json
+var enum_contracts_default = [
   { typeName: "GateProfile", schemaDef: "gateProfile", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
   { typeName: "GateVerdict", schemaDef: "gateVerdict", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
   { typeName: "DisqualificationCode", schemaDef: "disqualificationCode", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
@@ -23738,37 +23788,30 @@ var CHECKS = [
   { typeName: "SignalSemanticRole", schemaDef: "signalSemanticRole", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
   { typeName: "SignalAggregation", schemaDef: "signalAggregation", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" }
 ];
-async function readJson4(path) {
-  return JSON.parse(await readFile15(path, "utf-8"));
-}
-function extractStringUnion(source2, typeName) {
-  const match = source2.match(new RegExp(`export type ${typeName} =([\\s\\S]*?);`));
-  if (!match) return [];
-  return [...match[1].matchAll(/"([^"]+)"/g)].map((value) => value[1]).sort();
+
+// src/cli/enum-check.ts
+async function readJson3(path) {
+  return JSON.parse(await readFile16(path, "utf-8"));
 }
 function diff(left, right) {
   return left.filter((value) => !right.includes(value));
 }
 async function createEnumCheckReport() {
   const items = [];
-  const sourceCache = /* @__PURE__ */ new Map();
+  const metadata = await readDistributionMetadata();
   const schemaCache = /* @__PURE__ */ new Map();
-  for (const check of CHECKS) {
-    let typeSource = sourceCache.get(check.typeFile);
-    if (!typeSource) {
-      typeSource = await readFile15(check.typeFile, "utf-8");
-      sourceCache.set(check.typeFile, typeSource);
-    }
+  for (const check of enum_contracts_default) {
     let schema = schemaCache.get(check.schemaFile);
     if (!schema) {
-      schema = await readJson4(check.schemaFile);
+      schema = await readJson3(distributionPath(check.schemaFile));
       schemaCache.set(check.schemaFile, schema);
     }
-    const typeValues = extractStringUnion(typeSource, check.typeName);
-    const schemaValues = [...schema.$defs[check.schemaDef]?.enum ?? []].sort();
+    const packaged = metadata.enums[check.typeName];
+    const typeValues = Array.isArray(packaged) && packaged.every((value) => typeof value === "string") ? [...packaged].sort() : [];
+    const schemaValues = [...schema.$defs?.[check.schemaDef]?.enum ?? []].sort();
     const missingInSchema = diff(typeValues, schemaValues);
     const missingInTypes = diff(schemaValues, typeValues);
-    const status = missingInSchema.length === 0 && missingInTypes.length === 0 ? "pass" : "fail";
+    const status = typeValues.length > 0 && schemaValues.length > 0 && missingInSchema.length === 0 && missingInTypes.length === 0 ? "pass" : "fail";
     items.push({
       name: check.typeName,
       status,
@@ -23813,7 +23856,7 @@ async function runEnumCheckCommand(args) {
 
 // src/cli/snapshot.ts
 import { writeFile as writeFile2 } from "fs/promises";
-import { join as join13, relative as relative6 } from "path";
+import { join as join14, relative as relative5 } from "path";
 import { exit as exit7 } from "process";
 function parseSnapshotArgs(args) {
   const targets = [];
@@ -23850,7 +23893,7 @@ function normalizeReport(report) {
   return normalizeValue(report);
 }
 function snapshotPath(target) {
-  return join13(target, "expected-report.json");
+  return join14(target, "expected-report.json");
 }
 async function readSnapshot(path) {
   return optionalText(path);
@@ -23887,15 +23930,15 @@ async function runSnapshotCommand(args) {
   const results = await createSnapshotResults(options.targets, options.update);
   console.log("QEG Report Snapshots");
   for (const result of results) {
-    console.log(`- ${result.status.toUpperCase()} ${relative6(process.cwd(), result.target)} -> ${relative6(process.cwd(), result.path)}`);
+    console.log(`- ${result.status.toUpperCase()} ${relative5(process.cwd(), result.target)} -> ${relative5(process.cwd(), result.path)}`);
   }
   const failed = results.some((result) => result.status === "missing" || result.status === "mismatch");
   exit7(failed ? 2 : 0);
 }
 
 // src/cli/evidence-verify.ts
-import { readFile as readFile16 } from "fs/promises";
-import { join as join14 } from "path";
+import { readFile as readFile17 } from "fs/promises";
+import { join as join15 } from "path";
 import { exit as exit8 } from "process";
 function worst2(items) {
   if (items.some((item) => item.severity === "fail")) return "fail";
@@ -23907,7 +23950,7 @@ async function createEvidenceVerifyReport(rawTargets) {
   const items = [];
   for (const target of targets) {
     try {
-      const validation = await validateGateInput(JSON.parse(await readFile16(join14(target, "gate-input.json"), "utf-8")));
+      const validation = await validateGateInput(JSON.parse(await readFile17(join15(target, "gate-input.json"), "utf-8")));
       if (!validation.valid || !validation.input) {
         items.push({ target, artifactId: "gate-input", severity: "fail", code: "PATH_MISSING", message: `schema invalid: ${validation.issues.map((issue) => `${issue.path} ${issue.message}`).join("; ")}` });
         continue;
@@ -23936,8 +23979,8 @@ async function runEvidenceVerifyCommand(args) {
 }
 
 // src/cli/policy-lint.ts
-import { readFile as readFile17 } from "fs/promises";
-import { join as join15 } from "path";
+import { readFile as readFile18 } from "fs/promises";
+import { join as join16 } from "path";
 import { exit as exit9 } from "process";
 
 // src/cli/policy-lint/format.ts
@@ -24028,15 +24071,15 @@ function worst3(items) {
 }
 
 // src/cli/policy-lint.ts
-async function readJson5(path) {
-  return JSON.parse(await readFile17(path, "utf-8"));
+async function readJson4(path) {
+  return JSON.parse(await readFile18(path, "utf-8"));
 }
 async function createPolicyLintReport(rawTargets) {
   const targets = await collectReportTargets(rawTargets);
   const items = [];
   for (const target of targets) {
     try {
-      const input = await readJson5(join15(target, "gate-input.json"));
+      const input = await readJson4(join16(target, "gate-input.json"));
       lintPolicy(items, target, input.policy, "policy");
       if (input.evidencePackage?.gatePolicy) {
         lintPolicy(items, target, input.evidencePackage.gatePolicy, "evidencePackage.gatePolicy");
@@ -24123,7 +24166,7 @@ async function runCheckCommand(args) {
 
 // src/cli/evidence-normalize.ts
 import { realpath as realpath5 } from "fs/promises";
-import { basename as basename3, relative as relative8, resolve as resolve12 } from "path";
+import { basename as basename4, relative as relative7, resolve as resolve13 } from "path";
 import { exit as exit11 } from "process";
 
 // src/cli/evidence-normalize/values.ts
@@ -24273,18 +24316,18 @@ function adapterFields(adapter, raw) {
 
 // src/cli/evidence-normalize/files.ts
 import { createHash as createHash7 } from "crypto";
-import { readFile as readFile18, realpath as realpath4 } from "fs/promises";
-import { dirname as dirname2, isAbsolute as isAbsolute4, relative as relative7, resolve as resolve9 } from "path";
+import { readFile as readFile19, realpath as realpath4 } from "fs/promises";
+import { dirname as dirname3, isAbsolute as isAbsolute5, relative as relative6, resolve as resolve10 } from "path";
 function containedPath(baseDir, rawPath, label) {
-  const resolved = resolve9(baseDir, rawPath);
-  const offset = relative7(baseDir, resolved);
-  if (isAbsolute4(rawPath) || isOutsideBase2(offset)) {
+  const resolved = resolve10(baseDir, rawPath);
+  const offset = relative6(baseDir, resolved);
+  if (isAbsolute5(rawPath) || isOutsideBase2(offset)) {
     throw new CliError(`${label} must be contained within --base-dir`);
   }
   return resolved;
 }
 function isOutsideBase2(offset) {
-  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute4(offset);
+  return offset === "" || offset === ".." || offset.startsWith("../") || offset.startsWith("..\\") || isAbsolute5(offset);
 }
 async function assertRealContained(realBaseDir, path, label) {
   let actual;
@@ -24293,18 +24336,18 @@ async function assertRealContained(realBaseDir, path, label) {
   } catch (error) {
     throw new CliError(`Cannot resolve ${label}: ${error instanceof Error ? error.message : String(error)}`);
   }
-  const offset = relative7(realBaseDir, actual);
+  const offset = relative6(realBaseDir, actual);
   if (offset !== "" && isOutsideBase2(offset)) throw new CliError(`${label} resolves outside --base-dir`);
   return actual;
 }
 async function assertOutputParentContained(realBaseDir, outPath) {
   let actualParent;
   try {
-    actualParent = await realpath4(dirname2(outPath));
+    actualParent = await realpath4(dirname3(outPath));
   } catch (error) {
     throw new CliError(`Cannot resolve --out parent directory: ${error instanceof Error ? error.message : String(error)}`);
   }
-  const offset = relative7(realBaseDir, actualParent);
+  const offset = relative6(realBaseDir, actualParent);
   if (offset !== "" && isOutsideBase2(offset)) throw new CliError("--out parent resolves outside --base-dir");
   return actualParent;
 }
@@ -24313,7 +24356,7 @@ function sameFilesystemPath(left, right) {
 }
 async function readBytes(path, label) {
   try {
-    return await readFile18(path);
+    return await readFile19(path);
   } catch (error) {
     throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -24326,7 +24369,7 @@ function sha256(bytes) {
 var SUPPORTED_ADAPTERS = /* @__PURE__ */ new Set(["lakda", "toxiproxy", "shell", "ci"]);
 
 // src/cli/evidence-normalize/options.ts
-import { resolve as resolve10 } from "path";
+import { resolve as resolve11 } from "path";
 function parseArgs(args) {
   let adapter;
   let input;
@@ -24356,13 +24399,13 @@ function parseArgs(args) {
   if (!adapter || !input || !context || !out) {
     throw new CliError("Usage: qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json> [--base-dir <dir>] [--force]");
   }
-  return { adapter, input, context, out, baseDir: resolve10(baseDir), force };
+  return { adapter, input, context, out, baseDir: resolve11(baseDir), force };
 }
 
 // src/cli/evidence-normalize/publish.ts
 import { randomUUID as randomUUID3 } from "crypto";
 import { lstat as lstat7, open as open2, rename as rename2, unlink as unlink3 } from "fs/promises";
-import { basename as basename2, dirname as dirname3, resolve as resolve11 } from "path";
+import { basename as basename3, dirname as dirname4, resolve as resolve12 } from "path";
 async function publishNormalizedEvidence(outPath, content, force) {
   try {
     const destination = await lstat7(outPath);
@@ -24371,7 +24414,7 @@ async function publishNormalizedEvidence(outPath, content, force) {
   } catch (error) {
     if (!isMissingFile(error)) throw new CliError(`Inspect normalization output ${outPath}: ${String(error)}`);
   }
-  const tempPath = resolve11(dirname3(outPath), `.${basename2(outPath)}.${process.pid}.${randomUUID3()}.tmp`);
+  const tempPath = resolve12(dirname4(outPath), `.${basename3(outPath)}.${process.pid}.${randomUUID3()}.tmp`);
   let owned = false;
   try {
     const handle = await open2(tempPath, "wx");
@@ -24429,7 +24472,7 @@ async function normalizeResilienceEvidence(options) {
     assertRealContained(realBaseDir, contextPath, "--context"),
     assertOutputParentContained(realBaseDir, outPath)
   ]);
-  const realOutputPath = resolve12(realOutputParent, basename3(outPath));
+  const realOutputPath = resolve13(realOutputParent, basename4(outPath));
   if (sameFilesystemPath(realOutputPath, realInputPath) || sameFilesystemPath(realOutputPath, realContextPath)) {
     throw new CliError("--out must not overwrite --input or --context");
   }
@@ -24481,7 +24524,7 @@ async function normalizeResilienceEvidence(options) {
     attempt,
     rawArtifactRef: {
       id: `${node.id}:raw`,
-      path: relative8(options.baseDir, inputPath).replaceAll("\\", "/"),
+      path: relative7(options.baseDir, inputPath).replaceAll("\\", "/"),
       contentHash: sha256(rawBytes),
       revision: targetRevision
     },
@@ -24514,36 +24557,36 @@ async function runEvidenceNormalizeCommand(args) {
 
 // src/cli/init.ts
 import { mkdir as mkdir4, writeFile as writeFile3 } from "fs/promises";
-import { dirname as dirname4, join as join17, resolve as resolve13 } from "path";
+import { dirname as dirname5, join as join18, resolve as resolve14 } from "path";
 import { exit as exit12 } from "process";
 
 // src/cli/init-runtime.ts
-import { readFile as readFile19, readdir as readdir3 } from "fs/promises";
-import { join as join16 } from "path";
-import { fileURLToPath as fileURLToPath2 } from "url";
+import { readFile as readFile20, readdir as readdir3 } from "fs/promises";
+import { join as join17 } from "path";
+import { fileURLToPath as fileURLToPath3 } from "url";
 async function starterRuntimeFiles() {
-  const root = fileURLToPath2(new URL("../../", import.meta.url));
+  const root2 = fileURLToPath3(new URL("../../", import.meta.url));
   const files = /* @__PURE__ */ new Map();
   const visit = async (relativePath) => {
-    for (const entry of (await readdir3(join16(root, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-      const path = join16(relativePath, entry.name);
+    for (const entry of (await readdir3(join17(root2, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      const path = join17(relativePath, entry.name);
       if (entry.isDirectory()) await visit(path);
-      else if (entry.isFile()) files.set(path, await readFile19(join16(root, path), "utf8"));
+      else if (entry.isFile()) files.set(path, await readFile20(join17(root2, path), "utf8"));
       else throw new CliError(`Unsupported packaged runtime entry ${path}`);
     }
   };
   try {
     await visit("qeg-report-action");
     await visit("schemas");
-    files.set("LICENSE", await readFile19(join16(root, "LICENSE"), "utf8"));
+    files.set("LICENSE", await readFile20(join17(root2, "LICENSE"), "utf8"));
   } catch (error) {
-    throw new CliError(`Read starter runtime in ${root}: ${String(error)}`);
+    throw new CliError(`Read starter runtime in ${root2}: ${String(error)}`);
   }
   return files;
 }
 
 // src/cli/init.ts
-async function exists3(path) {
+async function exists2(path) {
   return await optionalStat(path) !== null;
 }
 function minimalGateInput() {
@@ -24648,14 +24691,14 @@ jobs:
 `;
 }
 function parseInitArgs(args) {
-  let root = ".";
+  let root2 = ".";
   let force = false;
   for (let index = 0; index < args.length; index += 1) {
     const arg = args[index];
     if (arg === "--root") {
       const value = args[index + 1];
       if (!value) throw new CliError("Expected path after --root");
-      root = value;
+      root2 = value;
       index += 1;
       continue;
     }
@@ -24665,10 +24708,10 @@ function parseInitArgs(args) {
     }
     throw new CliError("Usage: qeg init [--root <dir>] [--force]");
   }
-  return { root, force };
+  return { root: root2, force };
 }
 async function writeNewFile(path, content, force) {
-  if (await exists3(path)) {
+  if (await exists2(path)) {
     if (!force) return "skipped";
     await writeFile3(path, content, "utf-8");
     return "overwritten";
@@ -24678,35 +24721,35 @@ async function writeNewFile(path, content, force) {
 }
 async function runInitCommand(args) {
   const options = parseInitArgs(args);
-  const root = resolve13(options.root);
-  const qegDir = join17(root, ".qeg");
-  const workflowDir = join17(root, ".github", "workflows");
+  const root2 = resolve14(options.root);
+  const qegDir = join18(root2, ".qeg");
+  const workflowDir = join18(root2, ".github", "workflows");
   await mkdir4(qegDir, { recursive: true });
   await mkdir4(workflowDir, { recursive: true });
   const results = [
     {
-      path: join17(qegDir, "gate-input.json"),
-      status: await writeNewFile(join17(qegDir, "gate-input.json"), minimalGateInput(), options.force)
+      path: join18(qegDir, "gate-input.json"),
+      status: await writeNewFile(join18(qegDir, "gate-input.json"), minimalGateInput(), options.force)
     },
     {
-      path: join17(qegDir, "qeg-baseline.json"),
-      status: await writeNewFile(join17(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
+      path: join18(qegDir, "qeg-baseline.json"),
+      status: await writeNewFile(join18(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
     },
     {
-      path: join17(workflowDir, "qeg.yml"),
-      status: await writeNewFile(join17(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
+      path: join18(workflowDir, "qeg.yml"),
+      status: await writeNewFile(join18(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
     }
   ];
   const runtimeFiles = await starterRuntimeFiles();
   let runtimeWritten = 0;
   for (const [relativePath, content] of runtimeFiles) {
-    const path = join17(qegDir, "runtime", relativePath);
-    await mkdir4(dirname4(path), { recursive: true });
+    const path = join18(qegDir, "runtime", relativePath);
+    await mkdir4(dirname5(path), { recursive: true });
     const status = await writeNewFile(path, content, options.force);
     if (status !== "skipped") runtimeWritten++;
   }
   console.log("QEG init");
-  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join17(qegDir, "runtime")}`);
+  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join18(qegDir, "runtime")}`);
   for (const result of results) {
     console.log(`- ${result.status}: ${result.path}`);
   }
@@ -24718,11 +24761,11 @@ async function runInitCommand(args) {
 
 // src/cli/repro-bundle.ts
 import { createHash as createHash8 } from "crypto";
-import { mkdir as mkdir5, readFile as readFile20, readdir as readdir4 } from "fs/promises";
-import { basename as basename4, join as join18, resolve as resolve14 } from "path";
+import { mkdir as mkdir5, readFile as readFile21, readdir as readdir4 } from "fs/promises";
+import { basename as basename5, join as join19, resolve as resolve15 } from "path";
 import { exit as exit13 } from "process";
-async function readJson6(path) {
-  return JSON.parse(await readFile20(path, "utf-8"));
+async function readJson5(path) {
+  return JSON.parse(await readFile21(path, "utf-8"));
 }
 async function safeRead(path) {
   return optionalText(path);
@@ -24747,18 +24790,19 @@ function redact(value) {
 }
 function stageJson(contents, outDir, name, data, sourceTarget) {
   if (contents.has(name)) throw new CliError(`Duplicate repro bundle filename: ${name}`);
-  const path = join18(outDir, name);
+  const path = join19(outDir, name);
   const content = `${JSON.stringify(redact(data), null, 2)}
 `;
   contents.set(name, content);
   return { path, sha256: sha2562(content), ...sourceTarget ? { sourceTarget } : {} };
 }
 async function schemaInventory() {
-  const schemas = await readdir4("schemas");
+  const schemaDir = distributionPath("schemas");
+  const schemas = await readdir4(schemaDir);
   const rows2 = [];
   for (const file of schemas.filter((name) => name.endsWith(".schema.json")).sort()) {
-    const path = join18("schemas", file);
-    const content = await readFile20(path, "utf-8");
+    const path = join19(schemaDir, file);
+    const content = await readFile21(path, "utf-8");
     rows2.push({ file, sha256: sha2562(content), bytes: content.length });
   }
   return rows2;
@@ -24786,14 +24830,14 @@ function parseArgs2(args) {
 }
 async function runReproBundleCommand(args) {
   const options = parseArgs2(args);
-  const outDir = resolve14(options.outDir);
-  const pkg = await readJson6("package.json");
+  const outDir = resolve15(options.outDir);
+  const pkg = (await readDistributionMetadata()).package;
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
   const files = [];
   const contents = /* @__PURE__ */ new Map();
   const inputErrors = [];
   if (options.reportPath) {
-    const report = await readJson6(options.reportPath);
+    const report = await readJson5(options.reportPath);
     files.push(stageJson(contents, outDir, "qeg-ci-report.json", report));
   }
   files.push(stageJson(contents, outDir, "doctor.json", await createDoctorReport(targets)));
@@ -24820,17 +24864,17 @@ async function runReproBundleCommand(args) {
     files,
     inputErrors
   };
-  const manifestPath = join18(outDir, "manifest.json");
+  const manifestPath = join19(outDir, "manifest.json");
   contents.set("manifest.json", `${JSON.stringify(manifest, null, 2)}
 `);
   await mkdir5(outDir, { recursive: true });
-  await withOutputLease(outDir, async (root) => {
-    await publishFiles(root, contents);
-    const published = await readPublishedOutputs(root);
+  await withOutputLease(outDir, async (root2) => {
+    await publishFiles(root2, contents);
+    const published = await readPublishedOutputs(root2);
     const sealed = JSON.parse(published.files.get("manifest.json"));
     if (sealed.files.length !== files.length || new Set(sealed.files.map((file) => file.path)).size !== files.length) throw new CliError("Repro bundle manifest file set mismatch");
     for (const file of sealed.files) {
-      const content = published.files.get(basename4(file.path));
+      const content = published.files.get(basename5(file.path));
       if (content === void 0 || sha2562(content) !== file.sha256) throw new CliError(`Repro bundle hash mismatch: ${file.path}`);
     }
   });
@@ -24882,8 +24926,8 @@ async function runGateCommand(fixtureDir) {
 }
 async function runRecordCommand(fixtureDir) {
   try {
-    const code = await withOutputLease(fixtureDir, async (root) => {
-      const evaluated = await evaluateFixture(root);
+    const code = await withOutputLease(fixtureDir, async (root2) => {
+      const evaluated = await evaluateFixture(root2);
       await writeOutputRecord(evaluated);
       return getExitCode(evaluated.gateResult.verdict, evaluated.policy);
     });
@@ -24924,7 +24968,7 @@ async function main() {
       const configPath = configIndex >= 0 ? commandArgs[configIndex + 1] : void 0;
       const remaining = commandArgs.slice(1).filter((arg, i) => arg !== "--apply" && arg !== "--dry-run" && arg !== "--config" && i + 1 !== configIndex + 1);
       if (!directory || remaining.length || configIndex >= 0 && !configPath || apply && (!configPath || commandArgs.includes("--dry-run"))) throw new Error("Usage: qeg migrate <target-dir> [--config <config.json>] [--dry-run|--apply]");
-      const config = configPath ? JSON.parse(await readFile21(configPath, "utf8")) : void 0;
+      const config = configPath ? JSON.parse(await readFile22(configPath, "utf8")) : void 0;
       const report = apply ? await applyConsumerMigration(directory, config) : await planConsumerMigration(directory, config);
       console.log(JSON.stringify(report, null, 2));
       process.exitCode = ["blocked", "needs_configuration"].includes(report.status) ? 2 : 0;

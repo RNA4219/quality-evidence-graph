@@ -1,15 +1,19 @@
 {
   "id": "src/cli/report/baseline-diff.ts",
   "role": "report-baseline-diff",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 report-baseline-diff の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/cli/errors.ts",
+    "src/cli/path-key.ts",
+    "src/cli/report/baseline-contract.ts",
     "src/cli/report/model.ts",
     "src/cli/report/targets.ts",
     "src/types.ts"
   ],
   "deps_in": [
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
     "src/cli/report/core.ts"
   ],
   "risks": [
@@ -18,5 +22,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:9de5ba1b4e462c9b5e4e971ab8ce89acee3e2ce9d2999bead0da71e46c9f9905"
+  "contentHash": "sha256:83bc80495b20a6d4e1afef6e681b5600bfd1d67848f7708c62b7a94eee901226"
 }

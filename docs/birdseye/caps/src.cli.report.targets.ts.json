@@ -1,13 +1,14 @@
 {
   "id": "src/cli/report/targets.ts",
   "role": "report-targets",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 report-targets の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/file-errors.ts"
   ],
   "deps_in": [
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
     "src/cli/report.ts",
     "src/cli/report/baseline-diff.ts",
     "src/cli/report/core.ts"
@@ -18,5 +19,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:0567ac4f552f6dac2d8f0176795def29efa3d6d9ff48f91c535c1adb6dca6932"
+  "contentHash": "sha256:7d42e1ad69c7f872ff4ec673a4c1fc533c247594ad9fd3d3f1fb57c1daeb6aca"
 }

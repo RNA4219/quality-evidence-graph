@@ -157,7 +157,9 @@ export async function createCiReport(
   const errors: ReportError[] = selected.selection.status === "detection_failed"
     ? [{ code: "CHANGE_DETECTION_FAILED", message: selected.selection.error ?? "change detection failed" }]
     : [];
-  const baseline = await readBaseline(options.baselinePath);
+  let baseline: Awaited<ReturnType<typeof readBaseline>>;
+  try { baseline = await readBaseline(options.baselinePath); }
+  catch (error) { errors.push({ code: "BASELINE_INVALID", message: error instanceof Error ? error.message : String(error) }); }
   const results: ReportTargetResult[] = [];
   for (const target of selected.targets) {
     results.push(applyBaseline(await evaluateReportTarget(target), baseline));

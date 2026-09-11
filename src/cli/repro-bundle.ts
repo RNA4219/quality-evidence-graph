@@ -6,6 +6,7 @@ import { collectReportTargets } from "./report.js";
 import { createDoctorReport } from "./doctor.js";
 import { CliError } from "./errors.js";
 import { optionalText } from "./file-errors.js";
+import { distributionPath, readDistributionMetadata } from "./distribution.js";
 import { publishFiles, readGateInput, readPublishedOutputs, withOutputLease } from "../output-publication.js";
 
 interface ReproBundleManifest {
@@ -54,10 +55,11 @@ function stageJson(contents: Map<string, string>, outDir: string, name: string, 
 }
 
 async function schemaInventory(): Promise<unknown[]> {
-  const schemas = await readdir("schemas");
+  const schemaDir = distributionPath("schemas");
+  const schemas = await readdir(schemaDir);
   const rows: unknown[] = [];
   for (const file of schemas.filter((name) => name.endsWith(".schema.json")).sort()) {
-    const path = join("schemas", file);
+    const path = join(schemaDir, file);
     const content = await readFile(path, "utf-8");
     rows.push({ file, sha256: sha256(content), bytes: content.length });
   }
@@ -89,7 +91,7 @@ function parseArgs(args: readonly string[]): { reportPath?: string; outDir: stri
 export async function runReproBundleCommand(args: readonly string[]): Promise<void> {
   const options = parseArgs(args);
   const outDir = resolve(options.outDir);
-  const pkg = await readJson<{ name: string; version: string }>("package.json");
+  const pkg = (await readDistributionMetadata()).package;
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
   const files: ReproBundleManifest["files"][number][] = [];
   const contents = new Map<string, string>();

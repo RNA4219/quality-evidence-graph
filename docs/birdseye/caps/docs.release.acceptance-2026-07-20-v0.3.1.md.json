@@ -1,7 +1,7 @@
 {
   "id": "docs/release/acceptance-2026-07-20-v0.3.1.md",
   "role": "v0.3.1-github-only-release-acceptance",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG v0.3.1のGitHub-only配布、Action bundle、隔離schema障害・復旧、CI証跡の過去受入。現行改修の完了証拠には転用しない。",
   "deps_out": [

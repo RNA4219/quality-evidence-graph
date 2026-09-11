@@ -76,7 +76,7 @@ export interface ReportSummary {
 }
 
 export interface ReportError {
-  readonly code: "CHANGE_DETECTION_FAILED";
+  readonly code: "CHANGE_DETECTION_FAILED" | "BASELINE_INVALID";
   readonly message: string;
 }
 
@@ -102,6 +102,7 @@ export interface ReportDiff {
   readonly new: readonly ReportDiffItem[];
   readonly resolved: readonly ReportDiffItem[];
   readonly unchanged: readonly ReportDiffItem[];
+  readonly unverified?: readonly (ReportDiffItem & { readonly reason: "not_evaluated" | "evaluation_failed" })[];
 }
 
 export interface CreateCiReportOptions {

@@ -1,7 +1,7 @@
 {
   "id": "docs/project/review-fixes-2026-09-11.md",
   "role": "review-fixes-2026-09-11",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "R1〜R4の再現、全command排他、入力rollback、preview整合、manifest bindingの修正と追加受入。",
   "deps_out": [

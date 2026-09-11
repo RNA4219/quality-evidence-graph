@@ -3,6 +3,7 @@ import { join, resolve } from "path";
 import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { createSchemaCheckReport } from "./schema-check.js";
+import { distributionPath, readDistributionMetadata } from "./distribution.js";
 
 export type DoctorSeverity = "pass" | "warn" | "fail";
 
@@ -18,10 +19,6 @@ export interface DoctorReport {
   readonly generatedAt: string;
   readonly status: DoctorSeverity;
   readonly checks: readonly DoctorCheck[];
-}
-
-interface PackageJson {
-  readonly engines?: { readonly node?: string };
 }
 
 interface GateInputLike {
@@ -61,7 +58,7 @@ function worstSeverity(checks: readonly DoctorCheck[]): DoctorSeverity {
 }
 
 async function checkNode(): Promise<DoctorCheck> {
-  const pkg = await readJson<PackageJson>("package.json");
+  const pkg = (await readDistributionMetadata()).package;
   const actual = nodeMajor();
   const minimum = minimumNodeMajor(pkg.engines?.node);
   if (actual < minimum) {
@@ -80,18 +77,18 @@ async function checkNode(): Promise<DoctorCheck> {
 }
 
 async function checkDist(): Promise<DoctorCheck> {
-  if (await exists("dist/cli.js")) {
+  if (await exists(distributionPath("dist/cli.js")) || await exists(distributionPath("qeg-report-action/dist/cli.mjs"))) {
     return {
       name: "dist-cli",
       severity: "pass",
-      message: "dist/cli.js exists",
+      message: "QEG packaged CLI exists",
     };
   }
   return {
     name: "dist-cli",
     severity: "fail",
-    message: "dist/cli.js is missing",
-    remediation: "Run npm run build before CI report, or let the GitHub Action build first.",
+    message: "QEG packaged CLI is missing",
+    remediation: "Reinstall QEG, or rebuild the QEG distribution in its source repository.",
   };
 }
 
@@ -169,7 +166,7 @@ async function checkTarget(rawTarget: string): Promise<DoctorCheck[]> {
     ].filter((path): path is string => Boolean(path));
 
     for (const artifactPath of artifactPaths) {
-      const resolved = resolve(artifactPath);
+      const resolved = resolve(target, artifactPath);
       checks.push({
         name: `target:${rawTarget}:artifact:${artifactPath}`,
         severity: await exists(resolved) ? "pass" : "warn",

@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/code-to-gate-v0.3.1-2026-07-20/analysis-report.md",
   "role": "v0.3.1-static-analysis-evidence",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "v0.3.1のraw静的候補13件（high 1 / medium 12）、accepted-design 1件、effective medium 12件の履歴。",
   "deps_out": [

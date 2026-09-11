@@ -1,7 +1,7 @@
 {
   "id": "src/types.ts",
   "role": "types",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -40,6 +40,7 @@
     "src/cli/policy-lint/rules.ts",
     "src/cli/raw-ingest.ts",
     "src/cli/report.ts",
+    "src/cli/report/baseline-contract.ts",
     "src/cli/report/baseline-diff.ts",
     "src/cli/report/core.ts",
     "src/cli/report/format/shared.ts",

@@ -1,5 +1,7 @@
 import { readFile } from "fs/promises";
 import { exit } from "process";
+import { distributionPath, readDistributionMetadata } from "./distribution.js";
+import checks from "./enum-contracts.json" with { type: "json" };
 
 export interface EnumCheckItem {
   readonly name: string;
@@ -17,27 +19,8 @@ export interface EnumCheckReport {
   readonly items: readonly EnumCheckItem[];
 }
 
-const CHECKS = [
-  { typeName: "GateProfile", schemaDef: "gateProfile", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
-  { typeName: "GateVerdict", schemaDef: "gateVerdict", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
-  { typeName: "DisqualificationCode", schemaDef: "disqualificationCode", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
-  { typeName: "EvidenceKind", schemaDef: "evidenceKind", typeFile: "src/types/evidence.ts", schemaFile: "schemas/shared-defs.schema.json" },
-  { typeName: "TestType", schemaDef: "testType", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
-  { typeName: "ResilienceAdapter", schemaDef: "resilienceAdapter", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
-  { typeName: "ResilienceFaultModel", schemaDef: "resilienceFaultModel", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
-  { typeName: "SignalPhase", schemaDef: "signalPhase", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
-  { typeName: "SignalSemanticRole", schemaDef: "signalSemanticRole", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
-  { typeName: "SignalAggregation", schemaDef: "signalAggregation", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" },
-] as const;
-
 async function readJson<T>(path: string): Promise<T> {
   return JSON.parse(await readFile(path, "utf-8")) as T;
-}
-
-function extractStringUnion(source: string, typeName: string): string[] {
-  const match = source.match(new RegExp(`export type ${typeName} =([\\s\\S]*?);`));
-  if (!match) return [];
-  return [...match[1].matchAll(/"([^"]+)"/g)].map((value) => value[1]).sort();
 }
 
 function diff(left: readonly string[], right: readonly string[]): string[] {
@@ -46,25 +29,21 @@ function diff(left: readonly string[], right: readonly string[]): string[] {
 
 export async function createEnumCheckReport(): Promise<EnumCheckReport> {
   const items: EnumCheckItem[] = [];
-  const sourceCache = new Map<string, string>();
+  const metadata = await readDistributionMetadata();
   const schemaCache = new Map<string, { $defs: Record<string, { enum?: string[] }> }>();
 
-  for (const check of CHECKS) {
-    let typeSource = sourceCache.get(check.typeFile);
-    if (!typeSource) {
-      typeSource = await readFile(check.typeFile, "utf-8");
-      sourceCache.set(check.typeFile, typeSource);
-    }
+  for (const check of checks) {
     let schema = schemaCache.get(check.schemaFile);
     if (!schema) {
-      schema = await readJson<{ $defs: Record<string, { enum?: string[] }> }>(check.schemaFile);
+      schema = await readJson<{ $defs: Record<string, { enum?: string[] }> }>(distributionPath(check.schemaFile));
       schemaCache.set(check.schemaFile, schema);
     }
-    const typeValues = extractStringUnion(typeSource, check.typeName);
-    const schemaValues = [...(schema.$defs[check.schemaDef]?.enum ?? [])].sort();
+    const packaged = metadata.enums[check.typeName];
+    const typeValues = Array.isArray(packaged) && packaged.every(value => typeof value === "string") ? [...packaged].sort() : [];
+    const schemaValues = [...(schema.$defs?.[check.schemaDef]?.enum ?? [])].sort();
     const missingInSchema = diff(typeValues, schemaValues);
     const missingInTypes = diff(schemaValues, typeValues);
-    const status = missingInSchema.length === 0 && missingInTypes.length === 0 ? "pass" : "fail";
+    const status = typeValues.length > 0 && schemaValues.length > 0 && missingInSchema.length === 0 && missingInTypes.length === 0 ? "pass" : "fail";
     items.push({
       name: check.typeName,
       status,

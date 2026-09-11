@@ -1,0 +1,20 @@
+{
+  "id": "tests/cli-boundary-regression.test.mjs",
+  "role": "cli-boundary-regression.test",
+  "generation": "00020",
+  "public_api": [],
+  "summary": "QEG 0.4.0 cli-boundary-regression.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/cli-boundary-matrix.mjs"
+  ],
+  "deps_in": [
+    "docs/project/cli-boundary-fixes-2026-09-11.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:25c36e24aa52dcd603f82932df0c9aa7615550cffc6c4b28754c95e0ce339114"
+}
