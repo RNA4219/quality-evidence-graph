@@ -19144,11 +19144,18 @@ async function hasCommittedFile(root, name, bytes) {
   }
   return false;
 }
+async function assertNativeInputMatches(root, files) {
+  const input = files.get("gate-input.json");
+  if (input !== void 0 && await optionalRegular(join4(root, "gate-input.json")) !== input) {
+    throw new CliError("Output alias hash mismatch: gate-input.json; native input preserved. Review the input and rerun the producer command to create a matching generation");
+  }
+}
 async function readPublishedOutputs(directory) {
   return withOutputLease(directory, async (root) => {
     await assertPublicationComplete(root);
     const current = await generation(root);
     if (!current) throw new CliError("No completed output generation; rerun the original producer command");
+    await assertNativeInputMatches(root, current.files);
     for (const [name, bytes] of current.files) {
       await regular(join4(root, name));
       if (digest(await readFile6(join4(root, name))) !== digest(bytes)) throw new CliError(`Output alias hash mismatch: ${name}; run outputs recover`);
@@ -19161,7 +19168,8 @@ async function recoverOutputs(directory) {
     const current = await generation(root);
     await recoverPendingPublication(root);
     if (!current) throw new CliError("No completed generation to recover; rerun the original producer command");
-    for (const [name, bytes] of current.files) await replace(root, name, bytes);
+    for (const [name, bytes] of current.files) if (name !== "gate-input.json") await replace(root, name, bytes);
+    await assertNativeInputMatches(root, current.files);
     return current.generation;
   });
 }
@@ -22099,7 +22107,7 @@ async function runPlaceTestsUnderLease(directory) {
 var QEG_VERSION = "0.4.0";
 
 // src/cli.ts
-import { readFile as readFile22 } from "fs/promises";
+import { readFile as readFile21 } from "fs/promises";
 
 // src/consumer-migration.ts
 import { lstat as lstat4, readFile as readFile9 } from "fs/promises";
@@ -22226,7 +22234,7 @@ async function applyConsumerMigration(directory, config) {
 import { exit as exit14 } from "process";
 
 // src/cli/baseline.ts
-import { readFile as readFile12, stat as stat5 } from "fs/promises";
+import { readFile as readFile11, stat as stat5 } from "fs/promises";
 import { relative as relative5, resolve as resolve7 } from "path";
 import { exit as exit3 } from "process";
 
@@ -22278,7 +22286,7 @@ async function collectReportTargets(rawTargets) {
 }
 
 // src/cli/report/core.ts
-import { join as join9 } from "path";
+import { join as join8 } from "path";
 
 // src/cli/dq-explain.ts
 import { exit } from "process";
@@ -22645,8 +22653,7 @@ function validateEvaluatedFixture(expected, evaluated) {
 
 // src/cli/report/change-selection.ts
 import { execFile } from "child_process";
-import { readFile as readFile10 } from "fs/promises";
-import { join as join8, relative as relative4 } from "path";
+import { relative as relative4 } from "path";
 import { promisify } from "util";
 var execFileAsync = promisify(execFile);
 function portable2(path) {
@@ -22666,21 +22673,27 @@ async function changedFiles() {
     return { files: [], strategy: "worktree", error: "git repository detection failed: " + error };
   }
   const attempts = [
-    { strategy: "origin_main", args: ["diff", "--name-only", "--diff-filter=ACMRTUXB", "origin/main...HEAD"] },
-    { strategy: "head_parent", args: ["diff", "--name-only", "--diff-filter=ACMRTUXB", "HEAD~1...HEAD"] }
+    { strategy: "origin_main", args: ["diff", "--name-only", "-z", "--no-renames", "--diff-filter=ACDMRTUXB", "origin/main...HEAD"] },
+    { strategy: "head_parent", args: ["diff", "--name-only", "-z", "--no-renames", "--diff-filter=ACDMRTUXB", "HEAD~1...HEAD"] }
   ];
   const errors = [];
   for (const attempt of attempts) {
     try {
       const { stdout } = await execFileAsync("git", attempt.args);
-      return { files: stdout.split(/\r?\n/).map((file) => portable2(file.trim())).filter(Boolean), strategy: attempt.strategy };
+      return { files: stdout.split("\0").filter(Boolean).map(portable2), strategy: attempt.strategy };
     } catch (error) {
       errors.push(attempt.strategy + ": " + error);
     }
   }
   try {
-    const { stdout } = await execFileAsync("git", ["status", "--porcelain=v1", "--untracked-files=all"]);
-    const files = stdout.split(/\r?\n/).filter(Boolean).map((line) => line.slice(3).trim()).map((path) => path.includes(" -> ") ? path.split(" -> ").at(-1) ?? path : path).map(portable2);
+    const { stdout } = await execFileAsync("git", ["status", "--porcelain=v1", "-z", "--untracked-files=all"]);
+    const records = stdout.split("\0").filter(Boolean);
+    const files = [];
+    for (let index = 0; index < records.length; index++) {
+      const record = records[index];
+      files.push(portable2(record.slice(3)));
+      if (/[RC]/.test(record.slice(0, 2)) && records[index + 1] !== void 0) files.push(portable2(records[++index]));
+    }
     if (files.length > 0) return { files, strategy: "worktree" };
     errors.push("worktree: clean worktree cannot replace unavailable history");
   } catch (error) {
@@ -22692,12 +22705,16 @@ async function targetMentionsChangedFile(target, files) {
   const relTarget = relativeTarget2(target);
   if (files.some((file) => file === relTarget || file.startsWith(relTarget + "/"))) return true;
   try {
-    const input = JSON.parse(await readFile10(join8(target, "gate-input.json"), "utf-8"));
-    const artifacts = (input.metadata?.inputArtifacts ?? []).map((artifact) => artifact.path).filter((path) => Boolean(path)).map(portable2);
-    const changedCode = (input.graph?.nodes ?? []).filter((node) => node.kind === "changed_code" && node.path).map((node) => portable2(node.path));
-    return [...artifacts, ...changedCode].some((path) => files.includes(path));
+    return await withOutputLease(target, async (root) => {
+      const validation = await validateGateInput(JSON.parse(await readGateInput(root)));
+      if (!validation.valid || !validation.input) return true;
+      const input = validation.input;
+      const artifacts = input.metadata.inputArtifacts.map((artifact) => portable2(artifact.path));
+      const changedCode = input.graph.nodes.filter((node) => node.kind === "changed_code").map((node) => portable2(node.path));
+      return [...artifacts, ...changedCode].some((path) => files.includes(path));
+    });
   } catch {
-    return false;
+    return true;
   }
 }
 async function selectChangedTargets(targets, changedOnly = false) {
@@ -22719,9 +22736,9 @@ async function selectChangedTargets(targets, changedOnly = false) {
 }
 
 // src/cli/report/baseline-diff.ts
-import { readFile as readFile11 } from "fs/promises";
+import { readFile as readFile10 } from "fs/promises";
 async function readJsonFile2(path) {
-  return JSON.parse(await readFile11(path, "utf-8"));
+  return JSON.parse(await readFile10(path, "utf-8"));
 }
 async function readBaseline(path) {
   if (!path) return void 0;
@@ -22805,7 +22822,7 @@ function applyBaseline(target, baseline) {
 
 // src/cli/report/core.ts
 async function readExpectedIfPresent(target) {
-  const expectedPath = join9(target, "expected-gate-verdict.json");
+  const expectedPath = join8(target, "expected-gate-verdict.json");
   if (!(await safeStat(expectedPath))?.isFile()) {
     return void 0;
   }
@@ -23287,7 +23304,7 @@ async function exists(path) {
   }
 }
 async function readJson(path) {
-  return JSON.parse(await readFile12(path, "utf-8"));
+  return JSON.parse(await readFile11(path, "utf-8"));
 }
 function portable3(path) {
   return path.replace(/\\/g, "/");
@@ -23392,20 +23409,20 @@ async function runBaselineCommand(args) {
 import { exit as exit10 } from "process";
 
 // src/cli/doctor.ts
-import { readFile as readFile15, stat as stat6 } from "fs/promises";
-import { join as join13, resolve as resolve8 } from "path";
+import { readFile as readFile14, stat as stat6 } from "fs/promises";
+import { join as join12, resolve as resolve8 } from "path";
 import { exit as exit5 } from "process";
 
 // src/cli/schema-check.ts
-import { readFile as readFile14 } from "fs/promises";
-import { join as join12 } from "path";
+import { readFile as readFile13 } from "fs/promises";
+import { join as join11 } from "path";
 import { exit as exit4 } from "process";
 
 // src/cli/output-integrity.ts
-import { lstat as lstat6, readFile as readFile13 } from "fs/promises";
-import { join as join11 } from "path";
+import { lstat as lstat6, readFile as readFile12 } from "fs/promises";
+import { join as join10 } from "path";
 async function verifyOutputManifest(directory) {
-  if (await optionalText(join11(directory, ".qeg-current.json")) !== void 0) {
+  if (await optionalText(join10(directory, ".qeg-current.json")) !== void 0) {
     const snapshot = await readPublishedOutputs(directory);
     const content2 = snapshot.files.get("output-manifest.json");
     if (!content2) return ["Current generation is an intermediate result, not a completed record"];
@@ -23416,14 +23433,14 @@ async function verifyOutputManifest(directory) {
     });
   }
   try {
-    await lstat6(join11(directory, ".qeg-generations"));
+    await lstat6(join10(directory, ".qeg-generations"));
     return ["Output publication was interrupted or its pointer is missing; no completed generation"];
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
-  const content = await optionalText(join11(directory, "output-manifest.json"));
+  const content = await optionalText(join10(directory, "output-manifest.json"));
   if (content === void 0) return void 0;
-  return checkManifest(content, (name) => readFile13(join11(directory, name), "utf8"));
+  return checkManifest(content, (name) => readFile12(join10(directory, name), "utf8"));
 }
 async function checkManifest(content, read) {
   const raw = JSON.parse(content);
@@ -23444,7 +23461,7 @@ async function checkManifest(content, read) {
 
 // src/cli/schema-check.ts
 async function readJson2(path) {
-  return JSON.parse(await readFile14(path, "utf-8"));
+  return JSON.parse(await readFile13(path, "utf-8"));
 }
 async function createSchemaCheckReport(rawTargets = []) {
   const registry = await loadSchemaRegistry();
@@ -23481,7 +23498,7 @@ async function checkTarget(target, items) {
   }
   for (const [filename2, schema] of Object.entries(OUTPUT_SCHEMAS)) {
     try {
-      const content = await optionalText(join12(target, filename2));
+      const content = await optionalText(join11(target, filename2));
       if (content === void 0) continue;
       const output = await validateOutput(JSON.parse(content), schema);
       items.push({
@@ -23495,7 +23512,7 @@ async function checkTarget(target, items) {
     }
   }
   try {
-    const report = await validateGateInput(await readJson2(join12(target, "gate-input.json")));
+    const report = await validateGateInput(await readJson2(join11(target, "gate-input.json")));
     items.push({
       name: `${target}:gate-input`,
       status: report.valid ? "pass" : "fail",
@@ -23538,7 +23555,7 @@ async function exists2(path) {
   }
 }
 async function readJson3(path) {
-  return JSON.parse(await readFile15(path, "utf-8"));
+  return JSON.parse(await readFile14(path, "utf-8"));
 }
 function nodeMajor(version = process.versions.node) {
   return Number(version.split(".")[0]);
@@ -23604,7 +23621,7 @@ async function checkWorkflow() {
       remediation: "Use qeg init or qeg-report-action to add a workflow that uploads qeg-ci-report."
     }];
   }
-  const content = await readFile15(path, "utf-8");
+  const content = await readFile14(path, "utf-8");
   const usesQegAction = content.includes("qeg-report-action");
   const uploadsReportArtifact = usesQegAction || content.includes("actions/upload-artifact") && content.includes("qeg-ci-report");
   const writesSummary = usesQegAction || content.includes("GITHUB_STEP_SUMMARY") || content.includes("--github-summary") || content.includes("github-summary");
@@ -23625,7 +23642,7 @@ async function checkWorkflow() {
 }
 async function checkTarget2(rawTarget) {
   const target = resolve8(rawTarget);
-  const inputPath = join13(target, "gate-input.json");
+  const inputPath = join12(target, "gate-input.json");
   if (!await exists2(inputPath)) {
     return [{
       name: `target:${rawTarget}:gate-input`,
@@ -23707,7 +23724,7 @@ async function runDoctorCommand(args) {
 }
 
 // src/cli/enum-check.ts
-import { readFile as readFile16 } from "fs/promises";
+import { readFile as readFile15 } from "fs/promises";
 import { exit as exit6 } from "process";
 var CHECKS = [
   { typeName: "GateProfile", schemaDef: "gateProfile", typeFile: "src/types/primitives.ts", schemaFile: "schemas/shared-defs.schema.json" },
@@ -23722,7 +23739,7 @@ var CHECKS = [
   { typeName: "SignalAggregation", schemaDef: "signalAggregation", typeFile: "src/types/primitives.ts", schemaFile: "schemas/reliability.schema.json" }
 ];
 async function readJson4(path) {
-  return JSON.parse(await readFile16(path, "utf-8"));
+  return JSON.parse(await readFile15(path, "utf-8"));
 }
 function extractStringUnion(source2, typeName) {
   const match = source2.match(new RegExp(`export type ${typeName} =([\\s\\S]*?);`));
@@ -23739,7 +23756,7 @@ async function createEnumCheckReport() {
   for (const check of CHECKS) {
     let typeSource = sourceCache.get(check.typeFile);
     if (!typeSource) {
-      typeSource = await readFile16(check.typeFile, "utf-8");
+      typeSource = await readFile15(check.typeFile, "utf-8");
       sourceCache.set(check.typeFile, typeSource);
     }
     let schema = schemaCache.get(check.schemaFile);
@@ -23796,7 +23813,7 @@ async function runEnumCheckCommand(args) {
 
 // src/cli/snapshot.ts
 import { writeFile as writeFile2 } from "fs/promises";
-import { join as join14, relative as relative6 } from "path";
+import { join as join13, relative as relative6 } from "path";
 import { exit as exit7 } from "process";
 function parseSnapshotArgs(args) {
   const targets = [];
@@ -23833,7 +23850,7 @@ function normalizeReport(report) {
   return normalizeValue(report);
 }
 function snapshotPath(target) {
-  return join14(target, "expected-report.json");
+  return join13(target, "expected-report.json");
 }
 async function readSnapshot(path) {
   return optionalText(path);
@@ -23877,8 +23894,8 @@ async function runSnapshotCommand(args) {
 }
 
 // src/cli/evidence-verify.ts
-import { readFile as readFile17 } from "fs/promises";
-import { join as join15 } from "path";
+import { readFile as readFile16 } from "fs/promises";
+import { join as join14 } from "path";
 import { exit as exit8 } from "process";
 function worst2(items) {
   if (items.some((item) => item.severity === "fail")) return "fail";
@@ -23890,7 +23907,7 @@ async function createEvidenceVerifyReport(rawTargets) {
   const items = [];
   for (const target of targets) {
     try {
-      const validation = await validateGateInput(JSON.parse(await readFile17(join15(target, "gate-input.json"), "utf-8")));
+      const validation = await validateGateInput(JSON.parse(await readFile16(join14(target, "gate-input.json"), "utf-8")));
       if (!validation.valid || !validation.input) {
         items.push({ target, artifactId: "gate-input", severity: "fail", code: "PATH_MISSING", message: `schema invalid: ${validation.issues.map((issue) => `${issue.path} ${issue.message}`).join("; ")}` });
         continue;
@@ -23919,8 +23936,8 @@ async function runEvidenceVerifyCommand(args) {
 }
 
 // src/cli/policy-lint.ts
-import { readFile as readFile18 } from "fs/promises";
-import { join as join16 } from "path";
+import { readFile as readFile17 } from "fs/promises";
+import { join as join15 } from "path";
 import { exit as exit9 } from "process";
 
 // src/cli/policy-lint/format.ts
@@ -24012,14 +24029,14 @@ function worst3(items) {
 
 // src/cli/policy-lint.ts
 async function readJson5(path) {
-  return JSON.parse(await readFile18(path, "utf-8"));
+  return JSON.parse(await readFile17(path, "utf-8"));
 }
 async function createPolicyLintReport(rawTargets) {
   const targets = await collectReportTargets(rawTargets);
   const items = [];
   for (const target of targets) {
     try {
-      const input = await readJson5(join16(target, "gate-input.json"));
+      const input = await readJson5(join15(target, "gate-input.json"));
       lintPolicy(items, target, input.policy, "policy");
       if (input.evidencePackage?.gatePolicy) {
         lintPolicy(items, target, input.evidencePackage.gatePolicy, "evidencePackage.gatePolicy");
@@ -24256,7 +24273,7 @@ function adapterFields(adapter, raw) {
 
 // src/cli/evidence-normalize/files.ts
 import { createHash as createHash7 } from "crypto";
-import { readFile as readFile19, realpath as realpath4 } from "fs/promises";
+import { readFile as readFile18, realpath as realpath4 } from "fs/promises";
 import { dirname as dirname2, isAbsolute as isAbsolute4, relative as relative7, resolve as resolve9 } from "path";
 function containedPath(baseDir, rawPath, label) {
   const resolved = resolve9(baseDir, rawPath);
@@ -24296,7 +24313,7 @@ function sameFilesystemPath(left, right) {
 }
 async function readBytes(path, label) {
   try {
-    return await readFile19(path);
+    return await readFile18(path);
   } catch (error) {
     throw new CliError(`Cannot read ${label}: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -24497,28 +24514,28 @@ async function runEvidenceNormalizeCommand(args) {
 
 // src/cli/init.ts
 import { mkdir as mkdir4, writeFile as writeFile3 } from "fs/promises";
-import { dirname as dirname4, join as join18, resolve as resolve13 } from "path";
+import { dirname as dirname4, join as join17, resolve as resolve13 } from "path";
 import { exit as exit12 } from "process";
 
 // src/cli/init-runtime.ts
-import { readFile as readFile20, readdir as readdir3 } from "fs/promises";
-import { join as join17 } from "path";
+import { readFile as readFile19, readdir as readdir3 } from "fs/promises";
+import { join as join16 } from "path";
 import { fileURLToPath as fileURLToPath2 } from "url";
 async function starterRuntimeFiles() {
   const root = fileURLToPath2(new URL("../../", import.meta.url));
   const files = /* @__PURE__ */ new Map();
   const visit = async (relativePath) => {
-    for (const entry of (await readdir3(join17(root, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-      const path = join17(relativePath, entry.name);
+    for (const entry of (await readdir3(join16(root, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      const path = join16(relativePath, entry.name);
       if (entry.isDirectory()) await visit(path);
-      else if (entry.isFile()) files.set(path, await readFile20(join17(root, path), "utf8"));
+      else if (entry.isFile()) files.set(path, await readFile19(join16(root, path), "utf8"));
       else throw new CliError(`Unsupported packaged runtime entry ${path}`);
     }
   };
   try {
     await visit("qeg-report-action");
     await visit("schemas");
-    files.set("LICENSE", await readFile20(join17(root, "LICENSE"), "utf8"));
+    files.set("LICENSE", await readFile19(join16(root, "LICENSE"), "utf8"));
   } catch (error) {
     throw new CliError(`Read starter runtime in ${root}: ${String(error)}`);
   }
@@ -24662,34 +24679,34 @@ async function writeNewFile(path, content, force) {
 async function runInitCommand(args) {
   const options = parseInitArgs(args);
   const root = resolve13(options.root);
-  const qegDir = join18(root, ".qeg");
-  const workflowDir = join18(root, ".github", "workflows");
+  const qegDir = join17(root, ".qeg");
+  const workflowDir = join17(root, ".github", "workflows");
   await mkdir4(qegDir, { recursive: true });
   await mkdir4(workflowDir, { recursive: true });
   const results = [
     {
-      path: join18(qegDir, "gate-input.json"),
-      status: await writeNewFile(join18(qegDir, "gate-input.json"), minimalGateInput(), options.force)
+      path: join17(qegDir, "gate-input.json"),
+      status: await writeNewFile(join17(qegDir, "gate-input.json"), minimalGateInput(), options.force)
     },
     {
-      path: join18(qegDir, "qeg-baseline.json"),
-      status: await writeNewFile(join18(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
+      path: join17(qegDir, "qeg-baseline.json"),
+      status: await writeNewFile(join17(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
     },
     {
-      path: join18(workflowDir, "qeg.yml"),
-      status: await writeNewFile(join18(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
+      path: join17(workflowDir, "qeg.yml"),
+      status: await writeNewFile(join17(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
     }
   ];
   const runtimeFiles = await starterRuntimeFiles();
   let runtimeWritten = 0;
   for (const [relativePath, content] of runtimeFiles) {
-    const path = join18(qegDir, "runtime", relativePath);
+    const path = join17(qegDir, "runtime", relativePath);
     await mkdir4(dirname4(path), { recursive: true });
     const status = await writeNewFile(path, content, options.force);
     if (status !== "skipped") runtimeWritten++;
   }
   console.log("QEG init");
-  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join18(qegDir, "runtime")}`);
+  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join17(qegDir, "runtime")}`);
   for (const result of results) {
     console.log(`- ${result.status}: ${result.path}`);
   }
@@ -24701,11 +24718,11 @@ async function runInitCommand(args) {
 
 // src/cli/repro-bundle.ts
 import { createHash as createHash8 } from "crypto";
-import { mkdir as mkdir5, readFile as readFile21, readdir as readdir4, stat as stat8, writeFile as writeFile4 } from "fs/promises";
-import { basename as basename4, join as join19, resolve as resolve14 } from "path";
+import { mkdir as mkdir5, readFile as readFile20, readdir as readdir4 } from "fs/promises";
+import { basename as basename4, join as join18, resolve as resolve14 } from "path";
 import { exit as exit13 } from "process";
 async function readJson6(path) {
-  return JSON.parse(await readFile21(path, "utf-8"));
+  return JSON.parse(await readFile20(path, "utf-8"));
 }
 async function safeRead(path) {
   return optionalText(path);
@@ -24728,19 +24745,20 @@ function redact(value) {
   }
   return value;
 }
-async function writeJson(outDir, name, data) {
-  const path = join19(outDir, name);
+function stageJson(contents, outDir, name, data, sourceTarget) {
+  if (contents.has(name)) throw new CliError(`Duplicate repro bundle filename: ${name}`);
+  const path = join18(outDir, name);
   const content = `${JSON.stringify(redact(data), null, 2)}
 `;
-  await writeFile4(path, content, "utf-8");
-  return { path, sha256: sha2562(content) };
+  contents.set(name, content);
+  return { path, sha256: sha2562(content), ...sourceTarget ? { sourceTarget } : {} };
 }
 async function schemaInventory() {
   const schemas = await readdir4("schemas");
   const rows2 = [];
   for (const file of schemas.filter((name) => name.endsWith(".schema.json")).sort()) {
-    const path = join19("schemas", file);
-    const content = await readFile21(path, "utf-8");
+    const path = join18("schemas", file);
+    const content = await readFile20(path, "utf-8");
     rows2.push({ file, sha256: sha2562(content), bytes: content.length });
   }
   return rows2;
@@ -24769,41 +24787,56 @@ function parseArgs2(args) {
 async function runReproBundleCommand(args) {
   const options = parseArgs2(args);
   const outDir = resolve14(options.outDir);
-  await mkdir5(outDir, { recursive: true });
   const pkg = await readJson6("package.json");
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
   const files = [];
+  const contents = /* @__PURE__ */ new Map();
+  const inputErrors = [];
   if (options.reportPath) {
     const report = await readJson6(options.reportPath);
-    files.push(await writeJson(outDir, "qeg-ci-report.json", report));
+    files.push(stageJson(contents, outDir, "qeg-ci-report.json", report));
   }
-  files.push(await writeJson(outDir, "doctor.json", await createDoctorReport(targets)));
-  files.push(await writeJson(outDir, "schemas.json", await schemaInventory()));
+  files.push(stageJson(contents, outDir, "doctor.json", await createDoctorReport(targets)));
+  files.push(stageJson(contents, outDir, "schemas.json", await schemaInventory()));
   const workflow = await safeRead(".github/workflows/ci.yml");
   if (workflow !== void 0) {
-    files.push(await writeJson(outDir, "workflow.json", { path: ".github/workflows/ci.yml", content: workflow }));
+    files.push(stageJson(contents, outDir, "workflow.json", { path: ".github/workflows/ci.yml", content: workflow }));
   }
   for (const target of targets) {
-    const inputPath = join19(target, "gate-input.json");
+    let input;
     try {
-      if ((await stat8(inputPath)).isFile()) {
-        files.push(await writeJson(outDir, `gate-input-${basename4(target)}.json`, await readJson6(inputPath)));
-      }
-    } catch {
+      input = JSON.parse(await readGateInput(target));
+    } catch (error) {
+      inputErrors.push({ target, error: String(redact(error instanceof Error ? error.message : String(error))) });
+      continue;
     }
+    files.push(stageJson(contents, outDir, `gate-input-${sha2562(target)}.json`, input, target));
   }
   const manifest = {
     reportVersion: "qeg-repro-bundle-v1",
     generatedAt: (/* @__PURE__ */ new Date()).toISOString(),
     package: { name: pkg.name, version: pkg.version },
     reportPath: options.reportPath,
-    files
+    files,
+    inputErrors
   };
-  const manifestPath = join19(outDir, "manifest.json");
-  await writeFile4(manifestPath, `${JSON.stringify(manifest, null, 2)}
-`, "utf-8");
+  const manifestPath = join18(outDir, "manifest.json");
+  contents.set("manifest.json", `${JSON.stringify(manifest, null, 2)}
+`);
+  await mkdir5(outDir, { recursive: true });
+  await withOutputLease(outDir, async (root) => {
+    await publishFiles(root, contents);
+    const published = await readPublishedOutputs(root);
+    const sealed = JSON.parse(published.files.get("manifest.json"));
+    if (sealed.files.length !== files.length || new Set(sealed.files.map((file) => file.path)).size !== files.length) throw new CliError("Repro bundle manifest file set mismatch");
+    for (const file of sealed.files) {
+      const content = published.files.get(basename4(file.path));
+      if (content === void 0 || sha2562(content) !== file.sha256) throw new CliError(`Repro bundle hash mismatch: ${file.path}`);
+    }
+  });
   console.log(`QEG repro bundle written to: ${outDir}`);
   console.log(`Manifest: ${manifestPath}`);
+  if (inputErrors.length) console.log(`Input capture diagnostics: ${inputErrors.length}; see manifest.inputErrors`);
   exit13(0);
 }
 
@@ -24891,7 +24924,7 @@ async function main() {
       const configPath = configIndex >= 0 ? commandArgs[configIndex + 1] : void 0;
       const remaining = commandArgs.slice(1).filter((arg, i) => arg !== "--apply" && arg !== "--dry-run" && arg !== "--config" && i + 1 !== configIndex + 1);
       if (!directory || remaining.length || configIndex >= 0 && !configPath || apply && (!configPath || commandArgs.includes("--dry-run"))) throw new Error("Usage: qeg migrate <target-dir> [--config <config.json>] [--dry-run|--apply]");
-      const config = configPath ? JSON.parse(await readFile22(configPath, "utf8")) : void 0;
+      const config = configPath ? JSON.parse(await readFile21(configPath, "utf8")) : void 0;
       const report = apply ? await applyConsumerMigration(directory, config) : await planConsumerMigration(directory, config);
       console.log(JSON.stringify(report, null, 2));
       process.exitCode = ["blocked", "needs_configuration"].includes(report.status) ? 2 : 0;

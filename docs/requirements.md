@@ -349,11 +349,11 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-12 | `init` | 他 repo へ最小 QEG 設定を導入する | `.qeg/gate-input.json`、`.qeg/qeg-baseline.json`、GitHub Actions workflow を生成できる |
 | C-13 | `report --github-summary` | GitHub Actions Job Summary に人間向け累積レポートを書く | CI log の末尾だけに依存せず、DQ 別 / target 別の不足を Step Summary で読める |
 | C-14 | `report --baseline` | 既知の DQ を baseline として受理し、新規 DQ だけを赤にする | baseline が全 current DQ を覆い、blocker / residual risk / human review / expected mismatch がない場合だけ pass 扱いにできる |
-| C-15 | `report --changed-only` | 変更に関係する target だけを評価する | `QEG_CHANGED_FILES` または git diff から対象を絞り、対象なしの場合は空 report / exit `0` にできる |
+| C-15 | `report --changed-only` | 変更に関係する target だけを評価する | 削除・rename両端を含むGit差分または明示pathで絞る。読取り不能・schema不正・公開中の入力は通常評価へ回し、不確かな関連性を対象なし / exit `0` にしない |
 | C-16 | `qeg-report-action` | OSS 利用者が GitHub Actions へ QEG report を組み込みやすくする | report step 自体は成功終了し、`exit_code` output、artifact、Step Summary を残してから呼び出し側の final verdict で失敗させられる |
 | C-17 | `baseline audit` | baseline の放置を防ぐ | 期限切れ、owner 未設定、存在しない target、すでに解消済みの DQ を検出できる |
 | C-18 | `report --diff <previous-report.json>` | 前回 CI との差分を表示する | DQ を `new` / `resolved` / `unchanged` に分類し、今回増えた不足と解消した不足を読める |
-| C-19 | `repro-bundle` | CI 失敗の再現材料をまとめる | report、doctor、schema inventory、package version、workflow、対象 `gate-input.json` を secret redaction 付きで bundle 化できる |
+| C-19 | `repro-bundle` | CI 失敗の再現材料をまとめる | redaction付き入力をtargetごとに衝突なく保存し、元targetと対応付ける。取得失敗を明示し、manifestと全fileのhashを完了世代で検証して公開する |
 | C-20 | `evidence verify` | Gate 前に証跡実体だけを高速検証する | artifact path、hash、revision、retention、storageClassification の不足や矛盾を Gate 全体より前に切り分けられる |
 | C-21 | `policy lint` | GatePolicy 正本の矛盾を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile 設定の不整合を検出できる |
 | C-22 | `check` | ローカル総合確認入口を提供する | schema-check、enum-check、doctor、snapshot、report を一括実行し、導入者が最初に見るコマンドにできる |
@@ -555,7 +555,7 @@ EAC-08〜10の実装契約は[出力公開・復旧・consumer移行](spec/outpu
 | EAC-05 | 実体と意味の両方を検証する | raw・参照先のhash/revision/versionとraw内部の対象対応を検証し、I/O診断原因を保持 |
 | EAC-06 | 実行結果を正しく扱う | 必須未実行/mock-only/不明はDQ、資格のある採用failはno_go要因、passで独立blockerを消さない |
 | EAC-07 | 判定を再現可能にする | 入力順・wall clock・API/CLI経路で採用ID/除外理由/verdictが変わらない |
-| EAC-08 | 完全な出力だけを正式に扱う | 中断・競合・復旧時も同一世代のschema/hashが整合、失敗時に成功を主張しない |
+| EAC-08 | 完全な出力だけを正式に扱う | 中断・競合・復旧時も同一世代のschema/hashが整合。journalの更新前native入力を古い世代で再上書きしない。入力と過去出力が異なる場合は再評価を要求し、完全世代の復旧成功を主張しない |
 | EAC-09 | 実接続の証明範囲を明示する | 合成fixture・実artifact固定再生・実producer再実行を区別し、主張に対応した証拠を持つ |
 | EAC-10 | 旧consumerを明示的に移行する | 無変更dry-runと不足診断、明示設定、統制/履歴保持、再実行の冪等性を確認 |
 | EAC-11 | 統制と資格を一貫させる | profileやwaiverで資格不適合を隠さず、外部approval/retentionの既存条件を維持 |

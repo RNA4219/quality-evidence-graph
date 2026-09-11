@@ -1,7 +1,8 @@
 import { execFile } from "child_process";
-import { readFile } from "fs/promises";
-import { join, relative } from "path";
+import { relative } from "path";
 import { promisify } from "util";
+import { readGateInput, withOutputLease } from "../../output-publication.js";
+import { validateGateInput } from "../../validation/schema.js";
 
 const execFileAsync = promisify(execFile);
 export type ChangeSelectionStrategy = "all" | "env" | "origin_main" | "head_parent" | "worktree";
@@ -15,10 +16,6 @@ export interface ReportSelection {
   readonly error?: string;
 }
 export interface ChangeSelectionResult { readonly targets: readonly string[]; readonly selection: ReportSelection; }
-interface GateInputForChangedOnly {
-  readonly graph?: { readonly nodes?: readonly { readonly kind?: string; readonly path?: string }[] };
-  readonly metadata?: { readonly inputArtifacts?: readonly { readonly path?: string }[] };
-}
 function portable(path: string): string { return path.split(String.fromCharCode(92)).join("/"); }
 function relativeTarget(target: string): string { return portable(relative(process.cwd(), target)); }
 async function changedFiles(): Promise<{ files: string[]; strategy: Exclude<ChangeSelectionStrategy, "all">; error?: string }> {
@@ -29,22 +26,25 @@ async function changedFiles(): Promise<{ files: string[]; strategy: Exclude<Chan
   try { await execFileAsync("git", ["rev-parse", "--is-inside-work-tree"]); }
   catch (error) { return { files: [], strategy: "worktree", error: "git repository detection failed: " + error }; }
   const attempts: readonly { strategy: "origin_main" | "head_parent"; args: string[] }[] = [
-    { strategy: "origin_main", args: ["diff", "--name-only", "--diff-filter=ACMRTUXB", "origin/main...HEAD"] },
-    { strategy: "head_parent", args: ["diff", "--name-only", "--diff-filter=ACMRTUXB", "HEAD~1...HEAD"] },
+    { strategy: "origin_main", args: ["diff", "--name-only", "-z", "--no-renames", "--diff-filter=ACDMRTUXB", "origin/main...HEAD"] },
+    { strategy: "head_parent", args: ["diff", "--name-only", "-z", "--no-renames", "--diff-filter=ACDMRTUXB", "HEAD~1...HEAD"] },
   ];
   const errors: string[] = [];
   for (const attempt of attempts) {
     try {
       const { stdout } = await execFileAsync("git", attempt.args);
-      return { files: stdout.split(/\r?\n/).map((file) => portable(file.trim())).filter(Boolean), strategy: attempt.strategy };
+      return { files: stdout.split("\0").filter(Boolean).map(portable), strategy: attempt.strategy };
     } catch (error) { errors.push(attempt.strategy + ": " + error); }
   }
   try {
-    const { stdout } = await execFileAsync("git", ["status", "--porcelain=v1", "--untracked-files=all"]);
-    const files = stdout.split(/\r?\n/).filter(Boolean)
-      .map((line) => line.slice(3).trim())
-      .map((path) => path.includes(" -> ") ? path.split(" -> ").at(-1) ?? path : path)
-      .map(portable);
+    const { stdout } = await execFileAsync("git", ["status", "--porcelain=v1", "-z", "--untracked-files=all"]);
+    const records = stdout.split("\0").filter(Boolean);
+    const files: string[] = [];
+    for (let index = 0; index < records.length; index++) {
+      const record = records[index];
+      files.push(portable(record.slice(3)));
+      if (/[RC]/.test(record.slice(0, 2)) && records[index + 1] !== undefined) files.push(portable(records[++index]));
+    }
     if (files.length > 0) return { files, strategy: "worktree" };
     errors.push("worktree: clean worktree cannot replace unavailable history");
   } catch (error) {
@@ -56,11 +56,16 @@ async function targetMentionsChangedFile(target: string, files: readonly string[
   const relTarget = relativeTarget(target);
   if (files.some((file) => file === relTarget || file.startsWith(relTarget + "/"))) return true;
   try {
-    const input = JSON.parse(await readFile(join(target, "gate-input.json"), "utf-8")) as GateInputForChangedOnly;
-    const artifacts = (input.metadata?.inputArtifacts ?? []).map((artifact) => artifact.path).filter((path): path is string => Boolean(path)).map(portable);
-    const changedCode = (input.graph?.nodes ?? []).filter((node) => node.kind === "changed_code" && node.path).map((node) => portable(node.path as string));
-    return [...artifacts, ...changedCode].some((path) => files.includes(path));
-  } catch { return false; }
+    return await withOutputLease(target, async root => {
+      const validation = await validateGateInput(JSON.parse(await readGateInput(root)));
+      // Uncertain relevance must enter normal evaluation, which reports the actual input error/DQ.
+      if (!validation.valid || !validation.input) return true;
+      const input = validation.input;
+      const artifacts = input.metadata.inputArtifacts.map(artifact => portable(artifact.path));
+      const changedCode = input.graph.nodes.filter(node => node.kind === "changed_code").map(node => portable(node.path));
+      return [...artifacts, ...changedCode].some(path => files.includes(path));
+    });
+  } catch { return true; }
 }
 export async function selectChangedTargets(targets: readonly string[], changedOnly = false): Promise<ChangeSelectionResult> {
   if (!changedOnly) return { targets: [...targets], selection: { mode: "all", status: "selected", strategy: "all", changedFileCount: 0, selectedTargetCount: targets.length } };

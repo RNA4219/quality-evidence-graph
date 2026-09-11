@@ -12,6 +12,8 @@ next_review_due: 2026-12-10
 
 EAC-08〜10の実装入口は`docs/spec/output-publication-and-migration.md`。2026-09-11のR1〜R4修正と追加受入は`docs/project/review-fixes-2026-09-11.md`と`docs/evidence/review-fixes-2026-09-11/`を参照。前回の`docs/evidence/eac-completion-2026-09-10/`は実producer原本を含む履歴として保持する。
 
+最新のR5〜R7（native編集保護・差分選択・診断bundle）は`docs/project/followup-fixes-2026-09-11.md`と`docs/evidence/followup-fixes-2026-09-11/`を参照する。受入状態の正本は`docs/project/evidence-acceptance-status.md`。
+
 ## 1. 読み順
 
 1. `README.md`

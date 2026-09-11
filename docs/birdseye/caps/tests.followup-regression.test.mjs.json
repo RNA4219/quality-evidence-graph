@@ -1,0 +1,20 @@
+{
+  "id": "tests/followup-regression.test.mjs",
+  "role": "followup-regression.test",
+  "generation": "00019",
+  "public_api": [],
+  "summary": "QEG 0.4.0 followup-regression.test の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "tests/helpers/raw-producer-fixture.mjs"
+  ],
+  "deps_in": [
+    "docs/project/followup-fixes-2026-09-11.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:c8dcf3277ab1d3e13dae7f021e0c4d07cd8d752a4d2c12492492400d1f9fd6d5"
+}

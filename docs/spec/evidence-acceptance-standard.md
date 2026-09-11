@@ -3,7 +3,7 @@ intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-001
 owner: quality-evidence-graph
 status: defined
 standard_version: qeg-evidence-acceptance/v1
-implementation_status: accepted
+implementation_status: implemented
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -98,6 +98,8 @@ R-E01/02はP1、残りはP2。まず対象・時計・再実行を一緒に整�
 以下は基準に対する期待結果。実測と合否は受入台帳に記録する。black-boxを主とし、ログ・manifestによるgray確認を補助にする。自動化済みの同一ケースは実行証拠を流用でき、手動で重複実行する必要はない。
 
 2026-09-11の再レビューで、同じfile集合だけの中断試験と共有objectを使ったmapping試験では不足があった。TC-20〜22/24に加え、EAC-04/07のAPI/CLI照合はmanifestとloaded descriptorを別objectにし、正しいmappingと存在しない要求へのmappingの両方を試す。[R1〜R4の追加受入](../project/review-fixes-2026-09-11.md)を参照。
+
+その後のR6では、前世代がrecordだけの試験ではnative編集の巻き戻りを検出できないことが判明した。TC-20〜22はrecord/migrate/place-tests/build-graphの各前世代、command間のnative編集、復旧自体の中断と繰返しを含む。関連するC-15/C-19では、差分選択の読取り失敗・削除・rename両端と、同名targetの診断bundle・hash整合を[R5〜R7の追加受入](../project/followup-fixes-2026-09-11.md)で検証する。
 
 共通前提はraw fixtureまたは隔離consumer、実行必須=true、正当な現在build/revision、他のGate条件を満たす正常対照。操作は「対象データを準備→raw build-graph→place-tests→gate→record→schema/hash確認」。1要因変更ではraw hashも実際のbytesへ整合させ、hashエラーで本来の意味的検証が隠れないようにする。全ケースのoracleは本書の対応EAC規則（specified）とする。
 

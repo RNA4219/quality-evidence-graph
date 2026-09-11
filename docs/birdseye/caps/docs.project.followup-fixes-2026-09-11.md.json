@@ -1,0 +1,25 @@
+{
+  "id": "docs/project/followup-fixes-2026-09-11.md",
+  "role": "followup-fixes-2026-09-11",
+  "generation": "00019",
+  "public_api": [],
+  "summary": "R5〜R7の差分検査・native編集保護・診断bundle保存を一括修正し、操作順の組合せと実行証拠で受入を管理。",
+  "deps_out": [
+    "docs/evidence/followup-fixes-2026-09-11/validation.json",
+    "docs/spec/operational-cli-extensions.md",
+    "src/cli/report/change-selection.ts",
+    "src/cli/repro-bundle.ts",
+    "src/output-publication.ts",
+    "tests/followup-regression.test.mjs"
+  ],
+  "deps_in": [
+    "docs/project/evidence-acceptance-status.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:21a3e186a2150b8421bce99b5a565625757aaf515c1370a13c517b584065b592"
+}

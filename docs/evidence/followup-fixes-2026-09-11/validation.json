@@ -1,0 +1,114 @@
+{
+  "evidenceVersion": "qeg-followup-fixes/v1",
+  "reviewDate": "2026-09-11",
+  "baselineCommit": "e42359872f51d9d1bb1251325fa67d0040b0a6ed",
+  "sourceCommit": null,
+  "acceptance": {
+    "decision": "implemented",
+    "findingIds": [
+      "R5a",
+      "R5b",
+      "R6",
+      "R7"
+    ],
+    "requirements": [
+      "C-15",
+      "C-19",
+      "EAC-08",
+      "EAC-10",
+      "EAC-12"
+    ],
+    "pending": [
+      "source CI on Linux Node20/24 and Windows Node24"
+    ],
+    "excluded": [
+      "repository-wide absence of defects",
+      "production deployment",
+      "human-executed QA",
+      "new live producer runs",
+      "power-loss/filesystem durability"
+    ]
+  },
+  "baseline": {
+    "runtimeTestNodes": 165,
+    "fixtureContracts": 53,
+    "allFourCasesReproduced": true,
+    "mainCi": "https://github.com/RNA4219/quality-evidence-graph/actions/runs/34544849095",
+    "localReceipt": "artifacts/qeg-postmerge-review-20260911/review-receipt.json",
+    "localReceiptHash": "sha256:e0b83dc4241fac2b9125ef460d2d9e924e10ff1968bb10e7bf324f83762aa384",
+    "localResultsHash": "sha256:7498fd92a4beeea688e79259f631b454acdd9d76ec3d3a6cd869c31f220de060"
+  },
+  "regressionTests": [
+    "tests/followup-regression.test.mjs",
+    "tests/transaction-regression.test.mjs",
+    "tests/output-publication.test.mjs"
+  ],
+  "localValidation": {
+    "status": "passed",
+    "platform": "win32",
+    "node": "v24.11.0",
+    "runtimeTestNodes": 186,
+    "newTestNodes": 21,
+    "fixtureContracts": 53,
+    "reliabilityFixtures": 22,
+    "countingNote": "node:test includes parent tests and named subtests",
+    "commands": [
+      {
+        "command": "npm test",
+        "exitCode": 0,
+        "scope": "Full suite before final bundle manifest structural-path preservation guard"
+      },
+      {
+        "command": "npm run build && npm run test:runtime",
+        "exitCode": 0,
+        "scope": "Final source and tests, including secret-named bundle directories; 186 nodes"
+      },
+      {
+        "command": "npm run test:release-lifecycle",
+        "exitCode": 0,
+        "scope": "Final Action bundle"
+      },
+      {
+        "command": "node dist/cli.js schema-check --json && node dist/cli.js enum-check --json",
+        "exitCode": 0
+      }
+    ],
+    "checks": {
+      "publicTypes": "pass",
+      "packedConsumer": "pass",
+      "actionBundle": "pass",
+      "actionLifecycle": "go",
+      "compiledSchemas": 19,
+      "enum": "pass",
+      "birdseyeGeneration": "00019"
+    },
+    "logs": [
+      {
+        "path": "full-test.log",
+        "sha256": "sha256:22b4133270c08001acda8079197313317b6559de464048b5e85ab6b933ff6ea7"
+      },
+      {
+        "path": "final-build.log",
+        "sha256": "sha256:9dbc822a339882d25ac193dd6effea3a086327ff18bf003f71a28ced3027dace"
+      },
+      {
+        "path": "final-runtime.log",
+        "sha256": "sha256:b448f6079fe85af1d845557dc35338f5aa6d5f0de70810f5fed0fc32b0a67833"
+      },
+      {
+        "path": "lifecycle.log",
+        "sha256": "sha256:d36439df866911dc7abb9e084e66be5b5821e84fa86df9f1807edf4186c2c0e0"
+      },
+      {
+        "path": "schema.json",
+        "sha256": "sha256:346d7319fecd6f672eb5e6404d76e086608ebe39e1b235d3167976efa974a8bb"
+      },
+      {
+        "path": "enum.json",
+        "sha256": "sha256:dd11f685795f50b3dc8ce82a9bd5f2e6dc4adbf6a6b360bf6fc919b57c5e66b7"
+      }
+    ],
+    "logAvailability": "Sibling artifacts/qeg-followup-fixes-20260911; equivalent full checks are linked in source CI"
+  },
+  "ci": null
+}

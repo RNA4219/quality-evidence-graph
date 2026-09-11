@@ -1,13 +1,14 @@
 {
   "id": "tests/helpers/raw-producer-fixture.mjs",
   "role": "raw-producer-fixture",
-  "generation": "00018",
+  "generation": "00019",
   "public_api": [],
   "summary": "QEG 0.4.0 raw-producer-fixture の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
     "tests/execution-qualification.test.mjs",
+    "tests/followup-regression.test.mjs",
     "tests/helpers/execution-fixture.mjs",
     "tests/producer-pipeline.test.mjs",
     "tests/transaction-regression.test.mjs"

@@ -1,7 +1,7 @@
 {
   "id": "src/output-publication.ts",
   "role": "output-publication",
-  "generation": "00018",
+  "generation": "00019",
   "public_api": [],
   "summary": "QEG 0.4.0 output-publication の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -10,6 +10,7 @@
     "src/output-transaction.ts"
   ],
   "deps_in": [
+    "docs/project/followup-fixes-2026-09-11.md",
     "docs/project/review-fixes-2026-09-11.md",
     "src/cli.ts",
     "src/cli/commands.ts",
@@ -17,6 +18,8 @@
     "src/cli/output-files.ts",
     "src/cli/output-integrity.ts",
     "src/cli/pipeline.ts",
+    "src/cli/report/change-selection.ts",
+    "src/cli/repro-bundle.ts",
     "src/cli/schema-check.ts",
     "src/consumer-migration.ts",
     "src/index.ts"
@@ -27,5 +30,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:4dfe91c067a654c4eef29a34d9cef06a8ea15909df50460190c75ad604e8e713"
+  "contentHash": "sha256:890ca9bb183c9a02394d22b1d5a14eca0cbbe78589208356f926bd8be66617fc"
 }

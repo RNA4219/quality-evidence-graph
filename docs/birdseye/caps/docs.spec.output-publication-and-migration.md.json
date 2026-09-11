@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/output-publication-and-migration.md",
   "role": "output-publication-and-migration",
-  "generation": "00018",
+  "generation": "00019",
   "public_api": [],
   "summary": "QEG 0.4.0 output-publication-and-migration の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -14,5 +14,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:8ae950a5cb60b88f85ceabc940593e398f770c59af06a427676a6160b7f0a85a"
+  "contentHash": "sha256:1b8642f7aa210a3ed1ddbb95d187e2ad8209716209f74b5087f441da6e713196"
 }

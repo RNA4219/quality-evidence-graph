@@ -4,7 +4,7 @@ import { lstat, mkdir, readFile, realpath } from "fs/promises";
 import { createServer } from "net";
 import { join } from "path";
 import { CliError } from "./cli/errors.js";
-import { digest, filename, GENERATIONS, missing, POINTER, regular, replace, writeSynced } from "./output-storage.js";
+import { digest, filename, GENERATIONS, missing, optionalRegular, POINTER, regular, replace, writeSynced } from "./output-storage.js";
 import { assertPublicationComplete, preparePublication, recoverPendingPublication } from "./output-transaction.js";
 
 const leaseContext = new AsyncLocalStorage<{ identity: string; active: boolean }>();
@@ -83,11 +83,19 @@ export async function hasCommittedFile(root: string, name: string, bytes: string
   return false;
 }
 
+async function assertNativeInputMatches(root: string, files: ReadonlyMap<string, string>): Promise<void> {
+  const input = files.get("gate-input.json");
+  if (input !== undefined && await optionalRegular(join(root, "gate-input.json")) !== input) {
+    throw new CliError("Output alias hash mismatch: gate-input.json; native input preserved. Review the input and rerun the producer command to create a matching generation");
+  }
+}
+
 export async function readPublishedOutputs(directory: string): Promise<PublishedOutputs> {
   return withOutputLease(directory, async root => {
     await assertPublicationComplete(root);
     const current = await generation(root);
     if (!current) throw new CliError("No completed output generation; rerun the original producer command");
+    await assertNativeInputMatches(root, current.files);
     for (const [name, bytes] of current.files) {
       await regular(join(root, name));
       if (digest(await readFile(join(root, name))) !== digest(bytes)) throw new CliError(`Output alias hash mismatch: ${name}; run outputs recover`);
@@ -96,13 +104,14 @@ export async function readPublishedOutputs(directory: string): Promise<Published
   });
 }
 
-/** Roll back interrupted writes, then restore verified completed aliases; retain stages for diagnosis. */
+/** Rollback restores exact before-images. Alias repair never overwrites independently editable native input. */
 export async function recoverOutputs(directory: string): Promise<string> {
   return withOutputLease(directory, async root => {
     const current = await generation(root);
     await recoverPendingPublication(root);
     if (!current) throw new CliError("No completed generation to recover; rerun the original producer command");
-    for (const [name, bytes] of current.files) await replace(root, name, bytes);
+    for (const [name, bytes] of current.files) if (name !== "gate-input.json") await replace(root, name, bytes);
+    await assertNativeInputMatches(root, current.files);
     return current.generation;
   });
 }

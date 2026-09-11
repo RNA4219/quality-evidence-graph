@@ -1,7 +1,7 @@
 ---
 intent_id: INT-QEG-EAC-COMPLETION-001
 owner: quality-evidence-graph
-status: accepted
+status: implemented
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
@@ -28,7 +28,11 @@ qeg outputs recover ./consumer
 qeg record ./consumer
 ```
 
-`recover`は未完了journalの全hashとpointer対応を検証し、今回の全fileを更新前へ戻してから、pointerが指す検証済み世代のaliasを復元する。復旧自身が中断してもjournalを残し、再実行できる。初回公開に完了pointerがない場合も元入力を復元するが、完了世代がない旨をexit 1で返す。その後、元のproducer commandを再実行する。journal・pointer・世代本体が破損していれば自動上書きを止める。`build-graph`/`place-tests`/`migrate`の世代は中間成果であり、完了recordと区別する。履歴と中断stageの自動GCは行わない。
+`recover`は未完了journalの全hashとpointer対応を検証し、今回の全fileを更新前へ戻してから、pointerが指す検証済み世代の出力aliasを修復する。通常のalias修復は`gate-input.json`を上書きしない。native入力はcommand間で明示編集できるため、journalで戻した入力や利用者の編集を古い世代へ巻き戻さない。
+
+前世代が`migrate`・`build-graph`・`place-tests`等でgate-inputを含み、現在の入力と一致しない場合、入力を保護したまま`recover`と正式読取りはexit 1を返す。メッセージは入力の確認とproducer再実行を要求する。繰り返しrecoverしても古い入力へ戻らない。入力を修正してproducerを再実行するか、`record`で再評価し、一致する新しい世代を作る。新しい合格や承認を復旧処理が生成することはない。
+
+復旧自身が中断してもjournalを残し、再実行できる。初回公開に完了pointerがない場合も元入力を復元するが、完了世代がない旨をexit 1で返す。journal・pointer・世代本体が破損していれば自動上書きを止める。`build-graph`/`place-tests`/`migrate`や診断用`repro-bundle`の世代は完了recordと区別する。履歴と中断stageの自動GCは行わない。
 
 ## wire 0.2 consumerの明示移行
 

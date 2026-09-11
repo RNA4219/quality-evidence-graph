@@ -1,7 +1,7 @@
 {
   "id": "src/gate.ts",
   "role": "gate",
-  "generation": "00018",
+  "generation": "00019",
   "public_api": [],
   "summary": "QEG 0.4.0 gate の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
