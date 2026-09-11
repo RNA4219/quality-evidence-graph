@@ -23,4 +23,6 @@ PR #11 merge 57d303b34a8cca0ea2ed0c7be52054f807996a8e の追加レビューで�
 
 ローカル検証後、source CIを[validation.json](../evidence/cli-boundary-fixes-2026-09-11/validation.json)へ固定して受入を確定する。追加CI待ち。
 
+初回CIのWindows runtimeでは、別名pathとevaluator/Gitの実体pathが一致しない3種類の失敗がCLI/Action各3ケースに現れた。junction経由で同じ失敗を再現し、最寄りの存在する祖先まで実体pathへ正規化する修正を追加した。共通matrixの変更選択・baseline・diffはjunction（Windows）/symlink（Linux）経由でも評価する。
+
 wire0.2 / package0.4.0未公開、Gate evaluator・waiver・approval・retentionの判定規則と過去のproducer原本・受入JSONは維持する。baselineの無資格・suffix許容を拒否するため、従来誤って成功した設定は明示的に失敗する。全consumer markerを削除したfolderの自動推測、実producer再接続、本番環境や人手QAは今回の受入範囲に含めない。

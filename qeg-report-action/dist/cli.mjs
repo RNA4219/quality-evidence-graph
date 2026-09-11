@@ -2987,7 +2987,7 @@ var require_compile = __commonJS({
       const schOrFunc = root2.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve17.call(this, root2, ref);
+      let _sch = resolve16.call(this, root2, ref);
       if (_sch === void 0) {
         const schema = (_a = root2.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -3014,7 +3014,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve17(root2, ref) {
+    function resolve16(root2, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -3645,7 +3645,7 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve17(baseURI, relativeURI, options) {
+    function resolve16(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const resolved = resolveComponent(parse(baseURI, schemelessOptions), parse(relativeURI, schemelessOptions), schemelessOptions, true);
       schemelessOptions.skipEscape = true;
@@ -3903,7 +3903,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve17,
+      resolve: resolve16,
       resolveComponent,
       equal,
       serialize,
@@ -21214,32 +21214,32 @@ function detectGraphIntegrity(input) {
   unique2(input.graph.edges, "/graph/edges");
   unique2(input.metadata.inputArtifacts, "/metadata/inputArtifacts");
   const nodes = new Map(input.graph.nodes.map((n) => [n.id, n]));
-  const resolve17 = (ids, kind, pointer) => {
+  const resolve16 = (ids, kind, pointer) => {
     for (const id of ids) if (!nodes.has(id) || kind && nodes.get(id)?.kind !== kind) {
       issue(pointer, `Unresolved ${kind ?? "node"} reference "${id}"`, [id]);
     }
   };
-  for (const [index, edge2] of input.graph.edges.entries()) resolve17([edge2.from, edge2.to], void 0, `/graph/edges/${index}`);
+  for (const [index, edge2] of input.graph.edges.entries()) resolve16([edge2.from, edge2.to], void 0, `/graph/edges/${index}`);
   const artifacts = new Set(input.metadata.inputArtifacts.map((a) => a.id));
   for (const [index, node] of input.graph.nodes.entries()) {
     const pointer = `/graph/nodes/${index}`;
     for (const id of node.sourceArtifactIds) if (!artifacts.has(id)) issue(pointer, `Unresolved artifact reference "${id}"`, [node.id, id]);
-    if (node.kind === "requirement") resolve17(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
-    if (node.kind === "acceptance_criteria") resolve17(node.requirementIds, "requirement", pointer);
-    if (node.kind === "finding") resolve17(node.changedCodeIds, "changed_code", pointer);
-    if (node.kind === "failure_mode") resolve17(node.riskIds, "risk", pointer);
+    if (node.kind === "requirement") resolve16(node.acceptanceCriteriaIds, "acceptance_criteria", pointer);
+    if (node.kind === "acceptance_criteria") resolve16(node.requirementIds, "requirement", pointer);
+    if (node.kind === "finding") resolve16(node.changedCodeIds, "changed_code", pointer);
+    if (node.kind === "failure_mode") resolve16(node.riskIds, "risk", pointer);
     if (node.kind === "test") {
-      resolve17(node.coveredRiskIds ?? [], "risk", pointer);
+      resolve16(node.coveredRiskIds ?? [], "risk", pointer);
       if (node.testType !== "resilience") {
-        resolve17(node.coveredRequirementIds ?? [], "requirement", pointer);
-        resolve17(node.coveredChangedCodeIds ?? [], "changed_code", pointer);
+        resolve16(node.coveredRequirementIds ?? [], "requirement", pointer);
+        resolve16(node.coveredChangedCodeIds ?? [], "changed_code", pointer);
       }
     }
-    if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve17([node.testId], "test", pointer);
+    if (node.kind === "execution_evidence" && node.evidenceType === "resilience") resolve16([node.testId], "test", pointer);
   }
   for (const [index, node] of input.graph.nodes.entries()) if (node.kind === "test_placement") {
     const pointer = `/graph/nodes/${index}`;
-    resolve17(node.selectedTestIds, "test", pointer);
+    resolve16(node.selectedTestIds, "test", pointer);
     if (!input.placementPlan?.obligations.some((o) => o.id === node.obligationId)) {
       issue(pointer, `Unresolved obligation "${node.obligationId}"`, [node.id]);
     }
@@ -21255,15 +21255,15 @@ function detectGraphIntegrity(input) {
   const obligations = new Set(plan2.obligations.map((o) => o.id));
   for (const [index, obligation2] of plan2.obligations.entries()) {
     const pointer = `/placementPlan/obligations/${index}`;
-    resolve17(obligation2.changedCodeIds, "changed_code", pointer);
-    resolve17(obligation2.riskIds, "risk", pointer);
-    resolve17(obligation2.requirementIds, "requirement", pointer);
-    resolve17(obligation2.failureModeIds, "failure_mode", pointer);
+    resolve16(obligation2.changedCodeIds, "changed_code", pointer);
+    resolve16(obligation2.riskIds, "risk", pointer);
+    resolve16(obligation2.requirementIds, "requirement", pointer);
+    resolve16(obligation2.failureModeIds, "failure_mode", pointer);
   }
   for (const [index, placement] of plan2.placements.entries()) {
     const pointer = `/placementPlan/placements/${index}`;
     if (!obligations.has(placement.obligationId)) issue(pointer, `Unresolved obligation "${placement.obligationId}"`, [placement.id]);
-    resolve17(placement.selectedTestIds, "test", pointer);
+    resolve16(placement.selectedTestIds, "test", pointer);
   }
   return result;
 }
@@ -22282,7 +22282,7 @@ async function collectReportTargets(rawTargets) {
 }
 
 // src/cli/report/core.ts
-import { join as join8 } from "path";
+import { join as join9 } from "path";
 
 // src/cli/dq-explain.ts
 import { exit } from "process";
@@ -22652,12 +22652,27 @@ import { execFile } from "child_process";
 import { promisify } from "util";
 
 // src/cli/path-key.ts
-import { resolve as resolve5 } from "path";
+import { realpathSync } from "fs";
+import { basename as basename2, dirname, join as join8, resolve as resolve5 } from "path";
 function portablePath(path) {
   return path.replace(/\\/g, "/");
 }
 function pathKey(path, base2 = process.cwd()) {
-  const absolute = portablePath(resolve5(base2, portablePath(path)));
+  let ancestor = resolve5(base2, portablePath(path));
+  const missing2 = [];
+  while (true) {
+    try {
+      ancestor = realpathSync.native(ancestor);
+      break;
+    } catch (error) {
+      if (!["ENOENT", "ENOTDIR"].includes(error.code ?? "")) throw error;
+      const parent = dirname(ancestor);
+      if (parent === ancestor) break;
+      missing2.unshift(basename2(ancestor));
+      ancestor = parent;
+    }
+  }
+  const absolute = portablePath(join8(ancestor, ...missing2));
   return process.platform === "win32" ? absolute.toLowerCase() : absolute;
 }
 function pathWithin(path, directory) {
@@ -22743,7 +22758,7 @@ async function selectChangedTargets(targets, changedOnly = false) {
 
 // src/cli/report/baseline-diff.ts
 import { readFile as readFile11 } from "fs/promises";
-import { isAbsolute as isAbsolute3, relative as relative4, resolve as resolve7 } from "path";
+import { isAbsolute as isAbsolute3, relative as relative4 } from "path";
 
 // src/cli/report/baseline-contract.ts
 import { readFile as readFile10 } from "fs/promises";
@@ -22789,8 +22804,9 @@ async function readBaseline(path) {
 }
 function normalizeTargetForDiff(target) {
   if (target === "<repo>" || target.startsWith("<repo>/")) return target;
-  const rel = portable(relative4(process.cwd(), resolve7(target)));
-  return !isAbsolute3(rel) && rel !== ".." && !rel.startsWith("../") ? `<repo>${rel ? "/" + rel : ""}` : portable(target);
+  const key = pathKey(target);
+  const rel = portable(relative4(pathKey(process.cwd()), key));
+  return !isAbsolute3(rel) && rel !== ".." && !rel.startsWith("../") ? `<repo>${rel ? "/" + rel : ""}` : key;
 }
 function diffItemKey(item) {
   return JSON.stringify({
@@ -22867,7 +22883,7 @@ function applyBaseline(target, baseline) {
 
 // src/cli/report/core.ts
 async function readExpectedIfPresent(target) {
-  const expectedPath = join8(target, "expected-gate-verdict.json");
+  const expectedPath = join9(target, "expected-gate-verdict.json");
   if (!(await safeStat(expectedPath))?.isFile()) {
     return void 0;
   }
@@ -23235,16 +23251,16 @@ function formatCiReportText(report) {
 
 // src/cli/report/command.ts
 import { appendFile, mkdir as mkdir3, writeFile } from "fs/promises";
-import { dirname, resolve as resolve9 } from "path";
+import { dirname as dirname2, resolve as resolve8 } from "path";
 import { exit as exit2 } from "process";
 
 // src/cli/report/environment.ts
 import { lstat as lstat5 } from "fs/promises";
-import { isAbsolute as isAbsolute4, resolve as resolve8 } from "path";
+import { isAbsolute as isAbsolute4, resolve as resolve7 } from "path";
 async function githubSummaryPath(environment) {
   const value = environment.GITHUB_STEP_SUMMARY;
   if (!value || !value.trim() || value.includes("\0") || !isAbsolute4(value)) throw new CliError("--github-summary requires an absolute GITHUB_STEP_SUMMARY file path");
-  const path = resolve8(value);
+  const path = resolve7(value);
   try {
     if (!(await lstat5(path)).isFile()) throw new Error("not a regular file");
   } catch (error) {
@@ -23339,8 +23355,8 @@ async function runReportCommand(args) {
   });
   const output = formatReport(report, options.format);
   if (options.outPath) {
-    const outputPath = resolve9(options.outPath);
-    await mkdir3(dirname(outputPath), { recursive: true });
+    const outputPath = resolve8(options.outPath);
+    await mkdir3(dirname2(outputPath), { recursive: true });
     await writeFile(outputPath, output, "utf-8");
   }
   if (options.githubSummary) {
@@ -23427,19 +23443,19 @@ import { exit as exit10 } from "process";
 
 // src/cli/doctor.ts
 import { readFile as readFile15, stat as stat5 } from "fs/promises";
-import { join as join12, resolve as resolve10 } from "path";
+import { join as join13, resolve as resolve9 } from "path";
 import { exit as exit5 } from "process";
 
 // src/cli/schema-check.ts
 import { readFile as readFile13 } from "fs/promises";
-import { join as join10 } from "path";
+import { join as join11 } from "path";
 import { exit as exit4 } from "process";
 
 // src/cli/output-integrity.ts
 import { lstat as lstat6, readFile as readFile12 } from "fs/promises";
-import { join as join9 } from "path";
+import { join as join10 } from "path";
 async function verifyOutputManifest(directory) {
-  if (await optionalText(join9(directory, ".qeg-current.json")) !== void 0) {
+  if (await optionalText(join10(directory, ".qeg-current.json")) !== void 0) {
     const snapshot = await readPublishedOutputs(directory);
     const content2 = snapshot.files.get("output-manifest.json");
     if (!content2) return ["Current generation is an intermediate result, not a completed record"];
@@ -23450,14 +23466,14 @@ async function verifyOutputManifest(directory) {
     });
   }
   try {
-    await lstat6(join9(directory, ".qeg-generations"));
+    await lstat6(join10(directory, ".qeg-generations"));
     return ["Output publication was interrupted or its pointer is missing; no completed generation"];
   } catch (error) {
     if (error.code !== "ENOENT") throw error;
   }
-  const content = await optionalText(join9(directory, "output-manifest.json"));
+  const content = await optionalText(join10(directory, "output-manifest.json"));
   if (content === void 0) return void 0;
-  return checkManifest(content, (name) => readFile12(join9(directory, name), "utf8"));
+  return checkManifest(content, (name) => readFile12(join10(directory, name), "utf8"));
 }
 async function checkManifest(content, read) {
   const raw = JSON.parse(content);
@@ -23515,7 +23531,7 @@ async function checkTarget(target, items) {
   }
   for (const [filename2, schema] of Object.entries(OUTPUT_SCHEMAS)) {
     try {
-      const content = await optionalText(join10(target, filename2));
+      const content = await optionalText(join11(target, filename2));
       if (content === void 0) continue;
       const output = await validateOutput(JSON.parse(content), schema);
       items.push({
@@ -23529,7 +23545,7 @@ async function checkTarget(target, items) {
     }
   }
   try {
-    const report = await validateGateInput(await readJson(join10(target, "gate-input.json")));
+    const report = await validateGateInput(await readJson(join11(target, "gate-input.json")));
     items.push({
       name: `${target}:gate-input`,
       status: report.valid ? "pass" : "fail",
@@ -23565,11 +23581,11 @@ async function runSchemaCheckCommand(args) {
 
 // src/cli/distribution.ts
 import { readFile as readFile14 } from "fs/promises";
-import { join as join11 } from "path";
+import { join as join12 } from "path";
 import { fileURLToPath as fileURLToPath2 } from "url";
 var root = fileURLToPath2(new URL("../../", import.meta.url));
 function distributionPath(...segments) {
-  return join11(root, ...segments);
+  return join12(root, ...segments);
 }
 async function readDistributionMetadata() {
   const path = distributionPath("qeg-report-action", "runtime-metadata.json");
@@ -23673,8 +23689,8 @@ async function checkWorkflow() {
   ];
 }
 async function checkTarget2(rawTarget) {
-  const target = resolve10(rawTarget);
-  const inputPath = join12(target, "gate-input.json");
+  const target = resolve9(rawTarget);
+  const inputPath = join13(target, "gate-input.json");
   if (!await exists(inputPath)) {
     return [{
       name: `target:${rawTarget}:gate-input`,
@@ -23695,7 +23711,7 @@ async function checkTarget2(rawTarget) {
       ...(input.evidencePackage?.inputArtifactHashes ?? []).map((artifact) => artifact.path)
     ].filter((path) => Boolean(path));
     for (const artifactPath of artifactPaths) {
-      const resolved = resolve10(target, artifactPath);
+      const resolved = resolve9(target, artifactPath);
       checks.push({
         name: `target:${rawTarget}:artifact:${artifactPath}`,
         severity: await exists(resolved) ? "pass" : "warn",
@@ -23840,7 +23856,7 @@ async function runEnumCheckCommand(args) {
 
 // src/cli/snapshot.ts
 import { writeFile as writeFile2 } from "fs/promises";
-import { join as join13, relative as relative5 } from "path";
+import { join as join14, relative as relative5 } from "path";
 import { exit as exit7 } from "process";
 function parseSnapshotArgs(args) {
   const targets = [];
@@ -23877,7 +23893,7 @@ function normalizeReport(report) {
   return normalizeValue(report);
 }
 function snapshotPath(target) {
-  return join13(target, "expected-report.json");
+  return join14(target, "expected-report.json");
 }
 async function readSnapshot(path) {
   return optionalText(path);
@@ -23922,7 +23938,7 @@ async function runSnapshotCommand(args) {
 
 // src/cli/evidence-verify.ts
 import { readFile as readFile17 } from "fs/promises";
-import { join as join14 } from "path";
+import { join as join15 } from "path";
 import { exit as exit8 } from "process";
 function worst2(items) {
   if (items.some((item) => item.severity === "fail")) return "fail";
@@ -23934,7 +23950,7 @@ async function createEvidenceVerifyReport(rawTargets) {
   const items = [];
   for (const target of targets) {
     try {
-      const validation = await validateGateInput(JSON.parse(await readFile17(join14(target, "gate-input.json"), "utf-8")));
+      const validation = await validateGateInput(JSON.parse(await readFile17(join15(target, "gate-input.json"), "utf-8")));
       if (!validation.valid || !validation.input) {
         items.push({ target, artifactId: "gate-input", severity: "fail", code: "PATH_MISSING", message: `schema invalid: ${validation.issues.map((issue) => `${issue.path} ${issue.message}`).join("; ")}` });
         continue;
@@ -23964,7 +23980,7 @@ async function runEvidenceVerifyCommand(args) {
 
 // src/cli/policy-lint.ts
 import { readFile as readFile18 } from "fs/promises";
-import { join as join15 } from "path";
+import { join as join16 } from "path";
 import { exit as exit9 } from "process";
 
 // src/cli/policy-lint/format.ts
@@ -24063,7 +24079,7 @@ async function createPolicyLintReport(rawTargets) {
   const items = [];
   for (const target of targets) {
     try {
-      const input = await readJson4(join15(target, "gate-input.json"));
+      const input = await readJson4(join16(target, "gate-input.json"));
       lintPolicy(items, target, input.policy, "policy");
       if (input.evidencePackage?.gatePolicy) {
         lintPolicy(items, target, input.evidencePackage.gatePolicy, "evidencePackage.gatePolicy");
@@ -24150,7 +24166,7 @@ async function runCheckCommand(args) {
 
 // src/cli/evidence-normalize.ts
 import { realpath as realpath5 } from "fs/promises";
-import { basename as basename3, relative as relative7, resolve as resolve14 } from "path";
+import { basename as basename4, relative as relative7, resolve as resolve13 } from "path";
 import { exit as exit11 } from "process";
 
 // src/cli/evidence-normalize/values.ts
@@ -24301,9 +24317,9 @@ function adapterFields(adapter, raw) {
 // src/cli/evidence-normalize/files.ts
 import { createHash as createHash7 } from "crypto";
 import { readFile as readFile19, realpath as realpath4 } from "fs/promises";
-import { dirname as dirname2, isAbsolute as isAbsolute5, relative as relative6, resolve as resolve11 } from "path";
+import { dirname as dirname3, isAbsolute as isAbsolute5, relative as relative6, resolve as resolve10 } from "path";
 function containedPath(baseDir, rawPath, label) {
-  const resolved = resolve11(baseDir, rawPath);
+  const resolved = resolve10(baseDir, rawPath);
   const offset = relative6(baseDir, resolved);
   if (isAbsolute5(rawPath) || isOutsideBase2(offset)) {
     throw new CliError(`${label} must be contained within --base-dir`);
@@ -24327,7 +24343,7 @@ async function assertRealContained(realBaseDir, path, label) {
 async function assertOutputParentContained(realBaseDir, outPath) {
   let actualParent;
   try {
-    actualParent = await realpath4(dirname2(outPath));
+    actualParent = await realpath4(dirname3(outPath));
   } catch (error) {
     throw new CliError(`Cannot resolve --out parent directory: ${error instanceof Error ? error.message : String(error)}`);
   }
@@ -24353,7 +24369,7 @@ function sha256(bytes) {
 var SUPPORTED_ADAPTERS = /* @__PURE__ */ new Set(["lakda", "toxiproxy", "shell", "ci"]);
 
 // src/cli/evidence-normalize/options.ts
-import { resolve as resolve12 } from "path";
+import { resolve as resolve11 } from "path";
 function parseArgs(args) {
   let adapter;
   let input;
@@ -24383,13 +24399,13 @@ function parseArgs(args) {
   if (!adapter || !input || !context || !out) {
     throw new CliError("Usage: qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json> [--base-dir <dir>] [--force]");
   }
-  return { adapter, input, context, out, baseDir: resolve12(baseDir), force };
+  return { adapter, input, context, out, baseDir: resolve11(baseDir), force };
 }
 
 // src/cli/evidence-normalize/publish.ts
 import { randomUUID as randomUUID3 } from "crypto";
 import { lstat as lstat7, open as open2, rename as rename2, unlink as unlink3 } from "fs/promises";
-import { basename as basename2, dirname as dirname3, resolve as resolve13 } from "path";
+import { basename as basename3, dirname as dirname4, resolve as resolve12 } from "path";
 async function publishNormalizedEvidence(outPath, content, force) {
   try {
     const destination = await lstat7(outPath);
@@ -24398,7 +24414,7 @@ async function publishNormalizedEvidence(outPath, content, force) {
   } catch (error) {
     if (!isMissingFile(error)) throw new CliError(`Inspect normalization output ${outPath}: ${String(error)}`);
   }
-  const tempPath = resolve13(dirname3(outPath), `.${basename2(outPath)}.${process.pid}.${randomUUID3()}.tmp`);
+  const tempPath = resolve12(dirname4(outPath), `.${basename3(outPath)}.${process.pid}.${randomUUID3()}.tmp`);
   let owned = false;
   try {
     const handle = await open2(tempPath, "wx");
@@ -24456,7 +24472,7 @@ async function normalizeResilienceEvidence(options) {
     assertRealContained(realBaseDir, contextPath, "--context"),
     assertOutputParentContained(realBaseDir, outPath)
   ]);
-  const realOutputPath = resolve14(realOutputParent, basename3(outPath));
+  const realOutputPath = resolve13(realOutputParent, basename4(outPath));
   if (sameFilesystemPath(realOutputPath, realInputPath) || sameFilesystemPath(realOutputPath, realContextPath)) {
     throw new CliError("--out must not overwrite --input or --context");
   }
@@ -24541,28 +24557,28 @@ async function runEvidenceNormalizeCommand(args) {
 
 // src/cli/init.ts
 import { mkdir as mkdir4, writeFile as writeFile3 } from "fs/promises";
-import { dirname as dirname4, join as join17, resolve as resolve15 } from "path";
+import { dirname as dirname5, join as join18, resolve as resolve14 } from "path";
 import { exit as exit12 } from "process";
 
 // src/cli/init-runtime.ts
 import { readFile as readFile20, readdir as readdir3 } from "fs/promises";
-import { join as join16 } from "path";
+import { join as join17 } from "path";
 import { fileURLToPath as fileURLToPath3 } from "url";
 async function starterRuntimeFiles() {
   const root2 = fileURLToPath3(new URL("../../", import.meta.url));
   const files = /* @__PURE__ */ new Map();
   const visit = async (relativePath) => {
-    for (const entry of (await readdir3(join16(root2, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
-      const path = join16(relativePath, entry.name);
+    for (const entry of (await readdir3(join17(root2, relativePath), { withFileTypes: true })).sort((a, b) => a.name.localeCompare(b.name))) {
+      const path = join17(relativePath, entry.name);
       if (entry.isDirectory()) await visit(path);
-      else if (entry.isFile()) files.set(path, await readFile20(join16(root2, path), "utf8"));
+      else if (entry.isFile()) files.set(path, await readFile20(join17(root2, path), "utf8"));
       else throw new CliError(`Unsupported packaged runtime entry ${path}`);
     }
   };
   try {
     await visit("qeg-report-action");
     await visit("schemas");
-    files.set("LICENSE", await readFile20(join16(root2, "LICENSE"), "utf8"));
+    files.set("LICENSE", await readFile20(join17(root2, "LICENSE"), "utf8"));
   } catch (error) {
     throw new CliError(`Read starter runtime in ${root2}: ${String(error)}`);
   }
@@ -24705,35 +24721,35 @@ async function writeNewFile(path, content, force) {
 }
 async function runInitCommand(args) {
   const options = parseInitArgs(args);
-  const root2 = resolve15(options.root);
-  const qegDir = join17(root2, ".qeg");
-  const workflowDir = join17(root2, ".github", "workflows");
+  const root2 = resolve14(options.root);
+  const qegDir = join18(root2, ".qeg");
+  const workflowDir = join18(root2, ".github", "workflows");
   await mkdir4(qegDir, { recursive: true });
   await mkdir4(workflowDir, { recursive: true });
   const results = [
     {
-      path: join17(qegDir, "gate-input.json"),
-      status: await writeNewFile(join17(qegDir, "gate-input.json"), minimalGateInput(), options.force)
+      path: join18(qegDir, "gate-input.json"),
+      status: await writeNewFile(join18(qegDir, "gate-input.json"), minimalGateInput(), options.force)
     },
     {
-      path: join17(qegDir, "qeg-baseline.json"),
-      status: await writeNewFile(join17(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
+      path: join18(qegDir, "qeg-baseline.json"),
+      status: await writeNewFile(join18(qegDir, "qeg-baseline.json"), baselineTemplate(), options.force)
     },
     {
-      path: join17(workflowDir, "qeg.yml"),
-      status: await writeNewFile(join17(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
+      path: join18(workflowDir, "qeg.yml"),
+      status: await writeNewFile(join18(workflowDir, "qeg.yml"), workflowTemplate(), options.force)
     }
   ];
   const runtimeFiles = await starterRuntimeFiles();
   let runtimeWritten = 0;
   for (const [relativePath, content] of runtimeFiles) {
-    const path = join17(qegDir, "runtime", relativePath);
-    await mkdir4(dirname4(path), { recursive: true });
+    const path = join18(qegDir, "runtime", relativePath);
+    await mkdir4(dirname5(path), { recursive: true });
     const status = await writeNewFile(path, content, options.force);
     if (status !== "skipped") runtimeWritten++;
   }
   console.log("QEG init");
-  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join17(qegDir, "runtime")}`);
+  console.log(`- runtime: ${runtimeWritten}/${runtimeFiles.size} packaged files copied to ${join18(qegDir, "runtime")}`);
   for (const result of results) {
     console.log(`- ${result.status}: ${result.path}`);
   }
@@ -24746,7 +24762,7 @@ async function runInitCommand(args) {
 // src/cli/repro-bundle.ts
 import { createHash as createHash8 } from "crypto";
 import { mkdir as mkdir5, readFile as readFile21, readdir as readdir4 } from "fs/promises";
-import { basename as basename4, join as join18, resolve as resolve16 } from "path";
+import { basename as basename5, join as join19, resolve as resolve15 } from "path";
 import { exit as exit13 } from "process";
 async function readJson5(path) {
   return JSON.parse(await readFile21(path, "utf-8"));
@@ -24774,7 +24790,7 @@ function redact(value) {
 }
 function stageJson(contents, outDir, name, data, sourceTarget) {
   if (contents.has(name)) throw new CliError(`Duplicate repro bundle filename: ${name}`);
-  const path = join18(outDir, name);
+  const path = join19(outDir, name);
   const content = `${JSON.stringify(redact(data), null, 2)}
 `;
   contents.set(name, content);
@@ -24785,7 +24801,7 @@ async function schemaInventory() {
   const schemas = await readdir4(schemaDir);
   const rows2 = [];
   for (const file of schemas.filter((name) => name.endsWith(".schema.json")).sort()) {
-    const path = join18(schemaDir, file);
+    const path = join19(schemaDir, file);
     const content = await readFile21(path, "utf-8");
     rows2.push({ file, sha256: sha2562(content), bytes: content.length });
   }
@@ -24814,7 +24830,7 @@ function parseArgs2(args) {
 }
 async function runReproBundleCommand(args) {
   const options = parseArgs2(args);
-  const outDir = resolve16(options.outDir);
+  const outDir = resolve15(options.outDir);
   const pkg = (await readDistributionMetadata()).package;
   const targets = options.targets.length > 0 ? await collectReportTargets(options.targets) : [];
   const files = [];
@@ -24848,7 +24864,7 @@ async function runReproBundleCommand(args) {
     files,
     inputErrors
   };
-  const manifestPath = join18(outDir, "manifest.json");
+  const manifestPath = join19(outDir, "manifest.json");
   contents.set("manifest.json", `${JSON.stringify(manifest, null, 2)}
 `);
   await mkdir5(outDir, { recursive: true });
@@ -24858,7 +24874,7 @@ async function runReproBundleCommand(args) {
     const sealed = JSON.parse(published.files.get("manifest.json"));
     if (sealed.files.length !== files.length || new Set(sealed.files.map((file) => file.path)).size !== files.length) throw new CliError("Repro bundle manifest file set mismatch");
     for (const file of sealed.files) {
-      const content = published.files.get(basename4(file.path));
+      const content = published.files.get(basename5(file.path));
       if (content === void 0 || sha2562(content) !== file.sha256) throw new CliError(`Repro bundle hash mismatch: ${file.path}`);
     }
   });

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { cp, mkdir, readFile, unlink, writeFile } from 'node:fs/promises';
+import { cp, mkdir, readFile, symlink, unlink, writeFile } from 'node:fs/promises';
 import { join, relative, resolve } from 'node:path';
 import { spawnSync, execFileSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
@@ -31,7 +31,16 @@ function git(directory, args) {
   return execFileSync('git', ['-c', 'safe.directory=' + portable(directory), ...args], { cwd: directory, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 }
 
+async function aliasDirectory(directory) {
+  const physical = join(directory, 'physical'); const alias = join(directory, 'alias');
+  await mkdir(physical, { recursive: true });
+  await symlink(physical, alias, process.platform === 'win32' ? 'junction' : 'dir');
+  return alias;
+}
+
 export async function verifyPathSelection(run, fixtures, directory) {
+  // CLI spellings and Git/evaluator real paths must identify the same consumer.
+  directory = await aliasDirectory(directory);
   for (const strategy of ['origin_main', 'head_parent', 'worktree']) {
     const repo = join(directory, strategy); const target = join(repo, 'packages/サービス consumer');
     const input = await boundaryConsumer(fixtures, target);
@@ -57,6 +66,7 @@ export async function verifyPathSelection(run, fixtures, directory) {
     }
     const unrelated = exit(run(['report', '--json', '--changed-only', target], { cwd: repo, env: { QEG_CHANGED_FILES: 'elsewhere.txt' } }), 0);
     assert.equal(unrelated.data.selection.selectedTargetCount, 0);
+    exit(run(['report', '--json', '--changed-only', target], { cwd: repo, env: { QEG_CHANGED_FILES: join(target, 'removed-directory', 'deleted.ts') } }), 2);
   }
 }
 
@@ -84,6 +94,7 @@ export async function verifyTargetDiscovery(run, fixtures, directory) {
 }
 
 export async function verifyBaseline(run, fixtures, directory) {
+  directory = await aliasDirectory(directory);
   const target = join(directory, 'consumer'); const input = await boundaryConsumer(fixtures, target);
   delete input.policy.inputContract; await save(target, input);
   const current = exit(run(['report', '--json', target], { cwd: directory }), 2).data;
@@ -124,6 +135,7 @@ export async function verifyBaseline(run, fixtures, directory) {
 }
 
 export async function verifyDiff(run, fixtures, directory) {
+  directory = await aliasDirectory(directory);
   const target = join(directory, 'consumer'); const original = await boundaryConsumer(fixtures, target);
   const broken = structuredClone(original); delete broken.policy.inputContract; await save(target, broken);
   const previous = join(directory, 'previous.json'); await writeFile(previous, json(exit(run(['report', '--json', target], { cwd: directory }), 2).data));

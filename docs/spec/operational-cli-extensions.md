@@ -105,6 +105,8 @@ JSON/text/GitHub SummaryとActionのsummary artifactでunverifiedを表示する
 
 Git取得pathは`git rev-parse --show-toplevel`を基準とし、QEG_CHANGED_FILESはcwd相対または絶対pathとする。targetはcwd相対または絶対path。絶対pathへ正規化して比較し、Windowsでは大文字小文字を同一視する。target相対artifact参照と既存workspace相対参照を保守的に照合する。
 
+変更選択・baseline・差分比較では、junction/symlinkやWindowsの短縮名を実体pathへ揃える。削除済みpathは最寄りの存在する祖先を解決して残りの相対部分を接続し、変更対象から落とさない。別々の実体directoryは同名でも一致させない。
+
 親指定のtarget discoveryはgate-input/expected verdictに加え、ingest-manifest、qeg.bundle、test-placement-plan、output-manifest、quality-evidence-record、migration-reportをconsumer markerとする。入力が欠落/ディレクトリでもmarkerがある子は評価へ渡し、無関係な子folderだけを除く。すべての識別markerを削除したfolderは自動識別できないため、その場合はtargetを明示する。
 
 対象 target は、target directory 自体、`metadata.inputArtifacts[].path`、または graph の `changed_code.path` が変更ファイルと一致した場合に評価対象になる。Gitの削除Dを含め、renameは旧pathの削除と新pathの追加として両端を収集する。NUL区切りを使い、空白・日本語・Gitのpath quotingで対応が失われることを防ぐ。

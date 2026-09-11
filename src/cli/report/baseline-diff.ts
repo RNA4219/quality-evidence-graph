@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import { isAbsolute, relative, resolve } from "path";
+import { isAbsolute, relative } from "path";
 import type { Disqualification } from "../../types.js";
 import type {
   CiReport,
@@ -9,6 +9,7 @@ import type {
 } from "./model.js";
 import { portable } from "./targets.js";
 import { CliError } from "../errors.js";
+import { pathKey } from "../path-key.js";
 import { baselineDqMatches, baselineEntryIssues, baselineTargetMatches, readBaselineFile, type BaselineFile } from "./baseline-contract.js";
 export type ReportBaseline = BaselineFile;
 
@@ -29,8 +30,9 @@ export async function readBaseline(path: string | undefined): Promise<ReportBase
 
 function normalizeTargetForDiff(target: string): string {
   if (target === "<repo>" || target.startsWith("<repo>/")) return target;
-  const rel = portable(relative(process.cwd(), resolve(target)));
-  return !isAbsolute(rel) && rel !== ".." && !rel.startsWith("../") ? `<repo>${rel ? "/" + rel : ""}` : portable(target);
+  const key = pathKey(target);
+  const rel = portable(relative(pathKey(process.cwd()), key));
+  return !isAbsolute(rel) && rel !== ".." && !rel.startsWith("../") ? `<repo>${rel ? "/" + rel : ""}` : key;
 }
 
 function diffItemKey(item: ReportDiffItem): string {

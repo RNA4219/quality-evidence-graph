@@ -6,6 +6,7 @@
   "summary": "QEG 0.4.0 report-baseline-diff の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/errors.ts",
+    "src/cli/path-key.ts",
     "src/cli/report/baseline-contract.ts",
     "src/cli/report/model.ts",
     "src/cli/report/targets.ts",
@@ -21,5 +22,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:b594a5e9cd5354ced4ebe12b878aa6f66b971f974c0488d0846e6bd4e427f427"
+  "contentHash": "sha256:83bc80495b20a6d4e1afef6e681b5600bfd1d67848f7708c62b7a94eee901226"
 }

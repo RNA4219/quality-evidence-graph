@@ -177,7 +177,7 @@
       "role": "operational-cli-spec",
       "caps": "docs/birdseye/caps/docs.spec.operational-cli-extensions.md.json",
       "mtime": "00020",
-      "contentHash": "sha256:4771f1c5b4eaf86f24716e7d031c0e17a25c7523504e8cb548858fdb37e5f247"
+      "contentHash": "sha256:96c7441abc92b6cf0728941a167925c42fd1e40fdc3f29d8afa89028409a1ffb"
     },
     "docs/spec/gate-policy.md": {
       "role": "ipo-gate-policy-spec",
@@ -595,13 +595,14 @@
       "caps": "docs/birdseye/caps/src.cli.report.baseline-diff.ts.json",
       "depsOut": [
         "src/cli/errors.ts",
+        "src/cli/path-key.ts",
         "src/cli/report/baseline-contract.ts",
         "src/cli/report/model.ts",
         "src/cli/report/targets.ts",
         "src/types.ts"
       ],
       "mtime": "00020",
-      "contentHash": "sha256:b594a5e9cd5354ced4ebe12b878aa6f66b971f974c0488d0846e6bd4e427f427"
+      "contentHash": "sha256:83bc80495b20a6d4e1afef6e681b5600bfd1d67848f7708c62b7a94eee901226"
     },
     "src/cli/report/core.ts": {
       "role": "report-core",
@@ -2603,7 +2604,7 @@
         "docs/spec/operational-cli-extensions.md"
       ],
       "mtime": "00020",
-      "contentHash": "sha256:739647ab8dd832ef2e4c94c23eeb0b92beff3c08d359a3459e52d8cb780860f3"
+      "contentHash": "sha256:11fccd747466d5e36ee6bf71a8aac82415dd7dc75ee69c794e8b5df60cee582d"
     },
     "docs/evidence/cli-boundary-fixes-2026-09-11/validation.json": {
       "role": "validation",
@@ -2616,7 +2617,7 @@
       "caps": "docs/birdseye/caps/src.cli.path-key.ts.json",
       "depsOut": [],
       "mtime": "00020",
-      "contentHash": "sha256:d8a5a6d8bc96f47a5fff5bed2bcc7ce65b23c1f2302da8d538d204e931a4262e"
+      "contentHash": "sha256:9d7d872ee7ec5d1d3ac181aa90ecfef83ce56d541cc7a20565d7dd156fba3c23"
     },
     "src/cli/report/baseline-contract.ts": {
       "role": "baseline-contract",
@@ -2672,7 +2673,7 @@
       "caps": "docs/birdseye/caps/tests.helpers.cli-boundary-matrix.mjs.json",
       "depsOut": [],
       "mtime": "00020",
-      "contentHash": "sha256:23d2f06fe871803a60665e4b8a2e07311d8471e0cbd87a65ba8e5d9d12a6952c"
+      "contentHash": "sha256:14e6f9b846dd16e4951b1dbcedc3a6b355d2c094254b2b34da20273c4e136b13"
     }
   },
   "edges": [
@@ -5803,6 +5804,10 @@
     [
       "docs/project/evidence-acceptance-status.md",
       "docs/evidence/cli-boundary-fixes-2026-09-11/validation.json"
+    ],
+    [
+      "src/cli/report/baseline-diff.ts",
+      "src/cli/path-key.ts"
     ]
   ]
 }
