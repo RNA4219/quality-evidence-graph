@@ -1,0 +1,151 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [
+        {
+          "code": "DQ-14",
+          "count": 2,
+          "remediation": "Add source-backed manual oracle or placement-change retirement/revert evidence."
+        }
+      ],
+      "blockerCount": 0,
+      "residualRiskCount": 0,
+      "humanReviewCount": 0
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-manual-restored-deleted",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "disqualified",
+        "reasons": [
+          "Disqualified: 2 DQ code(s)",
+          "- DQ-14: Current manual inventory \"mbb:CASE-login-001\" must identify one current real manual test",
+          "- DQ-14: Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy"
+        ],
+        "disqualifications": [
+          {
+            "code": "DQ-14",
+            "message": "Current manual inventory \"mbb:CASE-login-001\" must identify one current real manual test",
+            "nodeIds": [
+              "mbb:CASE-login-001"
+            ],
+            "sourceRefs": [
+              {
+                "id": "mbb:sr-manual-inventory",
+                "path": "manual-bb/manual-case-inventory.json"
+              }
+            ]
+          },
+          {
+            "code": "DQ-14",
+            "message": "Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy",
+            "nodeIds": [
+              "qeg:placement-change-login-retirement",
+              "mbb:CASE-login-001",
+              "hate:AETE-login-001",
+              "qeg:risk-login-regression"
+            ],
+            "sourceRefs": [
+              {
+                "id": "hate:ev-login-green",
+                "path": "hate/reports/login-aete.json"
+              }
+            ]
+          }
+        ],
+        "blockers": [],
+        "residualRisks": [],
+        "requiredHumanReview": [],
+        "reliability": {
+          "enabled": false
+        },
+        "executionAccounting": {
+          "evaluatedAt": "2026-07-02T00:00:00.000Z",
+          "target": {
+            "projectId": "synthetic-eac",
+            "buildId": "synthetic-build-1",
+            "revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "environmentId": "synthetic-ci"
+          },
+          "selections": [
+            {
+              "testId": "hate:AETE-login-001",
+              "selectedEvidenceId": "qeg:eac-execution-4",
+              "selectedRunId": "synthetic-run-4",
+              "selectedStatus": "pass",
+              "reason": "latest_qualified_execution",
+              "consecutivePasses": 5,
+              "excluded": [
+                {
+                  "evidenceId": "qeg:eac-execution-0",
+                  "reason": "superseded"
+                },
+                {
+                  "evidenceId": "qeg:eac-execution-1",
+                  "reason": "superseded"
+                },
+                {
+                  "evidenceId": "qeg:eac-execution-2",
+                  "reason": "superseded"
+                },
+                {
+                  "evidenceId": "qeg:eac-execution-3",
+                  "reason": "superseded"
+                }
+              ]
+            }
+          ]
+        },
+        "expected": {
+          "fixture": "negative-manual-restored-deleted",
+          "expectedVerdict": "disqualified",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/manual-evidence-and-review.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [
+            "DQ-14",
+            "DQ-14"
+          ],
+          "actualDqCodes": [
+            "DQ-14",
+            "DQ-14"
+          ],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [],
+          "actualBlockerIds": []
+        }
+      }
+    ]
+  }
+}

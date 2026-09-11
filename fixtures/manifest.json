@@ -825,6 +825,50 @@
         "primaryBlocker": null
       },
       "snapshot": true
+    },
+    {
+      "name": "negative-manual-evidence-omitted",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-08",
+        "primaryBlocker": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-manual-result-fail",
+      "classification": "negative",
+      "expected": {
+        "verdict": "no_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": "qeg:manual-failed-qeg:review-manual"
+      },
+      "snapshot": true
+    },
+    {
+      "name": "negative-manual-restored-deleted",
+      "classification": "negative",
+      "expected": {
+        "verdict": "disqualified",
+        "exitCode": 2,
+        "primaryDq": "DQ-14",
+        "primaryBlocker": null
+      },
+      "snapshot": true
+    },
+    {
+      "name": "conditional-pre-release-review",
+      "classification": "positive",
+      "expected": {
+        "verdict": "conditional_go",
+        "exitCode": 2,
+        "primaryDq": null,
+        "primaryBlocker": null
+      },
+      "snapshot": true
     }
   ]
 }

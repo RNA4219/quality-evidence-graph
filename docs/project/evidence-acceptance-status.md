@@ -8,6 +8,8 @@ next_review_due: 2026-12-11
 
 # 証跡共通基準の実装・受入状況
 
+最新の[R25〜R28手動証拠・復帰・承認改修](manual-governance-fixes-2026-09-11.md)は実装・検証中。[今回の証拠](../evidence/manual-governance-fixes-2026-09-11/validation.json)にsource commitとCIを固定する。
+
 最新の[R20〜R24統制整合改修](governance-fixes-2026-09-11.md)を受入済み。source commit 2660cc6dbd43e8300b2537f9bd4196dacb272016 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34575322967)は3job全step成功。[今回の証拠](../evidence/governance-fixes-2026-09-11/validation.json)へ固定した。
 
 最新の[R14〜R19整合改修](gate-contract-fixes-2026-09-11.md)を受入済み。source commit 802e5b04de33a2bd37eaf5e1b34b982b15d7a529 の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34564476819)は3job全step成功。[今回の証拠](../evidence/gate-contract-fixes-2026-09-11/validation.json)へ固定した。以下のR1〜R13および実producerの受入原本は保持する。

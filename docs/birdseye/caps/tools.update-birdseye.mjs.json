@@ -1,7 +1,7 @@
 {
   "id": "tools/update-birdseye.mjs",
   "role": "update-birdseye",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 update-birdseye の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:e74b532d2deb1f30e7e2a7809a49fab3e339afba57b7e2d6546c800cbe0cf3d0"
+  "contentHash": "sha256:43b39f16d095edbe5d1b458bc3f2cd8e63439f3fffa12d77e876b424df20a792"
 }

@@ -1,0 +1,96 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [
+        {
+          "code": "DQ-08",
+          "count": 1,
+          "remediation": "Complete manual evidence with expectedResult, oracleRefs, traceTo, and evidenceRefs."
+        }
+      ],
+      "blockerCount": 0,
+      "residualRiskCount": 0,
+      "humanReviewCount": 0
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-manual-evidence-omitted",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "disqualified",
+        "reasons": [
+          "Disqualified: 1 DQ code(s)",
+          "- DQ-08: Manual evidence \"qeg:review-manual\" incomplete"
+        ],
+        "disqualifications": [
+          {
+            "code": "DQ-08",
+            "message": "Manual evidence \"qeg:review-manual\" incomplete",
+            "nodeIds": [
+              "qeg:review-manual"
+            ],
+            "sourceRefs": [
+              {
+                "id": "qeg:input-%2Fgraph%2Fnodes%2F1",
+                "path": "gate-input.json",
+                "label": "/graph/nodes/1: Diagnostic subject qeg:review-manual"
+              }
+            ]
+          }
+        ],
+        "blockers": [],
+        "residualRisks": [],
+        "requiredHumanReview": [],
+        "reliability": {
+          "enabled": false
+        },
+        "expected": {
+          "fixture": "negative-manual-evidence-omitted",
+          "expectedVerdict": "disqualified",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/manual-evidence-and-review.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [
+            "DQ-08"
+          ],
+          "actualDqCodes": [
+            "DQ-08"
+          ],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [],
+          "actualBlockerIds": []
+        }
+      }
+    ]
+  }
+}

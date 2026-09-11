@@ -8,6 +8,8 @@ next_review_due: 2026-10-20
 
 # Blueprint
 
+R25〜R28の[手動証拠・復帰・承認フェーズ契約](../spec/manual-evidence-and-review.md)では、shape・資格・状態・結果を共有評価し、DQ/blocker/human reviewへ接続する。検証表は正常・欠落・失敗・矛盾・状態遷移を持ち、CLI/API/Action/配布物とrecordまで確認する。
+
 R20〜R24の[統制整合契約](../spec/governance-consistency.md)では、配置先とtest実体の一致、自動引退の参照・layer・edge、timezone付き日時とnanosecond期限、非空白のIPO担当者、不明保管のDQ-16を固定する。既存承認と過去証拠は保持する。
 
 配置・正規化・snapshotのR14〜R19契約は[gate-contract-consistency](../spec/gate-contract-consistency.md)。選択coverageとoracle適格性をplanner/Gateで共通化し、graph/plan双方を検証する。human oracleは確認待ち、不正statusと空白waiver承認者は拒否する。wire0.2を維持し、snapshotの新形式と旧形式の読み取りを区別する。

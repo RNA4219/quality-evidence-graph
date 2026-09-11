@@ -15,8 +15,13 @@ import type {
   ExecutionDetails,
   ExecutionPolicy,
   ExecutionAccounting,
+  ManualEvidenceItem,
 } from "@quality-harness/quality-evidence-graph";
 import { buildGraph, placeTests } from "@quality-harness/quality-evidence-graph";
+// Schema-valid incomplete input is accepted by the public type and diagnosed by Gate (DQ-08).
+const incompleteManualEvidence: ManualEvidenceItem = { executedCaseId: "manual:incomplete", result: "pass" };
+const optionalManualRefs = incompleteManualEvidence.evidenceRefs?.map(ref => ref.id) ?? [];
+void optionalManualRefs;
 import { planConsumerMigration, applyConsumerMigration, readPublishedOutputs, recoverOutputs, parseProducerArtifact } from "@quality-harness/quality-evidence-graph";
 import type { ConsumerMigrationConfig, ConsumerMigrationReport, PublishedOutputs } from "@quality-harness/quality-evidence-graph";
 declare const migrationConfig: ConsumerMigrationConfig;

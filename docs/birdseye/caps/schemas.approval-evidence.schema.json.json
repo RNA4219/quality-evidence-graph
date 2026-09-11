@@ -1,7 +1,7 @@
 {
   "id": "schemas/approval-evidence.schema.json",
   "role": "approval-evidence.schema",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 approval-evidence.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:5827fefe9fa54fee2beb8795a000b26ba055daa56944f5bad5483c4ff2d20ae4"
+  "contentHash": "sha256:f27aaa14aed44796e77a7f166964a93472e79d7eea7dc3f449469f1d5652e4e5"
 }

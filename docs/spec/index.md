@@ -9,6 +9,8 @@ next_review_due: 2026-10-20
 
 # IPO 統制仕様
 
+R25〜R28と関連する入力状態の組合せは[手動証拠・復帰・承認フェーズの一貫した判定](manual-evidence-and-review.md)を参照する。
+
 配置実体・手動引退・厳密な日時・IPO役割・不明保管のR20〜R24規則は[統制整合契約](governance-consistency.md)を参照する。
 
 配置coverage、手動oracle、正規化status、waiver承認者、snapshot互換性の具体規則は[配置・判定・正規化の整合契約](gate-contract-consistency.md)を参照する。

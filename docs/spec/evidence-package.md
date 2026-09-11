@@ -69,6 +69,8 @@ manual evidence は次を持つ。
 
 manual case に expected result、oracle、traceability が欠ける場合は DQ-08。manual-scripted placement が acceptable oracle を持たない場合は DQ-14 とする。
 
+省略/空白/不正参照と結果の矛盾は[R25〜R28契約](manual-evidence-and-review.md)で検証する。手動failはblocker、blocked/skippedは要確認。manual passを必須の通常実行へ代用しない。
+
 ## 5. Evidence package hash
 
 `evidencePackageHash` は承認対象を固定するための値である。MVP では hash algorithm を固定しないが、同一 package manifest から同一値を再計算できることを受入条件にする。
@@ -86,3 +88,5 @@ evidence package は phase を区別する。
 | `release_decision` | IPO controlled release 判定 | 1 件以上必須 | approval evidence 不備は DQ-15 または No-Go。 |
 
 QEG が `release_decision` phase の package を評価する場合、approval evidence と evidence package hash が一致しなければ release Go にしてはならない。
+
+未承認pre_release_reviewはpackage IDをrequiredHumanReviewへ残す。承認者・権限・判断の空白、未来時刻、重複IDも不適格である。go以外の人間の判断をgo承認へ昇格しない。implementation_preparationのgoは既存の準備評価であり、release承認を意味しない。具体条件と対照試験は[横断契約](manual-evidence-and-review.md)を参照する。

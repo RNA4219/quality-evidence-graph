@@ -74,6 +74,8 @@ fixture と mock の合格は、実cluster、実fault injection、Lakda real acc
 
 ## Acceptance Commands
 
+R25〜R28は`negative-manual-evidence-omitted`、`negative-manual-result-fail`、`negative-manual-restored-deleted`、`conditional-pre-release-review`を固定fixtureとし、正常・欠落・失敗・矛盾・状態遷移を`tests/helpers/manual-governance-matrix.mjs`でCLI/API/Action/配布物/初期化runtimeへ共通適用する。
+
 R20/R21/R24は`negative-placement-layer-mismatch`、`negative-retirement-manual-replacement`、`negative-retention-unknown`の固定fixtureでDQ-03/14/16を確認する。R22/R23と各正常対照は`tests/helpers/governance-matrix.mjs`をCLI/API/配布物/Actionへ共通適用する。
 
 ```sh

@@ -1,0 +1,291 @@
+{
+  "metadata": {
+    "qegVersion": "0.2",
+    "runId": "qeg:run-positive-release-go",
+    "createdAt": "2026-06-03T04:00:00.000Z",
+    "profile": "ipo_controlled",
+    "inputArtifacts": [
+      {
+        "id": "qeg:artifact-001",
+        "adapter": "qeg-native",
+        "kind": "test_model",
+        "path": "artifacts/input.json",
+        "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+        "revision": "refs/heads/main"
+      }
+    ],
+    "requiredConnectorStatus": {
+      "qeg-native": "success"
+    }
+  },
+  "graph": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
+    },
+    "nodes": [
+      {
+        "id": "qeg:claim-001",
+        "kind": "requirement",
+        "label": "All critical risks mitigated",
+        "priority": "P0",
+        "severity": "critical",
+        "claimed": true,
+        "evidenceGap": 0,
+        "sourceRefs": [
+          {
+            "id": "qeg:sr-claim-001",
+            "path": "docs/claims/claim-001.md"
+          }
+        ],
+        "title": "All critical risks mitigated",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:sr-claim-001",
+              "path": "docs/claims/claim-001.md"
+            }
+          ],
+          "assumptions": [],
+          "confidence": "high"
+        },
+        "sourceArtifactIds": [
+          "qeg:artifact-001"
+        ],
+        "acceptanceCriteriaIds": []
+      },
+      {
+        "id": "qeg:review-manual",
+        "kind": "test",
+        "title": "Synthetic manual review case",
+        "layer": "manual-scripted",
+        "testExecutionMode": "real",
+        "existing": true,
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        },
+        "oracleType": "specified",
+        "oracleRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ],
+        "expectedResults": [
+          "The synthetic result matches"
+        ]
+      }
+    ],
+    "edges": [],
+    "completeness": {
+      "score": 1,
+      "partial": false,
+      "parserFailures": [],
+      "unsupportedClaims": []
+    }
+  },
+  "placementPlan": {
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
+    },
+    "obligations": [
+      {
+        "id": "qeg:review-obligation",
+        "changedCodeIds": [],
+        "riskIds": [],
+        "requirementIds": [],
+        "failureModeIds": [],
+        "priority": "P1",
+        "riskPriorityIndex": 1,
+        "gateRelevance": "blocking",
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      }
+    ],
+    "placements": [
+      {
+        "id": "qeg:review-placement",
+        "kind": "test_placement",
+        "title": "Synthetic manual placement",
+        "obligationId": "qeg:review-obligation",
+        "primaryLayer": "manual-scripted",
+        "disposition": "manual-only",
+        "gateRelevance": "blocking",
+        "candidateScores": [],
+        "selectedTestIds": [
+          "qeg:review-manual"
+        ],
+        "sourceArtifactIds": [],
+        "traceability": {
+          "sourceRefs": [
+            {
+              "id": "qeg:eac-synthetic-source",
+              "path": "gate-input.json",
+              "label": "EAC synthetic acceptance scenario"
+            }
+          ],
+          "assumptions": [
+            "Synthetic execution, not a live producer run"
+          ],
+          "confidence": "high"
+        }
+      }
+    ]
+  },
+  "gate": {
+    "evaluationScope": {
+      "kind": "fixture",
+      "target": "negative-manual-result-fail",
+      "notEvaluated": [
+        "Upstream producer ingestion",
+        "Real deployment",
+        "Release approval"
+      ]
+    },
+    "metadata": {
+      "qegVersion": "0.2",
+      "runId": "qeg:run-positive-release-go",
+      "createdAt": "2026-06-03T04:00:00.000Z",
+      "profile": "ipo_controlled",
+      "inputArtifacts": [
+        {
+          "id": "qeg:artifact-001",
+          "adapter": "qeg-native",
+          "kind": "test_model",
+          "path": "artifacts/input.json",
+          "contentHash": "sha256:04aa28011cacb4ea8fadee0e6b49b94976e50cef5860a149a46455fd71116490",
+          "revision": "refs/heads/main"
+        }
+      ],
+      "requiredConnectorStatus": {
+        "qeg-native": "success"
+      }
+    },
+    "verdict": "no_go",
+    "reasons": [
+      "No-go blockers: 1",
+      "- Reported manual execution \"qeg:review-manual\" failed"
+    ],
+    "disqualifications": [],
+    "blockers": [
+      {
+        "id": "qeg:manual-failed-qeg:review-manual",
+        "message": "Reported manual execution \"qeg:review-manual\" failed",
+        "testId": "qeg:review-manual",
+        "riskIds": [],
+        "sourceRefs": [
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          },
+          {
+            "id": "qeg:eac-synthetic-source",
+            "path": "gate-input.json",
+            "label": "EAC synthetic acceptance scenario"
+          }
+        ]
+      }
+    ],
+    "residualRisks": [],
+    "requiredHumanReview": [],
+    "testEvidenceAccounting": {
+      "countedTestIds": [],
+      "excludedMockTests": []
+    },
+    "reliability": {
+      "enabled": false
+    }
+  },
+  "exports": [
+    {
+      "kind": "json",
+      "path": "qeg.bundle.json",
+      "contentHash": "sha256:f802977e2c485acd02e04cfdfc69ca623deab2cdbc2d362dc98bf62db0c98420"
+    },
+    {
+      "kind": "json",
+      "path": "test-placement-plan.json",
+      "contentHash": "sha256:5d10cfbd2182f4624b55e07e21b59ef8851088d68ab77e22779fbf20fcbd483a"
+    },
+    {
+      "kind": "json",
+      "path": "gate-verdict.json",
+      "contentHash": "sha256:13484864f925710c48376edee2befb2333877c3ba952ac01578c075cd47ba03b"
+    },
+    {
+      "kind": "markdown",
+      "path": "quality-evidence-record.md",
+      "contentHash": "sha256:63f9f16419328d666a44617e1b5ec511e0e8919a1c11d0502169ce472cae2b68"
+    }
+  ],
+  "auditTrail": {
+    "evidencePackageHash": "sha256:release-package-hash",
+    "approvalEvidenceSummary": [
+      {
+        "id": "qeg:approval-release-001",
+        "approver": "approver-001",
+        "approvedAt": "2026-06-03T04:00:00.000Z",
+        "policyId": "qeg:policy-ipo-controlled-001",
+        "policyHash": "sha256:abc123",
+        "evidencePackageHash": "sha256:release-package-hash"
+      }
+    ],
+    "gatePolicyHash": "sha256:abc123",
+    "gatePolicyId": "qeg:policy-ipo-controlled-001"
+  }
+}

@@ -18438,7 +18438,7 @@ function collectEvidenceUsed(evaluated, defect) {
   return unique([
     ...evidencePackage.inputArtifactHashes.map((artifact) => artifact.id),
     ...evidencePackage.approvalEvidence.map((approval) => approval.id),
-    ...evidencePackage.manualEvidence.flatMap((item) => item.evidenceRefs.map((ref) => ref.id)),
+    ...evidencePackage.manualEvidence.flatMap((item) => (item.evidenceRefs ?? []).map((ref) => ref.id)),
     ...evidencePackage.sourceRefs.map((ref) => ref.id)
   ]);
 }
@@ -19559,6 +19559,86 @@ function evaluateRequiredExecutions(input, reliability) {
   return { disqualifications, blockers: blockers2 };
 }
 
+// src/gate/manual-evidence.ts
+import { isDeepStrictEqual as isDeepStrictEqual2 } from "node:util";
+var nonblank = (value) => typeof value === "string" && value.trim().length > 0;
+function references(value) {
+  return Array.isArray(value) && value.length > 0 && value.every((ref) => ref && nonblank(ref.id) && nonblank(ref.path) && nonblank(ref.evidenceKind));
+}
+function assessManualEvidence(input) {
+  const disqualifications = [], blockers2 = [], humanReview = [];
+  const reviewedRiskIds = /* @__PURE__ */ new Set();
+  const result = { disqualifications, blockers: blockers2, humanReview, reviewedRiskIds };
+  if (!input.evidencePackage) return result;
+  const items = input.evidencePackage.manualEvidence;
+  const add2 = (index, id, message) => {
+    disqualifications.push({
+      code: "DQ-08",
+      message,
+      nodeIds: nonblank(id) ? [id] : [],
+      sourceRefs: [inputSource(`/evidencePackage/manualEvidence/${index}`, message)]
+    });
+  };
+  if (!Array.isArray(items)) {
+    add2(0, void 0, "Manual evidence must be an array");
+    return result;
+  }
+  const nodes = new Map(input.graph.nodes.map((node) => [node.id, node]));
+  const grouped = /* @__PURE__ */ new Map();
+  for (const item of items) if (item && nonblank(item.executedCaseId)) {
+    const group = grouped.get(item.executedCaseId) ?? [];
+    if (!group.some((previous) => isDeepStrictEqual2(previous, item))) group.push(item);
+    grouped.set(item.executedCaseId, group);
+  }
+  const seen = /* @__PURE__ */ new Set();
+  for (const [index, item] of items.entries()) {
+    const id = item?.executedCaseId;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    if (!item || !nonblank(id) || !nonblank(item.expectedResult) || !references(item.oracleRefs) || !references(item.evidenceRefs) || !Array.isArray(item.traceTo) || item.traceTo.length === 0 || !item.traceTo.every(nonblank)) {
+      disqualifications.push({ code: "DQ-08", message: `Manual evidence "${id ?? "unknown"}" incomplete`, nodeIds: nonblank(id) ? [id] : [], sourceRefs: [] });
+      continue;
+    }
+    if (!["pass", "fail", "blocked", "skipped"].includes(item.result) || item.reviewerNote !== void 0 && typeof item.reviewerNote !== "string") {
+      add2(index, id, `Manual evidence "${id}" has an invalid result or reviewer note`);
+      continue;
+    }
+    if ((grouped.get(id)?.length ?? 0) > 1) {
+      add2(index, id, `Manual evidence "${id}" has conflicting current records`);
+      continue;
+    }
+    if (item.traceTo.some((target) => !["requirement", "risk", "acceptance_criteria"].includes(nodes.get(target)?.kind ?? ""))) {
+      add2(index, id, `Manual evidence "${id}" has unresolved requirement, risk or acceptance references`);
+      continue;
+    }
+    const test = nodes.get(id);
+    const hasNote = nonblank(item.reviewerNote);
+    const riskReview = !test && item.result === "pass" && hasNote && item.traceTo.every((target) => nodes.get(target)?.kind === "risk") && [...item.oracleRefs, ...item.evidenceRefs].every((ref) => ref.evidenceKind === "human_review");
+    if (!riskReview && (test?.kind !== "test" || test.deleted || test.testExecutionMode !== "real" || !["manual-scripted", "manual-exploratory"].includes(test.layer))) {
+      add2(index, id, `Manual evidence "${id}" does not reference a current real manual test`);
+      continue;
+    }
+    const selection = input.executionAccounting?.selections.find((selected) => selected.testId === id);
+    if (selection?.selectedStatus !== void 0 && selection.selectedStatus !== item.result) {
+      add2(index, id, `Manual evidence "${id}" disagrees with the selected execution result`);
+      continue;
+    }
+    const riskIds = [.../* @__PURE__ */ new Set([
+      ...item.traceTo.filter((target) => nodes.get(target)?.kind === "risk"),
+      ...test?.kind === "test" ? test.coveredRiskIds ?? [] : []
+    ])];
+    const refs = [...item.evidenceRefs, ...item.oracleRefs].map(({ evidenceKind: _kind, capturedAt: _time, ...ref }) => ref);
+    if (item.result === "fail" && selection?.selectedStatus !== "fail") {
+      blockers2.push({ id: `qeg:manual-failed-${id}`, message: `Reported manual execution "${id}" failed`, testId: id, riskIds, sourceRefs: refs });
+    }
+    if (item.result === "blocked" || item.result === "skipped") humanReview.push(id);
+    if (item.result === "pass" && hasNote && (riskReview || !input.policy.inputContract?.requireExecutedTests || selection?.selectedStatus === "pass")) {
+      for (const target of item.traceTo) if (nodes.get(target)?.kind === "risk") reviewedRiskIds.add(target);
+    }
+  }
+  return result;
+}
+
 // src/gate/dq/basic.ts
 function riskNodes(input) {
   return input.riskNodes ?? input.graph.nodes.filter((node) => node.kind === "risk");
@@ -19598,12 +19678,11 @@ function detectDQ03(input) {
 }
 function detectDQ04(input) {
   const disqualifications = [];
+  const reviewedRiskIds = (input.manualAssessment ?? assessManualEvidence(input)).reviewedRiskIds;
   for (const risk of riskNodes(input)) {
     if ((risk.priority === "P0" || risk.priority === "P1") && risk.evidenceGap > 0.5) {
       const hasWaiver = input.validWaivers.some((waiver) => waiver.linkedRiskIds.includes(risk.id));
-      const hasReviewerNote = input.evidencePackage?.manualEvidence.some(
-        (manual) => manual.traceTo.includes(risk.id) && manual.reviewerNote
-      );
+      const hasReviewerNote = reviewedRiskIds.has(risk.id);
       if (!hasWaiver && !hasReviewerNote) {
         disqualifications.push({
           code: "DQ-04",
@@ -19708,19 +19787,7 @@ var SR_DQ_11 = {
 
 // src/gate/dq/evidence.ts
 function detectDQ08(input) {
-  if (!input.evidencePackage) return [];
-  const disqualifications = [];
-  for (const manual of input.evidencePackage.manualEvidence) {
-    if (!manual.expectedResult || manual.oracleRefs.length === 0 || manual.traceTo.length === 0 || manual.evidenceRefs.length === 0) {
-      disqualifications.push({
-        code: "DQ-08",
-        message: `Manual evidence "${manual.executedCaseId}" incomplete`,
-        nodeIds: [manual.executedCaseId],
-        sourceRefs: []
-      });
-    }
-  }
-  return disqualifications;
+  return (input.manualAssessment ?? assessManualEvidence(input)).disqualifications;
 }
 var SENSITIVE_VALUE_PATTERNS = [
   /password\s*=\s*["'][^"']+["']/i,
@@ -19856,7 +19923,7 @@ function checkPolicyHashMismatch(input) {
   return null;
 }
 function checkApprovalRequired(input) {
-  if (input.evidencePackage?.phase === "release_decision" && input.evidencePackage.approvalEvidence.length === 0) {
+  if (input.evidencePackage?.phase === "release_decision" && (!Array.isArray(input.evidencePackage.approvalEvidence) || input.evidencePackage.approvalEvidence.length === 0)) {
     return {
       code: "DQ-15",
       message: "Approval evidence missing in release_decision phase",
@@ -19866,10 +19933,43 @@ function checkApprovalRequired(input) {
   }
   return null;
 }
+function checkApprovalShape(input) {
+  const evidence = input.evidencePackage;
+  if (!evidence) return [];
+  const issue = (message, id) => ({
+    code: "DQ-15",
+    message,
+    nodeIds: id ? [id] : [],
+    sourceRefs: [SR_DQ_15_APPROVAL]
+  });
+  if (!["implementation_preparation", "pre_release_review", "release_decision"].includes(evidence.phase) || !Array.isArray(evidence.approvalEvidence)) {
+    return [issue("Evidence package phase or approval collection is invalid")];
+  }
+  const nonblank3 = (value) => typeof value === "string" && value.trim().length > 0;
+  const clock = timestampNanos(input.metadata.createdAt), seen = /* @__PURE__ */ new Set();
+  const result = [];
+  for (const approval of evidence.approvalEvidence) {
+    const approvedAt = timestampNanos(approval?.approvedAt);
+    if (!approval || ![
+      approval.id,
+      approval.approver,
+      approval.roleOrAuthority,
+      approval.approvedDecision,
+      approval.policyId,
+      approval.policyHash,
+      approval.evidencePackageHash
+    ].every(nonblank3) || approvedAt === void 0 || clock !== void 0 && approvedAt > clock || !Array.isArray(approval.sourceRefs) || approval.sourceRefs.some((ref) => !ref || !nonblank3(ref.id) || !nonblank3(ref.path))) {
+      result.push(issue("Approval evidence has invalid identity, authority, decision, timestamp or sources", nonblank3(approval?.id) ? approval.id : void 0));
+    } else if (seen.has(approval.id)) result.push(issue("Approval evidence IDs must be unique", approval.id));
+    if (approval) seen.add(approval.id);
+  }
+  return result;
+}
 function checkApprovalEvidenceHashes(input) {
-  if (!input.evidencePackage) return [];
+  if (!input.evidencePackage || !Array.isArray(input.evidencePackage.approvalEvidence)) return [];
   const disqualifications = [];
   for (const approval of input.evidencePackage.approvalEvidence) {
+    if (!approval) continue;
     if (approval.policyId !== input.policy.policyId) {
       disqualifications.push({
         code: "DQ-15",
@@ -19912,6 +20012,7 @@ function detectDQ15(input) {
     ...checkWaiverSourceBacked(input.waivers),
     checkPolicyHashMismatch(input),
     checkApprovalRequired(input),
+    ...checkApprovalShape(input),
     ...checkApprovalEvidenceHashes(input)
   ].filter((d) => d !== null);
 }
@@ -19989,8 +20090,29 @@ function riskIdsForSubject(obligations, placements, subjectId) {
 function isManualLayer(layer) {
   return layer === "manual-scripted" || layer === "manual-exploratory";
 }
+function currentManualTest(input, subjectId) {
+  const test = input.graph.nodes.find((node) => node.id === subjectId);
+  return test?.kind === "test" && isManualLayer(test.layer) && test.testExecutionMode === "real" && !test.deleted ? test : void 0;
+}
 function isRestored(input, subjectId) {
-  return input.placementPlan?.manual_case_inventory?.current_subject_ids.includes(subjectId) ?? false;
+  const test = currentManualTest(input, subjectId);
+  return Boolean(test && input.placementPlan?.manual_case_inventory?.current_subject_ids.includes(subjectId) && (test.layer !== "manual-scripted" || hasUsableOracle(test, true)) && testPlacementNodes(input).some((placement) => placement.disposition !== "blocked" && placement.primaryLayer === test.layer && placement.selectedTestIds.includes(subjectId)));
+}
+function detectCurrentManualInventory(input) {
+  const inventory = input.placementPlan?.manual_case_inventory;
+  if (!inventory) return [];
+  const seen = /* @__PURE__ */ new Set();
+  const result = [];
+  for (const id of inventory.current_subject_ids) {
+    if (seen.has(id) || !currentManualTest(input, id)) result.push({
+      code: "DQ-14",
+      message: `Current manual inventory "${id}" must identify one current real manual test`,
+      nodeIds: [id],
+      sourceRefs: inventory.sourceRefs
+    });
+    seen.add(id);
+  }
+  return result;
 }
 function detectManualScriptedOracleGaps(input) {
   const disqualifications = [];
@@ -20106,6 +20228,7 @@ function detectManualCaseDisappearance(input) {
 }
 function detectDQ14(input) {
   return [
+    ...detectCurrentManualInventory(input),
     ...detectManualScriptedOracleGaps(input),
     ...detectPlacementChangeRetirementGaps(input),
     ...detectManualCaseDisappearance(input)
@@ -21407,25 +21530,25 @@ function upstreamDecisions(graph) {
 import { createHash as createHash5 } from "crypto";
 var same = (a, b) => canonicalJson(a) === canonicalJson(b);
 var compareId = (a, b) => a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-var nonblank = (v) => typeof v === "string" && v.trim().length > 0;
+var nonblank2 = (v) => typeof v === "string" && v.trim().length > 0;
 var fullRevision = (v) => typeof v === "string" && /^(?:[a-f0-9]{40}|[a-f0-9]{64})$/i.test(v);
 function validSources(v) {
-  return Array.isArray(v) && v.length > 0 && v.every((r) => r && nonblank(r.id) && nonblank(r.path));
+  return Array.isArray(v) && v.length > 0 && v.every((r) => r && nonblank2(r.id) && nonblank2(r.path));
 }
 function validRef(v) {
-  return Boolean(v && nonblank(v.id) && nonblank(v.path) && /^sha256:[a-f0-9]{64}$/.test(v.contentHash) && fullRevision(v.revision));
+  return Boolean(v && nonblank2(v.id) && nonblank2(v.path) && /^sha256:[a-f0-9]{64}$/.test(v.contentHash) && fullRevision(v.revision));
 }
 function validTarget(v) {
-  return Boolean(v && nonblank(v.projectId) && nonblank(v.buildId) && nonblank(v.environmentId) && fullRevision(v.revision));
+  return Boolean(v && nonblank2(v.projectId) && nonblank2(v.buildId) && nonblank2(v.environmentId) && fullRevision(v.revision));
 }
 function validIdentity(v) {
-  return Boolean(v && [v.producer, v.projectId, v.featureId, v.caseId].every(nonblank));
+  return Boolean(v && [v.producer, v.projectId, v.featureId, v.caseId].every(nonblank2));
 }
 function validPolicy(v) {
   return Boolean(v && validTarget(v.target) && Number.isFinite(v.maxEvidenceAgeHours) && v.maxEvidenceAgeHours > 0 && Number.isFinite(v.maxEvidenceAgeHours * 36e5) && validRef(v.buildBindingRef) && validSources(v.sourceRefs));
 }
 function validExecution(v) {
-  return Boolean(v && v.executionVersion === "qeg-execution/v1" && validIdentity(v.identity) && validTarget(v.target) && [v.testId, v.producerVersion, v.runId].every(nonblank) && validRef(v.rawArtifactRef) && ["pass", "fail", "skipped", "blocked", "cancelled", "unknown", "running"].includes(v.status) && ["real", "mock"].includes(v.executionMode) && (v.historySourceRefs === void 0 || validSources(v.historySourceRefs)));
+  return Boolean(v && v.executionVersion === "qeg-execution/v1" && validIdentity(v.identity) && validTarget(v.target) && [v.testId, v.producerVersion, v.runId].every(nonblank2) && validRef(v.rawArtifactRef) && ["pass", "fail", "skipped", "blocked", "cancelled", "unknown", "running"].includes(v.status) && ["real", "mock"].includes(v.executionMode) && (v.historySourceRefs === void 0 || validSources(v.historySourceRefs)));
 }
 function normalTests(input) {
   return input.graph.nodes.filter((n) => n.kind === "test" && n.testType !== "resilience").sort(compareId);
@@ -21608,6 +21731,16 @@ function evaluateExecutions(input) {
   return result();
 }
 
+// src/gate/package-review.ts
+function pendingPackageReview(evidencePackage) {
+  if (!evidencePackage || evidencePackage.phase === "implementation_preparation") return [];
+  const approvals = evidencePackage.approvalEvidence;
+  if (!Array.isArray(approvals)) return [evidencePackage.id];
+  if (evidencePackage.phase === "pre_release_review" && approvals.length === 0) return [evidencePackage.id];
+  if (approvals.some((approval) => typeof approval?.approvedDecision !== "string" || approval.approvedDecision.trim() !== "go")) return [evidencePackage.id];
+  return [];
+}
+
 // src/gate/evaluate.ts
 function evaluateGate(input) {
   const executionNanos = timestampNanos(input.metadata.createdAt);
@@ -21627,13 +21760,14 @@ function evaluateGate(input) {
   const reliability = evaluateReliability(context);
   const qualified = evaluateExecutions(context);
   context.executionAccounting = qualified.accounting;
+  context.manualAssessment = assessManualEvidence(context);
   const executions = evaluateRequiredExecutions(context, reliability.accounting);
   const upstream = upstreamDecisions(input.graph);
-  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...qualified.blockers, ...upstream.blockers] };
+  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...qualified.blockers, ...upstream.blockers, ...context.manualAssessment.blockers] };
   const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...qualified.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
   const blockers2 = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
-  const requiredHumanReview = [.../* @__PURE__ */ new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks, input.placementPlan), ...upstream.humanReview])];
+  const requiredHumanReview = [.../* @__PURE__ */ new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks, input.placementPlan), ...upstream.humanReview, ...context.manualAssessment.humanReview, ...pendingPackageReview(input.evidencePackage)])];
   const verdict = computeVerdict(
     disqualifications,
     blockers2,
@@ -22438,8 +22572,8 @@ var DQ_EXPLANATIONS = {
   "DQ-08": {
     code: "DQ-08",
     title: "Manual evidence incomplete",
-    meaning: "Manual evidence lacks expected result, oracle refs, traceability, or evidence refs.",
-    commonCauses: ["Manual case result copied without oracle", "Missing screenshot/log/reference"],
+    meaning: "Manual evidence is incomplete, has unresolved current-test/trace references, or conflicts with another result.",
+    commonCauses: ["Manual case result copied without oracle", "Missing screenshot/log/reference", "Conflicting manual and selected execution results"],
     requiredEvidence: ["expectedResult", "oracleRefs", "traceTo", "evidenceRefs"],
     minimalFix: ["Complete manualEvidence entries", "Attach source-backed oracle and execution evidence"],
     references: ["docs/spec/evidence-package.md"],

@@ -11,6 +11,7 @@ import type { DQDetectorInput } from "../context.js";
 import { computeBlockers } from "../verdict.js";
 import { detectInputContract } from "./input-contract.js";
 import { detectPlacementCoverage } from "./placement-coverage.js";
+import { assessManualEvidence } from "../manual-evidence.js";
 
 function riskNodes(input: DQDetectorInput): readonly RiskNode[] {
   return input.riskNodes ?? input.graph.nodes.filter((node: QegNode): node is RiskNode => node.kind === "risk");
@@ -60,13 +61,12 @@ export function detectDQ03(input: DQDetectorInput): Disqualification[] {
 
 export function detectDQ04(input: DQDetectorInput): Disqualification[] {
   const disqualifications: Disqualification[] = [];
+  const reviewedRiskIds = (input.manualAssessment ?? assessManualEvidence(input)).reviewedRiskIds;
 
   for (const risk of riskNodes(input)) {
     if ((risk.priority === "P0" || risk.priority === "P1") && risk.evidenceGap > 0.5) {
       const hasWaiver = input.validWaivers.some((waiver) => waiver.linkedRiskIds.includes(risk.id));
-      const hasReviewerNote = input.evidencePackage?.manualEvidence.some(
-        (manual) => manual.traceTo.includes(risk.id) && manual.reviewerNote
-      );
+      const hasReviewerNote = reviewedRiskIds.has(risk.id);
       if (!hasWaiver && !hasReviewerNote) {
         disqualifications.push({
           code: "DQ-04" as DisqualificationCode,

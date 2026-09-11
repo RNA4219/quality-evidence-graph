@@ -1,0 +1,10 @@
+{
+  "evidenceVersion": "qeg-remediation-acceptance-v1",
+  "baselineCommit": "71199ece186771dc36a54dd3342987002d60ecf1",
+  "acceptance": {
+    "decision": "implemented",
+    "findingIds": ["R25", "R26", "R27", "R28"],
+    "pending": ["local acceptance", "source CI"]
+  },
+  "contract": "docs/spec/manual-evidence-and-review.md"
+}

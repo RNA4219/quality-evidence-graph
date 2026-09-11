@@ -3,6 +3,7 @@ import type { DQDetectorInput } from "../context.js";
 import {
   checkApprovalEvidenceHashes,
   checkApprovalRequired,
+  checkApprovalShape,
   checkPolicyHashMismatch,
   checkWaiverSourceBacked,
 } from "./helpers.js";
@@ -23,6 +24,7 @@ export function detectDQ15(input: DQDetectorInput): Disqualification[] {
     ...checkWaiverSourceBacked(input.waivers),
     checkPolicyHashMismatch(input),
     checkApprovalRequired(input),
+    ...checkApprovalShape(input),
     ...checkApprovalEvidenceHashes(input),
   ].filter((d): d is Disqualification => d !== null);
 }

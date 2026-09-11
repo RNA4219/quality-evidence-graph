@@ -236,6 +236,8 @@ traceability の受入条件:
 | T-12 | 引退後も risk coverage を逆引きできる | 引退済み manual case の risk は `replacement_ids[]` の自動 test node から `coveredRiskIds` と `replaced_by` edge で automated coverage として辿れる |
 | T-13 | 引退は可逆イベントとして扱う | replacement test の削除、`evidenceStrength` 低下、green 回数不足、risk coverage 欠落が起き、manual case が復帰していなければ revert 候補として DQ-14 にする |
 | T-14 | manual case の単純消失を検出する | `manual_case_inventory.previous_subject_ids` から消えた case が `current_subject_ids` にも `placement_changes[].subject_id` にも無い場合、無断消失として DQ-14 にする |
+
+R25〜R28の[手動証拠・復帰・承認フェーズ契約](spec/manual-evidence-and-review.md)により、current inventoryは現役real manual testへ解決し、復帰による免除には配置とoracleも必要とする。手動証拠の項目省略はDQ-08として読み、結果failはblocker、未完了はhuman review、通常実行との矛盾はDQ-08。未承認pre_release_reviewは最大conditional_goとし、正常・欠落・失敗・矛盾・状態遷移を入力からrecordまで共通matrixで検証する。
 | T-15 | mock test を Gate 証跡から除外する | test node は `testExecutionMode=real|mock` を必須とし、`mock` は placement retirement の `evidenceStrength`、直近 green 回数、risk coverage を満たさない。除外 ID と理由は Gate 出力に残す |
 
 placement score は MVP では次の入力を使う。

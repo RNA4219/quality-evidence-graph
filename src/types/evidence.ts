@@ -153,10 +153,11 @@ export interface Retention {
 export interface ManualEvidenceItem {
   readonly executedCaseId: StableId;
   readonly result: "pass" | "fail" | "blocked" | "skipped";
-  readonly expectedResult: string;
-  readonly oracleRefs: readonly EvidenceRef[];
-  readonly traceTo: readonly StableId[];
-  readonly evidenceRefs: readonly EvidenceRef[];
+  /** 省略した入力も診断対象として読める。以下の不足・空白・空配列はDQ-08。 */
+  readonly expectedResult?: string;
+  readonly oracleRefs?: readonly EvidenceRef[];
+  readonly traceTo?: readonly StableId[];
+  readonly evidenceRefs?: readonly EvidenceRef[];
   readonly reviewerNote?: string;
 }
 

@@ -1,5 +1,6 @@
-import type { Disqualification, DisqualificationCode, Waiver } from "../../types.js";
+import type { Disqualification, DisqualificationCode, SourceRef, Waiver } from "../../types.js";
 import type { DQDetectorInput } from "../context.js";
+import { timestampNanos } from "../../timestamps.js";
 import {
   SR_DQ_15_APPROVAL,
   SR_DQ_15_APPROVAL_PKGHASH,
@@ -53,7 +54,7 @@ export function checkPolicyHashMismatch(input: DQDetectorInput): Disqualificatio
 export function checkApprovalRequired(input: DQDetectorInput): Disqualification | null {
   if (
     input.evidencePackage?.phase === "release_decision" &&
-    input.evidencePackage.approvalEvidence.length === 0
+    (!Array.isArray(input.evidencePackage.approvalEvidence) || input.evidencePackage.approvalEvidence.length === 0)
   ) {
     return {
       code: "DQ-15" as DisqualificationCode,
@@ -63,6 +64,31 @@ export function checkApprovalRequired(input: DQDetectorInput): Disqualification 
     };
   }
   return null;
+}
+
+/** Invalid approval records are not evidence of a completed human decision. */
+export function checkApprovalShape(input: DQDetectorInput): Disqualification[] {
+  const evidence = input.evidencePackage;
+  if (!evidence) return [];
+  const issue = (message: string, id?: string): Disqualification => ({ code: "DQ-15", message,
+    nodeIds: id ? [id] : [], sourceRefs: [SR_DQ_15_APPROVAL] });
+  if (!["implementation_preparation", "pre_release_review", "release_decision"].includes(evidence.phase) || !Array.isArray(evidence.approvalEvidence)) {
+    return [issue("Evidence package phase or approval collection is invalid")];
+  }
+  const nonblank = (value: unknown): value is string => typeof value === "string" && value.trim().length > 0;
+  const clock = timestampNanos(input.metadata.createdAt), seen = new Set<string>();
+  const result: Disqualification[] = [];
+  for (const approval of evidence.approvalEvidence) {
+    const approvedAt = timestampNanos(approval?.approvedAt);
+    if (!approval || ![approval.id, approval.approver, approval.roleOrAuthority, approval.approvedDecision,
+      approval.policyId, approval.policyHash, approval.evidencePackageHash].every(nonblank) ||
+      approvedAt === undefined || (clock !== undefined && approvedAt > clock) ||
+      !Array.isArray(approval.sourceRefs) || approval.sourceRefs.some((ref: SourceRef) => !ref || !nonblank(ref.id) || !nonblank(ref.path))) {
+      result.push(issue("Approval evidence has invalid identity, authority, decision, timestamp or sources", nonblank(approval?.id) ? approval.id : undefined));
+    } else if (seen.has(approval.id)) result.push(issue("Approval evidence IDs must be unique", approval.id));
+    if (approval) seen.add(approval.id);
+  }
+  return result;
 }
 
 /**
@@ -75,11 +101,12 @@ export function checkApprovalRequired(input: DQDetectorInput): Disqualification 
  * - non-empty sourceRefs
  */
 export function checkApprovalEvidenceHashes(input: DQDetectorInput): Disqualification[] {
-  if (!input.evidencePackage) return [];
+  if (!input.evidencePackage || !Array.isArray(input.evidencePackage.approvalEvidence)) return [];
 
   const disqualifications: Disqualification[] = [];
 
   for (const approval of input.evidencePackage.approvalEvidence) {
+    if (!approval) continue;
     if (approval.policyId !== input.policy.policyId) {
       disqualifications.push({
         code: "DQ-15" as DisqualificationCode,

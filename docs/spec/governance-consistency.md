@@ -20,6 +20,8 @@ manual→automatedの記録ではsubject_idがfrom_layerと一致するmanual te
 
 replacementの削除・劣化や自動coverage不足に対して手動caseがcurrent inventoryへ復帰している場合、従来どおりその手動caseを評価する。手動oracleを満たさない復帰や存在しないsubjectを、復帰フラグだけで有効化しない。
 
+R27ではcurrent一覧の実体・未削除・real/manual・重複を照合し、復帰免除には同layerの非blocked配置と適格oracleを必要とする。[横断検証表](manual-evidence-and-review.md)のinventory行を参照する。
+
 同一引退記録で強度・実行・coverageと構造の両方が不足するときは、既存の不足理由を優先してDQ-14を1件にする。別の引退記録や独立DQは保持する。
 
 ## 日時とwaiver

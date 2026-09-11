@@ -17,9 +17,9 @@
   "additionalProperties": false,
   "properties": {
     "id": { "$ref": "shared-defs.schema.json#/$defs/stableId" },
-    "approver": { "type": "string", "minLength": 1 },
-    "roleOrAuthority": { "type": "string", "minLength": 1 },
-    "approvedDecision": { "type": "string", "minLength": 1 },
+    "approver": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "roleOrAuthority": { "type": "string", "minLength": 1, "pattern": "\\S" },
+    "approvedDecision": { "type": "string", "minLength": 1, "pattern": "\\S", "description": "go以外の人間の判断をgo承認へ昇格しない。" },
     "approvedAt": { "$ref": "shared-defs.schema.json#/$defs/isoDateTime" },
     "policyId": { "type": "string", "minLength": 1 },
     "policyHash": { "type": "string", "minLength": 1 },

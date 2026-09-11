@@ -53,6 +53,7 @@
       "items": { "$ref": "approval-evidence.schema.json" }
     },
     "manualEvidence": {
+      "description": "手動結果は資格・参照・結果を共通評価する。補足項目の省略/空欄はDQ-08として診断し、実行passを自動生成しない。",
       "type": "array",
       "items": {
         "type": "object",

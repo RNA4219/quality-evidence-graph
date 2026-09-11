@@ -1,0 +1,19 @@
+{
+  "fixture": "negative-manual-evidence-omitted",
+  "description": "negative-manual-evidence-omitted",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-08",
+      "message": "Manual evidence \"qeg:review-manual\" incomplete",
+      "nodeIds": [
+        "qeg:review-manual"
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/manual-evidence-and-review.md"
+}

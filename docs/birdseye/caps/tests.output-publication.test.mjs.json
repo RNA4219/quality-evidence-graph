@@ -1,7 +1,7 @@
 {
   "id": "tests/output-publication.test.mjs",
   "role": "output-publication.test",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 output-publication.test の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],

@@ -17,6 +17,7 @@ import type {
 } from "../types.js";
 import type { EvidenceVerificationReport } from "../validation/evidence.js";
 import { allTestPlacements } from "../placement-contract.js";
+import type { ManualEvidenceAssessment } from "./manual-evidence.js";
 
 export interface GateEvaluationInput {
   metadata: QegMetadata;
@@ -35,6 +36,7 @@ export interface GateEvaluationInput {
 }
 
 export interface DQDetectorInput {
+  manualAssessment?: ManualEvidenceAssessment;
   executionAccounting?: ExecutionAccounting;
   metadata: QegMetadata;
   graph: QualityEvidenceGraph;
