@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00023";
+const generation = "00024";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,7 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/release-notes/2026-09-12-v0.4.1.md", "tests/action-contract.test.mjs",
   "docs/project/manual-governance-fixes-2026-09-11.md", "docs/spec/manual-evidence-and-review.md", "docs/evidence/manual-governance-fixes-2026-09-11/validation.json",
   "tests/manual-governance-regression.test.mjs", "tests/helpers/manual-governance-matrix.mjs",
   "docs/project/governance-fixes-2026-09-11.md", "docs/spec/governance-consistency.md", "docs/evidence/governance-fixes-2026-09-11/validation.json",
@@ -361,6 +362,11 @@ for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/bluepr
   additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/manual-evidence-and-review.md", "docs/evidence/manual-governance-fixes-2026-09-11/validation.json"])] };
 }
 additions["docs/spec/manual-evidence-and-review.md"].depsOut = ["src/gate/manual-evidence.ts", "src/gate/package-review.ts", "src/gate/dq/placement-change.ts", "src/gate/dq/helpers.ts", "tests/helpers/manual-governance-matrix.mjs"];
+for (const path of ["README.md", "README_JA.md", "README_EN.md", "docs/project/runbook.md"]) {
+  const previous = additions[path] ?? index.nodes[path];
+  additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/release-notes/2026-09-12-v0.4.1.md"])] };
+}
+additions["docs/release-notes/2026-09-12-v0.4.1.md"].depsOut = ["src/version.ts", "tests/package-smoke.mjs", "tools/action-lifecycle-acceptance.mjs"];
 const knownPaths = new Set([...Object.keys(index.nodes), ...Object.keys(additions)]);
 for (const path of currentPaths.filter(p => /\.(ts|mjs)$/.test(p))) {
   const code = await readFile(resolve(root, path), "utf8");
@@ -381,7 +387,7 @@ for (const [path, node] of Object.entries(additions)) {
     role: node.role,
     generation,
     public_api: [],
-    summary: node.summary ?? `QEG 0.4.0 ${node.role} の契約・実装。関連sourceと受入試験を参照。`,
+    summary: node.summary ?? `QEG ${node.role} の契約・実装。関連sourceと受入試験を参照。`,
     deps_out: node.depsOut ?? [],
     deps_in: node.depsIn ?? [],
     risks: node.risks ?? ["型、schema、fixture、CLI契約を同時に更新する"],

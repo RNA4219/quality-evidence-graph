@@ -1,9 +1,9 @@
 {
   "id": "src/gate/reliability/utils.ts",
   "role": "reliability-deterministic-utils",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 reliability-deterministic-utils の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG reliability-deterministic-utils の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/gate/reliability/bounds.ts",
     "src/gate/reliability/collections.ts",

@@ -1,9 +1,9 @@
 {
   "id": "src/gate/evaluate.ts",
   "role": "gate-evaluator",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 gate-evaluator の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG gate-evaluator の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/gate/context.ts",
     "src/gate/diagnostics.ts",

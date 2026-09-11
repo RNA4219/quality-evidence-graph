@@ -1,11 +1,12 @@
 {
   "id": "src/version.ts",
   "role": "version",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 version の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG version の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
+    "docs/release-notes/2026-09-12-v0.4.1.md",
     "src/cli.ts"
   ],
   "risks": [
@@ -14,5 +15,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:7ec5743ced80dc27b35340aca8338bb536f8c3290e1c11ded4e0b017afff8e01"
+  "contentHash": "sha256:9275504e2e989f7f0f9cc1c69d875d78455a1f40d1b38a358d58b4999b838f72"
 }

@@ -1,9 +1,9 @@
 {
   "id": "tools/migrate-execution-fixtures.mjs",
   "role": "migrate-execution-fixtures",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 migrate-execution-fixtures の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG migrate-execution-fixtures の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "tests/helpers/execution-fixture.mjs"
   ],

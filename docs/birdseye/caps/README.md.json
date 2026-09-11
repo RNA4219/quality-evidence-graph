@@ -1,9 +1,9 @@
 {
   "id": "README.md",
   "role": "overview",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 overview の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG overview の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     ".github/workflows/ci.yml",
     "README_EN.md",
@@ -16,6 +16,7 @@
     "docs/project/remediation-2026-09-10.md",
     "docs/release-notes/2026-07-20-v0.3.0.md",
     "docs/release-notes/2026-07-20-v0.3.1.md",
+    "docs/release-notes/2026-09-12-v0.4.1.md",
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/release/acceptance-2026-07-20.md",
     "docs/spec/evidence-acceptance-standard.md",
@@ -35,5 +36,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:8a8588daba8b30d7d3eda000b2853712763efbd803dedbf6bde302f7b7b37ddf"
+  "contentHash": "sha256:da73ae9758e9bfedd1e0882147887c68556ddeb37a7372095ed48ead674e6a1e"
 }

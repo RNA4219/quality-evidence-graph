@@ -1,9 +1,9 @@
 {
   "id": "tests/helpers/governance-matrix.mjs",
   "role": "governance-matrix",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 governance-matrix の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG governance-matrix の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "tests/helpers/cli-boundary-matrix.mjs",
     "tests/helpers/execution-fixture.mjs"

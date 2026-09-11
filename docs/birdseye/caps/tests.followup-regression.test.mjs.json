@@ -1,9 +1,9 @@
 {
   "id": "tests/followup-regression.test.mjs",
   "role": "followup-regression.test",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 followup-regression.test の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG followup-regression.test の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "tests/helpers/raw-producer-fixture.mjs"
   ],

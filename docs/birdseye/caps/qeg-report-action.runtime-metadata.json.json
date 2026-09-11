@@ -1,9 +1,9 @@
 {
   "id": "qeg-report-action/runtime-metadata.json",
   "role": "runtime-metadata",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 runtime-metadata の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG runtime-metadata の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:96b1072769552d909d7065cf0b74563a21e95e3d45b42efdacfab5688473c53a"
+  "contentHash": "sha256:eefe6f004a199be718b1bd0a78e8e6f2cd9094c4de14518e7d47e3cba11f7754"
 }

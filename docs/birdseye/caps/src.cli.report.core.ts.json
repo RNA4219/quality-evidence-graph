@@ -1,9 +1,9 @@
 {
   "id": "src/cli/report/core.ts",
   "role": "report-core",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 report-core の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG report-core の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/dq-explain.ts",
     "src/cli/errors.ts",

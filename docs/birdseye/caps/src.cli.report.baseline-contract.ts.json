@@ -1,9 +1,9 @@
 {
   "id": "src/cli/report/baseline-contract.ts",
   "role": "baseline-contract",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 baseline-contract の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG baseline-contract の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/errors.ts",
     "src/cli/file-errors.ts",

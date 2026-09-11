@@ -2,7 +2,7 @@
   "runtimeVersion": "qeg-runtime/v1",
   "package": {
     "name": "@quality-harness/quality-evidence-graph",
-    "version": "0.4.0",
+    "version": "0.4.1",
     "engines": {
       "node": ">=20"
     }

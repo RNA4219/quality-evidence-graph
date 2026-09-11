@@ -22316,7 +22316,7 @@ async function runPlaceTestsUnderLease(directory) {
 }
 
 // src/version.ts
-var QEG_VERSION = "0.4.0";
+var QEG_VERSION = "0.4.1";
 
 // src/cli.ts
 import { readFile as readFile22 } from "fs/promises";

@@ -211,7 +211,7 @@ raw入力からの手順は `examples/raw-producer-contract/README.md` を参照
 
 ### 10. v0.3.1 GitHub-only release（履歴）
 
-以下は当時の配布手順であり、現行0.4.0は未公開。今回の改修でtag作成・release・publishは実行しない。
+以下は当時の配布手順。0.4.0は単独配布せず、受入済み改修を0.4.1 tarballへまとめる。現在のパッケージ作成手順は[0.4.1ノート](../release-notes/2026-09-12-v0.4.1.md)を参照。
 
 v0.3.1ではnpm registryへpublishしない。packageは`private: true`とし、GitHub Release tarballとtag固定Actionを正規配布物とする。
 

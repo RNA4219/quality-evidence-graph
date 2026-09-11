@@ -1,0 +1,25 @@
+{
+  "id": "docs/release-notes/2026-09-12-v0.4.1.md",
+  "role": "2026-09-12-v0.4.1",
+  "generation": "00024",
+  "public_api": [],
+  "summary": "QEG 2026-09-12-v0.4.1 の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [
+    "src/version.ts",
+    "tests/package-smoke.mjs",
+    "tools/action-lifecycle-acceptance.mjs"
+  ],
+  "deps_in": [
+    "README.md",
+    "README_EN.md",
+    "README_JA.md",
+    "docs/project/runbook.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:a536f1e7e3b2a9f1e1a0911c1a6f7e40ea911455fc9bb9492b803239ddf2cf7b"
+}

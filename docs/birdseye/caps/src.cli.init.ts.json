@@ -1,9 +1,9 @@
 {
   "id": "src/cli/init.ts",
   "role": "oss-init-cli",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 oss-init-cli の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG oss-init-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/cli/errors.ts",
     "src/cli/file-errors.ts",

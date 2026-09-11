@@ -1,9 +1,9 @@
 {
   "id": "schemas/evidence-package.schema.json",
   "role": "evidence-package.schema",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 evidence-package.schema の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG evidence-package.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [

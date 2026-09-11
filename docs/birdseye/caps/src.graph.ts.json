@@ -1,9 +1,9 @@
 {
   "id": "src/graph.ts",
   "role": "graph",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
-  "summary": "QEG 0.4.0 graph の契約・実装。関連sourceと受入試験を参照。",
+  "summary": "QEG graph の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/adapters/code-to-gate.ts",
     "src/adapters/common.ts",

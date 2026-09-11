@@ -1,7 +1,7 @@
 {
   "id": "docs/release-notes/2026-07-20-v0.3.1.md",
   "role": "v0.3.1-release-notes",
-  "generation": "00023",
+  "generation": "00024",
   "public_api": [],
   "summary": "QEG 0.3.1のGitHub-only Action bundle、release lifecycle evidence、互換境界を記録するrelease notes。",
   "deps_out": [
