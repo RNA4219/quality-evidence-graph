@@ -27,6 +27,8 @@
 
 続く[R5〜R7の一括修正](docs/project/followup-fixes-2026-09-11.md)では、native編集を古い世代で戻さない復旧、差分検査の削除・不正入力検出、同名targetの再現bundle保存を追加しています。入力と過去の出力が異なる場合、`outputs recover`は入力を保護して再評価を要求します。
 
+2026-09-11の[R8〜R13改修](docs/project/cli-boundary-fixes-2026-09-11.md)では、実行場所による差分の見落とし、親指定での壊れたtargetの脱落、baselineの期限・対象不一致、未評価DQの誤解消、配布後の診断CLIを修正しています。共通テストをsource CLI・tarball・Actionへ適用し、初期化runtimeも検証します。
+
 フォーカス手順:
 
 - 直近変更ファイル±2hopの node ID を `docs/birdseye/index.json` から取得する。

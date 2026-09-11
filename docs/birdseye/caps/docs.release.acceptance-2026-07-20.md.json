@@ -1,7 +1,7 @@
 {
   "id": "docs/release/acceptance-2026-07-20.md",
   "role": "superseded-v0.3.0-release-acceptance",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "v0.3.0 repository completionとnpm公開を含む過去判定。npm公開は完了せず、現行配布契約はGitHub-only v0.3.1へ移管済み。",
   "deps_out": [

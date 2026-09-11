@@ -19,6 +19,7 @@ export function formatGithubSummary(report: CiReport): string {
     `- required human review: ${summary.humanReviewCount}`,
     "",
   ];
+  for (const error of report.errors) lines.push(`- ${error.code}: ${error.message}`);
 
   const reliabilityTargets = report.targets;
   for (const target of report.targets) if (target.evaluationScope) {
@@ -45,6 +46,7 @@ export function formatGithubSummary(report: CiReport): string {
     lines.push(`- new DQs: ${report.diff.new.length}`);
     lines.push(`- resolved DQs: ${report.diff.resolved.length}`);
     lines.push(`- unchanged DQs: ${report.diff.unchanged.length}`);
+    lines.push(`- unverified DQs: ${report.diff.unverified?.length ?? 0}`);
     lines.push("");
     for (const item of report.diff.new) {
       lines.push(`- new ${item.code}: ${item.target} - ${item.message}`);
@@ -52,6 +54,7 @@ export function formatGithubSummary(report: CiReport): string {
     for (const item of report.diff.resolved) {
       lines.push(`- resolved ${item.code}: ${item.target} - ${item.message}`);
     }
+    for (const item of report.diff.unverified ?? []) lines.push(`- unverified ${item.code}: ${item.target} - ${item.reason}`);
     if (report.diff.new.length > 0 || report.diff.resolved.length > 0) {
       lines.push("");
     }

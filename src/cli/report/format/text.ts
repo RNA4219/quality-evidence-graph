@@ -11,7 +11,7 @@ export function formatCiReportText(report: CiReport): string {
   const lines: string[] = [
     "Quality Evidence Graph CI Report",
     `Generated at: ${report.generatedAt}`,
-    `Overall: ${failingTargets.length === 0 ? "PASS" : "FAIL"}`,
+    `Overall: ${failingTargets.length === 0 && summary.cliErrors === 0 ? "PASS" : "FAIL"}`,
     "",
     "Summary",
     `- targets: ${summary.totalTargets}`,
@@ -23,6 +23,7 @@ export function formatCiReportText(report: CiReport): string {
     `- residual risks: ${summary.residualRiskCount}`,
     `- required human review: ${summary.humanReviewCount}`,
   ];
+  for (const error of report.errors) lines.push(`- ${error.code}: ${error.message}`);
 
   const reliabilityTargets = report.targets;
   for (const target of report.targets) if (target.evaluationScope) {
@@ -49,7 +50,8 @@ export function formatCiReportText(report: CiReport): string {
       `- previous report: ${report.diff.previousReport}`,
       `- new DQs: ${report.diff.new.length}`,
       `- resolved DQs: ${report.diff.resolved.length}`,
-      `- unchanged DQs: ${report.diff.unchanged.length}`
+      `- unchanged DQs: ${report.diff.unchanged.length}`,
+      `- unverified DQs: ${report.diff.unverified?.length ?? 0}`
     );
     for (const item of report.diff.new) {
       lines.push(`  new ${item.code}: ${item.target} - ${item.message}`);
@@ -57,6 +59,7 @@ export function formatCiReportText(report: CiReport): string {
     for (const item of report.diff.resolved) {
       lines.push(`  resolved ${item.code}: ${item.target} - ${item.message}`);
     }
+    for (const item of report.diff.unverified ?? []) lines.push(`  unverified ${item.code}: ${item.target} - ${item.reason}`);
   }
 
   if (failingTargets.length > 0) {

@@ -1,14 +1,14 @@
 ---
 intent_id: INT-QEG-EVIDENCE-ACCEPTANCE-STATUS-001
 owner: quality-evidence-graph
-status: accepted
+status: implemented
 last_reviewed_at: 2026-09-11
 next_review_due: 2026-12-11
 ---
 
 # 証跡共通基準の実装・受入状況
 
-正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。PR #10後の追加レビューでR5〜R7の3系統・4ケースを再現し、[一括修正](followup-fixes-2026-09-11.md)を実装した。source commit `f89e82219d80eff5e2085a73194915e992942483`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34552047197)はLinux Node20/24・Windows Node24の3job全step成功し、R5〜R7を受入済み。[今回の証拠](../evidence/followup-fixes-2026-09-11/validation.json)を正本とし、R1〜R4と実producer接続の受入原本は履歴として保持する。
+正本は[共通受入基準](../spec/evidence-acceptance-standard.md)。PR #11後の追加レビューでR8〜R13の6件を再現し、[CLI境界の一括修正](cli-boundary-fixes-2026-09-11.md)を実装した。追加CI待ち。[今回の証拠](../evidence/cli-boundary-fixes-2026-09-11/validation.json)へsource commitと検証結果を固定する。R1〜R7と実producer接続の受入原本は履歴として保持する。
 
 | 要求 | 対象 | 必要ケース | 状況 |
 |---|---|---|---|
@@ -23,9 +23,13 @@ next_review_due: 2026-12-11
 | EAC-09 | 実producerの接続証明 | TC-23 | accepted。実2回と固定再生を照合。下記の接続・拒否伝播範囲 |
 | EAC-10 | consumer移行 | TC-24、R2/3/6 | 中断復旧が明示native編集を巻き戻さないことと、producer再実行を追加検証。accepted（今回のsource CIで検証） |
 | EAC-11 | waiver/approval/retention/profile | TC-13/17/25 | accepted。移行でも承認原本と履歴を保持 |
-| EAC-12 | revisionに結び付く完了証拠 | TC-18/25、各受入単位 | accepted。R5〜R7のsource commit・CI・runtime treeを今回の証拠へ固定 |
-| C-15 | 差分対象の選択 | R5a/b | 不確かな入力を通常評価へ回し、削除・rename両端・日本語pathを追加検証。accepted（今回のsource CIで検証） |
-| C-19 | 再現資料の完全性 | R7 | 同名targetの分離、sourceTarget/inputErrors、世代公開・全hashを追加検証。accepted（今回のsource CIで検証） |
+| EAC-12 | revisionに結び付く完了証拠 | TC-18/25、各受入単位 | R8〜R13のsource commit・CI・runtime treeを今回の証拠へ固定予定 |
+| C-15 | 差分対象の選択 | R5a/b/8 | cwd/Git rootを正規化し、root/子階層/target自身を共通matrixで検証。追加CI待ち |
+| C-19 | 再現資料の完全性 | R7/13 | 同名targetの分離と全hashを維持し、配布物のschema/metadataを使用。追加CI待ち |
+| C-06 | 親指定の対象収集 | R9 | 管理済みconsumerの入力欠落・不正も診断に残す。追加CI待ち |
+| C-14/17 | baseline資格と対象 | R10/11 | 共通schema/owner/期限/target検証と完全path一致。追加CI待ち |
+| C-18 | 差分の解消証明 | R12 | 未選択・評価不能はunverifiedとして表示。追加CI待ち |
+| C-07/10/22 | 配布後の診断 | R13 | source/tarball/Action/初期化runtimeで共通診断。追加CI待ち |
 
 実装写像と操作は[統合契約](../spec/output-publication-and-migration.md)。実行件数はnode:testの親test/subtestを含み、TC群数と混同しない。最終の文書sealはruntime treeを維持し、PR最新CIとmerge後main CIは外部で確認する。
 
@@ -36,6 +40,8 @@ next_review_due: 2026-12-11
 同じ隔離CLIの`41 → 42`を2回実行し、manual実行は資格を満たすpassとして採用された。上流のstatic artifactにはpartial、RanDには未被覆の要求仮説があるため、期待するQEG判定は**disqualified / exit 2**。APIとCLIは同じ拒否を返す。上流原本の不足を修正してgoに見せる操作はしていない。これは実接続と不合格伝播の受入であり、対象のrelease承認、実環境、人間が実施したQAを主張しない。合成正常系は別試験で維持する。
 
 ## 既存の受入履歴
+
+PR #11はR5〜R7の追加条件に対応した修正。source `f89e82219d80eff5e2085a73194915e992942483`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34552047197)と[merge後main CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34552754114)は3job全step成功。[当時の証拠](../evidence/followup-fixes-2026-09-11/validation.json)はruntime186件・53fixturesを固定している。今回の6件はCLIの実行場所・対象収集・例外設定・配布形態の未検証組合せであり、共通matrixで補完する。
 
 PR #10はR1〜R4の再現条件に対応した修正。source commit `4da7cca488efb3680b0c581a211faa41b812d206`の[CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34544057648)と[merge後main CI](https://github.com/RNA4219/quality-evidence-graph/actions/runs/34544849095)は3job全step成功。[当時の証拠](../evidence/review-fixes-2026-09-11/validation.json)はruntime 165 tests・53 fixturesを固定している。R6はその復旧試験に含まれなかった前世代とnative編集の組合せであり、今回補完する。
 

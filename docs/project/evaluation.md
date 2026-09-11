@@ -46,6 +46,8 @@ git diff --check
 
 加えて、`explain`、`doctor`、`check`、`evidence verify`、`policy lint`、`report`のtext / JSON、`baseline audit`、`report --diff`、`snapshot`、`repro-bundle`をpositive fixtureで検証する。
 
+source CLIとbundled ActionにはR8〜R13の共通boundary matrixを適用する。tarball consumerでは同じpath/discovery/baseline/diff/diagnostic検査を実行し、初期化runtimeでは診断の可搬性と実際のenum破損拒否を確認する。詳細は[CLI境界改修](cli-boundary-fixes-2026-09-11.md)。
+
 ## 現行の検証記録
 
 EAC改修ごとの実装箇所、実測結果、CI revision、非評価範囲は `docs/project/evidence-acceptance-status.md` に記録する。R01〜R06の受入履歴は `docs/project/remediation-2026-09-10.md` に保持する。チェック数はmanifestと実行結果を正本とし、過去のチェック数を現在の完了証拠にしない。

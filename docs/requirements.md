@@ -340,23 +340,23 @@ MVP は CLI first とし、最低限次の処理単位を持つ。
 | C-03 | `place-tests` | risk ごとの obligation と placement を作る | placement rationale と candidate scores を出力できる |
 | C-04 | `gate` | Gate verdict を計算する | DQ / blocker / residual risk / human review を区別できる |
 | C-05 | `record` | Quality Evidence Record を生成する | 4 JSON artifact と Markdown summary を束ねられる |
-| C-06 | `report` | CI で複数 target を最後まで評価し、不足証跡と Gate failure を累積表示する | `gate-input.json` 欠落、ingest error、DQ、blocker、residual risk、human review を target 別 / DQ 別に出力し、CI artifact として保存できる |
-| C-07 | `doctor` | ローカル環境、build 出力、schema、CI workflow、target artifact の不足を事前診断する | hard failure と warning を分け、warning だけなら exit code `0` にする |
+| C-06 | `report` | CI で複数 target を最後まで評価し、不足証跡と Gate failure を累積表示する | 入力以外のconsumer markerでも子targetを発見し、`gate-input.json`欠落・不正を除外しない。ingest error、DQ、blocker、residual risk、human reviewをtarget別に累積する |
+| C-07 | `doctor` | ローカル環境、build 出力、schema、CI workflow、target artifact の不足を事前診断する | QEG配布物のCLI・metadata・schemaとconsumerのworkflow/入力を区別する。hard failureとwarningを分け、warningだけならexit `0` |
 | C-08 | `explain <DQ>` | DQ code の意味、原因、必要証跡、最小修正、参照仕様を説明する | 例: `DQ-15` の approval / policy / waiver 証跡不足を人間が直せる粒度で表示できる |
 | C-09 | `schema-check` | JSON Schema の compile と fixture 内 artifact の schema validation を行う | schema 自体の破損と fixture/schema drift を分けて報告できる |
-| C-10 | `enum-check` | TypeScript 型と JSON Schema enum の drift を検出する | `GateProfile`、`GateVerdict`、`DisqualificationCode` の差分を列挙できる |
+| C-10 | `enum-check` | TypeScript 型と JSON Schema enum の drift を検出する | 型からbuild時に生成した配布enumデータと同梱schemaを比較し、両方の欠落も失敗にする。consumer側srcに依存しない |
 | C-11 | `snapshot` | CI report の golden snapshot を fixture ごとに検証する | `generatedAt` と absolute path を正規化し、差分を安定して検出できる |
 | C-12 | `init` | 他 repo へ最小 QEG 設定を導入する | `.qeg/gate-input.json`、`.qeg/qeg-baseline.json`、GitHub Actions workflow を生成できる |
 | C-13 | `report --github-summary` | GitHub Actions Job Summary に人間向け累積レポートを書く | CI log の末尾だけに依存せず、DQ 別 / target 別の不足を Step Summary で読める |
-| C-14 | `report --baseline` | 既知の DQ を baseline として受理し、新規 DQ だけを赤にする | baseline が全 current DQ を覆い、blocker / residual risk / human review / expected mismatch がない場合だけ pass 扱いにできる |
-| C-15 | `report --changed-only` | 変更に関係する target だけを評価する | 削除・rename両端を含むGit差分または明示pathで絞る。読取り不能・schema不正・公開中の入力は通常評価へ回し、不確かな関連性を対象なし / exit `0` にしない |
+| C-14 | `report --baseline` | 既知の DQ を baseline として受理し、新規 DQ だけを赤にする | schema・owner・期限・targetの適用資格を監査と共有し、正規化した完全pathで照合する。全current DQを覆い、他のfailureがない場合だけ許容。不適格設定はBASELINE_INVALID / exit 1で累積 |
+| C-15 | `report --changed-only` | 変更に関係する target だけを評価する | Git root相対の差分とcwd相対の明示pathを絶対pathへ解決し、cwd自身・子階層・削除・renameを扱う。読取り不能・schema不正・公開中の入力は通常評価へ回し、不確かな関連性を対象なし / exit `0` にしない |
 | C-16 | `qeg-report-action` | OSS 利用者が GitHub Actions へ QEG report を組み込みやすくする | report step 自体は成功終了し、`exit_code` output、artifact、Step Summary を残してから呼び出し側の final verdict で失敗させられる |
-| C-17 | `baseline audit` | baseline の放置を防ぐ | 期限切れ、owner 未設定、存在しない target、すでに解消済みの DQ を検出できる |
-| C-18 | `report --diff <previous-report.json>` | 前回 CI との差分を表示する | DQ を `new` / `resolved` / `unchanged` に分類し、今回増えた不足と解消した不足を読める |
-| C-19 | `repro-bundle` | CI 失敗の再現材料をまとめる | redaction付き入力をtargetごとに衝突なく保存し、元targetと対応付ける。取得失敗を明示し、manifestと全fileのhashを完了世代で検証して公開する |
+| C-17 | `baseline audit` | baseline の放置を防ぐ | reportと同じschema・完全path照合・適用資格判定を使用し、期限切れ、owner未設定、不正日付、target消失を拒否する。現在一致しないDQはwarning |
+| C-18 | `report --diff <previous-report.json>` | 前回 CI との差分を表示する | DQをnew/resolved/unchangedで比較し、未評価・評価不能はunverified（理由付き）へ分ける。対象なし・CLI error・入力DQ-01を解消証明にしない |
+| C-19 | `repro-bundle` | CI 失敗の再現材料をまとめる | QEG配布metadata・schemaを使用し、redaction付き入力をtargetごとに衝突なく保存する。取得失敗を明示し、manifestと全fileのhashを完了世代で検証する |
 | C-20 | `evidence verify` | Gate 前に証跡実体だけを高速検証する | artifact path、hash、revision、retention、storageClassification の不足や矛盾を Gate 全体より前に切り分けられる |
 | C-21 | `policy lint` | GatePolicy 正本の矛盾を検査する | `policyHash`、`sourceRefs`、`exitCodePolicy`、`dqScope`、profile 設定の不整合を検出できる |
-| C-22 | `check` | ローカル総合確認入口を提供する | schema-check、enum-check、doctor、snapshot、report を一括実行し、導入者が最初に見るコマンドにできる |
+| C-22 | `check` | ローカル総合確認入口を提供する | schema-check、enum-check、doctor、snapshot、reportを配布先でも一括実行できる。source・tarball・bundled Action・初期化runtimeの組合せで検証する |
 | C-23 | Action outputs 拡充 | workflow 側の条件分岐を容易にする | `exit_code` に加え、`gate_failed`、`cli_errors`、`dq_count`、`report_path`、`summary_markdown_path` を出力できる |
 | C-24 | `evidence normalize --adapter <kind>` | 外部 resilience evidence を canonical node へ非破壊変換する | local raw JSON を読み、provenance と hash を保持した qeg-resilience-evidence-v1 を出力し、外部環境を操作しない |
 

@@ -1,7 +1,7 @@
 {
   "id": "src/gate/verdict/blockers.ts",
   "role": "blockers",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 blockers の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

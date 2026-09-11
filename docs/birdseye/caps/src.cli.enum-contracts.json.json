@@ -1,0 +1,18 @@
+{
+  "id": "src/cli/enum-contracts.json",
+  "role": "enum-contracts",
+  "generation": "00020",
+  "public_api": [],
+  "summary": "QEG 0.4.0 enum-contracts の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "src/cli/enum-check.ts"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:5bee695bae4f9ebe04222b9ddddc90a0e265b1f9d5a5ed0c9044506c912147c4"
+}

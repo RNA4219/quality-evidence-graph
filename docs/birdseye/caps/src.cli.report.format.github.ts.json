@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report/format/github.ts",
   "role": "github",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 github の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -17,5 +17,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:941f2d28e4568ba29a78cb5d37ec660d798c742f07cd2fecd0f3eb2c0961f8af"
+  "contentHash": "sha256:ffea5b2f8ca4858661fffa0094355a71d69099261695f48223bc2a6358d38d9e"
 }

@@ -1,0 +1,115 @@
+{
+  "runtimeVersion": "qeg-runtime/v1",
+  "package": {
+    "name": "@quality-harness/quality-evidence-graph",
+    "version": "0.4.0",
+    "engines": {
+      "node": ">=20"
+    }
+  },
+  "enums": {
+    "GateProfile": [
+      "ipo_controlled",
+      "lean",
+      "standard",
+      "strict"
+    ],
+    "GateVerdict": [
+      "conditional_go",
+      "disqualified",
+      "go",
+      "no_go"
+    ],
+    "DisqualificationCode": [
+      "DQ-01",
+      "DQ-02",
+      "DQ-03",
+      "DQ-04",
+      "DQ-05",
+      "DQ-06",
+      "DQ-07",
+      "DQ-08",
+      "DQ-09",
+      "DQ-10",
+      "DQ-11",
+      "DQ-12",
+      "DQ-13",
+      "DQ-14",
+      "DQ-15",
+      "DQ-16",
+      "DQ-17",
+      "DQ-18",
+      "DQ-19",
+      "DQ-20",
+      "DQ-21"
+    ],
+    "EvidenceKind": [
+      "audit",
+      "code",
+      "coverage",
+      "human_review",
+      "observability_log",
+      "observability_metric",
+      "observability_trace",
+      "policy",
+      "sarif",
+      "spec",
+      "test_result"
+    ],
+    "TestType": [
+      "functional",
+      "performance",
+      "resilience",
+      "security"
+    ],
+    "ResilienceAdapter": [
+      "chaos-mesh",
+      "ci",
+      "custom",
+      "docker-compose",
+      "lakda",
+      "litmus-chaos",
+      "shell",
+      "toxiproxy"
+    ],
+    "ResilienceFaultModel": [
+      "container_restart",
+      "custom",
+      "dependency_http_error",
+      "dependency_timeout",
+      "duplicate_event",
+      "network_latency",
+      "out_of_order_event",
+      "packet_loss",
+      "pod_kill",
+      "process_crash",
+      "resource_pressure"
+    ],
+    "SignalPhase": [
+      "experiment",
+      "fault",
+      "recovery",
+      "steady_state"
+    ],
+    "SignalSemanticRole": [
+      "custom",
+      "data_inconsistencies",
+      "duplicate_side_effects",
+      "error_rate",
+      "latency_p95",
+      "saturation",
+      "traffic_count"
+    ],
+    "SignalAggregation": [
+      "avg",
+      "count",
+      "latest",
+      "max",
+      "min",
+      "p50",
+      "p95",
+      "p99",
+      "rate"
+    ]
+  }
+}

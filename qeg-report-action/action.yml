@@ -184,6 +184,7 @@ runs:
 
         echo "$report_exit" > "$(dirname "$QEG_OUTPUT_PATH")/qeg-report-exit-code.txt"
         node -e "const fs=require('fs'); const report=JSON.parse(fs.readFileSync(process.env.QEG_OUTPUT_PATH,'utf8')); const s=report.summary||{}; const dq=(s.dqCounts||[]).reduce((n,d)=>n+(d.count||0),0); const diff=report.diff; const lines=['## QEG CI Report','',\`- targets: \${s.totalTargets||0}\`,\`- passed: \${s.passed||0}\`,\`- baseline accepted: \${s.baselineAccepted||0}\`,\`- gate failed: \${s.gateFailed||0}\`,\`- cli errors: \${s.cliErrors||0}\`,\`- DQs: \${dq}\`]; if(diff){lines.push(\`- new DQs: \${diff.new?.length||0}\`,\`- resolved DQs: \${diff.resolved?.length||0}\`,\`- unchanged DQs: \${diff.unchanged?.length||0}\`);} lines.push(''); fs.writeFileSync(process.env.QEG_SUMMARY_PATH, lines.join('\n')+'\n'); fs.appendFileSync(process.env.GITHUB_OUTPUT, \`gate_failed=\${s.gateFailed||0}\ncli_errors=\${s.cliErrors||0}\ndq_count=\${dq}\nreport_path=\${process.env.QEG_OUTPUT_PATH}\nsummary_markdown_path=\${process.env.QEG_SUMMARY_PATH}\n\`);"
+        node -e "const fs=require('fs'); const r=JSON.parse(fs.readFileSync(process.env.QEG_OUTPUT_PATH,'utf8')); if(r.diff){fs.appendFileSync(process.env.QEG_SUMMARY_PATH, '- unverified DQs: '+(r.diff.unverified?.length||0)+'\n');}"
         echo "exit_code=$report_exit" >> "$GITHUB_OUTPUT"
         exit 0
 

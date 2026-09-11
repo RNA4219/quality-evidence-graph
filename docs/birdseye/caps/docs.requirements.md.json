@@ -1,7 +1,7 @@
 {
   "id": "docs/requirements.md",
   "role": "requirements",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 requirements の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -51,5 +51,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:749706b7591cac52cf4b742af26795594badaa779ba6bbefe637e5baf93c4926"
+  "contentHash": "sha256:7f64ee9dee5e7efae5af9107c51f05ad0901bc172e360cc92a36655f7811a01d"
 }

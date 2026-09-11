@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://quality-harness.dev/schemas/qeg/report-baseline.schema.json",
+  "type": "object",
+  "required": ["entries"],
+  "additionalProperties": false,
+  "properties": {
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["code"],
+        "additionalProperties": false,
+        "properties": {
+          "target": { "type": "string", "minLength": 1 },
+          "code": { "$ref": "shared-defs.schema.json#/$defs/disqualificationCode" },
+          "message": { "type": "string", "minLength": 1 },
+          "nodeIds": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "owner": { "type": "string" },
+          "expiresAt": { "type": "string" }
+        }
+      }
+    }
+  }
+}

@@ -4,6 +4,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { createRawProducerFixture, persistRawFixture } from "./helpers/raw-producer-fixture.mjs";
+import { cliRunner, verifyPathSelection, verifyTargetDiscovery, verifyBaseline, verifyDiff, verifyDistribution } from "./helpers/cli-boundary-matrix.mjs";
 
 const temp = await mkdtemp(join(tmpdir(), "qeg-package-smoke-"));
 const npmCli = process.env.npm_execpath;
@@ -149,4 +150,10 @@ const typeContract = spawnSync(
 );
 assert.equal(typeContract.status, 0, typeContract.stderr || typeContract.stdout);
 
+const packedCli = cliRunner(join(packageRoot, 'dist/cli.js'), temp);
+for (const [name, verify] of [['paths', verifyPathSelection], ['discovery', verifyTargetDiscovery], ['baseline', verifyBaseline], ['diff', verifyDiff], ['distribution', verifyDistribution]]) {
+  await verify(packedCli, join(packageRoot, 'fixtures'), join(temp, 'boundary-' + name));
+}
+await verifyDistribution(cliRunner(packedActionBundle, temp), join(packageRoot, 'fixtures'), join(temp, 'boundary-packed-action'));
+console.log("Packed CLI boundary matrix R8-R13 and Action diagnostics passed");
 console.log("Clean tarball install, CLI/library/Action bundle smoke, and packed public type contract passed");

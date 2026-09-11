@@ -36,6 +36,7 @@
   "deps_in": [
     "README.md",
     "docs/agent/HUB.codex.md",
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
     "docs/project/evaluation.md",
     "docs/project/followup-fixes-2026-09-11.md",
     "docs/project/runbook.md",
@@ -55,6 +56,6 @@
     "npm run snapshot -- fixtures/positive-release-go",
     "node dist/cli.js check fixtures/positive-release-go"
   ],
-  "generation": "00019",
-  "contentHash": "sha256:7f8b1de0edd57c6d96f30b65ec7438a922ef52082756b757c58e75de4b410d6f"
+  "generation": "00020",
+  "contentHash": "sha256:4771f1c5b4eaf86f24716e7d031c0e17a25c7523504e8cb548858fdb37e5f247"
 }

@@ -1,14 +1,16 @@
 {
   "id": "src/cli/report/change-selection.ts",
   "role": "changed-target-selection",
-  "generation": "00019",
+  "generation": "00020",
   "public_api": [],
   "summary": "QEG 0.4.0 changed-target-selection の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/cli/path-key.ts",
     "src/output-publication.ts",
     "src/validation/schema.ts"
   ],
   "deps_in": [
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
     "docs/project/followup-fixes-2026-09-11.md",
     "src/cli/report/core.ts",
     "src/cli/report/model.ts"
@@ -19,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:c5a89434fbd878e0bac16da24b7de0cf660ec96ecf6e2a67d5ecace7086c5a8b"
+  "contentHash": "sha256:5fd221307e6cd5a26ad681021395d37f32678b09bfc0598f49510a6cbc40a98b"
 }

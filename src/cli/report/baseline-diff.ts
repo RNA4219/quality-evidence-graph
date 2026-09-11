@@ -1,34 +1,36 @@
 import { readFile } from "fs/promises";
-import type { Disqualification, StableId } from "../../types.js";
+import { isAbsolute, relative, resolve } from "path";
+import type { Disqualification } from "../../types.js";
 import type {
   CiReport,
   ReportDiff,
   ReportDiffItem,
   ReportTargetResult,
 } from "./model.js";
-import { portable, relativeTarget } from "./targets.js";
-
-interface BaselineEntry {
-  readonly target?: string;
-  readonly code: import("../../types.js").DisqualificationCode;
-  readonly message?: string;
-  readonly nodeIds?: readonly StableId[];
-}
-
-export interface ReportBaseline {
-  readonly entries: readonly BaselineEntry[];
-}
+import { portable } from "./targets.js";
+import { CliError } from "../errors.js";
+import { baselineDqMatches, baselineEntryIssues, baselineTargetMatches, readBaselineFile, type BaselineFile } from "./baseline-contract.js";
+export type ReportBaseline = BaselineFile;
 
 async function readJsonFile<T>(path: string): Promise<T> {
   return JSON.parse(await readFile(path, "utf-8")) as T;
 }
 export async function readBaseline(path: string | undefined): Promise<ReportBaseline | undefined> {
   if (!path) return undefined;
-  return readJsonFile<ReportBaseline>(path);
+  const baseline = await readBaselineFile(path);
+  const now = Date.now();
+  const errors: string[] = [];
+  for (const [index, entry] of baseline.entries.entries()) {
+    for (const issue of await baselineEntryIssues(entry, now)) if (issue.severity === "fail") errors.push(`entry ${index}: ${issue.message}`);
+  }
+  if (errors.length) throw new CliError(`Baseline is not eligible: ${errors.join("; ")}`);
+  return baseline;
 }
 
 function normalizeTargetForDiff(target: string): string {
-  return portable(target).replace(portable(process.cwd()), "<repo>");
+  if (target === "<repo>" || target.startsWith("<repo>/")) return target;
+  const rel = portable(relative(process.cwd(), resolve(target)));
+  return !isAbsolute(rel) && rel !== ".." && !rel.startsWith("../") ? `<repo>${rel ? "/" + rel : ""}` : portable(target);
 }
 
 function diffItemKey(item: ReportDiffItem): string {
@@ -62,21 +64,24 @@ export async function createReportDiff(current: CiReport, previousPath: string |
   const previousItems = reportDiffItems(previous);
   const currentKeys = new Set(currentItems.map(diffItemKey));
   const previousKeys = new Set(previousItems.map(diffItemKey));
+  const currentTargets = new Map(current.targets.map(target => [normalizeTargetForDiff(target.target), target]));
+  const missing = previousItems.filter(item => !currentKeys.has(diffItemKey(item)));
+  const unverified: NonNullable<ReportDiff["unverified"]>[number][] = [];
+  const resolved: ReportDiffItem[] = [];
+  for (const item of missing) {
+    const target = currentTargets.get(item.target);
+    if (!target) unverified.push({ ...item, reason: "not_evaluated" });
+    else if (target.status === "cli_error" || !target.verdict || target.disqualifications.some(dq => dq.code === "DQ-01")) unverified.push({ ...item, reason: "evaluation_failed" });
+    else resolved.push(item);
+  }
 
   return {
     previousReport: previousPath,
     new: currentItems.filter((item) => !previousKeys.has(diffItemKey(item))),
-    resolved: previousItems.filter((item) => !currentKeys.has(diffItemKey(item))),
+    resolved,
     unchanged: currentItems.filter((item) => previousKeys.has(diffItemKey(item))),
+    unverified,
   };
-}
-
-function sameNodeIds(left: readonly StableId[] | undefined, right: readonly StableId[]): boolean {
-  if (!left) return true;
-  const sortedLeft = [...left].sort();
-  const sortedRight = [...right].sort();
-  return sortedLeft.length === sortedRight.length &&
-    sortedLeft.every((value, index) => value === sortedRight[index]);
 }
 
 function baselineCovers(
@@ -85,15 +90,7 @@ function baselineCovers(
   disqualification: Disqualification
 ): boolean {
   if (!baseline) return false;
-  const relTarget = relativeTarget(target);
-  return baseline.entries.some((entry) => {
-    const targetMatches = !entry.target || portable(entry.target) === relTarget || relTarget.endsWith(portable(entry.target));
-    const messageMatches = !entry.message || entry.message === disqualification.message;
-    return targetMatches &&
-      entry.code === disqualification.code &&
-      messageMatches &&
-      sameNodeIds(entry.nodeIds, disqualification.nodeIds);
-  });
+  return baseline.entries.some(entry => baselineTargetMatches(entry, target) && baselineDqMatches(entry, disqualification));
 }
 
 export function applyBaseline(target: ReportTargetResult, baseline: ReportBaseline | undefined): ReportTargetResult {
