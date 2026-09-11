@@ -1,7 +1,7 @@
 {
   "id": "tests/fixture-regression.mjs",
   "role": "fixture-e2e-harness",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 fixture-e2e-harness の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

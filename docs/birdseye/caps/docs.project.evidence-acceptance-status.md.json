@@ -1,7 +1,7 @@
 {
   "id": "docs/project/evidence-acceptance-status.md",
   "role": "evidence-acceptance-ledger",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "EAC-01〜12とCLI境界の実装・受入台帳。R8〜R13の共通matrixとsource CIを対応付け、旧受入と実producer原本を履歴として保持。",
   "deps_out": [
@@ -12,6 +12,7 @@
     "docs/evidence/evidence-acceptance-2026-09-10/validation.json",
     "docs/evidence/followup-fixes-2026-09-11/validation.json",
     "docs/evidence/gate-contract-fixes-2026-09-11/validation.json",
+    "docs/evidence/manual-governance-fixes-2026-09-11/validation.json",
     "docs/evidence/review-fixes-2026-09-11/validation.json",
     "docs/project/cli-boundary-fixes-2026-09-11.md",
     "docs/project/followup-fixes-2026-09-11.md",
@@ -22,6 +23,7 @@
     "docs/spec/evidence-acceptance-standard.md",
     "docs/spec/execution-qualification.md",
     "docs/spec/governance-consistency.md",
+    "docs/spec/manual-evidence-and-review.md",
     "docs/spec/output-publication-and-migration.md",
     "tests/execution-qualification.test.mjs"
   ],
@@ -42,5 +44,5 @@
     "npm run birdseye-check",
     "npm run json-check"
   ],
-  "contentHash": "sha256:aec5b850e79f9f4d292019fd65df37eb4d7d7be172b8b7d43866848c82bcd2f4"
+  "contentHash": "sha256:022ff812dc25387a17f5b42ad5caa7202c8610498324fcd698f5f835a43247ed"
 }

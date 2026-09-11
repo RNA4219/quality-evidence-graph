@@ -1,7 +1,7 @@
 {
   "id": "tests/type-contract/contract.ts",
   "role": "public-type-contract",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 public-type-contract の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -14,5 +14,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:1cd352f050eeba9f6cb42ea09c41e51243bdbf9237d686a789411151fdc44b45"
+  "contentHash": "sha256:f122bb1e2395b3f25c96d1588a499ba15b7754efe0930113738bb5b8157c4175"
 }

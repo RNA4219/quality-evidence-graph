@@ -1,7 +1,7 @@
 {
   "id": "tools/action-lifecycle-acceptance.mjs",
   "role": "action-release-lifecycle-acceptance-harness",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "tag同梱bundleを隔離配置し、steady state、schema破損、復旧、hash付き新規証拠生成までを実行するharness。",
   "deps_out": [

@@ -1,7 +1,7 @@
 {
   "id": "src/gate/evaluate.ts",
   "role": "gate-evaluator",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 gate-evaluator の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -11,6 +11,8 @@
     "src/gate/dq/graph-integrity.ts",
     "src/gate/dq/placement-coverage.ts",
     "src/gate/execution/evaluator.ts",
+    "src/gate/manual-evidence.ts",
+    "src/gate/package-review.ts",
     "src/gate/reliability.ts",
     "src/gate/test-evidence.ts",
     "src/gate/upstream.ts",
@@ -29,5 +31,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:6348895e0ef03d8a24333ddce7af58011bec45dd6307bf1b378b6435f5278e42"
+  "contentHash": "sha256:1f37ca1a2932518d49e67b643f53183c411e11776616e1d95a155783136dd1ba"
 }

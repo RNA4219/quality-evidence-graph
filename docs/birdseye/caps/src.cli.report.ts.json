@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report.ts",
   "role": "ci-report-cli",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 ci-report-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

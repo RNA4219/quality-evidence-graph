@@ -2,6 +2,7 @@ import type { Disqualification, DisqualificationCode, SourceRef } from "../../ty
 import type { DQDetectorInput } from "../context.js";
 import { getEvidencePackageText } from "../context.js";
 import { SR_DQ_09, SR_DQ_11 } from "./source-refs.js";
+import { assessManualEvidence } from "../manual-evidence.js";
 
 /**
  * DQ-08: Manual evidence incomplete
@@ -9,21 +10,7 @@ import { SR_DQ_09, SR_DQ_11 } from "./source-refs.js";
  * Manual evidence must have expectedResult, oracleRefs, traceTo, and evidenceRefs.
  */
 export function detectDQ08(input: DQDetectorInput): Disqualification[] {
-  if (!input.evidencePackage) return [];
-
-  const disqualifications: Disqualification[] = [];
-  for (const manual of input.evidencePackage.manualEvidence) {
-    if (!manual.expectedResult || manual.oracleRefs.length === 0 ||
-        manual.traceTo.length === 0 || manual.evidenceRefs.length === 0) {
-      disqualifications.push({
-        code: "DQ-08" as DisqualificationCode,
-        message: `Manual evidence "${manual.executedCaseId}" incomplete`,
-        nodeIds: [manual.executedCaseId],
-        sourceRefs: [] as SourceRef[],
-      });
-    }
-  }
-  return disqualifications;
+  return (input.manualAssessment ?? assessManualEvidence(input)).disqualifications;
 }
 
 /**

@@ -1,7 +1,7 @@
 {
   "id": "docs/evidence/followup-fixes-2026-09-11/validation.json",
   "role": "validation",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 validation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],

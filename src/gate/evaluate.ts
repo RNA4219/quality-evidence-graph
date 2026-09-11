@@ -17,6 +17,8 @@ import { sourceDiagnostics } from "./diagnostics.js";
 import { upstreamDecisions } from "./upstream.js";
 import { evaluateExecutions } from "./execution/evaluator.js";
 import { timestampNanos } from "../timestamps.js";
+import { assessManualEvidence } from "./manual-evidence.js";
+import { pendingPackageReview } from "./package-review.js";
 
 export function evaluateGate(input: GateEvaluationInput): GateResult {
   // A Gate must be reproducible.  The evaluation clock is the recorded QEG
@@ -39,13 +41,14 @@ export function evaluateGate(input: GateEvaluationInput): GateResult {
   const reliability = evaluateReliability(context);
   const qualified = evaluateExecutions(context);
   context.executionAccounting = qualified.accounting;
+  context.manualAssessment = assessManualEvidence(context);
   const executions = evaluateRequiredExecutions(context, reliability.accounting);
   const upstream = upstreamDecisions(input.graph);
-  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...qualified.blockers, ...upstream.blockers] };
+  const enrichedContext = { ...context, blockers: [...context.blockers, ...reliability.blockers, ...executions.blockers, ...qualified.blockers, ...upstream.blockers, ...context.manualAssessment.blockers] };
   const disqualifications = sourceDiagnostics([...detectAllDQs(enrichedContext), ...detectGraphIntegrity(context), ...executions.disqualifications, ...qualified.disqualifications, ...upstream.disqualifications, ...reliability.disqualifications], input.graph);
   const blockers = sourceDiagnostics(enrichedContext.blockers, input.graph);
   const residualRisks = computeResidualRisks(enrichedContext);
-  const requiredHumanReview = [...new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks, input.placementPlan), ...upstream.humanReview])];
+  const requiredHumanReview = [...new Set([...computeRequiredHumanReview(input.graph, validWaivers, residualRisks, input.placementPlan), ...upstream.humanReview, ...context.manualAssessment.humanReview, ...pendingPackageReview(input.evidencePackage)])];
   const verdict = computeVerdict(
     disqualifications,
     blockers,

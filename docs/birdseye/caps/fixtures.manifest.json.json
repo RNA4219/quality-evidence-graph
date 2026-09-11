@@ -1,7 +1,7 @@
 {
   "id": "fixtures/manifest.json",
   "role": "fixture-manifest",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 fixture-manifest の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -19,5 +19,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:5ba3bca39bc9722013268327ce683a5d2643f23a1226c3c32022d6dd333f0df8"
+  "contentHash": "sha256:77624490217532f94450967b045f50ed037468882d17809b106a2158c922a8f3"
 }

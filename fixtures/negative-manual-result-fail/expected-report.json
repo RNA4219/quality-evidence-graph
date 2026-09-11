@@ -1,0 +1,94 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [],
+      "blockerCount": 1,
+      "residualRiskCount": 0,
+      "humanReviewCount": 0
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "negative-manual-result-fail",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "no_go",
+        "reasons": [
+          "No-go blockers: 1",
+          "- Reported manual execution \"qeg:review-manual\" failed"
+        ],
+        "disqualifications": [],
+        "blockers": [
+          {
+            "id": "qeg:manual-failed-qeg:review-manual",
+            "message": "Reported manual execution \"qeg:review-manual\" failed",
+            "testId": "qeg:review-manual",
+            "riskIds": [],
+            "sourceRefs": [
+              {
+                "id": "qeg:eac-synthetic-source",
+                "path": "gate-input.json",
+                "label": "EAC synthetic acceptance scenario"
+              },
+              {
+                "id": "qeg:eac-synthetic-source",
+                "path": "gate-input.json",
+                "label": "EAC synthetic acceptance scenario"
+              }
+            ]
+          }
+        ],
+        "residualRisks": [],
+        "requiredHumanReview": [],
+        "reliability": {
+          "enabled": false
+        },
+        "expected": {
+          "fixture": "negative-manual-result-fail",
+          "expectedVerdict": "no_go",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/manual-evidence-and-review.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [],
+          "actualDqCodes": [],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [
+            "qeg:manual-failed-qeg:review-manual"
+          ],
+          "actualBlockerIds": [
+            "qeg:manual-failed-qeg:review-manual"
+          ]
+        }
+      }
+    ]
+  }
+}

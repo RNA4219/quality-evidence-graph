@@ -87,8 +87,8 @@ const DQ_EXPLANATIONS: Record<DisqualificationCode, DqExplanation> = {
   "DQ-08": {
     code: "DQ-08",
     title: "Manual evidence incomplete",
-    meaning: "Manual evidence lacks expected result, oracle refs, traceability, or evidence refs.",
-    commonCauses: ["Manual case result copied without oracle", "Missing screenshot/log/reference"],
+    meaning: "Manual evidence is incomplete, has unresolved current-test/trace references, or conflicts with another result.",
+    commonCauses: ["Manual case result copied without oracle", "Missing screenshot/log/reference", "Conflicting manual and selected execution results"],
     requiredEvidence: ["expectedResult", "oracleRefs", "traceTo", "evidenceRefs"],
     minimalFix: ["Complete manualEvidence entries", "Attach source-backed oracle and execution evidence"],
     references: ["docs/spec/evidence-package.md"],

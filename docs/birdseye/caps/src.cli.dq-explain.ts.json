@@ -1,7 +1,7 @@
 {
   "id": "src/cli/dq-explain.ts",
   "role": "dq-explain-cli",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 dq-explain-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -22,5 +22,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:d6033722dad22aba816c1cb58e039c8772501aa938ccb9a98f545367521dd4c3"
+  "contentHash": "sha256:53531dbb15ec0e094de6f190cdb55f616ab6600e6f114ccd86362f2242a82271"
 }

@@ -1,7 +1,7 @@
 {
   "id": "tests/helpers/cli-boundary-matrix.mjs",
   "role": "cli-boundary-matrix",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 cli-boundary-matrix の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -11,7 +11,8 @@
     "tests/gate-contract-regression.test.mjs",
     "tests/governance-regression.test.mjs",
     "tests/helpers/gate-contract-matrix.mjs",
-    "tests/helpers/governance-matrix.mjs"
+    "tests/helpers/governance-matrix.mjs",
+    "tests/manual-governance-regression.test.mjs"
   ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"

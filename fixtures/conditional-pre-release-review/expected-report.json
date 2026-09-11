@@ -1,0 +1,72 @@
+{
+  "snapshotVersion": "qeg-report-snapshot-v1",
+  "report": {
+    "reportVersion": "qeg-ci-report-v2",
+    "generatedAt": "<snapshot>",
+    "selection": {
+      "mode": "all",
+      "status": "selected",
+      "strategy": "all",
+      "changedFileCount": 0,
+      "selectedTargetCount": 1
+    },
+    "errors": [],
+    "summary": {
+      "totalTargets": 1,
+      "passed": 0,
+      "baselineAccepted": 0,
+      "gateFailed": 1,
+      "cliErrors": 0,
+      "dqCounts": [],
+      "blockerCount": 0,
+      "residualRiskCount": 0,
+      "humanReviewCount": 1
+    },
+    "targets": [
+      {
+        "evaluationScope": {
+          "kind": "fixture",
+          "target": "conditional-pre-release-review",
+          "notEvaluated": [
+            "Upstream producer ingestion",
+            "Real deployment",
+            "Release approval"
+          ]
+        },
+        "target": "<target>",
+        "status": "gate_failed",
+        "exitCode": 2,
+        "verdict": "conditional_go",
+        "reasons": [
+          "Required human review: 1"
+        ],
+        "disqualifications": [],
+        "blockers": [],
+        "residualRisks": [],
+        "requiredHumanReview": [
+          "qeg:ep-release-001"
+        ],
+        "reliability": {
+          "enabled": false
+        },
+        "expected": {
+          "fixture": "conditional-pre-release-review",
+          "expectedVerdict": "conditional_go",
+          "expectedExitCode": 2,
+          "contractRef": "docs/spec/manual-evidence-and-review.md",
+          "validationPassed": true,
+          "verdictMatch": true,
+          "exitCodeMatch": true,
+          "dqMatch": true,
+          "expectedDqCodes": [],
+          "actualDqCodes": [],
+          "unexpectedDqCodes": [],
+          "missingDqCodes": [],
+          "blockerMatch": true,
+          "expectedBlockerIds": [],
+          "actualBlockerIds": []
+        }
+      }
+    ]
+  }
+}

@@ -31,7 +31,7 @@ function collectEvidenceUsed(evaluated: EvaluatedFixture, defect: EscapedDefectE
   return unique([
     ...evidencePackage.inputArtifactHashes.map((artifact) => artifact.id),
     ...evidencePackage.approvalEvidence.map((approval) => approval.id),
-    ...evidencePackage.manualEvidence.flatMap((item) => item.evidenceRefs.map((ref) => ref.id)),
+    ...evidencePackage.manualEvidence.flatMap((item) => (item.evidenceRefs ?? []).map((ref) => ref.id)),
     ...evidencePackage.sourceRefs.map((ref) => ref.id),
   ]);
 }

@@ -1,12 +1,13 @@
 {
   "id": "src/timestamps.ts",
   "role": "timestamps",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 timestamps の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/spec/governance-consistency.md",
+    "src/gate/dq/helpers.ts",
     "src/gate/evaluate.ts",
     "src/gate/execution/contracts.ts",
     "src/gate/waivers.ts",

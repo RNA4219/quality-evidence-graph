@@ -1,0 +1,29 @@
+{
+  "fixture": "negative-manual-restored-deleted",
+  "description": "negative-manual-restored-deleted",
+  "expectedVerdict": "disqualified",
+  "expectedDisqualifications": [
+    {
+      "code": "DQ-14",
+      "message": "Current manual inventory \"mbb:CASE-login-001\" must identify one current real manual test",
+      "nodeIds": [
+        "mbb:CASE-login-001"
+      ]
+    },
+    {
+      "code": "DQ-14",
+      "message": "Placement change \"qeg:placement-change-login-retirement\" is a revert candidate: evidence strength or green-run threshold fell below policy",
+      "nodeIds": [
+        "qeg:placement-change-login-retirement",
+        "mbb:CASE-login-001",
+        "hate:AETE-login-001",
+        "qeg:risk-login-regression"
+      ]
+    }
+  ],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/manual-evidence-and-review.md"
+}

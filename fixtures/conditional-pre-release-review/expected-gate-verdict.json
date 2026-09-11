@@ -1,0 +1,13 @@
+{
+  "fixture": "conditional-pre-release-review",
+  "description": "conditional-pre-release-review",
+  "expectedVerdict": "conditional_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [
+    "qeg:ep-release-001"
+  ],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/manual-evidence-and-review.md"
+}

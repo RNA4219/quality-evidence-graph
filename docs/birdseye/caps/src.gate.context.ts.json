@@ -1,10 +1,11 @@
 {
   "id": "src/gate/context.ts",
   "role": "context",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 context の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
+    "src/gate/manual-evidence.ts",
     "src/placement-contract.ts",
     "src/types.ts",
     "src/validation/evidence.ts"
@@ -23,6 +24,7 @@
     "src/gate/evaluate.ts",
     "src/gate/execution/contracts.ts",
     "src/gate/execution/evaluator.ts",
+    "src/gate/manual-evidence.ts",
     "src/gate/reliability/accounting.ts",
     "src/gate/reliability/blockers.ts",
     "src/gate/reliability/bounds.ts",
@@ -42,5 +44,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:5decdc4c604a6f578d69e9d07f2cfc1438460cbee223f0e96cee11d2fd100277"
+  "contentHash": "sha256:073c1752f41837de842c65a1c82b478a9cf78884d16b2a861813376cbeb200e3"
 }

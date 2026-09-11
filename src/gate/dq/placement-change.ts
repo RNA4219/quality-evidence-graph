@@ -55,8 +55,31 @@ function isManualLayer(layer: string): boolean {
   return layer === "manual-scripted" || layer === "manual-exploratory";
 }
 
+function currentManualTest(input: DQDetectorInput, subjectId: StableId): TestNode | undefined {
+  const test = input.graph.nodes.find(node => node.id === subjectId);
+  return test?.kind === "test" && isManualLayer(test.layer) && test.testExecutionMode === "real" && !test.deleted ? test : undefined;
+}
+
 function isRestored(input: DQDetectorInput, subjectId: StableId): boolean {
-  return input.placementPlan?.manual_case_inventory?.current_subject_ids.includes(subjectId) ?? false;
+  const test = currentManualTest(input, subjectId);
+  return Boolean(test && input.placementPlan?.manual_case_inventory?.current_subject_ids.includes(subjectId) &&
+    (test.layer !== "manual-scripted" || hasUsableOracle(test, true)) &&
+    testPlacementNodes(input).some(placement => placement.disposition !== "blocked" &&
+      placement.primaryLayer === test.layer && placement.selectedTestIds.includes(subjectId)));
+}
+
+function detectCurrentManualInventory(input: DQDetectorInput): Disqualification[] {
+  const inventory = input.placementPlan?.manual_case_inventory;
+  if (!inventory) return [];
+  const seen = new Set<string>();
+  const result: Disqualification[] = [];
+  for (const id of inventory.current_subject_ids) {
+    if (seen.has(id) || !currentManualTest(input, id)) result.push({ code: "DQ-14",
+      message: `Current manual inventory "${id}" must identify one current real manual test`,
+      nodeIds: [id], sourceRefs: inventory.sourceRefs });
+    seen.add(id);
+  }
+  return result;
 }
 
 function detectManualScriptedOracleGaps(input: DQDetectorInput): Disqualification[] {
@@ -210,6 +233,7 @@ function detectManualCaseDisappearance(input: DQDetectorInput): Disqualification
  */
 export function detectDQ14(input: DQDetectorInput): Disqualification[] {
   return [
+    ...detectCurrentManualInventory(input),
     ...detectManualScriptedOracleGaps(input),
     ...detectPlacementChangeRetirementGaps(input),
     ...detectManualCaseDisappearance(input),

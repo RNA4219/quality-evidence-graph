@@ -1,7 +1,7 @@
 {
   "id": "src/types.ts",
   "role": "types",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 types の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -65,6 +65,8 @@
     "src/gate/execution/evaluator.ts",
     "src/gate/execution/format.ts",
     "src/gate/execution/selection.ts",
+    "src/gate/manual-evidence.ts",
+    "src/gate/package-review.ts",
     "src/gate/reliability/accounting.ts",
     "src/gate/reliability/blockers.ts",
     "src/gate/reliability/bounds.ts",

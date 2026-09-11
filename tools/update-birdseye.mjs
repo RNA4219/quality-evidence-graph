@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00022";
+const generation = "00023";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");
@@ -239,6 +239,8 @@ async function sourceFiles(directory) {
   return files;
 }
 const currentPaths = [
+  "docs/project/manual-governance-fixes-2026-09-11.md", "docs/spec/manual-evidence-and-review.md", "docs/evidence/manual-governance-fixes-2026-09-11/validation.json",
+  "tests/manual-governance-regression.test.mjs", "tests/helpers/manual-governance-matrix.mjs",
   "docs/project/governance-fixes-2026-09-11.md", "docs/spec/governance-consistency.md", "docs/evidence/governance-fixes-2026-09-11/validation.json",
   "tests/governance-regression.test.mjs", "tests/helpers/governance-matrix.mjs",
   "docs/project/gate-contract-fixes-2026-09-11.md", "docs/spec/gate-contract-consistency.md", "docs/evidence/gate-contract-fixes-2026-09-11/validation.json",
@@ -354,6 +356,11 @@ for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/bluepr
   const previous = additions[path] ?? index.nodes[path];
   additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/governance-consistency.md", "docs/project/governance-fixes-2026-09-11.md"])] };
 }
+for (const path of ["README.md", "docs/agent/HUB.codex.md", "docs/project/blueprint.md", "docs/spec/index.md", "docs/project/evidence-acceptance-status.md", "docs/project/manual-governance-fixes-2026-09-11.md"]) {
+  const previous = additions[path] ?? index.nodes[path];
+  additions[path] = { ...previous, depsOut: [...new Set([...(previous.depsOut ?? []), "docs/spec/manual-evidence-and-review.md", "docs/evidence/manual-governance-fixes-2026-09-11/validation.json"])] };
+}
+additions["docs/spec/manual-evidence-and-review.md"].depsOut = ["src/gate/manual-evidence.ts", "src/gate/package-review.ts", "src/gate/dq/placement-change.ts", "src/gate/dq/helpers.ts", "tests/helpers/manual-governance-matrix.mjs"];
 const knownPaths = new Set([...Object.keys(index.nodes), ...Object.keys(additions)]);
 for (const path of currentPaths.filter(p => /\.(ts|mjs)$/.test(p))) {
   const code = await readFile(resolve(root, path), "utf8");

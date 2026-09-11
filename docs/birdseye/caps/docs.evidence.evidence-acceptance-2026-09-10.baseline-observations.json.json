@@ -1,7 +1,7 @@
 {
   "id": "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
   "role": "pre-standard-observation-evidence",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "4054df7での正常対照・別build・未来実行・fail後passの4観測。基準制定前の合成fixture証跡であり新基準の合格記録ではない。",
   "deps_out": [

@@ -1,7 +1,7 @@
 {
   "id": "docs/spec/governance-consistency.md",
   "role": "governance-consistency",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 governance-consistency の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -30,5 +30,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:383f236481dc0ca6ba8a8d017aaaa2b8a5b503b65a2f5ad854385354e9cbb3de"
+  "contentHash": "sha256:88bff36d0c1a556331eb13546acd3a7e10c36a55dafd849a75e50dc2399030e6"
 }

@@ -1,0 +1,23 @@
+{
+  "id": "docs/evidence/manual-governance-fixes-2026-09-11/validation.json",
+  "role": "validation",
+  "generation": "00023",
+  "public_api": [],
+  "summary": "QEG 0.4.0 validation の契約・実装。関連sourceと受入試験を参照。",
+  "deps_out": [],
+  "deps_in": [
+    "README.md",
+    "docs/agent/HUB.codex.md",
+    "docs/project/blueprint.md",
+    "docs/project/evidence-acceptance-status.md",
+    "docs/project/manual-governance-fixes-2026-09-11.md",
+    "docs/spec/index.md"
+  ],
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:0123f349081f0d8b7ea53d4a04a2b15f23c37384055939ba69a299c2f2791167"
+}

@@ -1,13 +1,14 @@
 {
   "id": "src/gate/dq/basic.ts",
   "role": "basic",
-  "generation": "00022",
+  "generation": "00023",
   "public_api": [],
   "summary": "QEG 0.4.0 basic の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "src/gate/context.ts",
     "src/gate/dq/input-contract.ts",
     "src/gate/dq/placement-coverage.ts",
+    "src/gate/manual-evidence.ts",
     "src/gate/verdict.ts",
     "src/types.ts"
   ],
@@ -20,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:b13eaaca6a4efdbc9592b46f2755035e9eba8c6c2f79f176edb664b42270f44f"
+  "contentHash": "sha256:260f6025d7cd3a28b18dceb889d9010b41a904b36727f51c27cf79d76f901b88"
 }

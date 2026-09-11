@@ -1,0 +1,17 @@
+{
+  "fixture": "negative-manual-result-fail",
+  "description": "negative-manual-result-fail",
+  "expectedVerdict": "no_go",
+  "expectedDisqualifications": [],
+  "expectedBlockers": [
+    {
+      "id": "qeg:manual-failed-qeg:review-manual",
+      "message": "Reported manual execution \"qeg:review-manual\" failed",
+      "riskIds": []
+    }
+  ],
+  "expectedResidualRisks": [],
+  "expectedHumanReview": [],
+  "expectedExitCode": 2,
+  "contractRef": "docs/spec/manual-evidence-and-review.md"
+}
