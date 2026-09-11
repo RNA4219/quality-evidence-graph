@@ -20,6 +20,8 @@ manual→automatedの記録ではsubject_idがfrom_layerと一致するmanual te
 
 replacementの削除・劣化や自動coverage不足に対して手動caseがcurrent inventoryへ復帰している場合、従来どおりその手動caseを評価する。手動oracleを満たさない復帰や存在しないsubjectを、復帰フラグだけで有効化しない。
 
+同一引退記録で強度・実行・coverageと構造の両方が不足するときは、既存の不足理由を優先してDQ-14を1件にする。別の引退記録や独立DQは保持する。
+
 ## 日時とwaiver
 
 QEG schemaのdate-timeは実在する暦日、明示timezone（Zまたは±HH:MM）、小数秒省略または1〜9桁を必要とする。実行証跡で使う検証を共通化し、2026-02-30、timezone欠落、24時、10桁以上の小数秒を受理しない。秒60は既存の実行時刻契約同様に対象外とする。日付やtimezoneを自動補正せずproducer原本を保持する。

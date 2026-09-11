@@ -145,14 +145,6 @@ function detectPlacementChangeRetirementGaps(input: DQDetectorInput): Disqualifi
       !["unit", "integration", "system", "e2e"].includes(test.layer) ||
       !input.graph.edges.some(edge => edge.kind === "replaced_by" && edge.from === change.subject_id && edge.to === test.id)
     );
-    if (invalidReplacement && !isRestored(input, change.subject_id)) {
-      disqualifications.push({
-        code: "DQ-14",
-        message: `Placement change "${change.id}" requires automated replacements linked by replaced_by`,
-        nodeIds: [change.id, change.subject_id, ...change.replacement_ids],
-        sourceRefs,
-      });
-    }
     const hasMockEvidence = concreteReplacementTests.some(
       (test) => !isGateEligibleTestEvidence(test)
     );
@@ -178,6 +170,14 @@ function detectPlacementChangeRetirementGaps(input: DQDetectorInput): Disqualifi
         code: "DQ-14" as DisqualificationCode,
         message: `Placement change "${change.id}" is a revert candidate: ${reason}`,
         nodeIds: [change.id, change.subject_id, ...change.replacement_ids, ...requiredRiskIds],
+        sourceRefs,
+      });
+    } else if (invalidReplacement && !isRestored(input, change.subject_id)) {
+      // 既存の引退失格を重複計上せず、強度・実行・coverageの診断を優先する。
+      disqualifications.push({
+        code: "DQ-14",
+        message: `Placement change "${change.id}" requires automated replacements linked by replaced_by`,
+        nodeIds: [change.id, change.subject_id, ...change.replacement_ids],
         sourceRefs,
       });
     }

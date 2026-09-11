@@ -81,6 +81,10 @@ export async function verifyRetirement(run, fixtures, directory, api) {
   input.graph.edges.pop(); input.graph.edges.push(edge);
   replacement.evidenceStrength = 0;
   await gate(run, directory, input, { verdict: 'disqualified', dq: 'DQ-14' }, api);
+  input.graph.edges = input.graph.edges.filter(e => e !== edge);
+  const degraded = await gate(run, directory, input, { verdict: 'disqualified', dq: 'DQ-14' }, api);
+  assert.equal(degraded.disqualifications.filter(d => d.code === 'DQ-14').length, 1, '同じ引退記録を二重計上しない');
+  input.graph.edges.push(edge);
   replacement.evidenceStrength = 0.93;
   const retired = input.graph.nodes.find(n => n.id === change.subject_id);
   retired.deleted = false; retired.oracleType = 'specified'; retired.oracleRefs = sourceRefs; retired.expectedResults = ['Restored manual check'];

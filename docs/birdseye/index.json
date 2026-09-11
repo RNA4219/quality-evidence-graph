@@ -717,7 +717,7 @@
         "src/types.ts"
       ],
       "mtime": "00022",
-      "contentHash": "sha256:6af0576ecafa2b3341189d8b563f288832d11cc9cf05c67e580a3b48afcbe378"
+      "contentHash": "sha256:572294304be0ab6e8f9fbf40a8cb43cd30d5f0cd4f51a942f7c287b250dd94e5"
     },
     "src/gate/evaluate.ts": {
       "role": "gate-evaluator",
@@ -2807,7 +2807,7 @@
         "tests/helpers/governance-matrix.mjs"
       ],
       "mtime": "00022",
-      "contentHash": "sha256:b9cef645f99f613aecc17a95b878f93e3f3e4fa801404fa333b40bd503bd9951"
+      "contentHash": "sha256:383f236481dc0ca6ba8a8d017aaaa2b8a5b503b65a2f5ad854385354e9cbb3de"
     },
     "docs/evidence/governance-fixes-2026-09-11/validation.json": {
       "role": "validation",
@@ -2833,7 +2833,7 @@
         "tests/helpers/execution-fixture.mjs"
       ],
       "mtime": "00022",
-      "contentHash": "sha256:3620931ce42a86b94a55018b4c5eed627421e2cd0ab73e5b5ce48b35ea0c0fd7"
+      "contentHash": "sha256:9848cb213180308db387ea0091a159a1fe3a0a3665cbdd03257d105b349f8375"
     },
     "src/timestamps.ts": {
       "role": "timestamps",
