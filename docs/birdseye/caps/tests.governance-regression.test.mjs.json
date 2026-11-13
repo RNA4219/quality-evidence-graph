@@ -1,7 +1,7 @@
 {
   "id": "tests/governance-regression.test.mjs",
   "role": "governance-regression.test",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG governance-regression.test の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

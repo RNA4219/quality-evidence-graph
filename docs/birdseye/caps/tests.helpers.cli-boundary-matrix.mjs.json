@@ -1,7 +1,7 @@
 {
   "id": "tests/helpers/cli-boundary-matrix.mjs",
   "role": "cli-boundary-matrix",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG cli-boundary-matrix の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -20,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:a7b1fda68d90671db5846af874bde2536ec3f234e4472ddbf27ab0d220fdaa25"
+  "contentHash": "sha256:4502103c611168f8a35ec39fbe3874535869879339beeaa5e4c64428c2e8dbdb"
 }

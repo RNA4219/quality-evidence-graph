@@ -1,7 +1,7 @@
 {
   "id": "src/cli/enum-check.ts",
   "role": "enum-drift-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG enum-drift-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -21,5 +21,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:46c3a7a120b302f930b86c3d83dbc9b8a82c47560a2361d8442fbe1514b177f5"
+  "contentHash": "sha256:22e67c08e54227b90953f842fead4207e8e9416def5683a81ade72dde2b3bf78"
 }

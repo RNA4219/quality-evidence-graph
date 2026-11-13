@@ -1,7 +1,7 @@
 {
   "id": "src/cli/init-runtime.ts",
   "role": "init-runtime",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG init-runtime の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

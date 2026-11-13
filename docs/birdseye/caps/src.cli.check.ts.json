@@ -1,7 +1,7 @@
 {
   "id": "src/cli/check.ts",
   "role": "local-check-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG local-check-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -27,5 +27,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:64d86a6998b58b031b5cf8710bb308e53e393670630d41f72a0aefe77201d6bc"
+  "contentHash": "sha256:9044820529344377e95f73e8ddfb21b5eb767c43ca8c18c9ce09355e965de78e"
 }

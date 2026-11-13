@@ -1,7 +1,7 @@
 {
   "id": "src/cli/init.ts",
   "role": "oss-init-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG oss-init-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -22,5 +22,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:6ab8a49f69f52eea0dbfc7bfec5313510d3bcf70c4aa862b0d4b85b573373b91"
+  "contentHash": "sha256:b6f7223c205ebbb73f5e1d9fe0ef2993b65a37c5b2bd815cf9d7665c03d7c062"
 }

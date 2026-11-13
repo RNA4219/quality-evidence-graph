@@ -3,7 +3,7 @@ import { readFile, readdir, writeFile } from "node:fs/promises";
 import { posix, resolve } from "node:path";
 
 const root = resolve(new URL("..", import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, "$1"));
-const generation = "00024";
+const generation = "00025";
 const json = (value) => JSON.stringify(value, null, 2) + "\n";
 const hash = (value) => "sha256:" + createHash("sha256").update(String(value).replace(/\r\n/g, "\n")).digest("hex");
 const indexPath = resolve(root, "docs/birdseye/index.json");

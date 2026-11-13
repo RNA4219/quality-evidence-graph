@@ -1,22 +1,19 @@
 {
   "id": "docs/spec/retention-immutability.md",
   "role": "ipo-spec",
-  "public_api": [
-    "Retention",
-    "StorageClassification"
-  ],
-  "summary": "retention、storage location、tamper evidence、silent overwrite 判定、secret / PII 取り扱いを固定する。",
+  "generation": "00025",
+  "public_api": [],
+  "summary": "QEG ipo-spec の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/ipo-controlled-profile.md",
     "docs/spec/index.md"
   ],
   "risks": [
-    "silent overwrite 可能な evidence を release 判定の唯一根拠にすると DQ-16 を見逃す"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "docs/spec/acceptance.md TC-SPEC-04"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:001812afa507d2776eca75190878930f49edcb53ceab49d740a0a3c8e2d98979"
 }

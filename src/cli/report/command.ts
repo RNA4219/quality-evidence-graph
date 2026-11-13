@@ -1,6 +1,5 @@
 import { appendFile, mkdir, writeFile } from "fs/promises";
 import { dirname, resolve } from "path";
-import { exit } from "process";
 import { CliError } from "../errors.js";
 import { createCiReport } from "./core.js";
 import { formatCiReportText, formatGithubSummary } from "./formatter.js";
@@ -110,5 +109,5 @@ export async function runReportCommand(args: readonly string[]): Promise<void> {
   }
 
   console.log(output.trimEnd());
-  exit(reportExitCode(report));
+  process.exitCode = reportExitCode(report);
 }

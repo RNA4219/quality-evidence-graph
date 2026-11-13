@@ -1,13 +1,13 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { mkdtemp, readdir, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
-import { cliRunner, verifyPathSelection, verifyTargetDiscovery, verifyBaseline, verifyDiff, verifyDistribution } from './helpers/cli-boundary-matrix.mjs';
+import { join, relative, resolve } from 'node:path';
+import { cliRunner, verifyPathSelection, verifyTargetDiscovery, verifyBaseline, verifyDiff, verifyDistribution, verifyPipedOutput } from './helpers/cli-boundary-matrix.mjs';
 const repo = resolve('.'); const fixtures = join(repo, 'fixtures');
 for (const [name, entry] of [['CLI', 'dist/cli.js'], ['Action bundle', 'qeg-report-action/dist/cli.mjs']]) {
   const run = cliRunner(join(repo, entry), repo);
-  for (const [finding, verify] of [['R8 paths', verifyPathSelection], ['R9 discovery', verifyTargetDiscovery], ['R10/11 baseline', verifyBaseline], ['R12 diff', verifyDiff], ['R13 distribution', verifyDistribution]]) {
+  for (const [finding, verify] of [['R8 paths', verifyPathSelection], ['R9 discovery', verifyTargetDiscovery], ['R10/11 baseline', verifyBaseline], ['R12 diff', verifyDiff], ['R13 distribution', verifyDistribution], ['piped stdout', verifyPipedOutput]]) {
     test(`${name}: ${finding} boundary matrix`, async () => verify(run, fixtures, await mkdtemp(join(tmpdir(), 'qeg-cli-matrix-'))));
   }
 }
@@ -27,4 +27,14 @@ test('R13: initialized runtime carries enum data and fails on actual packaged en
   assert.equal(run(['enum-check', '--json']).status, 2, 'both empty must not pass');
   await writeFile(metadataPath, original); schema.$defs.gateProfile.enum = ['unknown-profile']; await writeFile(schemaPath, JSON.stringify(schema));
   assert.equal(run(['enum-check', '--json']).status, 2);
+});
+test('commands report their exit code through process.exitCode instead of exit()', async () => {
+  // exit() ends the process before a piped stdout is flushed, so the tail of large output is lost.
+  const offenders = [];
+  for (const entry of await readdir(join(repo, 'src'), { recursive: true, withFileTypes: true })) {
+    if (!entry.isFile() || !entry.name.endsWith('.ts')) continue;
+    const file = join(entry.parentPath ?? entry.path, entry.name); const source = await readFile(file, 'utf8');
+    if (/\bprocess\s*\.\s*exit\s*\(/.test(source) || /import\s*\{[^}]*\bexit\b[^}]*\}\s*from\s*["'](?:node:)?process["']/.test(source)) offenders.push(relative(repo, file).replaceAll('\\', '/'));
+  }
+  assert.deepEqual(offenders.sort(), []);
 });

@@ -1,8 +1,9 @@
 {
   "id": "docs/spec/code-to-gate-2026-06-03/release-readiness.json",
   "role": "code-to-gate-readiness",
+  "generation": "00025",
   "public_api": [],
-  "summary": "code-to-gate v1.4.1 の readiness artifact。policy `ci-release-readiness` で status `passed`、findings 0、critical 0、high 0、failed conditions 0 を示す。",
+  "summary": "QEG code-to-gate-readiness の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/spec/code-to-gate-2026-06-03/analysis-report.md"
   ],
@@ -10,11 +11,10 @@
     "docs/spec/gate-acceptance-2026-06-03.md"
   ],
   "risks": [
-    "code-to-gate readiness passed を QEG の IPO controlled release approval と混同すると Gate 分離が崩れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "code-to-gate readiness . --policy C:\\Users\\ryo-n\\Codex_dev\\code-to-gate\\.github\\ctg-policy.yaml"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:8cde0355b26f466a68b19a36ddaf8d377dae916b2a5fe8d72bb09754a7b5f78a"
 }

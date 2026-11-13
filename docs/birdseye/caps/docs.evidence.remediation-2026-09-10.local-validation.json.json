@@ -1,7 +1,7 @@
 {
   "id": "docs/evidence/remediation-2026-09-10/local-validation.json",
   "role": "local-validation",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG local-validation の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],

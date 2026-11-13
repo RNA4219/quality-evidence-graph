@@ -1,7 +1,6 @@
 import { createHash } from "crypto";
 import { mkdir, readFile, readdir } from "fs/promises";
 import { basename, join, resolve } from "path";
-import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { createDoctorReport } from "./doctor.js";
 import { CliError } from "./errors.js";
@@ -146,5 +145,5 @@ export async function runReproBundleCommand(args: readonly string[]): Promise<vo
   console.log(`QEG repro bundle written to: ${outDir}`);
   console.log(`Manifest: ${manifestPath}`);
   if (inputErrors.length) console.log(`Input capture diagnostics: ${inputErrors.length}; see manifest.inputErrors`);
-  exit(0);
+  process.exitCode = 0;
 }

@@ -22762,7 +22762,7 @@ async function runExplainCommand(args) {
   }
   const explanation = getDqExplanation(rawCode);
   console.log(json ? JSON.stringify(explanation, null, 2) : formatExplanationText(explanation).trimEnd());
-  exit(0);
+  process.exitCode = 0;
 }
 
 // src/cli/validation.ts
@@ -23576,7 +23576,7 @@ async function runReportCommand(args) {
     await appendFile(summaryPath, formatGithubSummary(report), "utf-8");
   }
   console.log(output.trimEnd());
-  exit2(reportExitCode(report));
+  process.exitCode = reportExitCode(report);
 }
 
 // src/cli/baseline.ts
@@ -23647,7 +23647,7 @@ async function runBaselineCommand(args) {
   }
   const report = await createBaselineAuditReport(baselinePath, targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatBaselineAuditText(report).trimEnd());
-  exit3(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }
 
 // src/cli/check.ts
@@ -23788,7 +23788,7 @@ async function runSchemaCheckCommand(args) {
   const targets = args.filter((arg) => arg !== "--json");
   const report = await createSchemaCheckReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatSchemaCheckText(report).trimEnd());
-  exit4(report.status === "pass" ? 0 : 2);
+  process.exitCode = report.status === "pass" ? 0 : 2;
 }
 
 // src/cli/distribution.ts
@@ -23980,7 +23980,7 @@ async function runDoctorCommand(args) {
   const targets = args.filter((arg) => arg !== "--json");
   const report = await createDoctorReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatDoctorText(report).trimEnd());
-  exit5(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }
 
 // src/cli/enum-check.ts
@@ -24063,7 +24063,7 @@ async function runEnumCheckCommand(args) {
   const json = args.includes("--json");
   const report = await createEnumCheckReport();
   console.log(json ? JSON.stringify(report, null, 2) : formatEnumCheckText(report).trimEnd());
-  exit6(report.status === "pass" ? 0 : 2);
+  process.exitCode = report.status === "pass" ? 0 : 2;
 }
 
 // src/cli/snapshot.ts
@@ -24158,7 +24158,7 @@ async function runSnapshotCommand(args) {
     console.log(`- ${result.status.toUpperCase()} ${relative5(process.cwd(), result.target)} -> ${relative5(process.cwd(), result.path)}`);
   }
   const failed = results.some((result) => result.status === "missing" || result.status === "mismatch");
-  exit7(failed ? 2 : 0);
+  process.exitCode = failed ? 2 : 0;
 }
 
 // src/cli/evidence-verify.ts
@@ -24200,7 +24200,7 @@ async function runEvidenceVerifyCommand(args) {
   if (targets.length === 0) throw new CliError("Usage: qeg evidence verify [--json] <fixture-dir-or-parent> [...]");
   const report = await createEvidenceVerifyReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatEvidenceVerifyText(report).trimEnd());
-  exit8(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }
 
 // src/cli/policy-lint.ts
@@ -24343,7 +24343,7 @@ async function runPolicyLintCommand(args) {
   }
   const report = await createPolicyLintReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatPolicyLintText(report).trimEnd());
-  exit9(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }
 
 // src/cli/check.ts
@@ -24386,7 +24386,7 @@ async function runCheckCommand(args) {
   const targets = args.filter((arg) => arg !== "--json");
   const report = await createCheckReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatCheckText(report).trimEnd());
-  exit10(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }
 
 // src/cli/evidence-normalize.ts
@@ -24793,7 +24793,7 @@ async function normalizeResilienceEvidence(options) {
 async function runEvidenceNormalizeCommand(args) {
   const evidence = await normalizeResilienceEvidence(parseArgs(args));
   console.log(JSON.stringify(evidence, null, 2));
-  exit11(0);
+  process.exitCode = 0;
 }
 
 // src/cli/init.ts
@@ -24997,7 +24997,7 @@ async function runInitCommand(args) {
   if (results.some((result) => result.status === "skipped")) {
     console.log("Use --force to overwrite skipped files.");
   }
-  exit12(0);
+  process.exitCode = 0;
 }
 
 // src/cli/repro-bundle.ts
@@ -25122,7 +25122,7 @@ async function runReproBundleCommand(args) {
   console.log(`QEG repro bundle written to: ${outDir}`);
   console.log(`Manifest: ${manifestPath}`);
   if (inputErrors.length) console.log(`Input capture diagnostics: ${inputErrors.length}; see manifest.inputErrors`);
-  exit13(0);
+  process.exitCode = 0;
 }
 
 // src/cli/record.ts
@@ -25146,7 +25146,8 @@ async function runValidateCommand(fixtureDir) {
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
-      exit14(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }
@@ -25156,27 +25157,28 @@ async function runGateCommand(fixtureDir) {
     const evaluated = await evaluateFixture(fixtureDir);
     await assertValidOutput(evaluated.gateResult, "gate-verdict.schema.json");
     console.log(JSON.stringify(evaluated.gateResult, null, 2));
-    exit14(getExitCode(evaluated.gateResult.verdict, evaluated.policy));
+    process.exitCode = getExitCode(evaluated.gateResult.verdict, evaluated.policy);
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
-      exit14(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }
 }
 async function runRecordCommand(fixtureDir) {
   try {
-    const code = await withOutputLease(fixtureDir, async (root2) => {
+    process.exitCode = await withOutputLease(fixtureDir, async (root2) => {
       const evaluated = await evaluateFixture(root2);
       await writeOutputRecord(evaluated);
       return getExitCode(evaluated.gateResult.verdict, evaluated.policy);
     });
-    exit14(code);
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
-      exit14(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }
@@ -25188,16 +25190,17 @@ async function main() {
   if (args[0] === "--help" || args[0] === "-h") {
     console.log("Usage: qeg <command> [options] <fixture-dir-or-parent>");
     console.log("Commands: build-graph, place-tests, validate, gate, record, outputs, migrate, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
-    exit15(0);
+    return;
   }
   if (args[0] === "--version" || args[0] === "-v") {
     console.log(QEG_VERSION);
-    exit15(0);
+    return;
   }
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
     console.error("Commands: build-graph, place-tests, validate, gate, record, outputs, migrate, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
-    exit15(1);
+    process.exitCode = 1;
+    return;
   }
   const [command, ...commandArgs] = args;
   const fixtureDir = commandArgs[0];
@@ -25234,21 +25237,24 @@ async function main() {
     case "validate":
       if (!fixtureDir) {
         console.error("Usage: qeg validate <fixture-dir>");
-        exit15(1);
+        process.exitCode = 1;
+        return;
       }
       await runValidateCommand(fixtureDir);
       break;
     case "gate":
       if (!fixtureDir) {
         console.error("Usage: qeg gate <fixture-dir>");
-        exit15(1);
+        process.exitCode = 1;
+        return;
       }
       await runGateCommand(fixtureDir);
       break;
     case "record":
       if (!fixtureDir) {
         console.error("Usage: qeg record <fixture-dir>");
-        exit15(1);
+        process.exitCode = 1;
+        return;
       }
       await runRecordCommand(fixtureDir);
       break;
@@ -25277,14 +25283,16 @@ async function main() {
       }
       if (commandArgs[0] !== "verify") {
         console.error("Usage: qeg evidence verify <fixture-dir-or-parent> [...] | qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>");
-        exit15(1);
+        process.exitCode = 1;
+        return;
       }
       await runEvidenceVerifyCommand(commandArgs.slice(1));
       break;
     case "policy":
       if (commandArgs[0] !== "lint") {
         console.error("Usage: qeg policy lint <fixture-dir-or-parent> [...]");
-        exit15(1);
+        process.exitCode = 1;
+        return;
       }
       await runPolicyLintCommand(commandArgs.slice(1));
       break;
@@ -25302,10 +25310,10 @@ async function main() {
       break;
     default:
       console.error(`Unknown command: ${command}`);
-      exit15(1);
+      process.exitCode = 1;
   }
 }
 main().catch((error) => {
   console.error(`Command failure: ${error}`);
-  exit15(1);
+  process.exitCode = 1;
 });

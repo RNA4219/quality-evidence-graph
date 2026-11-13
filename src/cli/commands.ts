@@ -1,4 +1,3 @@
-import { exit } from "process";
 import { getExitCode } from "../gate.js";
 import { runBaselineCommand } from "./baseline.js";
 import { runCheckCommand } from "./check.js";
@@ -28,7 +27,8 @@ export async function runValidateCommand(fixtureDir: string): Promise<void> {
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
-      exit(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }
@@ -39,11 +39,12 @@ export async function runGateCommand(fixtureDir: string): Promise<void> {
     const evaluated = await evaluateFixture(fixtureDir);
     await assertValidOutput(evaluated.gateResult, "gate-verdict.schema.json");
     console.log(JSON.stringify(evaluated.gateResult, null, 2));
-    exit(getExitCode(evaluated.gateResult.verdict, evaluated.policy));
+    process.exitCode = getExitCode(evaluated.gateResult.verdict, evaluated.policy);
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
-      exit(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }
@@ -51,16 +52,16 @@ export async function runGateCommand(fixtureDir: string): Promise<void> {
 
 export async function runRecordCommand(fixtureDir: string): Promise<void> {
   try {
-    const code = await withOutputLease(fixtureDir, async root => {
+    process.exitCode = await withOutputLease(fixtureDir, async root => {
       const evaluated = await evaluateFixture(root);
       await writeOutputRecord(evaluated);
       return getExitCode(evaluated.gateResult.verdict, evaluated.policy);
     });
-    exit(code);
   } catch (error) {
     if (error instanceof CliError) {
       console.error(error.message);
-      exit(1);
+      process.exitCode = 1;
+      return;
     }
     throw error;
   }

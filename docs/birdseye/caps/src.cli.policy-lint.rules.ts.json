@@ -1,7 +1,7 @@
 {
   "id": "src/cli/policy-lint/rules.ts",
   "role": "rules",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG rules の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

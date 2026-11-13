@@ -1,7 +1,7 @@
 {
   "id": "schemas/execution.schema.json",
   "role": "execution.schema",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG execution.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],

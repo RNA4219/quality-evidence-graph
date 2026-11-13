@@ -1,7 +1,7 @@
 {
   "id": "src/cli/baseline.ts",
   "role": "baseline-audit-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG baseline-audit-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -24,5 +24,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:acd18dd00c462528957e645674802c806704d8493cdbffdb757f836448da1a67"
+  "contentHash": "sha256:52c86bdca68e234c9189587202f07e74b640bbdc03570168810bae3dea6dec72"
 }

@@ -1,7 +1,7 @@
 {
   "id": "docs/project/evaluation.md",
   "role": "current-acceptance-criteria",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Linux Node 20 / 24とWindows Node 24 CIを含む現行受入条件。",
   "deps_out": [
@@ -39,5 +39,5 @@
     "npm run birdseye-check",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "contentHash": "sha256:c50a71200f08ef57ccc3f0882ff60759130b8266f3a86b465c338724bec0a6ac"
+  "contentHash": "sha256:5d7eb4c41901ff31be804613f25b5f27108730749c733eb782ef0365b0e5f26e"
 }

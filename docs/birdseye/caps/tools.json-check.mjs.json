@@ -1,7 +1,7 @@
 {
   "id": "tools/json-check.mjs",
   "role": "tracked-json-parser",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG tracked-json-parser の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -12,5 +12,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:53e5edcb47db306b567dc568a79c473be78d45b54f42f42ddfb74c629cda3f5d"
+  "contentHash": "sha256:4edb6d0a220f386851627acf0684593efd3f2745e9d0f04a4dcd7c39b528d75c"
 }

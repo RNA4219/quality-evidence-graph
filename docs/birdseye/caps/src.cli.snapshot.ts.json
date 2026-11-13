@@ -1,7 +1,7 @@
 {
   "id": "src/cli/snapshot.ts",
   "role": "report-snapshot-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG report-snapshot-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -25,5 +25,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:bb3a63adf5cdd8763199ea25fc4891c45cf754ec9e2b01db37860f9c7f1ea46b"
+  "contentHash": "sha256:7b448566817fe027647ea26a43aea1573790175abfc204d301224ba7d9f1835d"
 }

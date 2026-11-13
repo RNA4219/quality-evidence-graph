@@ -1,7 +1,7 @@
 {
   "id": "src/cli/errors.ts",
   "role": "errors",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG errors の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
@@ -47,5 +47,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:0494bbd3e21351132647ab0c592f177dd50c738b35db0545ebc9744e9e602b19"
+  "contentHash": "sha256:3ca2480eb7160c04479bb18ced0477a52f1966d38513565de535680e962dbcd4"
 }

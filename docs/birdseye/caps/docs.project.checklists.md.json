@@ -1,16 +1,16 @@
 {
   "id": "docs/project/checklists.md",
   "role": "checklist",
+  "generation": "00025",
   "public_api": [],
-  "summary": "Hygiene と IPO controlled の release checklist。",
+  "summary": "QEG checklist の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [],
   "risks": [
-    "checklist が acceptance とずれると出荷判定が割れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:2718c34ee1b160b596ed695dbf53bbb72ba2d312e3df26a3771c2df2fe73ddde"
 }

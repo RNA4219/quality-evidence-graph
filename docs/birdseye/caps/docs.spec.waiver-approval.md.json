@@ -1,12 +1,9 @@
 {
   "id": "docs/spec/waiver-approval.md",
   "role": "ipo-spec",
-  "public_api": [
-    "Waiver",
-    "ApprovalEvidence",
-    "ControlRoles"
-  ],
-  "summary": "waiver、approval evidence、ControlRoles、human review の必須項目と有効条件を固定する。",
+  "generation": "00025",
+  "public_api": [],
+  "summary": "QEG ipo-spec の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/ipo-controlled-profile.md",
@@ -14,11 +11,10 @@
     "docs/spec/review-2026-06-03.md"
   ],
   "risks": [
-    "source-backed でない waiver や approval evidence が Gate を良化させると DQ-15 を見逃す"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "docs/spec/acceptance.md TC-SPEC-03"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:2d304dddec9af1cf96f7bc041758d87193294ecba117ab5f266e34ae93326df4"
 }

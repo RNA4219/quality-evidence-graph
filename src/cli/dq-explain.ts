@@ -1,4 +1,3 @@
-import { exit } from "process";
 import type { DisqualificationCode } from "../types.js";
 import { CliError } from "./errors.js";
 
@@ -286,5 +285,5 @@ export async function runExplainCommand(args: readonly string[]): Promise<void> 
 
   const explanation = getDqExplanation(rawCode);
   console.log(json ? JSON.stringify(explanation, null, 2) : formatExplanationText(explanation).trimEnd());
-  exit(0);
+  process.exitCode = 0;
 }

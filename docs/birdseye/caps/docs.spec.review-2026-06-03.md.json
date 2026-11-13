@@ -1,8 +1,9 @@
 {
   "id": "docs/spec/review-2026-06-03.md",
   "role": "ipo-spec-review",
+  "generation": "00025",
   "public_api": [],
-  "summary": "IPO 統制仕様書の見直し結果、指摘、修正方針、Gate 判定、残リスク、次アクションを記録する。",
+  "summary": "QEG ipo-spec-review の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/project/evaluation.md",
     "docs/project/runbook.md",
@@ -14,13 +15,10 @@
     "docs/spec/index.md"
   ],
   "risks": [
-    "レビュー Gate と IPO controlled release Gate を混同すると未実装のまま release Go と誤認する"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "schema JSON parse",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:59527f162a32fc144ed20ab9431c37e221d6ce6f26d962199ef852344cfc3f7e"
 }

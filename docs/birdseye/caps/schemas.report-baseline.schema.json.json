@@ -1,7 +1,7 @@
 {
   "id": "schemas/report-baseline.schema.json",
   "role": "report-baseline.schema",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG report-baseline.schema の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],

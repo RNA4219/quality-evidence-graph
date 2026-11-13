@@ -1,8 +1,9 @@
 {
   "id": "docs/spec/implementation-gate-2026-06-03.md",
   "role": "ipo-implementation-gate",
+  "generation": "00025",
   "public_api": [],
-  "summary": "IPO controlled profile 実装 Gate 記録。型、schema、CLI、Gate evaluator、DQ-01〜DQ-17、21 fixture、own-output validation、code-to-gate refactor 検証が通過し、IPO controlled release Gate は go と判定する。",
+  "summary": "QEG ipo-implementation-gate の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/project/evaluation.md",
     "docs/project/runbook.md"
@@ -12,16 +13,10 @@
     "docs/spec/gate-acceptance-2026-06-03.md"
   ],
   "risks": [
-    "release approval evidence と production deployment approval は本 Gate 外の運用証跡として継続管理する"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run build",
-    "schema JSON parse",
-    "fixture validate/gate/record",
-    "npm pack --dry-run --cache ./.npm-cache",
-    "code-to-gate analyze --emit all"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:cb50ac1d1c61f7cd046d9e7b463e2ac89b0c547e2ab5ad98fb3cddf3feb920f5"
 }

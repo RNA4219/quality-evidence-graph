@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import { exit } from "process";
 import { runBuildGraphCommand, runPlaceTestsCommand } from "./cli/pipeline.js";
 import { QEG_VERSION } from "./version.js";
 import { readPublishedOutputs, recoverOutputs } from "./output-publication.js";
@@ -30,17 +29,18 @@ async function main(): Promise<void> {
   if (args[0] === "--help" || args[0] === "-h") {
     console.log("Usage: qeg <command> [options] <fixture-dir-or-parent>");
     console.log("Commands: build-graph, place-tests, validate, gate, record, outputs, migrate, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
-    exit(0);
+    return;
   }
   if (args[0] === "--version" || args[0] === "-v") {
     console.log(QEG_VERSION);
-    exit(0);
+    return;
   }
 
   if (args.length < 1) {
     console.error("Usage: qeg <command> <fixture-dir>");
     console.error("Commands: build-graph, place-tests, validate, gate, record, outputs, migrate, report, baseline, doctor, explain, schema-check, enum-check, evidence, policy, repro-bundle, check, init, snapshot");
-    exit(1);
+    process.exitCode = 1;
+    return;
   }
 
   const [command, ...commandArgs] = args;
@@ -79,21 +79,24 @@ async function main(): Promise<void> {
     case "validate":
       if (!fixtureDir) {
         console.error("Usage: qeg validate <fixture-dir>");
-        exit(1);
+        process.exitCode = 1;
+        return;
       }
       await runValidateCommand(fixtureDir);
       break;
     case "gate":
       if (!fixtureDir) {
         console.error("Usage: qeg gate <fixture-dir>");
-        exit(1);
+        process.exitCode = 1;
+        return;
       }
       await runGateCommand(fixtureDir);
       break;
     case "record":
       if (!fixtureDir) {
         console.error("Usage: qeg record <fixture-dir>");
-        exit(1);
+        process.exitCode = 1;
+        return;
       }
       await runRecordCommand(fixtureDir);
       break;
@@ -122,14 +125,16 @@ async function main(): Promise<void> {
       }
       if (commandArgs[0] !== "verify") {
         console.error("Usage: qeg evidence verify <fixture-dir-or-parent> [...] | qeg evidence normalize --adapter <kind> --input <raw.json> --context <context.json> --out <evidence.json>");
-        exit(1);
+        process.exitCode = 1;
+        return;
       }
       await runEvidenceVerifyCommand(commandArgs.slice(1));
       break;
     case "policy":
       if (commandArgs[0] !== "lint") {
         console.error("Usage: qeg policy lint <fixture-dir-or-parent> [...]");
-        exit(1);
+        process.exitCode = 1;
+        return;
       }
       await runPolicyLintCommand(commandArgs.slice(1));
       break;
@@ -147,11 +152,13 @@ async function main(): Promise<void> {
       break;
     default:
       console.error(`Unknown command: ${command}`);
-      exit(1);
+      process.exitCode = 1;
   }
 }
 
+// Commands finish by setting process.exitCode and returning. Ending the process right after
+// writing would drop the part of a piped stdout that has not been flushed yet.
 main().catch((error) => {
   console.error(`Command failure: ${error}`);
-  exit(1);
+  process.exitCode = 1;
 });

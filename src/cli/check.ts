@@ -1,4 +1,3 @@
-import { exit } from "process";
 import { createDoctorReport } from "./doctor.js";
 import { createEnumCheckReport } from "./enum-check.js";
 import { createCiReport } from "./report.js";
@@ -53,5 +52,5 @@ export async function runCheckCommand(args: readonly string[]): Promise<void> {
   const targets = args.filter((arg) => arg !== "--json");
   const report = await createCheckReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatCheckText(report).trimEnd());
-  exit(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }

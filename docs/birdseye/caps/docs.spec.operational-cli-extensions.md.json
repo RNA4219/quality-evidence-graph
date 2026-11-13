@@ -1,23 +1,9 @@
 {
   "id": "docs/spec/operational-cli-extensions.md",
   "role": "operational-cli-spec",
-  "public_api": [
-    "qeg report",
-    "qeg report --diff",
-    "qeg doctor",
-    "qeg explain",
-    "qeg schema-check",
-    "qeg enum-check",
-    "qeg snapshot",
-    "qeg init",
-    "qeg baseline audit",
-    "qeg evidence verify",
-    "qeg policy lint",
-    "qeg repro-bundle",
-    "qeg check",
-    "qeg-report-action"
-  ],
-  "summary": "CI と OSS 導入の作業性を高める運用 CLI 仕様。report の GitHub Summary、baseline、changed-only、diff、doctor、DQ explain、schema/enum drift check、golden snapshot、init、baseline audit、evidence verify、policy lint、repro-bundle、check、qeg-report-action の contract と exit code を固定する。",
+  "generation": "00025",
+  "public_api": [],
+  "summary": "QEG operational-cli-spec の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "qeg-report-action/action.yml",
     "src/cli/baseline.ts",
@@ -45,17 +31,10 @@
     "docs/spec/reliability-extension.md"
   ],
   "risks": [
-    "report step が直接失敗すると GitHub Actions の汎用 exit code 表示に戻り、累積不足の可視性が落ちる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run schema-check",
-    "npm run enum-check",
-    "npm run explain -- DQ-15",
-    "npm run doctor -- fixtures/positive-release-go",
-    "npm run snapshot -- fixtures/positive-release-go",
-    "node dist/cli.js check fixtures/positive-release-go"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:e78d99f5db6ad3384ace2291f9a0f5731c2e76d93a2a2ff4850934e77a73024a"
 }

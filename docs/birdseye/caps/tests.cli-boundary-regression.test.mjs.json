@@ -1,7 +1,7 @@
 {
   "id": "tests/cli-boundary-regression.test.mjs",
   "role": "cli-boundary-regression.test",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG cli-boundary-regression.test の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -16,5 +16,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:25c36e24aa52dcd603f82932df0c9aa7615550cffc6c4b28754c95e0ce339114"
+  "contentHash": "sha256:302b398432c64d00d319bb0603d28fdeec56f262d1bc40afd950e1d195c3236c"
 }

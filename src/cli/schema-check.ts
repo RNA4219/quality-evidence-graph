@@ -1,6 +1,5 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { CliError } from "./errors.js";
 import { loadSchemaRegistry, validateGateInput } from "../validation/schema.js";
@@ -106,7 +105,7 @@ export async function runSchemaCheckCommand(args: readonly string[]): Promise<vo
   const targets = args.filter((arg) => arg !== "--json");
   const report = await createSchemaCheckReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatSchemaCheckText(report).trimEnd());
-  exit(report.status === "pass" ? 0 : 2);
+  process.exitCode = report.status === "pass" ? 0 : 2;
 }
 
 export async function assertSchemasCompile(): Promise<void> {

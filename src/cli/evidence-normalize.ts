@@ -1,6 +1,5 @@
 import { realpath } from "fs/promises";
 import { basename, relative, resolve } from "path";
-import { exit } from "process";
 import type { ResilienceEvidenceStatus, ResilienceExecutionEvidenceNode } from "../types.js";
 import { CliError } from "./errors.js";
 import { adapterFields } from "./evidence-normalize/adapters.js";
@@ -111,5 +110,5 @@ export async function normalizeResilienceEvidence(options: NormalizeOptions): Pr
 export async function runEvidenceNormalizeCommand(args: readonly string[]): Promise<void> {
   const evidence = await normalizeResilienceEvidence(parseArgs(args));
   console.log(JSON.stringify(evidence, null, 2));
-  exit(0);
+  process.exitCode = 0;
 }

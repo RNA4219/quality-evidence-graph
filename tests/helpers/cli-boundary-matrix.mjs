@@ -189,3 +189,18 @@ export async function verifyDistribution(run, fixtures, directory) {
   const checked = exit(run(['check', '--json', target], { cwd: directory }), 0).data;
   assert.ok(checked.items.every(item => item.status !== 'fail'));
 }
+// A parent process that reads stdout through a pipe must receive the whole output and the
+// documented exit code. The report is made larger than the stdio buffers libuv hands to a
+// child (8,192 bytes on macOS, about 200 KB on Linux) so a command that calls exit() right
+// after writing would lose the tail.
+export async function verifyPipedOutput(run, fixtures, directory) {
+  await mkdir(directory, { recursive: true });
+  const copy = join(directory, 'fixtures-copy'); await cp(fixtures, copy, { recursive: true });
+  const out = join(directory, 'report.json');
+  const piped = run(['report', '--json', '--out', out, fixtures, copy], { cwd: directory });
+  const saved = await readFile(out, 'utf8'); const report = JSON.parse(saved);
+  assert.ok(Buffer.byteLength(saved) > 256 * 1024, 'report must exceed the stdio buffer: ' + Buffer.byteLength(saved));
+  assert.equal(Buffer.byteLength(piped.stdout), Buffer.byteLength(saved), 'piped stdout was cut short');
+  assert.equal(piped.stdout, saved);
+  exit(piped, report.summary.cliErrors > 0 ? 1 : report.summary.gateFailed > 0 ? 2 : 0);
+}
