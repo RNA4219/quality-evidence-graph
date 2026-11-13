@@ -1,6 +1,5 @@
 import { readFile } from "fs/promises";
 import { join } from "path";
-import { exit } from "process";
 import { CliError } from "./errors.js";
 import { formatPolicyLintText } from "./policy-lint/format.js";
 import { type GateInputLike, type PolicyLintItem, type PolicyLintReport } from "./policy-lint/model.js";
@@ -60,5 +59,5 @@ export async function runPolicyLintCommand(args: readonly string[]): Promise<voi
   }
   const report = await createPolicyLintReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatPolicyLintText(report).trimEnd());
-  exit(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }

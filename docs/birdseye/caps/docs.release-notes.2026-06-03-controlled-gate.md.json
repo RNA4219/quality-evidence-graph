@@ -1,8 +1,9 @@
 {
   "id": "docs/release-notes/2026-06-03-controlled-gate.md",
   "role": "release-notes",
+  "generation": "00025",
   "public_api": [],
-  "summary": "2026-06-03 Controlled Gate リリースノート。DQ-01〜DQ-17、21 fixture、CLI、own-output validation、code-to-gate finding 0、README 導線整備を記録する。",
+  "summary": "QEG release-notes の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "README.md",
     "README_EN.md",
@@ -13,14 +14,10 @@
     "docs/agent/HUB.codex.md"
   ],
   "risks": [
-    "リリースノートが Gate 証跡や README と乖離すると利用者が現在状態を誤認する"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run build",
-    "npm pack --dry-run --cache ./.npm-cache",
-    "code-to-gate analyze --emit all"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:5cd627f4a110f5c55bc4130fec78db3437f4c76d34e831334cffcf4f0f92e4c3"
 }

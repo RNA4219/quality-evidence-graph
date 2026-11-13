@@ -1,8 +1,9 @@
 {
   "id": "fixtures/README.md",
   "role": "fixture-contract",
+  "generation": "00025",
   "public_api": [],
-  "summary": "minimal-valid と negative fixture 群の構成、producer check consistency fixture、期待 verdict、期待 DQ、必須 artifact を固定する。",
+  "summary": "QEG fixture-contract の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/agent/HUB.codex.md",
@@ -10,14 +11,10 @@
     "docs/requirements.md"
   ],
   "risks": [
-    "expected verdict / DQ が未固定だと Gate evaluator 実装時に判断が揺れる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm run typecheck",
-    "npm run validate -- fixtures/negative-producer-check-inconsistent",
-    "npm run validate -- fixtures/negative-producer-check-stale-sha",
-    "schema JSON parse"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:89bedf577144de3f4ddeae096b2d599695e4b3a5120bb9780ecd6fb18f5cd266"
 }

@@ -1,7 +1,7 @@
 {
   "id": "docs/project/manual-governance-fixes-2026-09-11.md",
   "role": "manual-governance-fixes-2026-09-11",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG manual-governance-fixes-2026-09-11 の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

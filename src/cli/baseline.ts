@@ -1,4 +1,3 @@
-import { exit } from "process";
 import { CliError } from "./errors.js";
 import { collectReportTargets, createCiReport } from "./report.js";
 import { baselineDqMatches, baselineEntryIssues, baselineTargetMatches, readBaselineFile, type BaselineEntry } from "./report/baseline-contract.js";
@@ -94,5 +93,5 @@ export async function runBaselineCommand(args: readonly string[]): Promise<void>
   }
   const report = await createBaselineAuditReport(baselinePath, targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatBaselineAuditText(report).trimEnd());
-  exit(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }

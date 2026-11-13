@@ -1,8 +1,9 @@
 {
   "id": "docs/spec/kano-mode-2026-06-03/requirements_audit_packet.json",
   "role": "kano-mode-requirements-audit",
+  "generation": "00025",
   "public_api": [],
-  "summary": "RanD KanoMode の QEG requirements audit packet。QEG-KANO-001〜005 がすべて gate_verdict `go`、overall_assessment `go` を示す。",
+  "summary": "QEG kano-mode-requirements-audit の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/spec/kano-mode-2026-06-03/kano.json"
   ],
@@ -10,11 +11,10 @@
     "docs/spec/gate-acceptance-2026-06-03.md"
   ],
   "risks": [
-    "overall go は requirements audit の結果であり、IPO controlled release approval ではない"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "requirements_audit_packet.json gate_summary overall_assessment == go"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:0c0c9d3dea624290dceeca699a2a5addc833a81f91493b4d207a75a0b8e74852"
 }

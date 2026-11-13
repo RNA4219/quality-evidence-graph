@@ -212,3 +212,31 @@ jobs:
           name: qeg-action-lifecycle-windows-24
           path: .qeg/action-lifecycle-windows-24
           if-no-files-found: warn
+
+  # macOS gives a child process an 8,192-byte stdio buffer, the smallest of the three
+  # platforms, so CLI output that is cut short when read through a pipe shows up here first.
+  portability-macos:
+    name: portability (macos-24)
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6.4.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Runtime contracts
+        run: npm run test:runtime
+
+      - name: Package install smoke
+        run: npm run test:package

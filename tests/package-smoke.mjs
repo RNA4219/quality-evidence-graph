@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { createRawProducerFixture, persistRawFixture } from "./helpers/raw-producer-fixture.mjs";
-import { cliRunner, verifyPathSelection, verifyTargetDiscovery, verifyBaseline, verifyDiff, verifyDistribution } from "./helpers/cli-boundary-matrix.mjs";
+import { cliRunner, verifyPathSelection, verifyTargetDiscovery, verifyBaseline, verifyDiff, verifyDistribution, verifyPipedOutput } from "./helpers/cli-boundary-matrix.mjs";
 import { gateContractMatrix } from "./helpers/gate-contract-matrix.mjs";
 import { governanceMatrix } from "./helpers/governance-matrix.mjs";
 import { manualGovernanceMatrix } from "./helpers/manual-governance-matrix.mjs";
@@ -157,10 +157,11 @@ const typeContract = spawnSync(
 assert.equal(typeContract.status, 0, typeContract.stderr || typeContract.stdout);
 
 const packedCli = cliRunner(join(packageRoot, 'dist/cli.js'), temp);
-for (const [name, verify] of [['paths', verifyPathSelection], ['discovery', verifyTargetDiscovery], ['baseline', verifyBaseline], ['diff', verifyDiff], ['distribution', verifyDistribution]]) {
+for (const [name, verify] of [['paths', verifyPathSelection], ['discovery', verifyTargetDiscovery], ['baseline', verifyBaseline], ['diff', verifyDiff], ['distribution', verifyDistribution], ['piped-stdout', verifyPipedOutput]]) {
   await verify(packedCli, join(packageRoot, 'fixtures'), join(temp, 'boundary-' + name));
 }
 await verifyDistribution(cliRunner(packedActionBundle, temp), join(packageRoot, 'fixtures'), join(temp, 'boundary-packed-action'));
+await verifyPipedOutput(cliRunner(packedActionBundle, temp), join(packageRoot, 'fixtures'), join(temp, 'boundary-packed-action-piped-stdout'));
 console.log("Packed CLI boundary matrix R8-R13 and Action diagnostics passed");
 for (const [surface, run] of [['cli', packedCli], ['action', cliRunner(packedActionBundle, temp)]]) {
   for (const [name, verify] of gateContractMatrix) await verify(run, join(packageRoot, 'fixtures'), join(temp, 'contract-' + surface + '-' + name.replaceAll('/', '-')), surface === 'cli' ? imported : undefined);

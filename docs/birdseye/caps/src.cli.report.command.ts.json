@@ -1,7 +1,7 @@
 {
   "id": "src/cli/report/command.ts",
   "role": "report-command",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG report-command の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -20,5 +20,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:d55224f9f98eaa2c2334b907855b9f8cc4193af911a510c5195e28f9f7611ab0"
+  "contentHash": "sha256:de1046a7dabc1b29ab0e6ee69e199eaa56ebf8e99408ab5a8a5f7089c473be40"
 }

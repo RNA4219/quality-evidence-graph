@@ -1,8 +1,9 @@
 {
   "id": "docs/control-mapping.md",
   "role": "control-mapping",
+  "generation": "00025",
   "public_api": [],
-  "summary": "変更管理、品質判定、例外承認、証跡保全、職務分掌、リリース承認への QEG artifact 対応を定義する。",
+  "summary": "QEG control-mapping の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/agent/HUB.codex.md",
@@ -10,11 +11,10 @@
     "docs/requirements.md"
   ],
   "risks": [
-    "統制対応が文書化されないと ipo_controlled profile が実装時に曖昧になる"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:c25058f2a916780a734792f433b7a3173b89230aef2a412a316c7e5561c00157"
 }

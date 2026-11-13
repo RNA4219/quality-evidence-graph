@@ -1,5 +1,4 @@
 import { readFile } from "fs/promises";
-import { exit } from "process";
 import { distributionPath, readDistributionMetadata } from "./distribution.js";
 import checks from "./enum-contracts.json" with { type: "json" };
 
@@ -87,5 +86,5 @@ export async function runEnumCheckCommand(args: readonly string[]): Promise<void
   const json = args.includes("--json");
   const report = await createEnumCheckReport();
   console.log(json ? JSON.stringify(report, null, 2) : formatEnumCheckText(report).trimEnd());
-  exit(report.status === "pass" ? 0 : 2);
+  process.exitCode = report.status === "pass" ? 0 : 2;
 }

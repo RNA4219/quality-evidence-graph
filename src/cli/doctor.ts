@@ -1,6 +1,5 @@
 import { readFile, stat } from "fs/promises";
 import { join, resolve } from "path";
-import { exit } from "process";
 import { collectReportTargets } from "./report.js";
 import { createSchemaCheckReport } from "./schema-check.js";
 import { distributionPath, readDistributionMetadata } from "./distribution.js";
@@ -227,5 +226,5 @@ export async function runDoctorCommand(args: readonly string[]): Promise<void> {
   const targets = args.filter((arg) => arg !== "--json");
   const report = await createDoctorReport(targets);
   console.log(json ? JSON.stringify(report, null, 2) : formatDoctorText(report).trimEnd());
-  exit(report.status === "fail" ? 1 : 0);
+  process.exitCode = report.status === "fail" ? 1 : 0;
 }

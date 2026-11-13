@@ -1,6 +1,5 @@
 import { mkdir, stat, writeFile } from "fs/promises";
 import { dirname, join, resolve } from "path";
-import { exit } from "process";
 import { CliError } from "./errors.js";
 import { upstreamInputContract } from "../input-contract.js";
 import { optionalStat } from "./file-errors.js";
@@ -187,6 +186,6 @@ export async function runInitCommand(args: readonly string[]): Promise<void> {
   if (results.some((result) => result.status === "skipped")) {
     console.log("Use --force to overwrite skipped files.");
   }
-  exit(0);
+  process.exitCode = 0;
 }
 

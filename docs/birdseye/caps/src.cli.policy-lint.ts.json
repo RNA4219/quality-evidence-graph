@@ -1,7 +1,7 @@
 {
   "id": "src/cli/policy-lint.ts",
   "role": "policy-lint-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG policy-lint-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -26,5 +26,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:81cbf662ad035967939672d639144c963af6ab729950f794e649c5dc4a02cf6d"
+  "contentHash": "sha256:4dcd0aff78f7301a6ce7e913bcac59da5e402724971d1e226c681093c228a944"
 }

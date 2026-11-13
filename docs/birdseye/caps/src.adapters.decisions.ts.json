@@ -1,7 +1,7 @@
 {
   "id": "src/adapters/decisions.ts",
   "role": "decisions",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG decisions の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [

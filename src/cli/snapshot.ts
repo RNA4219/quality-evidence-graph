@@ -1,6 +1,5 @@
 import { writeFile } from "fs/promises";
 import { join, relative } from "path";
-import { exit } from "process";
 import { collectReportTargets, createCiReport, type CiReport } from "./report.js";
 import { CliError } from "./errors.js";
 import { optionalText } from "./file-errors.js";
@@ -114,5 +113,5 @@ export async function runSnapshotCommand(args: readonly string[]): Promise<void>
   }
 
   const failed = results.some((result) => result.status === "missing" || result.status === "mismatch");
-  exit(failed ? 2 : 0);
+  process.exitCode = failed ? 2 : 0;
 }

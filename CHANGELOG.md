@@ -1,5 +1,12 @@
 # Changelog
 
+## 未リリース
+
+- CLIが出力の直後に`exit()`で終了していたため、別プロセスがパイプで受け取るとmacOSでは8,192バイトより後ろが欠けていた不具合を修正。全コマンドを`process.exitCode`での終了へ統一。exit codeの対応は変更なし。
+- source CLI・Action bundle・tarballへ共通のパイプ出力回帰テストと、`exit()`の再導入を検出するテストを追加。CIへ`portability (macos-24)`を追加。
+- git情報のない展開先（ZIPなど）で`npm test`が最後の`json-check`で失敗していたため、gitが使えない場合はディレクトリからJSONを列挙するよう修正。
+- package・CLI・Actionの版は0.4.1のまま。wire契約は0.2を維持。
+
 ## 0.4.1 - 2026-09-12 パッケージ
 
 - 0.4.0の未公開開発分とR1〜R28の受入済み改修をまとめ、package・CLI・Action・runtime metadataを0.4.1へ統一。

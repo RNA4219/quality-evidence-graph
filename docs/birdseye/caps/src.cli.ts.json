@@ -1,7 +1,7 @@
 {
   "id": "src/cli.ts",
   "role": "cli-entrypoint",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG cli-entrypoint の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -30,5 +30,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:5e44c30acac1a2734e2862792e725b2c4f50b69b58a49de56122b7772a266b31"
+  "contentHash": "sha256:88c9deeed3c55386cd7ff16607b7a97f3398272b93e89af81c97a291e5a61bf0"
 }

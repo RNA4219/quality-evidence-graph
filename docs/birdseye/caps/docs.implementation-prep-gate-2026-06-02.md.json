@@ -1,8 +1,9 @@
 {
   "id": "docs/implementation-prep-gate-2026-06-02.md",
   "role": "gate-record",
+  "generation": "00025",
   "public_api": [],
-  "summary": "implementation preparation を go、IPO controlled release を no_go と分離して再検収した record。",
+  "summary": "QEG gate-record の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
     "docs/project/tasks.codex.md"
   ],
@@ -10,12 +11,10 @@
     "docs/agent/HUB.codex.md"
   ],
   "risks": [
-    "実装準備 Go と release Go を混同すると未実装機能を release 可と誤認する"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "git ls-files docs/requirements.md",
-    "npm pack --dry-run --cache ./.npm-cache"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:fb8368d57c3af14dcf8ad78bfc18000ebbe841abb7029a428ba832bbd96e5bda"
 }

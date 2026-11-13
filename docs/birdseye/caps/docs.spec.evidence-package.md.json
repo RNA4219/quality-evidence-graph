@@ -1,10 +1,9 @@
 {
   "id": "docs/spec/evidence-package.md",
   "role": "ipo-spec",
-  "public_api": [
-    "EvidencePackage"
-  ],
-  "summary": "IPO controlled release 判定に必要な input artifact hash、QEG outputs、policy、waiver、approval evidence、manual evidence、record bundle を固定する。",
+  "generation": "00025",
+  "public_api": [],
+  "summary": "QEG ipo-spec の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [],
   "deps_in": [
     "docs/ipo-controlled-profile.md",
@@ -12,11 +11,10 @@
     "docs/spec/review-2026-06-03.md"
   ],
   "risks": [
-    "evidence package hash と approval evidence の不一致を見逃すと承認対象が固定できない"
+    "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
-    "docs/spec/acceptance.md TC-SPEC-04"
+    "npm test"
   ],
-  "generation": "00024",
   "contentHash": "sha256:47ea75c827f571570f6073280032a54afaaec2ed2d3d1729056ebe3d33d72221"
 }

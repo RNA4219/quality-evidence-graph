@@ -1,7 +1,7 @@
 {
   "id": "src/cli/doctor.ts",
   "role": "doctor-cli",
-  "generation": "00024",
+  "generation": "00025",
   "public_api": [],
   "summary": "QEG doctor-cli の契約・実装。関連sourceと受入試験を参照。",
   "deps_out": [
@@ -23,5 +23,5 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:85b6391c47911dd166702760758ce00ba7c5b2d9f0ad8b87ae8687c3068f60cb"
+  "contentHash": "sha256:5155e55992d5bc6caf550cc2e8b91fb4c72dc389c0378064b870e4d22b504d0e"
 }
