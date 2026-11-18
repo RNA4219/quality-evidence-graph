@@ -26,7 +26,7 @@ function nativePackages(metadata) {
       if (dependency.dep_kinds.some(edge => edge.kind !== "dev")) pending.push(dependency.pkg);
     }
   }
-  return metadata.packages.filter(pkg => pkg.id !== metadata.resolve.root && visited.has(pkg.id))
+  return metadata.packages.filter(pkg => pkg.source !== null && visited.has(pkg.id))
     .sort((a, b) => compare(a.name, b.name) || compare(a.version, b.version));
 }
 
@@ -73,14 +73,23 @@ function inheritedNotices(pkg, packages, byId) {
     return [{ file: "LICENSE", source: pkg.repository + "/blob/" + simdRevision + "/LICENSE",
       revision: simdRevision, text: readFileSync(join(root, "tools/licenses/nugine-simd-LICENSE.txt"), "utf8") }];
   }
+  if (pkg.repository === "https://github.com/napi-rs/napi-rs" && pkg.license === "MIT") {
+    const sha = revision(pkg);
+    // All three locked revisions use the same LICENSE blob, 7fe7e35eff46.
+    if (["cda88ea649a2e182e0b6f7ec9cb8a6db7758b47d", "a94cef33f62e74682963dd085e283f52dcec2600",
+      "d9cb526c15e63ba30e06b4d169068c9854180595"].includes(sha)) {
+      return [{ file: "LICENSE", source: pkg.repository + "/blob/" + sha + "/LICENSE",
+        revision: sha, text: readFileSync(join(root, "tools/licenses/napi-rs-LICENSE.txt"), "utf8") }];
+    }
+  }
   throw new Error("License text unavailable for " + pkg.name + "@" + pkg.version);
 }
 
-export function writeNativeNotices(executable) {
+export function writeNativeNotices(executable, manifest = "Cargo.toml", notices = "THIRD_PARTY_NOTICES.json") {
   const target = /^host:\s*(\S+)$/m.exec(run(process.env.RUSTC || "rustc", ["-vV"]))?.[1];
   if (!target) throw new Error("Could not determine the native Rust host target");
   const metadata = JSON.parse(run("cargo", ["metadata", "--locked", "--offline", "--format-version", "1",
-    "--manifest-path", join(root, "Cargo.toml"), "--filter-platform", target]));
+    "--manifest-path", join(root, manifest), "--filter-platform", target]));
   const packages = nativePackages(metadata);
   const byId = new Map(packages.map(pkg => [pkg.id, crateNotices(pkg)]));
   const texts = {};
@@ -95,7 +104,7 @@ export function writeNativeNotices(executable) {
     return { name: pkg.name, version: pkg.version, license: pkg.license ?? null,
       source: pkg.source, repository: pkg.repository, authors: pkg.authors, notices };
   });
-  const out = join(dirname(executable), "THIRD_PARTY_NOTICES.json");
+  const out = join(dirname(executable), notices);
   writeFileSync(out, JSON.stringify({ target, executable: executable.split(/[/\\]/).pop(),
     executableSha256: createHash("sha256").update(readFileSync(executable)).digest("hex"),
     crates, texts }, null, 2) + "\n");

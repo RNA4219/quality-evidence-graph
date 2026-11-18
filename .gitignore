@@ -1,5 +1,6 @@
 node_modules/
 /target/
+/npm-native/target/
 /native/
 dist/
 coverage/

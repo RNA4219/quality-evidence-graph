@@ -59,7 +59,7 @@ qeg report --json fixtures
 
 The CLI embeds its schemas and starter Action. Rust callers can use `quality_evidence_graph::gate::evaluate_gate` with the existing JSON wire contract.
 
-For the npm API, run `npm ci` and `npm run build`. The npm tarball includes the executable for the build platform. On a different OS or CPU, the bindings build the included Rust sources with Cargo on first use. The GitHub Action uses the Rust source and lockfile from its own revision. Self-hosted runners need Cargo and Bash.
+To build the npm API from source, run `npm ci` and `npm run build`. The npm tarball includes the CLI and a Node-API addon for the build platform. `evaluateGate()` calls Rust synchronously in the Node.js process. On platforms without bundled binaries, Cargo builds the included source on first use. The GitHub Action uses the Rust source and lockfile from its own revision. Self-hosted runners need Cargo and Bash.
 
 The npm commands below call the same Rust CLI.
 
