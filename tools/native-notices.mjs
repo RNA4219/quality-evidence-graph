@@ -99,5 +99,5 @@ export function writeNativeNotices(executable) {
   writeFileSync(out, JSON.stringify({ target, executable: executable.split(/[/\\]/).pop(),
     executableSha256: createHash("sha256").update(readFileSync(executable)).digest("hex"),
     crates, texts }, null, 2) + "\n");
-  console.log("Native notices: " + crates.length + " crates for " + target);
+  console.error("Native notices: " + crates.length + " crates for " + target);
 }

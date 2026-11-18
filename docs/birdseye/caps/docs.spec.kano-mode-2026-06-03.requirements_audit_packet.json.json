@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00029",
+  "generation": "00030",
   "deps_out": [
     "docs/spec/kano-mode-2026-06-03/kano.json"
   ],

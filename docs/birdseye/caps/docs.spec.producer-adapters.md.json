@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00029",
+  "generation": "00030",
   "deps_out": [
     "docs/spec/producer-schema-provenance.json",
     "src-rust/graph/ctg.rs",

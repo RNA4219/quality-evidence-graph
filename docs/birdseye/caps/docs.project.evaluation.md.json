@@ -11,7 +11,7 @@
     "npm run birdseye-check",
     "npm pack --dry-run --cache ./.npm-cache"
   ],
-  "generation": "00029",
+  "generation": "00030",
   "deps_out": [
     ".github/workflows/ci.yml",
     "docs/project/evidence-acceptance-status.md",

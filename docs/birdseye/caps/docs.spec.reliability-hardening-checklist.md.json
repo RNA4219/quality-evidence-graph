@@ -11,7 +11,7 @@
     "npm run birdseye-check",
     "git diff --check"
   ],
-  "generation": "00029",
+  "generation": "00030",
   "deps_out": [
     "docs/spec/reliability-extension.md",
     "docs/spec/reliability-hardening.md",

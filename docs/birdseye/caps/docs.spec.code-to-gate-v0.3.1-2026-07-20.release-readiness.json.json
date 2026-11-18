@@ -10,7 +10,7 @@
     "code-to-gate schema validate",
     "npm run json-check"
   ],
-  "generation": "00029",
+  "generation": "00030",
   "deps_out": [
     "docs/release/acceptance-2026-07-20-v0.3.1.md"
   ],

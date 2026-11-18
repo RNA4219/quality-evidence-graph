@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00029",
+  "generation": "00030",
   "deps_out": [],
   "deps_in": [
     "docs/evidence/remediation-2026-09-10/ci-validation.json",
