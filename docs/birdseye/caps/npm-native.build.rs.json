@@ -1,0 +1,16 @@
+{
+  "id": "npm-native/build.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "npm-native/build.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:fcbd1ff3f627a7553fa1704dc6f558998daff8bc256015c37aace62cc49ce584",
+  "generation": "00031",
+  "deps_out": [],
+  "deps_in": [
+    "npm-native/Cargo.toml"
+  ]
+}

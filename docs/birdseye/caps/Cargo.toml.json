@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:402e0663201610610040d06549fbd0dc873ed80bea3de6db6ca62d9e1cd8576b",
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "Cargo.lock",
     "build.rs",
@@ -21,6 +21,7 @@
     "README_EN.md",
     "README_JA.md",
     "docs/release-notes/2026-09-12-v0.4.1.md",
+    "npm-native/Cargo.toml",
     "src-rust/cli.rs"
   ]
 }

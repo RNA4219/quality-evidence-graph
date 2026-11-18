@@ -7,14 +7,16 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:80044a0c7f84ef17d925c1141ea603362960890860cdaa1ec6cdac0343256554",
-  "generation": "00030",
+  "contentHash": "sha256:55ce2ace5874bcf507b046a4226201c2ad792c313b38e1e0ff699f4dee07885c",
+  "generation": "00031",
   "deps_out": [
+    "npm-native/Cargo.toml",
     "src-rust/cli.rs"
   ],
   "deps_in": [
-    "bindings/api.mjs",
+    "bindings/addon.mjs",
     "bindings/cli.mjs",
+    "bindings/publication-worker.mjs",
     "tools/build-native.mjs"
   ]
 }

@@ -11,7 +11,7 @@
     "npm run enum-check",
     "npm run test:fixtures"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "docs/ipo-controlled-profile.md",
     "docs/spec/index.md",

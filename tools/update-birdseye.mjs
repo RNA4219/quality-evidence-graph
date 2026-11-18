@@ -29,6 +29,7 @@ async function walk(path) {
 export async function runtimeFiles() {
   return [
     "Cargo.toml", "Cargo.lock", "build.rs", "package.json", "tools/build-native.mjs", "tools/native-notices.mjs",
+    "npm-native/Cargo.toml", "npm-native/Cargo.lock", "npm-native/build.rs", ...await walk("npm-native/src"),
     "qeg-report-action/report.sh", "examples/transaction-probe.rs", "tests/native.rs",
     ...await walk("src-rust"), ...await walk("bindings"),
   ];
@@ -39,7 +40,12 @@ const connections = [
   ["Cargo.toml", "Cargo.lock"], ["Cargo.toml", "build.rs"], ["Cargo.toml", "src-rust/lib.rs"], ["Cargo.toml", "src-rust/main.rs"],
   ["src-rust/main.rs", "src-rust/cli.rs"], ["src-rust/assets.rs", "build.rs"], ["src-rust/runtime.rs", "schemas/gate-input.schema.json"],
   ["package.json", "bindings/cli.mjs"], ["package.json", "bindings/api.mjs"], ["package.json", "bindings/index.d.ts"],
-  ["bindings/cli.mjs", "bindings/native.mjs"], ["bindings/api.mjs", "bindings/native.mjs"], ["bindings/native.mjs", "src-rust/cli.rs"],
+  ["bindings/cli.mjs", "bindings/native.mjs"], ["bindings/api.mjs", "bindings/addon.mjs"], ["bindings/native.mjs", "src-rust/cli.rs"],
+  ["bindings/api.mjs", "bindings/publication-worker.mjs"], ["bindings/publication-worker.mjs", "bindings/native.mjs"],
+  ["bindings/addon.mjs", "bindings/native.mjs"], ["bindings/native.mjs", "npm-native/Cargo.toml"],
+  ["npm-native/Cargo.toml", "Cargo.toml"], ["npm-native/Cargo.toml", "npm-native/Cargo.lock"],
+  ["npm-native/Cargo.toml", "npm-native/build.rs"], ["npm-native/Cargo.toml", "npm-native/src/lib.rs"],
+  ["npm-native/src/lib.rs", "src-rust/cli.rs"],
   ["bindings/index.d.ts", "src/types.ts"], [".github/workflows/ci.yml", "Cargo.toml"], ["qeg-report-action/action.yml", "src-rust/cli.rs"],
   ["tools/birdseye-check.mjs", "tools/update-birdseye.mjs"],
   ["package.json", "tools/build-native.mjs"], ["tools/build-native.mjs", "bindings/native.mjs"],
@@ -64,6 +70,9 @@ const summaries = {
   "src-rust/record.rs": "判定、配置計画、グラフを監査用の証跡レコードへまとめる。",
   "src-rust/migration.rs": "consumerの旧入力を診断し、明示設定を使って移行する。",
   "bindings/api.mjs": "公開JavaScript APIの引数と返り値をRustランタイムへ接続する。",
+  "bindings/addon.mjs": "Node.jsプロセスにRustのNode-APIアドオンを読み込む。",
+  "bindings/publication-worker.mjs": "出力公開の各境界で呼び出し元のコールバック完了を待つ。",
+  "npm-native/src/lib.rs": "Node-APIの同期呼び出しと非同期タスクで共通のRust処理を実行する。",
   "bindings/cli.mjs": "npmのqegコマンドを起動する。",
   "bindings/native.mjs": "JavaScriptからRust実行ファイルを呼び出す。",
   "bindings/index.d.ts": "npm APIのTypeScript型を公開する。",

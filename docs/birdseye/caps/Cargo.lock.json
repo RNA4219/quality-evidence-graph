@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:1bdd0c5127459477ac7dd30ef2925c74af5cb76def22d06e648ea146af733c4e",
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [],
   "deps_in": [
     "Cargo.toml"

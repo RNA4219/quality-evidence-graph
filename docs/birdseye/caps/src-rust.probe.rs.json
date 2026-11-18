@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:e1cf51eb99598354a1249a6bbbb476ccc608e0daabef449d7624872c62f2d2fe",
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [],
   "deps_in": [
     "examples/transaction-probe.rs",

@@ -9,7 +9,7 @@
   "tests": [
     "npm run birdseye-check"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/requirements.md",

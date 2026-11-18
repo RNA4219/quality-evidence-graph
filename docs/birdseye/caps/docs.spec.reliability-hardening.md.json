@@ -13,7 +13,7 @@
     "npm run test:package",
     "npm run birdseye-check"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "docs/spec/reliability-extension.md",
     "docs/spec/reliability-hardening-checklist.md",

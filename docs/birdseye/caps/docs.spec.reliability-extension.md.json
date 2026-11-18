@@ -11,7 +11,7 @@
     "npm run schema-check",
     "npm run enum-check"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "docs/spec/operational-cli-extensions.md",
     "schemas/gate-policy.schema.json",
