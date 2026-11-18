@@ -7,10 +7,11 @@
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:9dd0ba88bed0416621168a37013c46a95056f3d6c477db8752eac03f50aa1c6a",
-  "generation": "00030",
+  "contentHash": "sha256:58454a3050f47358568a063e5afff7b8f48fc63209f79055b024b1b60edf3912",
+  "generation": "00031",
   "deps_out": [
-    "bindings/native.mjs"
+    "bindings/addon.mjs",
+    "bindings/publication-worker.mjs"
   ],
   "deps_in": [
     "package.json"

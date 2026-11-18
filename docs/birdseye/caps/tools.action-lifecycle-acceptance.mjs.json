@@ -9,7 +9,7 @@
   "tests": [
     "npm run test:release-lifecycle"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "qeg-report-action/action.yml",
     "schemas/action-lifecycle-evidence.schema.json"

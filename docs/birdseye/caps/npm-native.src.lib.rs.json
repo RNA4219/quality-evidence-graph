@@ -1,0 +1,18 @@
+{
+  "id": "npm-native/src/lib.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "Node-APIの同期呼び出しと非同期タスクで共通のRust処理を実行する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:7a73127b5f79bc70126aac2ad27b4cb9b865496ad0443deb9c6309d6ae0dd055",
+  "generation": "00031",
+  "deps_out": [
+    "src-rust/cli.rs"
+  ],
+  "deps_in": [
+    "npm-native/Cargo.toml"
+  ]
+}

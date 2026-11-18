@@ -7,8 +7,8 @@
   "tests": [
     "cargo test --locked"
   ],
-  "contentHash": "sha256:40304abd927c16d14cd9e736fd9c7c74325a90b1dbb6fdc072e9415f360cb430",
-  "generation": "00030",
+  "contentHash": "sha256:e0e71e37f256078819288ec742faf31c67b0f8bb989353fc9f787df0a32b7446",
+  "generation": "00031",
   "deps_out": [
     "Cargo.toml",
     "src-rust/action.rs",
@@ -33,6 +33,7 @@
   "deps_in": [
     "bindings/native.mjs",
     "docs/spec/remediation-2026-09-10.md",
+    "npm-native/src/lib.rs",
     "qeg-report-action/action.yml",
     "qeg-report-action/report.sh",
     "src-rust/lib.rs",

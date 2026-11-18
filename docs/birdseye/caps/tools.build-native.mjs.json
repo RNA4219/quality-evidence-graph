@@ -7,8 +7,8 @@
   "tests": [
     "cargo test --locked"
   ],
-  "contentHash": "sha256:f9fdd5233a75f9d71a8aeb25934bf8dd8b658b16ecbce59b1690d45d3a229d8b",
-  "generation": "00030",
+  "contentHash": "sha256:c7cbfb40bc795c77bf62849a95fd081d125f8c4d49a10a62ac74d6e2367cad49",
+  "generation": "00031",
   "deps_out": [
     "bindings/native.mjs"
   ],

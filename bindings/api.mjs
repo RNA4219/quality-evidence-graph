@@ -1,46 +1,60 @@
-import { spawnSync, spawn } from "node:child_process";
-import { createInterface } from "node:readline";
-import { nativeBinary, nativeEnv } from "./native.mjs";
+import { isAbsolute, resolve } from "node:path";
+import { Worker } from "node:worker_threads";
+import { addon, addonPath } from "./addon.mjs";
 
 export function invoke(method, ...args) {
-  const result = spawnSync(nativeBinary(), ["--api", method], {
-    input: JSON.stringify(args), encoding: "utf8", maxBuffer: Infinity, env: nativeEnv(),
-  });
-  if (result.error) throw result.error;
-  if (result.status !== 0) throw new Error(result.stderr.trim() || "QEG process failed");
-  return JSON.parse(result.stdout);
+  return JSON.parse(addon.invoke(method, JSON.stringify(args)));
 }
 
-export function invokeAsync(method, ...args) {
-  return new Promise((resolve, reject) => {
-    const proc = spawn(nativeBinary(), ["--api", method], {stdio: "pipe", env: nativeEnv()});
-    const output = [], errors = [];
-    proc.stdout.on("data", chunk => output.push(chunk));
-    proc.stderr.on("data", chunk => errors.push(chunk));
-    proc.once("error", reject);
-    proc.stdin.on("error", error => { if (error.code !== "EPIPE") reject(error); });
-    proc.once("close", code => {
-      if (code !== 0) return reject(new Error(Buffer.concat(errors).toString().trim() || "QEG process failed"));
-      try { resolve(JSON.parse(Buffer.concat(output).toString())); } catch (error) { reject(error); }
-    });
-    proc.stdin.end(JSON.stringify(args));
-  });
+function captureDirectory(directory) {
+  if (typeof directory !== "string" || directory === "") return directory;
+  if (process.platform === "win32") return resolve(directory);
+  // POSIX ではシンボリックリンクの後の .. をファイルシステムに解決させる。
+  return isAbsolute(directory) ? directory : process.cwd() + "/" + directory;
 }
 
-async function publishAtBoundaries(directory, files, callback) {
-  const proc = spawn(nativeBinary(), ["--api", "publishBoundaries"], {stdio: "pipe", env: nativeEnv()});
-  let errors = "";
-  proc.stderr.setEncoding("utf8").on("data", chunk => { errors += chunk; });
-  proc.stdin.on("error", error => { if (error.code !== "EPIPE") proc.destroy?.(error); });
-  const done = new Promise((resolve, reject) => { proc.once("error", reject); proc.once("close", resolve); });
-  const lines = createInterface({ input: proc.stdout });
-  proc.stdin.write(JSON.stringify([directory, [...files]]) + "\n");
-  for await (const line of lines) {
-    const boundary = JSON.parse(line);
-    try { await callback(boundary); proc.stdin.write("true\n"); }
-    catch (error) { proc.stdin.end(JSON.stringify(String(error)) + "\n"); break; }
+const directoryOperations = new Set([
+  "readPublishedOutputs", "publishFiles", "recoverOutputs", "planConsumerMigration", "applyConsumerMigration",
+  "loadRawArtifacts", "evaluateFixture", "verifyOutputManifest",
+]);
+
+export async function invokeAsync(method, ...args) {
+  // libuv のキューで待つ間に呼び出し元が process.chdir() しても同じ入力を開く。
+  if (directoryOperations.has(method)) args[0] = captureDirectory(args[0]);
+  if (method === "verifyEvidenceArtifacts" && typeof args[1]?.baseDir === "string") {
+    args[1] = { ...args[1], baseDir: captureDirectory(args[1].baseDir) };
   }
-  if (await done !== 0) throw new Error(errors.trim() || "Publishing outputs failed");
+  if (method === "writeOutputRecord" && typeof args[0]?.fixtureDir === "string") {
+    args[0] = { ...args[0], fixtureDir: captureDirectory(args[0].fixtureDir) };
+  }
+  return JSON.parse(await addon.invokeAsync(method, JSON.stringify(args)));
+}
+
+function publishAtBoundaries(directory, files, callback) {
+  const signal = new Int32Array(new SharedArrayBuffer(Int32Array.BYTES_PER_ELEMENT));
+  const worker = new Worker(new URL("./publication-worker.mjs", import.meta.url), {
+    execArgv: [],
+    workerData: { addonPath, request: JSON.stringify([captureDirectory(directory), [...files]]), signal },
+  });
+  return new Promise((resolve, reject) => {
+    worker.once("error", reject);
+    worker.once("exit", code => {
+      if (code === 0) resolve();
+      else reject(new Error("Publication worker exited with code " + code));
+    });
+    worker.on("message", async boundary => {
+      let accepted = false;
+      try {
+        await callback(boundary);
+        accepted = true;
+      } catch (error) {
+        try { worker.postMessage(String(error)); } catch { /* 呼び出し元が文字列化できない値を投げた場合 */ }
+      } finally {
+        Atomics.store(signal, 0, accepted ? 1 : -1);
+        Atomics.notify(signal, 0);
+      }
+    });
+  });
 }
 
 export const evaluateGate = input => invoke("evaluateGate", input);

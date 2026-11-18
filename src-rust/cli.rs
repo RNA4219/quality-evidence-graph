@@ -130,11 +130,15 @@ fn files_from(args: &Value) -> Result<Files> {
     let entries: Vec<(String, String)> = serde_json::from_value(args.clone())?;
     Ok(entries.into_iter().collect())
 }
+pub fn publish_api_with(args: &Value, boundary: impl FnMut(&str) -> Result<()>) -> Result<()> {
+    ensure!(args.is_array(), "Invalid API request");
+    storage::publish_with(Path::new(s(&args[0])), &files_from(&args[1])?, boundary)
+}
 fn publish_boundaries() -> Result<i32> {
     let stdin = io::stdin();
     let mut lines = stdin.lock().lines();
     let a: Value = serde_json::from_str(&lines.next().context("Missing request")??)?;
-    storage::publish_with(Path::new(s(&a[0])), &files_from(&a[1])?, |boundary| {
+    publish_api_with(&a, |boundary| {
         println!("{}", json!(boundary));
         io::stdout().flush()?;
         // 親プロセスが終了した場合は、プロセス強制終了と同じジャーナルを残す。
@@ -151,7 +155,14 @@ fn api(method: &str) -> Result<i32> {
     if method == "publishBoundaries" {
         return publish_boundaries();
     }
-    let a: Value = serde_json::from_reader(io::stdin().lock())?;
+    let args: Value = serde_json::from_reader(io::stdin().lock())?;
+    let value = dispatch_api(method, &args)?;
+    let mut out = io::BufWriter::new(io::stdout().lock());
+    serde_json::to_writer(&mut out, &value)?;
+    out.flush()?;
+    Ok(0)
+}
+pub fn dispatch_api(method: &str, a: &Value) -> Result<Value> {
     ensure!(a.is_array(), "Invalid API request");
     let dir = || Path::new(s(&a[0]));
     let v = match method {
@@ -197,17 +208,12 @@ fn api(method: &str) -> Result<i32> {
             Value::Null
         }
         "verifyOutputManifest" => commands::verify_output_manifest(dir())?,
-        "normalizeStatus" | "shellStatus" | "statusAliases" => {
-            commands::status_for_api(method, &a)?
-        }
+        "normalizeStatus" | "shellStatus" | "statusAliases" => commands::status_for_api(method, a)?,
         "timestampNanos" => json!(crate::common::timestamp_nanos(&a[0]).map(|t| t.to_string())),
         "validateWaiver" => gate::validate_waiver(&a[0], &a[1], &a[2]),
         _ => bail!("Unknown API operation: {method}"),
     };
-    let mut out = io::BufWriter::new(io::stdout().lock());
-    serde_json::to_writer(&mut out, &v)?;
-    out.flush()?;
-    Ok(0)
+    Ok(v)
 }
 pub fn run(args: Vec<String>) -> Result<i32> {
     let Some((command, args)) = args.split_first() else {

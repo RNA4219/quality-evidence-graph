@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "qeg-report-action/report.sh",
     "src-rust/cli.rs",

@@ -10,7 +10,7 @@
     "npm run schema-check",
     "npm run test:release-lifecycle"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "tools/action-lifecycle-acceptance.mjs"
   ],

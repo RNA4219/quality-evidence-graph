@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { mkdtemp, readFile, writeFile, cp } from "node:fs/promises";
+import { mkdtemp, readFile, writeFile, cp, rename } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -26,6 +26,18 @@ if (!tarball) {
 const installed = spawnSync(process.execPath, [npmCli, "install", tarball, "--prefix", temp, "--ignore-scripts", "--no-audit", "--no-fund", "--prefer-offline", "--cache", npmCache], { encoding: "utf-8" });
 assert.equal(installed.status, 0, installed.stderr || installed.stdout);
 const packageRoot = join(temp, "node_modules", "@quality-harness", "quality-evidence-graph");
+const nativeCli = join(packageRoot, "native", process.platform + "-" + process.arch, process.platform === "win32" ? "qeg.exe" : "qeg");
+const apiConsumer = join(temp, "installed-api.mjs");
+await cp(new URL("./helpers/installed-api.mjs", import.meta.url), apiConsumer);
+await rename(nativeCli, nativeCli + ".disabled");
+try {
+  const api = spawnSync(process.execPath, [apiConsumer, packageRoot], {
+    cwd: temp, env: { ...process.env, PATH: "" }, encoding: "utf8",
+  });
+  assert.equal(api.status, 0, api.stderr || api.stdout);
+} finally {
+  await rename(nativeCli + ".disabled", nativeCli);
+}
 const qegBin = join(temp, "node_modules", ".bin", process.platform === "win32" ? "qeg.cmd" : "qeg");
 function runQeg(args) {
   if (process.platform === "win32") {

@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [
     "tests/helpers/cli-boundary-matrix.mjs",
     "tests/helpers/manual-governance-matrix.mjs"

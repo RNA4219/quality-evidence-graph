@@ -1,6 +1,6 @@
 import { chmod, copyFile, mkdir, writeFile } from "node:fs/promises";
 import { dirname, join, relative } from "node:path";
-import { buildNative, packagedBinary } from "../bindings/native.mjs";
+import { buildAddon, buildNative, packagedAddon, packagedBinary } from "../bindings/native.mjs";
 import { writeNativeNotices } from "./native-notices.mjs";
 
 const binary = buildNative();
@@ -8,6 +8,8 @@ await mkdir(dirname(packagedBinary), { recursive: true });
 await copyFile(binary, packagedBinary);
 await chmod(packagedBinary, 0o755);
 writeNativeNotices(packagedBinary);
+await copyFile(buildAddon(), packagedAddon);
+writeNativeNotices(packagedAddon, "npm-native/Cargo.toml", "ADDON_THIRD_PARTY_NOTICES.json");
 
 const modules = {
   "index.js": ["api", "evaluateGate, getExitCode, isGateEligibleTestEvidence, validateGateInput, verifyEvidenceArtifacts, validateOutput, createRecordArtifacts, upstreamInputContract, UPSTREAM_REQUIRED_ARTIFACTS, buildGraph, placeTests, PLACEMENT_LAYERS, readPublishedOutputs, recoverOutputs, publishFiles, planConsumerMigration, applyConsumerMigration, parseProducerArtifact"],

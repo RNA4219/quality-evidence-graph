@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [],
   "deps_in": [
     "docs/project/cli-boundary-fixes-2026-09-11.md"

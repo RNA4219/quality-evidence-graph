@@ -9,7 +9,7 @@
   "tests": [
     "npm run test:package"
   ],
-  "generation": "00030",
+  "generation": "00031",
   "deps_out": [],
   "deps_in": [
     "tests/package-smoke.mjs"

@@ -1,0 +1,16 @@
+{
+  "id": "npm-native/Cargo.lock",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "npm-native/Cargo.lock の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:e63658e66c16122a2a7a820ce6e064ba534ca8608fc0ab9deb72528f4b58a91f",
+  "generation": "00031",
+  "deps_out": [],
+  "deps_in": [
+    "npm-native/Cargo.toml"
+  ]
+}
