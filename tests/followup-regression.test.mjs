@@ -4,8 +4,8 @@ import { cp, mkdir, mkdtemp, readFile, unlink, writeFile } from 'node:fs/promise
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { execFileSync, fork, spawnSync } from 'node:child_process';
-import { once } from 'node:events';
+import { execFileSync, spawnSync } from 'node:child_process';
+import { pausedProbe, finishProbe } from './helpers/command-transaction-child.mjs';
 import * as api from '../dist/index.js';
 import { createRawProducerFixture, persistRawFixture } from './helpers/raw-producer-fixture.mjs';
 const root = resolve('.');
@@ -29,17 +29,10 @@ async function configuration(directory, policy, digit = 'f') {
   const path = join(directory, 'migration-config.json'); await writeFile(path, json(config));
   return { config, path, original };
 }
-async function paused(mode, directory, configPath) {
-  const child = fork(join(root, 'tests/helpers/command-transaction-child.mjs'), [mode, directory, configPath], { cwd: root, stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
-  let stderr = ''; child.stderr.on('data', b => { stderr += b; }); child.stdout.resume();
-  await new Promise((accept, reject) => {
-    const timeout = setTimeout(() => { child.kill(); reject(new Error('Boundary timeout: ' + stderr)); }, 15000);
-    child.once('message', () => { clearTimeout(timeout); accept(); });
-    child.once('exit', code => { clearTimeout(timeout); reject(new Error('Child exit ' + code + ': ' + stderr)); });
-  });
-  return child;
+function paused(mode, directory, configPath) {
+  return pausedProbe([mode, directory, configPath], mode);
 }
-async function kill(child) { const exited = once(child, 'exit'); child.kill('SIGKILL'); await exited; }
+const kill = child => finishProbe(child, true);
 
 test('R6: recovery and repeated recovery preserve native edits after every producer generation', async t => {
   for (const producer of ['record', 'migration', 'place-tests', 'build-graph']) await t.test(producer, async () => {

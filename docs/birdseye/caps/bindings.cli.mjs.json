@@ -1,0 +1,18 @@
+{
+  "id": "bindings/cli.mjs",
+  "role": "npm-binding",
+  "public_api": [],
+  "summary": "npmのqegコマンドを起動する。",
+  "risks": [],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:68845fea8954b94ebfcf8279e9bf0e66b5427fc8c5344a6462e0bab0d815a4b6",
+  "generation": "00029",
+  "deps_out": [
+    "bindings/native.mjs"
+  ],
+  "deps_in": [
+    "package.json"
+  ]
+}

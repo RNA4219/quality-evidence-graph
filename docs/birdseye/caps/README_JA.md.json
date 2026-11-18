@@ -1,10 +1,17 @@
 {
   "id": "README_JA.md",
   "role": "human-overview-ja",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG human-overview-ja の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00029",
   "deps_out": [
+    "Cargo.toml",
     "docs/agent/HUB.codex.md",
     "docs/release-notes/2026-09-12-v0.4.1.md",
     "qeg-report-action/action.yml"
@@ -14,11 +21,5 @@
     "docs/agent/HUB.codex.md",
     "docs/release-notes/2026-06-03-controlled-gate.md"
   ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
-  ],
-  "contentHash": "sha256:f0569ac10b647f39b919d6e448537617d4a7666b0afd585e8a29ef9c218b8e45"
+  "contentHash": "sha256:0ce4ce34ca268b67921108612340c2974d78c088ff0f05b9bfaecf1a0fbacaa7"
 }

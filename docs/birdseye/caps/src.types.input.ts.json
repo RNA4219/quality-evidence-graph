@@ -1,9 +1,15 @@
 {
   "id": "src/types/input.ts",
   "role": "input",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG input の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00029",
   "deps_out": [
     "src/types/evidence.ts",
     "src/types/gate.ts",
@@ -12,12 +18,6 @@
   ],
   "deps_in": [
     "src/types.ts"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:f8c16e627590834adc25df7a9c36478fa303fa689eb23c60558f0c27f1f755a8"
 }

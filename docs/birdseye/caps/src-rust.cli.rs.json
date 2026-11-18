@@ -1,0 +1,41 @@
+{
+  "id": "src-rust/cli.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "qegコマンドとnpmからのAPI呼び出しをRust実装に渡す。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:40304abd927c16d14cd9e736fd9c7c74325a90b1dbb6fdc072e9415f360cb430",
+  "generation": "00029",
+  "deps_out": [
+    "Cargo.toml",
+    "src-rust/action.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/dq.json",
+    "src-rust/commands/normalize.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/common.rs",
+    "src-rust/gate.rs",
+    "src-rust/graph.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/graph/placement.rs",
+    "src-rust/migration.rs",
+    "src-rust/record.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "bindings/native.mjs",
+    "docs/spec/remediation-2026-09-10.md",
+    "qeg-report-action/action.yml",
+    "qeg-report-action/report.sh",
+    "src-rust/lib.rs",
+    "src-rust/main.rs"
+  ]
+}

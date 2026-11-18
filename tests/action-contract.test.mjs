@@ -6,11 +6,16 @@ import { resolve } from "node:path";
 
 const action = await readFile("qeg-report-action/action.yml", "utf-8");
 const ci = await readFile(".github/workflows/ci.yml", "utf-8");
-const initSource = await readFile("src/cli/init.ts", "utf-8");
+const initSource = await readFile("src-rust/commands/distribution.rs", "utf-8");
+const actionScript = await readFile("qeg-report-action/report.sh", "utf-8");
+const actionSummary = await readFile("src-rust/action.rs", "utf-8");
 const actionBundlePath = resolve("qeg-report-action", "dist", "cli.mjs");
 
 test("external Action uses its tagged CLI bundle and is fail-closed by default", () => {
-  assert.match(action, /QEG_ACTION_CLI: \$\{\{ github\.action_path \}\}\/dist\/cli\.mjs/);
+  assert.match(action, /QEG_ACTION_PATH: \$\{\{ github\.action_path \}\}/);
+  assert.match(actionScript, /cargo run --quiet --locked --manifest-path/);
+  assert.match(actionScript, /cd "\$QEG_ACTION_PATH\/\.\."/);
+  assert.match(actionScript, /\$QEG_DISTRIBUTION_ROOT\/Cargo\.toml/);
   assert.match(action, /report-command:[\s\S]*?default: ""/);
   assert.doesNotMatch(action, /@quality-harness\/quality-evidence-graph@/);
   assert.match(action, /enforce:[\s\S]*?default: "true"/);
@@ -31,8 +36,9 @@ test("Action uploads diagnostics before enforcing the verdict", () => {
 });
 
 test("optional preflight failures become report errors", () => {
-  assert.match(action, /ACTION_PREFLIGHT_FAILED/);
-  assert.match(action, /report_exit=1/);
+  assert.match(actionScript, /__action-summary/);
+  assert.match(actionSummary, /ACTION_PREFLIGHT_FAILED/);
+  assert.match(actionSummary, /exit = 1/);
 });
 
 test("self CI exercises the bundled Action in the Node matrix", () => {

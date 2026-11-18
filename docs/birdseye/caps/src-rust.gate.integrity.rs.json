@@ -1,0 +1,23 @@
+{
+  "id": "src-rust/gate/integrity.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/gate/integrity.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:cd6b7f07cc4d740fe2e58d9af11f1e74f92352f55b89333a3d996add6db874ce",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/gate.rs",
+    "src-rust/graph.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/spec/governance-consistency.md",
+    "docs/spec/remediation-2026-09-10.md",
+    "src-rust/gate.rs"
+  ]
+}

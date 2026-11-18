@@ -1,0 +1,28 @@
+{
+  "id": "src-rust/evidence.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "参照された証跡の存在、リビジョン、ハッシュを検証する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:7c4482df8afa8fe9194e0f659fd7764e7e47d44167c10d1c7c2902a75e97c00e",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/gate/execution.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/probe.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/spec/reliability-extension.md",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/reliability.rs",
+    "src-rust/lib.rs",
+    "src-rust/migration.rs",
+    "src-rust/runtime.rs"
+  ]
+}

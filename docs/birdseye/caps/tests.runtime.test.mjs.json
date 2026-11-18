@@ -1,20 +1,20 @@
 {
   "id": "tests/runtime.test.mjs",
   "role": "runtime-contract-tests",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG runtime-contract-tests の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [
-    "src/gate/test-evidence.ts"
-  ],
-  "deps_in": [
-    "docs/spec/reliability-hardening.md"
-  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
+  ],
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/gate/coverage.rs"
+  ],
+  "deps_in": [
+    "docs/spec/reliability-hardening.md"
   ],
   "contentHash": "sha256:88640bcc8f45394fa9ecb9738b732a755423fb8014715c59530b69ac9b1ccb92"
 }

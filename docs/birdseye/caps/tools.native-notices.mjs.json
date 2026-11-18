@@ -1,0 +1,14 @@
+{
+  "id": "tools/native-notices.mjs",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "tools/native-notices.mjs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:9039c89a508d13f91e7113ffad27501a807a5d0d9afb6b25173d877c035b4409",
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": []
+}

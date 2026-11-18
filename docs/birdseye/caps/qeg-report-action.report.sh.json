@@ -1,0 +1,18 @@
+{
+  "id": "qeg-report-action/report.sh",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "qeg-report-action/report.sh の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:5fa2bc2f200b01d4f3a314d7dad9656ddeea5799eab8183820907c74edb8a9ec",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/cli.rs"
+  ],
+  "deps_in": [
+    "qeg-report-action/action.yml"
+  ]
+}

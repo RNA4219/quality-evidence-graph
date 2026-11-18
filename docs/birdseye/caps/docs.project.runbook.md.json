@@ -1,9 +1,15 @@
 {
   "id": "docs/project/runbook.md",
   "role": "operations",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG operations の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00029",
   "deps_out": [
     ".github/workflows/ci.yml",
     "docs/project/evaluation.md",
@@ -12,12 +18,10 @@
     "docs/release-notes/2026-09-12-v0.4.1.md",
     "docs/spec/operational-cli-extensions.md",
     "qeg-report-action/action.yml",
-    "src/cli/baseline.ts",
-    "src/cli/check.ts",
-    "src/cli/evidence-verify.ts",
-    "src/cli/policy-lint.ts",
-    "src/cli/report.ts",
-    "src/cli/repro-bundle.ts"
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/report.rs"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
@@ -26,12 +30,6 @@
     "docs/spec/gate-acceptance-2026-06-03.md",
     "docs/spec/implementation-gate-2026-06-03.md",
     "docs/spec/review-2026-06-03.md"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:84e43fb5cd9f337e9dd82390430be44ba8ea320b97d90b01e5379802d9609e28"
 }

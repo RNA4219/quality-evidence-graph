@@ -49,11 +49,19 @@ QEG is not just a test management tool. It is a control layer for quality decisi
 
 ## CLI Usage
 
-Build first:
+Install the stable Rust toolchain and run these commands from the repository root.
 
 ```sh
-npm run build
+cargo install --locked --path .
+qeg gate fixtures/positive-release-go
+qeg report --json fixtures
 ```
+
+The CLI embeds its schemas and starter Action. Rust callers can use `quality_evidence_graph::gate::evaluate_gate` with the existing JSON wire contract.
+
+For the npm API, run `npm ci` and `npm run build`. The npm tarball includes the executable for the build platform. On a different OS or CPU, the bindings build the included Rust sources with Cargo on first use. The GitHub Action uses the Rust source and lockfile from its own revision. Self-hosted runners need Cargo and Bash.
+
+The npm commands below call the same Rust CLI.
 
 Validate a fixture:
 

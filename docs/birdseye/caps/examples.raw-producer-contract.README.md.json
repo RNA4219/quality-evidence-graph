@@ -1,16 +1,16 @@
 {
   "id": "examples/raw-producer-contract/README.md",
   "role": "README",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG README の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": [],
   "contentHash": "sha256:c62d7807cacf1be1a025a6499653a0c4e2a6d536046ed025e208b7313e6c7915"
 }

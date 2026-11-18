@@ -1,0 +1,24 @@
+{
+  "id": "src-rust/graph/manual.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/graph/manual.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:4189d95767567f9f8f5f43adb7bd97f7745fe94d141b7a1e7d6a798b65e28ee0",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src-rust/graph/adapter.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+    "docs/spec/evidence-acceptance-standard.md",
+    "docs/spec/producer-adapters.md",
+    "src-rust/graph.rs",
+    "src-rust/graph/links.rs"
+  ]
+}

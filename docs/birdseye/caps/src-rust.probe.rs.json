@@ -1,0 +1,19 @@
+{
+  "id": "src-rust/probe.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/probe.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:e1cf51eb99598354a1249a6bbbb476ccc608e0daabef449d7624872c62f2d2fe",
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": [
+    "examples/transaction-probe.rs",
+    "src-rust/evidence.rs",
+    "src-rust/lib.rs",
+    "src-rust/storage.rs"
+  ]
+}

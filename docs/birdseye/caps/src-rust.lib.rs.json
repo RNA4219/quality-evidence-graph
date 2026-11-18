@@ -1,0 +1,35 @@
+{
+  "id": "src-rust/lib.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "品質ゲート、グラフ構築、証跡処理のRust APIを公開する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:028569a27be118a6b56dec5b6d44a752df086e33335cc8d1cda646387d7f5765",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/action.rs",
+    "src-rust/assets.rs",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/common.rs",
+    "src-rust/evidence.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/graph.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/graph/placement.rs",
+    "src-rust/migration.rs",
+    "src-rust/probe.rs",
+    "src-rust/record.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "Cargo.toml",
+    "tests/native.rs"
+  ]
+}

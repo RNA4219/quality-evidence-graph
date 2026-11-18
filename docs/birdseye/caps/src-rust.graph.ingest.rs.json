@@ -1,0 +1,26 @@
+{
+  "id": "src-rust/graph/ingest.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/graph/ingest.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:2db173ffbac4f179ee4e6e2138f6ff3c358e8b51502fc0a3a91a1c3eb69eb12f",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/common.rs",
+    "src-rust/record.rs",
+    "src-rust/runtime.rs",
+    "src/adapters/producer-schemas.json",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src-rust/cli.rs",
+    "src-rust/evidence.rs",
+    "src-rust/graph.rs",
+    "src-rust/lib.rs"
+  ]
+}

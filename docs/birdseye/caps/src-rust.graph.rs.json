@@ -1,0 +1,35 @@
+{
+  "id": "src-rust/graph.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "producerの入力をグラフのノードとエッジへ変換する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:a03bfdf99b56b7aba5cfff6b78fb615ab8ab8681f3bb335c9a0e8fca25646505",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src-rust/graph/adapter.rs",
+    "src-rust/graph/ctg.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/graph/links.rs",
+    "src-rust/graph/manual.rs",
+    "src-rust/graph/placement.rs",
+    "src-rust/graph/rand.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/review-fixes-2026-09-11.md",
+    "docs/spec/remediation-2026-09-10.md",
+    "src-rust/cli.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/gate/execution.rs",
+    "src-rust/gate/integrity.rs",
+    "src-rust/gate/manual.rs",
+    "src-rust/lib.rs"
+  ]
+}

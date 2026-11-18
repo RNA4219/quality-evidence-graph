@@ -1,16 +1,18 @@
 {
   "id": "schemas/gate-input.schema.json",
   "role": "top-level-runtime-schema",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG top-level-runtime-schema の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
+  ],
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": [
+    "src-rust/runtime.rs"
   ],
   "contentHash": "sha256:782d530d4832e34caeec5d97f9784cefc0490d6cc14e86f30e3accf6487fd72c"
 }

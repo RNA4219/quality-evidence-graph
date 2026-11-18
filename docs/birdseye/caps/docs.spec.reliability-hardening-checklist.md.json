@@ -1,9 +1,17 @@
 {
   "id": "docs/spec/reliability-hardening-checklist.md",
   "role": "reliability-resilience-hardening-checklist",
-  "generation": "00025",
   "public_api": [],
   "summary": "Reliability / Resilience hardening の実装、fixture、local validation、Node 20 / 24 CI 証跡チェックリスト。",
+  "risks": [
+    "証跡なしの完了扱い、古い commit の CI 成功の流用、fixture を real acceptance と誤認する"
+  ],
+  "tests": [
+    "npm run test:fixtures",
+    "npm run birdseye-check",
+    "git diff --check"
+  ],
+  "generation": "00029",
   "deps_out": [
     "docs/spec/reliability-extension.md",
     "docs/spec/reliability-hardening.md",
@@ -13,14 +21,6 @@
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/spec/index.md",
     "docs/spec/reliability-hardening.md"
-  ],
-  "risks": [
-    "証跡なしの完了扱い、古い commit の CI 成功の流用、fixture を real acceptance と誤認する"
-  ],
-  "tests": [
-    "npm run test:fixtures",
-    "npm run birdseye-check",
-    "git diff --check"
   ],
   "contentHash": "sha256:ea4ca2c78f1e7698e26b501f5d0f098c589c22e35386ad041671cddc7f66ba2f"
 }

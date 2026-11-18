@@ -3,10 +3,14 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-      "@quality-harness/quality-evidence-graph": ["../../src/index.ts"]
+      "@quality-harness/quality-evidence-graph": [
+        "../../bindings/index.d.ts"
+      ]
     },
     "rootDir": "../..",
     "noEmit": true
   },
-  "include": ["contract.ts"]
+  "include": [
+    "contract.ts"
+  ]
 }

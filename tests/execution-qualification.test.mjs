@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import fs, { readFile, writeFile, unlink } from 'node:fs/promises';
-import { syncBuiltinESMExports } from 'node:module';
+import { readFile, writeFile, unlink } from 'node:fs/promises';
+import { deniedEvidence } from './helpers/command-transaction-child.mjs';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import * as api from '../dist/index.js';
@@ -132,11 +132,11 @@ test('EAC TC-15: raw missing, modified, unreadable, escaped path and semanticall
     if (mode === 'reference') f.executions[0].evidenceRefs[0].path = 'execution/missing.json';
     expectDq(await gate(f, { strict: false }), 'DQ-06');
   });
-  const f = await executionFixture(); const original = fs.readFile; const path = join(f.directory, f.executions[0].execution.rawArtifactRef.path);
-  const mock = t.mock.method(fs, 'readFile', async (...args) => { if (String(args[0]) === path) throw Object.assign(new Error('fixture denied'), { code: 'EACCES' }); return original(...args); });
-  syncBuiltinESMExports();
-  try { const report = await api.verifyEvidenceArtifacts(f.input, { baseDir: f.directory }); assert.ok(report.items.some(i => i.code === 'IO_ERROR' && i.message.includes('Cannot read'))); expectDq(api.evaluateGate({ ...f.input, evidenceVerification: report }), 'DQ-06'); }
-  finally { mock.mock.restore(); syncBuiltinESMExports(); }
+  const f = await executionFixture();
+  const path = join(f.directory, f.executions[0].execution.rawArtifactRef.path);
+  const report = deniedEvidence(f.input, f.directory, 'before-read', path);
+  assert.ok(report.items.some(i => i.code === 'IO_ERROR' && i.message.includes('Cannot read')));
+  expectDq(api.evaluateGate({ ...f.input, evidenceVerification: report }), 'DQ-06');
 });
 
 test('EAC TC-16/17/18: explicit history, planning, fingerprint reuse and wall clock invariance', async t => {

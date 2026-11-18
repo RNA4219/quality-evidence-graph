@@ -1,0 +1,22 @@
+{
+  "id": "src-rust/graph/links.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/graph/links.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:1ab34a85909c4b4752b9faddabfcb8f404b390125fe26e464fe08d3771876b1f",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src-rust/graph/adapter.rs",
+    "src-rust/graph/manual.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src-rust/graph.rs",
+    "src-rust/graph/placement.rs"
+  ]
+}

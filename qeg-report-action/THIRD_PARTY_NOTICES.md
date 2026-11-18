@@ -1,6 +1,6 @@
 # Third-party notices
 
-The bundled QEG CLI includes the following runtime dependencies. Their complete license texts are stored in `licenses/`.
+The npm package includes `native/<platform>-<arch>/THIRD_PARTY_NOTICES.json` beside each Rust executable. It lists the resolved Cargo crates, their versions, sources, license expressions, and the full notice texts for that build. The following notices are retained for the JavaScript CLI distributed in earlier releases.
 
 | Component | Version | License | License file |
 | --- | --- | --- | --- |
@@ -10,7 +10,7 @@ The bundled QEG CLI includes the following runtime dependencies. Their complete 
 | json-schema-traverse | 1.0.0 | MIT | `licenses/json-schema-traverse.txt` |
 | require-from-string | 2.0.2 | MIT | `licenses/require-from-string.txt` |
 
-This notice applies to `qeg-report-action/dist/cli.mjs`. QEG's own license remains in the repository root `LICENSE`.
+QEG's own license is in the repository root `LICENSE`.
 
 The bundle also includes version-pinned producer schemas, separately licensed from QEG:
 

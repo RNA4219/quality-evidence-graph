@@ -1,0 +1,31 @@
+{
+  "id": "src-rust/gate/coverage.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/gate/coverage.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:d4286941eafe9d44cc40ce66679827f027eb2e4d47f8e1cdcb71f222c9c4583a",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/gate.rs",
+    "src-rust/graph.rs",
+    "src-rust/graph/placement.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/evidence/evidence-acceptance-2026-09-10/baseline-observations.json",
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/requirements.md",
+    "docs/spec/evidence-acceptance-standard.md",
+    "docs/spec/gate-contract-consistency.md",
+    "docs/spec/governance-consistency.md",
+    "docs/spec/manual-evidence-and-review.md",
+    "src-rust/gate.rs",
+    "src-rust/lib.rs",
+    "src-rust/runtime.rs",
+    "tests/runtime.test.mjs"
+  ]
+}

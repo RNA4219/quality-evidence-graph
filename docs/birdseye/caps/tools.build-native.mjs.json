@@ -1,0 +1,18 @@
+{
+  "id": "tools/build-native.mjs",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "tools/build-native.mjs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:f9fdd5233a75f9d71a8aeb25934bf8dd8b658b16ecbce59b1690d45d3a229d8b",
+  "generation": "00029",
+  "deps_out": [
+    "bindings/native.mjs"
+  ],
+  "deps_in": [
+    "package.json"
+  ]
+}

@@ -2,6 +2,17 @@
 
 `Quality Evidence Graph` は、仕様、実装差分、リスク、テスト配置、実行証跡、Gate 判定を 1 つの証跡グラフとして扱う local-first な品質ゲート基盤です。
 
+## Rust版を実行する
+
+Rustの安定版とCargoがあれば、次のコマンドで実行できます。
+
+```sh
+cargo run --locked --release -- gate fixtures/positive-release-go
+cargo test --locked
+```
+
+`cargo install --locked --path .` で `qeg` をインストールできます。CLI、npm API、GitHub Actionは同じRust実装で判定します。npm APIのビルドと配布方法は [日本語の利用手順](README_JA.md#cli-の使い方) を参照してください。
+
 人間向けの概要は次を読んでください。
 
 - 日本語: [README_JA.md](README_JA.md)

@@ -1,9 +1,15 @@
 {
   "id": "schemas/qeg.bundle.schema.json",
   "role": "schema",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG schema の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00029",
   "deps_out": [
     "schemas/quality-evidence-record.schema.json"
   ],
@@ -11,12 +17,6 @@
     "docs/spec/reliability-extension.md",
     "schemas/shared-defs.schema.json",
     "src/types/graph.ts"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:1a390a07172070cca50931cde279b8d24f42bf5b97c09d5da124d4f20902bb06"
 }

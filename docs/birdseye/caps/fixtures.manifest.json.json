@@ -1,9 +1,15 @@
 {
   "id": "fixtures/manifest.json",
   "role": "fixture-manifest",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG fixture-manifest の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00029",
   "deps_out": [],
   "deps_in": [
     "docs/project/evaluation.md",
@@ -12,12 +18,6 @@
     "docs/spec/reliability-hardening-checklist.md",
     "docs/spec/reliability-hardening.md",
     "tests/fixture-regression.mjs"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:77624490217532f94450967b045f50ed037468882d17809b106a2158c922a8f3"
 }

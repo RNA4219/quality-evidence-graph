@@ -1,0 +1,36 @@
+{
+  "id": "src-rust/common.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/common.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:ad1963374c9179350f421e7636cfcdfa5fecc0b36fc7280a2eb4f7c6fdbbf067",
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": [
+    "docs/spec/governance-consistency.md",
+    "src-rust/action.rs",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/normalize.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/execution.rs",
+    "src-rust/graph.rs",
+    "src-rust/graph/adapter.rs",
+    "src-rust/graph/ctg.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/graph/links.rs",
+    "src-rust/graph/manual.rs",
+    "src-rust/graph/placement.rs",
+    "src-rust/graph/rand.rs",
+    "src-rust/lib.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs"
+  ]
+}

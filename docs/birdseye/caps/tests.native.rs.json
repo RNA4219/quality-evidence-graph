@@ -1,0 +1,16 @@
+{
+  "id": "tests/native.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "tests/native.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:a371cc8c0d2113471d775429178c5d96a6e0f72d830429eac3ee849c75aec65e",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/lib.rs"
+  ],
+  "deps_in": []
+}

@@ -1,0 +1,31 @@
+{
+  "id": "src-rust/storage.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "世代ごとの証跡を保存し、並行書き込みと中断復旧を制御する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:b4303c8c7cdb4c4513b825e6676f7f8c351fec809ceb454dd062973a3f358597",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/common.rs",
+    "src-rust/probe.rs"
+  ],
+  "deps_in": [
+    "docs/project/followup-fixes-2026-09-11.md",
+    "docs/project/review-fixes-2026-09-11.md",
+    "docs/spec/evidence-acceptance-standard.md",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/select.rs",
+    "src-rust/lib.rs",
+    "src-rust/migration.rs",
+    "src-rust/record.rs",
+    "src-rust/runtime.rs"
+  ]
+}

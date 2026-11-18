@@ -1,20 +1,20 @@
 {
   "id": "fixtures/README.md",
   "role": "fixture-contract",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG fixture-contract の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [
-    "docs/agent/HUB.codex.md",
-    "docs/project/tasks.codex.md",
-    "docs/requirements.md"
-  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
+  ],
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": [
+    "docs/agent/HUB.codex.md",
+    "docs/project/tasks.codex.md",
+    "docs/requirements.md"
   ],
   "contentHash": "sha256:89bedf577144de3f4ddeae096b2d599695e4b3a5120bb9780ecd6fb18f5cd266"
 }

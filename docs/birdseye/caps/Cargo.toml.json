@@ -1,0 +1,26 @@
+{
+  "id": "Cargo.toml",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "Rustライブラリとqeg実行ファイルの依存関係、ビルド対象、配布物を定義する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:402e0663201610610040d06549fbd0dc873ed80bea3de6db6ca62d9e1cd8576b",
+  "generation": "00029",
+  "deps_out": [
+    "Cargo.lock",
+    "build.rs",
+    "src-rust/lib.rs",
+    "src-rust/main.rs"
+  ],
+  "deps_in": [
+    ".github/workflows/ci.yml",
+    "README.md",
+    "README_EN.md",
+    "README_JA.md",
+    "docs/release-notes/2026-09-12-v0.4.1.md",
+    "src-rust/cli.rs"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "src-rust/commands/format.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/commands/format.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:cd9315fa60db94502efdbd102d90b033499a6c9f7e1aa5fe6c5a0822d817e6b0",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/commands/report.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src-rust/commands.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/record.rs"
+  ]
+}

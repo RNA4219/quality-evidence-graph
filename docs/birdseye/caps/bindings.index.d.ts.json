@@ -1,0 +1,18 @@
+{
+  "id": "bindings/index.d.ts",
+  "role": "npm-binding",
+  "public_api": [],
+  "summary": "npm APIのTypeScript型を公開する。",
+  "risks": [],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:0eadd1f8b0362757c9d497e39b3d9f95609f4302555223419e4ba1f97de03023",
+  "generation": "00029",
+  "deps_out": [
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "package.json"
+  ]
+}

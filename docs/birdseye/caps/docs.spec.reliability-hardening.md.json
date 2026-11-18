@@ -1,26 +1,8 @@
 {
   "id": "docs/spec/reliability-hardening.md",
   "role": "reliability-resilience-hardening-spec",
-  "generation": "00025",
   "public_api": [],
   "summary": "Reliability / Resilience 実装の DQ ownership、evaluator 分割、公開 union 型、negative fixture、normalizer 境界、CI 完了条件。",
-  "deps_out": [
-    "docs/spec/reliability-extension.md",
-    "docs/spec/reliability-hardening-checklist.md",
-    "fixtures/manifest.json",
-    "src/cli/evidence-normalize.ts",
-    "src/gate/reliability.ts",
-    "src/types/graph.ts",
-    "src/validation/schema.ts",
-    "tests/runtime.test.mjs"
-  ],
-  "deps_in": [
-    "docs/release/acceptance-2026-07-20-v0.3.1.md",
-    "docs/release/acceptance-2026-07-20.md",
-    "docs/spec/index.md",
-    "docs/spec/reliability-extension-review-2026-07-19.md",
-    "docs/spec/reliability-hardening-checklist.md"
-  ],
   "risks": [
     "refactor による判定 drift、legacy 型互換性の破壊、runtime test だけでの negative path 見逃し"
   ],
@@ -30,6 +12,24 @@
     "npm run test:fixtures",
     "npm run test:package",
     "npm run birdseye-check"
+  ],
+  "generation": "00029",
+  "deps_out": [
+    "docs/spec/reliability-extension.md",
+    "docs/spec/reliability-hardening-checklist.md",
+    "fixtures/manifest.json",
+    "src-rust/commands/normalize.rs",
+    "src-rust/gate/reliability.rs",
+    "src-rust/runtime.rs",
+    "src/types/graph.ts",
+    "tests/runtime.test.mjs"
+  ],
+  "deps_in": [
+    "docs/release/acceptance-2026-07-20-v0.3.1.md",
+    "docs/release/acceptance-2026-07-20.md",
+    "docs/spec/index.md",
+    "docs/spec/reliability-extension-review-2026-07-19.md",
+    "docs/spec/reliability-hardening-checklist.md"
   ],
   "contentHash": "sha256:842e3fe2c37de7c70fbd5a0787a121acbaba59ff10e748eafb81f50b40aff3bb"
 }

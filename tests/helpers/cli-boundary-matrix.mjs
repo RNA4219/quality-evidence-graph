@@ -144,13 +144,15 @@ export async function verifyDiff(run, fixtures, directory) {
   const skipped = exit(run([...args, '--changed-only'], { cwd: directory, env: { QEG_CHANGED_FILES: '' } }), 0).data;
   assert.equal(skipped.diff.resolved.length, 0); assert.equal(skipped.diff.unverified[0].reason, 'not_evaluated');
   // Execute the shipped Action summary program against a real skipped-target report.
-  const action = await readFile(join(fixtures, '../qeg-report-action/action.yml'), 'utf8');
-  const summaryProgram = action.split(/\r?\n/).find(line => line.includes('node -e "') && line.includes('- unverified DQs:'));
-  assert.ok(summaryProgram, 'Action must preserve unverified DQs in its artifact');
   const skippedPath = join(directory, 'skipped.json'); const artifactSummary = join(directory, 'artifact-summary.md');
-  await writeFile(skippedPath, json(skipped)); await writeFile(artifactSummary, '');
-  const rendered = spawnSync(process.execPath, ['-e', summaryProgram.match(/node -e "(.*)"$/)[1]], { encoding: 'utf8', env: { ...process.env, QEG_OUTPUT_PATH: skippedPath, QEG_SUMMARY_PATH: artifactSummary } });
-  assert.equal(rendered.status, 0, rendered.stderr); assert.match(await readFile(artifactSummary, 'utf8'), /unverified DQs: 1/);
+  await writeFile(skippedPath, json(skipped));
+  const outputs = join(directory, 'action-outputs');
+  exit(run(['__action-summary', skippedPath, '0'], { cwd: directory, env: {
+    QEG_OUTPUT_PATH: join(directory, 'action-report.json'), QEG_SUMMARY_PATH: artifactSummary,
+    GITHUB_OUTPUT: outputs, QEG_INSTALL_OUTCOME: 'skipped', QEG_BUILD_OUTCOME: 'skipped',
+  } }), 0);
+  assert.match(await readFile(artifactSummary, 'utf8'), /unverified DQs: 1/);
+  assert.match(await readFile(outputs, 'utf8'), /exit_code=0/);
   await writeFile(join(target, 'gate-input.json'), '{');
   const failed = exit(run(args, { cwd: directory }), 1).data;
   assert.equal(failed.diff.resolved.length, 0); assert.equal(failed.diff.unverified[0].reason, 'evaluation_failed');

@@ -1,18 +1,18 @@
 {
   "id": "qeg-report-action/THIRD_PARTY_NOTICES.md",
   "role": "action-bundle-third-party-notices",
-  "generation": "00025",
   "public_api": [],
   "summary": "Action bundleへ含まれるruntime dependencyと同梱license原文の索引。",
-  "deps_out": [],
-  "deps_in": [
-    "tests/package-smoke.mjs"
-  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm run test:package"
   ],
-  "contentHash": "sha256:711fabf9f964bdbf6352c3fa2800e31d9ed512be2adf4c80ce062a4fff3dc1fd"
+  "generation": "00029",
+  "deps_out": [],
+  "deps_in": [
+    "tests/package-smoke.mjs"
+  ],
+  "contentHash": "sha256:25a83e626e7b717070010b0754affae8353b363c3064bf8845574dfbf9cdc5d9"
 }

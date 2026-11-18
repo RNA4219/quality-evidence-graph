@@ -1,7 +1,8 @@
 # Contributing
 
-Issueで目的と互換性影響を共有し、焦点を絞ったPull Requestを作成してください。Node.js 20または24を使用します。
+Issueで目的と互換性影響を共有し、焦点を絞ったPull Requestを作成してください。Rustの安定版とCargoを使用します。npm APIと配布パッケージの検証にはNode.js 20または24も必要です。
 
+    cargo test --locked
     npm ci
     npm test
     npm run typecheck

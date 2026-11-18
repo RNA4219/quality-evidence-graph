@@ -1,0 +1,16 @@
+{
+  "id": "examples/transaction-probe.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "examples/transaction-probe.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:1b1790087cd0a7623de310c50de698f23e67d3fed0accdab1bdaeb6eb028a03d",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/probe.rs"
+  ],
+  "deps_in": []
+}

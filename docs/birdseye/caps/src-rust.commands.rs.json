@@ -1,0 +1,38 @@
+{
+  "id": "src-rust/commands.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "レポート、診断、初期化、証跡正規化などの補助コマンドを選択する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:0f780342de535c4cb5e7902bcb38f3004a08985a0ac069ca138f53648753fc02",
+  "generation": "00029",
+  "deps_out": [
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/format.rs",
+    "src-rust/commands/normalize.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/commands/select.rs",
+    "src-rust/common.rs",
+    "src-rust/storage.rs"
+  ],
+  "deps_in": [
+    "src-rust/cli.rs",
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/dq.json",
+    "src-rust/commands/normalize.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/commands/select.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/lib.rs",
+    "src-rust/migration.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs"
+  ]
+}
