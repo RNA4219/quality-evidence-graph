@@ -51,6 +51,9 @@ jobs:
         continue-on-error: true
         run: npm run build
 
+      - name: Native Rust fixture contracts
+        run: cargo test --locked
+
       - name: Public type contracts
         id: types
         continue-on-error: true

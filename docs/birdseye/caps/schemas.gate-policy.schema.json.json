@@ -1,18 +1,18 @@
 {
   "id": "schemas/gate-policy.schema.json",
   "role": "gate-policy.schema",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG gate-policy.schema の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [
-    "docs/spec/reliability-extension.md"
-  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
+  ],
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [
+    "docs/spec/reliability-extension.md"
   ],
   "contentHash": "sha256:317d1d161a7878427dfb779df82befd613bbfff2a369d5d33baee8cf435acfb6"
 }

@@ -1,0 +1,26 @@
+{
+  "id": "src-rust/commands/normalize.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/commands/normalize.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:6b2d71e1c3e7382c3c2f2466a36ea663698110f4814a820d2e7d0585570ccc88",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/common.rs",
+    "src-rust/runtime.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/spec/gate-contract-consistency.md",
+    "docs/spec/reliability-extension.md",
+    "docs/spec/reliability-hardening.md",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs"
+  ]
+}

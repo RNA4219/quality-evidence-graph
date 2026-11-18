@@ -1,0 +1,33 @@
+{
+  "id": "src-rust/commands/diagnostics.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/commands/diagnostics.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:36f77363acb0cb631c33ef62043fb6168fb86190cd788eee87d7f6a3c4544ee7",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/common.rs",
+    "src-rust/evidence.rs",
+    "src-rust/record.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs",
+    "src/cli/enum-contracts.json",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/evaluation.md",
+    "docs/project/runbook.md",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/distribution.rs"
+  ]
+}

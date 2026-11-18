@@ -1,0 +1,20 @@
+{
+  "id": "bindings/native.mjs",
+  "role": "npm-binding",
+  "public_api": [],
+  "summary": "JavaScriptからRust実行ファイルを呼び出す。",
+  "risks": [],
+  "tests": [
+    "npm test"
+  ],
+  "contentHash": "sha256:80044a0c7f84ef17d925c1141ea603362960890860cdaa1ec6cdac0343256554",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/cli.rs"
+  ],
+  "deps_in": [
+    "bindings/api.mjs",
+    "bindings/cli.mjs",
+    "tools/build-native.mjs"
+  ]
+}

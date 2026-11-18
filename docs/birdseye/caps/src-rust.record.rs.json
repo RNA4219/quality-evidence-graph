@@ -1,0 +1,26 @@
+{
+  "id": "src-rust/record.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "判定、配置計画、グラフを監査用の証跡レコードへまとめる。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:0a97e4e1d21b6aab2a9bda5548d99031e989933d974941656fe26317110941cf",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands/format.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/spec/remediation-2026-09-10.md",
+    "src-rust/cli.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/lib.rs",
+    "src-rust/migration.rs"
+  ]
+}

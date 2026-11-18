@@ -1,0 +1,32 @@
+{
+  "id": "src-rust/commands/distribution.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/commands/distribution.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:29ab36393d02a69ad16ff5d5b3a3e6b96535fe115038ccc74d577c098b4c4c9a",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/assets.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/common.rs",
+    "src-rust/graph.rs",
+    "src-rust/storage.rs"
+  ],
+  "deps_in": [
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
+    "docs/project/evaluation.md",
+    "docs/project/followup-fixes-2026-09-11.md",
+    "docs/project/runbook.md",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/diagnostics.rs"
+  ]
+}

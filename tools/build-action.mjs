@@ -1,4 +1,3 @@
-import { build } from 'esbuild';
 import { readFile, writeFile } from 'node:fs/promises';
 
 const pkg = JSON.parse(await readFile('package.json', 'utf8'));
@@ -13,6 +12,3 @@ for (const check of checks) {
 }
 await writeFile('qeg-report-action/runtime-metadata.json', JSON.stringify({ runtimeVersion: 'qeg-runtime/v1',
   package: { name: pkg.name, version: pkg.version, engines: pkg.engines }, enums }, null, 2) + '\n');
-await build({ entryPoints: ['src/cli.ts'], bundle: true, platform: 'node', format: 'esm', target: 'node20',
-  outfile: 'qeg-report-action/dist/cli.mjs', logLevel: 'warning',
-  banner: { js: "import { createRequire as qegCreateRequire } from 'node:module'; const require = qegCreateRequire(import.meta.url);" } });

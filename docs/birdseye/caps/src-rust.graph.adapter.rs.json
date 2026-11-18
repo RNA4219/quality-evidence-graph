@@ -1,0 +1,23 @@
+{
+  "id": "src-rust/graph/adapter.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/graph/adapter.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:dc7c1edf17a3462808e2c0364e2b48ff8624c6e167672482046b9a432854479c",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src-rust/graph.rs",
+    "src-rust/graph/ctg.rs",
+    "src-rust/graph/links.rs",
+    "src-rust/graph/manual.rs",
+    "src-rust/graph/rand.rs"
+  ]
+}

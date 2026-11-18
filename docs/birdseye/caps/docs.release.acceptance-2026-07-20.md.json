@@ -1,9 +1,15 @@
 {
   "id": "docs/release/acceptance-2026-07-20.md",
   "role": "superseded-v0.3.0-release-acceptance",
-  "generation": "00025",
   "public_api": [],
   "summary": "v0.3.0 repository completionとnpm公開を含む過去判定。npm公開は完了せず、現行配布契約はGitHub-only v0.3.1へ移管済み。",
+  "risks": [
+    "supersededなnpm公開承認を現行判定と誤認する"
+  ],
+  "tests": [
+    "npm run birdseye-check"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/requirements.md",
@@ -16,12 +22,6 @@
     "docs/project/blueprint.md",
     "docs/project/evaluation.md",
     "docs/release-notes/2026-07-20-v0.3.0.md"
-  ],
-  "risks": [
-    "supersededなnpm公開承認を現行判定と誤認する"
-  ],
-  "tests": [
-    "npm run birdseye-check"
   ],
   "contentHash": "sha256:f19cdbfb026baa0646e9db1d038ed47cf3480dd2eb965d246b445c3fdb81e45a"
 }

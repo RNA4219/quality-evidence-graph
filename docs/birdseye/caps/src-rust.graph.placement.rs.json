@@ -1,0 +1,27 @@
+{
+  "id": "src-rust/graph/placement.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/graph/placement.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:bf32aec297c9262372bf438d499449cc42211d0aa1f674321682f4aa2ddad805",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src-rust/graph/links.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/spec/gate-contract-consistency.md",
+    "docs/spec/remediation-2026-09-10.md",
+    "src-rust/cli.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/graph.rs",
+    "src-rust/lib.rs"
+  ]
+}

@@ -13,6 +13,7 @@ import { tmpdir } from "node:os";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { Ajv2020 } from "ajv/dist/2020.js";
+import { nativeBinary } from "../bindings/native.mjs";
 
 const repoRoot = fileURLToPath(new URL("../", import.meta.url));
 
@@ -49,11 +50,15 @@ function sanitizeOutput(value, deploymentRoot) {
     .slice(0, 20000);
 }
 
-function observe(cliPath, args, deploymentRoot) {
+function observe(cliPath, args, deploymentRoot, distributionRoot) {
   const startedAt = new Date().toISOString();
   console.log(`Lifecycle probe: ${args[0] ?? "--help"}`);
-  const result = spawnSync(process.execPath, [cliPath, ...args], {
+  const env = { ...process.env };
+  if (distributionRoot) env.QEG_DISTRIBUTION_ROOT = distributionRoot;
+  else delete env.QEG_DISTRIBUTION_ROOT;
+  const result = spawnSync(cliPath, args, {
     cwd: repoRoot,
+    env,
     encoding: "utf8",
     maxBuffer: 10 * 1024 * 1024,
     timeout: 30000,
@@ -63,7 +68,7 @@ function observe(cliPath, args, deploymentRoot) {
   const stdout = sanitizeOutput(result.stdout, deploymentRoot);
   const stderr = sanitizeOutput(result.stderr, deploymentRoot);
   return {
-    command: sanitizeOutput(`node <action-bundle> ${args.join(" ")}`, deploymentRoot),
+    command: sanitizeOutput(`qeg ${args.join(" ")}`, deploymentRoot),
     exitCode: result.status ?? 1,
     startedAt,
     endedAt,
@@ -95,22 +100,20 @@ async function main() {
     throw new Error("source revision must be worktree or a full lowercase Git SHA");
   }
 
-  const sourceCli = join(repoRoot, "qeg-report-action", "dist", "cli.mjs");
+  const sourceCli = nativeBinary();
   const sourceSchemas = join(repoRoot, "schemas");
   const evidenceSchemaPath = join(sourceSchemas, "action-lifecycle-evidence.schema.json");
   const tempRoot = await mkdtemp(join(tmpdir(), "qeg-action-lifecycle-"));
   const deploymentRoot = join(tempRoot, "release-root");
-  const deployedCli = join(deploymentRoot, "qeg-report-action", "dist", "cli.mjs");
-  const deployedSchemas = join(deploymentRoot, "schemas");
+  const executable = process.platform === "win32" ? "qeg.exe" : "qeg";
+  const deployedCli = join(deploymentRoot, executable);
   const beforeReport = join(tempRoot, "before-report.json");
   const recoveredReport = join(tempRoot, "recovered-report.json");
   const outputDir = dirname(options.out);
 
   try {
     await mkdir(dirname(deployedCli), { recursive: true });
-    await cp(join(repoRoot, "qeg-report-action"), join(deploymentRoot, "qeg-report-action"), { recursive: true });
-    await copyFile(join(repoRoot, "LICENSE"), join(deploymentRoot, "LICENSE"));
-    await cp(sourceSchemas, deployedSchemas, { recursive: true });
+    await copyFile(sourceCli, deployedCli);
 
     const bundleHash = await sha256File(sourceCli);
     const deployedBundleHash = await sha256File(deployedCli);
@@ -131,17 +134,19 @@ async function main() {
       deploymentRoot,
     );
 
-    const faultTarget = join(deployedSchemas, "gate-input.schema.json");
-    const originalSchema = await readFile(join(sourceSchemas, "gate-input.schema.json"));
+    // The installed Action sets this directory to the checkout of its own tag.
+    const runtime = join(target, "runtime");
+    const faultTarget = join(runtime, "schemas", "gate-input.schema.json");
+    const originalSchema = await readFile(faultTarget);
     const faultStartedAt = new Date().toISOString();
     await writeFile(faultTarget, "{\n", "utf8");
-    const faultObservation = observe(deployedCli, ["schema-check"], deploymentRoot);
+    const faultObservation = observe(deployedCli, ["schema-check"], deploymentRoot, runtime);
     const faultEndedAt = new Date().toISOString();
 
     const recoveryStartedAt = new Date().toISOString();
     await writeFile(faultTarget, originalSchema);
     const recoveredSchemaHash = await sha256File(faultTarget);
-    const schemaRecoveryObservation = observe(deployedCli, ["schema-check"], deploymentRoot);
+    const schemaRecoveryObservation = observe(deployedCli, ["schema-check"], deploymentRoot, runtime);
     const recoveredObservation = observe(
       deployedCli,
       ["report", "--json", "--out", recoveredReport, target],
@@ -197,11 +202,11 @@ async function main() {
       change: {
         id: "CHANGE-QEG-ACTION-BUNDLED-CLI",
         summary:
-          "Replace the npm-published default command with a CLI bundle stored in the GitHub Action tag.",
+          "Build the tagged Rust CLI and run the same native gate in the GitHub Action and installed starter.",
         sourceRefs: [
           "qeg-report-action/action.yml",
-          "qeg-report-action/dist/cli.mjs",
-          "package.json",
+          "qeg-report-action/report.sh",
+          "Cargo.lock",
         ],
       },
       risks: [
@@ -209,7 +214,7 @@ async function main() {
           id: "RISK-ACTION-BUNDLE-MISSING",
           priority: "P0",
           scenario: "The tagged Action cannot start because its CLI bundle is absent or stale.",
-          mitigation: "Build and commit the bundle, compare source/deployed hashes, and execute --version.",
+          mitigation: "Build the locked Rust CLI, compare source/deployed hashes, and execute --version.",
         },
         {
           id: "RISK-ACTION-SCHEMA-UNAVAILABLE",

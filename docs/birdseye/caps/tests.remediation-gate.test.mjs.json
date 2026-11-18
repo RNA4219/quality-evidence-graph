@@ -1,19 +1,19 @@
 {
   "id": "tests/remediation-gate.test.mjs",
   "role": "remediation-gate.test",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG remediation-gate.test の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [
-    "docs/project/acceptance-audit-2026-09-10.md",
-    "docs/project/remediation-2026-09-10.md"
-  ],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
-  "contentHash": "sha256:81224339366f8257ab992c99d9e3a10ad8673174d9d5ee5ab52f9fe61f6cd6ca"
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [
+    "docs/project/acceptance-audit-2026-09-10.md",
+    "docs/project/remediation-2026-09-10.md"
+  ],
+  "contentHash": "sha256:096ee10d926825675bae628b0a6cc09f882fe4f0d947577771cc7507837d5ac6"
 }

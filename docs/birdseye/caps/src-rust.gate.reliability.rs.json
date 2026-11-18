@@ -1,0 +1,26 @@
+{
+  "id": "src-rust/gate/reliability.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/gate/reliability.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:08841ce41a3e7a867f70c7edd0d5d6175957f3edf5cdbf65ed2b389db2e23fd8",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/evidence.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/reliability/qualification.rs",
+    "src-rust/gate/semantics.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/spec/reliability-extension.md",
+    "docs/spec/reliability-hardening.md",
+    "src-rust/gate.rs",
+    "src-rust/gate/execution.rs",
+    "src-rust/gate/reliability/qualification.rs"
+  ]
+}

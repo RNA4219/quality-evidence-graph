@@ -1,9 +1,17 @@
 {
   "id": "docs/spec/gate-policy.md",
   "role": "ipo-gate-policy-spec",
-  "generation": "00025",
   "public_api": [],
   "summary": "ipo_controlledのGate policy、基本DQ-01〜DQ-17、reliability DQ-18〜DQ-21、exit code、verdict優先順位、waiver境界を固定する。",
+  "risks": [
+    "DQ ownership drift、conditional_goをCI successとして扱う、waiverでDQを消す"
+  ],
+  "tests": [
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run test:fixtures"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/ipo-controlled-profile.md",
     "docs/spec/index.md",
@@ -12,14 +20,6 @@
   "deps_in": [
     "docs/ipo-controlled-profile.md",
     "docs/spec/index.md"
-  ],
-  "risks": [
-    "DQ ownership drift、conditional_goをCI successとして扱う、waiverでDQを消す"
-  ],
-  "tests": [
-    "npm run schema-check",
-    "npm run enum-check",
-    "npm run test:fixtures"
   ],
   "contentHash": "sha256:1becf890a9a7e94fa36f4aadb31e1770b6dd3f2973e95de72717180edfbffb45"
 }

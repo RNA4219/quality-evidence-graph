@@ -1,16 +1,16 @@
 {
   "id": "schemas/approval-evidence.schema.json",
   "role": "approval-evidence.schema",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG approval-evidence.schema の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [],
   "contentHash": "sha256:f27aaa14aed44796e77a7f166964a93472e79d7eea7dc3f449469f1d5652e4e5"
 }

@@ -1,0 +1,29 @@
+{
+  "id": "src-rust/commands/baseline.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/commands/baseline.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:f1560f9e17955c0523abe80e8afd7f0d6d4985fdcdd880edd9d5e49de8750c52",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/common.rs",
+    "src-rust/runtime.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
+    "docs/project/evaluation.md",
+    "docs/project/runbook.md",
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/report.rs"
+  ]
+}

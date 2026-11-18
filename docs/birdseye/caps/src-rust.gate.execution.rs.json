@@ -1,0 +1,23 @@
+{
+  "id": "src-rust/gate/execution.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/gate/execution.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:498f63289c3321f112e64a4186d8a28cab658aa0a5965506fece73cb73364fa6",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/reliability.rs",
+    "src-rust/graph.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src-rust/evidence.rs",
+    "src-rust/gate.rs"
+  ]
+}

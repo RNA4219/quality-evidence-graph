@@ -1,14 +1,19 @@
 {
   "id": "docs/spec/manual-evidence-and-review.md",
   "role": "manual-evidence-and-review",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG manual-evidence-and-review の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00030",
   "deps_out": [
-    "src/gate/dq/helpers.ts",
-    "src/gate/dq/placement-change.ts",
-    "src/gate/manual-evidence.ts",
-    "src/gate/package-review.ts",
+    "src-rust/gate.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/gate/manual.rs",
     "tests/helpers/manual-governance-matrix.mjs"
   ],
   "deps_in": [
@@ -18,12 +23,6 @@
     "docs/project/evidence-acceptance-status.md",
     "docs/project/manual-governance-fixes-2026-09-11.md",
     "docs/spec/index.md"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:a8bf820c7d000af8628db46962981d486036c9cb919b71bfe16aef68202e7202"
 }

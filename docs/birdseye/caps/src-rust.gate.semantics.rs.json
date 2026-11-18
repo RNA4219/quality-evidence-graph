@@ -1,0 +1,19 @@
+{
+  "id": "src-rust/gate/semantics.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/gate/semantics.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:b8fc4169527633931ec100097591533c38425fe863974c5df023f623148229e9",
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [
+    "src-rust/gate.rs",
+    "src-rust/gate/reliability.rs",
+    "src-rust/gate/reliability/qualification.rs",
+    "src-rust/runtime.rs"
+  ]
+}

@@ -1,41 +1,45 @@
-import fs from 'node:fs/promises';
-import { syncBuiltinESMExports } from 'node:module';
-import { resolve, basename } from 'node:path';
-const [mode, directory, configPath] = process.argv.slice(2);
-const root = await fs.realpath(directory);
-let paused = false;
-async function pause() {
-  paused = true;
-  process.send({ boundary: mode });
-  await new Promise(accept => process.once('message', accept));
+import assert from 'node:assert/strict';
+import { execFileSync, spawn, spawnSync } from 'node:child_process';
+import { once } from 'node:events';
+import { join } from 'node:path';
+import { createInterface } from 'node:readline';
+
+const metadata = JSON.parse(execFileSync('cargo', ['metadata', '--no-deps', '--format-version', '1'], { encoding: 'utf8' }));
+const binary = join(metadata.target_directory, 'debug', 'examples', 'transaction-probe' + (process.platform === 'win32' ? '.exe' : ''));
+
+export function runProbe(args, request) {
+  return spawnSync(binary, args, { encoding: 'utf8', input: request && JSON.stringify(request), maxBuffer: 16 * 1024 * 1024 });
 }
-if (mode === 'place-after-read' || mode === 'record-after-read') {
-  const original = fs.readFile;
-  fs.readFile = async (...args) => {
-    const content = await original(...args);
-    if (!paused && typeof args[0] === 'string' && resolve(args[0]) === resolve(root, 'gate-input.json')) await pause();
-    return content;
-  };
-  syncBuiltinESMExports();
-  if (mode === 'place-after-read') {
-    const { runPlaceTestsCommand } = await import('../../dist/cli/pipeline.js');
-    await runPlaceTestsCommand(directory);
-  } else {
-    const { runRecordCommand } = await import('../../dist/cli/commands.js');
-    await runRecordCommand(directory);
-  }
-} else {
-  const original = fs.rename;
-  fs.rename = async (from, to) => {
-    const name = basename(to);
-    if (!paused && mode === 'migration-before-input' && name === 'gate-input.json') await pause();
-    const result = await original(from, to);
-    if (!paused && (mode === 'migration-after-input' && name === 'gate-input.json' || mode === 'migration-after-pointer' && name === '.qeg-current.json' ||
-      mode === 'recover-after-input' && name === 'gate-input.json')) await pause();
-    return result;
-  };
-  syncBuiltinESMExports();
-  const api = await import('../../dist/index.js');
-  if (mode === 'recover-after-input') await api.recoverOutputs(directory);
-  else await api.applyConsumerMigration(directory, JSON.parse(await fs.readFile(configPath, 'utf8')));
+export function deniedEvidence(input, directory, operation, path, strict) {
+  const result = runProbe(['evidence-failure', directory, operation, path], { input, strict });
+  assert.equal(result.status, 0, result.error?.message || result.stderr);
+  return JSON.parse(result.stdout);
+}
+// Keep the native process handle, so termination at the boundary also releases its OS lease.
+export async function pausedProbe(args, boundary) {
+  const child = spawn(binary, args, { stdio: ['pipe', 'pipe', 'pipe'] });
+  const lines = createInterface({ input: child.stdout });
+  let stderr = '';
+  child.stderr.setEncoding('utf8').on('data', text => { stderr += text; });
+  await new Promise((resolve, reject) => {
+    const timer = setTimeout(() => { child.kill(); reject(new Error('Boundary timeout: ' + stderr)); }, 15000);
+    const finish = (error) => {
+      clearTimeout(timer);
+      child.off('error', finish);
+      child.off('exit', exited);
+      lines.off('line', line);
+      if (error) reject(error); else resolve();
+    };
+    const exited = code => finish(new Error('Probe exited ' + code + ': ' + stderr));
+    const line = text => { if (text === 'boundary:' + boundary) finish(); };
+    child.once('error', finish);
+    child.once('exit', exited);
+    lines.on('line', line);
+  });
+  return child;
+}
+export async function finishProbe(child, kill = false) {
+  const exited = once(child, 'exit');
+  if (kill) child.kill('SIGKILL'); else child.stdin.end('resume\n');
+  return (await exited)[0];
 }

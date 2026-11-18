@@ -1,9 +1,15 @@
 {
   "id": "src/types/primitives.ts",
   "role": "primitive-types",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG primitive-types の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00030",
   "deps_out": [],
   "deps_in": [
     "src/types.ts",
@@ -12,12 +18,6 @@
     "src/types/graph.ts",
     "src/types/ingest.ts",
     "src/types/record.ts"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:9d92e2e3f433920fb51d96a5ccd27abff66864b1188e1f682d717f89a04238b5"
 }

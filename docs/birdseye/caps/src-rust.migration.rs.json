@@ -1,0 +1,26 @@
+{
+  "id": "src-rust/migration.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "consumerの旧入力を診断し、明示設定を使って移行する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:e10abd807e63a2cf3779f577cec0e7643c26f93221eb36ad7d71583791f3b59a",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/evidence.rs",
+    "src-rust/gate.rs",
+    "src-rust/record.rs",
+    "src-rust/runtime.rs",
+    "src-rust/storage.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/project/review-fixes-2026-09-11.md",
+    "src-rust/cli.rs",
+    "src-rust/lib.rs"
+  ]
+}

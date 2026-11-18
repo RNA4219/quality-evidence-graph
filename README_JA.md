@@ -49,11 +49,19 @@ QEG は MVP だけでなく、監査・統制を前提にした controlled gover
 
 ## CLI の使い方
 
-最初に build します。
+Rustの安定版とCargoを用意し、リポジトリのルートで実行します。
 
 ```sh
-npm run build
+cargo install --locked --path .
+qeg gate fixtures/positive-release-go
+qeg report --json fixtures
 ```
+
+CLIは単体で動きます。スキーマと初期化用Actionは実行ファイルに同梱しています。Rustからは `quality_evidence_graph::gate::evaluate_gate` を呼び出せます。入力と結果は既存のJSON契約に従います。
+
+npm APIを利用する場合は `npm ci` と `npm run build` を実行してください。パッケージはビルドしたOS・CPU向けの実行ファイルを同梱します。別の環境では、初回起動時にCargoが同梱ソースをビルドします。GitHub Actionは指定したリビジョンのRustソースと `Cargo.lock` から実行します。セルフホストrunnerにはCargoとBashが必要です。
+
+以下のnpm経由のコマンドも同じRust CLIを呼び出します。
 
 fixture を検証します。
 

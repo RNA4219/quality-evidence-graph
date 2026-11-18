@@ -1,9 +1,17 @@
 {
   "id": "docs/ipo-controlled-profile.md",
   "role": "ipo-profile",
-  "generation": "00025",
   "public_api": [],
   "summary": "ipo_controlledのDQ-01〜DQ-21、waiver、approval evidence、retention、exit codeと、repository実装完成・外部release approval分離の契約。",
+  "risks": [
+    "repository completionを外部IPO統制承認へ自動昇格する"
+  ],
+  "tests": [
+    "npm run schema-check",
+    "npm run enum-check",
+    "npm run birdseye-check"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "docs/requirements.md",
@@ -17,14 +25,6 @@
     "docs/project/tasks.codex.md",
     "docs/requirements.md",
     "docs/spec/gate-policy.md"
-  ],
-  "risks": [
-    "repository completionを外部IPO統制承認へ自動昇格する"
-  ],
-  "tests": [
-    "npm run schema-check",
-    "npm run enum-check",
-    "npm run birdseye-check"
   ],
   "contentHash": "sha256:981beff34126837272fc3a260e9ea3c87fd849e2829b5ea674aa342c0ebf35ae"
 }

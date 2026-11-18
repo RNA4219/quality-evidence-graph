@@ -1,0 +1,19 @@
+{
+  "id": "src-rust/action.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/action.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:4a87b4d1e4d3127a7336ca8285ae3172fbabf64d4c66b5be2fcdba07b767bffa",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/common.rs"
+  ],
+  "deps_in": [
+    "src-rust/cli.rs",
+    "src-rust/lib.rs"
+  ]
+}

@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { fork, spawnSync } from 'node:child_process';
-import { once } from 'node:events';
+import { spawnSync } from 'node:child_process';
+import { pausedProbe, finishProbe as finish } from './helpers/command-transaction-child.mjs';
 import * as api from '../dist/index.js';
 import { contentHash } from '../dist/record.js';
 import { createRawProducerFixture, persistRawFixture } from './helpers/raw-producer-fixture.mjs';
@@ -29,22 +29,8 @@ async function consumer(missingContract = false) {
   await writeFile(configPath, json(config));
   return { directory, original, config, configPath };
 }
-async function paused(mode, f) {
-  const child = fork(new URL('./helpers/command-transaction-child.mjs', import.meta.url), [mode, f.directory, f.configPath], { stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
-  let stderr = ''; child.stderr.on('data', bytes => { stderr += bytes; }); child.stdout.resume();
-  try {
-    await new Promise((accept, reject) => {
-      const timeout = setTimeout(() => reject(new Error('Boundary timeout: ' + stderr)), 15000);
-      child.once('message', message => { clearTimeout(timeout); assert.equal(message.boundary, mode); accept(); });
-      child.once('exit', code => { clearTimeout(timeout); reject(new Error(`Child exited ${code}: ${stderr}`)); });
-    });
-  } catch (error) { child.kill(); throw error; }
-  return child;
-}
-async function finish(child, kill = false) {
-  const exited = once(child, 'exit');
-  if (kill) child.kill('SIGKILL'); else child.send('resume');
-  return (await exited)[0];
+function paused(mode, f) {
+  return pausedProbe([mode, f.directory, f.configPath], mode);
 }
 
 test('R1: placement and record own the lease from input read through publication', async t => {

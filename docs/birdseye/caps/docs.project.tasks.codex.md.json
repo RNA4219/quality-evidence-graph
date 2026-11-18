@@ -1,9 +1,16 @@
 {
   "id": "docs/project/tasks.codex.md",
   "role": "superseded-implementation-task-ledger",
-  "generation": "00025",
   "public_api": [],
   "summary": "TASK-01〜TASK-10の過去台帳。生成機能が当時未充足だった完了表記を訂正し、現行状態は改修台帳へ移管。",
+  "risks": [
+    "superseded台帳の過去no_goを現在状態と誤認する"
+  ],
+  "tests": [
+    "npm run birdseye-check",
+    "git diff --check"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/control-mapping.md",
     "docs/ipo-controlled-profile.md",
@@ -16,13 +23,6 @@
     "docs/agent/HUB.codex.md",
     "docs/implementation-prep-gate-2026-06-02.md",
     "docs/requirements.md"
-  ],
-  "risks": [
-    "superseded台帳の過去no_goを現在状態と誤認する"
-  ],
-  "tests": [
-    "npm run birdseye-check",
-    "git diff --check"
   ],
   "contentHash": "sha256:9508270fef7b064d16a4a123b0b42703ba3bfad5d2c253ddbe67f2fcc79dd771"
 }

@@ -1,12 +1,19 @@
 {
   "id": ".github/workflows/ci.yml",
   "role": "github-actions-ci",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG github-actions-ci の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00030",
   "deps_out": [
+    "Cargo.toml",
     "qeg-report-action/action.yml",
-    "src/cli/report.ts"
+    "src-rust/commands/report.rs"
   ],
   "deps_in": [
     "README.md",
@@ -14,11 +21,5 @@
     "docs/project/runbook.md",
     "docs/requirements.md"
   ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
-  ],
-  "contentHash": "sha256:bb135b880c06af1a5ee4ecb119de3af74bbef1809dff7c5294cdddc48ec7d755"
+  "contentHash": "sha256:9568e06132c13d4440a86fd0610e7f54056f502b1d5e5dd997aa8d63fe57a9ce"
 }

@@ -1,9 +1,17 @@
 {
   "id": "docs/project/evaluation.md",
   "role": "current-acceptance-criteria",
-  "generation": "00025",
   "public_api": [],
   "summary": "DQ-01〜DQ-21、provenance矛盾、53 fixture、package、隔離consumer、Linux Node 20 / 24とWindows Node 24 CIを含む現行受入条件。",
+  "risks": [
+    "acceptanceが古いとrepository completionを誤判定する"
+  ],
+  "tests": [
+    "npm test",
+    "npm run birdseye-check",
+    "npm pack --dry-run --cache ./.npm-cache"
+  ],
+  "generation": "00030",
   "deps_out": [
     ".github/workflows/ci.yml",
     "docs/project/evidence-acceptance-status.md",
@@ -15,12 +23,10 @@
     "docs/spec/operational-cli-extensions.md",
     "fixtures/manifest.json",
     "qeg-report-action/action.yml",
-    "src/cli/baseline.ts",
-    "src/cli/check.ts",
-    "src/cli/evidence-verify.ts",
-    "src/cli/policy-lint.ts",
-    "src/cli/report.ts",
-    "src/cli/repro-bundle.ts"
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/report.rs"
   ],
   "deps_in": [
     "docs/agent/HUB.codex.md",
@@ -30,14 +36,6 @@
     "docs/spec/gate-acceptance-2026-06-03.md",
     "docs/spec/implementation-gate-2026-06-03.md",
     "docs/spec/review-2026-06-03.md"
-  ],
-  "risks": [
-    "acceptanceが古いとrepository completionを誤判定する"
-  ],
-  "tests": [
-    "npm test",
-    "npm run birdseye-check",
-    "npm pack --dry-run --cache ./.npm-cache"
   ],
   "contentHash": "sha256:5d7eb4c41901ff31be804613f25b5f27108730749c733eb782ef0365b0e5f26e"
 }

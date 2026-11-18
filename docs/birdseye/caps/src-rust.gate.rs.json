@@ -1,0 +1,44 @@
+{
+  "id": "src-rust/gate.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "失格理由、ブロッカー、残存リスク、人間の確認から最終判定を作る。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:877727e455e8c3ecf9f3a8e0991a8375ecb99010c9951b28e0a50afdea596a13",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/common.rs",
+    "src-rust/evidence.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/gate/evidence.rs",
+    "src-rust/gate/execution.rs",
+    "src-rust/gate/integrity.rs",
+    "src-rust/gate/manual.rs",
+    "src-rust/gate/reliability.rs",
+    "src-rust/gate/semantics.rs",
+    "src-rust/graph.rs",
+    "src-rust/graph/placement.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/spec/gate-contract-consistency.md",
+    "docs/spec/governance-consistency.md",
+    "docs/spec/manual-evidence-and-review.md",
+    "docs/spec/reliability-extension.md",
+    "src-rust/cli.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/gate/evidence.rs",
+    "src-rust/gate/execution.rs",
+    "src-rust/gate/integrity.rs",
+    "src-rust/gate/manual.rs",
+    "src-rust/gate/reliability.rs",
+    "src-rust/gate/reliability/qualification.rs",
+    "src-rust/lib.rs",
+    "src-rust/migration.rs",
+    "src-rust/runtime.rs"
+  ]
+}

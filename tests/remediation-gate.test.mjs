@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import fs, { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
-import { syncBuiltinESMExports } from 'node:module';
+import { cp, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { deniedEvidence } from './helpers/command-transaction-child.mjs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
@@ -134,33 +134,25 @@ test('FIX-07: selected resilience execution must be covered by its dedicated eva
   assert.equal(evaluateGate({ ...input, evidenceVerification }).verdict, 'disqualified');
 });
 
-test('FIX-04/18: evidence I/O failures retain operation, path and optional severity', async t => {
+test('FIX-04/18: evidence I/O failures retain operation, path and optional severity', async () => {
   const input = await nativeInput();
   const artifact = input.metadata.inputArtifacts[0];
   const path = resolve(positive, artifact.path);
   for (const operation of ['stat', 'readFile']) {
-    const original = fs[operation];
-    const mocked = t.mock.method(fs, operation, async (...args) => {
-      if (String(args[0]) === path) throw Object.assign(new Error('permission denied (fixture)'), { code: 'EACCES' });
-      return original(...args);
-    });
-    syncBuiltinESMExports();
-    try {
-      for (const profile of ['lean', 'standard', 'strict', 'ipo_controlled']) for (const optional of [false, true]) {
-        const copy = structuredClone(input);
-        copy.metadata.profile = profile;
-        copy.metadata.inputArtifacts = [{ ...artifact, adapter: optional ? 'junit' : artifact.adapter }];
-        delete copy.evidencePackage;
-        const report = await verifyEvidenceArtifacts(copy, { baseDir: positive, strict: false });
-        assert.equal(report.status, optional ? 'warn' : 'fail');
-        assert.ok(report.items.some(i => i.code === 'IO_ERROR' && i.message.includes(path) && i.message.includes(operation === 'stat' ? 'stat' : 'read')));
-        assert.equal(report.items.some(i => i.code === 'FILE_MISSING'), false);
-        if (optional) {
-          copy.policy.inputContract.requiredArtifacts = [{ adapter: 'junit', kind: artifact.kind }];
-          assert.equal((await verifyEvidenceArtifacts(copy, { baseDir: positive, strict: false })).status, 'fail');
-        }
+    for (const profile of ['lean', 'standard', 'strict', 'ipo_controlled']) for (const optional of [false, true]) {
+      const copy = structuredClone(input);
+      copy.metadata.profile = profile;
+      copy.metadata.inputArtifacts = [{ ...artifact, adapter: optional ? 'junit' : artifact.adapter }];
+      delete copy.evidencePackage;
+      const report = deniedEvidence(copy, positive, operation === 'stat' ? 'before-stat' : 'before-read', path, false);
+      assert.equal(report.status, optional ? 'warn' : 'fail');
+      assert.ok(report.items.some(i => i.code === 'IO_ERROR' && i.message.includes(path) && i.message.includes(operation === 'stat' ? 'stat' : 'read')));
+      assert.equal(report.items.some(i => i.code === 'FILE_MISSING'), false);
+      if (optional) {
+        copy.policy.inputContract.requiredArtifacts = [{ adapter: 'junit', kind: artifact.kind }];
+        assert.equal(deniedEvidence(copy, positive, operation === 'stat' ? 'before-stat' : 'before-read', path, false).status, 'fail');
       }
-    } finally { mocked.mock.restore(); syncBuiltinESMExports(); }
+    }
   }
 });
 

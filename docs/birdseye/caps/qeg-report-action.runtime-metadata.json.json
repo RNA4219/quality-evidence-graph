@@ -1,16 +1,16 @@
 {
   "id": "qeg-report-action/runtime-metadata.json",
   "role": "runtime-metadata",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG runtime-metadata の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [],
   "contentHash": "sha256:eefe6f004a199be718b1bd0a78e8e6f2cd9094c4de14518e7d47e3cba11f7754"
 }

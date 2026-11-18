@@ -1,0 +1,40 @@
+{
+  "id": "src-rust/commands/report.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/commands/report.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:7c493475cdbaad4e0f2c476b0bddae70be69117a33cf80322a230afe65e98c26",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/dq.json",
+    "src-rust/commands/format.rs",
+    "src-rust/commands/select.rs",
+    "src-rust/gate.rs",
+    "src-rust/runtime.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    ".github/workflows/ci.yml",
+    "README.md",
+    "docs/project/cli-boundary-fixes-2026-09-11.md",
+    "docs/project/evaluation.md",
+    "docs/project/gate-contract-fixes-2026-09-11.md",
+    "docs/project/runbook.md",
+    "docs/requirements.md",
+    "docs/spec/gate-contract-consistency.md",
+    "docs/spec/operational-cli-extensions.md",
+    "qeg-report-action/action.yml",
+    "src-rust/cli.rs",
+    "src-rust/commands.rs",
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/distribution.rs",
+    "src-rust/commands/format.rs"
+  ]
+}

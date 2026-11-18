@@ -1,0 +1,38 @@
+{
+  "id": "src-rust/runtime.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "入力と出力をschemaで検証し、証跡の事前確認とGate評価を実行する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:e62ea4627d0c4e679d33bd26cbe75e59eb13ca718ae127f6f85eaaa0db6d9765",
+  "generation": "00030",
+  "deps_out": [
+    "schemas/gate-input.schema.json",
+    "src-rust/assets.rs",
+    "src-rust/commands.rs",
+    "src-rust/common.rs",
+    "src-rust/evidence.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/gate/semantics.rs",
+    "src-rust/storage.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/spec/governance-consistency.md",
+    "docs/spec/reliability-hardening.md",
+    "src-rust/cli.rs",
+    "src-rust/commands/baseline.rs",
+    "src-rust/commands/diagnostics.rs",
+    "src-rust/commands/normalize.rs",
+    "src-rust/commands/report.rs",
+    "src-rust/commands/select.rs",
+    "src-rust/graph/ingest.rs",
+    "src-rust/lib.rs",
+    "src-rust/migration.rs",
+    "src-rust/record.rs"
+  ]
+}

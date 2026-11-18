@@ -1,9 +1,15 @@
 {
   "id": "docs/project/blueprint.md",
   "role": "blueprint",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG blueprint の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/evidence/manual-governance-fixes-2026-09-11/validation.json",
     "docs/project/evidence-acceptance-status.md",
@@ -20,12 +26,6 @@
   "deps_in": [
     "docs/agent/HUB.codex.md",
     "docs/research/quality-evidence-graph-requirements-report.md"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:dcdd1e26b47e1a1429bc8973553afb4ea5a6e2559bed8256b038ea3c386113bb"
 }

@@ -1,18 +1,23 @@
 {
   "id": "docs/spec/governance-consistency.md",
   "role": "governance-consistency",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG governance-consistency の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/requirements.md",
     "schemas/shared-defs.schema.json",
-    "src/gate/dq/graph-integrity.ts",
-    "src/gate/dq/ipo.ts",
-    "src/gate/dq/placement-change.ts",
-    "src/gate/waivers.ts",
-    "src/timestamps.ts",
-    "src/validation/schema.ts",
+    "src-rust/common.rs",
+    "src-rust/gate.rs",
+    "src-rust/gate/coverage.rs",
+    "src-rust/gate/integrity.rs",
+    "src-rust/runtime.rs",
     "tests/helpers/governance-matrix.mjs"
   ],
   "deps_in": [
@@ -23,12 +28,6 @@
     "docs/project/governance-fixes-2026-09-11.md",
     "docs/requirements.md",
     "docs/spec/index.md"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:88bff36d0c1a556331eb13546acd3a7e10c36a55dafd849a75e50dc2399030e6"
 }

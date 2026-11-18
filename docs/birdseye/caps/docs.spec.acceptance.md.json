@@ -1,9 +1,16 @@
 {
   "id": "docs/spec/acceptance.md",
   "role": "superseded-spec-acceptance",
-  "generation": "00025",
   "public_api": [],
   "summary": "2026-06-03時点の仕様書検収履歴。現行のrepository completionはproject evaluationと2026-07-20 acceptanceへ移管済み。",
+  "risks": [
+    "過去no_goを現在状態と誤認する"
+  ],
+  "tests": [
+    "npm run birdseye-check",
+    "git diff --check"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/project/evaluation.md",
     "docs/project/runbook.md",
@@ -13,13 +20,6 @@
     "docs/spec/gate-acceptance-2026-06-03.md",
     "docs/spec/index.md",
     "docs/spec/review-2026-06-03.md"
-  ],
-  "risks": [
-    "過去no_goを現在状態と誤認する"
-  ],
-  "tests": [
-    "npm run birdseye-check",
-    "git diff --check"
   ],
   "contentHash": "sha256:96ac579cfc4790a530b95eb4dbc25d49b5dcf9517d219b38654b0467814a017f"
 }

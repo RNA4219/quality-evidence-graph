@@ -1,0 +1,22 @@
+{
+  "id": "src-rust/commands/dq.json",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "src-rust/commands/dq.json の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:b018f921dd3a095b276b068700f020957ca1bc9737a3ad8d5c71e0495cbfb15a",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/commands.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "docs/requirements.md",
+    "docs/spec/operational-cli-extensions.md",
+    "src-rust/cli.rs",
+    "src-rust/commands/report.rs"
+  ]
+}

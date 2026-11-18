@@ -1,9 +1,15 @@
 {
   "id": "src/types/execution.ts",
   "role": "execution",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG execution の契約・実装。関連sourceと受入試験を参照。",
+  "risks": [
+    "型、schema、fixture、CLI契約を同時に更新する"
+  ],
+  "tests": [
+    "npm test"
+  ],
+  "generation": "00030",
   "deps_out": [
     "src/types/evidence.ts"
   ],
@@ -12,12 +18,6 @@
     "src/types/gate.ts",
     "src/types/graph.ts",
     "src/types/ingest.ts"
-  ],
-  "risks": [
-    "型、schema、fixture、CLI契約を同時に更新する"
-  ],
-  "tests": [
-    "npm test"
   ],
   "contentHash": "sha256:19ce646f73402a55a69f4159528bf413785049c9cba9caecca2c73d24b805b2a"
 }

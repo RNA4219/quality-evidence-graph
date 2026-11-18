@@ -8,9 +8,13 @@
     "qeg": "./dist/cli.js"
   },
   "exports": {
-    ".": "./dist/index.js"
+    ".": {
+      "types": "./bindings/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
   },
-  "types": "./dist/index.d.ts",
+  "types": "./bindings/index.d.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/RNA4219/quality-evidence-graph.git"
@@ -33,12 +37,27 @@
     "SECURITY.md",
     "CODE_OF_CONDUCT.md",
     "README_EN.md",
-    "LICENSE"
+    "LICENSE",
+    "bindings/",
+    "src/types.ts",
+    "src/types/",
+    "src/cli/enum-contracts.json",
+    "src/adapters/producer-schemas.json",
+    "native/",
+    "Cargo.toml",
+    "Cargo.lock",
+    "build.rs",
+    "src-rust/",
+    "src/validation/evidence.ts",
+    "tools/build-action.mjs",
+    "tools/build-native.mjs",
+    "tools/native-notices.mjs",
+    "tools/licenses/"
   ],
   "scripts": {
-    "build": "tsc && npm run build:action",
+    "build": "npm run build:action && node tools/build-native.mjs",
     "typecheck": "tsc --noEmit",
-    "test:types": "node node_modules/typescript/bin/tsc -p tests/type-contract/tsconfig.json && npm run build && node tests/package-smoke.mjs",
+    "test:types": "tsc -p tests/type-contract/tsconfig.json",
     "qeg": "node dist/cli.js",
     "validate": "node dist/cli.js validate",
     "gate": "node dist/cli.js gate",
@@ -50,7 +69,7 @@
     "enum-check": "node dist/cli.js enum-check",
     "baseline": "node dist/cli.js baseline",
     "evidence": "node dist/cli.js evidence",
-    "test:runtime": "node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs tests/execution-qualification.test.mjs tests/output-publication.test.mjs tests/consumer-migration.test.mjs tests/producer-replay.test.mjs tests/transaction-regression.test.mjs tests/followup-regression.test.mjs tests/cli-boundary-regression.test.mjs tests/gate-contract-regression.test.mjs tests/governance-regression.test.mjs tests/manual-governance-regression.test.mjs",
+    "test:runtime": "cargo build --locked --example transaction-probe && node --test tests/runtime.test.mjs tests/action-contract.test.mjs tests/remediation-gate.test.mjs tests/producer-pipeline.test.mjs tests/execution-qualification.test.mjs tests/output-publication.test.mjs tests/consumer-migration.test.mjs tests/producer-replay.test.mjs tests/transaction-regression.test.mjs tests/followup-regression.test.mjs tests/cli-boundary-regression.test.mjs tests/gate-contract-regression.test.mjs tests/governance-regression.test.mjs tests/manual-governance-regression.test.mjs",
     "build-graph": "node dist/cli.js build-graph",
     "place-tests": "node dist/cli.js place-tests",
     "policy": "node dist/cli.js policy",
@@ -58,13 +77,14 @@
     "check": "node dist/cli.js check",
     "init": "node dist/cli.js init",
     "snapshot": "node dist/cli.js snapshot",
-    "test": "npm run test:types && npm run test:runtime && npm run test:fixtures && npm run test:package && npm run json-check",
+    "test": "npm run build && npm run test:types && npm run test:runtime && npm run test:fixtures && npm run test:package && npm run json-check",
     "test:fixtures": "node tests/fixture-regression.mjs",
     "test:package": "node tests/package-smoke.mjs",
     "birdseye-check": "node tools/birdseye-check.mjs",
     "json-check": "node tools/json-check.mjs",
     "build:action": "node tools/build-action.mjs",
-    "test:release-lifecycle": "node tools/action-lifecycle-acceptance.mjs"
+    "test:release-lifecycle": "node tools/action-lifecycle-acceptance.mjs",
+    "prepack": "npm run build"
   },
   "keywords": [
     "quality-gate",
@@ -78,14 +98,11 @@
   "engines": {
     "node": ">=20"
   },
-  "dependencies": {
-    "ajv": "^8.20.0",
-    "yaml": "2.9.0"
-  },
   "devDependencies": {
     "@types/node": "^25.9.1",
-    "esbuild": "^0.28.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "ajv": "^8.20.0",
+    "yaml": "2.9.0"
   },
   "private": true
 }

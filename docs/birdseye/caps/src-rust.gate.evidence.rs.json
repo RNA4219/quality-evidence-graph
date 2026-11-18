@@ -1,0 +1,20 @@
+{
+  "id": "src-rust/gate/evidence.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "src-rust/gate/evidence.rs の入出力と依存関係。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:a74821bc43d5910b745bd384215d75bfd9ff8256123bbaa3ca36b93ab524d9b7",
+  "generation": "00030",
+  "deps_out": [
+    "src-rust/gate.rs",
+    "src-rust/gate/manual.rs",
+    "src/types.ts"
+  ],
+  "deps_in": [
+    "src-rust/gate.rs"
+  ]
+}

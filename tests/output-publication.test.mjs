@@ -1,25 +1,16 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import fs, { mkdtemp, readFile, writeFile, mkdir, readdir, realpath } from 'node:fs/promises';
-import { syncBuiltinESMExports } from 'node:module';
+import { mkdtemp, writeFile, mkdir, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { fork, spawnSync } from 'node:child_process';
-import { once } from 'node:events';
+import { pausedProbe, finishProbe, runProbe } from './helpers/command-transaction-child.mjs';
 import { publishFiles, readPublishedOutputs, recoverOutputs } from '../dist/index.js';
 import { verifyOutputManifest } from '../dist/cli/output-integrity.js';
 
 const files = value => new Map(['a.json', 'b.json', 'output-manifest.json'].map(name => [name, JSON.stringify({ value }) + '\n']));
 const boundaries = ['staged-directory', ...[...files('').keys()].map(name => `staged:${name}`), 'sealed', 'prepared', ...[...files('').keys()].map(name => `alias:${name}`), 'pointer-committed', 'committed'];
-async function paused(directory, boundary) {
-  const child = fork(new URL('./helpers/publication-child.mjs', import.meta.url), [directory, boundary], { stdio: ['ignore', 'pipe', 'pipe', 'ipc'] });
-  let errors = ''; child.stderr.on('data', bytes => { errors += bytes; });
-  await new Promise((resolve, reject) => {
-    const timeout = setTimeout(() => { child.kill(); reject(new Error('child boundary timeout: ' + errors)); }, 10000);
-    child.once('message', message => { clearTimeout(timeout); assert.equal(message.boundary, boundary); resolve(); });
-    child.once('exit', code => { clearTimeout(timeout); reject(new Error(`child exited ${code}: ${errors}`)); });
-  });
-  return child;
+function paused(directory, boundary) {
+  return pausedProbe(['publication', directory, boundary], boundary);
 }
 
 for (const existing of [false, true]) test(`EAC-08 TC20/22: process termination at every boundary, existing=${existing}`, async t => {
@@ -28,7 +19,7 @@ for (const existing of [false, true]) test(`EAC-08 TC20/22: process termination 
     if (existing) await publishFiles(dir, files('old'));
     const child = await paused(dir, boundary);
     await assert.rejects(readPublishedOutputs(dir), /busy|lease/);
-    const exited = once(child, 'exit'); child.kill('SIGKILL'); await exited;
+    await finishProbe(child, true);
     if (['pointer-committed', 'committed'].includes(boundary)) assert.deepEqual((await readPublishedOutputs(dir)).files, files('new'));
     else if (existing) {
       if (boundary.startsWith('alias:') || boundary === 'prepared') await assert.rejects(readPublishedOutputs(dir), /Interrupted/);
@@ -49,10 +40,10 @@ test('EAC-08 TC21: another writer and recovery explicitly reject while a process
   const dir = await mkdtemp(join(tmpdir(), 'qeg-race-'));
   const writer = await paused(dir, 'alias:a.json');
   try {
-    const other = spawnSync(process.execPath, [new URL('./helpers/publication-child.mjs', import.meta.url).pathname.replace(/^\/([A-Za-z]:)/, '$1'), dir, 'never'], { encoding: 'utf8' });
+    const other = runProbe(['publication', dir, 'never']);
     assert.equal(other.status, 1, other.stderr); assert.match(other.stderr, /busy|lease/);
     await assert.rejects(recoverOutputs(dir), /busy|lease/);
-    const exited = once(writer, 'exit'); writer.send('continue'); assert.equal((await exited)[0], 0);
+    assert.equal(await finishProbe(writer), 0);
     assert.deepEqual((await readPublishedOutputs(dir)).files, files('new'));
   } finally { if (writer.exitCode === null) writer.kill(); }
 });
@@ -81,19 +72,11 @@ test('EAC-08 TC19: invalid output path or existing directory never replaces file
   assert.deepEqual(await readdir(dir), ['b.json']);
 });
 
-test('EAC-08 TC19: real rename failure preserves the previously completed generation', async t => {
+test('EAC-08 TC19: rename failure preserves the previously completed generation', async () => {
   const dir = await mkdtemp(join(tmpdir(), 'qeg-rename-fail-'));
   await publishFiles(dir, files('old'));
-  const target = join(await realpath(dir), 'b.json');
-  const original = fs.rename;
-  let injected = false;
-  const replacement = t.mock.method(fs, 'rename', async (from, to) => {
-    if (!injected && to === target) { injected = true; throw Object.assign(new Error('rename denied'), { code: 'EACCES' }); }
-    return original(from, to);
-  });
-  syncBuiltinESMExports();
-  try { await assert.rejects(publishFiles(dir, files('new')), /rename denied/); }
-  finally { replacement.mock.restore(); syncBuiltinESMExports(); }
-  assert.equal(injected, true);
+  const result = runProbe(['rename-failure', dir]);
+  assert.equal(result.status, 1);
+  assert.match(result.stderr, /rename denied/);
   assert.deepEqual((await readPublishedOutputs(dir)).files, files('old'));
 });

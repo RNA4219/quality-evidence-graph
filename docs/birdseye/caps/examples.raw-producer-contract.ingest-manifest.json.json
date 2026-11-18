@@ -1,16 +1,16 @@
 {
   "id": "examples/raw-producer-contract/ingest-manifest.json",
   "role": "ingest-manifest",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG ingest-manifest の契約・実装。関連sourceと受入試験を参照。",
-  "deps_out": [],
-  "deps_in": [],
   "risks": [
     "型、schema、fixture、CLI契約を同時に更新する"
   ],
   "tests": [
     "npm test"
   ],
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [],
   "contentHash": "sha256:41bdc5de52c23349555a02fe99aeb8aad85f513eb77eb6c2b05b0b5b5ace7b79"
 }

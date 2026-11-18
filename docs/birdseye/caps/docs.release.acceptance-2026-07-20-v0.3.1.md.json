@@ -1,9 +1,18 @@
 {
   "id": "docs/release/acceptance-2026-07-20-v0.3.1.md",
   "role": "v0.3.1-github-only-release-acceptance",
-  "generation": "00025",
   "public_api": [],
   "summary": "QEG v0.3.1のGitHub-only配布、Action bundle、隔離schema障害・復旧、CI証跡の過去受入。現行改修の完了証拠には転用しない。",
+  "risks": [
+    "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"
+  ],
+  "tests": [
+    "npm run test:fixtures",
+    "npm run test:package",
+    "npm run birdseye-check",
+    "git diff --check"
+  ],
+  "generation": "00030",
   "deps_out": [
     "docs/project/evaluation.md",
     "docs/requirements.md",
@@ -24,15 +33,6 @@
     "docs/release/acceptance-2026-07-20.md",
     "docs/spec/acceptance.md",
     "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"
-  ],
-  "risks": [
-    "未完了CIをgoと誤認する、隔離consumer smokeを実環境acceptanceへ昇格する、package versionとqegVersionを混同する"
-  ],
-  "tests": [
-    "npm run test:fixtures",
-    "npm run test:package",
-    "npm run birdseye-check",
-    "git diff --check"
   ],
   "contentHash": "sha256:2a9b3cd549825801c3198f5c40dbe0be05bf45a8af06a603f158a66b4a9f7800"
 }

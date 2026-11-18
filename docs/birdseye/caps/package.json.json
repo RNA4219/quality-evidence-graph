@@ -1,0 +1,19 @@
+{
+  "id": "package.json",
+  "role": "distribution-contract",
+  "public_api": [],
+  "summary": "npm公開API、CLI入口、検証コマンドを定義する。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:9850b65125a56d5f5b8ca0d2d4f80ee5c0e756f37a807c1d3999cda824ddfbb7",
+  "generation": "00030",
+  "deps_out": [
+    "bindings/api.mjs",
+    "bindings/cli.mjs",
+    "bindings/index.d.ts",
+    "tools/build-native.mjs"
+  ],
+  "deps_in": []
+}

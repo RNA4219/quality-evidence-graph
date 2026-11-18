@@ -1,0 +1,17 @@
+{
+  "id": "build.rs",
+  "role": "rust-module",
+  "public_api": [],
+  "summary": "schemaと初期化用ランタイムをバイナリへ組み込む。",
+  "risks": [],
+  "tests": [
+    "cargo test --locked"
+  ],
+  "contentHash": "sha256:7b3227fe411e13314e0349ceb4c0a6d77186b2570e11463a86217111f9573cdc",
+  "generation": "00030",
+  "deps_out": [],
+  "deps_in": [
+    "Cargo.toml",
+    "src-rust/assets.rs"
+  ]
+}
