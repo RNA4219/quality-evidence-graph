@@ -9,12 +9,12 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "src-rust/gate/coverage.rs"
   ],
   "deps_in": [
     "docs/spec/reliability-hardening.md"
   ],
-  "contentHash": "sha256:88640bcc8f45394fa9ecb9738b732a755423fb8014715c59530b69ac9b1ccb92"
+  "contentHash": "sha256:ff87033415ea0f7f4649e62614dfecea348937038da43f75601d625e92dcabcf"
 }

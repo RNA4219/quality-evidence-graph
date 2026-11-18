@@ -9,12 +9,12 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "qeg-report-action/THIRD_PARTY_NOTICES.md"
   ],
   "deps_in": [
     "docs/release-notes/2026-09-12-v0.4.1.md"
   ],
-  "contentHash": "sha256:fb20fca7a64f8b370cbc4ffa36c91e855abd86bf23c6d6a3cabd5b2648cb9deb"
+  "contentHash": "sha256:623c4de5a71ad972691b038bdc34c4b332534854da23172d51c1719c1ada91f1"
 }

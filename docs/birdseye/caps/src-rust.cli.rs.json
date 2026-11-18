@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:e0e71e37f256078819288ec742faf31c67b0f8bb989353fc9f787df0a32b7446",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "Cargo.toml",
     "src-rust/action.rs",

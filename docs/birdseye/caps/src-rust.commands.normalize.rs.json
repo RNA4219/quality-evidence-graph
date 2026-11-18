@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:6b2d71e1c3e7382c3c2f2466a36ea663698110f4814a820d2e7d0585570ccc88",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "src-rust/commands.rs",
     "src-rust/common.rs",

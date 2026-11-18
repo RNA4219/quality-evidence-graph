@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "docs/evidence/manual-governance-fixes-2026-09-11/validation.json",
     "docs/spec/manual-evidence-and-review.md"

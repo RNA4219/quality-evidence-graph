@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "docs/evidence/cli-boundary-fixes-2026-09-11/validation.json",
     "docs/spec/operational-cli-extensions.md",

@@ -8,7 +8,7 @@
     "npm test"
   ],
   "contentHash": "sha256:55ce2ace5874bcf507b046a4226201c2ad792c313b38e1e0ff699f4dee07885c",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "npm-native/Cargo.toml",
     "src-rust/cli.rs"

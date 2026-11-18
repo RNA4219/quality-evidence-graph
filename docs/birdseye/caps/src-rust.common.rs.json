@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:ad1963374c9179350f421e7636cfcdfa5fecc0b36fc7280a2eb4f7c6fdbbf067",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [],
   "deps_in": [
     "docs/spec/governance-consistency.md",

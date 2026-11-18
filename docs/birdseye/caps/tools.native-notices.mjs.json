@@ -8,7 +8,7 @@
     "cargo test --locked"
   ],
   "contentHash": "sha256:85685f10619fa54798ad77e8632cdb76435b8973d04bccec58957ca37819cd81",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [],
   "deps_in": []
 }

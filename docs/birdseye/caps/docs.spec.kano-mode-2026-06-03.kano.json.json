@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [],
   "deps_in": [
     "docs/spec/gate-acceptance-2026-06-03.md",

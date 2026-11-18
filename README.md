@@ -30,7 +30,7 @@ cargo test --locked
 5. `docs/project/evidence-acceptance-status.md` - 現行EAC改修の状態と受入証拠。R01〜R06の履歴は`docs/project/remediation-2026-09-10.md`
 6. `docs/project/runbook.md` / `docs/project/evaluation.md` - 実行手順と受入条件
 
-パッケージ版: **0.4.1**（[変更点・インストール](docs/release-notes/2026-09-12-v0.4.1.md)）。過去の配布版: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)。現行の受入状態は[EAC受入台帳](docs/project/evidence-acceptance-status.md)を参照。
+パッケージ版: **0.4.2**（[変更点・インストール](https://github.com/RNA4219/quality-evidence-graph/releases/tag/v0.4.2)）。過去の配布版: [v0.3.1 release notes](docs/release-notes/2026-07-20-v0.3.1.md)。現行の受入状態は[EAC受入台帳](docs/project/evidence-acceptance-status.md)を参照。
 
 追加調査後の[証跡共通受入基準](docs/spec/evidence-acceptance-standard.md)に沿い、実行対象・時刻・最新runの検証に加え、[世代公開・復旧・実producer接続・consumer移行](docs/spec/output-publication-and-migration.md)を実装しました。`outputs read/recover`で出力を検証・復旧し、`migrate --dry-run/--apply`で明示設定を移行できます。[受入状況](docs/project/evidence-acceptance-status.md)に検証範囲と証拠を集約しています。
 

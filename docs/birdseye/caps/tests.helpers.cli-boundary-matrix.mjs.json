@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [],
   "deps_in": [
     "docs/project/cli-boundary-fixes-2026-09-11.md",
@@ -20,5 +20,5 @@
     "tests/helpers/governance-matrix.mjs",
     "tests/manual-governance-regression.test.mjs"
   ],
-  "contentHash": "sha256:d5dc75e0b6da3279d0435a63f967487f8877f16bc122fb3fac2e358a314978ef"
+  "contentHash": "sha256:e3e8ca9f073920a0b9d030a0c98e89485108688f664dc18ba7a6a1954bd4f28f"
 }
