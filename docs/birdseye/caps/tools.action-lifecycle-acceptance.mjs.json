@@ -9,7 +9,7 @@
   "tests": [
     "npm run test:release-lifecycle"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "qeg-report-action/action.yml",
     "schemas/action-lifecycle-evidence.schema.json"
@@ -20,5 +20,5 @@
     "docs/release/acceptance-2026-07-20-v0.3.1.md",
     "schemas/action-lifecycle-evidence.schema.json"
   ],
-  "contentHash": "sha256:782e28ae4548b103c20ba13b518e8ca8eca04e1fe6f2c347ea7dd6c3238bcf5a"
+  "contentHash": "sha256:65f68341c56841479797a8d3265096307061e277523bb6fa16d7893623666d75"
 }

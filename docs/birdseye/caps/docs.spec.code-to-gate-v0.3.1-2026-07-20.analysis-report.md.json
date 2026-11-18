@@ -10,7 +10,7 @@
     "code-to-gate readiness",
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "docs/spec/code-to-gate-v0.3.1-2026-07-20/release-readiness.json"
   ],

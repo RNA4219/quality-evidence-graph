@@ -8,7 +8,7 @@
     "npm test"
   ],
   "contentHash": "sha256:4ce1524c87b184a55851465093af0350db98008dd35a7da1e8508f077038c037",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "bindings/native.mjs"
   ],

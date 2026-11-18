@@ -8,7 +8,7 @@
     "npm test"
   ],
   "contentHash": "sha256:58454a3050f47358568a063e5afff7b8f48fc63209f79055b024b1b60edf3912",
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "bindings/addon.mjs",
     "bindings/publication-worker.mjs"

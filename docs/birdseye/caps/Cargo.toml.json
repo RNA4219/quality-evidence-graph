@@ -7,8 +7,8 @@
   "tests": [
     "cargo test --locked"
   ],
-  "contentHash": "sha256:402e0663201610610040d06549fbd0dc873ed80bea3de6db6ca62d9e1cd8576b",
-  "generation": "00031",
+  "contentHash": "sha256:dcb44f2a0b78f10be6ad41b22df7f756b41405b9e1065893b619cbc6d3f97335",
+  "generation": "00032",
   "deps_out": [
     "Cargo.lock",
     "build.rs",

@@ -7,8 +7,8 @@
   "tests": [
     "cargo test --locked"
   ],
-  "contentHash": "sha256:eb846c2c862ecb2d29b0fa0456f87903c98cc95433eb089024d3ac0a7de7cf79",
-  "generation": "00031",
+  "contentHash": "sha256:5fd7d926fbb4cf0920790635cbdae50bd6f5d8b6ec89c8176e8c9fc6e0f7b895",
+  "generation": "00032",
   "deps_out": [
     "bindings/api.mjs",
     "bindings/cli.mjs",

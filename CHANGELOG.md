@@ -1,6 +1,12 @@
 # Changelog
 
-## 未リリース
+## 0.4.2 — npm APIの高速化
+
+- npm APIがNode-APIアドオンを読み込み、`evaluateGate()` は同じNode.jsプロセス内でRustを同期呼び出しする。非同期APIのPromiseと出力公開コールバックの契約を維持。
+- Windows x64、Ryzen 5 5500GT、Node.js 24.11.0で、検証済みの `positive-release-go` を繰り返し判定した時間は0.4.1の11.38 ms/回から0.144 ms/回に短縮。
+- Linux x64、Windows x64、macOS arm64向けのCLI・Node-APIアドオンを配布。グラフのwire契約は0.2。
+
+## 0.4.1 — Rust版
 
 - CLIが出力の直後に`exit()`で終了していたため、別プロセスがパイプで受け取るとmacOSでは8,192バイトより後ろが欠けていた不具合を修正。全コマンドを`process.exitCode`での終了へ統一。exit codeの対応は変更なし。
 - source CLI・Action bundle・tarballへ共通のパイプ出力回帰テストと、`exit()`の再導入を検出するテストを追加。CIへ`portability (macos-24)`を追加。

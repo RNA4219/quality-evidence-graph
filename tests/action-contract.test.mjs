@@ -26,7 +26,7 @@ test("tagged Action bundle exposes the release CLI version", () => {
     encoding: "utf8",
   });
   assert.equal(version.status, 0, version.stderr || version.stdout);
-  assert.equal(version.stdout.trim(), "0.4.1");
+  assert.equal(version.stdout.trim(), "0.4.2");
 });
 
 test("Action uploads diagnostics before enforcing the verdict", () => {

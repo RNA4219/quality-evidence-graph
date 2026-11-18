@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     ".github/workflows/ci.yml",
     "Cargo.toml",
@@ -37,5 +37,5 @@
   "deps_in": [
     "docs/release-notes/2026-06-03-controlled-gate.md"
   ],
-  "contentHash": "sha256:9ad298501cee7efaf6157c66f6eee821f21df6551b5f727e53a18655ac9532a2"
+  "contentHash": "sha256:a2bbf3e9465e335f4aadeac345d59d165c0f6316bc49bf56242049f24f081a46"
 }

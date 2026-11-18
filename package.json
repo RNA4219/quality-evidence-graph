@@ -1,6 +1,6 @@
 {
   "name": "@quality-harness/quality-evidence-graph",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "description": "Local-first Quality Evidence Graph and Test Placement Engine contracts",
   "type": "module",
   "main": "./dist/index.js",

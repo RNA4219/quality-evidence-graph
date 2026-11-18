@@ -9,7 +9,7 @@
   "tests": [
     "npm test"
   ],
-  "generation": "00031",
+  "generation": "00032",
   "deps_out": [
     "Cargo.toml",
     "docs/agent/HUB.codex.md",
@@ -21,5 +21,5 @@
     "docs/agent/HUB.codex.md",
     "docs/release-notes/2026-06-03-controlled-gate.md"
   ],
-  "contentHash": "sha256:e0589293bbd10a43f53daa4f2c206dd09b3da1443f3d2b629caa4af43f5018b9"
+  "contentHash": "sha256:d0e9ac6ddb08de01fb000b6ed2b7458492aa587f42a80eb8da421b98ad87b53d"
 }

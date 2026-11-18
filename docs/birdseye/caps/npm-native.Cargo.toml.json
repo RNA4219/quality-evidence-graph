@@ -7,8 +7,8 @@
   "tests": [
     "cargo test --locked"
   ],
-  "contentHash": "sha256:a5fc2302bd8faa86bc364c80f1bbf6d668d48a5a6da932e1da465283f6facf17",
-  "generation": "00031",
+  "contentHash": "sha256:9b57794f954a859036588e2a567ca3725c620ea7c76ad6c80fefdbd41f2b8bfb",
+  "generation": "00032",
   "deps_out": [
     "Cargo.toml",
     "npm-native/Cargo.lock",
